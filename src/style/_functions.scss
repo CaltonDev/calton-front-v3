@@ -1,0 +1,33 @@
+@import './variables';
+
+@function parse_background_color($type, $shade) {
+  @return map-get(map-get($backgrounds, $type), $shade);
+}
+
+@function parse_typography($type, $element, $property, $key: null) {
+  $element-map: map-get(map-get($typography, $type), $element);
+  $property-value: map-get($element-map, $property);
+
+  @if $property == 'color' {
+    $element-map: map-get(map-get($typography, $type), $element);
+    $property-value: map-get($element-map, $property);
+
+    @if $property == 'color' {
+      // Fallback to default colors if no specific colors are defined
+      $color-map: if(map-has-key($element-map, 'color'), $property-value, $default-colors);
+
+      @if $key != null and map-has-key($color-map, $key) {
+        @return map-get($color-map, $key);
+      } @else {
+        @return map-get($color-map, 'primary');
+      }
+    }
+  }
+
+    // Handle nested maps, such as fontWeight
+  @else if type-of($property-value) == 'map' and $key != null {
+    @return map-get($property-value, $key);
+  }
+
+  @return $property-value;
+}

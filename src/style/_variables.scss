@@ -1,0 +1,107 @@
+//@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+$backgrounds: (
+        button: (
+                900: #00006B,
+                800: #0C14A1,
+                700: #0C16C8,
+                600: #0F1AF4,
+                500: #3F49FC,
+                400: #797FFD,
+                300: #A1A6FE,
+                200: #BDC0FE,
+                100: #D1D3FE,
+                50: #DFE0FF,
+        ),
+);
+
+$default-colors: (
+        primary: #321D48,
+        secondary: #FFFFFF
+);
+
+$typography: (
+        headline: (
+                h1: (
+                        fontSize: 48px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 56.25px
+                ),
+                h2: (
+                        fontSize: 40px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 46.88px
+                ),
+                h3: (
+                        fontSize: 32px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 37.5px
+                ),
+                h4: (
+                        fontSize: 28px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 32.81px
+                ),
+                h5: (
+                        fontSize: 24px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 28.13px
+                ),
+                h6: (
+                        fontSize: 20px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 23.44px
+                ),
+                bodyBig: (
+                        fontSize: 20px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 25px
+                ),
+                bodyMedium: (
+                        fontSize: 16px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 20px
+                ),
+                bodySmall: (
+                        fontSize: 14px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 17.5px
+                ),
+        ),
+);

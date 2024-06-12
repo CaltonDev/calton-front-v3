@@ -1,0 +1,8 @@
+@import '@Style/app';
+
+.buttonColor{
+  background-color: parse_background_color(button, 100);
+  color: parse_typography(headline, h1, 'color');
+  font-size: parse_typography(headline, h1, 'fontSize');
+  font-weight: parse_typography(headline, h1, 'fontWeight', 'normal');
+}
