@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import React from 'react'
 import styles from './Login.module.scss'
 import Typography from '../../components/Typography/Typography'
+import Button from '../../components/Button/Button'
 
 function Login() {
     const navigate = useNavigate()
@@ -20,13 +21,13 @@ function Login() {
                 Login
             </Typography>
 
-            <button
-                className={styles.buttonColor}
-                type={'button'}
+            <Button
+                size={'large'}
+                variant={'outline'}
                 onClick={performLoginAndRedirect}
             >
                 Login
-            </button>
+            </Button>
         </div>
     )
 }

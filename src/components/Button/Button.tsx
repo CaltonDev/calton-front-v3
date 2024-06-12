@@ -1,34 +1,30 @@
-import { createElement } from 'react'
-import styles from './typography.module.scss'
+import styles from './Button.module.scss'
 import { ButtonProps } from './Button.interface'
+import React from 'react'
 
 const Button = ({
     size,
-    weight,
-    color = 'primary',
-    italic,
-    underline,
-    uppercase,
+    disabled = false,
+    isLoading = false,
+    arrowPlacement = 'none',
+    variant = 'solid',
+    onClick,
     children,
 }: ButtonProps) => {
-    let className = styles[`${size}-${weight}-${color}`]
+    const variantClass = variant ? styles[variant] : ''
+    const sizeClass = size ? styles[size] : ''
 
-    if (italic) className += ` ${styles[`${size}-${weight}-italic`]}`
-    if (underline) className += ` ${styles[`${size}-${weight}-underline`]}`
-    if (uppercase) className += ` ${styles[`${size}-${weight}-uppercase`]}`
-
-    const headingMap = {
-        h1: 'h1',
-        h2: 'h2',
-        h3: 'h3',
-        h4: 'h4',
-        h5: 'h5',
-        h6: 'h6',
-    }
-
-    const HeadingTag = headingMap[size as keyof typeof headingMap] || 'p'
-
-    return createElement(HeadingTag, { className }, children)
+    return (
+        <>
+            <button
+                className={`${styles.button} ${variantClass} ${sizeClass}`}
+                disabled={disabled}
+                onClick={onClick}
+            >
+                {children}
+            </button>
+        </>
+    )
 }
 
 export default Button

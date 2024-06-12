@@ -1,42 +1,38 @@
 @import '@Style/app';
 
-@each $headline, $styles in map-get($typography, headline) {
-  @each $weight, $fontWeight in map-get($styles, fontWeight) {
-    // Handle when specific colors are available
-    @if map-has-key($styles, 'color') {
-      @each $colorName, $colorValue in map-get($styles, color) {
-        .#{$headline}-#{$weight}-#{$colorName} {
-          font-size: parse_typography(headline, $headline, fontSize);
-          font-weight: $fontWeight;
-          color: parse_typography(headline, $headline, color, $colorName);
-          line-height: parse_typography(headline, $headline, lineHeight, $colorName);;
-          margin: 0;
-          margin-block: 0;
-          margin-inline: 0;
-        }
-      }
-    } @else {
-      // Handle when no specific colors are defined; use default colors
-      @each $colorName, $colorValue in $default-colors {
-        .#{$headline}-#{$weight}-#{$colorName} {
-          font-size: parse_typography(headline, $headline, fontSize);
-          font-weight: $fontWeight;
-          color: $colorValue; // Use value directly from default colors
-          line-height: parse_typography(headline, $headline, lineHeight, $colorName);
-          margin: 0;
-          margin-block: 0;
-          margin-inline: 0;
-        }
-      }
-    }
-    .#{$headline}-#{$weight}-italic {
-      font-style: italic;
-    }
-    .#{$headline}-#{$weight}-underline {
-      text-decoration: underline;
-    }
-    .#{$headline}-#{$weight}-uppercase {
-      text-transform: uppercase;
-    }
+.button {
+  display: map-get($button, display);
+  flex-direction: map-get($button, flex-direction);
+  justify-content: map-get($button, justify-content);
+  align-items: map-get($button, align-items);
+  padding: map-get($button, padding);
+  gap: map-get($button, gap);
+  background: map-get($button, background);
+  border-radius: map-get($button, border-radius);
+
+  &.small {
+    width: map-deep-get($button, size, small, width);
+  }
+
+  &.medium {
+    width: map-deep-get($button, size, medium, width);
+  }
+
+  &.large {
+    width: map-deep-get($button, size, large, width);
+  }
+
+  &.solid {
+    // Solid variant styles (if any specific styles are needed)
+  }
+
+  &.outline {
+    background: map-deep-get($button, variant, outline, background);
+    border: map-deep-get($button, variant, outline, border);
+  }
+
+  &.ghost {
+    background: map-deep-get($button, variant, ghost, background);
+    border: map-deep-get($button, variant, ghost, border);
   }
 }

@@ -105,3 +105,36 @@ $typography: (
                 ),
         ),
 );
+
+$button: (
+        display: flex,
+        flex-direction: row,
+        justify-content: center,
+        align-items: center,
+        padding: 15px 33px,
+        gap: 10px,
+        background: #3F49FC,
+        border-radius: 10px,
+        size: (
+                small: (
+                        width: 42px,
+                ),
+                medium: (
+                        width: 84px,
+                ),
+                large: (
+                        width: 125px,
+                ),
+        ),
+        variant: (
+                solid: (),
+                outline: (
+                        background: none,
+                        border: 2px #3F49FC solid
+                ),
+                ghost: (
+                        border: none,
+                        background: none
+                ),
+        )
+);
