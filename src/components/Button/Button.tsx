@@ -13,11 +13,11 @@ const Button = ({
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
     const sizeClass = size ? styles[size] : ''
-
+    const disabledClass = disabled ? styles[`disabled-${variant}`] : ''
     return (
         <>
             <button
-                className={`${styles.button} ${variantClass} ${sizeClass}`}
+                className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass}`}
                 disabled={disabled}
                 onClick={onClick}
             >

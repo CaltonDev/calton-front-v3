@@ -114,27 +114,64 @@ $button: (
         padding: 15px 33px,
         gap: 10px,
         background: #3F49FC,
+        border: none,
         border-radius: 10px,
+        font-size: 20px,
+        font-family: 'Roboto',
+        font-style: normal,
+        font-weight: 400,
+        line-height: 125%,
+        flex: none,
+        order: 0,
+        flex-grow: 0,
+        color: #FFFFFF,
         size: (
                 small: (
+                        font-size: 14px,
                         width: 42px,
                 ),
                 medium: (
+                        font-size: 16px,
                         width: 84px,
                 ),
                 large: (
+                        font-size: 20px,
                         width: 125px,
                 ),
         ),
         variant: (
-                solid: (),
+                solid: (
+                        color: #FFFFFF,
+                ),
                 outline: (
                         background: none,
-                        border: 2px #3F49FC solid
+                        border: 2px #3F49FC solid,
+                        color: #3F49FC,
                 ),
                 ghost: (
                         border: none,
-                        background: none
+                        background: none,
+                        color: #3F49FC,
+                ),
+        ),
+        disabled: (
+                color: #FFFFFF,
+                background: #C0BBC5,
+                variant: (
+                        solid: (
+                                color: #FFFFFF,
+                                background: #C0BBC5,
+                        ),
+                        outline: (
+                                background: none,
+                                border: 2px #C0BBC5 solid,
+                                color: #C0BBC5,
+                        ),
+                        ghost: (
+                                border: none,
+                                background: none,
+                                color: #C0BBC5,
+                        ),
                 ),
         )
 );

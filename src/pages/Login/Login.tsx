@@ -23,7 +23,8 @@ function Login() {
 
             <Button
                 size={'large'}
-                variant={'outline'}
+                variant={'solid'}
+                disabled={true}
                 onClick={performLoginAndRedirect}
             >
                 Login
