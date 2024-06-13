@@ -129,14 +129,17 @@ $button: (
                 small: (
                         font-size: 14px,
                         width: 42px,
+                        height: 32px,
                 ),
                 medium: (
                         font-size: 16px,
                         width: 84px,
+                        height: 44px,
                 ),
                 large: (
                         font-size: 20px,
                         width: 125px,
+                        height: 55px,
                 ),
         ),
         variant: (
@@ -173,19 +176,19 @@ $button: (
                                 color: #C0BBC5,
                         ),
                 ),
-        )
-);
-
-$icon: (
-        color: (
-                primary: (
-                        color: #FFFFFF,
+        ),
+        iconOnly: (
+                small: (
+                        width: 32px,
+                        height: 32px,
                 ),
-                secondary: (
-                        color: #3F49FC,
+                medium: (
+                        width: 44px,
+                        height: 44px,
                 ),
-                disabled: (
-                        color: #C0BBC5,
+                large: (
+                        width: 55px,
+                        height: 55px,
                 )
         )
-)
+);

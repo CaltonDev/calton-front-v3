@@ -6,8 +6,9 @@ import { getCSSVariable } from '../../utils/getCSSVariable'
 
 const Button = ({
     size,
+    iconOnly = false,
+    rounded = false,
     disabled = false,
-    isLoading = false,
     arrowPlacement = 'none',
     variant = 'solid',
     onClick,
@@ -23,6 +24,8 @@ const Button = ({
                 : styles['arrowRight']
             : ''
 
+    const iconOnlyClass = iconOnly ? styles[`iconOnly-${size}`] : ''
+    const roundedClass = rounded ? styles[`rounded-${size}`] : ''
     const [iconColor, setIconColor] = useState('')
 
     useEffect(() => {
@@ -44,7 +47,7 @@ const Button = ({
     return (
         <>
             <button
-                className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass} ${arrowDirection}`}
+                className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass} ${arrowDirection} ${iconOnlyClass} ${roundedClass}`}
                 disabled={disabled}
                 onClick={onClick}
             >

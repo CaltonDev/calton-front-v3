@@ -22,16 +22,19 @@
   border: map-get($button, border);
 
   &.small {
+    height: map-deep-get($button, size, small, height);
     width: map-deep-get($button, size, small, width);
     font-size: map-deep-get($button, size, small, font-size);
   }
 
   &.medium {
+    height: map-deep-get($button, size, medium, height);
     width: map-deep-get($button, size, medium, width);
     font-size: map-deep-get($button, size, medium, font-size);
   }
 
   &.large {
+    height: map-deep-get($button, size, large, height);
     width: map-deep-get($button, size, large, width);
     font-size: map-deep-get($button, size, large, font-size);
   }
@@ -83,4 +86,33 @@
     flex-direction: row-reverse;
   }
 
+  &.iconOnly-small {
+    height: map-deep-get($button, size, small, height);
+    width: map-deep-get($button, size, small, height);
+    padding: 0;
+  }
+
+  &.iconOnly-medium {
+    height: map-deep-get($button, size, medium, height);
+    width: map-deep-get($button, size, medium, height);
+    padding: 0;
+  }
+
+  &.iconOnly-large {
+    height: map-deep-get($button, size, large, height);
+    width: map-deep-get($button, size, large, height);
+    padding: 0;
+  }
+
+  &.rounded-small {
+    border-radius: map-deep-get($button, size, small, height);
+  }
+
+  &.rounded-medium {
+    border-radius: map-deep-get($button, size, medium, height);
+  }
+
+  &.rounded-large {
+    border-radius: map-deep-get($button, size, large, height);
+  }
 }
