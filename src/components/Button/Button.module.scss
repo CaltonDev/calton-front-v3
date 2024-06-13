@@ -75,4 +75,11 @@
     background: map-deep-get($button, disabled, variant, ghost, background);
     border: map-deep-get($button, disabled, variant, ghost, border);
   }
+
+  &.arrowRight {}
+
+  &.arrowLeft {
+    flex-direction: row-reverse;
+  }
+
 }

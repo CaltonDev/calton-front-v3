@@ -26,6 +26,7 @@ function Login() {
                 variant={'solid'}
                 disabled={true}
                 onClick={performLoginAndRedirect}
+                arrowPlacement={'right'}
             >
                 Login
             </Button>
