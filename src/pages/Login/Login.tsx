@@ -2,7 +2,6 @@ import { setUser } from '../../store/user/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import React from 'react'
-import styles from './Login.module.scss'
 import Typography from '../../components/Typography/Typography'
 import Button from '../../components/Button/Button'
 
@@ -24,7 +23,7 @@ function Login() {
             <Button
                 size={'large'}
                 variant={'solid'}
-                disabled={true}
+                disabled={false}
                 onClick={performLoginAndRedirect}
                 arrowPlacement={'right'}
             >

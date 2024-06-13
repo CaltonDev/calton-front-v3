@@ -12,7 +12,10 @@ const SvgWrapper = ({
     isClickable = false,
 }: SvgWrapperProps) => {
     return (
-        <span className={isClickable ? styles.clickable : ''}>
+        <span
+            style={{ width: width, height: height }}
+            className={isClickable ? styles.clickable : ''}
+        >
             {keySvg === 'arrowBack' ? (
                 <ArrowBackSvg
                     width={width}

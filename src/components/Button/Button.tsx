@@ -1,7 +1,8 @@
 import styles from './Button.module.scss'
 import { ButtonProps } from './Button.interface'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import { getCSSVariable } from '../../utils/getCSSVariable'
 
 const Button = ({
     size,
@@ -21,6 +22,25 @@ const Button = ({
                 ? styles['arrowLeft']
                 : styles['arrowRight']
             : ''
+
+    const [iconColor, setIconColor] = useState('')
+
+    useEffect(() => {
+        let iconColorString = ''
+
+        if (variant === 'solid') {
+            iconColorString = getCSSVariable('--primary-icon-color')
+        } else {
+            if (disabled) {
+                iconColorString = getCSSVariable('--disable-icon-color')
+            } else {
+                iconColorString = getCSSVariable('--secondary-icon-color')
+            }
+        }
+
+        setIconColor(iconColorString)
+    }, [disabled, variant])
+
     return (
         <>
             <button
@@ -31,6 +51,9 @@ const Button = ({
                 {children}
                 {arrowPlacement !== 'none' && (
                     <SvgWrapper
+                        width={24}
+                        height={24}
+                        fillColor={iconColor}
                         keySvg={
                             arrowPlacement === 'left'
                                 ? 'arrowBack'
