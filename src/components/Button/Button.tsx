@@ -27,13 +27,12 @@ const Button = ({
     const iconOnlyClass = iconOnly ? styles[`iconOnly-${size}`] : ''
     const roundedClass = rounded ? styles[`rounded-${size}`] : ''
     const [iconColor, setIconColor] = useState('')
+    const [iconSize, setIconSize] = useState(24)
 
-    useEffect(() => {
-        let iconColorString = ''
+    const selectIconColor = () => {
+        let iconColorString = getCSSVariable('--primary-icon-color')
 
-        if (variant === 'solid') {
-            iconColorString = getCSSVariable('--primary-icon-color')
-        } else {
+        if (variant !== 'solid') {
             if (disabled) {
                 iconColorString = getCSSVariable('--disable-icon-color')
             } else {
@@ -42,6 +41,21 @@ const Button = ({
         }
 
         setIconColor(iconColorString)
+    }
+
+    const selectIconSize = () => {
+        let iconSizeValue = Number(getCSSVariable('--large-icon-size'))
+        if (size === 'small') {
+            iconSizeValue = Number(getCSSVariable('--small-icon-size'))
+        } else if (size === 'medium') {
+            iconSizeValue = Number(getCSSVariable('--medium-icon-size'))
+        }
+
+        setIconSize(iconSizeValue)
+    }
+    useEffect(() => {
+        selectIconColor()
+        selectIconSize()
     }, [disabled, variant])
 
     return (
@@ -54,8 +68,8 @@ const Button = ({
                 {children}
                 {arrowPlacement !== 'none' && (
                     <SvgWrapper
-                        width={24}
-                        height={24}
+                        width={iconSize}
+                        height={iconSize}
                         fillColor={iconColor}
                         keySvg={
                             arrowPlacement === 'left'

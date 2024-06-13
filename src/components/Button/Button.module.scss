@@ -7,7 +7,7 @@
   justify-content: map-get($button, justify-content);
   align-items: map-get($button, align-items);
   padding: map-get($button, padding);
-  gap: map-get($button, gap);
+  //gap: map-get($button, gap);
   background: map-get($button, background);
   border-radius: map-get($button, border-radius);
   font-size: map-get($button, font-size);

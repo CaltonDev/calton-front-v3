@@ -21,14 +21,14 @@ function Login() {
             </Typography>
 
             <Button
-                size={'small'}
+                size={'medium'}
                 variant={'solid'}
                 disabled={false}
                 onClick={performLoginAndRedirect}
                 arrowPlacement={'right'}
-                iconOnly={true}
-                rounded={true}
-            />
+            >
+                Login
+            </Button>
         </div>
     )
 }
