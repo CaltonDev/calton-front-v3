@@ -1,8 +1,7 @@
 import styles from './Button.module.scss'
 import { ButtonProps } from './Button.interface'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
-import { getCSSVariable } from '../../utils/getCSSVariable'
 
 const Button = ({
     size,
@@ -26,37 +25,6 @@ const Button = ({
 
     const iconOnlyClass = iconOnly ? styles[`iconOnly-${size}`] : ''
     const roundedClass = rounded ? styles[`rounded-${size}`] : ''
-    const [iconColor, setIconColor] = useState('')
-    const [iconSize, setIconSize] = useState(24)
-
-    const selectIconColor = () => {
-        let iconColorString = getCSSVariable('--primary-icon-color')
-
-        if (variant !== 'solid') {
-            if (disabled) {
-                iconColorString = getCSSVariable('--disable-icon-color')
-            } else {
-                iconColorString = getCSSVariable('--secondary-icon-color')
-            }
-        }
-
-        setIconColor(iconColorString)
-    }
-
-    const selectIconSize = () => {
-        let iconSizeValue = Number(getCSSVariable('--large-icon-size'))
-        if (size === 'small') {
-            iconSizeValue = Number(getCSSVariable('--small-icon-size'))
-        } else if (size === 'medium') {
-            iconSizeValue = Number(getCSSVariable('--medium-icon-size'))
-        }
-
-        setIconSize(iconSizeValue)
-    }
-    useEffect(() => {
-        selectIconColor()
-        selectIconSize()
-    }, [disabled, variant])
 
     return (
         <>
@@ -68,9 +36,14 @@ const Button = ({
                 {children}
                 {arrowPlacement !== 'none' && (
                     <SvgWrapper
-                        width={iconSize}
-                        height={iconSize}
-                        fillColor={iconColor}
+                        size={size}
+                        color={
+                            variant === 'solid'
+                                ? 'primary'
+                                : disabled
+                                  ? 'disabled'
+                                  : 'secondary'
+                        }
                         keySvg={
                             arrowPlacement === 'left'
                                 ? 'arrowBack'

@@ -23,7 +23,7 @@ function Login() {
             <Button
                 size={'medium'}
                 variant={'solid'}
-                disabled={false}
+                disabled={true}
                 onClick={performLoginAndRedirect}
                 arrowPlacement={'right'}
             >
