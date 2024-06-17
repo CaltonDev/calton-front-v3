@@ -31,6 +31,7 @@ function Login() {
                 onChange={handleInputChange}
                 value={name}
                 placeholder={'Inserisci qui il tuo nome...'}
+                prefix={'arrowForward'}
             />
         </div>
     )

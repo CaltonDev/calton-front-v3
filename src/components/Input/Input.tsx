@@ -1,6 +1,7 @@
 import styles from './Input.module.scss'
 import { InputProps } from './Input.interface'
 import React from 'react'
+import SvgWrapper from '../SvgWrapper/SvgWrapper'
 
 const Input = ({
     size,
@@ -10,13 +11,32 @@ const Input = ({
     placeholder = '',
     type = 'text',
     value = '',
+    prefix,
+    suffix,
 }: InputProps) => {
     const colorClass = color ? styles[color] : ''
     const sizeClass = size ? styles[size] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
 
     return (
-        <>
+        <div className={styles.container}>
+            {(suffix || prefix) && (
+                <div
+                    className={
+                        prefix
+                            ? styles.iconContainerPrefix
+                            : suffix
+                              ? styles.iconContainerSuffix
+                              : ''
+                    }
+                >
+                    <SvgWrapper
+                        size={size}
+                        color={'secondary'}
+                        keySvg={prefix ? prefix : suffix ? suffix : ''}
+                    />
+                </div>
+            )}
             <input
                 className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass}`}
                 disabled={disabled}
@@ -25,7 +45,7 @@ const Input = ({
                 value={value}
                 placeholder={!value ? placeholder : ''}
             />
-        </>
+        </div>
     )
 }
 

@@ -1,5 +1,22 @@
 @import '@Style/app';
 
+.iconContainer {
+  position: absolute;
+  box-sizing:border-box;
+  top:25%;
+}
+.iconContainerPrefix {
+  @extend .iconContainer;
+}
+
+.iconContainerSuffix {
+  @extend .iconContainer;
+  right: 25%;
+}
+
+.container {
+  position: relative;
+}
 
 .input {
   box-sizing: map-get($input, box-sizing);

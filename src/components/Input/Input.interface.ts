@@ -7,4 +7,6 @@ export interface InputProps {
     type?: 'text' | 'number' | 'email' | 'password' | 'date'
     value?: string | number
     onChange?: React.ChangeEventHandler<HTMLInputElement>
+    prefix?: string
+    suffix?: string
 }
