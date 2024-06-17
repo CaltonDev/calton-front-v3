@@ -1,0 +1,55 @@
+@import '@Style/app';
+
+
+.input {
+  box-sizing: map-get($input, box-sizing);
+  display: map-get($input, display);
+  flex-direction: map-get($input, flex-direction);
+  align-items: map-get($input, align-items);
+  padding: map-get($input, padding);
+  gap: map-get($input, gap);
+  width: map-get($input, width);
+  height: map-get($input, height);
+  background: map-get($input, background);
+  border: map-get($input, border);
+  border-radius: map-get($input, border-radius);
+  flex: map-get($input, flex);
+  order: map-get($input, order);
+  flex-grow: map-get($input, flex-grow);
+
+  &.small {
+    width: map-deep-get($input, size, small, width);
+  }
+
+  &.medium {
+    height: map-deep-get($input, size, medium, height);
+    width: map-deep-get($input, size, medium, width);
+    font-size: map-deep-get($input, size, medium, font-size);
+  }
+
+  &.large {
+  }
+
+  &.primary {
+    border: map-deep-get($input, colorKey, primary, border);
+  }
+
+  &.secondary {
+    border: map-deep-get($input, colorKey, secondary, border);
+  }
+
+  &.error {
+    border: map-deep-get($input, colorKey, error, border);
+  }
+
+  &.success {
+    border: map-deep-get($input, colorKey, success, border);
+  }
+
+  &.disabled {
+    color: map-get($input, disabled, color);
+    background: map-get($input, disabled, background);
+    border: map-deep-get($input, disabled, border);
+  }
+
+}

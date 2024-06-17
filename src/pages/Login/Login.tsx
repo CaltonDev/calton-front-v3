@@ -1,17 +1,21 @@
 import { setUser } from '../../store/user/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import React from 'react'
+import React, { useState } from 'react'
 import Typography from '../../components/Typography/Typography'
-import Button from '../../components/Button/Button'
+import Input from '../../components/Input/Input'
 
 function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
+    const [name, setName] = useState('')
     const performLoginAndRedirect = () => {
         dispatch(setUser('exist'))
         navigate('/')
+    }
+
+    const handleInputChange = (e: any) => {
+        setName(e.target.value)
     }
 
     return (
@@ -20,15 +24,14 @@ function Login() {
                 Login
             </Typography>
 
-            <Button
+            <Input
                 size={'medium'}
-                variant={'solid'}
+                color={'success'}
                 disabled={true}
-                onClick={performLoginAndRedirect}
-                arrowPlacement={'right'}
-            >
-                Login
-            </Button>
+                onChange={handleInputChange}
+                value={name}
+                placeholder={'Inserisci qui il tuo nome...'}
+            />
         </div>
     )
 }
