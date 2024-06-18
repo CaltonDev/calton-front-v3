@@ -36,7 +36,7 @@ const Input = ({
                               : ''
                     }
                 >
-                    <div onClick={iconCallback}>
+                    <div onClick={iconCallback ? iconCallback : undefined}>
                         <SvgWrapper
                             size={size}
                             color={'secondary'}
