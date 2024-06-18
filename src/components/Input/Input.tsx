@@ -13,10 +13,16 @@ const Input = ({
     value = '',
     prefix,
     suffix,
+    iconCallback,
 }: InputProps) => {
     const colorClass = color ? styles[color] : ''
     const sizeClass = size ? styles[size] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
+
+    const suffixClass =
+        size === 'small'
+            ? styles.iconContainerSuffixSmall
+            : styles.iconContainerSuffixLarge
 
     return (
         <div className={styles.container}>
@@ -26,15 +32,18 @@ const Input = ({
                         prefix
                             ? styles.iconContainerPrefix
                             : suffix
-                              ? styles.iconContainerSuffix
+                              ? suffixClass
                               : ''
                     }
                 >
-                    <SvgWrapper
-                        size={size}
-                        color={'secondary'}
-                        keySvg={prefix ? prefix : suffix ? suffix : ''}
-                    />
+                    <div onClick={iconCallback}>
+                        <SvgWrapper
+                            size={size}
+                            color={'secondary'}
+                            keySvg={prefix ? prefix : suffix ? suffix : ''}
+                            isClickable={!!iconCallback}
+                        />
+                    </div>
                 </div>
             )}
             <input

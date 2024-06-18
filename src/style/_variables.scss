@@ -239,5 +239,17 @@ $input: (
           border: 1px solid #9D96A5,
           background: #F1F1F1,
           color: #9D96A5
-  )
+        ),
+        icon : (
+          position: absolute,
+          box-sizing: border-box,
+          top: 25%,
+          small: (
+            left: 10%
+          ),
+          large: (
+            left: 28%
+          )
+        )
 )
+

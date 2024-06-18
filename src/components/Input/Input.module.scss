@@ -1,17 +1,22 @@
 @import '@Style/app';
 
 .iconContainer {
-  position: absolute;
-  box-sizing:border-box;
-  top:25%;
+  position: map-deep-get($input, icon, position);
+  box-sizing: map-deep-get($input, icon, box-sizing);
+  top: map-deep-get($input, icon, top);
 }
 .iconContainerPrefix {
   @extend .iconContainer;
 }
 
-.iconContainerSuffix {
+.iconContainerSuffixSmall {
   @extend .iconContainer;
-  right: 25%;
+  left: map-deep-get($input, icon, small, left);
+}
+
+.iconContainerSuffixLarge {
+  @extend .iconContainer;
+  left: map-deep-get($input, icon, large, left);
 }
 
 .container {

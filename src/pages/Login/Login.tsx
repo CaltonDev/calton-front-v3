@@ -9,6 +9,8 @@ function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [name, setName] = useState('')
+    const [btnType, setBtnType] = useState<'text' | 'password'>('password')
+
     const performLoginAndRedirect = () => {
         dispatch(setUser('exist'))
         navigate('/')
@@ -16,6 +18,14 @@ function Login() {
 
     const handleInputChange = (e: any) => {
         setName(e.target.value)
+    }
+
+    const handleIcon = () => {
+        if (btnType === 'password') {
+            setBtnType('text')
+        } else {
+            setBtnType('password')
+        }
     }
 
     return (
@@ -27,11 +37,13 @@ function Login() {
             <Input
                 size={'medium'}
                 color={'success'}
-                disabled={true}
+                disabled={false}
                 onChange={handleInputChange}
                 value={name}
                 placeholder={'Inserisci qui il tuo nome...'}
-                prefix={'arrowForward'}
+                type={btnType}
+                iconCallback={handleIcon}
+                suffix={'arrowForward'}
             />
         </div>
     )

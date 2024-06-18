@@ -9,4 +9,5 @@ export interface InputProps {
     onChange?: React.ChangeEventHandler<HTMLInputElement>
     prefix?: string
     suffix?: string
+    iconCallback?: React.MouseEventHandler<HTMLDivElement>
 }
