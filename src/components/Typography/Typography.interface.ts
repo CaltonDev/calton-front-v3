@@ -10,7 +10,7 @@ export interface TypographyProps {
         | 'bodyMedium'
         | 'bodySmall'
     weight: 'light' | 'normal' | 'bold'
-    color?: 'primary' | 'secondary'
+    color?: 'primary' | 'secondary' | 'tertiary'
     italic?: boolean
     underline?: boolean
     uppercase?: boolean

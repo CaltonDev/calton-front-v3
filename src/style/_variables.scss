@@ -17,7 +17,8 @@ $backgrounds: (
 
 $default-colors: (
         primary: #321D48,
-        secondary: #FFFFFF
+        secondary: #FFFFFF,
+        tertiary: #9D96A5
 );
 
 $typography: (
@@ -251,5 +252,85 @@ $input: (
             left: 28%
           )
         )
-)
+);
 
+$checkbox: (
+    container: (
+      display: block,
+      position: relative,
+      padding-left: 35px,
+      margin-bottom: 12px,
+      cursor: pointer,
+      font-size: 22px,
+      -webkit-user-select: none,
+      -moz-user-select: none,
+      -ms-user-select: none,
+      user-select: none,
+      input: (
+        position: absolute,
+        opacity: 0,
+        cursor: pointer,
+        height: 0,
+        width: 0,
+      ),
+      checkmarkAfter: (
+        left: 8px,
+        top: 2px,
+        width: 3px,
+        height: 10px,
+        //checkmark color
+        border: solid #3F49FC,
+        border-width: 0 2px 2px 0,
+        -webkit-transform: rotate(45deg),
+        -ms-transform: rotate(45deg),
+        transform: rotate(45deg),
+        secondary: (
+          border: solid #0C16C8
+        ),
+        disabled: (
+          border: solid #9D96A5
+        )
+      )
+    ),
+    checkmark: (
+      position: absolute,
+      top: 0,
+      left: 0,
+      height: 20px,
+      width: 20px,
+      background-color: #FFF,
+      //checkbox border color
+      border: 2px solid #321D48,
+      border-radius: 6px,
+      after: (
+        content: "",
+        position: absolute,
+        display: none,
+      ),
+      primary: (
+        background-color: #FFF,
+        border: 2px solid #321D48,
+      ),
+      primaryClicked: (
+        background-color: #FFF,
+        border: 2px solid #3F49FC,
+      ),
+      secondary: (
+        background-color: #DFE0FF,
+        border: 2px solid #0C16C8,
+      ),
+      shadow: (
+        background-color: #FFF,
+        border: 2px solid #3F49FC,
+        box-shadow: 0px 0px 0px 3px #A1A6FE
+      ),
+      disabled: (
+        background-color: #F1F1F1,
+        border: 2px solid #9D96A5,
+      ),
+      radius: (
+        border-radius: 25px
+      )
+    ),
+
+)

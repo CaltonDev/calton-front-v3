@@ -1,0 +1,124 @@
+@import '@Style/app';
+
+/* Customize the label (the container) */
+.container {
+  display: map-deep-get($checkbox, container, display);
+  position: map-deep-get($checkbox, container, position);
+  padding-left: map-deep-get($checkbox, container, padding-left);
+  margin-bottom: map-deep-get($checkbox, container, margin-bottom);
+  cursor: map-deep-get($checkbox, container, cursor);
+  font-size: map-deep-get($checkbox, container, font-size);
+  -webkit-user-select: map-deep-get($checkbox, container, -webkit-user-select);
+  -moz-user-select: map-deep-get($checkbox, container, -moz-user-select);
+  -ms-user-select: map-deep-get($checkbox, container, -ms-user-select);
+  user-select: map-deep-get($checkbox, container, user-select);
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: map-deep-get($checkbox, container, input, position);
+  opacity: map-deep-get($checkbox, container, input, opacity);
+  cursor: map-deep-get($checkbox, container, input, cursor);
+  height: map-deep-get($checkbox, container, input, height);
+  width: map-deep-get($checkbox, container, input, width);
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: map-deep-get($checkbox, checkmark, position);
+  top: map-deep-get($checkbox, checkmark, top);
+  left: map-deep-get($checkbox, checkmark, left);
+  height: map-deep-get($checkbox, checkmark, height);
+  width: map-deep-get($checkbox, checkmark, width);
+  background-color: map-deep-get($checkbox, checkmark, background-color);
+  border: map-deep-get($checkbox, checkmark, border);
+  border-radius: map-deep-get($checkbox, checkmark, border-radius);
+
+  &.primary {
+    background-color: map-deep-get($checkbox, checkmark, primary, background-color);
+    border: map-deep-get($checkbox, checkmark, primary, border);
+  }
+
+  &.primaryClicked {
+    background-color: map-deep-get($checkbox, checkmark, primaryClicked, background-color);
+    border: map-deep-get($checkbox, checkmark, primaryClicked, border);
+  }
+
+  &.secondary {
+    background-color: map-deep-get($checkbox, checkmark, secondary, background-color);
+    border: map-deep-get($checkbox, checkmark, secondary, border);
+  }
+
+  &.shadow {
+    background-color: map-deep-get($checkbox, checkmark, shadow, background-color);
+    border: map-deep-get($checkbox, checkmark, shadow, border);
+    box-shadow: map-deep-get($checkbox, checkmark, shadow, box-shadow);
+  }
+
+  &.disabled {
+    background-color: map-deep-get($checkbox, checkmark, disabled, background-color);
+    border: map-deep-get($checkbox, checkmark, disabled, border);
+  }
+
+  &.radius {
+    border-radius: map-deep-get($checkbox, checkmark, radius, border-radius)
+  }
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: map-deep-get($checkbox, checkmark, after, content);
+  position: map-deep-get($checkbox, checkmark, after, position);
+  display: map-deep-get($checkbox, checkmark, after, display);
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: map-deep-get($checkbox, container, checkmarkAfter, left);
+  top: map-deep-get($checkbox, container, checkmarkAfter, top);
+  width: map-deep-get($checkbox, container, checkmarkAfter, width);
+  height: map-deep-get($checkbox, container, checkmarkAfter, height);
+  border: map-deep-get($checkbox, container, checkmarkAfter, border);
+  border-width: map-deep-get($checkbox, container, checkmarkAfter, border-width);
+  -webkit-transform: map-deep-get($checkbox, container, checkmarkAfter, -webkit-transform);
+  -ms-transform: map-deep-get($checkbox, container, checkmarkAfter, -ms-transform);
+  transform: map-deep-get($checkbox, container, checkmarkAfter, transform);
+
+  &.secondaryCheckmark {
+    border: map-deep-get($checkbox, container, checkmarkAfter, secondary, border)
+  }
+
+  &.disabledCheckmark {
+    border: map-deep-get($checkbox, container, checkmarkAfter, disabled, border)
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.iconContainer {
+  position: map-deep-get($input, icon, position);
+  box-sizing: map-deep-get($input, icon, box-sizing);
+  top: map-deep-get($input, icon, top);
+  box-sizing: map-get($input, box-sizing);
+  &.small {
+    width: map-deep-get($input, size, small, width);
+  }
+
+
+}
