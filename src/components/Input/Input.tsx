@@ -18,6 +18,7 @@ const Input = ({
     const colorClass = color ? styles[color] : ''
     const sizeClass = size ? styles[size] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
+    const containerSizeClass = size ? styles[`${size}Container`] : ''
 
     const suffixClass =
         size === 'small'
@@ -25,7 +26,7 @@ const Input = ({
             : styles.iconContainerSuffixLarge
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${containerSizeClass}`}>
             {(suffix || prefix) && (
                 <div
                     className={

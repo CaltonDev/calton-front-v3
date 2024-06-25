@@ -11,16 +11,29 @@
 
 .iconContainerSuffixSmall {
   @extend .iconContainer;
-  left: map-deep-get($input, icon, small, left);
+  right: map-deep-get($input, icon, small, right);
+  padding-top: map-deep-get($input, icon, small, padding-top);
 }
 
 .iconContainerSuffixLarge {
   @extend .iconContainer;
-  left: map-deep-get($input, icon, large, left);
+  right: map-deep-get($input, icon, large, right);
 }
 
 .container {
   position: relative;
+  width: map-get($input, width);
+
+  &.smallContainer {
+    width: map-deep-get($input, size, small, width);
+  }
+
+  &.mediumContainer {
+    width: map-deep-get($input, size, medium, width);
+  }
+
+  &.largeContainer {
+  }
 }
 
 .input {

@@ -44,7 +44,7 @@ function Login() {
             </Typography>
 
             <Input
-                size={'medium'}
+                size={'small'}
                 color={'success'}
                 disabled={false}
                 onChange={handleInputChange}
