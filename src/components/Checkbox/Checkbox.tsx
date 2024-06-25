@@ -15,15 +15,26 @@ const Checkbox = ({
 }: CheckboxProps) => {
     const checkboxClass = color ? styles[color] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
+    const disabledCheckmarkClass = disabled ? styles['containerDisabled'] : ''
+    const secondaryCheckmarkClass =
+        color === 'secondary' ? styles['containerSecondary'] : ''
     const checkmarkClass = disabled
         ? styles['disabledCheckmark']
         : color === 'secondary'
           ? styles['secondaryCheckmark']
           : ''
     const isRadius = type == 'radio' ? styles['radius'] : ''
-    console.log('styles: ', styles)
+    const containerRadius = type == 'radio' ? styles['containerRadio'] : ''
+    const containerRadiusAfter =
+        type === 'radio' && disabled
+            ? styles['containerRadioDisabled']
+            : type === 'radio' && color === 'secondary'
+              ? styles['containerRadioSecondary']
+              : ''
     return (
-        <label className={`${styles.container}`}>
+        <label
+            className={`${styles.container} ${disabledCheckmarkClass} ${secondaryCheckmarkClass} ${containerRadius} ${containerRadiusAfter}`}
+        >
             <div>
                 <div
                     className={styles.textContainer}

@@ -59,7 +59,7 @@ function Login() {
                 checked={checked}
                 onClick={() => setChecked(!checked)}
                 title={'Inserire testo'}
-                color={'primary'}
+                color={'secondary'}
                 disabled={false}
                 type={'radio'}
                 //subtitle={'Lorem ipsum dolor sit amet'}

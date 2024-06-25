@@ -96,14 +96,51 @@
   -webkit-transform: map-deep-get($checkbox, container, checkmarkAfter, -webkit-transform);
   -ms-transform: map-deep-get($checkbox, container, checkmarkAfter, -ms-transform);
   transform: map-deep-get($checkbox, container, checkmarkAfter, transform);
+}
 
-  &.secondaryCheckmark {
-    border: map-deep-get($checkbox, container, checkmarkAfter, secondary, border)
-  }
+.containerRadio .checkmark:after {
+  left: map-deep-get($checkbox, container, checkmarkAfterRadio, left);
+  top: map-deep-get($checkbox, container, checkmarkAfterRadio, top);
+  width: map-deep-get($checkbox, container, checkmarkAfterRadio, width);
+  height: map-deep-get($checkbox, container, checkmarkAfterRadio, height);
+  border: map-deep-get($checkbox, container, checkmarkAfterRadio, border);
+  //border-width: map-deep-get($checkbox, container, checkmarkAfterRadio, border-width);
+  -webkit-transform: map-deep-get($checkbox, container, checkmarkAfterRadio, -webkit-transform);
+  -ms-transform: map-deep-get($checkbox, container, checkmarkAfterRadio, -ms-transform);
+  transform: map-deep-get($checkbox, container, checkmarkAfterRadio, transform);
+  border-radius: map-deep-get($checkbox, container, checkmarkAfterRadio, border-radius);;
+}
 
-  &.disabledCheckmark {
-    border: map-deep-get($checkbox, container, checkmarkAfter, disabled, border)
-  }
+.containerSecondary {
+}
+
+.containerDisabled {
+}
+
+.containerRadioSecondary {
+}
+
+.containerRadioDisabled {
+}
+
+.containerSecondary .checkmark:after {
+  border: map-deep-get($checkbox, container, checkmarkAfter, secondary, border);
+  border-width: map-deep-get($checkbox, container, checkmarkAfter, border-width);
+}
+
+.containerDisabled .checkmark:after {
+  border: map-deep-get($checkbox, container, checkmarkAfter, disabled, border);
+  border-width: map-deep-get($checkbox, container, checkmarkAfter, border-width);
+}
+
+.containerRadioSecondary .checkmark:after {
+  border: map-deep-get($checkbox, container, checkmarkAfterRadio, secondary, border);
+  background: map-deep-get($checkbox, container, checkmarkAfterRadio, secondary, background);
+}
+
+.containerRadioDisabled .checkmark:after {
+  border: map-deep-get($checkbox, container, checkmarkAfterRadio, disabled, border);
+  background: map-deep-get($checkbox, container, checkmarkAfterRadio, disabled, background);
 }
 
 .textContainer {

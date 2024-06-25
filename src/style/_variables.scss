@@ -290,6 +290,26 @@ $checkbox: (
         disabled: (
           border: solid #9D96A5
         )
+      ),
+      checkmarkAfterRadio: (
+              left: 3.5px,
+              top: 3.5px,
+              width: 10px,
+              height: 10px,
+        //checkmark color
+              border: solid #3F49FC,
+              -webkit-transform: rotate(45deg),
+              -ms-transform: rotate(45deg),
+              transform: rotate(45deg),
+              border-radius: 10px,
+              secondary: (
+                      background: #0C16C8,
+                      border: solid #0C16C8
+              ),
+              disabled: (
+                      background: #9D96A5,
+                      border: solid #9D96A5
+              )
       )
     ),
     checkmark: (
