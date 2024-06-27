@@ -75,10 +75,12 @@
 
   &.error {
     border: map-deep-get($input, colorKey, error, border);
+    box-shadow: map-deep-get($input, colorKey, error, box-shadow);
   }
 
   &.success {
     border: map-deep-get($input, colorKey, success, border);
+    box-shadow: map-deep-get($input, colorKey, success, box-shadow);
   }
 
   &.disabled {
