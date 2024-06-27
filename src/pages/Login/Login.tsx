@@ -6,6 +6,7 @@ import Typography from '../../components/Typography/Typography'
 import Input from '../../components/Input/Input'
 import Checkbox from '../../components/Checkbox/Checkbox'
 import checkbox from '../../components/Checkbox/Checkbox'
+import Switch from '../../components/Switch/Switch'
 
 function Login() {
     const navigate = useNavigate()
@@ -64,6 +65,12 @@ function Login() {
                 type={'radio'}
                 hasContainer={true}
                 //subtitle={'Lorem ipsum dolor sit amet'}
+            />
+
+            <Switch
+                checked={checked}
+                disabled={false}
+                onClick={() => setChecked(!checked)}
             />
         </div>
     )
