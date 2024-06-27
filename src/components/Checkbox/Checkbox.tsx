@@ -31,37 +31,53 @@ const Checkbox = ({
             : type === 'radio' && color === 'secondary'
               ? styles['containerRadioSecondary']
               : ''
+    const hasContainerClass = hasContainer
+        ? disabled
+            ? styles['hasContainerClassDisabled']
+            : color === 'secondary'
+              ? styles['hasContainerClassSecondary']
+              : styles['hasContainerClass']
+        : ''
+
     return (
-        <label
-            className={`${styles.container} ${disabledCheckmarkClass} ${secondaryCheckmarkClass} ${containerRadius} ${containerRadiusAfter}`}
+        <div
+            className={`${hasContainerClass} ${hasContainer && styles.hasContainerClass}`}
         >
-            <div>
-                <div
-                    className={styles.textContainer}
-                    style={subtitle === '' ? { marginTop: 3 } : {}}
+            <div style={{ display: 'flex' }}>
+                <label
+                    className={`${styles.container} ${disabledCheckmarkClass} ${secondaryCheckmarkClass} ${containerRadius} ${containerRadiusAfter}`}
                 >
-                    <Typography weight={'normal'} size={'bodySmall'}>
-                        {title}
-                    </Typography>
-                    <Typography
-                        weight={'light'}
-                        size={'bodySmall'}
-                        color={'tertiary'}
-                    >
-                        {subtitle}
-                    </Typography>
-                </div>
-                <input
-                    type={'checkbox'}
-                    checked={checked}
-                    onClick={onClick}
-                    disabled={disabled}
-                />
-                <span
-                    className={`${styles.checkmark} ${disabledClass} ${checkboxClass} ${checkmarkClass} ${isRadius}`}
-                />
+                    <div>
+                        <div
+                            className={styles.textContainer}
+                            style={subtitle === '' ? { marginTop: 3 } : {}}
+                        >
+                            <Typography weight={'normal'} size={'bodySmall'}>
+                                {title}
+                            </Typography>
+                            {!hasContainer && (
+                                <Typography
+                                    weight={'light'}
+                                    size={'bodySmall'}
+                                    color={'tertiary'}
+                                >
+                                    {subtitle}
+                                </Typography>
+                            )}
+                        </div>
+                        <input
+                            type={'checkbox'}
+                            checked={checked}
+                            onClick={onClick}
+                            disabled={disabled}
+                        />
+                        <span
+                            className={`${styles.checkmark} ${disabledClass} ${checkboxClass} ${checkmarkClass} ${isRadius}`}
+                        />
+                    </div>
+                </label>
             </div>
-        </label>
+        </div>
     )
 }
 

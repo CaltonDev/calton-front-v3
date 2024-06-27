@@ -62,6 +62,7 @@ function Login() {
                 color={'secondary'}
                 disabled={false}
                 type={'radio'}
+                hasContainer={true}
                 //subtitle={'Lorem ipsum dolor sit amet'}
             />
         </div>
