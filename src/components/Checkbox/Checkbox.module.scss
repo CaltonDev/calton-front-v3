@@ -148,33 +148,23 @@
   flex-direction: column;
 }
 
-.iconContainer {
-  position: map-deep-get($input, icon, position);
-  box-sizing: map-deep-get($input, icon, box-sizing);
-  top: map-deep-get($input, icon, top);
-  box-sizing: map-get($input, box-sizing);
-  &.small {
-    width: map-deep-get($input, size, small, width);
-  }
-}
-
 .hasContainerClass {
-  height: 44px;
-  border-radius: 50px;
-  border: 1px solid #9D96A5;
-  gap: 12px;
-  flex-direction: row;
-  display: flex;
-  width: 144px;
-  justify-content: center;
-  align-items: center;
+  height: map-deep-get($checkbox, hasContainer, height);
+  border-radius: map-deep-get($checkbox, hasContainer, border-radius);
+  border: map-deep-get($checkbox, hasContainer, border);
+  gap: map-deep-get($checkbox, hasContainer, gap);
+  flex-direction: map-deep-get($checkbox, hasContainer, flex-direction);
+  display: map-deep-get($checkbox, hasContainer, display);
+  width: map-deep-get($checkbox, hasContainer, width);
+  justify-content: map-deep-get($checkbox, hasContainer, justify-content);
+  align-items: map-deep-get($checkbox, hasContainer, align-items);
 
   &.hasContainerClassDisabled {
-    background: #F1F1F1;
+    background: map-deep-get($checkbox, hasContainer, disabled, background);
   }
 
   &.hasContainerClassSecondary {
-    border: 1px solid #3F49FC;
-    box-shadow: 0px 0px 0px 3px #A1A6FE
+    border: map-deep-get($checkbox, hasContainer, secondary, border);
+    box-shadow: map-deep-get($checkbox, hasContainer, secondary, box-shadow);
   }
 }
