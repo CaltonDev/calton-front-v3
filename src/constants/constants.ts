@@ -1,3 +1,4 @@
+export const iconExtraSmallSize = 12
 export const iconSmallSize = 16
 export const iconSmallMedium = 20
 export const iconSmallLarge = 24

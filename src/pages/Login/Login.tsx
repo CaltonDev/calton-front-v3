@@ -71,6 +71,7 @@ function Login() {
                 checked={checked}
                 disabled={false}
                 onClick={() => setChecked(!checked)}
+                icon={true}
             />
         </div>
     )

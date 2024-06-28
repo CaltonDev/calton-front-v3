@@ -1,6 +1,6 @@
 export interface SvgWrapperProps {
     keySvg?: string
-    size?: 'small' | 'medium' | 'large'
+    size?: 'xsmall' | 'small' | 'medium' | 'large'
     color?: 'primary' | 'secondary' | 'disabled'
     isClickable?: boolean
 }

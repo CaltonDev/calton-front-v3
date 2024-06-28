@@ -5,12 +5,15 @@ import styles from './SvgWrapper.module.scss'
 import ArrowForwardSvg from './SvgIcons/ArrowForwardSvg'
 import {
     disabledColor,
+    iconExtraSmallSize,
     iconSmallLarge,
     iconSmallMedium,
     iconSmallSize,
     primaryColor,
     secondaryColor,
 } from '../../constants/constants'
+import LockOpenedSvg from './SvgIcons/LockOpenedSvg'
+import LockClosedSvg from './SvgIcons/LockClosedSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -19,11 +22,13 @@ const SvgWrapper = ({
     isClickable = false,
 }: SvgWrapperProps) => {
     const iconSize =
-        size === 'small'
-            ? iconSmallSize
-            : size === 'medium'
-              ? iconSmallMedium
-              : iconSmallLarge
+        size === 'xsmall'
+            ? iconExtraSmallSize
+            : size === 'small'
+              ? iconSmallSize
+              : size === 'medium'
+                ? iconSmallMedium
+                : iconSmallLarge
     const iconColor =
         color === 'primary'
             ? primaryColor
@@ -43,6 +48,18 @@ const SvgWrapper = ({
                 />
             ) : keySvg === 'arrowForward' ? (
                 <ArrowForwardSvg
+                    width={iconSize}
+                    height={iconSize}
+                    fillColor={iconColor}
+                />
+            ) : keySvg === 'lockOpenedSvg' ? (
+                <LockOpenedSvg
+                    width={iconSize}
+                    height={iconSize}
+                    fillColor={iconColor}
+                />
+            ) : keySvg === 'lockClosedSvg' ? (
+                <LockClosedSvg
                     width={iconSize}
                     height={iconSize}
                     fillColor={iconColor}

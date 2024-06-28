@@ -1,5 +1,21 @@
 @import '@Style/app';
 
+.iconNotChecked {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+}
+
+.iconChecked {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+}
+
+.iconNotDisplayed {
+  display: none;
+}
+
 /* Customize the label (the container) */
 .container {
   display: map-deep-get($checkbox, container, display);
