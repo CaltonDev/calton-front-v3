@@ -9,11 +9,14 @@ import {
     iconSmallLarge,
     iconSmallMedium,
     iconSmallSize,
+    iconSmallXLarge,
     primaryColor,
     secondaryColor,
 } from '../../constants/constants'
 import LockOpenedSvg from './SvgIcons/LockOpenedSvg'
 import LockClosedSvg from './SvgIcons/LockClosedSvg'
+import SearchSvg from './SvgIcons/SearchSvg'
+import ArrowDownSvg from './SvgIcons/ArrowDownSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -28,7 +31,9 @@ const SvgWrapper = ({
               ? iconSmallSize
               : size === 'medium'
                 ? iconSmallMedium
-                : iconSmallLarge
+                : size === 'large'
+                  ? iconSmallLarge
+                  : iconSmallXLarge
     const iconColor =
         color === 'primary'
             ? primaryColor
@@ -60,6 +65,18 @@ const SvgWrapper = ({
                 />
             ) : keySvg === 'lockClosedSvg' ? (
                 <LockClosedSvg
+                    width={iconSize}
+                    height={iconSize}
+                    fillColor={iconColor}
+                />
+            ) : keySvg === 'searchSvg' ? (
+                <SearchSvg
+                    width={iconSize}
+                    height={iconSize}
+                    fillColor={iconColor}
+                />
+            ) : keySvg === 'arrowDownSvg' ? (
+                <ArrowDownSvg
                     width={iconSize}
                     height={iconSize}
                     fillColor={iconColor}

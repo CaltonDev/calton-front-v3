@@ -51,12 +51,16 @@
   gap: map-get($input, gap);
   width: map-get($input, width);
   height: map-get($input, height);
-  background: map-get($input, background);
   border: map-get($input, border);
   border-radius: map-get($input, border-radius);
   flex: map-get($input, flex);
   order: map-get($input, order);
   flex-grow: map-get($input, flex-grow);
+
+  -webkit-appearance: none;
+  appearance: none;
+  background-size: 24px;
+  background: url("../../assets/icon/caretDownLight.svg") no-repeat calc(100% - 8px) center !important;
 
   &.small {
     width: map-deep-get($input, size, small, width);

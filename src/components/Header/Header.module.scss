@@ -1,0 +1,13 @@
+.appHeader {
+  background-color: #fff !important;
+  z-index: 999 !important;
+  width: 100% !important;
+  position: fixed !important;
+  height: 111px !important;
+  padding: 0 5rem !important;
+}
+
+.containerHeader{
+  display: flex !important;
+  justify-content: space-between !important;
+}

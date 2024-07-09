@@ -1,0 +1,39 @@
+
+.textInput{
+  width: 100%;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  box-shadow :none !important;
+  font-weight: 500;
+  border-radius: 0;
+}
+
+.textInput:hover{
+  border-bottom: 2px solid #3F49FC;
+  transition: border 0.1s ease-in-out;
+}
+
+.textInput:focus{
+  outline:none !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+  content: none !important;
+  border-bottom: 2px solid #3F49FC;
+}
+
+.placeholderTitle {
+  font-size:12px;
+  color: #3F49FC;
+  transition: color 0.1s ease-in-out;
+}
+
+.textInputNoFloat {
+  @extend .textInput
+}
+
+.textInputNoFloat:hover {
+  border-bottom: 2px solid #3F49FC;
+  transition: border 0.1s ease-in-out;
+}

@@ -2,6 +2,13 @@ import styles from './Input.module.scss'
 import { InputProps } from './Input.interface'
 import React from 'react'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import {
+    iconExtraSmallSize,
+    iconSmallLarge,
+    iconSmallMedium,
+    iconSmallSize,
+    iconSmallXLarge,
+} from '../../constants/constants'
 
 const Input = ({
     size,
@@ -20,6 +27,15 @@ const Input = ({
     const disabledClass = disabled ? styles[`disabled`] : ''
     const containerSizeClass = size ? styles[`${size}Container`] : ''
 
+    const iconSize =
+        size === 'small'
+            ? iconSmallSize
+            : size === 'medium'
+              ? iconSmallMedium
+              : size === 'large'
+                ? iconSmallLarge
+                : iconSmallXLarge
+
     const suffixClass =
         size === 'small'
             ? styles.iconContainerSuffixSmall
@@ -31,7 +47,9 @@ const Input = ({
                 <div
                     className={
                         prefix
-                            ? styles.iconContainerPrefix
+                            ? size === 'xlarge'
+                                ? styles.iconContainerPrefixXLarge
+                                : styles.iconContainerPrefix
                             : suffix
                               ? suffixClass
                               : ''
@@ -49,6 +67,7 @@ const Input = ({
             )}
             <input
                 className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass}`}
+                style={prefix ? { paddingLeft: iconSize + 5 } : {}}
                 disabled={disabled}
                 onChange={onChange}
                 type={type}

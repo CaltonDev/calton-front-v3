@@ -247,12 +247,16 @@ $input: (
           position: absolute,
           box-sizing: border-box,
           top: 25%,
+          left: 5px,
           small: (
             padding-top: 3px,
             right: 3%
           ),
           large: (
             right: 3%
+          ),
+          prefixXlarge: (
+            top: 18%
           )
         )
 );
