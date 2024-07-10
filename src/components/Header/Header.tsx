@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react'
 import styles from './Header.module.scss'
-import CaltonLogoWh from '../../assets/img/Logo Calton Mascotte.png'
 import Sidebar from '../Sidebar/Sidebar'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import SearchBar from '../SearchBar/SearchBar'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { debounce } from 'lodash'
 
 function Header() {
@@ -53,18 +52,49 @@ function Header() {
     return (
         <header className={styles.appHeader}>
             <div className={styles.containerHeader}>
-                <img src={CaltonLogoWh} alt="session-logo" width="55" />
-                <Sidebar />
-                <SearchBar
-                    value={searchLocal}
-                    placeholder={t('Cerca una parola o un feedback completo')}
-                    onChange={(event) => {
-                        handleSearch(event.target.value)
-                    }}
-                />
-                <div>
-                    <SvgWrapper />
-                    <SvgWrapper />
+                <div className={styles.leftHeaderContainer}>
+                    <SvgWrapper
+                        keySvg={'caltonLogoSvg'}
+                        color={'primaryIcon'}
+                        customWidth={31}
+                        customHeight={41}
+                        hasContainerProps={{
+                            hasContainer: true,
+                            containerSize: 55,
+                        }}
+                    />
+                    <Sidebar />
+                </div>
+                <div className={styles.rightHeaderContainer}>
+                    <SearchBar
+                        value={searchLocal}
+                        placeholder={t(
+                            'Cerca una parola o un feedback completo'
+                        )}
+                        onChange={(event) => {
+                            handleSearch(event.target.value)
+                        }}
+                    />
+                    <div className={styles.iconContainer}>
+                        <SvgWrapper
+                            keySvg={'settingsSvg'}
+                            color={'primaryIcon'}
+                            size={'xlarge'}
+                            hasContainerProps={{
+                                hasContainer: true,
+                                containerSize: 55,
+                            }}
+                        />
+                        <SvgWrapper
+                            keySvg={'profileSvg'}
+                            color={'primaryIcon'}
+                            size={'xlarge'}
+                            hasContainerProps={{
+                                hasContainer: true,
+                                containerSize: 55,
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </header>

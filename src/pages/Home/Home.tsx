@@ -8,6 +8,7 @@ import Input from '../../components/Input/Input'
 import Checkbox from '../../components/Checkbox/Checkbox'
 import Switch from '../../components/Switch/Switch'
 import Select from '../../components/Select/Select'
+import SvgWrapper from '../../components/SvgWrapper/SvgWrapper'
 
 function Home() {
     const navigate = useNavigate()
@@ -80,6 +81,16 @@ function Home() {
                 disabled={false}
                 onClick={() => setChecked(!checked)}
                 icon={true}
+            />
+
+            <SvgWrapper
+                keySvg={'settingsSvg'}
+                color={'primaryIcon'}
+                size={'xlarge'}
+                hasContainerProps={{
+                    hasContainer: true,
+                    containerSize: 55,
+                }}
             />
         </div>
     )

@@ -12,7 +12,7 @@ function Layout() {
     }*/
 
     return (
-        <div>
+        <div style={{ background: '#F5F5F5' }}>
             <ErrorSubscriptionModal />
             <Header />
             <Outlet />

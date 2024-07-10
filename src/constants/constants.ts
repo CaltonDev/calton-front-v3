@@ -8,3 +8,5 @@ export const iconSmallXLarge = 30
 export const primaryColor = '#FFFFFF'
 export const secondaryColor = '#3F49FC'
 export const disabledColor = '#C0BBC5'
+
+export const primaryIconColor = '#321D48'
