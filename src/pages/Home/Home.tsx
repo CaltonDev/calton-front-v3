@@ -38,7 +38,8 @@ function Home() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: 200,
+                height: 300,
+                paddingTop: 200,
             }}
         >
             <Typography size={'h1'} weight={'normal'} color={'primary'}>
