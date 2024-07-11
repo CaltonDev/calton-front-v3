@@ -7,5 +7,6 @@ export interface SelectProps {
     color?: 'primary' | 'secondary' | 'error' | 'success'
     placeholder?: string
     value?: string | number
+    fontSize?: string
     onChange?: React.ChangeEventHandler<HTMLSelectElement>
 }

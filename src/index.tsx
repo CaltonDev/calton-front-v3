@@ -7,6 +7,7 @@ import '../src/style/app.scss'
 import Login from './pages/Login/Login'
 import Layout from './layout/Layout'
 import Home from './pages/Home/Home'
+import './i18n'
 
 const router = createBrowserRouter([
     {

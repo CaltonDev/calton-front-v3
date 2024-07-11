@@ -60,7 +60,7 @@ function Header() {
                         customHeight={41}
                         hasContainerProps={{
                             hasContainer: true,
-                            containerSize: 55,
+                            containerSize: 50,
                         }}
                     />
                     <Sidebar />
@@ -82,7 +82,7 @@ function Header() {
                             size={'xlarge'}
                             hasContainerProps={{
                                 hasContainer: true,
-                                containerSize: 55,
+                                containerSize: 50,
                             }}
                         />
                         <SvgWrapper
@@ -91,7 +91,7 @@ function Header() {
                             size={'xlarge'}
                             hasContainerProps={{
                                 hasContainer: true,
-                                containerSize: 55,
+                                containerSize: 50,
                             }}
                         />
                     </div>

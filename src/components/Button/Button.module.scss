@@ -20,6 +20,7 @@
   order: map-get($button, order);
   flex-grow: map-get($button, flex-grow);
   border: map-get($button, border);
+  cursor: pointer;
 
   &.small {
     height: map-deep-get($button, size, small, height);

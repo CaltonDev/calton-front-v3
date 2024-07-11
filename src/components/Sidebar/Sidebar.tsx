@@ -39,6 +39,7 @@ function Sidebar() {
                 options={selectOptions}
                 value={platformType}
                 size={'small'}
+                fontSize={'medium'}
                 color={'secondary'}
                 customColor={'#7161EF'}
                 onChange={handlePlatformTypeChange}

@@ -17,7 +17,7 @@ function Home() {
     const [btnType, setBtnType] = useState<'text' | 'password'>('password')
     const [checked, setChecked] = useState(false)
     const performLoginAndRedirect = () => {
-        dispatch(setUser('exist'))
+        //dispatch(setUser('exist'))
         navigate('/')
     }
 
@@ -89,7 +89,7 @@ function Home() {
                 size={'xlarge'}
                 hasContainerProps={{
                     hasContainer: true,
-                    containerSize: 55,
+                    containerSize: 50,
                 }}
             />
         </div>
