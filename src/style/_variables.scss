@@ -201,8 +201,8 @@ $input: (
         align-items: center,
         padding: 12px 16px,
         gap: 9px,
-        width: 500px,
-        height: 44px,
+        width: 35vw,
+        height: 50px,
         background: #FFFFFF,
         border: 1px solid #9D96A5,
         border-radius: 10px,
@@ -220,7 +220,7 @@ $input: (
         ),
         size: (
           small: (
-            width: 200px
+            width: 165px
           ),
           medium: (
           ),
@@ -313,8 +313,8 @@ $checkbox: (
         )
       ),
       checkmarkAfterRadio: (
-              left: 2px,
-              top: 2px,
+              left: 3.5px,
+              top: 3.5px,
               width: 10px,
               height: 10px,
         //checkmark color

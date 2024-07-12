@@ -284,6 +284,7 @@ const SidebarMenu = () => {
                                                         ? '#3f49fc'
                                                         : ''
                                                 }
+                                                size={'xsmall'}
                                                 keySvg={route?.menu_icon}
                                             />
                                         </span>
