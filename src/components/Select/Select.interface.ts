@@ -8,5 +8,5 @@ export interface SelectProps {
     placeholder?: string
     value?: string | number
     fontSize?: string
-    onChange?: React.ChangeEventHandler<HTMLSelectElement>
+    onChange?: React.Dispatch<React.SetStateAction<null>>
 }

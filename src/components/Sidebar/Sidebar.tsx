@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './Sidebar.module.scss'
-import Select from '../Select/Select'
+import CaltonSelect from '../Select/Select'
 import { useTranslation } from 'react-i18next'
 import SidebarMenu from './SidebarMenu/SidebarMenu'
 function Sidebar() {
@@ -35,12 +35,11 @@ function Sidebar() {
 
     return (
         <div className={styles.sidebarContainer}>
-            <Select
+            <CaltonSelect
                 options={selectOptions}
                 value={platformType}
                 size={'small'}
                 fontSize={'medium'}
-                color={'secondary'}
                 customColor={'#7161EF'}
                 onChange={handlePlatformTypeChange}
             />

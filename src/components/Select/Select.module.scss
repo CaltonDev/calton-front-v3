@@ -42,7 +42,7 @@
   display: map-get($input, display);
   flex-direction: map-get($input, flex-direction);
   align-items: map-get($input, align-items);
-  padding: map-get($input, padding);
+  //padding: map-get($input, padding);
   gap: map-get($input, gap);
   width: map-get($input, width);
   height: map-get($input, height);
@@ -53,11 +53,7 @@
   flex-grow: map-get($input, flex-grow);
   line-height: map-deep-get($input, select, line-height);
 
-  -webkit-appearance: none;
-  appearance: none;
-  background-size: 24px;
-  background: url("data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2221%22%20viewBox%3D%220%200%2020%2021%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%208L10%2013L15%208%22%20stroke%3D%22white%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E") no-repeat calc(100% - 8px) center !important;
-  &.small {
+   &.small {
     width: map-deep-get($input, size, small, width);
   }
 
@@ -103,6 +99,11 @@
 
 .input:focus {
   outline: none;
+}
+
+.menu {
+  border-radius: 15px !important;
+  box-shadow: none !important;
 }
 
 .menuItem {

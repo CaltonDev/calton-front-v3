@@ -1,8 +1,9 @@
 import styles from './Select.module.scss'
 import { SelectProps } from './Select.interface'
-import React from 'react'
+import React, { useState } from 'react'
+import Select from 'react-select'
 
-const Select = ({
+const CaltonSelect = ({
     size,
     disabled = false,
     color = 'primary',
@@ -27,34 +28,31 @@ const Select = ({
 
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
-            <select
-                value={value}
+            <Select
+                classNames={{
+                    control: () =>
+                        `${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${fontSizeClass}`,
+                    menu: () => `${styles.menu}`,
+                    option: () => `${styles.menuItem}`,
+                }}
+                //defaultValue={value}
                 onChange={onChange}
-                className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${fontSizeClass}`}
-                style={
-                    customColor
-                        ? {
-                              background: customColor,
-                              borderColor: customColor,
-                              color: 'white',
-                          }
-                        : {}
-                }
-                disabled={disabled}
-            >
-                {placeholder !== '' && <option value="">{placeholder}</option>}
-                {options?.map((option: { value: any; label: any }) => (
-                    <option
-                        key={option.value}
-                        value={option.value}
-                        className={styles.menuItem}
-                    >
-                        {option.label}
-                    </option>
-                ))}
-            </select>
+                options={options}
+                styles={{
+                    control: (baseStyles) => ({
+                        ...baseStyles,
+                        borderColor: customColor ? customColor : '',
+                        background: customColor ? customColor : '',
+                        color: customColor ? 'white' : '',
+                    }),
+                }}
+                components={{
+                    IndicatorSeparator: () => null,
+                }}
+                //menuIsOpen={true}
+            />
         </div>
     )
 }
 
-export default Select
+export default CaltonSelect

@@ -7,7 +7,7 @@ import Typography from '../../components/Typography/Typography'
 import Input from '../../components/Input/Input'
 import Checkbox from '../../components/Checkbox/Checkbox'
 import Switch from '../../components/Switch/Switch'
-import Select from '../../components/Select/Select'
+import CaltonSelect from '../../components/Select/Select'
 import SvgWrapper from '../../components/SvgWrapper/SvgWrapper'
 
 function Home() {
@@ -70,7 +70,7 @@ function Home() {
                 //subtitle={'Lorem ipsum dolor sit amet'}
             />
 
-            <Select
+            <CaltonSelect
                 size={'small'}
                 color={'secondary'}
                 customColor={'#7161EF'}

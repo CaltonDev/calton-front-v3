@@ -1,19 +1,17 @@
 import store from '../../store/store'
 
-// getHeaders.ts
-interface Headers {
-    Authorization?: string
-    sessionId?: string
+interface HeadersInit {
+    [key: string]: string
 }
 
-interface GetHeadersResult {
-    headers: Headers
+export interface FetchOptions extends RequestInit {
+    headers: HeadersInit
 }
 
 export function getHeaders(
-    shouldNotBeLogged: boolean,
+    shouldNotBeLogged?: boolean,
     requireSession = false
-): GetHeadersResult {
+): FetchOptions {
     if (shouldNotBeLogged) {
         return {
             headers: {},
@@ -26,10 +24,15 @@ export function getHeaders(
         ? sessionStorage.getItem('unique') || ''
         : undefined
 
+    const headers: HeadersInit = {
+        Authorization: token,
+    }
+
+    if (requireSession && sessionId) {
+        headers.sessionId = sessionId
+    }
+
     return {
-        headers: {
-            Authorization: token,
-            ...(requireSession && sessionId ? { sessionId } : {}),
-        },
+        headers,
     }
 }
