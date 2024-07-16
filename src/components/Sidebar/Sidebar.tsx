@@ -7,7 +7,6 @@ function Sidebar() {
     const [platformType, setPlatformType] = useState('Recensioni')
     const { t } = useTranslation()
     const handlePlatformTypeChange = (e: any) => {
-        console.log('change ?')
         setPlatformType(e?.target?.value)
     }
 
