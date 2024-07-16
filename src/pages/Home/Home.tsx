@@ -34,16 +34,8 @@ function Home() {
     }
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                height: 300,
-                paddingTop: 200,
-            }}
-        >
-            <Typography size={'h1'} weight={'normal'} color={'primary'}>
+        <div>
+            {/*<Typography size={'h1'} weight={'normal'} color={'primary'}>
                 Login
             </Typography>
 
@@ -91,7 +83,7 @@ function Home() {
                     hasContainer: true,
                     containerSize: 50,
                 }}
-            />
+            />*/}
         </div>
     )
 }

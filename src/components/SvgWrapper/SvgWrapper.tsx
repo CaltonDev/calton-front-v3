@@ -28,6 +28,7 @@ import ProductSvg from './SvgIcons/ProductSvg'
 import FontiSvg from './SvgIcons/FontiSvg'
 import GrafoSvg from './SvgIcons/GrafoSvg'
 import PerformanceSvg from './SvgIcons/PerformanceSvg'
+import ChatIconSvg from './SvgIcons/ChatIconSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -37,6 +38,7 @@ const SvgWrapper = ({
     hasContainerProps = {
         hasContainer: false,
         containerSize: 0,
+        background: 'white',
     },
     customWidth,
     customHeight,
@@ -61,6 +63,9 @@ const SvgWrapper = ({
             : color === 'primaryIcon'
               ? primaryIconColor
               : disabledColor
+
+    const iconWidth = customWidth ? customWidth : iconSize
+    const iconHeight = customHeight ? customHeight : iconSize
     return (
         <div
             style={
@@ -68,6 +73,7 @@ const SvgWrapper = ({
                     ? {
                           width: hasContainerProps?.containerSize,
                           height: hasContainerProps?.containerSize,
+                          background: hasContainerProps?.background,
                       }
                     : {}
             }
@@ -84,50 +90,50 @@ const SvgWrapper = ({
             >
                 {keySvg === 'arrowBack' ? (
                     <ArrowBackSvg
-                        width={iconSize}
-                        height={iconSize}
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'arrowForward' ? (
                     <ArrowForwardSvg
-                        width={iconSize}
-                        height={iconSize}
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'lockOpenedSvg' ? (
                     <LockOpenedSvg
-                        width={iconSize}
-                        height={iconSize}
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'lockClosedSvg' ? (
                     <LockClosedSvg
-                        width={iconSize}
-                        height={iconSize}
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'searchSvg' ? (
                     <SearchSvg
-                        width={iconSize}
-                        height={iconSize}
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'arrowDownSvg' ? (
                     <ArrowDownSvg
-                        width={iconSize}
-                        height={iconSize}
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'settingsSvg' ? (
                     <SettingsSvg
-                        width={iconSize}
-                        height={iconSize}
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'profileSvg' ? (
                     <ProfileSvg
-                        width={iconSize}
-                        height={iconSize}
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'caltonLogoSvg' ? (
@@ -146,6 +152,8 @@ const SvgWrapper = ({
                     <GrafoSvg />
                 ) : keySvg === 'analisi-avanzata.svg' ? (
                     <PerformanceSvg />
+                ) : keySvg === 'chatIcon.svg' ? (
+                    <ChatIconSvg width={iconWidth} height={iconHeight} />
                 ) : (
                     <></>
                 )}
