@@ -6,17 +6,22 @@ type ActionMeta<T> = {
     // other properties as needed
 }
 
+export type Value = {
+    value?: string
+    label?: string
+    className: string
+}
 export interface SelectProps {
-    options?: any
+    options?: Value[]
     size?: 'small' | 'medium' | 'large' | 'xlarge'
     disabled?: boolean
     customColor?: string
     color?: 'primary' | 'secondary' | 'error' | 'success'
     placeholder?: string
-    value?: string | number
+    value?: Value
     fontSize?: string
     onChange?: (
-        newValue: SingleValue<string | number>,
+        newValue: SingleValue<Value>,
         actionMeta: ActionMeta<string | number>
     ) => void
 }

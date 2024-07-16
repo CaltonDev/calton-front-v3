@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Sidebar.module.scss'
 import CaltonSelect from '../Select/Select'
 import { useTranslation } from 'react-i18next'
 import SidebarMenu from './SidebarMenu/SidebarMenu'
 function Sidebar() {
-    const [platformType, setPlatformType] = useState('Recensioni')
+    const [platformType, setPlatformType] = useState('reviews')
     const { t } = useTranslation()
     const handlePlatformTypeChange = (e: any) => {
-        setPlatformType(e?.target?.value)
+        setPlatformType(e?.value)
     }
 
     const selectOptions = [
@@ -37,7 +37,13 @@ function Sidebar() {
         <div className={styles.sidebarContainer}>
             <CaltonSelect
                 options={selectOptions}
-                value={platformType}
+                value={
+                    selectOptions[
+                        selectOptions?.findIndex(
+                            (x) => x.value === platformType
+                        )
+                    ]
+                }
                 size={'small'}
                 fontSize={'medium'}
                 customColor={'#7161EF'}

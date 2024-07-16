@@ -10,7 +10,7 @@ const CaltonSelect = ({
     onChange,
     options,
     placeholder = '',
-    value = '',
+    value,
     customColor,
     fontSize,
 }: SelectProps) => {
@@ -25,7 +25,7 @@ const CaltonSelect = ({
                   fontSize?.slice(1)
           ]
         : ''
-    console.log({ customColor })
+
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
             <Select
@@ -69,6 +69,7 @@ const CaltonSelect = ({
                         color: 'white', // Change placeholder text color
                     }),
                 }}
+                menuIsOpen={true}
                 components={{
                     IndicatorSeparator: () => null,
                 }}
