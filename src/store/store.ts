@@ -1,39 +1,33 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userSlice from './user/userSlice'
 import settingsSlice from './settings/settingsSlice'
-import averageReviewByTime, {
-    averageReviewByTimeSlice,
-} from './home/averageReviewByTime'
-import AverageVotoByTimeSlice, {
-    averageVotoByTimeSlice,
-} from './home/averageVotoByTimeSlice'
-import { averageSentimentByTimeSlice } from './home/averageSentimentByTime'
-import { distribuzioneVotiSlice } from './home/distribuzioneVotiSlice'
-import { sourceSlice } from './home/sourceSlice'
-import { errorToastSlice } from './toast/errorToastSlice'
-import SelectedWordsSlice, {
-    selectedWordsSlice,
-} from './home/selectedWordsSlice'
-import { filtersSlice } from './filters/filtersSlice'
-import { selectableFiltersSlice } from './filters/selectableFiltersSlice'
-import { bubbleSlice } from './home/bubbleSlice'
-import { socketSlice } from './socket/socketSlice'
-import { feedbackHomeSlice } from './home/feedbackHomeSlice'
-import { locationFilteredSlice } from './locations/locationFilteredSlice'
-import { childUsersSlice } from './childUsers/childUsersSlice'
-import { sourcesFilteredSlice } from './sources/sourcesFilteredSlice'
-import { chartSlice } from './chart/chartSlice'
-import { analisiAvanzataSlice } from './analisiAvanzataState/analisiAvanzataSlice'
-import { distribuzioneRaccomandazioniSlice } from './home/distribuzioneRaccomandazioni'
-import { searchSlice } from './search/search'
-import { typeformUrlSlice } from './typeformUrl/typeformUrlSlice'
-import { codeSlice } from './code/codeSlice'
-import { menuSlice } from './menus/menuSlice'
-import { photosSlice } from './photos/photosSlice'
+import averageReviewByTimeSlice from './home/averageReviewByTime'
+import averageVotoByTimeSlice from './home/averageVotoByTimeSlice'
+import averageSentimentByTimeSlice from './home/averageSentimentByTime'
+import distribuzioneVotiSlice from './home/distribuzioneVotiSlice'
+import sourceSlice from './home/sourceSlice'
+import errorToastSlice from './toast/errorToastSlice'
+import selectedWordsSlice from './home/selectedWordsSlice'
+import filtersSlice from './filters/filtersSlice'
+import selectableFiltersSlice from './filters/selectableFiltersSlice'
+import bubbleSlice from './home/bubbleSlice'
+import socketSlice from './socket/socketSlice'
+import feedbackHomeSlice from './home/feedbackHomeSlice'
+import locationFilteredSlice from './locations/locationFilteredSlice'
+import childUsersSlice from './childUsers/childUsersSlice'
+import sourcesFilteredSlice from './sources/sourcesFilteredSlice'
+import chartSlice from './chart/chartSlice'
+import analisiAvanzataSlice from './analisiAvanzataState/analisiAvanzataSlice'
+import distribuzioneRaccomandazioniSlice from './home/distribuzioneRaccomandazioni'
+import searchSlice from './search/search'
+import typeformUrlSlice from './typeformUrl/typeformUrlSlice'
+import codeSlice from './code/codeSlice'
+import menuSlice from './menus/menuSlice'
+import photosSlice from './photos/photosSlice'
 
 const store = configureStore({
     reducer: {
-        User: userSlice,
+        user: userSlice,
         Settings: settingsSlice,
         AverageReviewByTime: averageReviewByTimeSlice,
         AverageVotoByTime: averageVotoByTimeSlice,
@@ -60,6 +54,7 @@ const store = configureStore({
         UploadPhotos: photosSlice,
     },
 })
+
 export type RootState = ReturnType<typeof store.getState>
 
 export default store

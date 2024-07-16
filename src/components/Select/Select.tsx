@@ -25,7 +25,6 @@ const CaltonSelect = ({
                   fontSize?.slice(1)
           ]
         : ''
-
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
             <Select
@@ -35,8 +34,12 @@ const CaltonSelect = ({
                     menu: () => `${styles.menu}`,
                     option: () => `${styles.menuItem}`,
                 }}
-                //defaultValue={value}
-                onChange={onChange}
+                defaultValue={value}
+                onChange={(value, action) => {
+                    if (onChange) {
+                        onChange(value, action)
+                    }
+                }}
                 options={options}
                 styles={{
                     control: (baseStyles) => ({
