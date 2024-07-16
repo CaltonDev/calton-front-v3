@@ -69,7 +69,6 @@ const CaltonSelect = ({
                         color: 'white', // Change placeholder text color
                     }),
                 }}
-                menuIsOpen={true}
                 components={{
                     IndicatorSeparator: () => null,
                 }}
