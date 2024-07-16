@@ -25,6 +25,7 @@ const CaltonSelect = ({
                   fontSize?.slice(1)
           ]
         : ''
+    console.log({ customColor })
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
             <Select
@@ -34,6 +35,7 @@ const CaltonSelect = ({
                     menu: () => `${styles.menu}`,
                     option: () => `${styles.menuItem}`,
                 }}
+                isSearchable={false}
                 defaultValue={value}
                 onChange={(value, action) => {
                     if (onChange) {
@@ -43,10 +45,28 @@ const CaltonSelect = ({
                 options={options}
                 styles={{
                     control: (baseStyles) => ({
-                        ...baseStyles,
-                        borderColor: customColor ? customColor : '',
-                        background: customColor ? customColor : '',
-                        color: customColor ? 'white' : '',
+                        borderColor: customColor
+                            ? customColor + '!important'
+                            : '',
+                        background: customColor
+                            ? customColor + '!important'
+                            : '',
+                    }),
+                    dropdownIndicator: (base, state) => ({
+                        ...base,
+                        color: 'white',
+                        transition: 'color 0.2s',
+                        ':hover': {
+                            color: '#d3d3d3',
+                        },
+                    }),
+                    singleValue: (base) => ({
+                        ...base,
+                        color: customColor ? 'white!important' : '',
+                    }),
+                    placeholder: (base) => ({
+                        ...base,
+                        color: 'white', // Change placeholder text color
                     }),
                 }}
                 components={{
