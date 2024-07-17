@@ -1,3 +1,4 @@
+import * as React from 'react'
 export interface SvgWrapperProps {
     keySvg: string
     size?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
@@ -11,6 +12,7 @@ export interface SvgWrapperProps {
     customWidth?: number
     customHeight?: number
     customColor?: string
+    onClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
 export interface SvgProps {

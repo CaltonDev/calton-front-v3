@@ -6,6 +6,7 @@
     @if map-has-key($styles, 'color') {
       @each $colorName, $colorValue in map-get($styles, color) {
         .#{$headline}-#{$weight}-#{$colorName} {
+          font-family: "Roboto" !important;
           font-size: parse_typography(headline, $headline, fontSize);
           font-weight: $fontWeight;
           color: parse_typography(headline, $headline, color, $colorName);
@@ -19,6 +20,7 @@
       // Handle when no specific colors are defined; use default colors
       @each $colorName, $colorValue in $default-colors {
         .#{$headline}-#{$weight}-#{$colorName} {
+          font-family: "Roboto" !important;
           font-size: parse_typography(headline, $headline, fontSize);
           font-weight: $fontWeight;
           color: $colorValue; // Use value directly from default colors

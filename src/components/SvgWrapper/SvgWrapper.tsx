@@ -6,10 +6,10 @@ import ArrowForwardSvg from './SvgIcons/ArrowForwardSvg'
 import {
     disabledColor,
     iconExtraSmallSize,
-    iconSmallLarge,
-    iconSmallMedium,
+    iconLargeSize,
+    iconMediumSize,
     iconSmallSize,
-    iconSmallXLarge,
+    iconXLargeSize,
     primaryColor,
     primaryIconColor,
     secondaryColor,
@@ -29,6 +29,7 @@ import FontiSvg from './SvgIcons/FontiSvg'
 import GrafoSvg from './SvgIcons/GrafoSvg'
 import PerformanceSvg from './SvgIcons/PerformanceSvg'
 import ChatIconSvg from './SvgIcons/ChatIconSvg'
+import CommunicationSvg from './SvgIcons/CommunicationSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -43,6 +44,7 @@ const SvgWrapper = ({
     customWidth,
     customHeight,
     customColor,
+    onClick,
 }: SvgWrapperProps) => {
     const iconSize =
         size === 'xsmall'
@@ -50,10 +52,10 @@ const SvgWrapper = ({
             : size === 'small'
               ? iconSmallSize
               : size === 'medium'
-                ? iconSmallMedium
+                ? iconMediumSize
                 : size === 'large'
-                  ? iconSmallLarge
-                  : iconSmallXLarge
+                  ? iconLargeSize
+                  : iconXLargeSize
     const iconColor = customColor
         ? customColor
         : color === 'primary'
@@ -68,6 +70,7 @@ const SvgWrapper = ({
     const iconHeight = customHeight ? customHeight : iconSize
     return (
         <div
+            onClick={onClick}
             style={
                 hasContainerProps?.hasContainer
                     ? {
@@ -154,6 +157,8 @@ const SvgWrapper = ({
                     <PerformanceSvg />
                 ) : keySvg === 'chatIcon.svg' ? (
                     <ChatIconSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'communicationIcon.svg' ? (
+                    <CommunicationSvg width={iconWidth} height={iconHeight} />
                 ) : (
                     <></>
                 )}

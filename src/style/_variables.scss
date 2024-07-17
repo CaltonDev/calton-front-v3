@@ -228,13 +228,17 @@ $input: (
           )
         ),
         fontSize: (
-          small: (),
+          small: (
+            font-size: 14px,
+          ),
           medium: (
-            font-size: 20px,
+            font-size: 16px,
             height: 50px,
             line-height: 21px
           ),
-          large: ()
+          large: (
+            font-size: 20px,
+          )
         ),
         colorKey: (
           primary: (

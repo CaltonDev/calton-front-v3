@@ -3,3 +3,29 @@
   bottom: 20px;
   right: 20px;
 }
+
+.chatContainer {
+  position: absolute;
+  width: 435px;
+  height: 879px;
+  bottom: 100px;
+  right: 20px;
+  background: #FFFFFF;
+  box-shadow: 4px 4px 20px rgba(50, 29, 72, 0.25);
+  border-radius: 10px;
+  padding: 20px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+}
+
+.svgContainer {
+  margin-right: 10px;
+}

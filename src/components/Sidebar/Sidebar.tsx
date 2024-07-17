@@ -45,7 +45,7 @@ function Sidebar() {
                     ]
                 }
                 size={'small'}
-                fontSize={'medium'}
+                fontSize={'large'}
                 customColor={'#7161EF'}
                 onChange={handlePlatformTypeChange}
             />

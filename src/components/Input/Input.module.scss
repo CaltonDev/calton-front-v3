@@ -14,11 +14,13 @@
   @extend .iconContainer;
   right: map-deep-get($input, icon, small, right);
   padding-top: map-deep-get($input, icon, small, padding-top);
+  left: auto;
 }
 
 .iconContainerSuffixLarge {
   @extend .iconContainer;
   right: map-deep-get($input, icon, large, right);
+  left: auto;
 }
 
 .iconContainerPrefixXLarge {
@@ -40,6 +42,10 @@
 
   &.largeContainer {
   }
+
+  &.fullWidthContainer {
+    width: 100%;
+  }
 }
 
 .input {
@@ -60,6 +66,7 @@
 
   &.small {
     width: map-deep-get($input, size, small, width);
+    font-size: map-deep-get($input, size, small, font-size);
   }
 
   &.medium {
@@ -69,6 +76,12 @@
   }
 
   &.large {
+    font-size: map-deep-get($input, size, large, font-size);
+  }
+
+  &.fullWidth {
+    width: 100%;
+    font-size: map-deep-get($input, size, medium, font-size);
   }
 
   &.primary {

@@ -52,6 +52,7 @@
   order: map-get($input, order);
   flex-grow: map-get($input, flex-grow);
   line-height: map-deep-get($input, select, line-height);
+  font-family: map-get($input, font-family);
 
    &.small {
     width: map-deep-get($input, size, small, width);
@@ -65,10 +66,22 @@
   &.large {
   }
 
+  &.fontSizeSmall{
+    font-size: map-deep-get($input, fontSize, small, font-size);
+    line-height: map-deep-get($input, fontSize, small, line-height);
+    height: map-deep-get($input, fontSize, small, height);
+  }
+
   &.fontSizeMedium {
     font-size: map-deep-get($input, fontSize, medium, font-size);
     line-height: map-deep-get($input, fontSize, medium, line-height);
     height: map-deep-get($input, fontSize, medium, height);
+  }
+
+  &.fontSizeLarge {
+    font-size: map-deep-get($input, fontSize, large, font-size);
+    line-height: map-deep-get($input, fontSize, large, line-height);
+    height: map-deep-get($input, fontSize, large, height);
   }
 
   &.primary {
@@ -139,7 +152,7 @@
   -webkit-appearance: none!important;
   -webkit-text-decoration: none!important;
   text-decoration: none!important;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif!important;
+  font-family: "Roboto" !important;
   font-weight: 400!important;
   font-size: 1rem!important;
   line-height: 1.5!important;

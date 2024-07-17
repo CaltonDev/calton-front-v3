@@ -4,10 +4,10 @@ import React from 'react'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import {
     iconExtraSmallSize,
-    iconSmallLarge,
-    iconSmallMedium,
+    iconLargeSize,
+    iconMediumSize,
     iconSmallSize,
-    iconSmallXLarge,
+    iconXLargeSize,
 } from '../../constants/constants'
 
 const Input = ({
@@ -21,20 +21,25 @@ const Input = ({
     prefix,
     suffix,
     iconCallback,
+    fullWidth = false,
 }: InputProps) => {
     const colorClass = color ? styles[color] : ''
-    const sizeClass = size ? styles[size] : ''
+    const sizeClass = fullWidth ? styles['fullWidth'] : size ? styles[size] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
-    const containerSizeClass = size ? styles[`${size}Container`] : ''
+    const containerSizeClass = fullWidth
+        ? styles[`fullWidthContainer`]
+        : size
+          ? styles[`${size}Container`]
+          : ''
 
     const iconSize =
         size === 'small'
             ? iconSmallSize
             : size === 'medium'
-              ? iconSmallMedium
+              ? iconMediumSize
               : size === 'large'
-                ? iconSmallLarge
-                : iconSmallXLarge
+                ? iconLargeSize
+                : iconXLargeSize
 
     const suffixClass =
         size === 'small'
