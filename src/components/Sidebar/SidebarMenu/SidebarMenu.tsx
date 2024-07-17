@@ -35,6 +35,7 @@ const SidebarMenu = () => {
                     child_routes: null,
                     customIcon: true,
                     visible: true,
+                    customSize: 31,
                     id: 2,
                 },
                 {
@@ -45,6 +46,7 @@ const SidebarMenu = () => {
                     child_routes: null,
                     customIcon: true,
                     visible: true,
+                    customSize: 31,
                     id: 3,
                 },
                 {
@@ -55,6 +57,7 @@ const SidebarMenu = () => {
                     child_routes: null,
                     customIcon: true,
                     visible: true,
+                    customSize: 25,
                     id: 4,
                 },
                 {
@@ -284,7 +287,9 @@ const SidebarMenu = () => {
                                                         ? '#3f49fc'
                                                         : ''
                                                 }
-                                                size={'xsmall'}
+                                                size={'large'}
+                                                customWidth={route?.customSize}
+                                                customHeight={route?.customSize}
                                                 keySvg={route?.menu_icon}
                                             />
                                         </span>

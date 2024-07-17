@@ -35,10 +35,6 @@ function Home() {
 
     return (
         <div>
-            <Typography size={'h1'} weight={'normal'} color={'reviews'}>
-                Login
-            </Typography>
-
             {/*<Input
                 size={'small'}
                 color={'success'}

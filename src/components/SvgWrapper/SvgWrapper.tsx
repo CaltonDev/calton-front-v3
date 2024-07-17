@@ -30,6 +30,12 @@ import GrafoSvg from './SvgIcons/GrafoSvg'
 import PerformanceSvg from './SvgIcons/PerformanceSvg'
 import ChatIconSvg from './SvgIcons/ChatIconSvg'
 import CommunicationSvg from './SvgIcons/CommunicationSvg'
+import RaggruppaSvg from './SvgIcons/RaggruppaSvg'
+import OtherSvg from './SvgIcons/OtherSvg'
+import TopicSvg from './SvgIcons/TopicSvg'
+import CanaliSvg from './SvgIcons/CanaliSvg'
+import TempoSvg from './SvgIcons/TempoSvg'
+import YourFiltersSvg from './SvgIcons/YourFiltersSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -146,11 +152,23 @@ const SvgWrapper = ({
                 ) : keySvg === 'reviews.svg' ? (
                     <StarSvg />
                 ) : keySvg === 'location.svg' ? (
-                    <LocationSvg />
+                    <LocationSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'products.svg' ? (
-                    <ProductSvg />
+                    <ProductSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'Fonti.svg' ? (
-                    <FontiSvg />
+                    <FontiSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'Grafo.svg' ? (
                     <GrafoSvg />
                 ) : keySvg === 'analisi-avanzata.svg' ? (
@@ -159,6 +177,18 @@ const SvgWrapper = ({
                     <ChatIconSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'communicationIcon.svg' ? (
                     <CommunicationSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'raggruppa.svg' ? (
+                    <RaggruppaSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'others.svg' ? (
+                    <OtherSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'topic.svg' ? (
+                    <TopicSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'channels.svg' ? (
+                    <CanaliSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'tempo.svg' ? (
+                    <TempoSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'customFilters.svg' ? (
+                    <YourFiltersSvg width={iconWidth} height={iconHeight} />
                 ) : (
                     <></>
                 )}

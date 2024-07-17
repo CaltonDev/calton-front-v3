@@ -9,6 +9,7 @@ export interface TypographyProps {
         | 'bodyBig'
         | 'bodyMedium'
         | 'bodySmall'
+        | 'bodyXSmall'
     weight: 'light' | 'normal' | 'bold'
     color?: 'primary' | 'secondary' | 'tertiary' | 'reviews'
     italic?: boolean
