@@ -35,11 +35,11 @@ function Home() {
 
     return (
         <div>
-            {/*<Typography size={'h1'} weight={'normal'} color={'primary'}>
+            <Typography size={'h1'} weight={'normal'} color={'reviews'}>
                 Login
             </Typography>
 
-            <Input
+            {/*<Input
                 size={'small'}
                 color={'success'}
                 disabled={false}
