@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from './FiltersList.module.scss'
+import styles from './Filter.module.scss'
 import Typography from '../../../Typography/Typography'
 import Switch from '../../../Switch/Switch'
 import SvgWrapper from '../../../SvgWrapper/SvgWrapper'
-function FiltersList() {
+import Button from '../../../Button/Button'
+import { FilterProps } from './Filter.interface'
+
+function Filter({ filter }: FilterProps) {
     const { t } = useTranslation()
     const [checked, setChecked] = useState(false)
     const [selectedFilter, setSelectedFilter] = useState<string | null>(null)
@@ -64,43 +67,25 @@ function FiltersList() {
     return (
         <div className={styles.container}>
             <div className={styles.titleContainer}>
-                <Typography
-                    size={'bodySmall'}
-                    weight={'bold'}
-                    color={'reviews'}
-                >
-                    {t('Filtri')?.toUpperCase()}
-                </Typography>
+                <div className={styles.header}>
+                    <SvgWrapper
+                        keySvg={filter?.svg}
+                        size={'large'}
+                        color={'white'}
+                    />
+                    <Typography size={'h6'} weight={'bold'} color={'white'}>
+                        {filter?.label}
+                    </Typography>
+                </div>
             </div>
-            {filtersObj?.map((filter) => {
-                return (
-                    <div key={filter?.key} className={styles.iconContainer}>
-                        <SvgWrapper
-                            keySvg={filter?.svg}
-                            size={'large'}
-                            color={'primaryIcon'}
-                            onClick={() => handleFiltersClick(filter?.key)}
-                        />
-                        <Typography
-                            size={'bodyXSmall'}
-                            weight={'normal'}
-                            color={'tertiary'}
-                        >
-                            {filter?.label}
-                        </Typography>
-                    </div>
-                )
-            })}
-            <div className={styles.titleContainer}>
-                <Switch
-                    checked={checked}
-                    disabled={false}
-                    onClick={() => setChecked(!checked)}
-                    icon={true}
-                />
+
+            <div className={styles.footerContainer}>
+                <Button size={'medium'} disabled={true}>
+                    {t('Applica')}
+                </Button>
             </div>
         </div>
     )
 }
 
-export default FiltersList
+export default Filter

@@ -2,7 +2,7 @@ import * as React from 'react'
 export interface SvgWrapperProps {
     keySvg: string
     size?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
-    color?: 'primary' | 'secondary' | 'disabled' | 'primaryIcon'
+    color?: 'primary' | 'secondary' | 'disabled' | 'primaryIcon' | 'white'
     isClickable?: boolean
     hasContainerProps?: {
         hasContainer: boolean

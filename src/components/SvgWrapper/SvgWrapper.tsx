@@ -178,17 +178,41 @@ const SvgWrapper = ({
                 ) : keySvg === 'communicationIcon.svg' ? (
                     <CommunicationSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'raggruppa.svg' ? (
-                    <RaggruppaSvg width={iconWidth} height={iconHeight} />
+                    <RaggruppaSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'others.svg' ? (
-                    <OtherSvg width={iconWidth} height={iconHeight} />
+                    <OtherSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'topic.svg' ? (
-                    <TopicSvg width={iconWidth} height={iconHeight} />
+                    <TopicSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'channels.svg' ? (
-                    <CanaliSvg width={iconWidth} height={iconHeight} />
+                    <CanaliSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'tempo.svg' ? (
-                    <TempoSvg width={iconWidth} height={iconHeight} />
+                    <TempoSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'customFilters.svg' ? (
-                    <YourFiltersSvg width={iconWidth} height={iconHeight} />
+                    <YourFiltersSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : (
                     <></>
                 )}

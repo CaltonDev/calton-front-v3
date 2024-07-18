@@ -11,7 +11,7 @@ export interface TypographyProps {
         | 'bodySmall'
         | 'bodyXSmall'
     weight: 'light' | 'normal' | 'bold'
-    color?: 'primary' | 'secondary' | 'tertiary' | 'reviews'
+    color?: 'primary' | 'secondary' | 'tertiary' | 'reviews' | 'white'
     italic?: boolean
     underline?: boolean
     uppercase?: boolean
