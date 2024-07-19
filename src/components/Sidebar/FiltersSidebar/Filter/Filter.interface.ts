@@ -5,5 +5,5 @@ type FilterType = {
 }
 
 export interface FilterProps {
-    filter: FilterType
+    filter: FilterType | null
 }

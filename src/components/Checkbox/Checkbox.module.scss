@@ -148,6 +148,12 @@
   flex-direction: column;
 }
 
+.textContainerDropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .hasContainerClass {
   height: map-deep-get($checkbox, hasContainer, height);
   border-radius: map-deep-get($checkbox, hasContainer, border-radius);

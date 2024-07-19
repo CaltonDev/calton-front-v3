@@ -22,6 +22,7 @@ const Input = ({
     suffix,
     iconCallback,
     fullWidth = false,
+    floatingDisplay = false,
 }: InputProps) => {
     const colorClass = color ? styles[color] : ''
     const sizeClass = fullWidth ? styles['fullWidth'] : size ? styles[size] : ''
@@ -31,6 +32,10 @@ const Input = ({
         : size
           ? styles[`${size}Container`]
           : ''
+
+    const floatingDisplayClass = floatingDisplay
+        ? styles['floatingDisplay']
+        : ''
 
     const iconSize =
         size === 'small'
@@ -71,7 +76,7 @@ const Input = ({
                 </div>
             )}
             <input
-                className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass}`}
+                className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${floatingDisplayClass}`}
                 style={prefix ? { paddingLeft: iconSize + 5 } : {}}
                 disabled={disabled}
                 onChange={onChange}

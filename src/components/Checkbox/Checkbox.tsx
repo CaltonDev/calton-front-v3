@@ -2,6 +2,7 @@ import styles from './Checkbox.module.scss'
 import { CheckboxProps } from './Checkbox.interface'
 import React from 'react'
 import Typography from '../Typography/Typography'
+import SvgWrapper from '../SvgWrapper/SvgWrapper'
 
 const Checkbox = ({
     checked = false,
@@ -12,6 +13,8 @@ const Checkbox = ({
     title = '',
     subtitle = '',
     hasContainer = false,
+    value,
+    dropdown,
 }: CheckboxProps) => {
     const checkboxClass = color ? styles[color] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
@@ -49,9 +52,22 @@ const Checkbox = ({
                 >
                     <div>
                         <div
-                            className={styles.textContainer}
+                            className={
+                                dropdown
+                                    ? styles.textContainerDropdown
+                                    : styles.textContainer
+                            }
                             style={subtitle === '' ? { marginTop: 3 } : {}}
                         >
+                            {dropdown && (
+                                <div style={{ marginRight: 3 }}>
+                                    <SvgWrapper
+                                        keySvg={'arrowDownSvg'}
+                                        color={'black'}
+                                        size={'small'}
+                                    />
+                                </div>
+                            )}
                             <Typography weight={'normal'} size={'bodySmall'}>
                                 {title}
                             </Typography>

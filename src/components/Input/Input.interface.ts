@@ -11,4 +11,5 @@ export interface InputProps {
     suffix?: string
     iconCallback?: React.MouseEventHandler<HTMLDivElement>
     fullWidth?: boolean
+    floatingDisplay?: boolean
 }

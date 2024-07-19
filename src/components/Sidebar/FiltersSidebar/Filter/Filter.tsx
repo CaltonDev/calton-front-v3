@@ -6,11 +6,14 @@ import Switch from '../../../Switch/Switch'
 import SvgWrapper from '../../../SvgWrapper/SvgWrapper'
 import Button from '../../../Button/Button'
 import { FilterProps } from './Filter.interface'
+import { useSelector } from 'react-redux'
+import GroupByFilter from '../Filters/GroupByFilter/GroupByFilter'
+import SourcesFilter from '../Filters/SourcesFilter/SourcesFilter'
 
 function Filter({ filter }: FilterProps) {
     const { t } = useTranslation()
     const [checked, setChecked] = useState(false)
-    const [selectedFilter, setSelectedFilter] = useState<string | null>(null)
+    //const selectedFilter = useSelector((state) => state.Settings.selectedFilter)
 
     const filtersObj = [
         {
@@ -61,7 +64,7 @@ function Filter({ filter }: FilterProps) {
     ]
 
     const handleFiltersClick = (filterId: string) => {
-        setSelectedFilter(filterId)
+        //setSelectedFilter(filterId)
     }
 
     return (
@@ -69,16 +72,42 @@ function Filter({ filter }: FilterProps) {
             <div className={styles.titleContainer}>
                 <div className={styles.header}>
                     <SvgWrapper
-                        keySvg={filter?.svg}
+                        keySvg={filter ? filter?.svg : ''}
                         size={'large'}
                         color={'white'}
                     />
                     <Typography size={'h6'} weight={'bold'} color={'white'}>
-                        {filter?.label}
+                        {filter ? filter?.label : ''}
                     </Typography>
                 </div>
             </div>
-
+            <div className={styles.filterContainer}>
+                {/*<GroupByFilter />*/}
+                {<SourcesFilter />}
+                {/*
+                    selectedFilter === -1 ?
+                        <CreateFilter setCustomFilters={callback} />
+                        : selectedFilter === 0 ?
+                            <SourcesFilter />
+                            : selectedFilter === 1 ?
+                                <SourcesFilter />
+                                : selectedFilter === 2 ?
+                                    <ChannelsFilter />
+                                    : selectedFilter === 3 ?
+                                        <TimeFilter />
+                                        : selectedFilter === 4 ?
+                                            <PlacesFilter /> :
+                                            selectedFilter === 5 ?
+                                                <TopicFilter /> :
+                                                selectedFilter === 6 ?
+                                                    <Products /> :
+                                                    selectedFilter === 7 ?
+                                                        <FeedbackFilter /> :
+                                                        selectedFilter === 8 ?
+                                                            <ListingStateFilter /> :
+                                                            selectedFilter >= CustomConstants.filters.customFiltersPosition ?
+                                                                renderCustomFilter() : <></>*/}
+            </div>
             <div className={styles.footerContainer}>
                 <Button size={'medium'} disabled={true}>
                     {t('Applica')}

@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito&family=Quicksand&display=swap');
+
+
+.buttonStyle {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.containerPopper {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  border: none;
+  border-radius: 6px;
+  z-index: 1300;
+  font-size: 13px;
+  color: #24292e;
+  background-color: transparent;
+}
+.containerPopperCore {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  border-radius: 6px;
+  width: 320px;
+  z-index: 1300;
+  font-size: 13px;
+  color: #24292e;
+  background-color: white;
+  border: 1px solid rgb(225, 228, 232);
+  min-height: 350px;
+  max-height: 420px;
+  overflow-y: hidden;
+}
+.containerAutoComplete {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.87);
+  box-sizing: border-box;
+  position: relative;
+  cursor: text;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  border-bottom: 1px solid #eaecef;
+  height: 100%;
+}
+.myLi {
+  display: flex;
+  padding: 10px 30px;
+  //border-bottom: 1px solid #212573;
+  cursor: pointer;
+  justify-content: space-around;
+  flex-direction: column;
+  color: #888eff !important;
+  height: auto;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+.myLiCore {
+  display: flex;
+  padding: 10px 30px;
+  //border-bottom: 1px solid rgb(234, 236, 239);
+  cursor: pointer;
+  justify-content: space-around;
+  flex-direction: column;
+  color: black !important;
+  height: auto;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+.myLiCore:first-child {
+  border-top: 1px solid rgb(234, 236, 239);
+}
+.rowIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  padding-bottom: 10px;
+  width: 214px;
+}
+.myLi:hover {
+  background: rgba(145, 202, 255, 0.2);
+}
+.myLiCore:hover {
+  background: rgba(205, 231, 255, 0.2);
+}
+.buttonOnly {
+  font-size: 13px!important;
+  font-weight: 600!important;
+  border: none;
+  box-shadow: none;
+  margin-top: 10px;
+  color: #3F49FC;
+}
+.buttonLabel{
+  color: black !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none!important;
+  display: flex!important;
+  align-items: baseline!important;
+  justify-content: space-between!important;
+  width: 100%!important;
+  background: transparent!important;
+}
+
+.buttonLabel:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.floatingButtonLabel{
+  color: black !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none!important;
+  display: flex!important;
+  align-items: baseline!important;
+  justify-content: space-between!important;
+  width: 100%!important;
+  padding: 6px 0 0 0;
+}
+
+.floatingButtonLabel:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.hide{
+  display: none;
+}
+.myUl {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  max-height: 70vh;
+  overflow: auto;
+  background-color: rgba(237, 237, 242, 0.96);
+  font-weight: 900 !important;
+  width: 92%;
+}
+.myUlCore {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  overflow-y: scroll;
+  background-color: white;
+  font-weight: 900 !important;
+  width: 100%;
+  max-height: 280px;
+}
+.labelAutocomplete{
+  max-width: 97%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  font-weight: 500;
+}
+.myUl:last-child {
+  padding: 8px 0 5vh 0;
+}
+.myUlCore:last-child {
+  padding: 8px 0 5vh 0;
+}
+.selectAllButtons {
+  font-size: 13px;
+  width: 100%;
+  text-align: left;
+  color: #586069;
+  font-weight: 900;
+  background-color: transparent;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+
+}
+.selectAllButtons > svg {
+  width: 100% !important;
+
+}
+.selectAllButtons:hover, .selectAllButtons:focus {
+  background-color: transparent !important;
+  color: #0366d6 !important;
+}
+
+.disableSelectAllButtons {
+  font-size: 13px;
+  width: 100%;
+  text-align: left;
+  color: #586069;
+  font-weight: 900;
+  background-color: transparent;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.resetLink {
+  color: #1976d2;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 118, 210, 0.4);
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 15px !important;
+}
+.resetLink:hover {
+  color: #1890ff;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration:none;
+  transition: color 0.3s ease;
+}
+.myBtnIntegration {
+  background-color: #212573 !important;
+  border-radius: 10px !important;
+  font-size: 13px !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+  text-transform: none !important;
+  width:8rem;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  border: none !important;
+}
+.option1 {
+  font-weight: 900;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  display: inline-block;
+  max-width: 100%;
+  align-items: flex-start;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}
+.option2 {
+  font-weight: 500;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  display: inline-block;
+  max-width: 100%;
+  align-items: flex-start;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}
+.inputAuto {
+  margin-top: 10px;
+  width: 100%;
+  margin-left: -5px !important;
+  border-radius: 0;
+  background-color: transparent;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.inputAuto:hover {
+  border-bottom: 2px solid #212573;
+  transition: border-bottom 0.15s;
+  transition-timing-function: ease;
+}
+.inputAuto:focus {
+  border-bottom: 2px solid #1976d2;
+  transition: border-bottom 0.1s;
+  transition-timing-function: ease;
+}
+
+.inputAutoCore {
+  margin-top: 10px!important;
+  width: 92% !important;
+  margin-left: 15px !important;
+  border-radius: 4px!important;
+  padding: 8px!important;
+  border: 1px solid rgb(234, 236, 239) !important;
+  background-color: transparent;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.inputAutoCore:hover {
+  border-bottom: 2px solid #212573;
+  transition: border-bottom 0.15s;
+  transition-timing-function: ease;
+}
+.inputAutoCore:focus {
+  border-bottom: 2px solid #1976d2;
+  transition: border-bottom 0.1s;
+  transition-timing-function: ease;
+}
+.containerOptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.containerLabel {
+  padding: 10px 10px 10px 20px;
+  font-weight: bold;
+  color: #586069;
+  text-transform: capitalize;
+  border: none;
+}
+.containerLabelCore {
+  padding: 10px;
+  font-weight: bold;
+  color: #586069;
+  text-transform: capitalize;
+  border-bottom: 1px solid rgb(234, 236, 239);
+}
+.myRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  background-color: transparent;
+}
+.myUlWrapper {
+  padding: 0 ;
+}
+
+.divider {
+  width: 214px;
+  border: 1px dashed #C0BBC5;
+}
+
+.inputContainer {
+  display: flex;
+  width: 262px;
+  height: 45px;
+  align-items: center;
+  flex-shrink: 0;
+  background: var(--Neutral-200, #E9E7EC);
+}
+
+.headerContainer {
+  gap: 8px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+}
+
+.floatingDisplayContainer {
+  width: 184px;
+}

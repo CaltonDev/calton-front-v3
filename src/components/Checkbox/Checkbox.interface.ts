@@ -8,4 +8,6 @@ export interface CheckboxProps {
     title?: string
     subtitle?: string
     hasContainer?: boolean
+    value?: string | number
+    dropdown?: boolean
 }

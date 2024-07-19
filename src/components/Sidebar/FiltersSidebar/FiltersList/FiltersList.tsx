@@ -4,10 +4,10 @@ import styles from './FiltersList.module.scss'
 import Typography from '../../../Typography/Typography'
 import Switch from '../../../Switch/Switch'
 import SvgWrapper from '../../../SvgWrapper/SvgWrapper'
-function FiltersList() {
+import { FilterInterface } from '../Filters.interface'
+function FiltersList({ setSelectedFilter }: any) {
     const { t } = useTranslation()
     const [checked, setChecked] = useState(false)
-    const [selectedFilter, setSelectedFilter] = useState<string | null>(null)
 
     const filtersObj = [
         {
@@ -57,8 +57,8 @@ function FiltersList() {
         },
     ]
 
-    const handleFiltersClick = (filterId: string) => {
-        setSelectedFilter(filterId)
+    const handleFiltersClick = (filter: FilterInterface) => {
+        setSelectedFilter(filter)
     }
 
     return (
@@ -79,7 +79,7 @@ function FiltersList() {
                             keySvg={filter?.svg}
                             size={'large'}
                             color={'primaryIcon'}
-                            onClick={() => handleFiltersClick(filter?.key)}
+                            onClick={() => handleFiltersClick(filter)}
                         />
                         <Typography
                             size={'bodyXSmall'}

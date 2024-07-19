@@ -107,5 +107,12 @@
     background: map-get($input, disabled, background);
     border: map-deep-get($input, disabled, border);
   }
-
+  &.floatingDisplay {
+    outline: 0;
+    border-width: 0 0 1px;
+    border-radius: 0;
+    padding: 0;
+    height: 25px;
+    background: var(--Neutral-200, #E9E7EC);
+  }
 }

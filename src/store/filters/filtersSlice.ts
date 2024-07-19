@@ -153,7 +153,7 @@ export const filtersSlice = createSlice({
         setStateSelect(
             state: any,
             action: PayloadAction<{
-                type: string
+                type: string | undefined
                 value: any
                 optional?: any | null
                 labelDate?: string | null
