@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next'
 import { FilterInterface } from './Filters.interface'
 
 function FiltersSidebar() {
-    const [showFilterList, setShowFilterList] = useState(true)
-    const [showFilter, setShowFilter] = useState(true)
+    const [showFilterList, setShowFilterList] = useState(false)
+    const [showFilter, setShowFilter] = useState(false)
     const { t } = useTranslation()
     const [selectedFilter, setSelectedFilter] = useState<FilterInterface>({
         key: '',
@@ -23,7 +23,9 @@ function FiltersSidebar() {
 
     return (
         <div>
-            {!showFilterList && <FilterBtn />}
+            {!showFilterList && (
+                <FilterBtn onClick={() => setShowFilterList(!showFilterList)} />
+            )}
             {showFilterList && (
                 <FiltersList setSelectedFilter={handleSelectFilter} />
             )}

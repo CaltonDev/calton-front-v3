@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  padding-left: 29px;
+  padding-top: 20px;
+}
+
+.contentDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

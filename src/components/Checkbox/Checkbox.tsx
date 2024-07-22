@@ -43,14 +43,14 @@ const Checkbox = ({
               : styles['hasContainerClass']
         : ''
 
-    const [showDropdownMenu, setShowDropdownMenu] = useState(dropdown)
+    const [showDropdownMenu, setShowDropdownMenu] = useState(false)
 
     return (
         <div
             className={`${hasContainerClass} ${hasContainer && styles.hasContainerClass}`}
         >
             <div style={{ display: 'flex' }}>
-                <label
+                <div
                     className={`${styles.container} ${disabledCheckmarkClass} ${secondaryCheckmarkClass} ${containerRadius} ${containerRadiusAfter}`}
                 >
                     <div>
@@ -65,6 +65,11 @@ const Checkbox = ({
                             {dropdown && (
                                 <div style={{ marginRight: 3 }}>
                                     <SvgWrapper
+                                        onClick={() =>
+                                            setShowDropdownMenu(
+                                                !showDropdownMenu
+                                            )
+                                        }
                                         keySvg={'arrowDownSvg'}
                                         color={'black'}
                                         size={'small'}
@@ -91,10 +96,11 @@ const Checkbox = ({
                             disabled={disabled}
                         />
                         <span
+                            onClick={onClick}
                             className={`${styles.checkmark} ${disabledClass} ${checkboxClass} ${checkmarkClass} ${isRadius}`}
                         />
                     </div>
-                </label>
+                </div>
             </div>
             {showDropdownMenu && (
                 <div className={styles.dropdownOptionsContainer}>
@@ -102,8 +108,8 @@ const Checkbox = ({
                         {dropdownOptions?.map((option) => {
                             return (
                                 <div
-                                    key={option?.key}
                                     onClick={option?.onClick}
+                                    key={option?.key}
                                 >
                                     <Typography
                                         size={'bodySmall'}

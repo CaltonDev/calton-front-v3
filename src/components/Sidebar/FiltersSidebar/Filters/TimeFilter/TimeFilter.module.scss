@@ -7,3 +7,29 @@
   gap: 20px;
   flex-shrink: 0;
 }
+
+.contentDiv {
+  position: absolute;
+  top: 250px;
+  z-index: 20;
+  width: 210px;
+  height: 109px;
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 22px;
+}
+
+.typographyDiv {
+  width: 100%;
+}
+
+.radioDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}

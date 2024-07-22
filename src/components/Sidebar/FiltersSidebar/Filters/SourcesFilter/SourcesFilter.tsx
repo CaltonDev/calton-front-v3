@@ -1,5 +1,4 @@
 import React from 'react'
-import Checkbox from '../../../../Checkbox/Checkbox'
 import styles from './SourcesFilter.module.scss'
 import { useTranslation } from 'react-i18next'
 import CustomAutocomplete from '../../../../CustomAutocomplete/CustomAutocomplete'
@@ -12630,6 +12629,7 @@ function SourcesFilter() {
                 multiple={true}
                 handleChange={handleChange}
                 defaultValue={selectedSource}
+                hasDropdown={true}
             />
         </div>
     )

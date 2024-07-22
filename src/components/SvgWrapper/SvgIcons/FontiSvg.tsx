@@ -6,7 +6,6 @@ const FontiSvg = ({
     height = 25,
     fillColor = 'white',
 }: SvgProps) => {
-    console.log('Fil: ', fillColor)
     return (
         <>
             <svg

@@ -81,7 +81,7 @@ export function displayVariationsFromObj(obj) {
 }
 
 export function getNoCodeFromPlatfrom() {
-    const platformType = store.getState()?.Settings.platformType
+    const platformType = store.getState()?.Settings?.Settings?.platformType
     return platformType === 'reviews'
         ? AppConfig.codesource
         : platformType === 'competitor'

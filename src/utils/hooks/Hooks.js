@@ -1,19 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react'
 
 function useDeepCompareEffect(callback, dependencies) {
-  const currentDependenciesRef = useRef();
+    const currentDependenciesRef = useRef()
 
-  if (JSON.stringify(currentDependenciesRef.current) !== JSON.stringify(dependencies)) {
-    currentDependenciesRef.current = dependencies;
-  }
+    if (
+        JSON.stringify(currentDependenciesRef.current) !==
+        JSON.stringify(dependencies)
+    ) {
+        currentDependenciesRef.current = dependencies
+    }
 
-  useEffect(callback, [currentDependenciesRef.current]);
+    useEffect(callback, [currentDependenciesRef.current])
 }
 
-
 const Hooks = {
-  useDeepCompareEffect
-};
+    useDeepCompareEffect,
+}
 
-export default Hooks;
-
+export default Hooks

@@ -56,7 +56,7 @@
   padding: map-get($input, padding);
   gap: map-get($input, gap);
   width: map-get($input, width);
-  height: map-get($input, height);
+  //height: map-get($input, height);
   background: map-get($input, background);
   border: map-get($input, border);
   border-radius: map-get($input, border-radius);
@@ -70,7 +70,7 @@
   }
 
   &.medium {
-    height: map-deep-get($input, size, medium, height);
+    //height: map-deep-get($input, size, medium, height);
     width: map-deep-get($input, size, medium, width);
     font-size: map-deep-get($input, size, medium, font-size);
   }

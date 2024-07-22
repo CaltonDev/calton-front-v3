@@ -21,8 +21,8 @@ export function getConfig() {
                     'https://r5wnlodnu1.execute-api.eu-south-1.amazonaws.com/',
                 apiAnalysisStandard:
                     'https://xmx4u97h6l.execute-api.eu-south-1.amazonaws.com/',
-                //apiSource: "https://di4nr4v7pc.execute-api.eu-south-1.amazonaws.com/",
-                apiSource: 'http://localhost:5004',
+                apiSource:
+                    'https://di4nr4v7pc.execute-api.eu-south-1.amazonaws.com/',
                 apiAnalysisGeneric:
                     'https://4qc0cidn9g.execute-api.eu-south-1.amazonaws.com/',
                 apiInfos:

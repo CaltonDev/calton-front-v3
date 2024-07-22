@@ -117,3 +117,8 @@
     border-radius: map-deep-get($button, size, large, height);
   }
 }
+
+.fullwidth {
+  width: 100% !important;
+  height: auto;
+}

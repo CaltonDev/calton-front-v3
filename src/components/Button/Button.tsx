@@ -12,9 +12,10 @@ const Button = ({
     variant = 'solid',
     onClick,
     children,
+    fullWidth = false,
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
-    const sizeClass = size ? styles[size] : ''
+    const sizeClass = fullWidth ? styles['fullwidth'] : size ? styles[size] : ''
     const disabledClass = disabled ? styles[`disabled-${variant}`] : ''
     const arrowDirection =
         arrowPlacement !== 'none'

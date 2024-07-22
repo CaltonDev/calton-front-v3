@@ -3,12 +3,12 @@
   flex-direction: column;
   justify-content: space-between;
   width: 75px;
-  height: 725px;
+  position: fixed;
+  height: 70%;
   flex-shrink: 0;
   border-radius: 10px;
   background: #FFF;
 
-  position: absolute;
   top: 200px;
   left: 21px;
 }

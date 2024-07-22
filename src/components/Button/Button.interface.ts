@@ -8,4 +8,5 @@ export interface ButtonProps {
     variant?: 'solid' | 'outline' | 'ghost'
     onClick?: React.MouseEventHandler<HTMLButtonElement>
     children?: string
+    fullWidth?: boolean
 }

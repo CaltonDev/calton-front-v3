@@ -12,7 +12,8 @@ const fetchData = async (
     options: FetchOptions = {}
 ): Promise<any> => {
     const defaultOptions: FetchOptions = {
-        method: 'GET',
+        //ask chat gpt
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },

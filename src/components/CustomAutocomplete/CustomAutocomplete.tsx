@@ -32,6 +32,7 @@ export default function CustomAutocomplete({
     floatingDisplay = false,
     name = '',
     isThick = false,
+    hasDropdown = false,
 }: CustomAutocompleteProps) {
     const [anchorEl, setAnchorEl] = useState<any>(null)
     const [pendingValue, setPendingValue] = useState<any>([])
@@ -463,7 +464,7 @@ export default function CustomAutocomplete({
                                                     true
                                                 }
                                                 onClick={handleSelectAllBtn}
-                                                dropdown={true}
+                                                dropdown={hasDropdown}
                                                 dropdownOptions={[
                                                     {
                                                         key: 0,

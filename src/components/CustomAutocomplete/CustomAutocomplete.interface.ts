@@ -18,4 +18,5 @@ export interface CustomAutocompleteProps {
     floatingDisplay?: boolean
     name?: string
     isThick?: boolean
+    hasDropdown?: boolean
 }

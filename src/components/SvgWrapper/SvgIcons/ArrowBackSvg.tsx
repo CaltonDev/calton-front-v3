@@ -6,7 +6,6 @@ const ArrowBackSvg = ({
     height = 24,
     fillColor = '#464D69',
 }: SvgProps) => {
-    console.log('fil: ', fillColor)
     return (
         <>
             <svg

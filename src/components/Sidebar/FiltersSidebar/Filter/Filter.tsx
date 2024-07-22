@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './Filter.module.scss'
 import Typography from '../../../Typography/Typography'
@@ -10,12 +10,21 @@ import { useSelector } from 'react-redux'
 import GroupByFilter from '../Filters/GroupByFilter/GroupByFilter'
 import SourcesFilter from '../Filters/SourcesFilter/SourcesFilter'
 import TimeFilter from '../Filters/TimeFilter/TimeFilter'
+import CustomFilter from '../Filters/CustomFilter/CustomFilter'
+import OtherFilter from '../Filters/OtherFilter/OtherFilter'
+import ChannelsFilter from '../Filters/ChannelsFilter/ChannelsFilter'
+import PlacesFilter from '../Filters/PlacesFilter/PlacesFilter'
+import TopicsFilter from '../Filters/TopicsFilter/TopicsFilter'
+import ProductsFilter from '../Filters/ProductsFilter/ProductsFilter'
 
 function Filter({ filter }: FilterProps) {
     const { t } = useTranslation()
     const [checked, setChecked] = useState(false)
     //const selectedFilter = useSelector((state) => state.Settings.selectedFilter)
 
+    useEffect(() => {
+        console.log('Filter: ', filter)
+    }, [filter])
     const filtersObj = [
         {
             key: 'raggruppa',
@@ -83,9 +92,25 @@ function Filter({ filter }: FilterProps) {
                 </div>
             </div>
             <div className={styles.filterContainer}>
-                {/*<GroupByFilter />*/}
-                {/*<SourcesFilter />*/}
-                {<SourcesFilter />}
+                {filter?.key === 'raggruppa' ? (
+                    <GroupByFilter />
+                ) : filter?.key === 'tempo' ? (
+                    <TimeFilter />
+                ) : filter?.key === 'fonti' ? (
+                    <SourcesFilter />
+                ) : filter?.key === 'channels' ? (
+                    <ChannelsFilter />
+                ) : filter?.key === 'location' ? (
+                    <PlacesFilter />
+                ) : filter?.key === 'topic' ? (
+                    <TopicsFilter />
+                ) : filter?.key === 'products' ? (
+                    <ProductsFilter />
+                ) : filter?.key === 'others' ? (
+                    <OtherFilter />
+                ) : (
+                    filter?.key === 'customFilters' && <CustomFilter />
+                )}
                 {/*
                     selectedFilter === -1 ?
                         <CreateFilter setCustomFilters={callback} />
@@ -94,11 +119,11 @@ function Filter({ filter }: FilterProps) {
                             : selectedFilter === 1 ?
                                 <TimeFilter />
                                 : selectedFilter === 2 ?
-                                    <ChannelsFilter />
+                                    <ProductsFilter />
                                     : selectedFilter === 3 ?
                                         <TimeFilter />
                                         : selectedFilter === 4 ?
-                                            <PlacesFilter /> :
+                                            <ProductsFilter /> :
                                             selectedFilter === 5 ?
                                                 <TopicFilter /> :
                                                 selectedFilter === 6 ?
