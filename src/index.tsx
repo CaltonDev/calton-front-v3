@@ -8,6 +8,9 @@ import Login from './pages/Login/Login'
 import Layout from './layout/Layout'
 import Home from './pages/Home/Home'
 import './i18n'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
+const persistor = persistStore(store)
 
 const router = createBrowserRouter([
     {
@@ -30,7 +33,9 @@ if (!rootElement) throw new Error('Root element not found')
 ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
         <Provider store={store}>
-            <RouterProvider router={router} />
+            <PersistGate loading={null} persistor={persistor}>
+                <RouterProvider router={router} />
+            </PersistGate>
         </Provider>
     </React.StrictMode>
 )
