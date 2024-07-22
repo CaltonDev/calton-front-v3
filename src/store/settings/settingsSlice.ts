@@ -1,14 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const settingsSlice = createSlice({
-    name: 'settings',
-    initialState: {
+export interface SettingsState {
+    Settings: {
+        platformType: string
+        isSidebarOpen: boolean
+        filters: any[]
+        selectedFilter: any
+        showNumbers: boolean
+    }
+}
+
+const initialState: SettingsState = {
+    Settings: {
         platformType: 'reviews',
         isSidebarOpen: false,
         filters: [],
         selectedFilter: null,
         showNumbers: false,
     },
+}
+export const settingsSlice = createSlice({
+    name: 'settings',
+    initialState,
     reducers: {
         setPlatformType(state, action) {
             return { ...state, platformType: action.payload }

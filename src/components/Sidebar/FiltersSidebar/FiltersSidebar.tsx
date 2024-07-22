@@ -7,7 +7,7 @@ import { FilterInterface } from './Filters.interface'
 
 function FiltersSidebar() {
     const [showFilterList, setShowFilterList] = useState(true)
-    const [showFilter, setShowFilter] = useState(false)
+    const [showFilter, setShowFilter] = useState(true)
     const { t } = useTranslation()
     const [selectedFilter, setSelectedFilter] = useState<FilterInterface>({
         key: '',
@@ -18,12 +18,12 @@ function FiltersSidebar() {
     const handleSelectFilter = (filter: FilterInterface) => {
         setSelectedFilter(filter)
         setShowFilter(true)
-        setShowFilterList(false)
+        //setShowFilterList(false)
     }
 
     return (
         <div>
-            <FilterBtn />
+            {!showFilterList && <FilterBtn />}
             {showFilterList && (
                 <FiltersList setSelectedFilter={handleSelectFilter} />
             )}

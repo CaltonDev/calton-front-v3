@@ -9,6 +9,7 @@ import { FilterProps } from './Filter.interface'
 import { useSelector } from 'react-redux'
 import GroupByFilter from '../Filters/GroupByFilter/GroupByFilter'
 import SourcesFilter from '../Filters/SourcesFilter/SourcesFilter'
+import TimeFilter from '../Filters/TimeFilter/TimeFilter'
 
 function Filter({ filter }: FilterProps) {
     const { t } = useTranslation()
@@ -83,14 +84,15 @@ function Filter({ filter }: FilterProps) {
             </div>
             <div className={styles.filterContainer}>
                 {/*<GroupByFilter />*/}
+                {/*<SourcesFilter />*/}
                 {<SourcesFilter />}
                 {/*
                     selectedFilter === -1 ?
                         <CreateFilter setCustomFilters={callback} />
                         : selectedFilter === 0 ?
-                            <SourcesFilter />
+                            <TimeFilter />
                             : selectedFilter === 1 ?
-                                <SourcesFilter />
+                                <TimeFilter />
                                 : selectedFilter === 2 ?
                                     <ChannelsFilter />
                                     : selectedFilter === 3 ?

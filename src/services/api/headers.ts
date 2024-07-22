@@ -19,6 +19,7 @@ export function getHeaders(
     }
 
     const state = store.getState()
+    console.log('Stat: ', state)
     const token = state?.user?.data?.user?.token || ''
     const sessionId = requireSession
         ? sessionStorage.getItem('unique') || ''

@@ -1,6 +1,6 @@
 import styles from './Checkbox.module.scss'
 import { CheckboxProps } from './Checkbox.interface'
-import React from 'react'
+import React, { useState } from 'react'
 import Typography from '../Typography/Typography'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 
@@ -15,6 +15,7 @@ const Checkbox = ({
     hasContainer = false,
     value,
     dropdown,
+    dropdownOptions,
 }: CheckboxProps) => {
     const checkboxClass = color ? styles[color] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
@@ -41,6 +42,8 @@ const Checkbox = ({
               ? styles['hasContainerClassSecondary']
               : styles['hasContainerClass']
         : ''
+
+    const [showDropdownMenu, setShowDropdownMenu] = useState(dropdown)
 
     return (
         <div
@@ -93,6 +96,27 @@ const Checkbox = ({
                     </div>
                 </label>
             </div>
+            {showDropdownMenu && (
+                <div className={styles.dropdownOptionsContainer}>
+                    <div className={styles.paddingContainer}>
+                        {dropdownOptions?.map((option) => {
+                            return (
+                                <div
+                                    key={option?.key}
+                                    onClick={option?.onClick}
+                                >
+                                    <Typography
+                                        size={'bodySmall'}
+                                        weight={'normal'}
+                                    >
+                                        {option?.displayLabel}
+                                    </Typography>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

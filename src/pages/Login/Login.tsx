@@ -61,9 +61,9 @@ function Login() {
                 )
                 sessionStorage.setItem('unique', id)
                 const userLanguage = response?.user?.lang
-                console.log('Res: ', response)
                 changeLanguage(userLanguage)
 
+                console.log('Response: ', response)
                 dispatch(setUser(response))
                 if (response.user.isFirstAccess) {
                     history('/integrazioniOnboarding')

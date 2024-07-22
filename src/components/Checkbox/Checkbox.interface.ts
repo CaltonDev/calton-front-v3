@@ -1,4 +1,11 @@
 import * as React from 'react'
+
+type dropdownOptionsValue = {
+    key: number
+    displayLabel: string
+    onClick: () => void
+}
+
 export interface CheckboxProps {
     checked?: boolean
     disabled?: boolean
@@ -10,4 +17,5 @@ export interface CheckboxProps {
     hasContainer?: boolean
     value?: string | number
     dropdown?: boolean
+    dropdownOptions?: dropdownOptionsValue[]
 }

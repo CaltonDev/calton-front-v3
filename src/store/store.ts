@@ -24,7 +24,18 @@ import typeformUrlSlice from './typeformUrl/typeformUrlSlice'
 import codeSlice from './code/codeSlice'
 import menuSlice from './menus/menuSlice'
 import photosSlice from './photos/photosSlice'
-
+import {
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { combineReducers } from '@reduxjs/toolkit'
+/*
 const store = configureStore({
     reducer: {
         user: userSlice,
@@ -53,6 +64,61 @@ const store = configureStore({
         Menus: menuSlice,
         UploadPhotos: photosSlice,
     },
+})
+*/
+const persistConfig = {
+    key: 'root',
+    storage,
+    //whitelist: ['user', 'settings'], // lista di slice da persistere
+}
+
+// Combinazione dei reducers
+const rootReducer = combineReducers({
+    user: userSlice,
+    Settings: settingsSlice,
+    AverageReviewByTime: averageReviewByTimeSlice,
+    AverageVotoByTime: averageVotoByTimeSlice,
+    AverageSentimentByTime: averageSentimentByTimeSlice,
+    DistribuzioniVoti: distribuzioneVotiSlice,
+    Source: sourceSlice,
+    ShowToast: errorToastSlice,
+    SelectedWords: selectedWordsSlice,
+    Filters: filtersSlice,
+    SelectableFilters: selectableFiltersSlice,
+    Bubble: bubbleSlice,
+    Socket: socketSlice,
+    FeedbackHome: feedbackHomeSlice,
+    LocationFiltered: locationFilteredSlice,
+    ChildUsers: childUsersSlice,
+    SourcesFiltered: sourcesFilteredSlice,
+    Chart: chartSlice,
+    AnalisiAvanzataState: analisiAvanzataSlice,
+    DistribuzioneRaccomandazioni: distribuzioneRaccomandazioniSlice,
+    Search: searchSlice,
+    TypeformSurvey: typeformUrlSlice,
+    Code: codeSlice,
+    Menus: menuSlice,
+    UploadPhotos: photosSlice,
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+// Configurazione dello store
+const store = configureStore({
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }),
+    reducer: persistedReducer,
 })
 
 export type RootState = ReturnType<typeof store.getState>

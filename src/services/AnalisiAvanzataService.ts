@@ -1,17 +1,4 @@
 import apiService from './api/apiService'
-/*import {
-    setTopics,
-    setDistribuzioneTopic,
-    setDistribuzioneTopicPerSentiment,
-    setDistribuzioneTopicPerData,
-    setVotoMedioTopicPerData,
-    setVotoMedioTopic,
-    setCountTopic,
-    setReviewsInfos,
-    setAvgRating,
-    setAvgSentiment,
-    setDistribuzioneSentiment,
-} from '../redux/AnalisiAvanzataState'*/
 import { generateRandomColor, getNoCodeFromPlatfrom } from '../helpers/helpers'
 import { getHeaders } from './api/headers'
 
@@ -518,7 +505,7 @@ function getAvgSentiment(
     })
 }
 
-export {
+const AnalisiAvanzataService = {
     getTopicFiltered,
     getDistribuzioneTopic,
     getDistribuzioneSentiment,
@@ -531,3 +518,5 @@ export {
     getAvgRating,
     getAvgSentiment,
 }
+
+export default AnalisiAvanzataService

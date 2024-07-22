@@ -94,6 +94,13 @@ export default function CustomAutocomplete({
         setUsedPending(true)
     }
 
+    const handleSelectAllBtn = () => {
+        if (pendingValue?.length === labels?.length) {
+            deselectAll()
+        } else {
+            selectAll()
+        }
+    }
     const handleReset = () => {
         if (multiple == false) {
             setPendingValue(null)
@@ -451,7 +458,32 @@ export default function CustomAutocomplete({
                                                     ' ' +
                                                     t('elementi selezionati')
                                                 }
+                                                checked={
+                                                    pendingValue?.length > 0 &&
+                                                    true
+                                                }
+                                                onClick={handleSelectAllBtn}
                                                 dropdown={true}
+                                                dropdownOptions={[
+                                                    {
+                                                        key: 0,
+                                                        displayLabel:
+                                                            t(
+                                                                'Seleziona tutto'
+                                                            ),
+                                                        onClick: () =>
+                                                            selectAll(),
+                                                    },
+                                                    {
+                                                        key: 1,
+                                                        displayLabel:
+                                                            t(
+                                                                'Deseleziona tutto'
+                                                            ),
+                                                        onClick: () =>
+                                                            deselectAll(),
+                                                    },
+                                                ]}
                                             />
                                         </div>
                                     </div>
@@ -473,12 +505,6 @@ export default function CustomAutocomplete({
                                                     getSelected(option)
                                                 return (
                                                     <li
-                                                        onClick={(e) => {
-                                                            handleChangePending(
-                                                                e,
-                                                                option
-                                                            )
-                                                        }}
                                                         className={
                                                             displayType ===
                                                             'core'
@@ -509,6 +535,48 @@ export default function CustomAutocomplete({
                                                                 <Checkbox
                                                                     type={
                                                                         'checkbox'
+                                                                    }
+                                                                    onClick={(
+                                                                        e: any
+                                                                    ) => {
+                                                                        handleChangePending(
+                                                                            e,
+                                                                            option
+                                                                        )
+                                                                    }}
+                                                                    checked={
+                                                                        pendingValue.findIndex(
+                                                                            (
+                                                                                item: any
+                                                                            ) =>
+                                                                                (item?._id !=
+                                                                                    null &&
+                                                                                    option?._id ==
+                                                                                        null &&
+                                                                                    item?._id ===
+                                                                                        option?._id) ||
+                                                                                item ===
+                                                                                    option?._id ||
+                                                                                item ===
+                                                                                    option ||
+                                                                                (customCheckEquality &&
+                                                                                    customCheckEquality?.length >
+                                                                                        0 &&
+                                                                                    option[
+                                                                                        customCheckEquality[0]
+                                                                                    ] !=
+                                                                                        null &&
+                                                                                    item[
+                                                                                        customCheckEquality[1]
+                                                                                    ] !=
+                                                                                        null &&
+                                                                                    option[
+                                                                                        customCheckEquality[0]
+                                                                                    ] ===
+                                                                                        item[
+                                                                                            customCheckEquality[1]
+                                                                                        ])
+                                                                        ) !== -1
                                                                     }
                                                                     title={
                                                                         option[

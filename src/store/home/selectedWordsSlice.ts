@@ -1,15 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-interface SelectedWordsState {
-    word: any
-    sentiment: boolean
-    isText: boolean
+export interface SelectedWordsState {
+    SelectedWords: {
+        word: any
+        sentiment: boolean
+        isText: boolean
+    }
 }
 
 const initialState: SelectedWordsState = {
-    word: null,
-    sentiment: false,
-    isText: false,
+    SelectedWords: {
+        word: null,
+        sentiment: false,
+        isText: false,
+    },
 }
 export const selectedWordsSlice = createSlice({
     name: 'selectedWordsSlice',

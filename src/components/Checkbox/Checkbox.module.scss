@@ -174,3 +174,23 @@
     box-shadow: map-deep-get($checkbox, hasContainer, secondary, box-shadow);
   }
 }
+
+.dropdownOptionsContainer {
+  width: 214px;
+  position: absolute;
+  left: 25px;
+  z-index: 20;
+
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 6px 3px 30px 0px rgba(50, 29, 72, 0.10);
+}
+
+.paddingContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+}
