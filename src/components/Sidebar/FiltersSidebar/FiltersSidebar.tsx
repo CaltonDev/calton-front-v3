@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { RefObject, useState } from 'react'
 import FilterBtn from './FilterBtn/FilterBtn'
 import FiltersList from './FiltersList/FiltersList'
 import Filter from './Filter/Filter'
 import { useTranslation } from 'react-i18next'
 import { FilterInterface } from './Filters.interface'
+import Hooks from '../../../utils/hooks/Hooks'
 
 function FiltersSidebar() {
     const [showFilterList, setShowFilterList] = useState(false)
@@ -21,8 +22,15 @@ function FiltersSidebar() {
         //setShowFilterList(false)
     }
 
+    const handleClickOutside = () => {
+        setShowFilterList(false)
+        setShowFilter(false)
+    }
+
+    const ref = Hooks.useOutsideClick(handleClickOutside)
+
     return (
-        <div>
+        <div ref={ref}>
             {!showFilterList && (
                 <FilterBtn onClick={() => setShowFilterList(!showFilterList)} />
             )}

@@ -9,9 +9,9 @@ import Chat from '../components/Chat/Chat'
 
 function Layout() {
     const user = useSelector((state: RootState) => state.user?.data)
-    /*if (!user) {
+    if (!user) {
         return <Navigate to={'/login'} replace />
-    }*/
+    }
 
     return (
         <div style={{ background: '#F5F5F5' }}>

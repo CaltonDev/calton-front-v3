@@ -493,7 +493,7 @@ export default function CustomAutocomplete({
                                         ref={parentRef}
                                         style={{
                                             width: 262,
-                                            height: 550,
+                                            height: 775,
                                             overflow: 'auto',
                                         }}
                                     >
@@ -595,9 +595,19 @@ export default function CustomAutocomplete({
                                                                             : option
                                                                     }
                                                                     subtitle={
-                                                                        option[
-                                                                            secondary
-                                                                        ]
+                                                                        Array.isArray(
+                                                                            option[
+                                                                                secondary
+                                                                            ]
+                                                                        )
+                                                                            ? option[
+                                                                                  secondary
+                                                                              ].join(
+                                                                                  ', '
+                                                                              )
+                                                                            : option[
+                                                                                  secondary
+                                                                              ]
                                                                     }
                                                                 />
                                                             </div>
