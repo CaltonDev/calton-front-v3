@@ -329,12 +329,13 @@ $checkbox: (
         )
       ),
       checkmarkAfterRadio: (
-              left: 3.5px,
-              top: 3.5px,
-              width: 10px,
-              height: 10px,
+              left: 5px,
+              top: 5px,
+              width: 4px,
+              height: 4px,
         //checkmark color
               border: solid #3F49FC,
+              background: #3F49FC,
               -webkit-transform: rotate(45deg),
               -ms-transform: rotate(45deg),
               transform: rotate(45deg),

@@ -104,6 +104,7 @@
   width: map-deep-get($checkbox, container, checkmarkAfterRadio, width);
   height: map-deep-get($checkbox, container, checkmarkAfterRadio, height);
   border: map-deep-get($checkbox, container, checkmarkAfterRadio, border);
+  background: map-deep-get($checkbox, container, checkmarkAfterRadio, background);
   //border-width: map-deep-get($checkbox, container, checkmarkAfterRadio, border-width);
   -webkit-transform: map-deep-get($checkbox, container, checkmarkAfterRadio, -webkit-transform);
   -ms-transform: map-deep-get($checkbox, container, checkmarkAfterRadio, -ms-transform);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Checkbox from '../../../../Checkbox/Checkbox'
 import styles from './GroupByFilter.module.scss'
 import { useTranslation } from 'react-i18next'
@@ -17,23 +17,61 @@ function GroupByFilter() {
     const { groupby } = useSelector(selectAllFilters)
     const dispatch = useDispatch()
     const { t, i18n } = useTranslation()
+    const [checked, setChecked] = useState('')
     const handleChange = (event: any, type: string) => {
-        dispatch(setGroupBy(event.target.value))
+        setChecked(event)
+        /*dispatch(setGroupBy(event.target.value))
         const payload = {
             type,
             value: event.target.value,
         }
-        dispatch(setStateSelect(payload))
+        dispatch(setStateSelect(payload))*/
     }
 
     return (
         <div className={styles.container}>
-            <Checkbox type={'radio'} value={'1d'} title={t('1 giorno')} />
-            <Checkbox type={'radio'} value={'w'} title={t('7 giorni')} />
-            <Checkbox type={'radio'} value={'M'} title={t('1 mese')} />
-            <Checkbox type={'radio'} value={'Q'} title={t('3 mesi')} />
-            <Checkbox type={'radio'} value={'2Q'} title={t('6 mesi')} />
-            <Checkbox type={'radio'} value={'Y'} title={t('1 anno')} />
+            <Checkbox
+                type={'radio'}
+                value={'1d'}
+                title={t('1 giorno')}
+                onClick={() => handleChange('1d', 'groupby')}
+                checked={checked === '1d'}
+            />
+            <Checkbox
+                type={'radio'}
+                value={'w'}
+                title={t('7 giorni')}
+                onClick={() => handleChange('w', 'groupby')}
+                checked={checked === 'w'}
+            />
+            <Checkbox
+                type={'radio'}
+                value={'M'}
+                title={t('1 mese')}
+                onClick={() => handleChange('M', 'groupby')}
+                checked={checked === 'M'}
+            />
+            <Checkbox
+                type={'radio'}
+                value={'Q'}
+                title={t('3 mesi')}
+                onClick={() => handleChange('Q', 'groupby')}
+                checked={checked === 'Q'}
+            />
+            <Checkbox
+                type={'radio'}
+                value={'2Q'}
+                title={t('6 mesi')}
+                onClick={() => handleChange('2Q', 'groupby')}
+                checked={checked === '2Q'}
+            />
+            <Checkbox
+                type={'radio'}
+                value={'Y'}
+                title={t('1 anno')}
+                onClick={() => handleChange('Y', 'groupby')}
+                checked={checked === 'Y'}
+            />
         </div>
     )
 }
