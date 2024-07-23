@@ -91,8 +91,9 @@ const SvgWrapper = ({
                           width: hasContainerProps?.containerSize,
                           height: hasContainerProps?.containerSize,
                           background: hasContainerProps?.background,
+                          cursor: 'pointer',
                       }
-                    : {}
+                    : { cursor: 'pointer' }
             }
             className={
                 hasContainerProps?.hasContainer ? styles.iconContainer : ''

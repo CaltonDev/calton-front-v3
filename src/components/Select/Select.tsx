@@ -51,6 +51,7 @@ const CaltonSelect = ({
                         background: customColor
                             ? customColor + '!important'
                             : '',
+                        cursor: 'pointer',
                     }),
                     dropdownIndicator: (base, state) => ({
                         ...base,
