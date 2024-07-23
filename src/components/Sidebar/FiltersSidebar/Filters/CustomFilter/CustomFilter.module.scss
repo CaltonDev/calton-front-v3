@@ -2,7 +2,8 @@
   display: flex;
   padding: 32px;
   align-items: center;
-  height: 230px;
+  overflow-y: auto;
+  height: 770px;
   flex-direction: column;
   gap: 10px;
   flex-shrink: 0;

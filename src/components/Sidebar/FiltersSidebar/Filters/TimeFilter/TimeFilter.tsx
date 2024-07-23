@@ -334,7 +334,6 @@ function TimeFilter() {
                     key={endDatef.format('yyyy-mm-dd')}
                     style={{
                         height: '100%',
-                        marginLeft: '-2px',
                     }}
                 >
                     <DatePicker
@@ -359,28 +358,6 @@ function TimeFilter() {
                         locale={i18n.language}
                     />
                     <DatePickerWrapperStyles />
-                    <div className={styles.button}>
-                        {defaultStaticRanges(t).map(
-                            ({ label, startDate, endDate }) => {
-                                return (
-                                    <button
-                                        className={styles.buttonOutlined}
-                                        key={label}
-                                        type="button"
-                                        onClick={(t) =>
-                                            handleChange(
-                                                startDate,
-                                                endDate,
-                                                label
-                                            )
-                                        }
-                                    >
-                                        {label}
-                                    </button>
-                                )
-                            }
-                        )}
-                    </div>
                 </div>
             )}
 

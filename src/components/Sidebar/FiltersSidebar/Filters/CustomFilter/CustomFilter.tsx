@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Checkbox from '../../../../Checkbox/Checkbox'
 import styles from './CustomFilter.module.scss'
 import { useTranslation } from 'react-i18next'
@@ -13,11 +13,12 @@ import Button from '../../../../Button/Button'
 function CustomFilter() {
     const { t } = useTranslation()
     const dispatch = useDispatch()
-    //const { customFilters, customFiltersSelectable } = useSelector(selectAllFilters)
-    const customFilters = [{ name: 'test' }, { name: 'prova' }]
+    const { customFilters, customFiltersSelectable } =
+        useSelector(selectAllFilters)
+
     return (
         <div className={styles.container}>
-            {customFilters?.map((filter) => {
+            {customFiltersSelectable?.map((filter: any) => {
                 return (
                     <Button key={filter?.name} size={'small'} fullWidth={true}>
                         {filter?.name}
