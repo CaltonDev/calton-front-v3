@@ -82,6 +82,7 @@ function FiltersSidebar() {
 
     const [filters, setFilters] = useState(commonFilters)
     const [isListing, setIsListing] = useState(false)
+    const [blockSidebar, setBlockSidebar] = useState(false)
 
     const handleSelectFilter = (filter: FilterInterface) => {
         setSelectedFilter(filter)
@@ -90,8 +91,10 @@ function FiltersSidebar() {
     }
 
     const handleClickOutside = () => {
-        setShowFilterList(false)
-        setShowFilter(false)
+        if (!blockSidebar) {
+            setShowFilterList(false)
+            setShowFilter(false)
+        }
     }
 
     useEffect(() => {
@@ -122,7 +125,11 @@ function FiltersSidebar() {
                 <FilterBtn onClick={() => setShowFilterList(!showFilterList)} />
             )}
             {showFilterList && (
-                <FiltersList setSelectedFilter={handleSelectFilter} />
+                <FiltersList
+                    setSelectedFilter={handleSelectFilter}
+                    blockSidebar={blockSidebar}
+                    setBlockSidebar={setBlockSidebar}
+                />
             )}
             {showFilter && <Filter filter={selectedFilter} />}
         </div>

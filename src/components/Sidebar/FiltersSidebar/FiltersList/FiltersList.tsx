@@ -5,9 +5,12 @@ import Typography from '../../../Typography/Typography'
 import Switch from '../../../Switch/Switch'
 import SvgWrapper from '../../../SvgWrapper/SvgWrapper'
 import { FilterInterface } from '../Filters.interface'
-function FiltersList({ setSelectedFilter }: any) {
+function FiltersList({
+    setSelectedFilter,
+    blockSidebar,
+    setBlockSidebar,
+}: any) {
     const { t } = useTranslation()
-    const [checked, setChecked] = useState(false)
 
     const filtersObj = [
         {
@@ -93,9 +96,9 @@ function FiltersList({ setSelectedFilter }: any) {
             })}
             <div className={styles.titleContainer}>
                 <Switch
-                    checked={checked}
+                    checked={blockSidebar}
                     disabled={false}
-                    onClick={() => setChecked(!checked)}
+                    onClick={() => setBlockSidebar(!blockSidebar)}
                     icon={true}
                 />
             </div>
