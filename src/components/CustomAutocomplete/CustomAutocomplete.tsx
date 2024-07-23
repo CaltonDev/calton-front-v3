@@ -502,6 +502,7 @@ export default function CustomAutocomplete({
                                             .map((virtualCol, index) => {
                                                 const option =
                                                     displayOptions[index]
+
                                                 const selected =
                                                     getSelected(option)
                                                 return (
@@ -545,6 +546,12 @@ export default function CustomAutocomplete({
                                                                             option
                                                                         )
                                                                     }}
+                                                                    hasIcon={
+                                                                        displayType ===
+                                                                        'channels'
+                                                                            ? `${option}.svg`
+                                                                            : ''
+                                                                    }
                                                                     checked={
                                                                         pendingValue.findIndex(
                                                                             (
@@ -580,9 +587,12 @@ export default function CustomAutocomplete({
                                                                         ) !== -1
                                                                     }
                                                                     title={
-                                                                        option[
-                                                                            primary
-                                                                        ]
+                                                                        primary !==
+                                                                        ''
+                                                                            ? option[
+                                                                                  primary
+                                                                              ]
+                                                                            : option
                                                                     }
                                                                     subtitle={
                                                                         option[

@@ -34,7 +34,6 @@ function ProductsFilter() {
         const allProductsSelected: string[] = []
         const result: any[] = []
         let newEvent = event
-        console.log(newEvent)
 
         if (
             selectedProductsDetails?.length > 0 &&

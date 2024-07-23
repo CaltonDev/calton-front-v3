@@ -16,15 +16,13 @@ import ChannelsFilter from '../Filters/ChannelsFilter/ChannelsFilter'
 import PlacesFilter from '../Filters/PlacesFilter/PlacesFilter'
 import TopicsFilter from '../Filters/TopicsFilter/TopicsFilter'
 import ProductsFilter from '../Filters/ProductsFilter/ProductsFilter'
+import CustomFilterSingle from '../Filters/CustomFilter/CustomFilterSingle/CustomFilterSingle'
 
 function Filter({ filter }: FilterProps) {
     const { t } = useTranslation()
     const [checked, setChecked] = useState(false)
     //const selectedFilter = useSelector((state) => state.Settings.selectedFilter)
 
-    useEffect(() => {
-        console.log('Filter: ', filter)
-    }, [filter])
     const filtersObj = [
         {
             key: 'raggruppa',
@@ -108,8 +106,12 @@ function Filter({ filter }: FilterProps) {
                     <ProductsFilter />
                 ) : filter?.key === 'others' ? (
                     <OtherFilter />
+                ) : filter?.key === 'customFilters' ? (
+                    <CustomFilter />
                 ) : (
-                    filter?.key === 'customFilters' && <CustomFilter />
+                    filter?.key === 'customFiltersSingle' && (
+                        <CustomFilterSingle />
+                    )
                 )}
                 {/*
                     selectedFilter === -1 ?

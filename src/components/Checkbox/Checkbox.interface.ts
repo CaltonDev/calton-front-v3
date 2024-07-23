@@ -18,4 +18,5 @@ export interface CheckboxProps {
     value?: string | number
     dropdown?: boolean
     dropdownOptions?: dropdownOptionsValue[]
+    hasIcon?: string
 }

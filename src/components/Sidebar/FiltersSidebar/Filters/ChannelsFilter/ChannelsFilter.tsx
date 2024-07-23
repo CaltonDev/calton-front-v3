@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './ChannelsFilter.module.scss'
 import { useTranslation } from 'react-i18next'
 import CustomAutocomplete from '../../../../CustomAutocomplete/CustomAutocomplete'
@@ -16,6 +16,9 @@ function ChannelsFilter() {
     const { selectedChannel } = useSelector(selectAllFilters)
     const { t, i18n } = useTranslation()
 
+    useEffect(() => {
+        console.log('A: ', allChannelSources, ' s_ ', selectedChannel)
+    }, [allChannelSources, selectedChannel])
     const equalsIgnoreOrder = (a: string[], b: string[]) => {
         if (a?.length !== b?.length) return false
         const uniqueValues = new Set([...a, ...b])
@@ -40,7 +43,7 @@ function ChannelsFilter() {
     return (
         <div className={styles.container}>
             <CustomAutocomplete
-                displayType={'filter'}
+                displayType={'channels'}
                 label={
                     selectedChannel && selectedChannel?.length === 0
                         ? t('Tutti i canali')

@@ -36,6 +36,14 @@ import TopicSvg from './SvgIcons/TopicSvg'
 import CanaliSvg from './SvgIcons/CanaliSvg'
 import TempoSvg from './SvgIcons/TempoSvg'
 import YourFiltersSvg from './SvgIcons/YourFiltersSvg'
+import AmazonSvg from './SvgIcons/AmazonSvg'
+import FacebookSvg from './SvgIcons/FacebookSvg'
+import GoogleMyBusinessSvg from './SvgIcons/GoogleMyBusinessSvg'
+import TrustpilotSvg from './SvgIcons/TrustpilotSvg'
+import TrustedShopsSvg from './SvgIcons/TrustedShopsSvg'
+import TripAdvisorSvg from './SvgIcons/TripAdvisorSvg'
+import JustEatSvg from './SvgIcons/JustEatSvg'
+import TheForkSvg from './SvgIcons/TheForkSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -213,6 +221,22 @@ const SvgWrapper = ({
                         height={iconHeight}
                         fillColor={iconColor}
                     />
+                ) : keySvg === 'Amazon.svg' ? (
+                    <AmazonSvg />
+                ) : keySvg === 'Facebook.svg' ? (
+                    <FacebookSvg />
+                ) : keySvg === 'GoogleMyBusiness.svg' ? (
+                    <GoogleMyBusinessSvg />
+                ) : keySvg === 'Trustpilot.svg' ? (
+                    <TrustpilotSvg />
+                ) : keySvg === 'Trusted shops.svg' ? (
+                    <TrustedShopsSvg />
+                ) : keySvg === 'TripadvisorAPI.svg' ? (
+                    <TripAdvisorSvg />
+                ) : keySvg === 'JustEat.svg' ? (
+                    <JustEatSvg />
+                ) : keySvg === 'TheFork.svg' ? (
+                    <TheForkSvg />
                 ) : (
                     <></>
                 )}

@@ -198,7 +198,7 @@ async function wrapperDistribuzioneVoti(
             compactValues
         )
         if (response.data) {
-            dispatch(setDistribuzioniVoti(response.data.data))
+            dispatch(setDistribuzioniVoti(response.data))
         }
     } catch (e) {
         dispatch(
@@ -227,7 +227,7 @@ async function wrapperDistribuzioneRecc(
             returnAnt
         )
         if (response.data) {
-            dispatch(setDistribuzioniRacc(response.data.data))
+            dispatch(setDistribuzioniRacc(response.data))
         }
     } catch (e) {
         dispatch(setDistribuzioniRacc([]))
@@ -254,7 +254,7 @@ async function wrapperGetAverageVotoByTime(
             undefined
         )
         if (response.data) {
-            dispatch(setAverageVotoByTime(response.data.data))
+            dispatch(setAverageVotoByTime(response.data))
         } else {
             dispatch(
                 showToast({
@@ -291,7 +291,7 @@ async function wrapperGetAverageSentimentByTime(
             undefined
         )
         if (response.data) {
-            dispatch(setAverageSentimentByTime(response.data.data))
+            dispatch(setAverageSentimentByTime(response.data))
         } else {
             dispatch(
                 showToast({
@@ -396,7 +396,7 @@ async function wrapperGetSourcesFilter(
         )
 
         if (response.data) {
-            const myArray = response.data.data
+            const myArray = response.data
             const newArray = []
             for (const obj of myArray) {
                 newArray.push(obj)
@@ -427,7 +427,7 @@ async function wrappeWordsCountBUBBLE(allFilters, dispatch, numCommons, t) {
             getNoCodeFromPlatfrom()
         )
         if (response.data) {
-            dispatch(setBubbles(response.data.data))
+            dispatch(setBubbles(response.data))
         } else {
             dispatch(
                 showToast({ type: 2, text: t('Impossibile ottenere bubbles') })
@@ -482,7 +482,7 @@ async function wrapperGetInfoFeedbackHome(allFilters, wordSelected, dispatch) {
             true
         )
         if (response.data) {
-            dispatch(setFeedbacksCount(response.data.data?.countFeed))
+            dispatch(setFeedbacksCount(response.data?.countFeed))
         } else {
             dispatch(setFeedbacksCount(0))
         }
@@ -496,7 +496,7 @@ async function wrapperGetChannelSourcesFiltered(dispatch, t) {
     try {
         const response = await FilterService.getChannelSourcesFiltered()
         if (response.data) {
-            dispatch(setAllChannelSources(response.data.data))
+            dispatch(setAllChannelSources(response.data))
         } else {
             dispatch(
                 showToast({ type: 2, text: t('Impossibile ottenere canali') })
@@ -516,7 +516,7 @@ async function wrapperGetLocationsFiltered(dispatch) {
                 : getNoCodeFromPlatfrom()
         )
         if (response.data) {
-            dispatch(setAllLocations(response.data.data))
+            dispatch(setAllLocations(response.data))
         } else {
         }
     } catch (e) {}
@@ -526,7 +526,7 @@ async function wrapperGetAllTopics(dispatch) {
     try {
         const response = await FilterService.getTopicFiltered(true)
         if (response.data) {
-            dispatch(setAllTopics(response.data.data))
+            dispatch(setAllTopics(response.data))
         } else {
         }
     } catch (e) {}
@@ -543,11 +543,11 @@ async function wrapperGetMenusRedux(dispatch) {
             true
         )
 
-        if (response?.data?.data) {
+        if (response?.data) {
             let tmpList = []
 
-            if (response?.data?.data) {
-                tmpList = response?.data?.data
+            if (response?.data) {
+                tmpList = response?.data
             }
 
             dispatch(setMenusList(tmpList))
@@ -571,7 +571,7 @@ async function wrappeGetProductsService(dispatch, platformType, t) {
         response = await ProductsService.getProductsUnFiltered(code)
 
         if (response.data) {
-            const myArray = response.data.data
+            const myArray = response.data
             let newArray = []
             myArray.forEach((obj) => {
                 newArray.push(obj)
@@ -606,7 +606,7 @@ async function wrappeGetLocationService(dispatch, platformType = 'reviews', t) {
         response = await LocationService.getUserLocations(code)
 
         if (response.data) {
-            dispatch(setLocationFiltered(response.data.data))
+            dispatch(setLocationFiltered(response.data))
         } else {
             dispatch(
                 showToast({
@@ -623,7 +623,7 @@ async function wrappeGetChildUsers(dispatch, t) {
     try {
         const response = await LoginService.getChildUsers()
         if (response.data) {
-            dispatch(setChildUsers(response.data.data))
+            dispatch(setChildUsers(response.data))
         } else {
             dispatch(
                 showToast({
@@ -731,8 +731,8 @@ async function wrapperGetSourcesFiltered(dispatch, code, t) {
     try {
         const response = await SourcesService.getSourcesFiltered(code)
 
-        dispatch(setSourcesFiltered(response?.data?.data))
-        dispatch(setAllSources(response?.data?.data))
+        dispatch(setSourcesFiltered(response?.data))
+        dispatch(setAllSources(response?.data))
     } catch (e) {
         dispatch(
             showToast({ type: 2, text: t('Impossibile ottenere sources') })

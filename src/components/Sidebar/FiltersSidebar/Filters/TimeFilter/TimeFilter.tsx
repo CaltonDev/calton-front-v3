@@ -122,7 +122,6 @@ function TimeFilter() {
     const dispatch = useDispatch()
     const [showPickerDate, setShowPickerDate] = useState(true)
     const { startDate, endDate } = useSelector(selectAllFilters)
-    console.log('StartDate_ ', useSelector(selectAllFilters))
     const [startDatef, setStartDate] = useState(startDate && moment(startDate))
     const [endDatef, setEndDate] = useState(startDate && moment(endDate))
     const [dateRange, setDateRange] = useState([
@@ -180,9 +179,6 @@ function TimeFilter() {
         setShowPickerDate(true)
     }
 
-    useEffect(() => {
-        console.log('Start: ', startDate)
-    }, [startDate])
     useEffect(() => {
         dispatch(resetFilters())
     }, [])

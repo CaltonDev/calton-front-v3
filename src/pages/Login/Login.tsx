@@ -63,7 +63,6 @@ function Login() {
                 const userLanguage = response?.user?.lang
                 changeLanguage(userLanguage)
 
-                console.log('Response: ', response)
                 dispatch(setUser(response))
                 if (response.user.isFirstAccess) {
                     history('/integrazioniOnboarding')

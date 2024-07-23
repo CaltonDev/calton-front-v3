@@ -67,7 +67,6 @@ function OtherFilter() {
     }
 
     const ratingChanged = (newRating: number) => {
-        console.log(newRating)
         saveFiltersToRedux(newRating, 'voto')
     }
 

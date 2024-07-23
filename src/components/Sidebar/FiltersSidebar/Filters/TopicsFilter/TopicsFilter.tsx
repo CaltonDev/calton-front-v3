@@ -95,7 +95,6 @@ function TopicsFilter() {
             })
         })
         if (!equalsIgnoreOrder(allids, selectedTopics)) {
-            console.log(allids)
             const payload = {
                 type,
                 value: allids,

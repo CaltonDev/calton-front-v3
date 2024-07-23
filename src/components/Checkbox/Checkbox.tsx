@@ -16,6 +16,7 @@ const Checkbox = ({
     value,
     dropdown,
     dropdownOptions,
+    hasIcon = '',
 }: CheckboxProps) => {
     const checkboxClass = color ? styles[color] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
@@ -56,14 +57,14 @@ const Checkbox = ({
                     <div>
                         <div
                             className={
-                                dropdown
+                                dropdown || hasIcon !== ''
                                     ? styles.textContainerDropdown
                                     : styles.textContainer
                             }
                             style={subtitle === '' ? { marginTop: 3 } : {}}
                         >
                             {dropdown && (
-                                <div style={{ marginRight: 3 }}>
+                                <div style={{ marginRight: 5 }}>
                                     <SvgWrapper
                                         onClick={() =>
                                             setShowDropdownMenu(
@@ -74,6 +75,11 @@ const Checkbox = ({
                                         color={'black'}
                                         size={'small'}
                                     />
+                                </div>
+                            )}
+                            {hasIcon !== '' && (
+                                <div style={{ marginRight: 5 }}>
+                                    <SvgWrapper keySvg={hasIcon} />
                                 </div>
                             )}
                             <Typography weight={'normal'} size={'bodySmall'}>
