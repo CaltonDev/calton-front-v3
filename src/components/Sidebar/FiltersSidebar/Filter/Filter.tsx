@@ -97,7 +97,9 @@ function Filter({ filter }: FilterProps) {
                 </div>
             </div>
             <div className={styles.filterContainer}>
-                {filter?.key === 'raggruppa' ? (
+                {openCustomFilter !== '' ? (
+                    <CustomFilterSingle customFilterId={openCustomFilter} />
+                ) : filter?.key === 'raggruppa' ? (
                     <GroupByFilter />
                 ) : filter?.key === 'tempo' ? (
                     <TimeFilter />
@@ -113,11 +115,9 @@ function Filter({ filter }: FilterProps) {
                     <ProductsFilter />
                 ) : filter?.key === 'others' ? (
                     <OtherFilter />
-                ) : filter?.key === 'customFilters' ? (
-                    <CustomFilter openCustomFilter={setOpenCustomFilter} />
                 ) : (
-                    openCustomFilter !== '' && (
-                        <CustomFilterSingle customFilterId={openCustomFilter} />
+                    filter?.key === 'customFilters' && (
+                        <CustomFilter openCustomFilter={setOpenCustomFilter} />
                     )
                 )}
                 {/*
