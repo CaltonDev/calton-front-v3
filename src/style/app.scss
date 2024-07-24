@@ -4,3 +4,10 @@
 body {
   background: #F6F6F6 !important;
 }
+
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}

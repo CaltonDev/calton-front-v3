@@ -132,6 +132,8 @@ function TimeFilter() {
     const [rangeHelperState, setRangeHelperState] = useState([])
     const [firstTime, setFirstTime] = useState(true)
     const { t, i18n } = useTranslation()
+    const [startDateInputValue, setStartDateInputValue] = useState()
+    const [endDateInputValue, setEndDateInputValue] = useState()
 
     registerLocale(
         i18n.language,
@@ -326,6 +328,11 @@ function TimeFilter() {
                 : setDateRange([startDatef?.toDate(), endDatef?.toDate()])
         }
     }
+
+    const handleDateInput = (e: any, type: string) => {
+        if (type === 'start') setStartDateInputValue(e?.target?.value)
+        else setEndDateInputValue(e?.target?.value)
+    }
     return (
         <div className={styles.container}>
             {showPickerDate && (
@@ -367,8 +374,22 @@ function TimeFilter() {
                         {t('Inserisci data')}
                     </Typography>
                 </div>
-                <Input size={'small'} placeholder={'test'} fullWidth={true} />
-                <Input size={'small'} placeholder={'test'} fullWidth={true} />
+                <Input
+                    size={'small'}
+                    placeholder={'test'}
+                    type={'date'}
+                    fullWidth={true}
+                    onChange={(e) => handleDateInput(e, 'start')}
+                    value={startDateInputValue}
+                />
+                <Input
+                    size={'small'}
+                    placeholder={'test'}
+                    fullWidth={true}
+                    type={'date'}
+                    onChange={(e) => handleDateInput(e, 'end')}
+                    value={endDateInputValue}
+                />
                 <div className={styles.typographyDiv}>
                     <Typography size={'bodySmall'} weight={'light'}>
                         {t('Oppure seleziona')}

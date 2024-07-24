@@ -1,22 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './CustomFilterSingle.module.scss'
 import { useTranslation } from 'react-i18next'
 import CustomAutocomplete from '../../../../../CustomAutocomplete/CustomAutocomplete'
 import { useDispatch, useSelector } from 'react-redux'
 import { SelectableFiltersState } from '../../../../../../store/filters/selectableFiltersSlice'
 import { selectAllFilters } from '../../../../../../store/selectors/selectorsSlice'
-import { setStateSelect } from '../../../../../../store/filters/filtersSlice'
+import {
+    setCustomFilter,
+    setCustomFilterSelectable,
+    setStateSelect,
+} from '../../../../../../store/filters/filtersSlice'
+import any = jasmine.any
+import { CustomFilterSingleProps } from './CustomFilter.interface'
 
-function CustomFilterSingle() {
+function CustomFilterSingle({ customFilterId }: CustomFilterSingleProps) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
 
     const example: any[] = []
 
-    const { selectedSource, sourceName } = useSelector(selectAllFilters)
-    const allFonti = useSelector(
-        (state: SelectableFiltersState) => state.SelectableFilters.allSources
-    )
+    const { customFilters, customFiltersSelectable } =
+        useSelector(selectAllFilters)
 
     const equalsIgnoreOrder = (a: string[], b: string[]) => {
         if (a?.length !== b?.length) return false
@@ -31,104 +35,46 @@ function CustomFilterSingle() {
         return true
     }
 
-    const handleChange = (event: any, type: string) => {
-        let newEvent = event
-        const allids: string[] = []
-        const result: any[] = []
-        const allSourcesSelected: any[] = []
-
-        if (
-            sourceName?.length > 0 &&
-            sourceName?.length !== newEvent?.length &&
-            newEvent.length > 0
-        ) {
-            const map: any = {}
-            newEvent.forEach((obj: any) => {
-                if (obj._id) {
-                    map[obj._id] = obj
-                } else {
-                    map[obj] = obj
-                }
-            })
-
-            sourceName.forEach((obj: any) => {
-                const obj2 = map[obj._id]
-                if (!obj2) {
-                    result.push(obj)
-                }
-            })
-
-            result.forEach((res) => {
-                if (res?.idProductParent === null && res?.idProduct !== null) {
-                    newEvent = newEvent.filter((elm: any) => {
-                        const child: any = allFonti.find(
-                            (x: any) => x._id === elm
-                        )
-                        return !(child?.idProductParent === res?.idProduct)
-                    })
-                }
-            })
+    const handleChangeCustomFilter = (event: any, filterCustom: any) => {
+        const customFilter = {
+            _id: filterCustom._id,
+            collection: filterCustom.collection,
+            EP_config: filterCustom.EP_config,
+            attribute: filterCustom.attribute,
+            selectedCustom:
+                typeof event === 'object' && !Array.isArray(event)
+                    ? [event.target.value]
+                    : event,
         }
-        if (!equalsIgnoreOrder(event, selectedSource)) {
-            newEvent.map((e: any) => {
-                if (
-                    typeof e === 'object' &&
-                    'idProductParent' in e &&
-                    e?.idProductParent === null &&
-                    e.idProduct !== null
-                ) {
-                    allFonti.forEach((prod: any) => {
-                        if (
-                            prod?.idProductParent === e?.idProduct &&
-                            !allids.includes(prod?._id)
-                        ) {
-                            allids.push(prod._id)
-                        }
-                    })
-                }
-                if (e && e._id && !allids.includes(e._id)) allids.push(e._id)
-                else if (e && !e._id) allids.push(e)
-            })
-            allFonti.forEach((item: any, i) => {
-                allids.forEach((elm, i) => {
-                    if (item._id == elm) {
-                        allSourcesSelected.push(item)
-                    }
-                })
-            })
 
-            //infer from type but we should standardize payload
-            const payload: {
-                type: string
-                value: any
-                optional: any
-            } = {
-                type,
-                value: allids,
-                optional: allSourcesSelected,
-            }
-            dispatch(setStateSelect(payload))
+        const filters = customFilters.filter(
+            (elm: any) => elm._id !== customFilter._id
+        )
+        if (customFilter.selectedCustom.length > 0) {
+            filters.push(customFilter)
         }
+        dispatch(setCustomFilter(filters))
     }
+
+    const filterCustom = customFiltersSelectable.filter(
+        (elm: any) => elm._id === customFilterId
+    )
+    const defaultValue = customFilters.filter(
+        (elm: any) => elm._id === filterCustom._id
+    )[0]?.selectedCustom
 
     return (
         <div className={styles.container}>
             <CustomAutocomplete
                 displayType={'filter'}
-                label={
-                    selectedSource && selectedSource?.length == 0
-                        ? 'Tutti le fonti'
-                        : selectedSource?.length + ' fonti'
-                }
-                placeholderInput={'Cerca fonti'}
-                primary={'name'}
-                secondary={'formatted_address'}
-                labels={example ? example : []}
-                type={'source'}
-                multiple={true}
-                handleChange={handleChange}
-                defaultValue={selectedSource}
-                hasDropdown={true}
+                key={filterCustom._id}
+                label={'Seleziona filtri'}
+                placeholderInput={t('Cerca')}
+                labels={filterCustom.values}
+                multiple={filterCustom.multiple}
+                type={'locations'}
+                handleChange={(e) => handleChangeCustomFilter(e, filterCustom)}
+                defaultValue={defaultValue}
             />
         </div>
     )

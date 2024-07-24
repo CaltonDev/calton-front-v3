@@ -9,8 +9,9 @@ import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { setStateSelect } from '../../../../../store/filters/filtersSlice'
 import Input from '../../../../Input/Input'
 import Button from '../../../../Button/Button'
+import { CustomFilterProps } from './CustomFilter.interface'
 
-function CustomFilter() {
+function CustomFilter({ openCustomFilter }: CustomFilterProps) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const { customFilters, customFiltersSelectable } =
@@ -20,7 +21,12 @@ function CustomFilter() {
         <div className={styles.container}>
             {customFiltersSelectable?.map((filter: any) => {
                 return (
-                    <Button key={filter?.name} size={'small'} fullWidth={true}>
+                    <Button
+                        key={filter?.name}
+                        size={'small'}
+                        fullWidth={true}
+                        onClick={() => openCustomFilter(filter?._id)}
+                    >
                         {filter?.name}
                     </Button>
                 )

@@ -75,6 +75,13 @@ function Filter({ filter }: FilterProps) {
         //setSelectedFilter(filterId)
     }
 
+    type SubmitFunctionType = () => void
+
+    const handleApplyBtnClick = (submitFunction: SubmitFunctionType) => {
+        submitFunction()
+    }
+    const [openCustomFilter, setOpenCustomFilter] = useState('')
+
     return (
         <div className={styles.container}>
             <div className={styles.titleContainer}>
@@ -107,10 +114,10 @@ function Filter({ filter }: FilterProps) {
                 ) : filter?.key === 'others' ? (
                     <OtherFilter />
                 ) : filter?.key === 'customFilters' ? (
-                    <CustomFilter />
+                    <CustomFilter openCustomFilter={setOpenCustomFilter} />
                 ) : (
-                    filter?.key === 'customFiltersSingle' && (
-                        <CustomFilterSingle />
+                    openCustomFilter !== '' && (
+                        <CustomFilterSingle customFilterId={openCustomFilter} />
                     )
                 )}
                 {/*
@@ -137,8 +144,13 @@ function Filter({ filter }: FilterProps) {
                                                             selectedFilter >= CustomConstants.filters.customFiltersPosition ?
                                                                 renderCustomFilter() : <></>*/}
             </div>
+            {/*todo: we should call the submit from the custom autocomplete*/}
             <div className={styles.footerContainer}>
-                <Button size={'medium'} disabled={true}>
+                <Button
+                    size={'medium'}
+                    disabled={false}
+                    submitFunction={handleApplyBtnClick}
+                >
                     {t('Applica')}
                 </Button>
             </div>

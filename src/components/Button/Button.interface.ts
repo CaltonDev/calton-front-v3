@@ -9,4 +9,5 @@ export interface ButtonProps {
     onClick?: React.MouseEventHandler<HTMLButtonElement>
     children?: string
     fullWidth?: boolean
+    submitFunction?: (arg0: any) => void
 }

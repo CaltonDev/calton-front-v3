@@ -35,7 +35,7 @@ function OtherFilter() {
             dispatch(setCustomFilter(tmpfeedbackFilters))
         } else {
             const filtersToSave: any[] = []
-            const foundFilters = customFilters?.map((elm: any) => {
+            customFilters?.map((elm: any) => {
                 if (
                     elm.attribute === type &&
                     !elm.selectedCustom.includes(data)

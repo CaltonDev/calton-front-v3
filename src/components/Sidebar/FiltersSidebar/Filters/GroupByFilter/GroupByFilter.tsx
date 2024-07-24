@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Checkbox from '../../../../Checkbox/Checkbox'
 import styles from './GroupByFilter.module.scss'
 import { useTranslation } from 'react-i18next'
@@ -8,24 +8,18 @@ import {
     setGroupBy,
     setStateSelect,
 } from '../../../../../store/filters/filtersSlice'
-import {
-    SelectableFiltersState,
-    setAllSources,
-} from '../../../../../store/filters/selectableFiltersSlice'
 
 function GroupByFilter() {
     const { groupby } = useSelector(selectAllFilters)
     const dispatch = useDispatch()
-    const { t, i18n } = useTranslation()
-    const [checked, setChecked] = useState('')
-    const handleChange = (event: any, type: string) => {
-        setChecked(event)
-        /*dispatch(setGroupBy(event.target.value))
+    const { t } = useTranslation()
+    const handleChange = (value: any, type: string) => {
+        dispatch(setGroupBy(value))
         const payload = {
             type,
-            value: event.target.value,
+            value: value,
         }
-        dispatch(setStateSelect(payload))*/
+        dispatch(setStateSelect(payload))
     }
 
     return (
@@ -35,42 +29,42 @@ function GroupByFilter() {
                 value={'1d'}
                 title={t('1 giorno')}
                 onClick={() => handleChange('1d', 'groupby')}
-                checked={checked === '1d'}
+                checked={groupby === '1d'}
             />
             <Checkbox
                 type={'radio'}
                 value={'w'}
                 title={t('7 giorni')}
                 onClick={() => handleChange('w', 'groupby')}
-                checked={checked === 'w'}
+                checked={groupby === 'w'}
             />
             <Checkbox
                 type={'radio'}
                 value={'M'}
                 title={t('1 mese')}
                 onClick={() => handleChange('M', 'groupby')}
-                checked={checked === 'M'}
+                checked={groupby === 'M'}
             />
             <Checkbox
                 type={'radio'}
                 value={'Q'}
                 title={t('3 mesi')}
                 onClick={() => handleChange('Q', 'groupby')}
-                checked={checked === 'Q'}
+                checked={groupby === 'Q'}
             />
             <Checkbox
                 type={'radio'}
                 value={'2Q'}
                 title={t('6 mesi')}
                 onClick={() => handleChange('2Q', 'groupby')}
-                checked={checked === '2Q'}
+                checked={groupby === '2Q'}
             />
             <Checkbox
                 type={'radio'}
                 value={'Y'}
                 title={t('1 anno')}
                 onClick={() => handleChange('Y', 'groupby')}
-                checked={checked === 'Y'}
+                checked={groupby === 'Y'}
             />
         </div>
     )

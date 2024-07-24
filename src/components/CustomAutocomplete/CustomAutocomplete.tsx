@@ -178,6 +178,7 @@ export default function CustomAutocomplete({
         setPendingValue(defaultValue ? defaultValue : [])
     }
 
+    //todo: we should call this handle submit from the parent
     const handleSubmit = () => {
         if (handleChange) {
             handleChange(

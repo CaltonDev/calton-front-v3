@@ -13,6 +13,7 @@ const Button = ({
     onClick,
     children,
     fullWidth = false,
+    submitFunction,
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
     const sizeClass = fullWidth ? styles['fullwidth'] : size ? styles[size] : ''
@@ -27,6 +28,15 @@ const Button = ({
     const iconOnlyClass = iconOnly ? styles[`iconOnly-${size}`] : ''
     const roundedClass = rounded ? styles[`rounded-${size}`] : ''
 
+    const handleBtnClick = (e: any) => {
+        if (onClick) {
+            onClick(e?.target?.value)
+        }
+
+        if (submitFunction) {
+            submitFunction
+        }
+    }
     return (
         <>
             <button
