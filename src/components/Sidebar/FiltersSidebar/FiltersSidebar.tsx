@@ -84,6 +84,14 @@ function FiltersSidebar() {
     const [isListing, setIsListing] = useState(false)
     const [blockSidebar, setBlockSidebar] = useState(false)
 
+    const handleCloseOpenFilter = () => {
+        setSelectedFilter({
+            key: '',
+            label: '',
+            svg: '',
+        })
+        setShowFilter(false)
+    }
     const handleSelectFilter = (filter: FilterInterface) => {
         setSelectedFilter(filter)
         setShowFilter(true)
@@ -131,7 +139,12 @@ function FiltersSidebar() {
                     setBlockSidebar={setBlockSidebar}
                 />
             )}
-            {showFilter && <Filter filter={selectedFilter} />}
+            {showFilter && (
+                <Filter
+                    filter={selectedFilter}
+                    handleCloseOpenFilter={handleCloseOpenFilter}
+                />
+            )}
         </div>
     )
 }

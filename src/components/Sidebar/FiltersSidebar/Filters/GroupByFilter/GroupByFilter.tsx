@@ -19,6 +19,10 @@ function GroupByFilter() {
             type,
             value: value,
         }
+        if (groupby === value) {
+            payload.value = ''
+        }
+
         dispatch(setStateSelect(payload))
     }
 

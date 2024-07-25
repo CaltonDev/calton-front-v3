@@ -12,8 +12,9 @@ import {
 } from '../../../../../store/filters/filtersSlice'
 import Typography from '../../../../Typography/Typography'
 import ReactStars from 'react-stars'
+import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
 
-function OtherFilter() {
+function OtherFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const { customFilters } = useSelector(selectAllFilters)
@@ -62,6 +63,7 @@ function OtherFilter() {
                 }
             })
 
+            //            setPreparedPayload(payload)
             dispatch(setCustomFilter(filtersToSave))
         }
     }

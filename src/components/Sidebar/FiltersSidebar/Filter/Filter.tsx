@@ -20,7 +20,7 @@ import CustomFilterSingle from '../Filters/CustomFilter/CustomFilterSingle/Custo
 import { setStateSelect } from '../../../../store/filters/filtersSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
 
-function Filter({ filter }: FilterProps) {
+function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
     const { t } = useTranslation()
     const [checked, setChecked] = useState(false)
     const [openCustomFilter, setOpenCustomFilter] = useState('')
@@ -88,9 +88,11 @@ function Filter({ filter }: FilterProps) {
     type SubmitFunctionType = () => void
 
     const handleApplyBtnClick = () => {
-        console.log('son quiii')
         console.log({ preparedPayload })
-        dispatch(setStateSelect(preparedPayload as any))
+        if (filter?.key !== 'raggruppa') {
+            dispatch(setStateSelect(preparedPayload as any))
+            handleCloseOpenFilter()
+        } else handleCloseOpenFilter()
     }
 
     return (
@@ -109,23 +111,26 @@ function Filter({ filter }: FilterProps) {
             </div>
             <div className={styles.filterContainer}>
                 {openCustomFilter !== '' ? (
-                    <CustomFilterSingle customFilterId={openCustomFilter} />
+                    <CustomFilterSingle
+                        customFilterId={openCustomFilter}
+                        setPreparedPayload={setPreparedPayload}
+                    />
                 ) : filter?.key === 'raggruppa' ? (
                     <GroupByFilter />
                 ) : filter?.key === 'tempo' ? (
                     <TimeFilter />
                 ) : filter?.key === 'fonti' ? (
-                    <SourcesFilter />
+                    <SourcesFilter setPreparedPayload={setPreparedPayload} />
                 ) : filter?.key === 'channels' ? (
-                    <ChannelsFilter />
+                    <ChannelsFilter setPreparedPayload={setPreparedPayload} />
                 ) : filter?.key === 'location' ? (
                     <PlacesFilter setPreparedPayload={setPreparedPayload} />
                 ) : filter?.key === 'topic' ? (
-                    <TopicsFilter />
+                    <TopicsFilter setPreparedPayload={setPreparedPayload} />
                 ) : filter?.key === 'products' ? (
-                    <ProductsFilter />
+                    <ProductsFilter setPreparedPayload={setPreparedPayload} />
                 ) : filter?.key === 'others' ? (
-                    <OtherFilter />
+                    <OtherFilter setPreparedPayload={setPreparedPayload} />
                 ) : (
                     filter?.key === 'customFilters' && (
                         <CustomFilter openCustomFilter={setOpenCustomFilter} />

@@ -7,11 +7,9 @@ import { SelectableFiltersState } from '../../../../../store/filters/selectableF
 import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { setStateSelect } from '../../../../../store/filters/filtersSlice'
 import { SettingsState } from '../../../../../store/settings/settingsSlice'
+import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-// eslint-disable-next-line react/prop-types
-function PlacesFilter({ setPreparedPayload }) {
+function PlacesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const dispatch = useDispatch()
     const { selectedLocation, selectedLocationDetails } =
         useSelector(selectAllFilters)
@@ -52,14 +50,12 @@ function PlacesFilter({ setPreparedPayload }) {
                 value: allids,
                 optional: allPlacesSelected,
             }
-            console.log({ payload })
             setPreparedPayload(payload)
         }
     }
 
     return (
         <div className={styles.container}>
-            CONTAINER
             <CustomAutocomplete
                 displayType={'filter'}
                 label={

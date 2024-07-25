@@ -9,8 +9,9 @@ import {
     setCustomFilter,
     setStateSelect,
 } from '../../../../../store/filters/filtersSlice'
+import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
 
-function ProductsFilter() {
+function ProductsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const allProducts = useSelector(
         (state: SelectableFiltersState) => state.SelectableFilters.allProducts
     )
@@ -94,7 +95,7 @@ function ProductsFilter() {
                 value: allids,
                 optional: allProductsSelected,
             }
-            dispatch(setStateSelect(payload))
+            setPreparedPayload(payload)
         }
     }
     return (

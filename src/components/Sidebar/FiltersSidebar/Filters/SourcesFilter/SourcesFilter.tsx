@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SelectableFiltersState } from '../../../../../store/filters/selectableFiltersSlice'
 import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { setStateSelect } from '../../../../../store/filters/filtersSlice'
+import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
 
-function SourcesFilter() {
+function SourcesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
 
@@ -106,7 +107,7 @@ function SourcesFilter() {
                 value: allids,
                 optional: allSourcesSelected,
             }
-            dispatch(setStateSelect(payload))
+            setPreparedPayload(payload)
         }
     }
 

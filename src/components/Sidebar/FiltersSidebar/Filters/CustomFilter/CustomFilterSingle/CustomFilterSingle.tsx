@@ -12,7 +12,10 @@ import {
 } from '../../../../../../store/filters/filtersSlice'
 import { CustomFilterSingleProps } from './CustomFilter.interface'
 
-function CustomFilterSingle({ customFilterId }: CustomFilterSingleProps) {
+function CustomFilterSingle({
+    customFilterId,
+    setPreparedPayload,
+}: CustomFilterSingleProps) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const { customFilters, customFiltersSelectable } =
@@ -40,6 +43,7 @@ function CustomFilterSingle({ customFilterId }: CustomFilterSingleProps) {
         if (customFilter.selectedCustom.length > 0) {
             filters.push(customFilter)
         }
+        //            setPreparedPayload(payload)
         dispatch(setCustomFilter(filters))
     }
 

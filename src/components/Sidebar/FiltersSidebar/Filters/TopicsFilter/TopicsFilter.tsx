@@ -9,8 +9,9 @@ import {
     setCustomFilter,
     setStateSelect,
 } from '../../../../../store/filters/filtersSlice'
+import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
 
-function TopicsFilter() {
+function TopicsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const dispatch = useDispatch()
     const { selectedTopics, customFilters } = useSelector(selectAllFilters)
     const allTopics = useSelector(
@@ -100,7 +101,7 @@ function TopicsFilter() {
                 value: allids,
                 optional: allTopicsSelected,
             }
-            dispatch(setStateSelect(payload))
+            setPreparedPayload(payload)
             const foundFilters = customFilters?.filter(
                 (elm: any) => elm.attribute === 'testo'
             )
