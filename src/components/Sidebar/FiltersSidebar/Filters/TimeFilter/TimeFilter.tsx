@@ -37,11 +37,21 @@ const DatePickerWrapperStyles = createGlobalStyle`
   
   .react-datepicker {
       border: none;
-      width: 100% !important    ;
+      width: 100% !important;
+      padding-top: 10px;
   }
   .react-datepicker-popper {
       width: 100% !important;
       transform: translate(0px, 70px) !important;
+  }
+  
+  .react-datepicker__month {
+      margin-top: 20px;
+  }
+  
+  .react-datepicker__current-month {
+      position: absolute;
+      padding-left: 20px !important;
   }
   
   .react-datepicker__month-container {
@@ -78,16 +88,18 @@ const DatePickerWrapperStyles = createGlobalStyle`
     height: 43rem;*/
   }    
   .my-little-popper .react-datepicker .react-datepicker__navigation--next{
-    padding-top: 15px !important;
+      margin-top: 10px;
   }    
   .my-little-popper .react-datepicker .react-datepicker__navigation--previous{
-    padding-top: 15px !important;
+    right: 20px;
+    left: auto;
+    margin-top: 10px;
   }
   .my-little-popper .react-datepicker .react-datepicker__triangle{
     transform: translate3d(134.5px, 0px, 0px)!important;
   }
   .my-little-popper .react-datepicker .react-datepicker__month-container .react-datepicker__month .react-datepicker__week .react-datepicker__day--in-range{
-    background-color: rgba(150, 153, 212, 0.57) !important;
+    background-color: #34E0A1 !important;
     color: #FFFFFF !important;
   }
   .my-little-popper .react-datepicker .react-datepicker__month-container .react-datepicker__month .react-datepicker__week .react-datepicker__day--range-end{
@@ -385,48 +397,56 @@ function TimeFilter() {
             )}
 
             <div className={styles.contentDiv}>
-                <div className={styles.typographyDiv}>
-                    <Typography size={'bodySmall'} weight={'light'}>
-                        {t('Inserisci data')}
-                    </Typography>
+                <div className={styles.generalContainer}>
+                    <div className={styles.typographyDiv}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('Inserisci data')}
+                        </Typography>
+                    </div>
+                    <Input
+                        size={'small'}
+                        placeholder={'test'}
+                        type={'date'}
+                        fullWidth={true}
+                        onChange={(e) => handleDateInput(e, 'start')}
+                        value={startDateInputValue}
+                    />
+                    <Input
+                        size={'small'}
+                        placeholder={'test'}
+                        fullWidth={true}
+                        type={'date'}
+                        onChange={(e) => handleDateInput(e, 'end')}
+                        value={endDateInputValue}
+                    />
                 </div>
-                <Input
-                    size={'small'}
-                    placeholder={'test'}
-                    type={'date'}
-                    fullWidth={true}
-                    onChange={(e) => handleDateInput(e, 'start')}
-                    value={startDateInputValue}
-                />
-                <Input
-                    size={'small'}
-                    placeholder={'test'}
-                    fullWidth={true}
-                    type={'date'}
-                    onChange={(e) => handleDateInput(e, 'end')}
-                    value={endDateInputValue}
-                />
-                <div className={styles.typographyDiv}>
-                    <Typography size={'bodySmall'} weight={'light'}>
-                        {t('Oppure seleziona')}
-                    </Typography>
-                </div>
-                <div className={styles.radioDiv}>
-                    {defaultStaticRanges(t).map(
-                        ({ label, startDate, endDate }) => {
-                            return (
-                                <Checkbox
-                                    key={label}
-                                    type={'radio'}
-                                    title={label}
-                                    checked={timeLabel === label}
-                                    onClick={() =>
-                                        handleChange(startDate, endDate, label)
-                                    }
-                                />
-                            )
-                        }
-                    )}
+                <div className={styles.generalContainer}>
+                    <div className={styles.typographyDiv}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('Oppure seleziona')}
+                        </Typography>
+                    </div>
+                    <div className={styles.radioDiv}>
+                        {defaultStaticRanges(t).map(
+                            ({ label, startDate, endDate }) => {
+                                return (
+                                    <Checkbox
+                                        key={label}
+                                        type={'radio'}
+                                        title={label}
+                                        checked={timeLabel === label}
+                                        onClick={() =>
+                                            handleChange(
+                                                startDate,
+                                                endDate,
+                                                label
+                                            )
+                                        }
+                                    />
+                                )
+                            }
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
