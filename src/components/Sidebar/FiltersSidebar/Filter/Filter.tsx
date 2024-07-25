@@ -31,65 +31,11 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
         labelDate?: string | null
     } | null>(null)
     const dispatch = useDispatch()
-    //const selectedFilter = useSelector((state) => state.Settings.selectedFilter)
-
-    const filtersObj = [
-        {
-            key: 'raggruppa',
-            svg: 'raggruppa.svg',
-            label: t('Raggruppa'),
-        },
-        {
-            key: 'fonti',
-            svg: 'Fonti.svg',
-            label: t('Fonti'),
-        },
-        {
-            key: 'channels',
-            svg: 'channels.svg',
-            label: t('Canali'),
-        },
-        {
-            key: 'tempo',
-            svg: 'tempo.svg',
-            label: t('Tempo'),
-        },
-        {
-            key: 'location',
-            svg: 'location.svg',
-            label: t('Luogo'),
-        },
-        {
-            key: 'topic',
-            svg: 'topic.svg',
-            label: t('Topic'),
-        },
-        {
-            key: 'products',
-            svg: 'products.svg',
-            label: t('Prodotti'),
-        },
-        {
-            key: 'others',
-            svg: 'others.svg',
-            label: t('Altri'),
-        },
-        {
-            key: 'customFilters',
-            svg: 'customFilters.svg',
-            label: t('I tuoi filtri'),
-        },
-    ]
-
-    const handleFiltersClick = (filterId: string) => {
-        //setSelectedFilter(filterId)
-    }
-
-    type SubmitFunctionType = () => void
+    const avoidSubmitOnFilters = ['raggruppa', 'tempo']
 
     const handleApplyBtnClick = () => {
         console.log({ preparedPayload })
-        if (filter?.key !== 'raggruppa') {
+        if (!avoidSubmitOnFilters?.includes(filter?.key ? filter?.key : '')) {
             dispatch(setStateSelect(preparedPayload as any))
             handleCloseOpenFilter()
         } else handleCloseOpenFilter()
@@ -136,6 +82,7 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
                         <CustomFilter openCustomFilter={setOpenCustomFilter} />
                     )
                 )}
+                <TimeFilter />
                 {/*
                     selectedFilter === -1 ?
                         <CreateFilter setCustomFilters={callback} />

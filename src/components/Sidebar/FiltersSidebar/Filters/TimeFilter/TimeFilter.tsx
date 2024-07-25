@@ -121,7 +121,7 @@ const DatePickerWrapperStyles = createGlobalStyle`
 function TimeFilter() {
     const dispatch = useDispatch()
     const [showPickerDate, setShowPickerDate] = useState(true)
-    const { startDate, endDate } = useSelector(selectAllFilters)
+    const { startDate, endDate, timeLabel } = useSelector(selectAllFilters)
     const [startDatef, setStartDate] = useState(startDate && moment(startDate))
     const [endDatef, setEndDate] = useState(startDate && moment(endDate))
     const [dateRange, setDateRange] = useState([
@@ -132,8 +132,8 @@ function TimeFilter() {
     const [rangeHelperState, setRangeHelperState] = useState([])
     const [firstTime, setFirstTime] = useState(true)
     const { t, i18n } = useTranslation()
-    const [startDateInputValue, setStartDateInputValue] = useState()
-    const [endDateInputValue, setEndDateInputValue] = useState()
+    const [startDateInputValue, setStartDateInputValue] = useState(startDate)
+    const [endDateInputValue, setEndDateInputValue] = useState(endDate)
 
     registerLocale(
         i18n.language,
@@ -177,127 +177,133 @@ function TimeFilter() {
         }
     }
 
-    const handlePickerDate = () => {
-        setShowPickerDate(true)
-    }
-
     useEffect(() => {
         dispatch(resetFilters())
     }, [])
 
     const handleChange = (startDate: Date, endDate: Date, label = '') => {
-        if (endDate && startDate) {
-            const dateObj: {
-                startDate: string
-                endDate: string
-            } = {
-                startDate: '',
-                endDate: '',
-            }
-            dateObj.startDate = moment(dateObj?.startDate).format('YYYY-MM-DD')
-            dateObj.endDate = moment(dateObj?.endDate).format('YYYY-MM-DD')
-            setStartDate(moment(startDate))
-            setEndDate(moment(endDate))
-            let res = null
-            let close = false
-            if (dateObj.startDate === dateObj.endDate) {
-                res = {
-                    startDate: dateObj.startDate,
-                    endDate: dateObj.endDate,
-                }
-            } else {
-                res = dateObj
-                close = true
-            }
-
-            const numDays = Math.round(
-                moment(res.endDate).diff(moment(res.startDate), 'days')
-            )
-            const groupby = null
-
-            if (numDays <= 14) {
-                console.log('group 1 day')
-                const payload = {
-                    dis1day: false,
-                    dis7days: true,
-                    dis1month: true,
-                    dis3months: true,
-                    dis6months: true,
-                    dis1year: true,
-                    groupby: '1d',
-                }
-                //dispatch(setAllFilters(payload))
-            } else if (numDays > 14 && numDays <= 62) {
-                console.log('group 7 days')
-                const payload = {
-                    dis1day: false,
-                    dis7days: false,
-                    dis1month: true,
-                    dis3months: true,
-                    dis6months: true,
-                    dis1year: true,
-                    groupby: 'w',
-                }
-                //dispatch(setAllFilters(payload))
-            } else if (numDays > 62 && numDays <= 186) {
-                console.log('group 1 month')
-                const payload = {
-                    dis1day: false,
-                    dis7days: false,
-                    dis1month: false,
-                    dis3months: true,
-                    dis6months: true,
-                    dis1year: true,
-                    groupby: 'M',
-                }
-                //dispatch(setAllFilters(payload))
-            } else if (numDays > 186 && numDays <= 366) {
-                console.log('group 3 months')
-                const payload = {
-                    dis1day: false,
-                    dis7days: false,
-                    dis1month: false,
-                    dis3months: false,
-                    dis6months: true,
-                    dis1year: true,
-                    groupby: 'Q',
-                }
-                //dispatch(setAllFilters(payload))
-            } else if (numDays > 366 && numDays <= 730) {
-                console.log('group 6 months')
-                const payload = {
-                    dis1day: false,
-                    dis7days: false,
-                    dis1month: false,
-                    dis3months: false,
-                    dis6months: false,
-                    dis1year: true,
-                    groupby: '2Q',
-                }
-                dispatch(setAllFilters(payload))
-            } else {
-                console.log('group 1 year')
-                const payload = {
-                    dis1day: false,
-                    dis7days: false,
-                    dis1month: false,
-                    dis3months: false,
-                    dis6months: false,
-                    dis1year: false,
-                    groupby: 'Y',
-                }
-                //dispatch(setAllFilters(payload))
-            }
+        if (label === timeLabel) {
             const payload = {
-                type: 'time',
-                value: res,
-                optional: groupby,
-                labelDate: label,
+                dis1day: false,
+                dis7days: true,
+                dis1month: true,
+                dis3months: true,
+                dis6months: true,
+                dis1year: true,
+                groupby: '1d',
+                timeLabel: '',
             }
-            //dispatch(setStateSelect(payload))
-            /* if (close == true) {
-                 handlePickerDate(false)
-             }*/
+            dispatch(setAllFilters(payload))
+        } else {
+            if (endDate && startDate) {
+                const dateObj: any = {
+                    startDate: startDate,
+                    endDate: endDate,
+                }
+
+                dateObj.startDate = moment(dateObj?.startDate).format(
+                    'YYYY-MM-DD'
+                )
+                dateObj.endDate = moment(dateObj?.endDate).format('YYYY-MM-DD')
+                setStartDate(moment(startDate))
+                setEndDate(moment(endDate))
+                let res = null
+                if (dateObj.startDate === dateObj.endDate) {
+                    res = {
+                        startDate: dateObj.startDate,
+                        endDate: dateObj.endDate,
+                    }
+                } else {
+                    res = dateObj
+                }
+
+                const numDays = Math.round(
+                    moment(res.endDate).diff(moment(res.startDate), 'days')
+                )
+                const groupby = null
+
+                if (numDays <= 14) {
+                    const payload = {
+                        dis1day: false,
+                        dis7days: true,
+                        dis1month: true,
+                        dis3months: true,
+                        dis6months: true,
+                        dis1year: true,
+                        groupby: '1d',
+                        timeLabel: label,
+                    }
+                    dispatch(setAllFilters(payload))
+                } else if (numDays > 14 && numDays <= 62) {
+                    const payload = {
+                        dis1day: false,
+                        dis7days: false,
+                        dis1month: true,
+                        dis3months: true,
+                        dis6months: true,
+                        dis1year: true,
+                        groupby: 'w',
+                        timeLabel: label,
+                    }
+                    dispatch(setAllFilters(payload))
+                } else if (numDays > 62 && numDays <= 186) {
+                    const payload = {
+                        dis1day: false,
+                        dis7days: false,
+                        dis1month: false,
+                        dis3months: true,
+                        dis6months: true,
+                        dis1year: true,
+                        groupby: 'M',
+                        timeLabel: label,
+                    }
+                    dispatch(setAllFilters(payload))
+                } else if (numDays > 186 && numDays <= 366) {
+                    const payload = {
+                        dis1day: false,
+                        dis7days: false,
+                        dis1month: false,
+                        dis3months: false,
+                        dis6months: true,
+                        dis1year: true,
+                        groupby: 'Q',
+                        timeLabel: label,
+                    }
+                    dispatch(setAllFilters(payload))
+                } else if (numDays > 366 && numDays <= 730) {
+                    const payload = {
+                        dis1day: false,
+                        dis7days: false,
+                        dis1month: false,
+                        dis3months: false,
+                        dis6months: false,
+                        dis1year: true,
+                        groupby: '2Q',
+                        timeLabel: label,
+                    }
+                    dispatch(setAllFilters(payload))
+                } else {
+                    const payload = {
+                        dis1day: false,
+                        dis7days: false,
+                        dis1month: false,
+                        dis3months: false,
+                        dis6months: false,
+                        dis1year: false,
+                        groupby: 'Y',
+                        timeLabel: label,
+                    }
+                    dispatch(setAllFilters(payload))
+                }
+                const payload = {
+                    type: 'time',
+                    value: res,
+                    optional: groupby,
+                    labelDate: label,
+                    timeLabel: label,
+                }
+                dispatch(setStateSelect(payload))
+            }
         }
     }
 
@@ -330,8 +336,18 @@ function TimeFilter() {
     }
 
     const handleDateInput = (e: any, type: string) => {
-        if (type === 'start') setStartDateInputValue(e?.target?.value)
-        else setEndDateInputValue(e?.target?.value)
+        const inputDate = e?.target?.value
+        const formattedDate = moment(inputDate).toDate()
+        const tmpDateObj = [...dateRange]
+        if (type === 'start') {
+            tmpDateObj[0] = formattedDate
+            setStartDateInputValue(e?.target?.value)
+        } else {
+            tmpDateObj[1] = formattedDate
+            setEndDateInputValue(e?.target?.value)
+        }
+
+        setDateRange(tmpDateObj)
     }
     return (
         <div className={styles.container}>
@@ -396,42 +412,21 @@ function TimeFilter() {
                     </Typography>
                 </div>
                 <div className={styles.radioDiv}>
-                    <Checkbox
-                        type={'radio'}
-                        value={'today'}
-                        title={t('Oggi')}
-                    />
-                    <Checkbox
-                        type={'radio'}
-                        value={'yesterday'}
-                        title={t('Ieri')}
-                    />
-                    <Checkbox
-                        type={'radio'}
-                        value={'M'}
-                        title={t('Settimana Corrente')}
-                    />
-                    <Checkbox
-                        type={'radio'}
-                        value={'Q'}
-                        title={t('Settimana Precedente')}
-                    />
-                    <Checkbox
-                        type={'radio'}
-                        value={'2Q'}
-                        title={t('Mese Corrente')}
-                    />
-                    <Checkbox
-                        type={'radio'}
-                        value={'Y'}
-                        title={t('Mese Precedente')}
-                    />
-                    <Checkbox
-                        type={'radio'}
-                        value={'Y'}
-                        title={t('Anno Corrente')}
-                    />
-                    <Checkbox type={'radio'} value={'Y'} title={t('Sempre')} />
+                    {defaultStaticRanges(t).map(
+                        ({ label, startDate, endDate }) => {
+                            return (
+                                <Checkbox
+                                    key={label}
+                                    type={'radio'}
+                                    title={label}
+                                    checked={timeLabel === label}
+                                    onClick={() =>
+                                        handleChange(startDate, endDate, label)
+                                    }
+                                />
+                            )
+                        }
+                    )}
                 </div>
             </div>
         </div>

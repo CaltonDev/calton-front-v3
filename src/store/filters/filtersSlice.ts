@@ -33,6 +33,7 @@ interface FiltersState {
     customFiltersSelectable: any[]
     feedbackFilters: any[]
     selectedProductsDetails: any | null
+    timeLabel: string
 }
 
 const initialState: FiltersState = {
@@ -61,6 +62,7 @@ const initialState: FiltersState = {
     customFiltersSelectable: [],
     feedbackFilters: [],
     selectedProductsDetails: null,
+    timeLabel: '',
 }
 
 export const filtersSlice = createSlice({
@@ -68,6 +70,7 @@ export const filtersSlice = createSlice({
     initialState,
     reducers: {
         setAllFilters(state, action: PayloadAction<Partial<FiltersState>>) {
+            console.log('State: ', state, ' action: ', action)
             return {
                 ...state,
                 ...action.payload,
@@ -87,7 +90,7 @@ export const filtersSlice = createSlice({
         resetFiltersByPayload(state, action: PayloadAction<string>) {
             switch (action.payload) {
                 case 'groupby':
-                    return { ...state, groupby: 'Q' }
+                    return { ...state, groupby: 'Q', timeLabel: '' }
                 case 'selectedSource':
                     return { ...state, selectedSource: [], sourceName: null }
                 case 'selectedChannel':
