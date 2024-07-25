@@ -178,6 +178,15 @@ export default function CustomAutocomplete({
         setPendingValue(defaultValue ? defaultValue : [])
     }
 
+    useEffect(() => {
+        if (handleChange) {
+            handleChange(
+                !multiple ? pendingValue[0] ?? null : pendingValue,
+                type
+            )
+        }
+    }, [pendingValue])
+
     //todo: we should call this handle submit from the parent
     const handleSubmit = () => {
         if (handleChange) {

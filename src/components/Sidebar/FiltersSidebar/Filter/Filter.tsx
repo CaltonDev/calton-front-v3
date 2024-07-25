@@ -6,7 +6,7 @@ import Switch from '../../../Switch/Switch'
 import SvgWrapper from '../../../SvgWrapper/SvgWrapper'
 import Button from '../../../Button/Button'
 import { FilterProps } from './Filter.interface'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import GroupByFilter from '../Filters/GroupByFilter/GroupByFilter'
 import SourcesFilter from '../Filters/SourcesFilter/SourcesFilter'
 import TimeFilter from '../Filters/TimeFilter/TimeFilter'
@@ -17,10 +17,20 @@ import PlacesFilter from '../Filters/PlacesFilter/PlacesFilter'
 import TopicsFilter from '../Filters/TopicsFilter/TopicsFilter'
 import ProductsFilter from '../Filters/ProductsFilter/ProductsFilter'
 import CustomFilterSingle from '../Filters/CustomFilter/CustomFilterSingle/CustomFilterSingle'
+import { setStateSelect } from '../../../../store/filters/filtersSlice'
+import { PayloadAction } from '@reduxjs/toolkit'
 
 function Filter({ filter }: FilterProps) {
     const { t } = useTranslation()
     const [checked, setChecked] = useState(false)
+    const [openCustomFilter, setOpenCustomFilter] = useState('')
+    const [preparedPayload, setPreparedPayload] = useState<{
+        type: string | undefined
+        value: any
+        optional?: any | null
+        labelDate?: string | null
+    } | null>(null)
+    const dispatch = useDispatch()
     //const selectedFilter = useSelector((state) => state.Settings.selectedFilter)
 
     const filtersObj = [
@@ -77,10 +87,11 @@ function Filter({ filter }: FilterProps) {
 
     type SubmitFunctionType = () => void
 
-    const handleApplyBtnClick = (submitFunction: SubmitFunctionType) => {
-        submitFunction()
+    const handleApplyBtnClick = () => {
+        console.log('son quiii')
+        console.log({ preparedPayload })
+        dispatch(setStateSelect(preparedPayload as any))
     }
-    const [openCustomFilter, setOpenCustomFilter] = useState('')
 
     return (
         <div className={styles.container}>
@@ -108,7 +119,7 @@ function Filter({ filter }: FilterProps) {
                 ) : filter?.key === 'channels' ? (
                     <ChannelsFilter />
                 ) : filter?.key === 'location' ? (
-                    <PlacesFilter />
+                    <PlacesFilter setPreparedPayload={setPreparedPayload} />
                 ) : filter?.key === 'topic' ? (
                     <TopicsFilter />
                 ) : filter?.key === 'products' ? (
@@ -149,7 +160,7 @@ function Filter({ filter }: FilterProps) {
                 <Button
                     size={'medium'}
                     disabled={false}
-                    submitFunction={handleApplyBtnClick}
+                    onClick={handleApplyBtnClick}
                 >
                     {t('Applica')}
                 </Button>

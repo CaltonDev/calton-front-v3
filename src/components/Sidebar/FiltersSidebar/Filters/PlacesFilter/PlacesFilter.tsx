@@ -8,7 +8,10 @@ import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { setStateSelect } from '../../../../../store/filters/filtersSlice'
 import { SettingsState } from '../../../../../store/settings/settingsSlice'
 
-function PlacesFilter() {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+// eslint-disable-next-line react/prop-types
+function PlacesFilter({ setPreparedPayload }) {
     const dispatch = useDispatch()
     const { selectedLocation, selectedLocationDetails } =
         useSelector(selectAllFilters)
@@ -49,12 +52,14 @@ function PlacesFilter() {
                 value: allids,
                 optional: allPlacesSelected,
             }
-            dispatch(setStateSelect(payload))
+            console.log({ payload })
+            setPreparedPayload(payload)
         }
     }
 
     return (
         <div className={styles.container}>
+            CONTAINER
             <CustomAutocomplete
                 displayType={'filter'}
                 label={
