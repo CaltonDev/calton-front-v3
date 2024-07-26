@@ -39,6 +39,7 @@ const DatePickerWrapperStyles = createGlobalStyle`
       border: none;
       width: 100% !important;
       padding-top: 10px;
+      border-radius: unset;
   }
   .react-datepicker-popper {
       width: 100% !important;
