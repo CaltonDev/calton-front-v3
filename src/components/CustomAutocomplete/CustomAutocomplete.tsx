@@ -396,7 +396,7 @@ export default function CustomAutocomplete({
                     </Button>
                 </div>
             )}
-            <div>
+            <div style={{ width: '100%' }}>
                 {
                     <>
                         <div
@@ -502,7 +502,7 @@ export default function CustomAutocomplete({
                                         className="List"
                                         ref={parentRef}
                                         style={{
-                                            width: 262,
+                                            width: '100%',
                                             height: '100%',
                                             overflow: 'auto',
                                         }}
