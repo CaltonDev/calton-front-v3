@@ -44,6 +44,11 @@ const Checkbox = ({
               : styles['hasContainerClass']
         : ''
 
+    const containerClass = dropdown
+        ? styles['containerWithDropdown']
+        : styles.container
+
+    console.log('drop: ', containerClass)
     const [showDropdownMenu, setShowDropdownMenu] = useState(false)
 
     return (
@@ -52,7 +57,7 @@ const Checkbox = ({
         >
             <div style={{ display: 'flex' }}>
                 <div
-                    className={`${styles.container} ${disabledCheckmarkClass} ${secondaryCheckmarkClass} ${containerRadius} ${containerRadiusAfter}`}
+                    className={`${containerClass} ${disabledCheckmarkClass} ${secondaryCheckmarkClass} ${containerRadius} ${containerRadiusAfter}`}
                 >
                     <div>
                         <div

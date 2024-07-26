@@ -14,6 +14,10 @@
   user-select: map-deep-get($checkbox, container, user-select);
 }
 
+.containerWithDropdown {
+  @extend .container;
+  padding-left: 30px;
+}
 /* Hide the browser's default checkbox */
 .container input {
   position: map-deep-get($checkbox, container, input, position);
