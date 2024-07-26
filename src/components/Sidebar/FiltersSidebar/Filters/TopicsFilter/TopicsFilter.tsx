@@ -73,7 +73,7 @@ function TopicsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
                     filtersToSave.push(elm)
                 }
             })
-
+            //todo: check if necessary
             dispatch(setCustomFilter(filtersToSave))
         }
     }

@@ -20,11 +20,11 @@ function CustomFilterSingle({
     const dispatch = useDispatch()
     const { customFilters, customFiltersSelectable } =
         useSelector(selectAllFilters)
+    //todo: check if necessary
     const filterCustom = customFiltersSelectable.filter(
         (elm: any) => elm._id === customFilterId
     )[0]
 
-    console.log('filterCustom?.values: ', filterCustom)
     const handleChangeCustomFilter = (event: any, filterCustom: any) => {
         const customFilter = {
             _id: filterCustom._id,

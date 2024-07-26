@@ -13,7 +13,7 @@ import { SettingsState } from '../../../store/settings/settingsSlice'
 
 function FiltersSidebar() {
     const [showFilterList, setShowFilterList] = useState(false)
-    const [showFilter, setShowFilter] = useState(true)
+    const [showFilter, setShowFilter] = useState(false)
     const { t } = useTranslation()
     const [selectedFilter, setSelectedFilter] = useState<FilterInterface>({
         key: '',

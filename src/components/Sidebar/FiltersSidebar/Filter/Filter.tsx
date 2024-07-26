@@ -82,7 +82,6 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
                         <CustomFilter openCustomFilter={setOpenCustomFilter} />
                     )
                 )}
-                <TimeFilter />
                 {/*
                     selectedFilter === -1 ?
                         <CreateFilter setCustomFilters={callback} />

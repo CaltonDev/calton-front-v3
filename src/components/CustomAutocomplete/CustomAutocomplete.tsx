@@ -503,7 +503,7 @@ export default function CustomAutocomplete({
                                         ref={parentRef}
                                         style={{
                                             width: 262,
-                                            height: 775,
+                                            height: '100%',
                                             overflow: 'auto',
                                         }}
                                     >
