@@ -24,9 +24,6 @@ function FiltersSidebar() {
     const platformType = useSelector(
         (state: SettingsState) => state.Settings.platformType
     )
-
-    const { customFilters, customFiltersSelectable } =
-        useSelector(selectAllFilters)
     const commonFilters = [
         {
             nameButton: t('Raggruppa'),

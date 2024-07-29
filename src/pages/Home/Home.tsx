@@ -15,6 +15,7 @@ import { SelectedWordsState } from '../../store/home/selectedWordsSlice'
 import { useTranslation } from 'react-i18next'
 import { SettingsState } from '../../store/settings/settingsSlice'
 import Hooks from '../../utils/hooks/Hooks'
+import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 
 function Home() {
     const navigate = useNavigate()
@@ -69,55 +70,7 @@ function Home() {
         }
     }
 
-    return (
-        <div>
-            {/*<Input
-                size={'small'}
-                color={'success'}
-                disabled={false}
-                onChange={handleInputChange}
-                value={name}
-                placeholder={'Inserisci qui il tuo nome...'}
-                type={btnType}
-                iconCallback={handleIcon}
-                suffix={'arrowForward'}
-            />
-
-            <Checkbox
-                checked={checked}
-                onClick={() => setChecked(!checked)}
-                title={'Inserire testo'}
-                color={'secondary'}
-                disabled={false}
-                type={'radio'}
-                hasContainer={true}
-                //subtitle={'Lorem ipsum dolor sit amet'}
-            />
-
-            <CaltonSelect
-                size={'small'}
-                color={'secondary'}
-                customColor={'#7161EF'}
-            />
-
-            <Switch
-                checked={checked}
-                disabled={false}
-                onClick={() => setChecked(!checked)}
-                icon={true}
-            />
-
-            <SvgWrapper
-                keySvg={'settingsSvg'}
-                color={'primaryIcon'}
-                size={'xlarge'}
-                hasContainerProps={{
-                    hasContainer: true,
-                    containerSize: 50,
-                }}
-            />*/}
-        </div>
-    )
+    return <PageContainer>ciao</PageContainer>
 }
 
 export default Home

@@ -1,0 +1,25 @@
+.container {
+  background: #888eff;
+  border-radius: 8px;
+  height: 28px;
+  max-width: 10vw;
+  padding: 8px 9px;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 10px;
+  margin-right: 10px;
+  display: flex;
+  color: #fff;
+  align-items: center;
+  cursor: pointer;
+}
+
+.containerTitle {
+  max-width: 7.7vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*# sourceMappingURL=FiltersButton.module.css.map */
