@@ -3,11 +3,61 @@ import styles from './Sidebar.module.scss'
 import CaltonSelect from '../Select/Select'
 import { useTranslation } from 'react-i18next'
 import SidebarMenu from './SidebarMenu/SidebarMenu'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCode } from '../../store/code/codeSlice'
+import { resetFilters } from '../../store/filters/filtersSlice'
+import ServiceWrapper from '../../helpers/ServiceWrapper'
+import { showToast } from '../../store/toast/errorToastSlice'
+import { selectAllFilters } from '../../store/selectors/selectorsSlice'
+import { useNavigate } from 'react-router-dom'
+import ListingService from '../../services/ListingService'
+import {
+    setPlatformType,
+    SettingsState,
+} from '../../store/settings/settingsSlice'
+import {
+    competitorsColor,
+    listingsColor,
+    reviewsColor,
+    surveysColor,
+} from '../../constants/constants'
 function Sidebar() {
-    const [platformType, setPlatformType] = useState('reviews')
     const { t } = useTranslation()
+    const dispatch = useDispatch()
+    const allFilters = useSelector(selectAllFilters)
+    const history = useNavigate()
+    const platformType = useSelector(
+        (state: SettingsState) => state.Settings.platformType
+    )
+
     const handlePlatformTypeChange = (e: any) => {
-        setPlatformType(e?.value)
+        const value = e?.value
+        dispatch(setCode(getCodeFromPlatformType(value)))
+        dispatch(setPlatformType(value))
+        dispatch(resetFilters())
+        if (value === 'listing') {
+            checkNumberOfListings()
+        }
+        ServiceWrapper.wrapperLoadFilters(allFilters, dispatch, value, t)
+    }
+
+    const checkNumberOfListings = async () => {
+        try {
+            const res = await ListingService.getNumberOfListings()
+
+            if (res?.data?.count === 0) {
+                history('./integrations')
+            }
+        } catch (error) {
+            dispatch(
+                showToast({
+                    type: 2,
+                    text: t('Numero di listings non trovato'),
+                })
+            )
+            history('./integrations')
+            console.log(error)
+        }
     }
 
     const selectOptions = [
@@ -33,8 +83,37 @@ function Sidebar() {
         },
     ]
 
+    const getCodeFromPlatformType = (type: string) => {
+        let code: number[] = []
+
+        if (type === 'reviews') {
+            code = [0, 1, 2, 3]
+        } else if (type === 'surveys') {
+            code = [4]
+        } else if (type === 'competitor') {
+            code = [5]
+        } else if (type === 'listing') {
+            code = [6]
+        }
+
+        return code
+    }
+
+    const getBackgroundColor = () => {
+        return platformType === 'reviews'
+            ? reviewsColor
+            : platformType === 'surveys'
+              ? surveysColor
+              : platformType === 'competitor'
+                ? competitorsColor
+                : listingsColor
+    }
+
     return (
-        <div className={styles.sidebarContainer}>
+        <div
+            className={styles.sidebarContainer}
+            style={{ background: getBackgroundColor() }}
+        >
             <CaltonSelect
                 options={selectOptions}
                 value={
@@ -46,7 +125,7 @@ function Sidebar() {
                 }
                 size={'small'}
                 fontSize={'large'}
-                customColor={'#7161EF'}
+                customColor={getBackgroundColor()}
                 onChange={handlePlatformTypeChange}
             />
             <div className={styles.divider} />

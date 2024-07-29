@@ -55,12 +55,12 @@
   font-family: map-get($input, font-family);
 
    &.small {
-    width: map-deep-get($input, size, small, width);
+    width: map-deep-get($input, select, size, small, width);
   }
 
   &.medium {
-    height: map-deep-get($input, size, medium, height);
-    width: map-deep-get($input, size, medium, width);
+    height: map-deep-get($input, select, size, medium, height);
+    width: map-deep-get($input, select, size, medium, width);
   }
 
   &.large {

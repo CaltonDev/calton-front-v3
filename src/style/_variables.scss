@@ -228,7 +228,16 @@ $input: (
         line-height: 125%,
         color: #321D48,
         select: (
-          line-height: 17px,
+          line-height: 21px,
+          size: (
+                  small: (
+                    width: 170px
+                  ),
+                  medium: (
+                  ),
+                  large: (
+                  )
+          ),
         ),
         size: (
           small: (

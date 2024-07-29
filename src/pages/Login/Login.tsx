@@ -12,6 +12,40 @@ import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
 import CaltonLogoWh from '../../assets/img/Logo Calton Mascotte.png'
 import moment from 'moment'
+import { setDistribuzioniVoti } from '../../store/home/distribuzioneVotiSlice'
+import { setDistribuzioniRacc } from '../../store/home/distribuzioneRaccomandazioni'
+import { setAverageVotoByTime } from '../../store/home/averageVotoByTimeSlice'
+import { setAverageSentimentByTime } from '../../store/home/averageSentimentByTime'
+import { setAverageReviewByTime } from '../../store/home/averageReviewByTime'
+import { setSources } from '../../store/home/sourceSlice'
+import { setBubbles } from '../../store/home/bubbleSlice'
+import { setMenusList } from '../../store/menus/menuSlice'
+import { setSelectedWord } from '../../store/home/selectedWordsSlice'
+import { resetSearch, setWordSearched } from '../../store/search/search'
+import {
+    setFeedbacks,
+    setFeedbacksCount,
+} from '../../store/home/feedbackHomeSlice'
+import {
+    setAllChannelSources,
+    setAllLocations,
+    setAllProducts,
+    setAllTopics,
+} from '../../store/filters/selectableFiltersSlice'
+import { setLocationFiltered } from '../../store/locations/locationFilteredSlice'
+import { setChildUsers } from '../../store/childUsers/childUsersSlice'
+import { setSourcesFiltered } from '../../store/sources/sourcesFilteredSlice'
+import {
+    setPlatformType,
+    setShowNumbers,
+} from '../../store/settings/settingsSlice'
+import {
+    setDistribuzioneTopicPerSentiment,
+    setVotoMedioTopic,
+} from '../../store/analisiAvanzataState/analisiAvanzataSlice'
+import { setCurrentToasts, showToast } from '../../store/toast/errorToastSlice'
+import { resetFilters } from '../../store/filters/filtersSlice'
+import { resetSocketMessage } from '../../store/socket/socketSlice'
 
 function Login() {
     const { t, i18n } = useTranslation()
@@ -20,6 +54,45 @@ function Login() {
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const history = useNavigate()
+
+    useEffect(() => {
+        sessionStorage.removeItem('unique')
+        dispatch(setDistribuzioniVoti(null))
+        dispatch(setDistribuzioniRacc(null))
+        dispatch(setAverageVotoByTime(null))
+        dispatch(setAverageSentimentByTime(null))
+        dispatch(setAverageReviewByTime(null))
+        dispatch(setSources(null))
+        dispatch(setBubbles(null))
+        dispatch(setMenusList([]))
+        dispatch(
+            setSelectedWord({
+                word: null,
+                sentiment: false,
+                isText: false,
+            })
+        )
+        dispatch(setWordSearched(null))
+        dispatch(setFeedbacks(null))
+        dispatch(setFeedbacksCount(0))
+        dispatch(setAllChannelSources(null))
+        dispatch(setAllProducts(null))
+        dispatch(setAllLocations(null))
+        dispatch(setAllTopics(null))
+        dispatch(resetSearch())
+        dispatch(setLocationFiltered(null))
+        dispatch(setChildUsers(null))
+        dispatch(setSourcesFiltered(null))
+        dispatch(setPlatformType('reviews'))
+        dispatch(setDistribuzioneTopicPerSentiment(null))
+        dispatch(setVotoMedioTopic(null))
+        dispatch(setShowNumbers(false))
+        dispatch(setCurrentToasts([]))
+        dispatch(resetFilters())
+        dispatch(resetSocketMessage())
+        dispatch(setUser(null))
+        dispatch(showToast({ type: 7 }))
+    }, [])
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
