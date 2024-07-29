@@ -21,6 +21,7 @@ import {
     reviewsColor,
     surveysColor,
 } from '../../constants/constants'
+import { getBackgroundColor } from '../../utils/utils'
 function Sidebar() {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -99,20 +100,10 @@ function Sidebar() {
         return code
     }
 
-    const getBackgroundColor = () => {
-        return platformType === 'reviews'
-            ? reviewsColor
-            : platformType === 'surveys'
-              ? surveysColor
-              : platformType === 'competitor'
-                ? competitorsColor
-                : listingsColor
-    }
-
     return (
         <div
             className={styles.sidebarContainer}
-            style={{ background: getBackgroundColor() }}
+            style={{ background: getBackgroundColor(platformType) }}
         >
             <CaltonSelect
                 options={selectOptions}
@@ -125,7 +116,7 @@ function Sidebar() {
                 }
                 size={'small'}
                 fontSize={'large'}
-                customColor={getBackgroundColor()}
+                customColor={getBackgroundColor(platformType)}
                 onChange={handlePlatformTypeChange}
             />
             <div className={styles.divider} />

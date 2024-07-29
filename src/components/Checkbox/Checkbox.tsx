@@ -48,7 +48,6 @@ const Checkbox = ({
         ? styles['containerWithDropdown']
         : styles.container
 
-    console.log('drop: ', containerClass)
     const [showDropdownMenu, setShowDropdownMenu] = useState(false)
 
     return (

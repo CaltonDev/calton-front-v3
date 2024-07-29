@@ -70,7 +70,6 @@ export const filtersSlice = createSlice({
     initialState,
     reducers: {
         setAllFilters(state, action: PayloadAction<Partial<FiltersState>>) {
-            console.log('State: ', state, ' action: ', action)
             return {
                 ...state,
                 ...action.payload,

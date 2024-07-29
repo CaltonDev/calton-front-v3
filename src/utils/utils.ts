@@ -13,6 +13,12 @@ import {
     differenceInCalendarDays,
 } from 'date-fns'
 import i18next from 'i18next'
+import {
+    competitorsColor,
+    listingsColor,
+    reviewsColor,
+    surveysColor,
+} from '../constants/constants'
 
 const defineds = {
     startOfWeek: startOfWeek(new Date()),
@@ -95,3 +101,13 @@ export const defaultStaticRanges = (t: typeof i18next.t) =>
             endDate: defineds.endOfToday,
         },
     ])
+
+export const getBackgroundColor = (platformType: string) => {
+    return platformType === 'reviews'
+        ? reviewsColor
+        : platformType === 'surveys'
+          ? surveysColor
+          : platformType === 'competitor'
+            ? competitorsColor
+            : listingsColor
+}

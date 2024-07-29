@@ -2,6 +2,7 @@ import styles from './Button.module.scss'
 import { ButtonProps } from './Button.interface'
 import React from 'react'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import { getBackgroundColor } from '../../utils/utils'
 
 const Button = ({
     size,
@@ -13,7 +14,7 @@ const Button = ({
     onClick,
     children,
     fullWidth = false,
-    submitFunction,
+    color,
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
     const sizeClass = fullWidth ? styles['fullwidth'] : size ? styles[size] : ''
@@ -28,19 +29,15 @@ const Button = ({
     const iconOnlyClass = iconOnly ? styles[`iconOnly-${size}`] : ''
     const roundedClass = rounded ? styles[`rounded-${size}`] : ''
 
-    const handleBtnClick = (e: any) => {
-        if (onClick) {
-            onClick(e?.target?.value)
-        }
-
-        if (submitFunction) {
-            submitFunction
-        }
-    }
     return (
         <>
             <button
                 className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass} ${arrowDirection} ${iconOnlyClass} ${roundedClass}`}
+                style={
+                    color
+                        ? { background: getBackgroundColor(color ? color : '') }
+                        : {}
+                }
                 disabled={disabled}
                 onClick={onClick}
             >

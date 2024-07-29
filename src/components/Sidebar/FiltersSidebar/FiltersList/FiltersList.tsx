@@ -5,12 +5,17 @@ import Typography from '../../../Typography/Typography'
 import Switch from '../../../Switch/Switch'
 import SvgWrapper from '../../../SvgWrapper/SvgWrapper'
 import { FilterInterface } from '../Filters.interface'
+import { useSelector } from 'react-redux'
+import { SettingsState } from '../../../../store/settings/settingsSlice'
 function FiltersList({
     setSelectedFilter,
     blockSidebar,
     setBlockSidebar,
 }: any) {
     const { t } = useTranslation()
+    const platformType = useSelector(
+        (state: SettingsState) => state.Settings.platformType
+    )
 
     const filtersObj = [
         {
@@ -70,7 +75,15 @@ function FiltersList({
                 <Typography
                     size={'bodySmall'}
                     weight={'bold'}
-                    color={'reviews'}
+                    color={
+                        platformType === 'reviews'
+                            ? 'reviews'
+                            : platformType === 'surveys'
+                              ? 'surveys'
+                              : platformType === 'competitor'
+                                ? 'competitor'
+                                : 'listing'
+                    }
                 >
                     {t('Filtri')?.toUpperCase()}
                 </Typography>

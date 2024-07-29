@@ -31,7 +31,6 @@ function SourcesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     }
 
     const handleChange = (event: any, type: string) => {
-        console.log('EVent: ', event)
         let newEvent = event
         const allids: string[] = []
         const result: any[] = []

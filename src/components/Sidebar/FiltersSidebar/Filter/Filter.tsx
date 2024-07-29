@@ -34,7 +34,6 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
     const avoidSubmitOnFilters = ['raggruppa', 'tempo']
 
     const handleApplyBtnClick = () => {
-        console.log({ preparedPayload })
         if (!avoidSubmitOnFilters?.includes(filter?.key ? filter?.key : '')) {
             dispatch(setStateSelect(preparedPayload as any))
             handleCloseOpenFilter()

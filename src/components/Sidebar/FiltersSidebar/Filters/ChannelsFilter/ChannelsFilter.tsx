@@ -15,11 +15,8 @@ function ChannelsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
             state.SelectableFilters.allChannelSources
     )
     const { selectedChannel } = useSelector(selectAllFilters)
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
 
-    useEffect(() => {
-        console.log('A: ', allChannelSources, ' s_ ', selectedChannel)
-    }, [allChannelSources, selectedChannel])
     const equalsIgnoreOrder = (a: string[], b: string[]) => {
         if (a?.length !== b?.length) return false
         const uniqueValues = new Set([...a, ...b])
