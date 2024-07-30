@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { PageHeaderProps } from './PageHeader.interface'
-import styles from './PageContainer.module.scss'
+import styles from './PageHeader.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { selectAllFilters } from '../../../store/selectors/selectorsSlice'

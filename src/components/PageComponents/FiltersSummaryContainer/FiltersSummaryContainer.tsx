@@ -1,4 +1,4 @@
-import styles from './ContainerFilters.module.scss'
+import styles from './FiltersSummaryContainer.module.scss'
 import FiltersButton from './FiltersButton/FiltersButton'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,10 +6,10 @@ import { resetFilters } from '../../../store/filters/filtersSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { displayVariations } from '../../../helpers/helpers'
 import { SettingsState } from '../../../store/settings/settingsSlice'
+import { FilterType } from '../../../utils/filterHelpers'
 import { FilterSummaryContainerProps } from './FilterSummaryContainer.interface'
-import { AllFiltersState } from '../../../store/selectors/selectorsSlice'
 
-function FiltersSummaryContainer({ filter }: FilterSummaryContainerProps) {
+function FiltersSummaryContainer(filter: FilterSummaryContainerProps) {
     const [upperFilters, setUpperFilters] = useState([])
     const [more, setMore] = useState(false)
     const { t } = useTranslation()
@@ -18,8 +18,12 @@ function FiltersSummaryContainer({ filter }: FilterSummaryContainerProps) {
         (state: SettingsState) => state.Settings.platformType
     )
     const getActiveFilters = () => {
-        return filter.Filters.filter(
-            (elm: any) =>
+        if (!filter || !Array.isArray(filter)) {
+            return []
+        }
+
+        return filter.filter(
+            (elm: FilterType) =>
                 JSON.stringify(elm.condition) !== JSON.stringify(elm.value) &&
                 elm.value != null
         )
@@ -51,10 +55,10 @@ function FiltersSummaryContainer({ filter }: FilterSummaryContainerProps) {
     useEffect(() => {
         if (getActiveFilters().length > 4) {
             const tmpFilters = JSON.parse(JSON.stringify(filter)).slice(0, 5)
-            setUpperFilters(tmpFilters)
+            //setUpperFilters(tmpFilters)
             setMore(true)
         } else {
-            setUpperFilters(JSON.parse(JSON.stringify(filter)))
+            //setUpperFilters(JSON.parse(JSON.stringify(filter)))
             setMore(false)
         }
     }, [filter])
@@ -62,8 +66,8 @@ function FiltersSummaryContainer({ filter }: FilterSummaryContainerProps) {
     const prepareValue = () => {
         const tmpArray: any[] = []
         const arrayFilters: any[] = []
-        JSON.parse(JSON.stringify(filter.Filters))
-            .slice(5, filter?.Filters.length)
+        JSON.parse(JSON.stringify(filter))
+            .slice(5, filter?.length)
             .map((elm: any) => {
                 if (
                     JSON.stringify(elm.condition) !==
@@ -93,26 +97,26 @@ function FiltersSummaryContainer({ filter }: FilterSummaryContainerProps) {
         return { tmpArray, arrayFilters }
     }
 
-    const checkPageFilter = (filter: AllFiltersState) => {
+    /*const checkPageFilter = (filter: FilterType) => {
         //First one allows the time filter to be displayed only in listing ->performance
         //Second one removes all other filters except from source inside listing->menu
         return (
             !(
-                filter.Filters === 3 &&
+                filter?.filter === 3 &&
                 platformType === 'listing' &&
                 !window.location.pathname.includes('performance')
             ) &&
             !(
-                filter.Filters !== 4 &&
+                filter?.filter !== 4 &&
                 platformType === 'listing' &&
                 !window.location.pathname.includes('performance')
             )
         )
-    }
+    }*/
 
     return (
         <>
-            {upperFilters.map((elm: any) => {
+            {upperFilters?.map((elm: any) => {
                 const display = elm.valueText
                 let value
                 if (Array.isArray(elm.condition)) {
@@ -173,8 +177,8 @@ function FiltersSummaryContainer({ filter }: FilterSummaryContainerProps) {
                     JSON.stringify(elm.condition) !==
                         JSON.stringify(elm.value) &&
                     elm.value != null &&
-                    elm?.filter !== 8 &&
-                    checkPageFilter(elm.filter)
+                    elm?.filter !== 8 //&&
+                    //checkPageFilter(elm.filter)
                 ) {
                     return (
                         <FiltersButton

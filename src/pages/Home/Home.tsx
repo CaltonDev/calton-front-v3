@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next'
 import { SettingsState } from '../../store/settings/settingsSlice'
 import Hooks from '../../utils/hooks/Hooks'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
+import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 
 function Home() {
     const navigate = useNavigate()
@@ -70,7 +71,11 @@ function Home() {
         }
     }
 
-    return <PageContainer>ciao</PageContainer>
+    return (
+        <PageContainer>
+            <PageHeader heading={'Recensioni'}></PageHeader>
+        </PageContainer>
+    )
 }
 
 export default Home

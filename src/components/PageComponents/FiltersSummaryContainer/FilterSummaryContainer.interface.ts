@@ -1,5 +1,5 @@
-import { AllFiltersState } from '../../../store/selectors/selectorsSlice'
+import { FilterType } from '../../../utils/filterHelpers'
 
 export interface FilterSummaryContainerProps {
-    filter: AllFiltersState
+    [filter: string]: FilterType[]
 }
