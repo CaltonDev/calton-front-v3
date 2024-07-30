@@ -21,6 +21,7 @@ export interface TypographyProps {
         | 'listing'
         | 'white'
         | 'grey'
+        | 'blue'
     italic?: boolean
     underline?: boolean
     uppercase?: boolean

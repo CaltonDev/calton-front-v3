@@ -44,6 +44,8 @@ import TrustedShopsSvg from './SvgIcons/TrustedShopsSvg'
 import TripAdvisorSvg from './SvgIcons/TripAdvisorSvg'
 import JustEatSvg from './SvgIcons/JustEatSvg'
 import TheForkSvg from './SvgIcons/TheForkSvg'
+import CloseIconSvg from './SvgIcons/CloseIconSvg'
+import ExpandIconSvg from './SvgIcons/ExpandIconSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -238,6 +240,10 @@ const SvgWrapper = ({
                     <JustEatSvg />
                 ) : keySvg === 'TheFork.svg' ? (
                     <TheForkSvg />
+                ) : keySvg === 'close.svg' ? (
+                    <CloseIconSvg />
+                ) : keySvg === 'expand.svg' ? (
+                    <ExpandIconSvg />
                 ) : (
                     <></>
                 )}

@@ -1,22 +1,35 @@
 .container{
-  background: #888eff;
-  border-radius: 8px;
-  height: 28px;
-  max-width: 10vw;
-  padding: 8px 9px;
-  font-family: "Montserrat", "Heebo", sans-serif !important;
-  font-weight: 600;
-  font-size: 10px;
-  line-height: 10px;
-  margin-right: 10px;
   display: flex;
-  color: #fff;
-  align-items: center;
-  cursor: pointer;
+  flex-direction: column;
+  padding: 6px 5px;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 5px;
+  background: var(--Neutral-200, #E9E7EC);
+  justify-content: space-between;
+  width: 150px;
+  height: 100%;
+  min-height: 50px;
+  max-height: 150px;
 }
-.containerTitle{
-  max-width: 7.7vw;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+.leftTitleItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.textContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  overflow: auto;
 }

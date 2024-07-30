@@ -7,7 +7,7 @@ const endDate = moment(now).format('YYYY-MM-DD')
 now.setFullYear(now.getFullYear() - 1)
 const startDate = moment(now).format('YYYY-MM-DD')
 
-interface FiltersState {
+export interface FiltersState {
     dis1day: boolean
     dis7days: boolean
     dis1month: boolean

@@ -87,62 +87,57 @@ function PageHeader({
                     </div>
                 )}
                 {heading && (
-                    <div
-                        style={{ display: 'flex', alignItems: 'center' }}
-                        onClick={handleHeadingClick}
-                    >
-                        {showArrowBack && (
-                            <div>
-                                <span
-                                    style={{
-                                        paddingTop: '5px',
-                                        lineHeight: 0,
-                                        verticalAlign: 'middle',
-                                        marginRight: '8px',
-                                        cursor: 'pointer',
-                                    }}
-                                    onClick={() =>
-                                        history(
-                                            arrowBackUrl ? arrowBackUrl : ''
-                                        )
-                                    }
-                                >
-                                    <SvgWrapper
-                                        size={'small'}
-                                        color={'black'}
-                                        keySvg={'arrowBack'}
-                                    />
-                                </span>
+                    <div className={styles.headingContainer}>
+                        <div onClick={handleHeadingClick}>
+                            {showArrowBack && (
+                                <div>
+                                    <span
+                                        style={{
+                                            paddingTop: '5px',
+                                            lineHeight: 0,
+                                            verticalAlign: 'middle',
+                                            marginRight: '8px',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={() =>
+                                            history(
+                                                arrowBackUrl ? arrowBackUrl : ''
+                                            )
+                                        }
+                                    >
+                                        <SvgWrapper
+                                            size={'small'}
+                                            color={'black'}
+                                            keySvg={'arrowBack'}
+                                        />
+                                    </span>
+                                </div>
+                            )}
+                            <Typography size={'h1'} weight={'bold'}>
+                                {t(heading)}
+                            </Typography>
+                        </div>
+                        {!(
+                            window.location.pathname.includes('locations') ||
+                            window.location.pathname.includes('fonti') ||
+                            window.location.pathname.includes(
+                                'integrazioniOnboarding'
+                            ) ||
+                            window.location.pathname.includes('integrations') ||
+                            window.location.pathname.includes(
+                                'chooseLocations'
+                            ) ||
+                            window.location.pathname.includes(
+                                'AddCompetitorsSource'
+                            ) ||
+                            window.location.pathname.includes('products')
+                        ) && (
+                            <div id={'test'}>
+                                <FiltersSummaryContainer
+                                    filter={getConfigFilter(filters, t)}
+                                />
                             </div>
                         )}
-                        <Typography size={'h1'} weight={'bold'}>
-                            {t(heading)}
-                        </Typography>
-                    </div>
-                )}
-                {!(
-                    window.location.pathname.includes('locations') ||
-                    window.location.pathname.includes('fonti') ||
-                    window.location.pathname.includes(
-                        'integrazioniOnboarding'
-                    ) ||
-                    window.location.pathname.includes('integrations') ||
-                    window.location.pathname.includes('chooseLocations') ||
-                    window.location.pathname.includes('AddCompetitorsSource') ||
-                    window.location.pathname.includes('products')
-                ) && (
-                    <div
-                        id={'test'}
-                        style={{
-                            marginTop: 10,
-                            marginBottom: 30,
-                            display: 'flex',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <FiltersSummaryContainer
-                            filter={getConfigFilter(filters, t)}
-                        />
                     </div>
                 )}
             </div>

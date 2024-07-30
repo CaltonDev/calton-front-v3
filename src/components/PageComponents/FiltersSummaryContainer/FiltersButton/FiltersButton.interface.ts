@@ -1,10 +1,12 @@
 import { AllFiltersState } from '../../../../store/selectors/selectorsSlice'
 
 export interface FiltersButtonProps {
-    title?: string
+    title: string
     showCancel?: boolean
     isMore?: boolean
-    valueExp?: string | any[]
+    value?: string | any[]
     filter?: AllFiltersState
     keyUpdate?: string
+    setShowAllFilters?: (arg0: boolean) => void
+    showAllFilters?: boolean
 }

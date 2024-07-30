@@ -13,6 +13,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
     const [filter, setFilter] = useState(filters?.filter)
     const [upperFilters, setUpperFilters] = useState([])
     const [more, setMore] = useState(false)
+    const [showAllFilters, setShowAllFilters] = useState(false)
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const platformType = useSelector(
@@ -59,7 +60,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
 
     useEffect(() => {
         if (getActiveFilters().length > 4) {
-            const tmpFilters = JSON.parse(JSON.stringify(filter)).slice(0, 5)
+            const tmpFilters = JSON.parse(JSON.stringify(filter)).slice(0, 4)
             setUpperFilters(tmpFilters)
             setMore(true)
         } else {
@@ -68,6 +69,12 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
         }
     }, [filter])
 
+    useEffect(() => {
+        let tmpFilters = JSON.parse(JSON.stringify(filter)).slice(0, 4)
+
+        if (showAllFilters) tmpFilters = JSON.parse(JSON.stringify(filter))
+        setUpperFilters(tmpFilters)
+    }, [showAllFilters])
     const prepareValue = () => {
         const tmpArray: any[] = []
         const arrayFilters: any[] = []
@@ -85,11 +92,11 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                     let value
                     if (Array.isArray(elm.condition)) {
                         if (elm.mapValue) {
-                            value = elm?.value
-                                ?.map((el: any) => el[elm.mapValue])
-                                ?.join(', ')
+                            value = elm?.value?.map(
+                                (el: any) => el[elm.mapValue]
+                            )
                         } else if (elm?.value) {
-                            value = elm?.value?.join(', ')
+                            value = elm?.value
                         } else {
                             value = null
                         }
@@ -119,26 +126,20 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
         )
     }*/
 
-    useEffect(() => {
-        console.log('upperFilters: ', upperFilters)
-    }, [upperFilters])
-
     return (
-        <>
+        <div className={styles.container}>
             {upperFilters.map((elm: any) => {
                 const display = elm.valueText
                 let value
                 if (Array.isArray(elm.condition)) {
                     if (elm.key === 'selectedProducts') {
-                        value = elm?.value
-                            ?.map((el: any) => {
-                                if (el.idProductParent === null) {
-                                    return el[elm.mapValue]
-                                } else {
-                                    return displayVariations(el)
-                                }
-                            })
-                            ?.join(', ')
+                        value = elm?.value?.map((el: any) => {
+                            if (el.idProductParent === null) {
+                                return el[elm.mapValue]
+                            } else {
+                                return displayVariations(el)
+                            }
+                        })
                     } else if (elm.mapValue) {
                         const tmpArr = elm?.value?.map(
                             (el: any) => el[elm.mapValue]
@@ -152,7 +153,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                                     elm.value[i][elm.mapValue]
                                 tmpDisplay.push(tmpString)
                             })
-                            value = tmpDisplay?.join(', ')
+                            value = tmpDisplay
                         } else if (
                             elm.filter === 4 &&
                             platformType === 'listing'
@@ -161,7 +162,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                             elm?.value?.forEach((element: any) => {
                                 tmpDisplay.push(element?.title)
                             })
-                            value = tmpDisplay?.join(', ')
+                            value = tmpDisplay
                         } else if (elm.filter === 8) {
                             const tmpDisplay: any[] = []
                             elm?.value?.forEach((element: any, i: number) => {
@@ -171,12 +172,12 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                                     elm.value[i][elm.mapValue]
                                 tmpDisplay.push(tmpString)
                             })
-                            value = tmpDisplay?.join(', ')
+                            value = tmpDisplay
                         } else {
-                            value = tmpArr?.join(', ')
+                            value = tmpArr
                         }
                     } else if (elm?.value) {
-                        value = elm?.value?.join(', ')
+                        value = elm?.value
                     } else {
                         value = null
                     }
@@ -192,9 +193,9 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                     return (
                         <FiltersButton
                             showCancel={elm.showCancel}
-                            valueExp={value}
+                            value={value}
                             key={elm.key}
-                            title={value ? display + value : elm.text + display}
+                            title={display}
                             keyUpdate={elm.key}
                             isMore={false}
                             filter={elm.filter}
@@ -227,7 +228,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                                 listingStates.find((obj) => obj?.value === key)
                                     ?.label +
                                     ': ' +
-                                    displayableLabel?.join(', ')
+                                    displayableLabel
                             )
                         }
                     })
@@ -235,7 +236,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                     return (
                         <FiltersButton
                             showCancel={elm.showCancel}
-                            valueExp={displayableValue?.join(', ')}
+                            value={displayableValue}
                             title={displayableValue?.join(', ')}
                             keyUpdate={elm.key}
                             key={elm.key}
@@ -247,25 +248,17 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
             })}
             {more && (
                 <FiltersButton
-                    valueExp={prepareValue().tmpArray}
+                    value={prepareValue().tmpArray}
                     title={
-                        '+ ' +
-                        prepareValue().arrayFilters.length +
-                        ' ' +
-                        t('Filtri')
+                        prepareValue().arrayFilters.length + ' ' + t('Filtri')
                     }
                     isMore={true}
+                    showCancel={false}
+                    showAllFilters={showAllFilters}
+                    setShowAllFilters={setShowAllFilters}
                 />
             )}
-            {more && (
-                <span
-                    onClick={() => dispatch(resetFilters())}
-                    className={styles.resetAll}
-                >
-                    {t('rimuovi filtri')}
-                </span>
-            )}
-        </>
+        </div>
     )
 }
 

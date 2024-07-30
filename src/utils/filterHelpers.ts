@@ -2,11 +2,12 @@ import moment from 'moment'
 import CustomConstants from '../constants/CustomConstants'
 import i18next from 'i18next'
 import { AllFiltersState } from '../store/selectors/selectorsSlice'
+import { FiltersState } from '../store/filters/filtersSlice'
 
 export type FilterType = {
     text?: string
     valueText?: string | null
-    value?: string
+    value?: string[] | string | ListingConditions
     mapValue?: string | null
     condition?: never[] | ListingConditions | string | null
     filter?: number
@@ -52,49 +53,45 @@ export const getTranslateFromGroupBy = (
 }
 
 export const getTextFromGroupBy = (
-    filters: AllFiltersState,
+    filters: FiltersState,
     t: typeof i18next.t
 ) => {
-    return filters.Filters?.groupby == '1d'
+    return filters?.groupby == '1d'
         ? t('1 giorno')
-        : filters.Filters?.groupby == 'w'
+        : filters?.groupby == 'w'
           ? t('7 giorni')
-          : filters.Filters?.groupby == 'M'
+          : filters?.groupby == 'M'
             ? t('1 mese')
-            : filters.Filters?.groupby == 'Q'
+            : filters?.groupby == 'Q'
               ? t('3 mesi')
-              : filters.Filters?.groupby == '2Q'
+              : filters?.groupby == '2Q'
                 ? t('6 mesi')
-                : filters.Filters?.groupby == 'Y'
+                : filters?.groupby == 'Y'
                   ? t('1 anno')
                   : null
 }
 
-const getTextFromTime = (filters: AllFiltersState, t: typeof i18next.t) => {
-    const labelDate = filters.Filters?.labelDate
+const getTextFromTime = (filters: FiltersState, t: typeof i18next.t) => {
+    const labelDate = filters?.labelDate
     if (labelDate) {
         return t(labelDate)
     }
-    const startDate = moment(filters.Filters?.selectedTime?.startDate).format(
-        'DD/MM/YYYY'
-    )
-    const endDate = moment(filters.Filters?.selectedTime?.endDate).format(
-        'DD/MM/YYYY'
-    )
+    const startDate = moment(filters?.startDate).format('DD/MM/YYYY')
+    const endDate = moment(filters?.endDate).format('DD/MM/YYYY')
     return startDate && endDate
         ? t('Dal') + startDate + t('al') + endDate
         : null
 }
 
 export const getConfigFilter = (
-    filters: AllFiltersState,
+    filters: FiltersState,
     t: typeof i18next.t
 ): FilterType[] => {
     return [
         {
             text: t('Raggruppa per') + ' ',
             valueText: getTextFromGroupBy(filters, t),
-            value: filters.Filters?.groupby,
+            value: filters?.groupby,
             mapValue: null,
             condition: 'Q',
             filter: 0,
@@ -102,9 +99,9 @@ export const getConfigFilter = (
             showCancel: true,
         },
         {
-            text: t('Fonti Feedback') + ' ',
-            valueText: t('Fonti Feedback') + ': ',
-            value: filters.Filters?.sourceName,
+            text: t('Fonti') + ' ',
+            valueText: t('Fonti') + ': ',
+            value: filters?.sourceName,
             mapValue: 'name',
             condition: [],
             filter: 1,
@@ -112,9 +109,9 @@ export const getConfigFilter = (
             showCancel: true,
         },
         {
-            text: t('Canali Selezionati') + ': ',
-            valueText: t('Canali Selezionati') + ': ',
-            value: filters.Filters?.selectedChannel,
+            text: t('Canali') + ': ',
+            valueText: t('Canali') + ': ',
+            value: filters?.selectedChannel,
             mapValue: null,
             condition: [],
             filter: 2,
@@ -124,7 +121,7 @@ export const getConfigFilter = (
         {
             text: '',
             valueText: getTextFromTime(filters, t),
-            value: filters.Filters?.selectedTime,
+            value: filters?.selectedTime,
             mapValue: null,
             condition: null,
             filter: 3,
@@ -132,9 +129,9 @@ export const getConfigFilter = (
             showCancel: false,
         },
         {
-            text: t('Luoghi Selezionati') + ': ',
-            valueText: t('Luoghi Selezionati') + ': ',
-            value: filters.Filters?.selectedLocationDetails,
+            text: t('Luoghi') + ': ',
+            valueText: t('Luoghi') + ': ',
+            value: filters?.selectedLocationDetails,
             mapValue: 'locationName',
             condition: [],
             filter: 4,
@@ -142,9 +139,9 @@ export const getConfigFilter = (
             showCancel: true,
         },
         {
-            text: t('Topic Selezionati') + ': ',
-            valueText: t('Topic Selezionati') + ': ',
-            value: filters.Filters?.selectedTopicsDetails,
+            text: t('Topic') + ': ',
+            valueText: t('Topic') + ': ',
+            value: filters?.selectedTopicsDetails,
             mapValue: 'name',
             condition: [],
             filter: 5,
@@ -152,9 +149,9 @@ export const getConfigFilter = (
             showCancel: true,
         },
         {
-            text: t('Prodotti Selezionati') + ': ',
-            valueText: t('Prodotti Selezionati') + ': ',
-            value: filters.Filters?.selectedProductsDetails,
+            text: t('Prodotti') + ': ',
+            valueText: t('Prodotti') + ': ',
+            value: filters?.selectedProductsDetails,
             mapValue: 'productName',
             condition: [],
             filter: 6,
@@ -162,9 +159,9 @@ export const getConfigFilter = (
             showCancel: true,
         },
         {
-            text: t('Filtri su feedback selezionati') + ': ',
-            valueText: t('Filtri su feedback selezionati') + ': ',
-            value: filters.Filters?.customFilters.filter(
+            text: t('Custom') + ': ',
+            valueText: t('Custom') + ': ',
+            value: filters?.customFilters.filter(
                 (elm: any) => elm._id === null
             ),
             mapValue: 'selectedCustom',
@@ -176,7 +173,7 @@ export const getConfigFilter = (
         {
             text: '',
             valueText: '',
-            value: filters?.Filters?.listingLocationState,
+            value: filters?.listingLocationState,
             mapValue: 'listingLocationState',
             condition: {
                 verified: {
@@ -203,7 +200,7 @@ export const getConfigFilter = (
         {
             text: '',
             valueText: '',
-            value: filters?.Filters?.customFilters.filter(
+            value: filters?.customFilters.filter(
                 (elm: any) => elm.collection !== 'feedback'
             ),
             mapValue: 'selectedCustom',
