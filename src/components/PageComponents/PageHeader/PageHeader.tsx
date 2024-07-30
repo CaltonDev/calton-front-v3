@@ -10,9 +10,12 @@ import SvgWrapper from '../../SvgWrapper/SvgWrapper'
 import moment from 'moment'
 import { getConfigFilter } from '../../../utils/filterHelpers'
 import FiltersSummaryContainer from '../FiltersSummaryContainer/FiltersSummaryContainer'
+import Typography from '../../Typography/Typography'
+import { SettingsState } from '../../../store/settings/settingsSlice'
 
 function PageHeader({
     heading,
+    subheading,
     previousPage,
     setPreviousState,
     arrowBackUrl,
@@ -24,6 +27,9 @@ function PageHeader({
     const { startDate, endDate, labelDate, groupby } =
         useSelector(selectAllFilters)
     const { t } = useTranslation()
+    const platformType = useSelector(
+        (state: SettingsState) => state.Settings.platformType
+    )
 
     useEffect(() => {
         if (
@@ -67,11 +73,19 @@ function PageHeader({
     }
 
     return (
-        <div
-            className="page-title d-flex justify-content-between align-items-center"
-            style={{ marginBottom: '1.875rem' }}
-        >
+        <div style={{ marginBottom: '1.875rem' }}>
             <div className={styles.containerColumn}>
+                {subheading && (
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography
+                            size={'bodySmall'}
+                            weight={'light'}
+                            color={'grey'}
+                        >
+                            {t(platformType) + ' > ' + t(heading)}
+                        </Typography>
+                    </div>
+                )}
                 {heading && (
                     <div
                         style={{ display: 'flex', alignItems: 'center' }}
@@ -101,18 +115,9 @@ function PageHeader({
                                 </span>
                             </div>
                         )}
-                        <b
-                            style={{
-                                color: '#321D48',
-                                fontSize: '22px',
-                                fontWeight: 'bold',
-                                fontFamily:
-                                    'Montserrat, Heebo, sans-serif !important;',
-                                paddingRight: '10px',
-                            }}
-                        >
+                        <Typography size={'h1'} weight={'bold'}>
                             {t(heading)}
-                        </b>
+                        </Typography>
                     </div>
                 )}
                 {!(

@@ -9,7 +9,8 @@ import { SettingsState } from '../../../store/settings/settingsSlice'
 import { FilterType } from '../../../utils/filterHelpers'
 import { FilterSummaryContainerProps } from './FilterSummaryContainer.interface'
 
-function FiltersSummaryContainer(filter: FilterSummaryContainerProps) {
+function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
+    const [filter, setFilter] = useState(filters?.filter)
     const [upperFilters, setUpperFilters] = useState([])
     const [more, setMore] = useState(false)
     const { t } = useTranslation()
@@ -17,6 +18,10 @@ function FiltersSummaryContainer(filter: FilterSummaryContainerProps) {
     const platformType = useSelector(
         (state: SettingsState) => state.Settings.platformType
     )
+
+    useEffect(() => {
+        setFilter(filters?.filter)
+    }, [filters])
     const getActiveFilters = () => {
         if (!filter || !Array.isArray(filter)) {
             return []
@@ -55,10 +60,10 @@ function FiltersSummaryContainer(filter: FilterSummaryContainerProps) {
     useEffect(() => {
         if (getActiveFilters().length > 4) {
             const tmpFilters = JSON.parse(JSON.stringify(filter)).slice(0, 5)
-            //setUpperFilters(tmpFilters)
+            setUpperFilters(tmpFilters)
             setMore(true)
         } else {
-            //setUpperFilters(JSON.parse(JSON.stringify(filter)))
+            setUpperFilters(JSON.parse(JSON.stringify(filter)))
             setMore(false)
         }
     }, [filter])
@@ -114,9 +119,13 @@ function FiltersSummaryContainer(filter: FilterSummaryContainerProps) {
         )
     }*/
 
+    useEffect(() => {
+        console.log('upperFilters: ', upperFilters)
+    }, [upperFilters])
+
     return (
         <>
-            {upperFilters?.map((elm: any) => {
+            {upperFilters.map((elm: any) => {
                 const display = elm.valueText
                 let value
                 if (Array.isArray(elm.condition)) {

@@ -73,7 +73,7 @@ function Home() {
 
     return (
         <PageContainer>
-            <PageHeader heading={'Recensioni'}></PageHeader>
+            <PageHeader heading={t('Home')} subheading={true}></PageHeader>
         </PageContainer>
     )
 }

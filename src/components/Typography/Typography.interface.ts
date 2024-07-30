@@ -20,6 +20,7 @@ export interface TypographyProps {
         | 'competitor'
         | 'listing'
         | 'white'
+        | 'grey'
     italic?: boolean
     underline?: boolean
     uppercase?: boolean
