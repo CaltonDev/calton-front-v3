@@ -1,7 +1,7 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
-interface ErrorToastState {
+export interface ErrorToastState {
     data: any
     currentToast: string[]
 }

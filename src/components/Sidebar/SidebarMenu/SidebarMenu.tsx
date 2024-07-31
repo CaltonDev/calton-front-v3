@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import styles from './SidebarMenu.module.scss'
 import SvgWrapper from '../../SvgWrapper/SvgWrapper'
+import { UserState } from '../../../store/user/userSlice'
+import { SettingsState } from '../../../store/settings/settingsSlice'
 const SidebarMenu = () => {
     const temporary = {
         navLinks: {
@@ -249,8 +251,14 @@ const SidebarMenu = () => {
             ],
         },
     }
-    const routes = temporary?.navLinks //useSelector((state: any) => state?.user?.data?.navLinks)
-    const platformType = 'reviews' //useSelector((state: any) => state?.settings?.platformType)
+    const routes = useSelector(
+        (state: UserState) => state?.user?.data?.navLinks
+    )
+
+    console.log('Routes. ', routes)
+    const platformType = useSelector(
+        (state: SettingsState) => state?.Settings?.platformType
+    )
     const history = useNavigate()
 
     const isActiveRoute = (path: string) => {

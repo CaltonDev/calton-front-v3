@@ -36,8 +36,7 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { combineReducers } from '@reduxjs/toolkit'
 /*
-const store = configureStore({
-    reducer: {
+export interface StoreState {
         user: userSlice,
         Settings: settingsSlice,
         AverageReviewByTime: averageReviewByTimeSlice,
@@ -63,8 +62,8 @@ const store = configureStore({
         Code: codeSlice,
         Menus: menuSlice,
         UploadPhotos: photosSlice,
-    },
-})
+
+}
 */
 const persistConfig = {
     key: 'root',

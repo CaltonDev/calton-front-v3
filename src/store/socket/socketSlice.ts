@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit'
 
-interface SocketState {
+export interface SocketState {
     message: any[]
     consumeLocally: boolean
 }

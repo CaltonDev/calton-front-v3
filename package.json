@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
+    "@hotjar/browser": "^1.0.9",
     "@reduxjs/toolkit": "^2.2.5",
     "@tanstack/react-virtual": "^3.8.3",
     "@testing-library/jest-dom": "^5.14.1",
@@ -17,6 +18,7 @@
     "antd": "^5.19.3",
     "i18next": "^23.11.5",
     "i18next-browser-languagedetector": "^8.0.0",
+    "js-file-download": "^0.4.12",
     "lodash": "^4.17.21",
     "match-sorter": "^6.3.4",
     "moment": "^2.30.1",

@@ -22,6 +22,7 @@ import {
     surveysColor,
 } from '../../constants/constants'
 import { getBackgroundColor } from '../../utils/utils'
+import { UserState } from '../../store/user/userSlice'
 function Sidebar() {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -30,7 +31,6 @@ function Sidebar() {
     const platformType = useSelector(
         (state: SettingsState) => state.Settings.platformType
     )
-
     const handlePlatformTypeChange = (e: any) => {
         const value = e?.value
         dispatch(setCode(getCodeFromPlatformType(value)))
