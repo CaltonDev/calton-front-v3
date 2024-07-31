@@ -46,6 +46,11 @@ import JustEatSvg from './SvgIcons/JustEatSvg'
 import TheForkSvg from './SvgIcons/TheForkSvg'
 import CloseIconSvg from './SvgIcons/CloseIconSvg'
 import ExpandIconSvg from './SvgIcons/ExpandIconSvg'
+import MenuSvg from './SvgIcons/MenuSvg'
+import HoursSvg from './SvgIcons/HoursSvg'
+import PhotosSvg from './SvgIcons/PhotosSvg'
+import PostSvg from './SvgIcons/PostSvg'
+import SondaggiSvg from './SvgIcons/SondaggiSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -244,6 +249,18 @@ const SvgWrapper = ({
                     <CloseIconSvg />
                 ) : keySvg === 'expand.svg' ? (
                     <ExpandIconSvg />
+                ) : keySvg === 'menu.svg' ? (
+                    <MenuSvg />
+                ) : keySvg === 'hours.svg' ? (
+                    <HoursSvg />
+                ) : keySvg === 'photo.svg' ? (
+                    <PhotosSvg />
+                ) : keySvg === 'localPost.svg' ? (
+                    <PostSvg />
+                ) : keySvg === 'performance.svg' ? (
+                    <PerformanceSvg />
+                ) : keySvg === 'sondaggi.svg' ? (
+                    <SondaggiSvg />
                 ) : (
                     <></>
                 )}
