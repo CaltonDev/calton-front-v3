@@ -543,6 +543,14 @@ export default function CustomAutocomplete({
                                                                 className={
                                                                     stylesS.rowIcon
                                                                 }
+                                                                onClick={(
+                                                                    e: any
+                                                                ) => {
+                                                                    handleChangePending(
+                                                                        e,
+                                                                        option
+                                                                    )
+                                                                }}
                                                             >
                                                                 <Checkbox
                                                                     type={
