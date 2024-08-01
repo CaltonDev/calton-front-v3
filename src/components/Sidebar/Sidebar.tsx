@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './Sidebar.module.scss'
 import CaltonSelect from '../Select/Select'
 import { useTranslation } from 'react-i18next'
@@ -9,25 +9,17 @@ import { resetFilters } from '../../store/filters/filtersSlice'
 import ServiceWrapper from '../../helpers/ServiceWrapper'
 import { showToast } from '../../store/toast/errorToastSlice'
 import { selectAllFilters } from '../../store/selectors/selectorsSlice'
-import { useNavigate } from 'react-router-dom'
 import ListingService from '../../services/ListingService'
 import {
     setPlatformType,
     SettingsState,
 } from '../../store/settings/settingsSlice'
-import {
-    competitorsColor,
-    listingsColor,
-    reviewsColor,
-    surveysColor,
-} from '../../constants/constants'
+
 import { getBackgroundColor } from '../../utils/utils'
-import { UserState } from '../../store/user/userSlice'
 function Sidebar() {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
-    const history = useNavigate()
     const platformType = useSelector(
         (state: SettingsState) => state.Settings.platformType
     )

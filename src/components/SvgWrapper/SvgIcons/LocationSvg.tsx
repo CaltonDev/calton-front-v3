@@ -5,6 +5,7 @@ const LocationSvg = ({
     width = 31,
     height = 31,
     fillColor = 'white',
+    svgBackgroundColor,
 }: SvgProps) => {
     return (
         <>
@@ -14,6 +15,11 @@ const LocationSvg = ({
                 viewBox="0 0 31 31"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                style={
+                    svgBackgroundColor
+                        ? { background: svgBackgroundColor, borderRadius: 10 }
+                        : {}
+                }
             >
                 <path
                     d="M15.5 18C17.5711 18 19.25 16.3211 19.25 14.25C19.25 12.1789 17.5711 10.5 15.5 10.5C13.4289 10.5 11.75 12.1789 11.75 14.25C11.75 16.3211 13.4289 18 15.5 18Z"

@@ -5,6 +5,7 @@ const PerformanceSvg = ({
     width = 30,
     height = 30,
     fillColor = 'white',
+    svgBackgroundColor,
 }: SvgProps) => {
     return (
         <>
@@ -14,6 +15,11 @@ const PerformanceSvg = ({
                 viewBox="0 0 31 31"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                style={
+                    svgBackgroundColor
+                        ? { background: svgBackgroundColor, borderRadius: 10 }
+                        : {}
+                }
             >
                 <path
                     d="M13 21.75C17.8325 21.75 21.75 17.8325 21.75 13C21.75 8.16751 17.8325 4.25 13 4.25C8.16751 4.25 4.25 8.16751 4.25 13C4.25 17.8325 8.16751 21.75 13 21.75Z"

@@ -18,6 +18,7 @@ export interface SvgWrapperProps {
     customWidth?: number
     customHeight?: number
     customColor?: string
+    svgBackgroundColor?: string | null
     onClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
@@ -25,4 +26,5 @@ export interface SvgProps {
     width?: number
     height?: number
     fillColor?: string
+    svgBackgroundColor?: string | null
 }

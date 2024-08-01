@@ -5,6 +5,7 @@ const PostSvg = ({
     width = 31,
     height = 31,
     fillColor = 'white',
+    svgBackgroundColor,
 }: SvgProps) => {
     return (
         <>
@@ -14,6 +15,11 @@ const PostSvg = ({
                 viewBox="0 0 31 31"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                style={
+                    svgBackgroundColor
+                        ? { background: svgBackgroundColor, borderRadius: 10 }
+                        : {}
+                }
             >
                 <path
                     d="M23 5.5H8C6.61929 5.5 5.5 6.61929 5.5 8V23C5.5 24.3807 6.61929 25.5 8 25.5H23C24.3807 25.5 25.5 24.3807 25.5 23V8C25.5 6.61929 24.3807 5.5 23 5.5Z"

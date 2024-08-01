@@ -5,12 +5,11 @@ import styles from './SidebarMenu.module.scss'
 import SvgWrapper from '../../SvgWrapper/SvgWrapper'
 import { UserState } from '../../../store/user/userSlice'
 import { SettingsState } from '../../../store/settings/settingsSlice'
+import { getBackgroundColor } from '../../../utils/utils'
 const SidebarMenu = () => {
     const routes = useSelector(
         (state: UserState) => state?.user?.user?.navLinks
     )
-
-    console.log('Routes: ', routes)
 
     const platformType = useSelector(
         (state: SettingsState) => state?.Settings?.platformType
@@ -48,8 +47,15 @@ const SidebarMenu = () => {
                                             <SvgWrapper
                                                 customColor={
                                                     isActiveRoute(path)
-                                                        ? '#3f49fc'
-                                                        : ''
+                                                        ? getBackgroundColor(
+                                                              platformType
+                                                          )
+                                                        : 'white'
+                                                }
+                                                svgBackgroundColor={
+                                                    isActiveRoute(path)
+                                                        ? 'white'
+                                                        : null
                                                 }
                                                 size={'large'}
                                                 customWidth={route?.customSize}

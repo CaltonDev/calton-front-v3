@@ -5,6 +5,7 @@ const GrafoSvg = ({
     width = 30,
     height = 30,
     fillColor = 'white',
+    svgBackgroundColor,
 }: SvgProps) => {
     return (
         <>
@@ -14,6 +15,11 @@ const GrafoSvg = ({
                 viewBox="0 0 31 31"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                style={
+                    svgBackgroundColor
+                        ? { background: svgBackgroundColor, borderRadius: 10 }
+                        : {}
+                }
             >
                 <g clipPath="url(#clip0_245_5223)">
                     <path

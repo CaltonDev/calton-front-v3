@@ -5,6 +5,7 @@ const FontiSvg = ({
     width = 25,
     height = 25,
     fillColor = 'white',
+    svgBackgroundColor,
 }: SvgProps) => {
     return (
         <>
@@ -14,6 +15,11 @@ const FontiSvg = ({
                 viewBox="0 0 25 25"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                style={
+                    svgBackgroundColor
+                        ? { background: svgBackgroundColor, borderRadius: 10 }
+                        : {}
+                }
             >
                 <path
                     d="M18.5 4.5H6.5C4.84315 4.5 3.5 5.84315 3.5 7.5V9.5C3.5 11.1569 4.84315 12.5 6.5 12.5H18.5C20.1569 12.5 21.5 11.1569 21.5 9.5V7.5C21.5 5.84315 20.1569 4.5 18.5 4.5Z"

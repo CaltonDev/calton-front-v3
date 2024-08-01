@@ -62,6 +62,7 @@ const SvgWrapper = ({
         containerSize: 0,
         background: 'white',
     },
+    svgBackgroundColor,
     customWidth,
     customHeight,
     customColor,
@@ -164,31 +165,46 @@ const SvgWrapper = ({
                 ) : keySvg === 'caltonLogoSvg' ? (
                     <CaltonLogoSvg />
                 ) : keySvg === 'home.svg' ? (
-                    <HomeSvg />
+                    <HomeSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'reviews.svg' ? (
-                    <StarSvg />
+                    <StarSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'location.svg' ? (
                     <LocationSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
                     />
                 ) : keySvg === 'products.svg' ? (
                     <ProductSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
                     />
                 ) : keySvg === 'Fonti.svg' ? (
                     <FontiSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
                     />
                 ) : keySvg === 'Grafo.svg' ? (
-                    <GrafoSvg />
+                    <GrafoSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'analisi-avanzata.svg' ? (
-                    <PerformanceSvg />
+                    <PerformanceSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'chatIcon.svg' ? (
                     <ChatIconSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'communicationIcon.svg' ? (
@@ -250,17 +266,35 @@ const SvgWrapper = ({
                 ) : keySvg === 'expand.svg' ? (
                     <ExpandIconSvg />
                 ) : keySvg === 'menu.svg' ? (
-                    <MenuSvg />
+                    <MenuSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'hours.svg' ? (
-                    <HoursSvg />
+                    <HoursSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'photo.svg' ? (
-                    <PhotosSvg />
+                    <PhotosSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'localPost.svg' ? (
-                    <PostSvg />
+                    <PostSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'performance.svg' ? (
-                    <PerformanceSvg />
+                    <PerformanceSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : keySvg === 'sondaggi.svg' ? (
-                    <SondaggiSvg />
+                    <SondaggiSvg
+                        fillColor={iconColor}
+                        svgBackgroundColor={svgBackgroundColor}
+                    />
                 ) : (
                     <></>
                 )}
