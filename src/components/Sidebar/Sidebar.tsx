@@ -47,7 +47,8 @@ function Sidebar() {
             const res = await ListingService.getNumberOfListings()
 
             if (res?.data?.count === 0) {
-                history('./integrations')
+                //todo: solve this error
+                //history('./integrations')
             }
         } catch (error) {
             dispatch(
@@ -56,7 +57,7 @@ function Sidebar() {
                     text: t('Numero di listings non trovato'),
                 })
             )
-            history('./integrations')
+            //history('./integrations')
             console.log(error)
         }
     }
