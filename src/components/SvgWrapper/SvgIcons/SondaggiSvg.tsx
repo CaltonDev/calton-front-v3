@@ -4,7 +4,7 @@ import { SvgProps } from '../SvgWrapper.interface'
 const SondaggiSvg = ({
     width = 31,
     height = 31,
-    fillColor = '#B57DFA',
+    fillColor = 'white',
 }: SvgProps) => {
     return (
         <>
