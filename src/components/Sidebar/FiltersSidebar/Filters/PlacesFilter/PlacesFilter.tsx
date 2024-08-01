@@ -5,9 +5,8 @@ import CustomAutocomplete from '../../../../CustomAutocomplete/CustomAutocomplet
 import { useDispatch, useSelector } from 'react-redux'
 import { SelectableFiltersState } from '../../../../../store/filters/selectableFiltersSlice'
 import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
-import { setStateSelect } from '../../../../../store/filters/filtersSlice'
-import { SettingsState } from '../../../../../store/settings/settingsSlice'
 import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
+import { RootState } from '../../../../../store/store'
 
 function PlacesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const dispatch = useDispatch()
@@ -18,7 +17,7 @@ function PlacesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     )
     const { t, i18n } = useTranslation()
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
 
     const equalsIgnoreOrder = (a: string[], b: string[]) => {

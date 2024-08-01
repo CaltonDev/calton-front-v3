@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './FiltersList.module.scss'
 import Typography from '../../../Typography/Typography'
@@ -6,7 +6,7 @@ import Switch from '../../../Switch/Switch'
 import SvgWrapper from '../../../SvgWrapper/SvgWrapper'
 import { FilterInterface } from '../Filters.interface'
 import { useSelector } from 'react-redux'
-import { SettingsState } from '../../../../store/settings/settingsSlice'
+import { RootState } from '../../../../store/store'
 function FiltersList({
     setSelectedFilter,
     blockSidebar,
@@ -14,7 +14,7 @@ function FiltersList({
 }: any) {
     const { t } = useTranslation()
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
 
     const filtersObj = [

@@ -1,22 +1,14 @@
-import styles from './Home.module.scss'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser } from '../../store/user/userSlice'
-import Typography from '../../components/Typography/Typography'
-import Input from '../../components/Input/Input'
-import Checkbox from '../../components/Checkbox/Checkbox'
-import Switch from '../../components/Switch/Switch'
-import CaltonSelect from '../../components/Select/Select'
-import SvgWrapper from '../../components/SvgWrapper/SvgWrapper'
 import ServiceWrapper from '../../helpers/ServiceWrapper'
 import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 import { SelectedWordsState } from '../../store/home/selectedWordsSlice'
 import { useTranslation } from 'react-i18next'
-import { SettingsState } from '../../store/settings/settingsSlice'
 import Hooks from '../../utils/hooks/Hooks'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
+import { RootState } from '../../store/store'
 
 function Home() {
     const navigate = useNavigate()
@@ -29,7 +21,7 @@ function Home() {
         (state: SelectedWordsState) => state.SelectedWords
     )
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
 
     const { t } = useTranslation()

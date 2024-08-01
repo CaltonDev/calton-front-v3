@@ -3,17 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import styles from './SidebarMenu.module.scss'
 import SvgWrapper from '../../SvgWrapper/SvgWrapper'
-import { SettingsState } from '../../../store/settings/settingsSlice'
 import { getBackgroundColor } from '../../../utils/utils'
 import { RootState } from '../../../store/store'
 
 const SidebarMenu = () => {
-    const routes = useSelector(
-        (state: RootState) => state?.user?.data?.navLinks
-    )
+    const routes = useSelector((state: RootState) => state?.User?.navLinks)
 
     const platformType = useSelector(
-        (state: SettingsState) => state?.Settings?.platformType
+        (state: RootState) => state?.Settings?.platformType
     )
     const history = useNavigate()
 

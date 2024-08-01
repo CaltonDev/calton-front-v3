@@ -392,6 +392,7 @@ function TimeFilter() {
                         preventOpenOnFocus={true}
                         allowSameDay={true}
                         locale={i18n.language}
+                        inline
                     />
                     <DatePickerWrapperStyles />
                 </div>

@@ -1,6 +1,6 @@
 // routes
-import {lazy} from "react";
-import React from 'react';
+import { lazy } from 'react'
+import React from 'react'
 
 // a function to retry loading a chunk to avoid chunk load error for out of date code
 /*
@@ -44,13 +44,16 @@ const InsightsSurvey = lazy(() => lazyRetry(() => import("../pages/InsightsSurve
 const Products = lazy(() => lazyRetry(() => import("../pages/Products/Products"), "Products"));
 */
 
+const Home = lazy(() => import('../pages/Home/Home'))
+
+/*
+
 const AnalisiAvanzata = lazy(() => import("../pages/AnalisiAvanzata/AnalisiAvanzata"));
 //const Competitor = lazy(() => import("../pages/Competitor/Competitor"));
 const CreateSurvey = lazy(() => import("../pages/Surveys/CreateSurvey/CreateSurvey"));
 const EditSurvey = lazy(() => import("../pages/Surveys/EditSurvey/EditSurvey"));
 const Fonti = lazy(() => import("../pages/Fonti/Fonti"));
 const Grafo = lazy(() => import("../pages/Grafo/Grafo"));
-const Home = lazy(() => import("../pages/Home/Home"));
 const Integrations = lazy(() => import("../pages/Integrations/Integration"));
 const Luoghi = lazy(() => import("../pages/Luoghi/Luoghi"));
 const Profile = lazy(() => import("../pages/Profile/Profile"));
@@ -74,140 +77,10 @@ const ListingPhotos = lazy(()=> import("../pages/ListingPhotos/ListingPhotos"))
 const ListingCreatePost = lazy(()=> import("../pages/ListingCreatePost/ListingCreatePost"))
 const ListingCalendarPost = lazy(()=> import("../pages/ListingCalendarPost/ListingCalendarPost"))
 const ListingPosts = lazy(()=> import("../pages/ListingPosts/ListingPosts"))
-const ListingPostInfo = lazy(()=> import("../pages/ListingPostInfo/ListingPostInfo"))
+const ListingPostInfo = lazy(()=> import("../pages/ListingPostInfo/ListingPostInfo"))*/
 export const objRoutes = {
     Dashboards: {
         path: 'home',
-        component: <Home />
-    },
-    Reviews: {
-        path: 'reviews',
-        component: <ReviewsWrapper />
-    },
-    Settings: {
-        path: 'settings',
-        component: <Settings />
-    },
-    Profile: {
-        path: 'profile',
-        component: <Profile />
-    },
-    Locations: {
-        path: 'locations',
-        component: <Luoghi />
-    },
-    Fonti: {
-        path: 'fonti',
-        component: <Fonti />
-    },
-    IntegrationSources: {
-        path: 'fonti/integrations',
-        component: <Integrations />
-    },
-    IntegrationSourcesListing: {
-        path: 'home/integrations',
-        component: <Integrations />
-    },
-    Grafo: {
-        path: 'grafo',
-        component: <Grafo />
-    },
-    SelectableCards: {
-        path: 'chooseLocations',
-        component: <SelectableCards />
-    },
-    AnalisiAvanzata: {
-        path: 'analisiavanzata',
-        component: <AnalisiAvanzata />
-    },
-    Surveys: {
-        path: "surveys",
-        component: <Surveys />
-    },
-    CreateSurvey: {
-        path: "surveys/new",
-        component: <CreateSurvey />
-    },
-    EditSurvey: {
-        path: 'surveys/edit/:id',
-        component: <EditSurvey />
-    },
-    CustomDashboard: {
-        path: 'customdashboard/:id',
-        component: <AnalysisCharts />
-    },
-    AddCompetitorsSource: {
-        path: 'home/AddCompetitorsSource',
-        component: <AddCompetitorsSource />
-    },
-    InsightsSurvey: {
-        path: 'insights/:id',
-        component: <InsightsSurvey />
-    },
-    Products: {
-        path: 'products',
-        component: <Products />
-    },
-    ListingHours: {
-        path: 'hours',
-        component: <ListingHours />
-    },
-    ListingEditHours: {
-        path: 'hours/edit',
-        component: <ListingEditHours />
-    },
-    ListingMenu: {
-        path: 'menu',
-        component: <ListingMenu/>
-    },
-    ListingCreateMenu: {
-        path: 'menu/new',
-        component: <ListingEditMenu/>
-    },
-    ListingEditMenu: {
-        path: 'menu/edit',
-        component: <ListingEditMenu/>
-    },
-    ListingEditInfo: {
-        path: 'home/edit',
-        component: <ListingEditInfo />
-    },
-    ListingPosts: {
-        path: 'localPost',
-        component: <ListingPosts />
-    },
-    ListingCreateNewPost: {
-        path: 'localPost/edit',
-        component: <ListingCreatePost />
-    },
-    ListingCalendarPost: {
-        path: 'localPost/calendar',
-        component: <ListingCalendarPost />
-    },
-    ListingInfoPost: {
-        path: 'localPost/info',
-        component: <ListingPostInfo />
-    },
-    /*
-    ListingEditOthers: {
-        path: 'editOthers',
-        component: <ListingEditOthers/>
-    },*/
-    ListingPhotos: {
-        path: 'photo',
-        component: <ListingPhotos/>
-    },
-    ListingUploadPhotos: {
-        path: 'photo/upload',
-        component: <ListingUploadPhotos />
-    },
-    Performance: {
-        path: 'performance',
-        component: <Performance/>
-    },
-    CreateNewListing: {
-        path: 'chooseLocations/new',
-        component: <ListingEditInfo/>
+        component: Home,
     },
 }
-

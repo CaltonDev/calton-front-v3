@@ -10,18 +10,16 @@ import ServiceWrapper from '../../helpers/ServiceWrapper'
 import { showToast } from '../../store/toast/errorToastSlice'
 import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 import ListingService from '../../services/ListingService'
-import {
-    setPlatformType,
-    SettingsState,
-} from '../../store/settings/settingsSlice'
+import { setPlatformType } from '../../store/settings/settingsSlice'
 
 import { getBackgroundColor } from '../../utils/utils'
+import { RootState } from '../../store/store'
 function Sidebar() {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
     const handlePlatformTypeChange = (e: any) => {
         const value = e?.value

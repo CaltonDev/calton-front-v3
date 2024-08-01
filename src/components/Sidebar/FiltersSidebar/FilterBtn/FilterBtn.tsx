@@ -4,11 +4,11 @@ import styles from './FilterBtn.module.scss'
 import { FilterBtnProps } from './FilterBtn.interface'
 import { getBackgroundColor } from '../../../../utils/utils'
 import { useSelector } from 'react-redux'
-import { SettingsState } from '../../../../store/settings/settingsSlice'
+import { RootState } from '../../../../store/store'
 function FilterBtn({ onClick }: FilterBtnProps) {
     const { t } = useTranslation()
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
 
     return (

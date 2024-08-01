@@ -73,7 +73,7 @@ const persistConfig = {
 
 // Combinazione dei reducers
 const rootReducer = combineReducers({
-    user: userSlice,
+    User: userSlice,
     Settings: settingsSlice,
     AverageReviewByTime: averageReviewByTimeSlice,
     AverageVotoByTime: averageVotoByTimeSlice,

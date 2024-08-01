@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store/store'
-import { Navigate, Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import ErrorSubscriptionModal from '../components/ErrorSubscriptionModal/ErrorSubscriptionModal'
 import Header from '../components/Header/Header'
@@ -13,12 +13,8 @@ import { FiltersState, setStateSelect } from '../store/filters/filtersSlice'
 import { manageLayoutToastWSAndReload } from '../helpers/helpers'
 import AppConfig from '../constants/AppConfig'
 import LoginService from '../services/LoginService'
-import { setUser, UserState } from '../store/user/userSlice'
-import {
-    setShowNumbers,
-    setSidebar,
-    SettingsState,
-} from '../store/settings/settingsSlice'
+import { setUser } from '../store/user/userSlice'
+import { setShowNumbers, setSidebar } from '../store/settings/settingsSlice'
 import { toast } from 'react-toastify'
 import Hotjar from '@hotjar/browser'
 import { v5 as uuidv5 } from 'uuid'
@@ -29,19 +25,26 @@ import { ErrorToastState, showToast } from '../store/toast/errorToastSlice'
 import FileDownload from 'js-file-download'
 
 function Layout() {
-    const user = useSelector((state: RootState) => state.user)
+    const user = useSelector((state: RootState) => state.User)
     const history = useNavigate()
     const [compId, setCompId] = useState(sessionStorage.getItem('unique'))
     const dispatch = useDispatch()
     const showNumbers = useSelector(
-        (state: SettingsState) => state.Settings.showNumbers
+        (state: RootState) => state.Settings.showNumbers
     )
     const { t } = useTranslation()
-    const socketMessage = useSelector((state: SocketState) => state?.message)
+    const socketMessage = useSelector(
+        (state: RootState) => state?.Socket?.message
+    )
     const listingStateFilter = useSelector(
         (state: FiltersState) => state?.listingLocationState
     )
 
+    const location = useLocation()
+    const routes = useSelector((state: RootState) => state?.User?.routes)
+    const platformType = useSelector(
+        (state: RootState) => state.Settings.platformType
+    )
     useEffect(() => {
         dispatch(resetUploadPhotos())
     }, [])
@@ -68,12 +71,12 @@ function Layout() {
     })
 
     const checkSub = async () => {
-        if (user?.data) {
+        if (user) {
             try {
                 const response = await LoginService.checkSub()
                 if (!sessionStorage.getItem('unique')) {
                     const currId = uuidv5(
-                        user?.data?.user?.token + new Date().toString(),
+                        user?.user?.token + new Date().toString(),
                         AppConfig.namespace
                     )
                     // console.log('curr: ', currId);
@@ -99,6 +102,49 @@ function Layout() {
         }
         dispatch(setSidebar(false))
     }, [])
+
+    useEffect(() => {
+        if (routes) {
+            /* TODO POSSIBLE NEW LOGIC BUT ALIGN BACK FIRST
+             *
+             *  const locationArray = location.pathname.split("/")
+             *  const actualLocation = locationArray[1];
+             *  const found = routes[platformType]?.some(
+             *    (el) => {
+             *      return (el.path === actualLocation && el.path.split("/")?.length === locationArray?.length - 1) || actualLocation === 'buyNow'
+             *    }
+             *   );
+             */
+            const actualLocation = location.pathname.split('/')[1]
+            const found = routes[platformType]?.some(
+                (el: any) =>
+                    el.path === actualLocation ||
+                    el.path.split('/')[0] === actualLocation ||
+                    actualLocation === 'buyNow'
+            )
+
+            const foundHome = routes[platformType]?.some(
+                (el: any) =>
+                    el.path === 'home' || el.path.split('/')[0] === 'home'
+            )
+
+            if (!found && !foundHome) {
+                history('../buyNow')
+            } else if (!found && foundHome) {
+                history('../home')
+            } else if (found && actualLocation === 'buyNow') {
+                if (foundHome) {
+                    history('../home')
+                }
+            }
+        }
+    }, [platformType, location.pathname, routes])
+
+    if (!user?.user && location.pathname !== '/signup') {
+        return <Navigate to={'/login'} />
+    } else if (location.pathname === '/') {
+        return <Navigate to={'/home'} />
+    }
 
     //todo: find errors
     /*useEffect(() => {

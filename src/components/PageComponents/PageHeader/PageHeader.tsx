@@ -11,7 +11,7 @@ import moment from 'moment'
 import { getConfigFilter } from '../../../utils/filterHelpers'
 import FiltersSummaryContainer from '../FiltersSummaryContainer/FiltersSummaryContainer'
 import Typography from '../../Typography/Typography'
-import { SettingsState } from '../../../store/settings/settingsSlice'
+import { RootState } from '../../../store/store'
 
 function PageHeader({
     heading,
@@ -28,7 +28,7 @@ function PageHeader({
         useSelector(selectAllFilters)
     const { t } = useTranslation()
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
 
     useEffect(() => {

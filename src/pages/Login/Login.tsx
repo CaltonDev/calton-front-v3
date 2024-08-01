@@ -139,7 +139,7 @@ function Login() {
                 if (response.user.isFirstAccess) {
                     history('/integrazioniOnboarding')
                 } else {
-                    history('/')
+                    history('/home')
                 }
             }
         } catch (e: any) {

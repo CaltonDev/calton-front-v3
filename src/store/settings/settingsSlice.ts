@@ -1,23 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface SettingsState {
-    Settings: {
-        platformType: string
-        isSidebarOpen: boolean
-        filters: any[]
-        selectedFilter: any
-        showNumbers: boolean
-    }
+    platformType: string
+    isSidebarOpen: boolean
+    filters: any[]
+    selectedFilter: any
+    showNumbers: boolean
 }
 
 const initialState: SettingsState = {
-    Settings: {
-        platformType: 'reviews',
-        isSidebarOpen: false,
-        filters: [],
-        selectedFilter: null,
-        showNumbers: false,
-    },
+    platformType: 'reviews',
+    isSidebarOpen: false,
+    filters: [],
+    selectedFilter: null,
+    showNumbers: false,
 }
 export const settingsSlice = createSlice({
     name: 'settings',

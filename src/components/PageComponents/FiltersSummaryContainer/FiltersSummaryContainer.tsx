@@ -2,12 +2,11 @@ import styles from './FiltersSummaryContainer.module.scss'
 import FiltersButton from './FiltersButton/FiltersButton'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { resetFilters } from '../../../store/filters/filtersSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { displayVariations } from '../../../helpers/helpers'
-import { SettingsState } from '../../../store/settings/settingsSlice'
 import { FilterType } from '../../../utils/filterHelpers'
 import { FilterSummaryContainerProps } from './FilterSummaryContainer.interface'
+import { RootState } from '../../../store/store'
 
 function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
     const [filter, setFilter] = useState(filters?.filter)
@@ -17,7 +16,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
 
     useEffect(() => {

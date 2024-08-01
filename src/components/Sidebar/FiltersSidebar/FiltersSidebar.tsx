@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FilterBtn from './FilterBtn/FilterBtn'
 import FiltersList from './FiltersList/FiltersList'
 import Filter from './Filter/Filter'
@@ -8,8 +8,7 @@ import Hooks from '../../../utils/hooks/Hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import CustomFilterService from '../../../services/CustomFilterService'
 import { setCustomFilterSelectable } from '../../../store/filters/filtersSlice'
-import { selectAllFilters } from '../../../store/selectors/selectorsSlice'
-import { SettingsState } from '../../../store/settings/settingsSlice'
+import { RootState } from '../../../store/store'
 
 function FiltersSidebar() {
     const [showFilterList, setShowFilterList] = useState(false)
@@ -22,7 +21,7 @@ function FiltersSidebar() {
     })
     const dispatch = useDispatch()
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
     const commonFilters = [
         {

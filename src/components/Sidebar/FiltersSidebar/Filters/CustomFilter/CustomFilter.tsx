@@ -10,7 +10,7 @@ import { setStateSelect } from '../../../../../store/filters/filtersSlice'
 import Input from '../../../../Input/Input'
 import Button from '../../../../Button/Button'
 import { CustomFilterProps } from './CustomFilter.interface'
-import { SettingsState } from '../../../../../store/settings/settingsSlice'
+import { RootState } from '../../../../../store/store'
 
 function CustomFilter({ openCustomFilter }: CustomFilterProps) {
     const { t } = useTranslation()
@@ -18,7 +18,7 @@ function CustomFilter({ openCustomFilter }: CustomFilterProps) {
     const { customFilters, customFiltersSelectable } =
         useSelector(selectAllFilters)
     const platformType = useSelector(
-        (state: SettingsState) => state.Settings.platformType
+        (state: RootState) => state.Settings.platformType
     )
     return (
         <div className={styles.container}>
