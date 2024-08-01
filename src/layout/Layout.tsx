@@ -29,7 +29,7 @@ import { ErrorToastState, showToast } from '../store/toast/errorToastSlice'
 import FileDownload from 'js-file-download'
 
 function Layout() {
-    const user = useSelector((state: UserState) => state.user)
+    const user = useSelector((state: RootState) => state.user)
     const history = useNavigate()
     const [compId, setCompId] = useState(sessionStorage.getItem('unique'))
     const dispatch = useDispatch()
@@ -68,12 +68,12 @@ function Layout() {
     })
 
     const checkSub = async () => {
-        if (user?.user) {
+        if (user?.data) {
             try {
                 const response = await LoginService.checkSub()
                 if (!sessionStorage.getItem('unique')) {
                     const currId = uuidv5(
-                        user?.user?.user?.token + new Date().toString(),
+                        user?.data?.user?.token + new Date().toString(),
                         AppConfig.namespace
                     )
                     // console.log('curr: ', currId);

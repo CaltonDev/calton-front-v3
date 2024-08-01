@@ -12,26 +12,22 @@ interface User {
 }
 
 export interface UserData {
-    user: {
-        user: User | null
-        navLinks?: NavLink
-        routes?: any[]
-        trustpilotReply?: boolean
-    }
+    user: User | null
+    navLinks?: NavLink
+    routes?: any[]
+    trustpilotReply?: boolean
 }
 
 export interface UserState {
-    user: UserData
+    data: UserData
 }
 
 const initialState: UserState = {
-    user: {
-        user: {
-            user: {},
-            navLinks: {},
-            routes: [],
-            trustpilotReply: false,
-        },
+    data: {
+        user: null,
+        navLinks: {},
+        routes: [],
+        trustpilotReply: false,
     },
 }
 
@@ -41,7 +37,7 @@ export const userSlice = createSlice({
     reducers: {
         setUser: (state, action: PayloadAction<UserData | null>) => {
             if (action.payload) {
-                state.user = action.payload
+                state.data = action.payload
             }
         },
     },
