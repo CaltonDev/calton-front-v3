@@ -170,6 +170,7 @@ function OtherFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
                     onChange={ratingChanged}
                     size={24}
                     color2={'#ffd700'}
+                    color1={'#E9E7EC'}
                     half={false}
                 />
             </div>

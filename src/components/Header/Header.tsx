@@ -56,11 +56,11 @@ function Header() {
                     <SvgWrapper
                         keySvg={'caltonLogoSvg'}
                         color={'primaryIcon'}
-                        customWidth={31}
-                        customHeight={41}
+                        customWidth={35}
+                        customHeight={35}
                         hasContainerProps={{
                             hasContainer: true,
-                            containerSize: 50,
+                            containerSize: 45,
                         }}
                     />
                     <Sidebar />
@@ -82,7 +82,7 @@ function Header() {
                             size={'xlarge'}
                             hasContainerProps={{
                                 hasContainer: true,
-                                containerSize: 50,
+                                containerSize: 45,
                             }}
                         />
                         <SvgWrapper
@@ -91,7 +91,7 @@ function Header() {
                             size={'xlarge'}
                             hasContainerProps={{
                                 hasContainer: true,
-                                containerSize: 50,
+                                containerSize: 45,
                             }}
                         />
                     </div>

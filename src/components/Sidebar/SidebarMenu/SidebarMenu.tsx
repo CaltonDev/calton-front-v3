@@ -57,7 +57,7 @@ const SidebarMenu = () => {
                                                         ? 'white'
                                                         : null
                                                 }
-                                                size={'large'}
+                                                size={'xlarge'}
                                                 customWidth={route?.customSize}
                                                 customHeight={route?.customSize}
                                                 keySvg={route?.menu_icon}

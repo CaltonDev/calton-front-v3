@@ -1,12 +1,16 @@
 import React from 'react'
 import { SvgProps } from '../SvgWrapper.interface'
 
-const CaltonLogoSvg = ({}: SvgProps) => {
+const CaltonLogoSvg = ({
+    width = 30,
+    height = 30,
+    fillColor = '#321D48',
+}: SvgProps) => {
     return (
         <>
             <svg
-                width="31"
-                height="41"
+                width={width}
+                height={height}
                 viewBox="0 0 31 41"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

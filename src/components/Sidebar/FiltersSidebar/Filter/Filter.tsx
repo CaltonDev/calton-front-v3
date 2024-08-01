@@ -47,7 +47,7 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
                     <SvgWrapper
                         keySvg={filter ? filter?.svg : ''}
                         size={'large'}
-                        color={'white'}
+                        customColor={'white'}
                     />
                     <Typography size={'h6'} weight={'bold'} color={'white'}>
                         {filter ? filter?.label : ''}
@@ -108,7 +108,7 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
             {/*todo: we should call the submit from the custom autocomplete*/}
             <div className={styles.footerContainer}>
                 <Button
-                    size={'medium'}
+                    size={'small'}
                     disabled={false}
                     onClick={handleApplyBtnClick}
                 >

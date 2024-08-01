@@ -76,7 +76,7 @@ function PageHeader({
         <div style={{ marginBottom: '1.875rem' }}>
             <div className={styles.containerColumn}>
                 {subheading && (
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.containerBreadcrumb}>
                         <Typography
                             size={'bodySmall'}
                             weight={'light'}

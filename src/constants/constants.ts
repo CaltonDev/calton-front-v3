@@ -3,7 +3,7 @@ export const iconSmallSize = 16
 export const iconMediumSize = 20
 export const iconLargeSize = 24
 
-export const iconXLargeSize = 30
+export const iconXLargeSize = 25
 
 export const primaryColor = '#FFFFFF'
 export const secondaryColor = '#3F49FC'

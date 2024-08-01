@@ -12,6 +12,7 @@
   -moz-user-select: map-deep-get($checkbox, container, -moz-user-select);
   -ms-user-select: map-deep-get($checkbox, container, -ms-user-select);
   user-select: map-deep-get($checkbox, container, user-select);
+  margin-bottom: 0px;
 }
 
 .containerWithDropdown {

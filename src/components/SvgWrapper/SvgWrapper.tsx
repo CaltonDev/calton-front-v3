@@ -166,11 +166,15 @@ const SvgWrapper = ({
                     <CaltonLogoSvg />
                 ) : keySvg === 'home.svg' ? (
                     <HomeSvg
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                         svgBackgroundColor={svgBackgroundColor}
                     />
                 ) : keySvg === 'reviews.svg' ? (
                     <StarSvg
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                         svgBackgroundColor={svgBackgroundColor}
                     />
@@ -197,11 +201,15 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'Grafo.svg' ? (
                     <GrafoSvg
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                         svgBackgroundColor={svgBackgroundColor}
                     />
                 ) : keySvg === 'analisi-avanzata.svg' ? (
                     <PerformanceSvg
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                         svgBackgroundColor={svgBackgroundColor}
                     />

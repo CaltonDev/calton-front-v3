@@ -93,14 +93,14 @@ function FiltersList({
                     <div key={filter?.key} className={styles.iconContainer}>
                         <SvgWrapper
                             keySvg={filter?.svg}
-                            size={'large'}
+                            size={'medium'}
                             color={'primaryIcon'}
                             onClick={() => handleFiltersClick(filter)}
                         />
                         <Typography
                             size={'bodyXSmall'}
                             weight={'normal'}
-                            color={'tertiary'}
+                            color={'grey'}
                         >
                             {filter?.label}
                         </Typography>

@@ -2,25 +2,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 75px;
+  width: 70px;
   position: fixed;
-  height: 70%;
+  height: 75%;
   flex-shrink: 0;
   border-radius: 10px;
   background: #FFF;
-
-  top: 20%;
+  gap: 14px;
+  top: 15%;
   left: 21px;
 }
 
 .titleContainer {
   display: flex;
   height: 41px;
-  padding: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   flex-shrink: 0;
 
   border-radius: 10px 10px 0px 0px;
