@@ -1,23 +1,16 @@
 .container {
   display: flex;
-  width: 204px;
-  height: 230px;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  flex-shrink: 0;
 }
 
 .contentDiv {
   width: 203px;
-  height: 109px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 22px;
-  margin-top: 65%;
 }
 
 .typographyDiv {

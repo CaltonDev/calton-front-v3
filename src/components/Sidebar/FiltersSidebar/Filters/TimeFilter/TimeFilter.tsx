@@ -88,10 +88,10 @@ const DatePickerWrapperStyles = createGlobalStyle`
     padding: 10px;
     height: 43rem;*/
   }    
-  .my-little-popper .react-datepicker .react-datepicker__navigation--next{
+  .react-datepicker__navigation--next{
       margin-top: 10px;
   }    
-  .my-little-popper .react-datepicker .react-datepicker__navigation--previous{
+  .react-datepicker__navigation--previous{
     right: 20px;
     left: auto;
     margin-top: 10px;
