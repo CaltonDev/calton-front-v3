@@ -137,7 +137,6 @@ function Login() {
                 changeLanguage(userLanguage)
                 dispatch(setUser(response))
                 if (response.user.isFirstAccess) {
-                    console.log('nbbb')
                     history('/integrazioniOnboarding')
                 } else {
                     history('/')
