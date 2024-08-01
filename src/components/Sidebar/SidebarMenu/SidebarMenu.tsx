@@ -251,9 +251,7 @@ const SidebarMenu = () => {
             ],
         },
     }
-    const routes = useSelector(
-        (state: UserState) => state?.user?.data?.navLinks
-    )
+    const routes = useSelector((state: UserState) => state?.user?.navLinks)
 
     const platformType = useSelector(
         (state: SettingsState) => state?.Settings?.platformType

@@ -29,7 +29,7 @@ import { ErrorToastState, showToast } from '../store/toast/errorToastSlice'
 import FileDownload from 'js-file-download'
 
 function Layout() {
-    const user = useSelector((state: UserState) => state.user?.data)
+    const user = useSelector((state: UserState) => state.user)
     const history = useNavigate()
     const [compId, setCompId] = useState(sessionStorage.getItem('unique'))
     const dispatch = useDispatch()

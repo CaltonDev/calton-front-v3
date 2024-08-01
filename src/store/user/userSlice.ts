@@ -19,19 +19,15 @@ export interface UserData {
 }
 
 export interface UserState {
-    user: {
-        data: UserData | null
-    }
+    user: UserData
 }
 
 const initialState: UserState = {
     user: {
-        data: {
-            user: null,
-            navLinks: {},
-            routes: [],
-            trustpilotReply: false,
-        },
+        user: null,
+        navLinks: {},
+        routes: [],
+        trustpilotReply: false,
     },
 }
 
@@ -41,7 +37,7 @@ export const userSlice = createSlice({
     reducers: {
         setUser: (state, action: PayloadAction<UserData | null>) => {
             if (action.payload) {
-                state.user.data = action.payload
+                state.user = action.payload
             }
         },
     },

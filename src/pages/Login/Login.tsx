@@ -135,16 +135,16 @@ function Login() {
                 sessionStorage.setItem('unique', id)
                 const userLanguage = response?.user?.lang
                 changeLanguage(userLanguage)
-
                 dispatch(setUser(response))
                 if (response.user.isFirstAccess) {
+                    console.log('nbbb')
                     history('/integrazioniOnboarding')
                 } else {
                     history('/')
                 }
             }
         } catch (e: any) {
-            console.log(e.response)
+            console.log(e)
         }
         setIsLoading(false)
     }
