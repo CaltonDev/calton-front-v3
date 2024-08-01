@@ -73,7 +73,7 @@ function Layout() {
                 const response = await LoginService.checkSub()
                 if (!sessionStorage.getItem('unique')) {
                     const currId = uuidv5(
-                        user?.user?.token + new Date().toString(),
+                        user?.user?.user?.token + new Date().toString(),
                         AppConfig.namespace
                     )
                     // console.log('curr: ', currId);

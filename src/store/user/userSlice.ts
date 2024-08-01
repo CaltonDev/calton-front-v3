@@ -12,10 +12,12 @@ interface User {
 }
 
 export interface UserData {
-    user: User | null
-    navLinks?: NavLink
-    routes?: any[]
-    trustpilotReply?: boolean
+    user: {
+        user: User | null
+        navLinks?: NavLink
+        routes?: any[]
+        trustpilotReply?: boolean
+    }
 }
 
 export interface UserState {
@@ -24,10 +26,12 @@ export interface UserState {
 
 const initialState: UserState = {
     user: {
-        user: null,
-        navLinks: {},
-        routes: [],
-        trustpilotReply: false,
+        user: {
+            user: {},
+            navLinks: {},
+            routes: [],
+            trustpilotReply: false,
+        },
     },
 }
 
