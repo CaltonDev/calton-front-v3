@@ -12,7 +12,10 @@ import Button from '../../../../Button/Button'
 import { CustomFilterProps } from './CustomFilter.interface'
 import { RootState } from '../../../../../store/store'
 
-function CustomFilter({ openCustomFilter }: CustomFilterProps) {
+function CustomFilter({
+    openCustomFilter,
+    setSelectedCustomFilter,
+}: CustomFilterProps) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const { customFilters, customFiltersSelectable } =
@@ -20,6 +23,11 @@ function CustomFilter({ openCustomFilter }: CustomFilterProps) {
     const platformType = useSelector(
         (state: RootState) => state.Settings.platformType
     )
+
+    const handleCustomFilterSelection = (filter: any) => {
+        openCustomFilter(filter?._id)
+        setSelectedCustomFilter(filter?.name)
+    }
     return (
         <div className={styles.container}>
             {customFiltersSelectable?.map((filter: any) => {
@@ -28,7 +36,7 @@ function CustomFilter({ openCustomFilter }: CustomFilterProps) {
                         key={filter?.name}
                         size={'small'}
                         fullWidth={true}
-                        onClick={() => openCustomFilter(filter?._id)}
+                        onClick={() => handleCustomFilterSelection(filter)}
                         color={
                             platformType === 'reviews'
                                 ? 'reviews'

@@ -24,6 +24,7 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
     const { t } = useTranslation()
     const [checked, setChecked] = useState(false)
     const [openCustomFilter, setOpenCustomFilter] = useState('')
+    const [selectedCustomFilter, setSelectedCustomFilter] = useState('')
     const [preparedPayload, setPreparedPayload] = useState<{
         type: string | undefined
         value: any
@@ -40,6 +41,9 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
         } else handleCloseOpenFilter()
     }
 
+    useEffect(() => {
+        setOpenCustomFilter('')
+    }, [filter?.key])
     return (
         <div className={styles.container}>
             <div className={styles.titleContainer}>
@@ -50,8 +54,23 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
                         customColor={'white'}
                     />
                     <Typography size={'h6'} weight={'bold'} color={'white'}>
-                        {filter ? filter?.label : ''}
+                        {selectedCustomFilter !== ''
+                            ? filter?.label + ' > '
+                            : filter
+                              ? filter?.label
+                              : ''}
                     </Typography>
+                    {selectedCustomFilter && (
+                        <Typography
+                            size={'h6'}
+                            weight={'light'}
+                            color={'white'}
+                        >
+                            {selectedCustomFilter !== ''
+                                ? selectedCustomFilter
+                                : ''}
+                        </Typography>
+                    )}
                 </div>
             </div>
             <div className={styles.filterContainer}>
@@ -78,7 +97,10 @@ function Filter({ filter, handleCloseOpenFilter }: FilterProps) {
                     <OtherFilter setPreparedPayload={setPreparedPayload} />
                 ) : (
                     filter?.key === 'customFilters' && (
-                        <CustomFilter openCustomFilter={setOpenCustomFilter} />
+                        <CustomFilter
+                            openCustomFilter={setOpenCustomFilter}
+                            setSelectedCustomFilter={setSelectedCustomFilter}
+                        />
                     )
                 )}
                 {/*
