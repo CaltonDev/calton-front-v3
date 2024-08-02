@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Checkbox from '../../../../Checkbox/Checkbox'
 import styles from './OtherFilter.module.scss'
 import { useTranslation } from 'react-i18next'
@@ -18,14 +18,17 @@ function OtherFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const { customFilters } = useSelector(selectAllFilters)
-
-    const saveFiltersToRedux = (data: string | number, type: string) => {
+    const [starsList, setStarsList] = useState<number[]>([])
+    const saveFiltersToRedux = (
+        data: string | number | number[],
+        type: string
+    ) => {
         const payload = {
             _id: null,
             collection: 'feedback',
             EP_config: null,
             attribute: type,
-            selectedCustom: [data],
+            selectedCustom: Array.isArray(data) ? data : [data],
         }
         const foundFilters = customFilters?.filter(
             (elm: any) => elm.attribute === type
@@ -68,8 +71,18 @@ function OtherFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
         }
     }
 
-    const ratingChanged = (newRating: number) => {
-        saveFiltersToRedux(newRating, 'voto')
+    const ratingChanged = (index: number) => {
+        const tmpList = JSON.parse(JSON.stringify(starsList))
+        const removeIdx = starsList.indexOf(index)
+
+        if (removeIdx !== -1) {
+            tmpList.splice(removeIdx, 1)
+        } else {
+            tmpList.push(index)
+        }
+        setStarsList(tmpList)
+
+        saveFiltersToRedux(starsList, 'voto')
     }
 
     return (
@@ -165,14 +178,20 @@ function OtherFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
                 <Typography size={'bodySmall'} weight={'normal'}>
                     {t('Voto')}
                 </Typography>
-                <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    color2={'#ffd700'}
-                    color1={'#E9E7EC'}
-                    half={false}
-                />
+                <div className={styles.starsContainer}>
+                    {Array.from({ length: 5 }).map((_, index: number) => (
+                        <ReactStars
+                            value={starsList?.includes(index) ? 1 : 0}
+                            key={'stars_' + (index + 1)}
+                            count={1}
+                            onChange={() => ratingChanged(index + 1)}
+                            size={24}
+                            color2={'#ffd700'}
+                            color1={'#E9E7EC'}
+                            half={false}
+                        />
+                    ))}
+                </div>
             </div>
             <div className={styles.contentDiv}>
                 <Typography size={'bodySmall'} weight={'normal'}>
