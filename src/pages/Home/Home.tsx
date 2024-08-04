@@ -9,7 +9,10 @@ import Hooks from '../../utils/hooks/Hooks'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import { RootState } from '../../store/store'
-
+import DonutCard from '../../components/DonutCard/DonutCard'
+import TrackerCard from '../../components/TrackerCard/TrackerCard'
+import TierListCard from '../../components/TierListCard/TierListCard'
+import styles from './Home.module.scss'
 function Home() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -63,9 +66,39 @@ function Home() {
         }
     }
 
+    const tierList = [
+        {
+            label: 'The Fork',
+            icon: 'TheFork.svg',
+        },
+        {
+            label: 'Facebook',
+            icon: 'Facebook.svg',
+        },
+        {
+            label: 'Tripadvisor',
+            icon: 'TripadvisorAPI.svg',
+        },
+    ]
     return (
         <PageContainer>
             <PageHeader heading={t('Home')} subheading={true}></PageHeader>
+            <div className={styles.container}>
+                <div className={styles.itemContainer}>
+                    <DonutCard
+                        numberOfReviews={24547}
+                        positive={45}
+                        neutral={15}
+                        negative={40}
+                    />
+                </div>
+                <div className={styles.itemContainer}>
+                    <TrackerCard numberOfReply={5463} totalReply={15000} />
+                </div>
+                <div className={styles.itemContainer}>
+                    <TierListCard tierList={tierList} />
+                </div>
+            </div>
         </PageContainer>
     )
 }

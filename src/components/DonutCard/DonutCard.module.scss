@@ -1,0 +1,29 @@
+.container {
+  border-radius: 10px;
+  background: #FFF;
+  height: 100%;
+  padding: 24px 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.dognutContainer {
+  width: 120px;
+  height: 120px;
+}
+
+.rightItemContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.tagContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

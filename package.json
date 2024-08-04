@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
+    "@ant-design/plots": "^2.2.6",
     "@hotjar/browser": "^1.0.9",
     "@reduxjs/toolkit": "^2.2.5",
     "@tanstack/react-virtual": "^3.8.3",

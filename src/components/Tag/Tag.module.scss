@@ -1,0 +1,19 @@
+.container {
+  display: inline-flex;
+  padding: 5px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 5px;
+
+  &.positive {
+    background: var(--Sentiment-positivo-300, #C7F6E5);
+  }
+  &.neutral {
+    background: var(--Sentiment-medio-300, #FEEEBB);
+  }
+  &.negative {
+    background: var(--Sentiment-negativo-300, #FFD3DF);
+  }
+}

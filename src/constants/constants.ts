@@ -17,3 +17,9 @@ export const surveysColor = '#B57DFA'
 export const competitorsColor = '#FFAFF2'
 
 export const listingsColor = '#63D2FF'
+
+export const positiveColor = '#1DBD82'
+
+export const neutralColor = '#F59E0B'
+
+export const negativeColor = '#FF1654'

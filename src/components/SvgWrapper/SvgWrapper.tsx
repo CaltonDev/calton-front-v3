@@ -254,21 +254,21 @@ const SvgWrapper = ({
                         fillColor={iconColor}
                     />
                 ) : keySvg === 'Amazon.svg' ? (
-                    <AmazonSvg />
+                    <AmazonSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'Facebook.svg' ? (
-                    <FacebookSvg />
+                    <FacebookSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'GoogleMyBusiness.svg' ? (
                     <GoogleMyBusinessSvg />
                 ) : keySvg === 'Trustpilot.svg' ? (
-                    <TrustpilotSvg />
+                    <TrustpilotSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'Trusted shops.svg' ? (
-                    <TrustedShopsSvg />
+                    <TrustedShopsSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'TripadvisorAPI.svg' ? (
-                    <TripAdvisorSvg />
+                    <TripAdvisorSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'JustEat.svg' ? (
-                    <JustEatSvg />
+                    <JustEatSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'TheFork.svg' ? (
-                    <TheForkSvg />
+                    <TheForkSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'close.svg' ? (
                     <CloseIconSvg />
                 ) : keySvg === 'expand.svg' ? (

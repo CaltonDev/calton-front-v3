@@ -25,5 +25,6 @@ export interface TypographyProps {
     italic?: boolean
     underline?: boolean
     uppercase?: boolean
+    customTextColor?: string
     children: string
 }

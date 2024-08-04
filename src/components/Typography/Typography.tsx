@@ -10,6 +10,7 @@ const Typography = ({
     underline,
     uppercase,
     children,
+    customTextColor,
 }: TypographyProps) => {
     let className = styles[`${size}-${weight}-${color}`]
 
@@ -28,7 +29,11 @@ const Typography = ({
 
     const HeadingTag = headingMap[size as keyof typeof headingMap] || 'p'
 
-    return createElement(HeadingTag, { className }, children)
+    return createElement(
+        HeadingTag,
+        { style: { color: customTextColor ? customTextColor : '' }, className },
+        children
+    )
 }
 
 export default Typography
