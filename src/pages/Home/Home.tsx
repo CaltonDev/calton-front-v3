@@ -13,6 +13,7 @@ import DonutCard from '../../components/DonutCard/DonutCard'
 import TrackerCard from '../../components/TrackerCard/TrackerCard'
 import TierListCard from '../../components/TierListCard/TierListCard'
 import styles from './Home.module.scss'
+import ReviewCard from '../../components/Cards/ReviewCard/ReviewCard'
 function Home() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -84,19 +85,26 @@ function Home() {
         <PageContainer>
             <PageHeader heading={t('Home')} subheading={true}></PageHeader>
             <div className={styles.container}>
-                <div className={styles.itemContainer}>
-                    <DonutCard
-                        numberOfReviews={24547}
-                        positive={45}
-                        neutral={15}
-                        negative={40}
-                    />
+                <div className={styles.headerContainer}>
+                    <div className={styles.itemContainer}>
+                        <DonutCard
+                            numberOfReviews={24547}
+                            positive={45}
+                            neutral={15}
+                            negative={40}
+                        />
+                    </div>
+                    <div className={styles.itemContainer}>
+                        <TrackerCard numberOfReply={5463} totalReply={15000} />
+                    </div>
+                    <div className={styles.itemContainer}>
+                        <TierListCard tierList={tierList} />
+                    </div>
                 </div>
-                <div className={styles.itemContainer}>
-                    <TrackerCard numberOfReply={5463} totalReply={15000} />
-                </div>
-                <div className={styles.itemContainer}>
-                    <TierListCard tierList={tierList} />
+                <div className={styles.reviewsContainer}>
+                    <ReviewCard />
+
+                    <ReviewCard />
                 </div>
             </div>
         </PageContainer>

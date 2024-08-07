@@ -26,14 +26,19 @@
   width: map-get($input, width);
 
   &.smallContainer {
-    width: map-deep-get($input, size, small, width);
+    width: map-deep-get($select, size, small, width);
   }
 
   &.mediumContainer {
-    width: map-deep-get($input, size, medium, width);
+    width: map-deep-get($select, size, medium, width);
   }
 
   &.largeContainer {
+  }
+
+  &.outlined {
+    background: map-deep-get($select, outlined, background);
+    border-color: map-deep-get($select, outlined, border-color);
   }
 }
 
@@ -66,20 +71,26 @@
   &.large {
   }
 
+  &.fontSizeXSmall{
+    font-size: map-deep-get($input, fontSize, xsmall, font-size) !important;
+    line-height: map-deep-get($input, fontSize, xsmall, line-height);
+    height: map-deep-get($input, fontSize, xsmall, height);
+  }
+
   &.fontSizeSmall{
-    font-size: map-deep-get($input, fontSize, small, font-size);
+    font-size: map-deep-get($input, fontSize, small, font-size) !important;
     line-height: map-deep-get($input, fontSize, small, line-height);
     height: map-deep-get($input, fontSize, small, height);
   }
 
   &.fontSizeMedium {
-    font-size: map-deep-get($input, fontSize, medium, font-size);
+    font-size: map-deep-get($input, fontSize, medium, font-size) !important;
     line-height: map-deep-get($input, fontSize, medium, line-height);
     height: map-deep-get($input, fontSize, medium, height);
   }
 
   &.fontSizeLarge {
-    font-size: map-deep-get($input, fontSize, large, font-size);
+    font-size: map-deep-get($input, fontSize, large, font-size) !important;
     line-height: map-deep-get($input, fontSize, large, line-height);
     height: map-deep-get($input, fontSize, large, height);
   }
@@ -154,7 +165,7 @@
   text-decoration: none!important;
   font-family: "Roboto" !important;
   font-weight: 400!important;
-  font-size: 1rem!important;
+  font-size: 1rem !important;
   line-height: 1.5!important;
   letter-spacing: 0.00938em!important;
   display: -webkit-box!important;
@@ -178,4 +189,41 @@
   white-space: nowrap!important;
   padding-left: 16px!important;
   padding-right: 16px!important;
+
+  &.fontSizeXSmall{
+    font-size: map-deep-get($input, fontSize, xsmall, font-size) !important;
+    line-height: map-deep-get($input, fontSize, xsmall, line-height);
+    height: map-deep-get($input, fontSize, xsmall, height);
+  }
+
+  &.fontSizeSmall{
+    font-size: map-deep-get($input, fontSize, small, font-size) !important;
+    line-height: map-deep-get($input, fontSize, small, line-height);
+    height: map-deep-get($input, fontSize, small, height);
+  }
+
+  &.fontSizeMedium {
+    font-size: map-deep-get($input, fontSize, medium, font-size) !important;
+    line-height: map-deep-get($input, fontSize, medium, line-height);
+    height: map-deep-get($input, fontSize, medium, height);
+  }
+
+  &.fontSizeLarge {
+    font-size: map-deep-get($input, fontSize, large, font-size) !important;
+    line-height: map-deep-get($input, fontSize, large, line-height);
+    height: map-deep-get($input, fontSize, large, height);
+  }
+}
+
+.optionContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.valueContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }

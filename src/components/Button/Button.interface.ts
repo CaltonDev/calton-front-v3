@@ -9,5 +9,6 @@ export interface ButtonProps {
     onClick?: React.MouseEventHandler<HTMLButtonElement>
     children?: string
     fullWidth?: boolean
+    customPadding?: string
     color?: 'reviews' | 'surveys' | 'competitor' | 'listing'
 }

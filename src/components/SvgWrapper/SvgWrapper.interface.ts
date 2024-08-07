@@ -14,6 +14,8 @@ export interface SvgWrapperProps {
         hasContainer: boolean
         containerSize: number
         background?: string
+        border?: string
+        outlined?: boolean
     }
     customWidth?: number
     customHeight?: number

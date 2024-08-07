@@ -1,0 +1,43 @@
+import React from 'react'
+import styles from './TextContainer.module.scss'
+import { TextContainerProps } from './TextContainer.interface'
+import Typography from '../Typography/Typography'
+import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import ReactStars from 'react-stars'
+function TextContainer({
+    label = '',
+    color = '#0C14A1',
+    iconSvg,
+    textColor = 'white',
+    isRating,
+}: TextContainerProps) {
+    return (
+        <div className={`${styles.container}`} style={{ background: color }}>
+            {iconSvg && (
+                <SvgWrapper keySvg={iconSvg ? iconSvg : ''} size={'small'} />
+            )}
+            {label !== '' && (
+                <Typography
+                    size={'bodySmall'}
+                    weight={'normal'}
+                    color={textColor}
+                >
+                    {label}
+                </Typography>
+            )}
+            {isRating && (
+                <ReactStars
+                    count={5}
+                    value={isRating}
+                    size={16}
+                    color2={'#ffd700'}
+                    color1={'#FFFFFF'}
+                    half={false}
+                    edit={false}
+                />
+            )}
+        </div>
+    )
+}
+
+export default TextContainer

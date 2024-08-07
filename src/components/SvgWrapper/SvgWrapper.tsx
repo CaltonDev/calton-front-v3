@@ -51,6 +51,12 @@ import HoursSvg from './SvgIcons/HoursSvg'
 import PhotosSvg from './SvgIcons/PhotosSvg'
 import PostSvg from './SvgIcons/PostSvg'
 import SondaggiSvg from './SvgIcons/SondaggiSvg'
+import OpenInNewPageSvg from './SvgIcons/OpenInNewPageSvg'
+import MessageSvg from './SvgIcons/MessageSvg'
+import ReplySvg from './SvgIcons/ReplySvg'
+import NegativeSentimentIcon from './SvgIcons/NegativeSentimentIcon'
+import NeutralSentimentIcon from './SvgIcons/NeutralSentimentIcon'
+import PositiveSentimentIcon from './SvgIcons/PositiveSentimentIcon'
 
 const SvgWrapper = ({
     keySvg,
@@ -60,7 +66,7 @@ const SvgWrapper = ({
     hasContainerProps = {
         hasContainer: false,
         containerSize: 0,
-        background: 'white',
+        outlined: false,
     },
     svgBackgroundColor,
     customWidth,
@@ -93,16 +99,21 @@ const SvgWrapper = ({
     return (
         <div
             onClick={onClick}
-            style={
-                hasContainerProps?.hasContainer
-                    ? {
-                          width: hasContainerProps?.containerSize,
-                          height: hasContainerProps?.containerSize,
-                          background: hasContainerProps?.background,
-                          cursor: 'pointer',
-                      }
-                    : { cursor: 'pointer' }
-            }
+            style={{
+                width: hasContainerProps?.containerSize
+                    ? hasContainerProps?.containerSize
+                    : '',
+                height: hasContainerProps?.containerSize
+                    ? hasContainerProps?.containerSize
+                    : '',
+                background: hasContainerProps?.background
+                    ? hasContainerProps?.background
+                    : '',
+                border: hasContainerProps?.outlined
+                    ? hasContainerProps?.border
+                    : '',
+                cursor: 'pointer',
+            }}
             className={
                 hasContainerProps?.hasContainer ? styles.iconContainer : ''
             }
@@ -111,6 +122,7 @@ const SvgWrapper = ({
                 style={{
                     width: customWidth ? customWidth : iconSize,
                     height: customHeight ? customHeight : iconSize,
+                    display: 'flex',
                 }}
                 className={isClickable ? styles.clickable : ''}
             >
@@ -303,6 +315,18 @@ const SvgWrapper = ({
                         fillColor={iconColor}
                         svgBackgroundColor={svgBackgroundColor}
                     />
+                ) : keySvg === 'openInNewPageIcon.svg' ? (
+                    <OpenInNewPageSvg fillColor={iconColor} />
+                ) : keySvg === 'message.svg' ? (
+                    <MessageSvg fillColor={iconColor} />
+                ) : keySvg === 'reply.svg' ? (
+                    <ReplySvg fillColor={iconColor} />
+                ) : keySvg === 'negativeSentiment.svg' ? (
+                    <NegativeSentimentIcon />
+                ) : keySvg === 'neutralSentiment.svg' ? (
+                    <NeutralSentimentIcon />
+                ) : keySvg === 'positiveSentiment.svg' ? (
+                    <PositiveSentimentIcon />
                 ) : (
                     <></>
                 )}

@@ -15,9 +15,11 @@ const Button = ({
     children,
     fullWidth = false,
     color,
+    customPadding,
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
-    const sizeClass = fullWidth ? styles['fullwidth'] : size ? styles[size] : ''
+    const sizeClass = size ? styles[size] : ''
+    const fullWidthClass = fullWidth ? styles['fullwidth'] : ''
     const disabledClass = disabled ? styles[`disabled-${variant}`] : ''
     const arrowDirection =
         arrowPlacement !== 'none'
@@ -32,12 +34,13 @@ const Button = ({
     return (
         <>
             <button
-                className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass} ${arrowDirection} ${iconOnlyClass} ${roundedClass}`}
-                style={
-                    color
-                        ? { background: getBackgroundColor(color ? color : '') }
-                        : {}
-                }
+                className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass} ${arrowDirection} ${iconOnlyClass} ${roundedClass} ${fullWidthClass}`}
+                style={{
+                    background: color
+                        ? getBackgroundColor(color ? color : '')
+                        : '',
+                    padding: customPadding ? customPadding : '',
+                }}
                 disabled={disabled}
                 onClick={onClick}
             >

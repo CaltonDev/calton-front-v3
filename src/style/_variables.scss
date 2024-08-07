@@ -104,7 +104,7 @@ $typography: (
                         lineHeight: 20px
                 ),
                 bodySmall: (
-                        fontSize: 12px,
+                        fontSize: 14px,
                         fontWeight: (
                                 light: 300,
                                 normal: 400,
@@ -113,6 +113,15 @@ $typography: (
                         lineHeight: 17.5px
                 ),
                 bodyXSmall: (
+                        fontSize: 12px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 17.5px
+                ),
+                bodyXXSmall: (
                         fontSize: 10px,
                         fontWeight: (
                                 light: 300,
@@ -254,8 +263,11 @@ $input: (
           )
         ),
         fontSize: (
-          small: (
+          xsmall: (
             font-size: 12px,
+          ),
+          small: (
+                  font-size: 14px,
           ),
           medium: (
             font-size: 16px,
@@ -302,6 +314,22 @@ $input: (
           prefixXlarge: (
             top: 18%
           )
+        )
+);
+
+$select: (
+        size: (
+                small: (
+                  width: auto
+                ),
+                medium: (
+                ),
+                large: (
+                )
+        ),
+        outlined: (
+            border-color: #321D48 !important,
+            background: none
         )
 );
 

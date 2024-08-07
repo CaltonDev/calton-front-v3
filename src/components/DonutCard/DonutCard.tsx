@@ -70,9 +70,18 @@ function DonutCard({
                     </Typography>{' '}
                 </div>
                 <div className={styles.tagContainer}>
-                    <Tag percentage={45} type={'positive'} />
-                    <Tag percentage={15} type={'neutral'} />
-                    <Tag percentage={40} type={'negative'} />
+                    <Tag
+                        label={t('Positivi') + ' ' + 45 + '%'}
+                        type={'positive'}
+                    />
+                    <Tag
+                        label={t('Neutri') + ' ' + 45 + '%'}
+                        type={'neutral'}
+                    />
+                    <Tag
+                        label={t('Negativi') + ' ' + 45 + '%'}
+                        type={'negative'}
+                    />
                 </div>
             </div>
         </div>

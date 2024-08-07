@@ -1,5 +1,4 @@
 export interface TagProps {
-    label: string
+    percentage: number
     type: 'positive' | 'neutral' | 'negative'
-    iconSvg?: string
 }

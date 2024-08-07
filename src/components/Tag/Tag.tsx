@@ -8,22 +8,25 @@ import {
     neutralColor,
     positiveColor,
 } from '../../constants/constants'
-function Tag({ percentage, type }: TagProps) {
+import SvgWrapper from '../SvgWrapper/SvgWrapper'
+function Tag({ label, type, iconSvg }: TagProps) {
     const { t } = useTranslation()
-
-    const label =
-        (type === 'positive'
-            ? t('Positivi')
-            : type === 'neutral'
-              ? t('Neutri')
-              : t('Negativi')) +
-        ' ' +
-        percentage +
-        '%'
-
     const colorClass = styles[`${type}`]
     return (
         <div className={`${colorClass} ${styles.container}`}>
+            {iconSvg && (
+                <SvgWrapper
+                    keySvg={iconSvg ? iconSvg : ''}
+                    size={'small'}
+                    customColor={
+                        type === 'positive'
+                            ? positiveColor
+                            : type === 'neutral'
+                              ? neutralColor
+                              : negativeColor
+                    }
+                />
+            )}
             <Typography
                 size={'bodySmall'}
                 weight={'normal'}

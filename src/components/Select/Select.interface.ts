@@ -9,7 +9,8 @@ type ActionMeta<T> = {
 export type Value = {
     value?: string
     label?: string
-    className: string
+    className?: string
+    icon?: string
 }
 export interface SelectProps {
     options?: Value[]
@@ -17,11 +18,12 @@ export interface SelectProps {
     disabled?: boolean
     customColor?: string
     color?: 'primary' | 'secondary' | 'error' | 'success'
-    placeholder?: string
+    placeholderColor?: string
     value?: Value
-    fontSize?: string
+    fontSize?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
     onChange?: (
         newValue: SingleValue<Value>,
         actionMeta: ActionMeta<string | number>
     ) => void
+    customHeight?: string
 }

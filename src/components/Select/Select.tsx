@@ -1,18 +1,19 @@
 import styles from './Select.module.scss'
 import { SelectProps } from './Select.interface'
 import React, { useState } from 'react'
-import Select from 'react-select'
-
+import Select, { components } from 'react-select'
+import SvgWrapper from '../SvgWrapper/SvgWrapper'
 const CaltonSelect = ({
     size,
     disabled = false,
     color = 'primary',
     onChange,
     options,
-    placeholder = '',
     value,
     customColor,
+    placeholderColor,
     fontSize,
+    customHeight,
 }: SelectProps) => {
     const colorClass = color ? styles[color] : ''
     const sizeClass = size ? styles[size] : ''
@@ -26,6 +27,28 @@ const CaltonSelect = ({
           ]
         : ''
 
+    const { Option } = components
+    const IconOption = (props: any) => (
+        <Option {...props}>
+            <div className={styles.optionContainer}>
+                {props.data.label}
+                {props.data.icon && (
+                    <SvgWrapper size={'small'} keySvg={props.data.icon} />
+                )}
+            </div>
+        </Option>
+    )
+    const SingleValueIcon = (props: any) => {
+        return (
+            <div className={styles.valueContainer} style={{}}>
+                {props?.selectProps.getOptionLabel(props?.data)}
+                {props.data.icon && (
+                    <SvgWrapper size={'small'} keySvg={props.data.icon} />
+                )}
+            </div>
+        )
+    }
+
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
             <Select
@@ -33,7 +56,7 @@ const CaltonSelect = ({
                     control: () =>
                         `${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${fontSizeClass}`,
                     menu: () => `${styles.menu}`,
-                    option: () => `${styles.menuItem}`,
+                    option: () => `${styles.menuItem} ${fontSizeClass}`,
                 }}
                 isSearchable={false}
                 defaultValue={value}
@@ -44,6 +67,13 @@ const CaltonSelect = ({
                 }}
                 options={options}
                 styles={{
+                    valueContainer: (baseStyles) => ({
+                        ...baseStyles,
+                        display: 'flex',
+                        color: placeholderColor
+                            ? placeholderColor
+                            : 'white !important',
+                    }),
                     control: (baseStyles) => ({
                         borderColor: customColor
                             ? customColor + '!important'
@@ -52,10 +82,15 @@ const CaltonSelect = ({
                             ? customColor + '!important'
                             : '',
                         cursor: 'pointer',
+                        height: customHeight ? customHeight : '',
+                        ':active': {
+                            ...baseStyles[':active'],
+                            backgroundColor: 'red',
+                        },
                     }),
                     dropdownIndicator: (base, state) => ({
                         ...base,
-                        color: 'white',
+                        color: placeholderColor ? placeholderColor : 'white',
                         transition: 'color 0.2s',
                         ':hover': {
                             color: '#d3d3d3',
@@ -63,15 +98,20 @@ const CaltonSelect = ({
                     }),
                     singleValue: (base) => ({
                         ...base,
-                        color: customColor ? 'white!important' : '',
+                        color: placeholderColor
+                            ? placeholderColor
+                            : 'white !important',
                     }),
                     placeholder: (base) => ({
                         ...base,
-                        color: 'white', // Change placeholder text color
+                        color: placeholderColor ? placeholderColor : 'white', // Change placeholder text color
                     }),
+                    input: (base) => ({ ...base }),
                 }}
                 components={{
                     IndicatorSeparator: () => null,
+                    Option: IconOption,
+                    SingleValue: SingleValueIcon,
                 }}
                 //menuIsOpen={true}
             />
