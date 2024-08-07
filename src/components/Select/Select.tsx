@@ -11,6 +11,8 @@ const CaltonSelect = ({
     options,
     value,
     customColor,
+    customBorderColor,
+    customWidth,
     placeholderColor,
     fontSize,
     customHeight,
@@ -75,9 +77,11 @@ const CaltonSelect = ({
                             : 'white !important',
                     }),
                     control: (baseStyles) => ({
-                        borderColor: customColor
-                            ? customColor + '!important'
-                            : '',
+                        borderColor: customBorderColor
+                            ? customBorderColor + '!important'
+                            : customColor
+                              ? customColor + '!important'
+                              : '',
                         background: customColor
                             ? customColor + '!important'
                             : '',
@@ -87,6 +91,7 @@ const CaltonSelect = ({
                             ...baseStyles[':active'],
                             backgroundColor: 'red',
                         },
+                        width: customWidth ? customWidth + '!important' : '',
                     }),
                     dropdownIndicator: (base, state) => ({
                         ...base,
@@ -106,7 +111,9 @@ const CaltonSelect = ({
                         ...base,
                         color: placeholderColor ? placeholderColor : 'white', // Change placeholder text color
                     }),
-                    input: (base) => ({ ...base }),
+                    input: (base) => ({
+                        ...base,
+                    }),
                 }}
                 components={{
                     IndicatorSeparator: () => null,

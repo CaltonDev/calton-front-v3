@@ -33,7 +33,7 @@ function ReviewCard() {
         },
     ]
 
-    const handlePlatformTypeChange = () => {
+    const handleSentimentChange = () => {
         console.log('Ciao')
     }
     return (
@@ -102,7 +102,7 @@ function ReviewCard() {
                             customColor={'none'}
                             customHeight={'auto'}
                             placeholderColor={'black'}
-                            onChange={handlePlatformTypeChange}
+                            onChange={handleSentimentChange}
                         />
                     </div>
                     <div className={styles.reviewContainer}>

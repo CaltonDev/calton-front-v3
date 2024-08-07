@@ -10,5 +10,7 @@ export interface ButtonProps {
     children?: string
     fullWidth?: boolean
     customPadding?: string
+    customColor?: string
+    customTextColor?: string
     color?: 'reviews' | 'surveys' | 'competitor' | 'listing'
 }

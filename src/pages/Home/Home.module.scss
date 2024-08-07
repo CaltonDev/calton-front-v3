@@ -1,12 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 20px;
 }
 
 .itemContainer {
   width: 33%;
-  height: 130px;
+  height: 100%;
 }
 
 .headerContainer{
@@ -16,9 +16,21 @@
   gap: 20px;
 }
 
+.navigatorRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .reviewsContainer {
   display: flex;
   flex-direction: row;
   gap: 20px;
   width: 100%;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }

@@ -14,12 +14,10 @@ import TrackerCard from '../../components/TrackerCard/TrackerCard'
 import TierListCard from '../../components/TierListCard/TierListCard'
 import styles from './Home.module.scss'
 import ReviewCard from '../../components/Cards/ReviewCard/ReviewCard'
+import Button from '../../components/Button/Button'
+import PageNavigator from '../../components/PageNavigator/PageNavigator'
 function Home() {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [name, setName] = useState('')
-    const [btnType, setBtnType] = useState<'text' | 'password'>('password')
-    const [checked, setChecked] = useState(false)
     const allFilters = useSelector(selectAllFilters)
     const wordSelected = useSelector(
         (state: SelectedWordsState) => state.SelectedWords
@@ -29,6 +27,8 @@ function Home() {
     )
 
     const { t } = useTranslation()
+
+    const [currentPage, setCurrentPage] = useState(1)
 
     const reloadHome = async () => {
         await ServiceWrapper.wrapperReloadHome(
@@ -50,23 +50,6 @@ function Home() {
         reloadHome()
     }, [allFilters])
 
-    const performLoginAndRedirect = () => {
-        //dispatch(setUser('exist'))
-        navigate('/')
-    }
-
-    const handleInputChange = (e: any) => {
-        setName(e.target.value)
-    }
-
-    const handleIcon = () => {
-        if (btnType === 'password') {
-            setBtnType('text')
-        } else {
-            setBtnType('password')
-        }
-    }
-
     const tierList = [
         {
             label: 'The Fork',
@@ -81,6 +64,14 @@ function Home() {
             icon: 'TripadvisorAPI.svg',
         },
     ]
+
+    const changeElementsPerPage = (e: any) => {
+        //setCurrentPage(e.target.value)
+    }
+
+    const changePage = (e: any) => {
+        setCurrentPage(e.target.value)
+    }
     return (
         <PageContainer>
             <PageHeader heading={t('Home')} subheading={true}></PageHeader>
@@ -101,9 +92,35 @@ function Home() {
                         <TierListCard tierList={tierList} />
                     </div>
                 </div>
+                <div className={styles.navigatorRow}>
+                    <div className={styles.btnContainer}>
+                        <Button
+                            size={'small'}
+                            customColor={'#E9E7EC'}
+                            customTextColor={'black'}
+                        >
+                            {t('Data')}
+                        </Button>
+                        <Button
+                            size={'small'}
+                            customColor={'#E9E7EC'}
+                            customTextColor={'black'}
+                        >
+                            {t('Rating')}
+                        </Button>
+                    </div>
+                    <div>
+                        <PageNavigator
+                            totalElements={255}
+                            currentPage={currentPage}
+                            pageElements={30}
+                            changeElementsPerPage={changeElementsPerPage}
+                            changePage={changePage}
+                        />
+                    </div>
+                </div>
                 <div className={styles.reviewsContainer}>
                     <ReviewCard />
-
                     <ReviewCard />
                 </div>
             </div>

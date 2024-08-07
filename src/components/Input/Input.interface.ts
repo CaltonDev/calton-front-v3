@@ -12,4 +12,5 @@ export interface InputProps {
     iconCallback?: React.MouseEventHandler<HTMLDivElement>
     fullWidth?: boolean
     floatingDisplay?: boolean
+    isSquared?: boolean
 }

@@ -7,8 +7,8 @@ type ActionMeta<T> = {
 }
 
 export type Value = {
-    value?: string
-    label?: string
+    value?: string | number
+    label?: string | number
     className?: string
     icon?: string
 }
@@ -26,4 +26,6 @@ export interface SelectProps {
         actionMeta: ActionMeta<string | number>
     ) => void
     customHeight?: string
+    customWidth?: string
+    customBorderColor?: string
 }

@@ -23,6 +23,7 @@ const Input = ({
     iconCallback,
     fullWidth = false,
     floatingDisplay = false,
+    isSquared = false,
 }: InputProps) => {
     const colorClass = color ? styles[color] : ''
     const sizeClass = fullWidth ? styles['fullWidth'] : size ? styles[size] : ''
@@ -52,7 +53,12 @@ const Input = ({
             : styles.iconContainerSuffixLarge
 
     return (
-        <div className={`${styles.container} ${containerSizeClass}`}>
+        <div
+            className={`${styles.container} ${containerSizeClass}`}
+            style={{
+                width: isSquared ? 41 : '',
+            }}
+        >
             {(suffix || prefix) && (
                 <div
                     className={
@@ -77,7 +83,10 @@ const Input = ({
             )}
             <input
                 className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${floatingDisplayClass}`}
-                style={prefix ? { paddingLeft: iconSize + 5 } : {}}
+                style={{
+                    paddingLeft: prefix ? iconSize + 5 : '',
+                    width: isSquared ? 41 : '',
+                }}
                 disabled={disabled}
                 onChange={onChange}
                 type={type}
