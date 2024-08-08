@@ -11,4 +11,5 @@ export interface TextareaProps {
     iconCallback?: React.MouseEventHandler<HTMLDivElement>
     fullWidth?: boolean
     size?: 'small' | 'medium' | 'large' | 'xlarge'
+    customPadding?: string
 }

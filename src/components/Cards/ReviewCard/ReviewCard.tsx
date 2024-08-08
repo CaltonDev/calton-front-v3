@@ -187,6 +187,7 @@ function ReviewCard() {
                             fullWidth={true}
                             icon={'sendIcon.svg'}
                             placeholder={t('Rispondi...')}
+                            customPadding={'100px'}
                         />
                     </div>
                 </div>

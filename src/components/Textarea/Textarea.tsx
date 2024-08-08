@@ -22,6 +22,7 @@ const Textarea = ({
     iconCallback,
     fullWidth = false,
     size,
+    customPadding,
 }: TextareaProps) => {
     const colorClass = color ? styles[color] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
@@ -38,10 +39,12 @@ const Textarea = ({
                 placeholder={!value ? placeholder : ''}
                 rows={rows}
                 cols={cols}
+                style={{ paddingRight: customPadding }}
             />
             {icon && (
                 <div className={styles.iconContainer}>
                     <SvgWrapper
+                        onClick={iconCallback}
                         keySvg={icon}
                         size={'small'}
                         hasContainerProps={{
