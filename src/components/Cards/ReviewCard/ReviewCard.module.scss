@@ -1,12 +1,18 @@
 .container {
   border-radius: 10px;
   background: #FFF;
-  height: 400px;
-  padding: 20px 18px;
+  //height: 420px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+}
+
+.paddedContainer {
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .headerContainer {
@@ -69,4 +75,15 @@
   height: 20px;
   border-radius: 20px;
   background: #C0BBC5;
+}
+
+.textareaContainer {
+  padding: 6px 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.labelContainer {
+  padding-left: 12px;
 }

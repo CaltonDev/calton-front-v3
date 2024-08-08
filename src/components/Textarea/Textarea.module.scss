@@ -1,31 +1,10 @@
 @import '@Style/app';
 
 .iconContainer {
-  position: map-deep-get($input, icon, position);
-  box-sizing: map-deep-get($input, icon, box-sizing);
-  top: map-deep-get($input, icon, top);
-  left: map-deep-get($input, icon, left);
-}
-.iconContainerPrefix {
-  @extend .iconContainer;
-}
-
-.iconContainerSuffixSmall {
-  @extend .iconContainer;
-  right: map-deep-get($input, icon, small, right);
-  padding-top: map-deep-get($input, icon, small, padding-top);
-  left: auto;
-}
-
-.iconContainerSuffixLarge {
-  @extend .iconContainer;
-  right: map-deep-get($input, icon, large, right);
-  left: auto;
-}
-
-.iconContainerPrefixXLarge {
-  @extend .iconContainer;
-  top: map-deep-get($input, icon, prefixXlarge, top);
+  position: map-deep-get($input, textarea, icon, position);
+  box-sizing: map-deep-get($input, textarea, icon, box-sizing);
+  right: map-deep-get($input, textarea, icon, right);
+  bottom: map-deep-get($input, textarea, icon, bottom);
 }
 
 .container {
@@ -48,12 +27,13 @@
   }
 }
 
-.input {
+.textarea {
+  resize: map-get($input, textarea, resize);
   box-sizing: map-get($input, box-sizing);
   display: map-get($input, display);
   flex-direction: map-get($input, flex-direction);
   align-items: map-get($input, align-items);
-  padding: map-get($input, padding);
+  padding: map-get($input, textarea, padding);
   gap: map-get($input, gap);
   width: map-get($input, width);
   //height: map-get($input, height);
@@ -81,7 +61,7 @@
   }
 
   &.fullWidth {
-    width: 100%;
+    width: 100% !important;
     font-size: map-deep-get($input, size, medium, font-size);
   }
 
@@ -116,4 +96,12 @@
     height: 25px;
     background: var(--Neutral-200, #E9E7EC);
   }
+}
+
+.textarea:active {
+  box-shadow: map-deep-get($input, textarea, box-shadow);
+}
+
+.textarea:focus {
+  box-shadow: map-deep-get($input, textarea, box-shadow);
 }

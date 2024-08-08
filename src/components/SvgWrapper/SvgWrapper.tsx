@@ -57,6 +57,7 @@ import ReplySvg from './SvgIcons/ReplySvg'
 import NegativeSentimentIcon from './SvgIcons/NegativeSentimentIcon'
 import NeutralSentimentIcon from './SvgIcons/NeutralSentimentIcon'
 import PositiveSentimentIcon from './SvgIcons/PositiveSentimentIcon'
+import SendIconSvg from './SvgIcons/SendIconSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -327,6 +328,8 @@ const SvgWrapper = ({
                     <NeutralSentimentIcon />
                 ) : keySvg === 'positiveSentiment.svg' ? (
                     <PositiveSentimentIcon />
+                ) : keySvg === 'sendIcon.svg' ? (
+                    <SendIconSvg />
                 ) : (
                     <></>
                 )}

@@ -314,6 +314,17 @@ $input: (
           prefixXlarge: (
             top: 18%
           )
+        ),
+        textarea: (
+          icon: (
+            position: absolute,
+            box-sizing: border-box,
+            right: 10px,
+            bottom: 10px,
+          ),
+          box-shadow: (0px 1px 2px 0px rgba(50, 29, 72, 0.15), 0px 0px 0px 4px #BDC0FE),
+          resize: none,
+          padding: 6px 12px
         )
 );
 
