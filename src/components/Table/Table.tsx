@@ -112,7 +112,7 @@ const Table = ({
     })
 
     return (
-        <div className="p-2">
+        <div className={styles.container}>
             <table className={styles.table}>
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => (

@@ -1,7 +1,12 @@
 @import '@Style/app';
 
+.container {
+  border-radius: 26px;
+}
 .table {
   width: 100%;
+  border-radius: 10px;
+  gap: 3px;
 }
 
 .th {
