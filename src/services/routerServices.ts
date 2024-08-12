@@ -30,7 +30,7 @@ const CreateSurvey = lazy(() => lazyRetry(() => import("../pages/Surveys/CreateS
 const EditSurvey = lazy(() => lazyRetry(() => import("../pages/Surveys/EditSurvey/EditSurvey"), "EditSurvey"));
 const Fonti = lazy(() => lazyRetry(() => import("../pages/Fonti/Fonti"), "Fonti"));
 const Grafo = lazy(() => lazyRetry(() => import("../pages/Grafo/Grafo"), "Grafo"));
-const Home = lazy(() => lazyRetry(() => import("../pages/Home/Home"), "Home"));
+const Luoghi = lazy(() => lazyRetry(() => import("../pages/Luoghi/Luoghi"), "Luoghi"));
 const Integrations = lazy(() => lazyRetry(() => import("../pages/Integrations/Integration"), "Integration"));
 const Luoghi = lazy(() => lazyRetry(() => import("../pages/Luoghi/Luoghi"), "Luoghi"));
 const Profile = lazy(() => lazyRetry(() => import("../pages/Profile/Profile"), "Profile"));
@@ -45,6 +45,7 @@ const Products = lazy(() => lazyRetry(() => import("../pages/Products/Products")
 */
 
 const Home = lazy(() => import('../pages/Home/Home'))
+const Luoghi = lazy(() => import('../pages/Luoghi/Luoghi'))
 
 /*
 
@@ -82,5 +83,9 @@ export const objRoutes = {
     Dashboards: {
         path: 'home',
         component: Home,
+    },
+    Luoghi: {
+        path: 'locations',
+        component: Luoghi,
     },
 }

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, ReactNode, ComponentType } from 'react'
+import React, { Suspense, ComponentType } from 'react'
 import ReactDOM from 'react-dom/client'
 import store from './store/store'
 import { Provider } from 'react-redux'
@@ -14,6 +14,7 @@ import './i18n'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import { objRoutes } from './services/routerServices'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 const persistor = persistStore(store)
 
 const LazyComponentWrapper = ({
@@ -45,14 +46,18 @@ const router = createBrowserRouter([
     },
 ])
 
+const queryClient = new QueryClient()
+
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('Root element not found')
 ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <RouterProvider router={router} />
-            </PersistGate>
-        </Provider>
+        <QueryClientProvider client={queryClient}>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <RouterProvider router={router} />
+                </PersistGate>
+            </Provider>
+        </QueryClientProvider>
     </React.StrictMode>
 )

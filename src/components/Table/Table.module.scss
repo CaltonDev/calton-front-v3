@@ -1,0 +1,38 @@
+@import '@Style/app';
+
+.table {
+  width: 100%;
+}
+
+.th {
+  padding: 16px 24px;
+  gap: 10px;
+  background: var(--Neutral-200, #E9E7EC);
+
+  color: var(--Neutral-900, #321D48);
+
+  /* Body02/Bold */
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 20px */
+  text-align: start;
+}
+
+.td {
+  padding: 16px 24px;
+  gap: 10px;
+  align-self: stretch;
+  background: #FFF;
+
+  color: var(--Neutral-900, #321D48);
+  /* Body02/regular */
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%; /* 20px */
+
+  text-align: start;
+}

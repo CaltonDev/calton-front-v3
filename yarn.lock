@@ -2481,12 +2481,36 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
+"@tanstack/query-core@5.51.21":
+  version "5.51.21"
+  resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-5.51.21.tgz"
+  integrity sha512-POQxm42IUp6n89kKWF4IZi18v3fxQWFRolvBA6phNVmA8psdfB1MvDnGacCJdS+EOX12w/CyHM62z//rHmYmvw==
+
+"@tanstack/react-query@^5.51.23":
+  version "5.51.23"
+  resolved "https://registry.npmjs.org/@tanstack/react-query/-/react-query-5.51.23.tgz"
+  integrity sha512-CfJCfX45nnVIZjQBRYYtvVMIsGgWLKLYC4xcUiYEey671n1alvTZoCBaU9B85O8mF/tx9LPyrI04A6Bs2THv4A==
+  dependencies:
+    "@tanstack/query-core" "5.51.21"
+
+"@tanstack/react-table@^8.20.1":
+  version "8.20.1"
+  resolved "https://registry.npmjs.org/@tanstack/react-table/-/react-table-8.20.1.tgz"
+  integrity sha512-PJK+07qbengObe5l7c8vCdtefXm8cyR4i078acWrHbdm8JKw1ES7YpmOtVt9ALUVEEFAHscdVpGRhRgikgFMbQ==
+  dependencies:
+    "@tanstack/table-core" "8.20.1"
+
 "@tanstack/react-virtual@^3.8.3":
   version "3.8.3"
   resolved "https://registry.npmjs.org/@tanstack/react-virtual/-/react-virtual-3.8.3.tgz"
   integrity sha512-9ICwbDUUzN99CJIGc373i8NLoj6zFTKI2Hlcmo0+lCSAhPQ5mxq4dGOMKmLYoEFyHcGQ64Bd6ZVbnPpM6lNK5w==
   dependencies:
     "@tanstack/virtual-core" "3.8.3"
+
+"@tanstack/table-core@8.20.1":
+  version "8.20.1"
+  resolved "https://registry.npmjs.org/@tanstack/table-core/-/table-core-8.20.1.tgz"
+  integrity sha512-5Ly5TIRHnWH7vSDell9B/OVyV380qqIJVg7H7R7jU4fPEmOD4smqAX7VRflpYI09srWR8aj5OLD2Ccs1pI5mTg==
 
 "@tanstack/virtual-core@3.8.3":
   version "3.8.3"
