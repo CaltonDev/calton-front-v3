@@ -6,6 +6,7 @@ import Input from '../Input/Input'
 import { useTranslation } from 'react-i18next'
 import { PageNavigatorProps } from './PageNavigator.interface'
 import CaltonSelect from '../Select/Select'
+import Button from '../Button/Button'
 function PageNavigator({
     pageElements,
     totalElements,
@@ -35,10 +36,20 @@ function PageNavigator({
     ]
 
     const handlePageElements = (e: any) => {
-        console.log('Clicked')
         changeElementsPerPage(e)
     }
 
+    const calculatePageSelector = () => {
+        const lastPage = Math.ceil(totalElements / pageElements)
+        if (currentPage === 0) return [0, 1, 2]
+        else if (currentPage === lastPage - 1)
+            return [currentPage - 2, currentPage - 1, currentPage]
+        else return [currentPage - 1, currentPage, currentPage + 1]
+    }
+
+    useEffect(() => {
+        calculatePageSelector()
+    }, [currentPage])
     return (
         <div className={styles.container}>
             <div className={styles.elementsPerPageSelector}>
@@ -82,12 +93,26 @@ function PageNavigator({
                     onClick={() => changePage('previous')}
                     disabled={currentPage < 1}
                 />
-                <Input
-                    value={currentPage + 1}
-                    onChange={(e) => changePage(e?.target?.value)}
-                    size={'small'}
-                    isSquared={true}
-                />
+
+                {calculatePageSelector()?.map((index) => {
+                    return (
+                        <Button
+                            size={'small'}
+                            variant={'outline'}
+                            customBorderColor={
+                                index === currentPage ? 'blue' : '#C0BBC5'
+                            }
+                            customTextColor={'black'}
+                            customHeight={44}
+                            customWidth={44}
+                            customPadding={'unset'}
+                            onClick={() => changePage(index + 1)}
+                        >
+                            {String(index + 1)}
+                        </Button>
+                    )
+                })}
+
                 <SvgWrapper
                     keySvg={'arrowForward'}
                     size={'small'}

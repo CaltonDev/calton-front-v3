@@ -12,5 +12,8 @@ export interface ButtonProps {
     customPadding?: string
     customColor?: string
     customTextColor?: string
+    customBorderColor?: string
     color?: 'reviews' | 'surveys' | 'competitor' | 'listing'
+    customWidth?: number
+    customHeight?: number
 }

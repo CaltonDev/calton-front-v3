@@ -18,6 +18,9 @@ const Button = ({
     customPadding,
     customColor,
     customTextColor,
+    customBorderColor,
+    customWidth,
+    customHeight,
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
     const sizeClass = size ? styles[size] : ''
@@ -45,6 +48,9 @@ const Button = ({
                           : '',
                     color: customTextColor ? customTextColor : '',
                     padding: customPadding ? customPadding : '',
+                    borderColor: customBorderColor ? customBorderColor : '',
+                    width: customWidth ? customWidth : '',
+                    height: customHeight ? customHeight : '',
                 }}
                 disabled={disabled}
                 onClick={onClick}
