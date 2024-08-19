@@ -15,15 +15,29 @@ import styles from './HomeReviews.module.scss'
 import ReviewCard from '../../../components/Cards/ReviewCard/ReviewCard'
 import Button from '../../../components/Button/Button'
 import PageNavigator from '../../../components/PageNavigator/PageNavigator'
+import { getNoCodeFromPlatfrom } from '../../../helpers/helpers'
+import FeedbackService from '../../../services/FeedbackService'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
-    const wordSelected = useSelector(
-        (state: SelectedWordsState) => state.SelectedWords
-    )
+    const wordSelected = useSelector((state: RootState) => state.SelectedWords)
     const platformType = useSelector(
         (state: RootState) => state.Settings.platformType
     )
+    const [isLoading, setIsLoading] = useState(true)
+    const [infoData, setInfoData] = useState(null)
+    const [sort, setSort] = useState([
+        {
+            name: 'data',
+            direction: 'desc',
+        },
+    ])
+    const [page, setPage] = useState(0)
+    const [displayDownload, setDisplayDownload] = useState(false)
+    const [metadataSelect, setMetadataSelect] = useState(null)
+    const search = useSelector((state: RootState) => state.Search.wordSearched)
+    const [customFiltersSelectable, setCustomFiltersSelectable] = useState(null)
+    const user = useSelector((state: RootState) => state.User.user)
 
     const { t } = useTranslation()
 
@@ -40,14 +54,14 @@ function HomeReviews() {
             t
         )
     }
-
+    /*
     useEffect(() => {
         ServiceWrapper.wrapperLoadFilters(allFilters, dispatch, platformType, t)
     }, [])
 
     Hooks.useDeepCompareEffect(() => {
         reloadHome()
-    }, [allFilters])
+    }, [allFilters])*/
 
     const tierList = [
         {
@@ -71,6 +85,30 @@ function HomeReviews() {
     const changePage = (e: any) => {
         setCurrentPage(e.target.value)
     }
+
+    const feedbacks = FeedbackService.getFeedbacks(
+        undefined,
+        allFilters,
+        undefined,
+        false,
+        getNoCodeFromPlatfrom(),
+        page * 20,
+        20,
+        sort,
+        search,
+        false,
+        undefined,
+        'xlsx',
+        undefined,
+        undefined,
+        undefined,
+        undefined
+    )
+
+    useEffect(() => {
+        console.log('feedbacks: ', feedbacks)
+    }, [feedbacks])
+
     return (
         <PageContainer>
             <PageHeader heading={t('Home')} subheading={true}></PageHeader>

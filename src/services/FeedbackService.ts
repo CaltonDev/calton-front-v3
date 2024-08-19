@@ -1,5 +1,6 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
+import { useQuery, useQueryClient, UseQueryResult } from 'react-query'
 
 interface AllFilters {
     startDate: string
@@ -88,6 +89,24 @@ interface GetInfoFeedbacksBody {
     returnAnt?: boolean | undefined
 }
 
+interface ApiService {
+    apiFeedback: {
+        post: (
+            url: string,
+            body: GetInfoFeedbacksBody,
+            headers: HeadersInit
+        ) => Promise<Response>
+    }
+}
+
+interface QueryData {
+    id: string | string[]
+    // Add other properties as needed
+}
+
+export const fetchFeedbacks = (body: GetInfoFeedbacksBody) =>
+    apiService.apiFeedback.post('/getFeedback', body, getHeaders(false, true))
+
 function getFeedbacks(
     idSources: any | undefined,
     allFilters: AllFilters,
@@ -107,8 +126,10 @@ function getFeedbacks(
     lemmas: any | null,
     returnAnt = true,
     wordFilter: any | undefined = undefined
-): Promise<any> {
-    const body: GetFeedbacksBody = {
+): UseQueryResult<any, Error> {
+    const queryClient = useQueryClient()
+
+    const body: GetInfoFeedbacksBody = {
         idSources: idSources ? idSources : allFilters.selectedSource,
         columns,
         simplified,
@@ -117,7 +138,7 @@ function getFeedbacks(
         limit,
         sort,
         search,
-        customFilters: wordFilter ? wordFilter : allFilters.customFilters,
+        customFilters: wordFilter ?? allFilters.customFilters,
         download,
         returnFormatted,
         typeDownload,
@@ -128,14 +149,24 @@ function getFeedbacks(
         antTable,
         idMetadata,
         idProducts: allFilters.selectedProducts,
-        words,
-        lemmas,
+        words: words ?? undefined,
+        lemmas: lemmas ?? undefined,
         returnAnt,
     }
-    return apiService.apiFeedback.post(
-        '/getFeedback',
-        body,
-        getHeaders(false, true)
+
+    return useQuery<any, Error>(
+        ['idSources', idSources ?? allFilters.selectedSource],
+        () => fetchFeedbacks(body),
+        {
+            initialData: () => {
+                return queryClient
+                    .getQueryData<QueryData[]>('idSources')
+                    ?.find(
+                        (d) => d.id === (idSources ?? allFilters.selectedSource)
+                    )
+            },
+            staleTime: 0,
+        }
     )
 }
 

@@ -1,5 +1,6 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
+import { useQuery, useQueryClient } from 'react-query'
 
 interface GetLocationsFilteredBody {
     code: any
@@ -18,15 +19,34 @@ function getChannelSourcesFiltered() {
     )
 }
 
+interface QueryData {
+    id: string | string[]
+    // Add other properties as needed
+}
+
 function getLocationsFiltered(code: any, returnAnt: any) {
     const body: GetLocationsFilteredBody = {
         code,
         returnAnt,
     }
-    return apiService.apiUrl.post(
-        '/location/getLocationsFiltered',
-        body,
-        getHeaders()
+    const queryClient = useQueryClient()
+
+    return useQuery<any, Error>(
+        ['location', 'locationId'],
+        () =>
+            apiService.apiUrl.post(
+                '/location/getLocationsFiltered',
+                body,
+                getHeaders()
+            ),
+        {
+            initialData: () => {
+                return queryClient
+                    .getQueryData<QueryData[]>('location')
+                    ?.find((d) => d.id === 'locationId')
+            },
+            staleTime: 0,
+        }
     )
 }
 

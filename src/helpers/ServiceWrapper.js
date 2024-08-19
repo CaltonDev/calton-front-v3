@@ -754,7 +754,8 @@ async function wrapperGetFeedbacks(
     t
 ) {
     try {
-        const response = await FeedbackService.getFeedbacks(
+        console.log('Adas')
+        const response = FeedbackService.getFeedbacks(
             undefined,
             allFilters,
             undefined,
@@ -770,12 +771,14 @@ async function wrapperGetFeedbacks(
             undefined,
             undefined
         )
+        console.log('Response: ', response)
         if (response.data) {
             return response
         } else {
             dispatch(showToast({ type: 2, text: t('Feedback non presenti') }))
         }
     } catch (e) {
+        console.log('E; ', e)
         dispatch(showToast({ type: 2, text: t('Non sono presenti feedback') }))
     }
 }

@@ -58,6 +58,7 @@ import NegativeSentimentIcon from './SvgIcons/NegativeSentimentIcon'
 import NeutralSentimentIcon from './SvgIcons/NeutralSentimentIcon'
 import PositiveSentimentIcon from './SvgIcons/PositiveSentimentIcon'
 import SendIconSvg from './SvgIcons/SendIconSvg'
+import RowSelectionSvg from './SvgIcons/RowSelectionSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -74,6 +75,7 @@ const SvgWrapper = ({
     customHeight,
     customColor,
     onClick,
+    disabled = false,
 }: SvgWrapperProps) => {
     const iconSize =
         size === 'xsmall'
@@ -99,7 +101,7 @@ const SvgWrapper = ({
     const iconHeight = customHeight ? customHeight : iconSize
     return (
         <div
-            onClick={onClick}
+            onClick={!disabled ? onClick : undefined}
             style={{
                 width: hasContainerProps?.containerSize
                     ? hasContainerProps?.containerSize
@@ -113,7 +115,7 @@ const SvgWrapper = ({
                 border: hasContainerProps?.outlined
                     ? hasContainerProps?.border
                     : '',
-                cursor: 'pointer',
+                cursor: !disabled ? 'pointer' : '',
             }}
             className={
                 hasContainerProps?.hasContainer ? styles.iconContainer : ''
@@ -330,6 +332,8 @@ const SvgWrapper = ({
                     <PositiveSentimentIcon />
                 ) : keySvg === 'sendIcon.svg' ? (
                     <SendIconSvg />
+                ) : keySvg === 'rowSelection.svg' ? (
+                    <RowSelectionSvg />
                 ) : (
                     <></>
                 )}

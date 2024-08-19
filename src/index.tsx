@@ -14,7 +14,7 @@ import './i18n'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import { objRoutes } from './services/routerServices'
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { QueryClientProvider, QueryClient } from 'react-query'
 const persistor = persistStore(store)
 
 const LazyComponentWrapper = ({

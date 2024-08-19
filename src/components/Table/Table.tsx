@@ -1,150 +1,220 @@
 import styles from './Table.module.scss'
 import { TableProps } from './Table.interface'
-import React from 'react'
-import SvgWrapper from '../SvgWrapper/SvgWrapper'
-import {
-    iconExtraSmallSize,
-    iconLargeSize,
-    iconMediumSize,
-    iconSmallSize,
-    iconXLargeSize,
-} from '../../constants/constants'
+import React, { HTMLProps, useEffect } from 'react'
 import {
     createColumnHelper,
     flexRender,
     getCoreRowModel,
     useReactTable,
+    getSortedRowModel,
+    PaginationState,
+    getPaginationRowModel,
 } from '@tanstack/react-table'
+import PageNavigator from '../PageNavigator/PageNavigator'
+import SvgWrapper from '../SvgWrapper/SvgWrapper'
+
+function IndeterminateCheckbox({
+    indeterminate,
+    className = '',
+    ...rest
+}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
+    const ref = React.useRef<HTMLInputElement>(null!)
+
+    React.useEffect(() => {
+        if (typeof indeterminate === 'boolean') {
+            ref.current.indeterminate = !rest.checked && indeterminate
+        }
+    }, [ref, indeterminate])
+
+    return (
+        <input
+            type="checkbox"
+            ref={ref}
+            className={className + ' cursor-pointer'}
+            {...rest}
+        />
+    )
+}
 
 const Table = ({
-    rows,
-    cols,
-    disabled = false,
-    color = 'primary',
-    onChange,
-    placeholder = '',
-    value = '',
-    icon,
-    iconCallback,
-    fullWidth = false,
-    size,
-    customPadding,
+    data = [],
+    columnsData = [],
+    fullyLoaded = false,
+    fetchData,
 }: TableProps) => {
-    const colorClass = color ? styles[color] : ''
-    const disabledClass = disabled ? styles[`disabled`] : ''
-    const sizeClass = fullWidth ? styles['fullWidth'] : size ? styles[size] : ''
-    const containerSizeClass = fullWidth ? styles[`fullWidthContainer`] : ''
+    const columnHelper = createColumnHelper<any>()
 
-    type Person = {
-        firstName: string
-        lastName: string
-        age: number
-        visits: number
-        status: string
-        progress: number
-    }
-
-    const defaultData: Person[] = [
-        {
-            firstName: 'tanner',
-            lastName: 'linsley',
-            age: 24,
-            visits: 100,
-            status: 'In Relationship',
-            progress: 50,
-        },
-        {
-            firstName: 'tandy',
-            lastName: 'miller',
-            age: 40,
-            visits: 40,
-            status: 'Single',
-            progress: 80,
-        },
-        {
-            firstName: 'joe',
-            lastName: 'dirte',
-            age: 45,
-            visits: 20,
-            status: 'Complicated',
-            progress: 10,
-        },
+    const columns: any[] = [
+        columnHelper.accessor((row) => row, {
+            id: 'select',
+            header: () => <span></span>,
+            cell: ({ row }) => (
+                <div className="px-1">
+                    <IndeterminateCheckbox
+                        {...{
+                            checked: row.getIsSelected(),
+                            disabled: !row.getCanSelect(),
+                            indeterminate: row.getIsSomeSelected(),
+                            onChange: row.getToggleSelectedHandler(),
+                        }}
+                    />
+                </div>
+            ),
+        }),
     ]
 
-    const columnHelper = createColumnHelper<Person>()
+    let idx = 0
+    columnsData?.forEach((column: any) => {
+        idx += 1
+        columns.push(
+            columnHelper.accessor((row) => row[column?.title], {
+                id: column?._id ? column._id : idx,
+                cell: (info) => <i>{info.getValue()}</i>,
+                header: () => <span>{column?.title}</span>,
+                footer: (info) => info.column.id,
+            })
+        )
+    })
 
-    const columns = [
-        columnHelper.accessor('firstName', {
-            cell: (info) => info.getValue(),
-            footer: (info) => info.column.id,
-        }),
-        columnHelper.accessor((row) => row.lastName, {
-            id: 'lastName',
-            cell: (info) => <i>{info.getValue()}</i>,
-            header: () => <span>Last Name</span>,
-            footer: (info) => info.column.id,
-        }),
-        columnHelper.accessor('age', {
-            header: () => 'Age',
-            cell: (info) => info.renderValue(),
-            footer: (info) => info.column.id,
-        }),
-        columnHelper.accessor('visits', {
-            header: () => <span>Visits</span>,
-            footer: (info) => info.column.id,
-        }),
-        columnHelper.accessor('status', {
-            header: 'Status',
-            footer: (info) => info.column.id,
-        }),
-        columnHelper.accessor('progress', {
-            header: 'Profile Progress',
-            footer: (info) => info.column.id,
-        }),
-    ]
-    const [data, _setData] = React.useState(() => [...defaultData])
-    const rerender = React.useReducer(() => ({}), {})[1]
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    })
+
+    const [rowSelection, setRowSelection] = React.useState({})
 
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        state: {
+            pagination,
+            rowSelection,
+        },
+        enableRowSelection: true, //enable row selection for all rows
+        onRowSelectionChange: setRowSelection,
+        getRowId: (row: any) => row?._id,
     })
+
+    const changePage = (direction: any) => {
+        if (direction === 'next') {
+            setPagination({
+                pageIndex: pagination.pageIndex + 1,
+                pageSize: pagination.pageSize,
+            })
+        } else if (direction === 'previous') {
+            setPagination({
+                pageIndex: pagination.pageIndex - 1,
+                pageSize: pagination.pageSize,
+            })
+        } else {
+            const number = Number(direction)
+            if (
+                number > 0 &&
+                number <= Math.ceil(data?.length / pagination.pageSize)
+            ) {
+                setPagination({
+                    pageIndex: number - 1,
+                    pageSize: pagination.pageSize,
+                })
+            } else {
+                setPagination({
+                    pageIndex: 0,
+                    pageSize: pagination.pageSize,
+                })
+            }
+        }
+        if (!fullyLoaded) {
+            if (fetchData) {
+                fetchData(pagination.pageIndex, pagination.pageSize)
+            }
+        }
+    }
+
+    const changeElementsPerPage = (e: any) => {
+        setPagination({
+            pageIndex: pagination.pageIndex,
+            pageSize: e.value,
+        })
+
+        if (!fullyLoaded) {
+            if (fetchData) {
+                fetchData(pagination.pageIndex, pagination.pageSize)
+            }
+        }
+    }
 
     return (
         <div className={styles.container}>
-            <table className={styles.table}>
-                <thead>
-                    {table.getHeaderGroups().map((headerGroup) => (
-                        <tr key={headerGroup.id}>
-                            {headerGroup.headers.map((header) => (
-                                <th key={header.id} className={styles.th}>
-                                    {header.isPlaceholder
-                                        ? null
-                                        : flexRender(
-                                              header.column.columnDef.header,
-                                              header.getContext()
-                                          )}
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody>
-                    {table.getRowModel().rows.map((row) => (
-                        <tr key={row.id}>
-                            {row.getVisibleCells().map((cell) => (
-                                <td key={cell.id} className={styles.td}>
-                                    {flexRender(
-                                        cell.column.columnDef.cell,
-                                        cell.getContext()
-                                    )}
-                                </td>
-                            ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div className={styles.header}>
+                <div className={styles.headerBtn}>
+                    <div className={styles.rowSelectionContainer}>
+                        <SvgWrapper
+                            keySvg={'rowSelection.svg'}
+                            size={'medium'}
+                            onClick={table.getToggleAllRowsSelectedHandler()}
+                        />
+                    </div>
+                </div>
+                <PageNavigator
+                    pageElements={pagination.pageSize}
+                    totalElements={data?.length}
+                    currentPage={pagination.pageIndex}
+                    changePage={changePage}
+                    changeElementsPerPage={changeElementsPerPage}
+                />
+            </div>
+            <div className={styles.tableContainer}>
+                <table className={styles.table}>
+                    <thead>
+                        {table.getHeaderGroups().map((headerGroup) => (
+                            <tr key={headerGroup.id}>
+                                {headerGroup.headers.map((header) => (
+                                    <th key={header.id} className={styles.th}>
+                                        <div
+                                            {...{
+                                                className:
+                                                    header.column.getCanSort()
+                                                        ? 'cursor-pointer select-none'
+                                                        : '',
+                                                onClick:
+                                                    header.column.getToggleSortingHandler(),
+                                            }}
+                                        >
+                                            {flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext()
+                                            )}
+                                            {{
+                                                asc: ' 🔼',
+                                                desc: ' 🔽',
+                                            }[
+                                                header.column.getIsSorted() as string
+                                            ] ?? null}
+                                        </div>
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    <tbody>
+                        {table.getRowModel().rows.map((row) => (
+                            <tr key={row.id}>
+                                {row.getVisibleCells().map((cell) => (
+                                    <td key={cell.id} className={styles.td}>
+                                        {flexRender(
+                                            cell.column.columnDef.cell,
+                                            cell.getContext()
+                                        )}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }

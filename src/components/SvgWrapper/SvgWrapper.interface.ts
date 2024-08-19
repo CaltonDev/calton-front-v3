@@ -22,6 +22,7 @@ export interface SvgWrapperProps {
     customColor?: string
     svgBackgroundColor?: string | null
     onClick?: React.MouseEventHandler<HTMLDivElement>
+    disabled?: boolean
 }
 
 export interface SvgProps {
