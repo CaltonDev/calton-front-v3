@@ -82,6 +82,9 @@ const Table = ({
     })
 
     const [rowSelection, setRowSelection] = React.useState({})
+    const [columnVisibility, setColumnVisibility] = React.useState<any>({
+        select: false,
+    })
 
     const table = useReactTable({
         data,
@@ -92,9 +95,11 @@ const Table = ({
         state: {
             pagination,
             rowSelection,
+            columnVisibility,
         },
         enableRowSelection: true, //enable row selection for all rows
         onRowSelectionChange: setRowSelection,
+        onColumnVisibilityChange: setColumnVisibility,
         getRowId: (row: any) => row?._id,
     })
 
@@ -146,11 +151,18 @@ const Table = ({
         }
     }
 
+    const handleRowSelection = () => {
+        setColumnVisibility({ select: true })
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
                 <div className={styles.headerBtn}>
-                    <div className={styles.rowSelectionContainer}>
+                    <div
+                        className={styles.rowSelectionContainer}
+                        onClick={handleRowSelection}
+                    >
                         <SvgWrapper
                             keySvg={'rowSelection.svg'}
                             size={'medium'}
