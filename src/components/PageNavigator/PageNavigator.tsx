@@ -41,6 +41,11 @@ function PageNavigator({
 
     const calculatePageSelector = () => {
         const lastPage = Math.ceil(totalElements / pageElements)
+        if (lastPage - currentPage === 0) {
+            return [0]
+        } else if (lastPage - currentPage === 1) {
+            return [0, 1]
+        }
         if (currentPage === 0) return [0, 1, 2]
         else if (currentPage === lastPage - 1)
             return [currentPage - 2, currentPage - 1, currentPage]
@@ -97,6 +102,7 @@ function PageNavigator({
                 {calculatePageSelector()?.map((index) => {
                     return (
                         <Button
+                            key={index}
                             size={'small'}
                             variant={'outline'}
                             customBorderColor={
