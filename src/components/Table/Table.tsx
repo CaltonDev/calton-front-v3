@@ -140,7 +140,7 @@ const Table = ({
 
     const changeElementsPerPage = (e: any) => {
         setPagination({
-            pageIndex: pagination.pageIndex,
+            pageIndex: 0,
             pageSize: e.value,
         })
 

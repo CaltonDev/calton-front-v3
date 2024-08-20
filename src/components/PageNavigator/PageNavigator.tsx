@@ -40,21 +40,30 @@ function PageNavigator({
     }
 
     const calculatePageSelector = () => {
-        const lastPage = Math.ceil(totalElements / pageElements)
-        if (lastPage - currentPage === 0) {
-            return [0]
-        } else if (lastPage - currentPage === 1) {
-            return [0, 1]
+        const lastPage = Math.max(
+            0,
+            Math.ceil(totalElements / pageElements) - 1
+        )
+
+        if (lastPage < 2) {
+            return Array.from({ length: lastPage + 1 }, (_, i) => i)
         }
-        if (currentPage === 0) return [0, 1, 2]
-        else if (currentPage === lastPage - 1)
-            return [currentPage - 2, currentPage - 1, currentPage]
-        else return [currentPage - 1, currentPage, currentPage + 1]
+
+        if (currentPage === 0) {
+            return [0, 1, 2]
+        }
+
+        if (currentPage === lastPage) {
+            return [lastPage - 2, lastPage - 1, lastPage]
+        }
+
+        return [currentPage - 1, currentPage, currentPage + 1]
     }
 
     useEffect(() => {
         calculatePageSelector()
-    }, [currentPage])
+    }, [currentPage, pageElements])
+
     return (
         <div className={styles.container}>
             <div className={styles.elementsPerPageSelector}>
