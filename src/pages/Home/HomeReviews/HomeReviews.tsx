@@ -17,6 +17,9 @@ import Button from '../../../components/Button/Button'
 import PageNavigator from '../../../components/PageNavigator/PageNavigator'
 import { getNoCodeFromPlatfrom } from '../../../helpers/helpers'
 import FeedbackService from '../../../services/FeedbackService'
+import LineChart from '../../../components/Charts/LineChart/LineChart'
+import ChartConfig from '../../../constants/ChartConfig'
+import CountUp from 'react-countup'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -33,11 +36,18 @@ function HomeReviews() {
         },
     ])
     const [page, setPage] = useState(0)
-    const [displayDownload, setDisplayDownload] = useState(false)
-    const [metadataSelect, setMetadataSelect] = useState(null)
     const search = useSelector((state: RootState) => state.Search.wordSearched)
-    const [customFiltersSelectable, setCustomFiltersSelectable] = useState(null)
-    const user = useSelector((state: RootState) => state.User.user)
+
+    const averageReviewByTime = useSelector(
+        (state: RootState) => state.AverageReviewByTime
+    )
+    const averageByTime = useSelector(
+        (state: RootState) => state.AverageVotoByTime
+    )
+
+    const averageSentimentByTime = useSelector(
+        (state: RootState) => state.AverageSentimentByTime
+    )
 
     const { t } = useTranslation()
 
@@ -63,102 +73,62 @@ function HomeReviews() {
         reloadHome()
     }, [allFilters])*/
 
-    const tierList = [
-        {
-            label: 'The Fork',
-            icon: 'TheFork.svg',
-        },
-        {
-            label: 'Facebook',
-            icon: 'Facebook.svg',
-        },
-        {
-            label: 'Tripadvisor',
-            icon: 'TripadvisorAPI.svg',
-        },
-    ]
-
-    const changeElementsPerPage = (e: any) => {
-        //setCurrentPage(e.target.value)
-    }
-
-    const changePage = (e: any) => {
-        setCurrentPage(e.target.value)
-    }
-
-    const feedbacks = FeedbackService.getFeedbacks(
-        undefined,
-        allFilters,
-        undefined,
-        false,
-        getNoCodeFromPlatfrom(),
-        page * 20,
-        20,
-        sort,
-        search,
-        false,
-        undefined,
-        'xlsx',
-        undefined,
-        undefined,
-        undefined,
-        undefined
-    )
-
-    useEffect(() => {
-        console.log('feedbacks: ', feedbacks)
-    }, [feedbacks])
-
     return (
         <PageContainer>
             <PageHeader heading={t('Home')} subheading={true}></PageHeader>
             <div className={styles.container}>
-                <div className={styles.headerContainer}>
-                    <div className={styles.itemContainer}>
-                        <DonutCard
-                            numberOfReviews={24547}
-                            positive={45}
-                            neutral={15}
-                            negative={40}
-                        />
-                    </div>
-                    <div className={styles.itemContainer}>
-                        <TrackerCard numberOfReply={5463} totalReply={15000} />
-                    </div>
-                    <div className={styles.itemContainer}>
-                        <TierListCard tierList={tierList} />
-                    </div>
-                </div>
-                <div className={styles.navigatorRow}>
-                    <div className={styles.btnContainer}>
-                        <Button
-                            size={'small'}
-                            customColor={'#E9E7EC'}
-                            customTextColor={'black'}
-                        >
-                            {t('Data')}
-                        </Button>
-                        <Button
-                            size={'small'}
-                            customColor={'#E9E7EC'}
-                            customTextColor={'black'}
-                        >
-                            {t('Rating')}
-                        </Button>
-                    </div>
-                    <div>
-                        <PageNavigator
-                            totalElements={255}
-                            currentPage={currentPage}
-                            pageElements={30}
-                            changeElementsPerPage={changeElementsPerPage}
-                            changePage={changePage}
-                        />
-                    </div>
-                </div>
-                <div className={styles.reviewsContainer}>
-                    <ReviewCard />
-                    <ReviewCard />
+                <div className={styles.rowHome}>
+                    <LineChart
+                        dataReady={!averageReviewByTime.isLoading}
+                        color={ChartConfig.color.primary}
+                        title={t('Numero di recensioni')}
+                        styleCounter={styles.countUpReviews}
+                        numberToShow={averageReviewByTime?.data?.totalFeedback}
+                        contentPopover={t('NumeroRecensioniHelper')}
+                        isRound={true}
+                        label={t('Recensioni')}
+                        chartdata={averageReviewByTime?.data}
+                    />
+                    <LineChart
+                        dataReady={!averageByTime.isLoading}
+                        title={t('Voto Medio')}
+                        numberToShow={averageByTime?.data?.tot}
+                        contentPopover={t('VotoMedioHelper')}
+                        label={t('Valutazioni')}
+                        styleCounter={styles.countUpRatings}
+                        chartdata={averageByTime?.data?.values}
+                        decimals={2}
+                    />
+                    <LineChart
+                        dataReady={!averageSentimentByTime.isLoading}
+                        isSentiment={true}
+                        title={t('Sentiment')}
+                        numberToShowComponent={
+                            <>
+                                <CountUp
+                                    separator=","
+                                    className={styles.countUpPos}
+                                    start={0}
+                                    end={averageSentimentByTime?.data?.countPos}
+                                    duration={3}
+                                    decimals={0}
+                                    useEasing={true}
+                                />
+                                <CountUp
+                                    separator=","
+                                    className={styles.countUpNeg}
+                                    start={0}
+                                    end={averageSentimentByTime?.data?.countNeg}
+                                    duration={3}
+                                    decimals={0}
+                                    useEasing={true}
+                                />
+                            </>
+                        }
+                        contentPopover={t('SentimentHelper')}
+                        label={t('Sentiment')}
+                        chartdata={averageSentimentByTime?.data?.chartdata}
+                    />
                 </div>
             </div>
         </PageContainer>

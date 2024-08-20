@@ -1,0 +1,67 @@
+.myHeadingText{
+  margin-left: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 4px;
+  color: #464D69;
+}
+.counterPoint {
+  font-size: 1.40rem;
+  font-weight: 500;
+  color: #727891;
+  margin-right: 10px;
+}
+.myContainerHeading{
+  display: flex;
+}
+.myExtContainerHeading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.countUp {
+  font-size: 1.4rem;
+  color: #255aee;
+}
+
+
+.customRibbornDiv {
+  margin-left: 18px;
+}
+
+.headingTextDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tooltipDiv {
+  display: flex;
+  align-self: center;
+}
+
+
+.tooltipText {
+  color: black;
+  background-color: white;
+  font-size: 0.9em;
+  line-height: 1.25em;
+}
+
+.infoIcon {
+  height: 0.8em;
+  width: 0.8em;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #3f49fc;
+}
+
+.tooltipInnerStyle {
+  padding-top: .5em;
+  padding-bottom:.5em;
+}

@@ -1,0 +1,65 @@
+.rctBlock {
+  width: 32%;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.rctBlockTwoCols {
+  width: 49.5%;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.rctBlockMediaQuery {
+  width: 49.5%;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+@media screen and (max-width: 1600px) {
+  .rctBlockMediaQuery {
+    width: 49.5% !important;
+  }
+}
+.myMargin {
+  margin-bottom: 7%;
+}
+
+.rctBlock:hover {
+  box-shadow: 0 1px 15px 1px rgba(69, 65, 78, 0.08);
+}
+
+@media screen and (max-width: 768px) {
+  .rctBlock {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.4s ease-in-out 0s;
+    margin-bottom: 24px;
+    position: relative;
+  }
+}
+
+/*# sourceMappingURL=LineChart.module.css.map */
