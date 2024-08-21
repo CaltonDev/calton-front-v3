@@ -14,6 +14,7 @@ function TinyAreaChart({
     title,
     isRound,
 }: TinyAreaChartProps) {
+    console.log({ label, chartdata })
     const { t } = useTranslation()
     const showNumbers = useSelector(
         (state: RootState) => state.Settings.showNumbers
@@ -106,10 +107,8 @@ function TinyAreaChart({
             range: [0.02, 0.989],
         },
         label: showNumbers ? CustomConstants.labelAnt : undefined,
-        areaStyle: () => {
-            return {
-                fill: `l(270) 0:${startColor} 0.7:${borderColor} 1:${borderColor}`,
-            }
+        style: {
+            fill: `l(270) 0:${startColor} 0.7:${borderColor} 1:${borderColor}`,
         },
     }
 
