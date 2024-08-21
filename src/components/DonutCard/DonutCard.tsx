@@ -9,6 +9,7 @@ import Tag from '../Tag/Tag'
 import { Pie } from '@ant-design/plots'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
+import { PieConfig } from '@ant-design/plots/lib'
 
 function DonutCard({
     numberOfReviews,
@@ -21,7 +22,7 @@ function DonutCard({
         (state: RootState) => state.Settings.showNumbers
     )
 
-    const config = {
+    const config: PieConfig = {
         data: [
             { type: '分类一', value: 27 },
             { type: '分类二', value: 25 },
@@ -34,8 +35,8 @@ function DonutCard({
         appendPadding: 10,
         legend: false,
         statistic: {
-            title: '',
-            content: '',
+            title: false,
+            content: false,
         },
         label: showNumbers
             ? {

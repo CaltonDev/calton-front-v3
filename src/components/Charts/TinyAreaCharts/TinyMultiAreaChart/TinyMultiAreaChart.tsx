@@ -2,7 +2,7 @@ import React from 'react'
 import AppConfig from '../../../../constants/AppConfig'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
-import { Area } from '@ant-design/plots'
+import { Area, AreaConfig } from '@ant-design/plots'
 import { useSelector } from 'react-redux'
 import CustomConstants from '../../../../constants/CustomConstants'
 import { RootState } from '../../../../store/store'
@@ -17,7 +17,7 @@ function TinyMultiAreaChart({ chartdata, title }: TinyMultiAreaChartProps) {
         (state: RootState) => state.Settings.showNumbers
     )
 
-    const config = {
+    const config: AreaConfig = {
         data: chartdata?.filter((elm) => elm?.type !== 'neu'),
         xField: 'data',
         animation: undefined,
@@ -79,15 +79,16 @@ function TinyMultiAreaChart({ chartdata, title }: TinyMultiAreaChartProps) {
         yAxis: {
             min: 0,
             grid: {
-                visible: false,
+                line: { style: { lineWidth: 0 } },
             },
             tickCount: 4,
         },
         xAxis: {
-            visible: false,
+            line: { style: { lineWidth: 0 } },
             range: [0.02, 0.989],
+            label: null,
         },
-        label: showNumbers ? CustomConstants.labelAnt : undefined,
+        //label: showNumbers ? CustomConstants.labelAnt : undefined,
         areaStyle: (elm: any) => {
             return {
                 fill:

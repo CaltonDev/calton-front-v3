@@ -1,4 +1,4 @@
-import { Line } from '@ant-design/plots'
+import { Line, LineConfig } from '@ant-design/plots'
 import moment from 'moment'
 import AppConfig from '../../../../constants/AppConfig'
 //import TopicsChip from '..'
@@ -63,15 +63,15 @@ function TinyMultiLineChart({
         return []
     }
 
-    const config = {
+    const config: LineConfig = {
         data: calculateValues(data),
         xField,
         yField,
         seriesField,
-        colorField,
-        container: title,
-        id: title,
-        color:
+        //colorField,
+        //container: title,
+        //id: title,
+        /*color:
             colorFunction === 1
                 ? (label: string) => {
                       let color
@@ -102,7 +102,7 @@ function TinyMultiLineChart({
                                     label.toLowerCase()
                             )?.color
                         }
-                      : undefined,
+                      : undefined,*/
         xAxis: {
             range: range,
             nice: true,
@@ -131,11 +131,11 @@ function TinyMultiLineChart({
             : {
                   position: 'bottom',
               },
-        brush: {
+        /*brush: {
             enabled: true,
             action: 'highlight',
-        },
-        label: showNumbers ? CustomConstants.labelAnt : undefined,
+        },*/
+        //label: showNumbers ? CustomConstants.labelAnt : undefined,
         tooltip: {
             formatter: (data: any) => {
                 return {
@@ -151,9 +151,9 @@ function TinyMultiLineChart({
             },
         },
         smooth,
-        point: !smooth && {
+        /*point: !smooth && {
             shape: 'circle',
-        },
+        },*/
         animation: animation
             ? {
                   appear: {

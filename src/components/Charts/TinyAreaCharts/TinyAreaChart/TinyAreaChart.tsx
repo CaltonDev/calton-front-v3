@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
-import { Area } from '@ant-design/plots'
+import { Area, AreaConfig } from '@ant-design/plots'
 import { useSelector } from 'react-redux'
 import CustomConstants from '../../../../constants/CustomConstants'
 import { TinyAreaChartProps } from './TinyAreaChart.interface'
@@ -14,7 +14,6 @@ function TinyAreaChart({
     title,
     isRound,
 }: TinyAreaChartProps) {
-    console.log({ label, chartdata })
     const { t } = useTranslation()
     const showNumbers = useSelector(
         (state: RootState) => state.Settings.showNumbers
@@ -49,7 +48,7 @@ function TinyAreaChart({
         return 5
     }
 
-    const config = {
+    const config: AreaConfig = {
         data: chartdata,
         xField: 'data',
         yField: 'value',
@@ -98,16 +97,17 @@ function TinyAreaChart({
                 },
             },
             grid: {
-                visible: false,
+                line: { style: { lineWidth: 0 } },
             },
         },
         padding: label === t('Valutazioni') ? [10, 0, 45, 25] : [10, 0, 45, 40],
         xAxis: {
-            visible: false,
+            line: { style: { lineWidth: 0 } },
             range: [0.02, 0.989],
+            label: null,
         },
-        label: showNumbers ? CustomConstants.labelAnt : undefined,
-        style: {
+        //label: showNumbers ? CustomConstants.labelAnt : undefined,
+        areaStyle: {
             fill: `l(270) 0:${startColor} 0.7:${borderColor} 1:${borderColor}`,
         },
     }
