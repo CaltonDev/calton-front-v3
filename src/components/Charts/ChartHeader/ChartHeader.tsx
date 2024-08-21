@@ -10,6 +10,7 @@ import { Tooltip } from 'antd'
 import { saveAs } from 'file-saver'
 import { ChartHeaderProps } from './ChartHeader.interface'
 import SvgWrapper from '../../SvgWrapper/SvgWrapper'
+import Typography from '../../Typography/Typography'
 
 function ChartHeader({
     title = '',
@@ -84,9 +85,9 @@ function ChartHeader({
             <div className={styles.myExtContainerHeading}>
                 <div className={styles.myContainerHeading}>
                     <div className={styles.headingTextDiv}>
-                        <p className={styles.myHeadingText}>
+                        <Typography size={'h5'} weight={'bold'}>
                             {!option ? title : t('Sinonimi/Esclusioni')}
-                        </p>
+                        </Typography>
                         {dataReady && isInfoTooltip ? (
                             <div className={styles.tooltipDiv}>
                                 <Tooltip

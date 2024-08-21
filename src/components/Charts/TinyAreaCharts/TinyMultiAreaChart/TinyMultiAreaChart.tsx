@@ -10,7 +10,11 @@ import { TinyMultiAreaChartProps } from './TinyMultiAreaChart.interface'
 
 const { positive, negative, neutrale } = AppConfig.themeColors
 
-function TinyMultiAreaChart({ chartdata, title }: TinyMultiAreaChartProps) {
+function TinyMultiAreaChart({
+    chartdata,
+    title,
+    showYAxis,
+}: TinyMultiAreaChartProps) {
     const { t } = useTranslation()
     const startColor = '#ffffff'
     const showNumbers = useSelector(
@@ -75,7 +79,7 @@ function TinyMultiAreaChart({ chartdata, title }: TinyMultiAreaChartProps) {
             },
         },
         legend: false,
-        padding: [10, 0, 45, 40],
+        padding: !showYAxis ? [0, 20, 45, 0] : [10, 0, 45, 40],
         yAxis: {
             min: 0,
             grid: {

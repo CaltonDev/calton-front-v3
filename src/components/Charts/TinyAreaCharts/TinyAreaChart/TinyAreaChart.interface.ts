@@ -4,4 +4,5 @@ export interface TinyAreaChartProps {
     borderColor?: string
     title: string
     isRound?: boolean
+    showYAxis?: boolean
 }

@@ -13,6 +13,7 @@ function TinyAreaChart({
     borderColor,
     title,
     isRound,
+    showYAxis = false,
 }: TinyAreaChartProps) {
     const { t } = useTranslation()
     const showNumbers = useSelector(
@@ -34,18 +35,6 @@ function TinyAreaChart({
             return min
         }
         return 0
-    }
-
-    const maxCalc = () => {
-        if (chartdata) {
-            const max = Math.max(
-                ...chartdata?.map((element: any) => {
-                    return element['value']
-                })
-            )
-            return Math.round(max * 100) / 100
-        }
-        return 5
     }
 
     const config: AreaConfig = {
@@ -91,16 +80,22 @@ function TinyAreaChart({
         yAxis: {
             min: minCalc(),
             tickCount: 4,
-            label: {
-                formatter: (label: string) => {
-                    return parseFloat(label).toFixed(isRound ? 0 : 1)
-                },
-            },
+            label: showYAxis
+                ? {
+                      formatter: (label: string) => {
+                          return parseFloat(label).toFixed(isRound ? 0 : 1)
+                      },
+                  }
+                : null,
             grid: {
                 line: { style: { lineWidth: 0 } },
             },
         },
-        padding: label === t('Valutazioni') ? [10, 0, 45, 25] : [10, 0, 45, 40],
+        padding: !showYAxis
+            ? [0, 20, 45, 0]
+            : label === t('Valutazioni')
+              ? [10, 0, 45, 25]
+              : [10, 0, 45, 40],
         xAxis: {
             line: { style: { lineWidth: 0 } },
             range: [0.02, 0.989],
