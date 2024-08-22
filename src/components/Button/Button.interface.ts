@@ -1,6 +1,6 @@
 import * as React from 'react'
 export interface ButtonProps {
-    size: 'small' | 'medium' | 'large'
+    size?: 'small' | 'medium' | 'large'
     disabled?: boolean
     iconOnly?: boolean
     rounded?: boolean

@@ -1,0 +1,59 @@
+.container {
+  border-radius: 10px;
+  background: #FFF;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 60%;
+    flex-shrink: 0;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.infoSelectorContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.line {
+  width: 100px;
+  height: 4px;
+  stroke-width: 4px;
+  background: #E1DDFF;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.lineSelected {
+  @extend .line;
+  background: #7161EF;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 80%;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footerText {
+  align-self: end;
+}

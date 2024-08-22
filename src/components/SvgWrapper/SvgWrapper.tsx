@@ -59,6 +59,8 @@ import NeutralSentimentIcon from './SvgIcons/NeutralSentimentIcon'
 import PositiveSentimentIcon from './SvgIcons/PositiveSentimentIcon'
 import SendIconSvg from './SvgIcons/SendIconSvg'
 import RowSelectionSvg from './SvgIcons/RowSelectionSvg'
+import HighlighterSvg from './SvgIcons/HighlighterSvg'
+import BurgerIconDotSvg from './SvgIcons/BurgerIconDotSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -69,6 +71,7 @@ const SvgWrapper = ({
         hasContainer: false,
         containerSize: 0,
         outlined: false,
+        background: '',
     },
     svgBackgroundColor,
     customWidth,
@@ -126,6 +129,8 @@ const SvgWrapper = ({
                     width: customWidth ? customWidth : iconSize,
                     height: customHeight ? customHeight : iconSize,
                     display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 }}
                 className={isClickable ? styles.clickable : ''}
             >
@@ -334,6 +339,10 @@ const SvgWrapper = ({
                     <SendIconSvg />
                 ) : keySvg === 'rowSelection.svg' ? (
                     <RowSelectionSvg />
+                ) : keySvg === 'highlighter.svg' ? (
+                    <HighlighterSvg />
+                ) : keySvg === 'burgerIconDot.svg' ? (
+                    <BurgerIconDotSvg />
                 ) : (
                     <></>
                 )}

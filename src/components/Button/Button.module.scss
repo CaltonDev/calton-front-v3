@@ -24,19 +24,19 @@
 
   &.small {
     height: map-deep-get($button, size, small, height);
-    width: map-deep-get($button, size, small, width);
+    //width: map-deep-get($button, size, small, width);
     font-size: map-deep-get($button, size, small, font-size);
   }
 
   &.medium {
     height: map-deep-get($button, size, medium, height);
-    width: map-deep-get($button, size, medium, width);
+    //width: map-deep-get($button, size, medium, width);
     font-size: map-deep-get($button, size, medium, font-size);
   }
 
   &.large {
     height: map-deep-get($button, size, large, height);
-    width: map-deep-get($button, size, large, width);
+    //width: map-deep-get($button, size, large, width);
     font-size: map-deep-get($button, size, large, font-size);
   }
 
