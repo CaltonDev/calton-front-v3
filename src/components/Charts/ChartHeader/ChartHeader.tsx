@@ -11,6 +11,7 @@ import { saveAs } from 'file-saver'
 import { ChartHeaderProps } from './ChartHeader.interface'
 import SvgWrapper from '../../SvgWrapper/SvgWrapper'
 import Typography from '../../Typography/Typography'
+import TextContainer from '../../TextContainer/TextContainer'
 
 function ChartHeader({
     title = '',
@@ -33,6 +34,7 @@ function ChartHeader({
     isBeta = false,
     isInfoTooltip,
     infoTooltip,
+    textIcon,
 }: ChartHeaderProps) {
     const [downloading, setDownloading] = useState(false)
     const { t, i18n } = useTranslation()
@@ -135,50 +137,51 @@ function ChartHeader({
                     )
                 )}
             </div>
-            <div>
-                <div className="float-right pr-10 hidden-md-down">
-                    <div
-                        style={{ float: 'right' }}
-                        className="featured-section-icon"
-                    >
-                        {textForNumber && (
-                            <span className={classTextForNumber}>
-                                {textForNumber}
-                            </span>
-                        )}
-                        <span className={styles.counterPoint}>
-                            {numberToShowComponent ? (
-                                numberToShowComponent
-                            ) : numberToShow === 0 ? (
-                                <span>0</span>
-                            ) : numberToShow ? (
-                                <CountUp
-                                    separator=","
-                                    className={styleCounter}
-                                    start={0}
-                                    end={numberToShow}
-                                    duration={3}
-                                    decimals={decimals}
-                                    useEasing={true}
-                                />
-                            ) : extraImg && dataReady ? (
-                                <div onClick={() => onClickImg()}>
-                                    <img
-                                        alt={''}
-                                        width={sizeImg}
-                                        src={extraImg}
-                                        style={{
-                                            marginRight: 20,
-                                            cursor: 'pointer',
-                                        }}
-                                    />
-                                </div>
-                            ) : (
-                                ''
-                            )}
-                        </span>
-                    </div>
-                </div>
+            <div style={{ paddingLeft: 5 }}>
+                {textForNumber && (
+                    <span className={classTextForNumber}>{textForNumber}</span>
+                )}
+                <span className={styles.counterPoint}>
+                    {numberToShowComponent ? (
+                        numberToShowComponent
+                    ) : numberToShow === 0 ? (
+                        <TextContainer
+                            label={String(numberToShow)}
+                            textColor={'black'}
+                            color={'#F1F1F1'}
+                            iconSvg={textIcon}
+                            customIconHeight={24}
+                            customIconWidth={24}
+                            rightSideIcon={true}
+                            textSize={'h5'}
+                        />
+                    ) : numberToShow ? (
+                        <TextContainer
+                            label={String(numberToShow)}
+                            textColor={'black'}
+                            color={'#F1F1F1'}
+                            iconSvg={textIcon}
+                            customIconHeight={24}
+                            customIconWidth={24}
+                            rightSideIcon={true}
+                            textSize={'h5'}
+                        />
+                    ) : extraImg && dataReady ? (
+                        <div onClick={() => onClickImg()}>
+                            <img
+                                alt={''}
+                                width={sizeImg}
+                                src={extraImg}
+                                style={{
+                                    marginRight: 20,
+                                    cursor: 'pointer',
+                                }}
+                            />
+                        </div>
+                    ) : (
+                        ''
+                    )}
+                </span>
             </div>
         </>
     )

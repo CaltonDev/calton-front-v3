@@ -19,4 +19,5 @@ export interface ChartHeaderProps {
     isBeta?: boolean
     isInfoTooltip?: boolean
     infoTooltip?: boolean
+    textIcon?: string
 }

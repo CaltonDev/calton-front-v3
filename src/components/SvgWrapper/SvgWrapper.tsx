@@ -61,6 +61,8 @@ import SendIconSvg from './SvgIcons/SendIconSvg'
 import RowSelectionSvg from './SvgIcons/RowSelectionSvg'
 import HighlighterSvg from './SvgIcons/HighlighterSvg'
 import BurgerIconDotSvg from './SvgIcons/BurgerIconDotSvg'
+import StarFilledSvg from './SvgIcons/StarFilledSvg'
+import RadioSentimentSvg from './SvgIcons/RadioSentimentSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -343,6 +345,10 @@ const SvgWrapper = ({
                     <HighlighterSvg />
                 ) : keySvg === 'burgerIconDot.svg' ? (
                     <BurgerIconDotSvg />
+                ) : keySvg === 'star' ? (
+                    <StarFilledSvg />
+                ) : keySvg === 'radioSentiment.svg' ? (
+                    <RadioSentimentSvg fillColor={customColor} />
                 ) : (
                     <></>
                 )}

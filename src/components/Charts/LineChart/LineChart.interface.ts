@@ -19,4 +19,5 @@ export interface LineChartProps {
     isKeyword?: boolean
     isInfoTooltip?: boolean
     infoTooltip?: any
+    textIcon?: string
 }

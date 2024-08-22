@@ -10,17 +10,35 @@ function TextContainer({
     iconSvg,
     textColor = 'white',
     isRating,
+    rightSideIcon = false,
+    customIconWidth,
+    customIconHeight,
+    customTextColor,
+    iconColor,
+    textSize,
 }: TextContainerProps) {
     return (
-        <div className={`${styles.container}`} style={{ background: color }}>
+        <div
+            className={
+                rightSideIcon ? styles.containerReverse : styles.container
+            }
+            style={{ background: color }}
+        >
             {iconSvg && (
-                <SvgWrapper keySvg={iconSvg ? iconSvg : ''} size={'small'} />
+                <SvgWrapper
+                    keySvg={iconSvg ? iconSvg : ''}
+                    size={'small'}
+                    customWidth={customIconWidth}
+                    customHeight={customIconHeight}
+                    customColor={iconColor}
+                />
             )}
             {label !== '' && (
                 <Typography
-                    size={'bodySmall'}
+                    size={textSize ? textSize : 'bodySmall'}
                     weight={'normal'}
                     color={textColor}
+                    customTextColor={customTextColor}
                 >
                     {label}
                 </Typography>

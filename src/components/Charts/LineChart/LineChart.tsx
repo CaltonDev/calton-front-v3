@@ -26,6 +26,7 @@ function LineChart({
     isKeyword,
     isInfoTooltip,
     infoTooltip,
+    textIcon,
 }: LineChartProps) {
     return (
         <>
@@ -50,6 +51,7 @@ function LineChart({
                     isAnt={true}
                     isInfoTooltip={isInfoTooltip}
                     infoTooltip={infoTooltip}
+                    textIcon={textIcon}
                 />
                 {isSentiment ? (
                     <TinyMultiAreaChart title={title} chartdata={chartdata} />

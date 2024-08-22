@@ -1,9 +1,13 @@
 .container {
   display: inline-flex;
-  height: 16px;
   padding: 5px 10px;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
   border-radius: 5px;
+}
+
+.containerReverse {
+  @extend .container;
+  flex-direction: row-reverse;
 }

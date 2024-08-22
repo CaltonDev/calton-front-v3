@@ -21,6 +21,7 @@ import LineChart from '../../../components/Charts/LineChart/LineChart'
 import ChartConfig from '../../../constants/ChartConfig'
 import CountUp from 'react-countup'
 import InfoCardViewer from '../../../components/InfoCardViewer/InfoCardViewer'
+import TextContainer from '../../../components/TextContainer/TextContainer'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -65,14 +66,14 @@ function HomeReviews() {
             t
         )
     }
-    /*
+
     useEffect(() => {
         ServiceWrapper.wrapperLoadFilters(allFilters, dispatch, platformType, t)
     }, [])
 
     Hooks.useDeepCompareEffect(() => {
         reloadHome()
-    }, [allFilters])*/
+    }, [allFilters])
 
     const AiData = [
         {
@@ -92,6 +93,8 @@ function HomeReviews() {
             body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         },
     ]
+
+    console.log('avg: ', averageByTime)
     return (
         <PageContainer>
             <PageHeader heading={t('Home')} subheading={true}></PageHeader>
@@ -120,32 +123,41 @@ function HomeReviews() {
                         styleCounter={styles.countUpRatings}
                         chartdata={averageByTime?.data?.values}
                         decimals={2}
+                        textIcon={'star'}
                     />
                     <LineChart
                         dataReady={!averageSentimentByTime.isLoading}
                         isSentiment={true}
                         title={t('Sentiment')}
                         numberToShowComponent={
-                            <>
-                                <CountUp
-                                    separator=","
-                                    className={styles.countUpPos}
-                                    start={0}
-                                    end={averageSentimentByTime?.data?.countPos}
-                                    duration={3}
-                                    decimals={0}
-                                    useEasing={true}
+                            <div className={styles.showComponentContainer}>
+                                <TextContainer
+                                    label={String(
+                                        averageSentimentByTime?.data?.countPos
+                                    )}
+                                    customTextColor={'#34E0A1'}
+                                    color={'#F1F1F1'}
+                                    iconSvg={'radioSentiment.svg'}
+                                    iconColor={'#34E0A1'}
+                                    customIconHeight={24}
+                                    customIconWidth={24}
+                                    rightSideIcon={true}
+                                    textSize={'h5'}
                                 />
-                                <CountUp
-                                    separator=","
-                                    className={styles.countUpNeg}
-                                    start={0}
-                                    end={averageSentimentByTime?.data?.countNeg}
-                                    duration={3}
-                                    decimals={0}
-                                    useEasing={true}
+                                <TextContainer
+                                    label={String(
+                                        averageSentimentByTime?.data?.countNeg
+                                    )}
+                                    customTextColor={'#ff6960'}
+                                    color={'#F1F1F1'}
+                                    iconSvg={'radioSentiment.svg'}
+                                    iconColor={'#FF608B'}
+                                    customIconHeight={24}
+                                    customIconWidth={24}
+                                    rightSideIcon={true}
+                                    textSize={'h5'}
                                 />
-                            </>
+                            </div>
                         }
                         contentPopover={t('SentimentHelper')}
                         label={t('Sentiment')}
