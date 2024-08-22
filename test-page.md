@@ -4,7 +4,7 @@ description: test
 
 # test page
 
-test
+test page
 
 ```typescript
 // Some code
