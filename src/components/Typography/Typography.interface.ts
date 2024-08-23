@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface TypographyProps {
     size:
         | 'h1'
@@ -28,5 +30,7 @@ export interface TypographyProps {
     underline?: boolean
     uppercase?: boolean
     customTextColor?: string
+    customFontSize?: number
     children: string
+    onClick?: React.MouseEventHandler<HTMLSpanElement>
 }

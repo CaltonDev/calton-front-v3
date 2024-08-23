@@ -3,6 +3,7 @@ import { ButtonProps } from './Button.interface'
 import React from 'react'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import { getBackgroundColor } from '../../utils/utils'
+import { marginRight } from 'html2canvas/dist/types/css/property-descriptors/margin'
 
 const Button = ({
     size,
@@ -21,6 +22,7 @@ const Button = ({
     customBorderColor,
     customWidth,
     customHeight,
+    icon,
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
     const sizeClass = size ? styles[size] : ''
@@ -57,21 +59,29 @@ const Button = ({
             >
                 {children}
                 {arrowPlacement !== 'none' && (
-                    <SvgWrapper
-                        size={size}
-                        color={
-                            variant === 'solid'
-                                ? 'primary'
-                                : disabled
-                                  ? 'disabled'
-                                  : 'secondary'
-                        }
-                        keySvg={
-                            arrowPlacement === 'left'
-                                ? 'arrowBack'
-                                : 'arrowForward'
-                        }
-                    />
+                    <div
+                        style={{
+                            marginRight: arrowPlacement === 'left' ? 5 : '',
+                        }}
+                    >
+                        <SvgWrapper
+                            size={size}
+                            color={
+                                variant === 'solid'
+                                    ? 'primary'
+                                    : disabled
+                                      ? 'disabled'
+                                      : 'secondary'
+                            }
+                            keySvg={
+                                icon
+                                    ? icon
+                                    : arrowPlacement === 'left'
+                                      ? 'arrowBack'
+                                      : 'arrowForward'
+                            }
+                        />
+                    </div>
                 )}
             </button>
         </>

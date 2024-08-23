@@ -63,6 +63,7 @@ import HighlighterSvg from './SvgIcons/HighlighterSvg'
 import BurgerIconDotSvg from './SvgIcons/BurgerIconDotSvg'
 import StarFilledSvg from './SvgIcons/StarFilledSvg'
 import RadioSentimentSvg from './SvgIcons/RadioSentimentSvg'
+import GoogleSvg from './SvgIcons/GoogleSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -281,6 +282,8 @@ const SvgWrapper = ({
                     <FacebookSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'GoogleMyBusiness.svg' ? (
                     <GoogleMyBusinessSvg />
+                ) : keySvg === 'Google.svg' ? (
+                    <GoogleSvg />
                 ) : keySvg === 'Trustpilot.svg' ? (
                     <TrustpilotSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'Trusted shops.svg' ? (

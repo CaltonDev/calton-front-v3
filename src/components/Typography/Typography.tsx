@@ -11,6 +11,8 @@ const Typography = ({
     uppercase,
     children,
     customTextColor,
+    customFontSize,
+    onClick,
 }: TypographyProps) => {
     let className = styles[`${size}-${weight}-${color}`]
 
@@ -31,7 +33,15 @@ const Typography = ({
 
     return createElement(
         HeadingTag,
-        { style: { color: customTextColor ? customTextColor : '' }, className },
+        {
+            style: {
+                color: customTextColor ? customTextColor : '',
+                fontSize: customFontSize ? customFontSize : '',
+                cursor: onClick ? 'pointer' : '',
+            },
+            className,
+            onClick,
+        },
         children
     )
 }

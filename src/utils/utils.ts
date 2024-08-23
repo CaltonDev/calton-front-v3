@@ -109,5 +109,7 @@ export const getBackgroundColor = (platformType: string) => {
           ? surveysColor
           : platformType === 'competitor'
             ? competitorsColor
-            : listingsColor
+            : platformType === 'white'
+              ? '#FFFFFF'
+              : listingsColor
 }

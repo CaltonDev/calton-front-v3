@@ -10,7 +10,7 @@ import AppConfig from '../../constants/AppConfig'
 import { useTranslation } from 'react-i18next'
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
-import CaltonLogoWh from '../../assets/img/Logo Calton Mascotte.png'
+import logoFull from '../../assets/img/logo-full.png'
 import moment from 'moment'
 import { setDistribuzioniVoti } from '../../store/home/distribuzioneVotiSlice'
 import { setDistribuzioniRacc } from '../../store/home/distribuzioneRaccomandazioni'
@@ -46,6 +46,11 @@ import {
 import { setCurrentToasts, showToast } from '../../store/toast/errorToastSlice'
 import { resetFilters } from '../../store/filters/filtersSlice'
 import { resetSocketMessage } from '../../store/socket/socketSlice'
+import Typography from '../../components/Typography/Typography'
+import { Formik } from 'formik'
+import { Form, FormItem } from 'formik-antd'
+import { isWhiteSpaceString } from '../../helpers/helpers'
+import Checkbox from '../../components/Checkbox/Checkbox'
 
 function Login() {
     const { t, i18n } = useTranslation()
@@ -148,9 +153,153 @@ function Login() {
         setIsLoading(false)
     }
 
+    const handleKeyDown = (event: any) => {
+        if (event.key === 'Enter') {
+            event.preventDefault()
+        }
+    }
+
+    function validatePostFields(values: string, fieldType: string) {
+        if (isWhiteSpaceString(values)) {
+            return t('Obbligatorio')
+        }
+
+        if (values?.length === 0) {
+            return t('Obbligatorio')
+        }
+
+        return undefined
+    }
     return (
-        <div className={styles.primaryBackground}>
-            <div className={styles.centerItem}>
+        <div className={styles.container}>
+            <div className={styles.leftContainer}></div>
+            <div className={styles.rightContainer}>
+                <div className={styles.centerItem}>
+                    <img src={logoFull} alt="session-logo" height="110" />
+                </div>
+                <div>
+                    <Typography size={'h1'} weight={'bold'} color={'blue'}>
+                        {t('Accedi')}
+                    </Typography>
+                    <Typography size={'h5'} weight={'light'} color={'primary'}>
+                        {t('Non so se c’è bisogno di un sottotitolo.')}
+                    </Typography>
+                </div>
+                <Formik
+                    initialValues={{
+                        email: email,
+                        password: password,
+                    }}
+                    onSubmit={async (values, actions) => {
+                        //await handlePublishPost(actions)
+                        actions.setSubmitting(false)
+                    }}
+                >
+                    {(formikProps) => {
+                        return (
+                            <Form onKeyDown={handleKeyDown}>
+                                <div className={styles.inputDiv}>
+                                    <Typography
+                                        size={'bodySmall'}
+                                        weight={'light'}
+                                    >
+                                        {t('E-mail')}
+                                    </Typography>
+                                    <FormItem
+                                        name="email"
+                                        required={true}
+                                        validate={(value) =>
+                                            validatePostFields(value, 'email')
+                                        }
+                                    >
+                                        <Input
+                                            type={'text'}
+                                            value={email}
+                                            placeholder={t('La tua email...')}
+                                            onChange={changeEmail}
+                                        />
+                                    </FormItem>
+                                </div>
+                                <div>
+                                    <Typography
+                                        size={'bodySmall'}
+                                        weight={'light'}
+                                    >
+                                        {t('Password')}
+                                    </Typography>
+                                    <FormItem
+                                        name="password"
+                                        required={true}
+                                        validate={(value) =>
+                                            validatePostFields(
+                                                value,
+                                                'password'
+                                            )
+                                        }
+                                    >
+                                        <Input
+                                            type={'text'}
+                                            value={email}
+                                            placeholder={t(
+                                                'La tua password...'
+                                            )}
+                                            onChange={changePwd}
+                                        />
+                                    </FormItem>
+                                </div>
+                            </Form>
+                        )
+                    }}
+                </Formik>
+
+                <div className={styles.recoverPasswordDiv}>
+                    <Checkbox title={t('Ricorda password')} />
+                    <Typography
+                        size={'bodySmall'}
+                        weight={'bold'}
+                        color={'blue'}
+                    >
+                        {t('Password dimenticata')}
+                    </Typography>
+                </div>
+                <div className={styles.centerItemSmall}>
+                    <Button onClick={handleSubmit} size={'medium'} fullWidth>
+                        {t('Login')}
+                    </Button>
+                    <div className={styles.signUpRow}>
+                        <Typography size={'bodyXSmall'} weight={'light'}>
+                            {t('Non sei ancora registrato?')}
+                        </Typography>
+                        <Typography
+                            size={'bodyXSmall'}
+                            weight={'light'}
+                            color={'blue'}
+                            onClick={() => console.log('clicked')}
+                        >
+                            {t('Registrati qui')}
+                        </Typography>
+                    </div>
+                </div>
+                <div className={styles.divider}>
+                    <div className={styles.line}></div>
+                    <Typography size={'bodyMedium'} weight={'bold'}>
+                        {t('or')}
+                    </Typography>
+                    <div className={styles.line}></div>
+                </div>
+                <Button
+                    onClick={handleSubmit}
+                    size={'medium'}
+                    fullWidth
+                    color={'white'}
+                    customTextColor={'#3F49FC'}
+                    arrowPlacement={'left'}
+                    icon={'Google.svg'}
+                >
+                    {t('Login con Google')}
+                </Button>
+            </div>
+            {/*<div className={styles.centerItem}>
                 <img src={CaltonLogoWh} alt="session-logo" height="150" />
             </div>
             <div className={styles.centerItem}>
@@ -191,7 +340,7 @@ function Login() {
                         {t('Registrati')}
                     </Button>
                 </div>
-            </div>
+            </div>*/}
         </div>
     )
 }
