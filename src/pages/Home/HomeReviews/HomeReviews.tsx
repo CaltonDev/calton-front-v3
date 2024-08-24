@@ -22,6 +22,13 @@ import ChartConfig from '../../../constants/ChartConfig'
 import CountUp from 'react-countup'
 import InfoCardViewer from '../../../components/InfoCardViewer/InfoCardViewer'
 import TextContainer from '../../../components/TextContainer/TextContainer'
+import HomeService from '../../../services/HomeService'
+import { setBubbles } from '../../../store/home/bubbleSlice'
+import { setSources } from '../../../store/home/sourceSlice'
+import { setAverageVotoByTime } from '../../../store/home/averageVotoByTimeSlice'
+import { setAverageReviewByTime } from '../../../store/home/averageReviewByTime'
+import { setAverageSentimentByTime } from '../../../store/home/averageSentimentByTime'
+import { setDistribuzioniRacc } from '../../../store/home/distribuzioneRaccomandazioni'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -55,6 +62,7 @@ function HomeReviews() {
 
     const [currentPage, setCurrentPage] = useState(1)
 
+    /*
     const reloadHome = async () => {
         await ServiceWrapper.wrapperReloadHome(
             allFilters,
@@ -66,14 +74,80 @@ function HomeReviews() {
             t
         )
     }
+      Hooks.useDeepCompareEffect(() => {
+        reloadHome()
+    }, [allFilters])
+*/
 
+    //change wrapperReloadHome with singles react query
+    const bubbleData = HomeService.wordsCountBUBBLE(
+        allFilters,
+        20,
+        getNoCodeFromPlatfrom()
+    )
+
+    const sourcesHomeData = HomeService.getSourcesHome(
+        allFilters,
+        getNoCodeFromPlatfrom(),
+        undefined,
+        undefined,
+        undefined,
+        true,
+        true
+    )
+
+    const avgVotoByTimeData = HomeService.getAverageByTime(
+        allFilters,
+        'rating',
+        'Date',
+        getNoCodeFromPlatfrom(),
+        undefined,
+        true,
+        undefined
+    )
+
+    const avgSentimentByTimeData = HomeService.getAverageByTime(
+        allFilters,
+        'sentiment',
+        null,
+        getNoCodeFromPlatfrom(),
+        undefined,
+        true,
+        undefined
+    )
+
+    const avgReviewByTimeData = HomeService.distribuzioneRecensioniPerData(
+        allFilters,
+        getNoCodeFromPlatfrom(),
+        undefined,
+        true
+    )
+
+    const distribuzioneRecensioniData =
+        HomeService.getDistributionReccomandation(
+            allFilters,
+            ['tipo_raccomandazione'],
+            'Date',
+            getNoCodeFromPlatfrom(),
+            true
+        )
+
+    console.log('TEst: ', avgReviewByTimeData)
+    useEffect(() => {
+        if (bubbleData.status === 'success')
+            dispatch(setBubbles(bubbleData?.data?.data))
+        if (avgVotoByTimeData.status === 'success')
+            dispatch(setAverageVotoByTime(avgVotoByTimeData?.data?.data))
+
+        /*dispatch(setSources(sourcesHomeData?.data?.data))
+        dispatch(setAverageVotoByTime(avgVotoByTimeData?.data?.data))
+        dispatch(setAverageReviewByTime(avgReviewByTimeData?.data?.data))
+        dispatch(setAverageSentimentByTime(avgSentimentByTimeData?.data?.data))
+        dispatch(setDistribuzioniRacc(distribuzioneRecensioniData?.data?.data))*/
+    }, [bubbleData, avgVotoByTimeData])
     useEffect(() => {
         ServiceWrapper.wrapperLoadFilters(allFilters, dispatch, platformType, t)
     }, [])
-
-    Hooks.useDeepCompareEffect(() => {
-        reloadHome()
-    }, [allFilters])
 
     const AiData = [
         {
@@ -94,7 +168,6 @@ function HomeReviews() {
         },
     ]
 
-    console.log('avg: ', averageByTime)
     return (
         <PageContainer>
             <PageHeader heading={t('Home')} subheading={true}></PageHeader>

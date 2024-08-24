@@ -2,6 +2,7 @@ import apiService from './api/apiService'
 import { getNoCodeFromPlatfrom } from '../helpers/helpers'
 import { getHeaders } from './api/headers'
 import { AllFiltersInterface } from './interfaces/interfaces'
+import { useQuery, useQueryClient } from 'react-query'
 
 function getAverageByTime(
     allFilters: AllFiltersInterface,
@@ -42,10 +43,18 @@ function getAverageByTime(
         isMultiChoice,
         idProducts: selectedProducts,
     }
-    return apiService.apiAnalysisStandard.post(
-        '/getAverageByTime',
-        body,
-        getHeaders()
+
+    return useQuery<any, Error>(
+        ['averageByTime', 'averageByTimeId'],
+        () =>
+            apiService.apiAnalysisStandard.post(
+                '/getAverageByTime',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
@@ -157,15 +166,27 @@ function wordsCountBUBBLE(
         code,
         idProducts: selectedProducts,
     }
-    return apiService.apiAnalysisStandard.post('/wordCloud', body, getHeaders())
+
+    return useQuery<any, Error>(
+        ['bubbles', 'bubblesId'],
+        () =>
+            apiService.apiAnalysisStandard.post(
+                '/wordCloud',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function distribuzioneRecensioniPerData(
     allFilters: AllFiltersInterface,
-    nocode: string | undefined = undefined,
+    nocode: number[] | undefined = undefined,
     columns: any[] = [],
     returnAnt = false,
-    idSources: string[]
+    idSources?: string[]
 ) {
     const {
         startDate,
@@ -193,10 +214,17 @@ function distribuzioneRecensioniPerData(
         returnAnt,
         idProducts: selectedProducts,
     }
-    return apiService.apiAnalysisStandard.post(
-        '/ColPerData',
-        body,
-        getHeaders()
+    return useQuery<any, Error>(
+        ['distribuzioneRecensioniPerData', 'distribuzioneRecensioniPerDataId'],
+        () =>
+            apiService.apiAnalysisStandard.post(
+                '/ColPerData',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
@@ -234,20 +262,30 @@ function getSourcesHome(
         download,
         includeTypeformInfo: includeTypeformInfo,
         columnDateToGroup,
-        groupby: null,
+        groupby: groupby,
         idProducts: selectedProducts,
         returnAnt,
         fromHome,
     }
-
-    return apiService.apiSource.post('/getSourcesFiltered', body, getHeaders())
+    return useQuery<any, Error>(
+        ['sourcesHome', 'sourcesHomeId'],
+        () =>
+            apiService.apiSource.post(
+                '/getSourcesFiltered',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function getDistributionReccomandation(
     allFilters: AllFiltersInterface,
     colName: string[] = ['tipo_raccomandazione'],
     columnDateToGroup = 'Date',
-    code: string,
+    code: number[],
     returnAnt: boolean
 ) {
     const {
@@ -273,10 +311,18 @@ function getDistributionReccomandation(
         idProducts: selectedProducts,
         returnAnt,
     }
-    return apiService.apiAnalysisStandard.post(
-        '/countColumn',
-        body,
-        getHeaders()
+
+    return useQuery<any, Error>(
+        ['distribuzioneReccomendation', 'distribuzioneReccomendationId'],
+        () =>
+            apiService.apiAnalysisStandard.post(
+                '/countColumn',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
