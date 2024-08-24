@@ -13,6 +13,8 @@ import {
 const Input = ({
     size,
     disabled = false,
+    name,
+    onBlur,
     color = 'primary',
     onChange,
     placeholder = '',
@@ -82,6 +84,8 @@ const Input = ({
                 </div>
             )}
             <input
+                name={name}
+                onBlur={onBlur}
                 className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${floatingDisplayClass}`}
                 style={{
                     paddingLeft: prefix ? iconSize + 5 : '',

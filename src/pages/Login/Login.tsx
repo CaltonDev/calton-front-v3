@@ -209,6 +209,7 @@ function Login() {
                     }}
                     onSubmit={async (values, actions) => {
                         //await handlePublishPost(actions)
+                        console.log(values)
                         actions.setSubmitting(false)
                     }}
                 >
@@ -255,7 +256,7 @@ function Login() {
                                     >
                                         {t('Password')}
                                     </Typography>
-                                    <FormItem
+                                    {/*<FormItem
                                         name="password"
                                         required={true}
                                         validate={(value) =>
@@ -273,59 +274,69 @@ function Login() {
                                             )}
                                             onChange={changePwd}
                                         />
-                                    </FormItem>
+                                    </FormItem>*/}
                                 </div>
+
+                                <div className={styles.recoverPasswordDiv}>
+                                    {/*
+                                    <Checkbox title={t('Ricorda password')} />
+*/}
+                                    <Typography
+                                        size={'bodySmall'}
+                                        weight={'bold'}
+                                        color={'blue'}
+                                    >
+                                        {t('Password dimenticata')}
+                                    </Typography>
+                                </div>
+                                <div className={styles.centerItemSmall}>
+                                    <Button size={'medium'} fullWidth>
+                                        {t('Login')}
+                                    </Button>
+                                    <div className={styles.signUpRow}>
+                                        <Typography
+                                            size={'bodyXSmall'}
+                                            weight={'light'}
+                                        >
+                                            {t('Non sei ancora registrato?')}
+                                        </Typography>
+                                        <Typography
+                                            size={'bodyXSmall'}
+                                            weight={'light'}
+                                            color={'blue'}
+                                            onClick={() =>
+                                                console.log('clicked')
+                                            }
+                                        >
+                                            {t('Registrati qui')}
+                                        </Typography>
+                                    </div>
+                                </div>
+                                <div className={styles.divider}>
+                                    <div className={styles.line}></div>
+                                    <Typography
+                                        size={'bodyMedium'}
+                                        weight={'bold'}
+                                    >
+                                        {t('or')}
+                                    </Typography>
+                                    <div className={styles.line}></div>
+                                </div>
+                                <Button
+                                    //onClick={handleSubmit}
+                                    size={'medium'}
+                                    fullWidth
+                                    color={'white'}
+                                    customTextColor={'#3F49FC'}
+                                    arrowPlacement={'left'}
+                                    icon={'Google.svg'}
+                                >
+                                    {t('Login con Google')}
+                                </Button>
                             </Form>
                         )
                     }}
                 </Formik>
-
-                <div className={styles.recoverPasswordDiv}>
-                    <Checkbox title={t('Ricorda password')} />
-                    <Typography
-                        size={'bodySmall'}
-                        weight={'bold'}
-                        color={'blue'}
-                    >
-                        {t('Password dimenticata')}
-                    </Typography>
-                </div>
-                <div className={styles.centerItemSmall}>
-                    <Button onClick={handleSubmit} size={'medium'} fullWidth>
-                        {t('Login')}
-                    </Button>
-                    <div className={styles.signUpRow}>
-                        <Typography size={'bodyXSmall'} weight={'light'}>
-                            {t('Non sei ancora registrato?')}
-                        </Typography>
-                        <Typography
-                            size={'bodyXSmall'}
-                            weight={'light'}
-                            color={'blue'}
-                            onClick={() => console.log('clicked')}
-                        >
-                            {t('Registrati qui')}
-                        </Typography>
-                    </div>
-                </div>
-                <div className={styles.divider}>
-                    <div className={styles.line}></div>
-                    <Typography size={'bodyMedium'} weight={'bold'}>
-                        {t('or')}
-                    </Typography>
-                    <div className={styles.line}></div>
-                </div>
-                <Button
-                    onClick={handleSubmit}
-                    size={'medium'}
-                    fullWidth
-                    color={'white'}
-                    customTextColor={'#3F49FC'}
-                    arrowPlacement={'left'}
-                    icon={'Google.svg'}
-                >
-                    {t('Login con Google')}
-                </Button>
             </div>
             {/*<div className={styles.centerItem}>
                 <img src={CaltonLogoWh} alt="session-logo" height="150" />
