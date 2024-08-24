@@ -47,7 +47,7 @@ import { setCurrentToasts, showToast } from '../../store/toast/errorToastSlice'
 import { resetFilters } from '../../store/filters/filtersSlice'
 import { resetSocketMessage } from '../../store/socket/socketSlice'
 import Typography from '../../components/Typography/Typography'
-import { Formik } from 'formik'
+import { Field, Formik } from 'formik'
 import { Form, FormItem } from 'formik-antd'
 import { isWhiteSpaceString } from '../../helpers/helpers'
 import Checkbox from '../../components/Checkbox/Checkbox'
@@ -170,6 +170,23 @@ function Login() {
 
         return undefined
     }
+
+    const CustomInputComponent = ({
+        field, // { name, value, onChange, onBlur }
+        form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+        ...props
+    }: {
+        field: any
+        form: any
+    }) => (
+        <div>
+            <Input {...field} {...props} />
+            {touched[field.name] && errors[field.name] && (
+                <div className="error">{errors[field.name]}</div>
+            )}
+        </div>
+    )
+
     return (
         <div className={styles.container}>
             <div className={styles.leftContainer}></div>
@@ -205,20 +222,31 @@ function Login() {
                                     >
                                         {t('E-mail')}
                                     </Typography>
-                                    <FormItem
+                                    <Field
                                         name="email"
-                                        required={true}
-                                        validate={(value) =>
-                                            validatePostFields(value, 'email')
-                                        }
-                                    >
-                                        <Input
-                                            type={'text'}
-                                            value={email}
-                                            placeholder={t('La tua email...')}
-                                            onChange={changeEmail}
-                                        />
-                                    </FormItem>
+                                        component={CustomInputComponent}
+                                        placeholder="Email Name"
+                                    />
+
+                                    {/*<FormItem
+                                            name="email"
+                                            required={true}
+                                            validate={(value) =>
+                                                validatePostFields(
+                                                    value,
+                                                    'email'
+                                                )
+                                            }
+                                        >
+                                            <Input
+                                                type={'text'}
+                                                value={email}
+                                                placeholder={t(
+                                                    'La tua email...'
+                                                )}
+                                                onChange={changeEmail}
+                                            />
+                                        </FormItem>*/}
                                 </div>
                                 <div>
                                     <Typography
