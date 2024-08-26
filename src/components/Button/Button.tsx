@@ -41,6 +41,7 @@ const Button = ({
     return (
         <>
             <button
+                type={'submit'}
                 className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass} ${arrowDirection} ${iconOnlyClass} ${roundedClass} ${fullWidthClass}`}
                 style={{
                     background: customColor
