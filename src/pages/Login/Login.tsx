@@ -8,7 +8,6 @@ import { v5 as uuidv5 } from 'uuid'
 import AppConfig from '../../constants/AppConfig'
 import { useTranslation } from 'react-i18next'
 import Button from '../../components/Button/Button'
-import Input from '../../components/Input/Input'
 import logoFull from '../../assets/img/logo-full.png'
 import moment from 'moment'
 import { setDistribuzioniVoti } from '../../store/home/distribuzioneVotiSlice'
@@ -47,9 +46,10 @@ import { resetFilters } from '../../store/filters/filtersSlice'
 import { resetSocketMessage } from '../../store/socket/socketSlice'
 import Typography from '../../components/Typography/Typography'
 import { Field, Formik } from 'formik'
-import { Form, FormItem } from 'formik-antd'
+import { Form } from 'formik-antd'
 import { isEmail, isWhiteSpaceString } from '../../helpers/helpers'
 import Checkbox from '../../components/Checkbox/Checkbox'
+import FormInputWrapper from '../../components/FormInputWrapper/FormInputWrapper'
 
 function Login() {
     const { t, i18n } = useTranslation()
@@ -167,35 +167,6 @@ function Login() {
         return undefined
     }
 
-    const CustomInputComponent = ({
-        field, // { name, value, onChange, onBlur }
-        form: { touched, errors, formikProps }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-        ...props
-    }: {
-        field: any
-        form: any
-    }) => {
-        useEffect(() => {
-            formikProps?.setFieldValue(field.name, field.value)
-            formikProps?.setFieldTouched(field.name, true)
-        }, [field.value])
-
-        return (
-            <div>
-                <Input {...field} {...props} />
-                {touched[field.name] && errors[field.name] && (
-                    <Typography
-                        size={'bodySmall'}
-                        weight={'normal'}
-                        customTextColor={'#FF3739'}
-                    >
-                        {errors[field.name]}
-                    </Typography>
-                )}
-            </div>
-        )
-    }
-
     return (
         <div className={styles.container}>
             <div className={styles.leftContainer}></div>
@@ -237,11 +208,11 @@ function Login() {
                                             size={'bodySmall'}
                                             weight={'light'}
                                         >
-                                            {t('E-mail')}
+                                            {t('E-mail') + '*'}
                                         </Typography>
                                         <Field
                                             name="email"
-                                            component={CustomInputComponent}
+                                            component={FormInputWrapper}
                                             placeholder="Email Name"
                                             formikProps={formikProps}
                                             required={true}
@@ -253,16 +224,16 @@ function Login() {
                                             }
                                         />
                                     </div>
-                                    <div>
+                                    <div className={styles.inputDiv}>
                                         <Typography
                                             size={'bodySmall'}
                                             weight={'light'}
                                         >
-                                            {t('Password')}
+                                            {t('Password') + '*'}
                                         </Typography>
                                         <Field
                                             name="password"
-                                            component={CustomInputComponent}
+                                            component={FormInputWrapper}
                                             placeholder="Your Password"
                                             validate={(value: any) =>
                                                 validateLoginFields(
@@ -330,7 +301,7 @@ function Login() {
                                         arrowPlacement={'left'}
                                         icon={'Google.svg'}
                                     >
-                                        {t('Login con Google')}
+                                        {t('FormInputWrapper con Google')}
                                     </Button>
                                 </Form>
                             )
