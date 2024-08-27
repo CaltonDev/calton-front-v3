@@ -7,7 +7,7 @@ import { useQuery, useQueryClient } from 'react-query'
 function getAverageByTime(
     allFilters: AllFiltersInterface,
     type: string,
-    columnDateToGroup: string | null,
+    columnDateToGroup: string | undefined,
     nocode = getNoCodeFromPlatfrom(),
     columns: any[] | undefined = undefined,
     returnAnt = false,
@@ -45,7 +45,7 @@ function getAverageByTime(
     }
 
     return useQuery<any, Error>(
-        ['averageByTime', 'averageByTimeId'],
+        ['averageByTime', `averageByTimeId + ${type}`],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/getAverageByTime',
