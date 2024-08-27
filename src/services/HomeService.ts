@@ -45,7 +45,7 @@ function getAverageByTime(
     }
 
     return useQuery<any, Error>(
-        ['averageByTime', `averageByTimeId + ${type}`],
+        ['averageByTime', `averageByTimeId + ${type}`, allFilters.toString()],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/getAverageByTime',
@@ -215,7 +215,11 @@ function distribuzioneRecensioniPerData(
         idProducts: selectedProducts,
     }
     return useQuery<any, Error>(
-        ['distribuzioneRecensioniPerData', 'distribuzioneRecensioniPerDataId'],
+        [
+            'distribuzioneRecensioniPerData',
+            'distribuzioneRecensioniPerDataId',
+            allFilters.toString(),
+        ],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/ColPerData',
