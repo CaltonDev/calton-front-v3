@@ -20,6 +20,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 50px 0;
 }
 
 .inputDiv {
@@ -32,6 +33,17 @@
   display: flex;
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
 
 .primaryBackground{
   background: #3e49fb;

@@ -1,9 +1,8 @@
 import styles from './Login.module.scss'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginService from '../../services/LoginService'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setUser } from '../../store/user/userSlice'
-import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v5 as uuidv5 } from 'uuid'
 import AppConfig from '../../constants/AppConfig'
@@ -49,14 +48,12 @@ import { resetSocketMessage } from '../../store/socket/socketSlice'
 import Typography from '../../components/Typography/Typography'
 import { Field, Formik } from 'formik'
 import { Form, FormItem } from 'formik-antd'
-import { isWhiteSpaceString } from '../../helpers/helpers'
+import { isEmail, isWhiteSpaceString } from '../../helpers/helpers'
 import Checkbox from '../../components/Checkbox/Checkbox'
 
 function Login() {
     const { t, i18n } = useTranslation()
     const dispatch = useDispatch()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const history = useNavigate()
 
@@ -99,16 +96,11 @@ function Login() {
         dispatch(showToast({ type: 7 }))
     }, [])
 
-    const handleSubmit = async (e: any) => {
-        e.preventDefault()
-        await login()
-    }
-
-    const changeEmail = (e: any) => {
-        setEmail(e.target.value)
-    }
-    const changePwd = (e: any) => {
-        setPassword(e.target.value)
+    const handleSubmit = async (values: {
+        email: string
+        password: string
+    }) => {
+        await login(values.email, values.password)
     }
 
     const changeLanguage = (lang: string) => {
@@ -128,7 +120,7 @@ function Login() {
         }
     }
 
-    const login = async () => {
+    const login = async (email: string, password: string) => {
         setIsLoading(true)
         try {
             const response = await LoginService.login(email, password)
@@ -159,7 +151,11 @@ function Login() {
         }
     }
 
-    function validatePostFields(values: string, fieldType: string) {
+    function validateLoginFields(values: string, fieldType: string) {
+        if (fieldType === 'email' && !isEmail(values)) {
+            return t('Text should be an email')
+        }
+
         if (isWhiteSpaceString(values)) {
             return t('Obbligatorio')
         }
@@ -173,19 +169,32 @@ function Login() {
 
     const CustomInputComponent = ({
         field, // { name, value, onChange, onBlur }
-        form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+        form: { touched, errors, formikProps }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
         ...props
     }: {
         field: any
         form: any
-    }) => (
-        <div>
-            <Input {...field} {...props} />
-            {touched[field.name] && errors[field.name] && (
-                <div className="error">{errors[field.name]}</div>
-            )}
-        </div>
-    )
+    }) => {
+        useEffect(() => {
+            formikProps?.setFieldValue(field.name, field.value)
+            formikProps?.setFieldTouched(field.name, true)
+        }, [field.value])
+
+        return (
+            <div>
+                <Input {...field} {...props} />
+                {touched[field.name] && errors[field.name] && (
+                    <Typography
+                        size={'bodySmall'}
+                        weight={'normal'}
+                        customTextColor={'#FF3739'}
+                    >
+                        {errors[field.name]}
+                    </Typography>
+                )}
+            </div>
+        )
+    }
 
     return (
         <div className={styles.container}>
@@ -194,192 +203,141 @@ function Login() {
                 <div className={styles.centerItem}>
                     <img src={logoFull} alt="session-logo" height="110" />
                 </div>
-                <div>
-                    <Typography size={'h1'} weight={'bold'} color={'blue'}>
-                        {t('Accedi')}
-                    </Typography>
-                    <Typography size={'h5'} weight={'light'} color={'primary'}>
-                        {t('Non so se c’è bisogno di un sottotitolo.')}
-                    </Typography>
-                </div>
-                <Formik
-                    initialValues={{
-                        email: email,
-                        password: password,
-                    }}
-                    onSubmit={async (values, actions) => {
-                        //await handlePublishPost(actions)
-                        console.log(values)
-                        actions.setSubmitting(false)
-                    }}
-                >
-                    {(formikProps) => {
-                        return (
-                            <Form onKeyDown={handleKeyDown}>
-                                <div className={styles.inputDiv}>
-                                    <Typography
-                                        size={'bodySmall'}
-                                        weight={'light'}
-                                    >
-                                        {t('E-mail')}
-                                    </Typography>
-                                    <Field
-                                        name="email"
-                                        component={CustomInputComponent}
-                                        placeholder="Email Name"
-                                    />
-
-                                    {/*<FormItem
+                <div className={styles.formContainer}>
+                    <div>
+                        <Typography size={'h1'} weight={'bold'} color={'blue'}>
+                            {t('Accedi')}
+                        </Typography>
+                        <Typography
+                            size={'h5'}
+                            weight={'light'}
+                            color={'primary'}
+                        >
+                            {t('Non so se c’è bisogno di un sottotitolo.')}
+                        </Typography>
+                    </div>
+                    <Formik
+                        initialValues={{
+                            email: '',
+                            password: '',
+                        }}
+                        onSubmit={async (values, actions) => {
+                            await handleSubmit(values)
+                            actions.setSubmitting(false)
+                        }}
+                    >
+                        {(formikProps) => {
+                            return (
+                                <Form
+                                    onKeyDown={handleKeyDown}
+                                    className={styles.form}
+                                >
+                                    <div className={styles.inputDiv}>
+                                        <Typography
+                                            size={'bodySmall'}
+                                            weight={'light'}
+                                        >
+                                            {t('E-mail')}
+                                        </Typography>
+                                        <Field
                                             name="email"
+                                            component={CustomInputComponent}
+                                            placeholder="Email Name"
+                                            formikProps={formikProps}
                                             required={true}
-                                            validate={(value) =>
-                                                validatePostFields(
+                                            validate={(value: any) =>
+                                                validateLoginFields(
                                                     value,
                                                     'email'
                                                 )
                                             }
-                                        >
-                                            <Input
-                                                type={'text'}
-                                                value={email}
-                                                placeholder={t(
-                                                    'La tua email...'
-                                                )}
-                                                onChange={changeEmail}
-                                            />
-                                        </FormItem>*/}
-                                </div>
-                                <div>
-                                    <Typography
-                                        size={'bodySmall'}
-                                        weight={'light'}
-                                    >
-                                        {t('Password')}
-                                    </Typography>
-                                    {/*<FormItem
-                                        name="password"
-                                        required={true}
-                                        validate={(value) =>
-                                            validatePostFields(
-                                                value,
-                                                'password'
-                                            )
-                                        }
-                                    >
-                                        <Input
-                                            type={'text'}
-                                            value={email}
-                                            placeholder={t(
-                                                'La tua password...'
-                                            )}
-                                            onChange={changePwd}
                                         />
-                                    </FormItem>*/}
-                                </div>
-
-                                <div className={styles.recoverPasswordDiv}>
-                                    {/*
-                                    <Checkbox title={t('Ricorda password')} />
-*/}
-                                    <Typography
-                                        size={'bodySmall'}
-                                        weight={'bold'}
-                                        color={'blue'}
-                                    >
-                                        {t('Password dimenticata')}
-                                    </Typography>
-                                </div>
-                                <div className={styles.centerItemSmall}>
-                                    <Button size={'medium'} fullWidth>
-                                        {t('Login')}
-                                    </Button>
-                                    <div className={styles.signUpRow}>
+                                    </div>
+                                    <div>
                                         <Typography
-                                            size={'bodyXSmall'}
+                                            size={'bodySmall'}
                                             weight={'light'}
                                         >
-                                            {t('Non sei ancora registrato?')}
+                                            {t('Password')}
                                         </Typography>
-                                        <Typography
-                                            size={'bodyXSmall'}
-                                            weight={'light'}
-                                            color={'blue'}
-                                            onClick={() =>
-                                                console.log('clicked')
+                                        <Field
+                                            name="password"
+                                            component={CustomInputComponent}
+                                            placeholder="Your Password"
+                                            validate={(value: any) =>
+                                                validateLoginFields(
+                                                    value,
+                                                    'password'
+                                                )
                                             }
+                                            required={true}
+                                        />
+                                    </div>
+
+                                    <div className={styles.recoverPasswordDiv}>
+                                        <Checkbox
+                                            title={t('Ricorda password')}
+                                        />
+                                        <Typography
+                                            size={'bodySmall'}
+                                            weight={'bold'}
+                                            color={'blue'}
                                         >
-                                            {t('Registrati qui')}
+                                            {t('Password dimenticata')}
                                         </Typography>
                                     </div>
-                                </div>
-                                <div className={styles.divider}>
-                                    <div className={styles.line}></div>
-                                    <Typography
-                                        size={'bodyMedium'}
-                                        weight={'bold'}
+                                    <div className={styles.centerItemSmall}>
+                                        <Button size={'medium'} fullWidth>
+                                            {t('Login')}
+                                        </Button>
+                                        <div className={styles.signUpRow}>
+                                            <Typography
+                                                size={'bodyXSmall'}
+                                                weight={'light'}
+                                            >
+                                                {t(
+                                                    'Non sei ancora registrato?'
+                                                )}
+                                            </Typography>
+                                            <Typography
+                                                size={'bodyXSmall'}
+                                                weight={'light'}
+                                                color={'blue'}
+                                                onClick={() =>
+                                                    console.log('clicked')
+                                                }
+                                            >
+                                                {t('Registrati qui')}
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                    <div className={styles.divider}>
+                                        <div className={styles.line}></div>
+                                        <Typography
+                                            size={'bodyMedium'}
+                                            weight={'bold'}
+                                        >
+                                            {t('or')}
+                                        </Typography>
+                                        <div className={styles.line}></div>
+                                    </div>
+                                    <Button
+                                        //onClick={handleSubmit}
+                                        size={'medium'}
+                                        fullWidth
+                                        color={'white'}
+                                        customTextColor={'#3F49FC'}
+                                        arrowPlacement={'left'}
+                                        icon={'Google.svg'}
                                     >
-                                        {t('or')}
-                                    </Typography>
-                                    <div className={styles.line}></div>
-                                </div>
-                                <Button
-                                    //onClick={handleSubmit}
-                                    size={'medium'}
-                                    fullWidth
-                                    color={'white'}
-                                    customTextColor={'#3F49FC'}
-                                    arrowPlacement={'left'}
-                                    icon={'Google.svg'}
-                                >
-                                    {t('Login con Google')}
-                                </Button>
-                            </Form>
-                        )
-                    }}
-                </Formik>
-            </div>
-            {/*<div className={styles.centerItem}>
-                <img src={CaltonLogoWh} alt="session-logo" height="150" />
-            </div>
-            <div className={styles.centerItem}>
-                <p className={styles.headerLogin}>
-                    <b>{t('Bentornato')}</b>
-                </p>
-                <Input
-                    value={email}
-                    //style={{ marginTop: '35px' }}
-                    //iconName={<GoMail style={{ fontSize: '1.25rem' }} />}
-                    placeholder={'Email'}
-                    //onKeyDown={handleKeyDown}
-                    onChange={changeEmail}
-                />
-                <Input
-                    value={password}
-                    type={'password'}
-                    //iconName={<MdOutlineLock style={{ fontSize: '1.25rem' }} />}
-                    placeholder={'Password'}
-                    //onKeyDown={handleKeyDown}
-                    onChange={changePwd}
-                />
-                <div className={styles.recoverPasswordWrapper}>
-                    <span className={styles.recoverPassword}>
-                        {t('Password dimenticata')}?
-                    </span>
+                                        {t('Login con Google')}
+                                    </Button>
+                                </Form>
+                            )
+                        }}
+                    </Formik>
                 </div>
-                <div className={styles.centerItemSmall}>
-                    <Button onClick={handleSubmit} size={'small'}>
-                        {t('Login')}
-                    </Button>
-                    <Button
-                        onClick={() =>
-                            history('register', { state: { fromButton: true } })
-                        }
-                        size={'small'}
-                    >
-                        {t('Registrati')}
-                    </Button>
-                </div>
-            </div>*/}
+            </div>
         </div>
     )
 }
