@@ -49,17 +49,15 @@ import { Field, Formik } from 'formik'
 import { Form } from 'formik-antd'
 import { isEmail, isWhiteSpaceString } from '../../helpers/helpers'
 import Checkbox from '../../components/Checkbox/Checkbox'
-import FormInputWrapper from '../../components/FormInputWrapper/FormInputWrapper'
+import FormInputWrapper from '../../components/FormFieldsWrapper/FormInputWrapper/FormInputWrapper'
 import CaltonSelect from '../../components/Select/Select'
+import LanguageSelect from '../../components/LanguageSelect/LanguageSelect'
 
 function Login() {
     const { t, i18n } = useTranslation()
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
     const history = useNavigate()
-    const lang = i18n.language.includes('-')
-        ? i18n.language.split('-')[0]
-        : i18n.language
 
     useEffect(() => {
         sessionStorage.removeItem('unique')
@@ -170,57 +168,10 @@ function Login() {
         return undefined
     }
 
-    const selectOptions = [
-        {
-            value: 'it',
-            label: 'ITA',
-            icon: 'itaFlag.svg',
-        },
-        {
-            value: 'es',
-            label: 'ES',
-            icon: 'esFlag.svg',
-        },
-        {
-            value: 'en',
-            label: 'EN',
-            icon: 'enFlag.svg',
-        },
-    ]
-
-    const handleLanguageChange = (e: any) => {
-        console.log('e: ', e)
-        window.localStorage.setItem('language', e.value)
-        i18n.changeLanguage(e.value)
-        //todo: check in future if we need moment or days
-        /*if (e.target.value === 'it') {
-            moment.updateLocale('it', localization_it)
-        } else if (e.target.value === 'es') {
-            moment.updateLocale('es', localization_es)
-        } else {
-            moment.updateLocale('en', localization_en)
-        }*/
-    }
-
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <CaltonSelect
-                    options={selectOptions}
-                    value={
-                        selectOptions[
-                            selectOptions?.findIndex((x) => x.value === lang)
-                        ]
-                    }
-                    size={'small'}
-                    fontSize={'small'}
-                    customColor={'none'}
-                    customHeight={'auto'}
-                    placeholderColor={'black'}
-                    onChange={handleLanguageChange}
-                    iconOnly={true}
-                    iconSize={'large'}
-                />
+                <LanguageSelect />
             </div>
             <div className={styles.contentDiv}>
                 <div className={styles.leftContainer}></div>
@@ -271,7 +222,7 @@ function Login() {
                                             <Field
                                                 name="email"
                                                 component={FormInputWrapper}
-                                                placeholder="Email Name"
+                                                placeholder={t('Email Name')}
                                                 formikProps={formikProps}
                                                 required={true}
                                                 validate={(value: any) =>
@@ -292,7 +243,7 @@ function Login() {
                                             <Field
                                                 name="password"
                                                 component={FormInputWrapper}
-                                                placeholder="Your Password"
+                                                placeholder={t('Your Password')}
                                                 validate={(value: any) =>
                                                     validateLoginFields(
                                                         value,

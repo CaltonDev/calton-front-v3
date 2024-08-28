@@ -14,7 +14,7 @@ export type Value = {
 }
 export interface SelectProps {
     options?: Value[]
-    size?: 'small' | 'medium' | 'large' | 'xlarge'
+    size?: 'small' | 'medium' | 'large' | 'xlarge' | 'fullWidth'
     disabled?: boolean
     customColor?: string
     color?: 'primary' | 'secondary' | 'error' | 'success'

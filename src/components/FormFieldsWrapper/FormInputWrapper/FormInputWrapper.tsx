@@ -1,7 +1,7 @@
 import styles from './FormInputWrapper.module.scss'
 import React, { useEffect } from 'react'
-import Input from '../../components/Input/Input'
-import Typography from '../../components/Typography/Typography'
+import Input from '../../Input/Input'
+import Typography from '../../Typography/Typography'
 function FormInputWrapper({
     field, // { name, value, onChange, onBlur }
     form: { touched, errors, formikProps }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.

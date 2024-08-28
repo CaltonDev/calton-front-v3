@@ -25,6 +25,10 @@
   position: relative;
   width: map-get($input, width);
 
+  &.fullWidthContainer {
+    width: 100%;
+  }
+
   &.smallContainer {
     width: map-deep-get($select, size, small, width);
   }
@@ -58,6 +62,10 @@
   flex-grow: map-get($input, flex-grow);
   line-height: map-deep-get($input, select, line-height);
   font-family: map-get($input, font-family);
+
+  &.fullWidth {
+    width: 100%;
+  }
 
    &.small {
     width: map-deep-get($input, select, size, small, width);
