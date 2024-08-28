@@ -222,6 +222,11 @@
   align-items: center;
 }
 
+.optionContainerReverse {
+  @extend .optionContainer;
+  flex-direction: row-reverse;
+}
+
 .valueContainer {
   display: flex;
   gap: 10px;

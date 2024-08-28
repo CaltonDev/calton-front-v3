@@ -1,6 +1,6 @@
 import styles from './Select.module.scss'
 import { SelectProps } from './Select.interface'
-import React, { useState } from 'react'
+import React from 'react'
 import Select, { components } from 'react-select'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 const CaltonSelect = ({
@@ -16,6 +16,8 @@ const CaltonSelect = ({
     placeholderColor,
     fontSize,
     customHeight,
+    iconOnly = false,
+    iconSize = 'small',
 }: SelectProps) => {
     const colorClass = color ? styles[color] : ''
     const sizeClass = size ? styles[size] : ''
@@ -32,10 +34,16 @@ const CaltonSelect = ({
     const { Option } = components
     const IconOption = (props: any) => (
         <Option {...props}>
-            <div className={styles.optionContainer}>
+            <div
+                className={
+                    iconOnly
+                        ? styles.optionContainerReverse
+                        : styles.optionContainer
+                }
+            >
                 {props.data.label}
                 {props.data.icon && (
-                    <SvgWrapper size={'small'} keySvg={props.data.icon} />
+                    <SvgWrapper size={iconSize} keySvg={props.data.icon} />
                 )}
             </div>
         </Option>
@@ -43,9 +51,9 @@ const CaltonSelect = ({
     const SingleValueIcon = (props: any) => {
         return (
             <div className={styles.valueContainer} style={{}}>
-                {props?.selectProps.getOptionLabel(props?.data)}
+                {!iconOnly && props?.selectProps.getOptionLabel(props?.data)}
                 {props.data.icon && (
-                    <SvgWrapper size={'small'} keySvg={props.data.icon} />
+                    <SvgWrapper size={iconSize} keySvg={props.data.icon} />
                 )}
             </div>
         )
@@ -54,6 +62,7 @@ const CaltonSelect = ({
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
             <Select
+                menuIsOpen={true}
                 classNames={{
                     control: () =>
                         `${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${fontSizeClass}`,
@@ -91,7 +100,11 @@ const CaltonSelect = ({
                             ...baseStyles[':active'],
                             backgroundColor: 'red',
                         },
-                        width: customWidth ? customWidth + '!important' : '',
+                        width: iconOnly
+                            ? '90px !important'
+                            : customWidth
+                              ? customWidth + '!important'
+                              : '',
                     }),
                     dropdownIndicator: (base, state) => ({
                         ...base,

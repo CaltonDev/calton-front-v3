@@ -9628,7 +9628,7 @@ mock-property@~1.0.0:
     hasown "^2.0.0"
     isarray "^2.0.5"
 
-moment-timezone@^0.5.40:
+moment-timezone@^0.5.40, moment-timezone@^0.5.45:
   version "0.5.45"
   resolved "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.45.tgz"
   integrity sha512-HIWmqA86KcmCAhnMAN0wuDOARV/525R2+lOLotuGFzn4HO+FH+/645z2wx0Dt3iDv6/p61SIvKnDstISainhLQ==

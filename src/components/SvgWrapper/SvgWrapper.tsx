@@ -64,6 +64,9 @@ import BurgerIconDotSvg from './SvgIcons/BurgerIconDotSvg'
 import StarFilledSvg from './SvgIcons/StarFilledSvg'
 import RadioSentimentSvg from './SvgIcons/RadioSentimentSvg'
 import GoogleSvg from './SvgIcons/GoogleSvg'
+import ItaFlagIcon from './SvgIcons/ItaFlagIcon'
+import EsFlagIcon from './SvgIcons/EsFlagIcon'
+import EnFlagIcon from './SvgIcons/EnFlagIcon'
 
 const SvgWrapper = ({
     keySvg,
@@ -352,6 +355,12 @@ const SvgWrapper = ({
                     <StarFilledSvg />
                 ) : keySvg === 'radioSentiment.svg' ? (
                     <RadioSentimentSvg fillColor={customColor} />
+                ) : keySvg === 'itaFlag.svg' ? (
+                    <ItaFlagIcon />
+                ) : keySvg === 'esFlag.svg' ? (
+                    <EsFlagIcon />
+                ) : keySvg === 'enFlag.svg' ? (
+                    <EnFlagIcon />
                 ) : (
                     <></>
                 )}

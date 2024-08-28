@@ -94,7 +94,6 @@ function HomeReviews() {
         },
     ]
 
-    console.log('avg: ', averageByTime)
     return (
         <PageContainer>
             <PageHeader heading={t('Home')} subheading={true}></PageHeader>

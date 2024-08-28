@@ -28,4 +28,6 @@ export interface SelectProps {
     customHeight?: string
     customWidth?: string
     customBorderColor?: string
+    iconOnly?: boolean
+    iconSize?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
 }
