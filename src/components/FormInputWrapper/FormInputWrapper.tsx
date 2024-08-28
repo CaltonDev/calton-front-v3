@@ -1,4 +1,4 @@
-import styles from './Login.module.scss'
+import styles from './FormInputWrapper.module.scss'
 import React, { useEffect } from 'react'
 import Input from '../../components/Input/Input'
 import Typography from '../../components/Typography/Typography'
