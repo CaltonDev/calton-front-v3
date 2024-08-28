@@ -62,7 +62,6 @@ const CaltonSelect = ({
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
             <Select
-                menuIsOpen={true}
                 classNames={{
                     control: () =>
                         `${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${fontSizeClass}`,

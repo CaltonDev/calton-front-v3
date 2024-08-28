@@ -15,6 +15,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import { objRoutes } from './services/routerServices'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import SignUp from './pages/SignUp/SignUp'
 const persistor = persistStore(store)
 
 const LazyComponentWrapper = ({
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
     {
         path: '/login',
         element: <Login />,
+    },
+    {
+        path: '/sign-up',
+        element: <SignUp />,
     },
     {
         element: <Layout />,

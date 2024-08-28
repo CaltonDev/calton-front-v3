@@ -1,4 +1,4 @@
-import styles from './Login.module.scss'
+import styles from './SignUp.module.scss'
 import React, { useEffect, useState } from 'react'
 import LoginService from '../../services/LoginService'
 import { useDispatch } from 'react-redux'
@@ -103,7 +103,7 @@ function Login() {
         email: string
         password: string
     }) => {
-        await login(values.email, values.password)
+        await SignUp(values.email, values.password)
     }
 
     const changeLanguage = (lang: string) => {
@@ -123,10 +123,10 @@ function Login() {
         }
     }
 
-    const login = async (email: string, password: string) => {
+    const SignUp = async (email: string, password: string) => {
         setIsLoading(true)
         try {
-            const response = await LoginService.login(email, password)
+            /*const response = await LoginService.login(email, password)
             if (response) {
                 const id = uuidv5(
                     response.user.token + new Date().toString(),
@@ -141,7 +141,8 @@ function Login() {
                 } else {
                     history('/home')
                 }
-            }
+            }*/
+            //TODO: missing signup api
         } catch (e: any) {
             console.log(e)
         }
@@ -235,7 +236,7 @@ function Login() {
                                 weight={'bold'}
                                 color={'blue'}
                             >
-                                {t('Accedi')}
+                                {t('Crea il tuo account')}
                             </Typography>
                             <Typography
                                 size={'h5'}
@@ -303,22 +304,6 @@ function Login() {
                                             />
                                         </div>
 
-                                        <div
-                                            className={
-                                                styles.recoverPasswordDiv
-                                            }
-                                        >
-                                            <Checkbox
-                                                title={t('Ricorda password')}
-                                            />
-                                            <Typography
-                                                size={'bodySmall'}
-                                                weight={'bold'}
-                                                color={'blue'}
-                                            >
-                                                {t('Password dimenticata')}
-                                            </Typography>
-                                        </div>
                                         <div className={styles.centerItemSmall}>
                                             <Button size={'medium'} fullWidth>
                                                 {t('Login')}
@@ -328,9 +313,7 @@ function Login() {
                                                     size={'bodyXSmall'}
                                                     weight={'light'}
                                                 >
-                                                    {t(
-                                                        'Non sei ancora registrato?'
-                                                    )}
+                                                    {t('Hai già un account?')}
                                                 </Typography>
                                                 <Typography
                                                     size={'bodyXSmall'}
@@ -340,7 +323,7 @@ function Login() {
                                                         console.log('clicked')
                                                     }
                                                 >
-                                                    {t('Registrati qui')}
+                                                    {t('Login')}
                                                 </Typography>
                                             </div>
                                         </div>
