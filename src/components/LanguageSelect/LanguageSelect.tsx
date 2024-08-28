@@ -48,7 +48,7 @@ function LanguageSelect() {
             }
             size={'small'}
             fontSize={'small'}
-            customColor={'none'}
+            customColor={'white'}
             customHeight={'auto'}
             placeholderColor={'black'}
             onChange={handleLanguageChange}
