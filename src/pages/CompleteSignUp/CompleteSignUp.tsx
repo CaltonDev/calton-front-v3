@@ -260,107 +260,37 @@ function Login() {
                                                 />
                                             </div>
                                         </div>
-                                        <div className={styles.bodyContainer}>
-                                            <Typography
-                                                size={'bodyMedium'}
-                                                weight={'bold'}
+                                        <div className={styles.containerRight}>
+                                            <div
+                                                className={styles.bodyContainer}
                                             >
-                                                {t('Informazioni aziendali')}
-                                            </Typography>
-                                            <div className={styles.inputDiv}>
                                                 <Typography
-                                                    size={'bodySmall'}
-                                                    weight={'light'}
+                                                    size={'bodyMedium'}
+                                                    weight={'bold'}
                                                 >
-                                                    {t("Nome dell'azienda") +
-                                                        '*'}
-                                                </Typography>
-                                                <Field
-                                                    name="company"
-                                                    component={FormInputWrapper}
-                                                    placeholder={t(
-                                                        'Company name'
+                                                    {t(
+                                                        'Informazioni aziendali'
                                                     )}
-                                                    formikProps={formikProps}
-                                                    required={true}
-                                                    validate={(value: any) =>
-                                                        validateLoginFields(
-                                                            value,
-                                                            'company'
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                            {/*TODO: add google custom autocomplete*/}
-                                            <div className={styles.inputDiv}>
-                                                <Typography
-                                                    size={'bodySmall'}
-                                                    weight={'light'}
-                                                >
-                                                    {t('Address') + '*'}
                                                 </Typography>
-                                                <Field
-                                                    name="address"
-                                                    component={FormInputWrapper}
-                                                    placeholder={t(
-                                                        'Company address'
-                                                    )}
-                                                    validate={(value: any) =>
-                                                        validateLoginFields(
-                                                            value,
-                                                            'address'
-                                                        )
-                                                    }
-                                                    required={true}
-                                                />
-                                            </div>
-                                            <div className={styles.inputDivRow}>
                                                 <div
                                                     className={styles.inputDiv}
-                                                    style={{ width: '33%' }}
-                                                >
-                                                    <Typography
-                                                        size={'bodySmall'}
-                                                        weight={'light'}
-                                                    >
-                                                        {t('Settore') + '*'}
-                                                    </Typography>
-                                                    <Field
-                                                        name="sector"
-                                                        component={
-                                                            FormSelectWrapper
-                                                        }
-                                                        formikProps={
-                                                            formikProps
-                                                        }
-                                                        required={true}
-                                                        validate={(
-                                                            value: any
-                                                        ) =>
-                                                            validateLoginFields(
-                                                                value,
-                                                                'sector'
-                                                            )
-                                                        }
-                                                    />
-                                                </div>
-                                                <div
-                                                    className={styles.inputDiv}
-                                                    style={{ width: '33%' }}
                                                 >
                                                     <Typography
                                                         size={'bodySmall'}
                                                         weight={'light'}
                                                     >
                                                         {t(
-                                                            'Tipologia di Business'
+                                                            "Nome dell'azienda"
                                                         ) + '*'}
                                                     </Typography>
                                                     <Field
-                                                        name="businessType"
+                                                        name="company"
                                                         component={
-                                                            FormSelectWrapper
+                                                            FormInputWrapper
                                                         }
+                                                        placeholder={t(
+                                                            'Company name'
+                                                        )}
                                                         formikProps={
                                                             formikProps
                                                         }
@@ -370,41 +300,142 @@ function Login() {
                                                         ) =>
                                                             validateLoginFields(
                                                                 value,
-                                                                'businessType'
+                                                                'company'
                                                             )
                                                         }
                                                     />
                                                 </div>
+                                                {/*TODO: add google custom autocomplete*/}
                                                 <div
                                                     className={styles.inputDiv}
-                                                    style={{ width: '33%' }}
                                                 >
                                                     <Typography
                                                         size={'bodySmall'}
                                                         weight={'light'}
                                                     >
-                                                        {t(
-                                                            'Numero di punti vendita'
-                                                        ) + '*'}
+                                                        {t('Address') + '*'}
                                                     </Typography>
                                                     <Field
-                                                        name="shoppingPoints"
+                                                        name="address"
                                                         component={
-                                                            FormSelectWrapper
+                                                            FormInputWrapper
                                                         }
-                                                        formikProps={
-                                                            formikProps
-                                                        }
-                                                        required={true}
+                                                        placeholder={t(
+                                                            'Company address'
+                                                        )}
                                                         validate={(
                                                             value: any
                                                         ) =>
                                                             validateLoginFields(
                                                                 value,
-                                                                'shoppingPoints'
+                                                                'address'
                                                             )
                                                         }
+                                                        required={true}
                                                     />
+                                                </div>
+                                                <div
+                                                    className={
+                                                        styles.inputDivRow
+                                                    }
+                                                >
+                                                    <div
+                                                        className={
+                                                            styles.inputDiv
+                                                        }
+                                                        style={{ width: '33%' }}
+                                                    >
+                                                        <Typography
+                                                            size={'bodySmall'}
+                                                            weight={'light'}
+                                                        >
+                                                            {t('Settore') + '*'}
+                                                        </Typography>
+                                                        <Field
+                                                            name="sector"
+                                                            component={
+                                                                FormSelectWrapper
+                                                            }
+                                                            formikProps={
+                                                                formikProps
+                                                            }
+                                                            required={true}
+                                                            validate={(
+                                                                value: any
+                                                            ) =>
+                                                                validateLoginFields(
+                                                                    value,
+                                                                    'sector'
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            styles.inputDiv
+                                                        }
+                                                        style={{ width: '33%' }}
+                                                    >
+                                                        <Typography
+                                                            size={'bodySmall'}
+                                                            weight={'light'}
+                                                        >
+                                                            {t(
+                                                                'Tipologia di Business'
+                                                            ) + '*'}
+                                                        </Typography>
+                                                        <Field
+                                                            name="businessType"
+                                                            component={
+                                                                FormSelectWrapper
+                                                            }
+                                                            formikProps={
+                                                                formikProps
+                                                            }
+                                                            required={true}
+                                                            validate={(
+                                                                value: any
+                                                            ) =>
+                                                                validateLoginFields(
+                                                                    value,
+                                                                    'businessType'
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            styles.inputDiv
+                                                        }
+                                                        style={{ width: '33%' }}
+                                                    >
+                                                        <Typography
+                                                            size={'bodySmall'}
+                                                            weight={'light'}
+                                                        >
+                                                            {t(
+                                                                'Numero di punti vendita'
+                                                            ) + '*'}
+                                                        </Typography>
+                                                        <Field
+                                                            name="shoppingPoints"
+                                                            component={
+                                                                FormSelectWrapper
+                                                            }
+                                                            formikProps={
+                                                                formikProps
+                                                            }
+                                                            required={true}
+                                                            validate={(
+                                                                value: any
+                                                            ) =>
+                                                                validateLoginFields(
+                                                                    value,
+                                                                    'shoppingPoints'
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div
