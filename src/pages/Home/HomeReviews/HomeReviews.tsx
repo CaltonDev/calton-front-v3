@@ -22,6 +22,13 @@ import ChartConfig from '../../../constants/ChartConfig'
 import CountUp from 'react-countup'
 import InfoCardViewer from '../../../components/InfoCardViewer/InfoCardViewer'
 import TextContainer from '../../../components/TextContainer/TextContainer'
+import HomeService from '../../../services/HomeService'
+import { setBubbles } from '../../../store/home/bubbleSlice'
+import { setSources } from '../../../store/home/sourceSlice'
+import { setAverageVotoByTime } from '../../../store/home/averageVotoByTimeSlice'
+import { setAverageReviewByTime } from '../../../store/home/averageReviewByTime'
+import { setAverageSentimentByTime } from '../../../store/home/averageSentimentByTime'
+import { setDistribuzioniRacc } from '../../../store/home/distribuzioneRaccomandazioni'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -40,21 +47,11 @@ function HomeReviews() {
     const [page, setPage] = useState(0)
     const search = useSelector((state: RootState) => state.Search.wordSearched)
 
-    const averageReviewByTime = useSelector(
-        (state: RootState) => state.AverageReviewByTime
-    )
-    const averageByTime = useSelector(
-        (state: RootState) => state.AverageVotoByTime
-    )
-
-    const averageSentimentByTime = useSelector(
-        (state: RootState) => state.AverageSentimentByTime
-    )
-
     const { t } = useTranslation()
 
     const [currentPage, setCurrentPage] = useState(1)
 
+    /*
     const reloadHome = async () => {
         await ServiceWrapper.wrapperReloadHome(
             allFilters,
@@ -66,14 +63,76 @@ function HomeReviews() {
             t
         )
     }
+      Hooks.useDeepCompareEffect(() => {
+        reloadHome()
+    }, [allFilters])
+*/
+
+    //change wrapperReloadHome with singles react query
+    const bubbleData = HomeService.wordsCountBUBBLE(
+        allFilters,
+        20,
+        getNoCodeFromPlatfrom()
+    )
+
+    const sourcesHomeData = HomeService.getSourcesHome(
+        allFilters,
+        getNoCodeFromPlatfrom(),
+        undefined,
+        undefined,
+        undefined,
+        true,
+        true
+    )
+
+    const averageVotoByTime = HomeService.getAverageByTime(
+        allFilters,
+        'rating',
+        'Date',
+        getNoCodeFromPlatfrom(),
+        undefined,
+        true,
+        undefined
+    )?.data
+
+    const averageSentimentByTime = HomeService.getAverageByTime(
+        allFilters,
+        'sentiment',
+        undefined,
+        getNoCodeFromPlatfrom(),
+        undefined,
+        true,
+        undefined
+    )?.data
+
+    const averageReviewByTime = HomeService.distribuzioneRecensioniPerData(
+        allFilters,
+        getNoCodeFromPlatfrom(),
+        undefined,
+        true
+    )?.data
+
+    console.log(
+        '1: ',
+        averageVotoByTime,
+        ' 2: ',
+        averageSentimentByTime,
+        ' 3: ',
+        averageReviewByTime
+    )
+
+    const distribuzioneRecensioniData =
+        HomeService.getDistributionReccomandation(
+            allFilters,
+            ['tipo_raccomandazione'],
+            'Date',
+            getNoCodeFromPlatfrom(),
+            true
+        )
 
     useEffect(() => {
         ServiceWrapper.wrapperLoadFilters(allFilters, dispatch, platformType, t)
     }, [])
-
-    Hooks.useDeepCompareEffect(() => {
-        reloadHome()
-    }, [allFilters])
 
     const AiData = [
         {
@@ -102,30 +161,34 @@ function HomeReviews() {
                     <InfoCardViewer data={AiData} />
                 </div>
                 <div className={styles.rowHome}>
+                    {/*TODO: missing averageReviewByTime?.data?.totalFeedback*/}
                     <LineChart
-                        dataReady={!averageReviewByTime.isLoading}
+                        dataReady={!averageReviewByTime}
                         color={ChartConfig.color.primary}
                         title={t('Numero di recensioni')}
                         styleCounter={styles.countUpReviews}
-                        numberToShow={averageReviewByTime?.data?.totalFeedback}
+                        numberToShow={averageReviewByTime?.data?.reduce(
+                            (acc: number, obj: any) => acc + obj?.value,
+                            0
+                        )}
                         contentPopover={t('NumeroRecensioniHelper')}
                         isRound={true}
                         label={t('Recensioni')}
                         chartdata={averageReviewByTime?.data}
                     />
                     <LineChart
-                        dataReady={!averageByTime.isLoading}
+                        dataReady={!averageVotoByTime}
                         title={t('Voto Medio')}
-                        numberToShow={averageByTime?.data?.tot}
+                        numberToShow={averageVotoByTime?.data?.tot}
                         contentPopover={t('VotoMedioHelper')}
                         label={t('Valutazioni')}
                         styleCounter={styles.countUpRatings}
-                        chartdata={averageByTime?.data?.values}
+                        chartdata={averageVotoByTime?.data?.values}
                         decimals={2}
                         textIcon={'star'}
                     />
                     <LineChart
-                        dataReady={!averageSentimentByTime.isLoading}
+                        dataReady={!averageSentimentByTime}
                         isSentiment={true}
                         title={t('Sentiment')}
                         numberToShowComponent={

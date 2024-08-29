@@ -2,6 +2,7 @@ import apiService from './api/apiService'
 import store from '../store/store'
 //import { setSurveyData } from '../redux/SourcesFiltered'
 import { getHeaders } from './api/headers'
+import { useQuery } from 'react-query'
 
 interface SourceFilteredBody {
     code: string
@@ -49,10 +50,17 @@ function getSourcesFiltered(code: string, fromSurveyTab?: boolean) {
         fromSurveyTab,
     }
 
-    return apiService.apiUrl.post(
-        '/source/getSourcesFiltered',
-        body,
-        getHeaders()
+    return useQuery<any, Error>(
+        ['sourcesFiltered', 'sourcesFilteredId'],
+        () =>
+            apiService.apiUrl.post(
+                '/source/getSourcesFiltered',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
