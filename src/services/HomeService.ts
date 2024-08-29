@@ -93,10 +93,17 @@ function getDistribuzioneVoti(
         idProducts: selectedProducts,
         compactValues,
     }
-    return apiService.apiAnalysisStandard.post(
-        '/countSingleCol',
-        body,
-        getHeaders()
+    return useQuery<any, Error>(
+        ['distribuzioneVoti', 'distribuzioneVotiId', allFilters],
+        () =>
+            apiService.apiAnalysisStandard.post(
+                '/countSingleCol',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 

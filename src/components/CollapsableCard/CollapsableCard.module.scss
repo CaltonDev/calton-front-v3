@@ -1,0 +1,42 @@
+.rctBlock{
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  margin-bottom: 24px;
+  position: relative;
+}
+.rctBlock:hover {
+  box-shadow: 0 1px 15px 1px rgba(69, 65, 78, 0.08);
+}
+.contextuaLink{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  align-items: center;
+}
+.contextuaLink a{
+  margin-right: 15px;
+  cursor: pointer;
+}
+.rctBlockTitle {
+  padding-top: 0.25rem;
+  //padding-right: 1.25rem;
+  padding-bottom: 0.25rem;
+  position: relative;
+}
+.rctBlockContent{
+  padding: 0 1.25rem 1.25rem;
+}
+.rctCollapsableFooter{
+  background-color: #fff;
+  border-top: 1px solid #EBEDF2;
+  padding: 0.9375rem 1.25rem 30px;
+  width: 99%;
+}

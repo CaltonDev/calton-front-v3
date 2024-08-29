@@ -23,6 +23,7 @@ const Button = ({
     customWidth,
     customHeight,
     icon,
+    className,
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
     const sizeClass = size ? styles[size] : ''
@@ -42,7 +43,7 @@ const Button = ({
         <>
             <button
                 type={'submit'}
-                className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass} ${arrowDirection} ${iconOnlyClass} ${roundedClass} ${fullWidthClass}`}
+                className={`${styles.button} ${variantClass} ${sizeClass} ${disabledClass} ${arrowDirection} ${iconOnlyClass} ${roundedClass} ${fullWidthClass} ${className}`}
                 style={{
                     background: customColor
                         ? customColor

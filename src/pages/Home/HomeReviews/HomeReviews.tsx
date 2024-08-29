@@ -29,6 +29,11 @@ import { setAverageVotoByTime } from '../../../store/home/averageVotoByTimeSlice
 import { setAverageReviewByTime } from '../../../store/home/averageReviewByTime'
 import { setAverageSentimentByTime } from '../../../store/home/averageSentimentByTime'
 import { setDistribuzioniRacc } from '../../../store/home/distribuzioneRaccomandazioni'
+import Table from '../../../components/Table/Table'
+import Tabs from '../../../components/TabsComponent/Tabs'
+import CollapsableCard from '../../../components/CollapsableCard/CollapsableCard'
+import DistributionRatingsGraph from '../../../components/Graphs/DistributionRatingsGraph/DistributionRatingsGraph'
+import { saveAs } from 'file-saver'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -36,6 +41,10 @@ function HomeReviews() {
     const platformType = useSelector(
         (state: RootState) => state.Settings.platformType
     )
+    const isCompact = useSelector(
+        (state: RootState) => state.Settings.showNumbers
+    )
+
     const [isLoading, setIsLoading] = useState(true)
     const [infoData, setInfoData] = useState(null)
     const [sort, setSort] = useState([
@@ -46,6 +55,8 @@ function HomeReviews() {
     ])
     const [page, setPage] = useState(0)
     const search = useSelector((state: RootState) => state.Search.wordSearched)
+
+    const sources = useSelector((state: RootState) => state.Source)
 
     const { t } = useTranslation()
 
@@ -112,6 +123,15 @@ function HomeReviews() {
         true
     )?.data
 
+    const distribuzioneVoti = HomeService.getDistribuzioneVoti(
+        allFilters,
+        'Date',
+        undefined,
+        true,
+        undefined,
+        !isCompact
+    )
+
     console.log(
         '1: ',
         averageVotoByTime,
@@ -152,6 +172,21 @@ function HomeReviews() {
             body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         },
     ]
+
+    const buttonList = [t('Voti'), t('Raccomandazioni')]
+
+    const saveCanvas = () => {
+        const divElement = document.getElementById('Distribuzione Dei Voti')
+        let canvasSave
+        if (divElement) canvasSave = divElement.querySelector('canvas')
+
+        if (canvasSave) {
+            const canvas = canvasSave as HTMLCanvasElement
+            canvas.toBlob(function (blob) {
+                saveAs(blob ? blob : '', 'distributionRatings.png')
+            })
+        }
+    }
 
     return (
         <PageContainer>
@@ -225,6 +260,66 @@ function HomeReviews() {
                         label={t('Sentiment')}
                         chartdata={averageSentimentByTime?.data?.chartdata}
                     />
+                </div>
+                <div className={styles.rowHome}>
+                    <Table
+                        data={sources?.data}
+                        columnsData={sources?.data?.columns}
+                        fullyLoaded={true}
+                    />
+                    <CollapsableCard
+                        colClasses={styles.myWidth}
+                        heading={t('Distribuzione Dei Voti')}
+                        collapsible={false}
+                        reloadable={false}
+                        downloadble={true}
+                        onDownload={saveCanvas}
+                        closeable={false}
+                        isAnt={true}
+                    >
+                        <div>
+                            <Tabs buttons={buttonList}>
+                                <div
+                                    key="tab-1"
+                                    className={styles.myContainerTab}
+                                >
+                                    <DistributionRatingsGraph
+                                        dataReady={!distribuzioneVoti.isLoading}
+                                        chartdata={distribuzioneVoti?.data}
+                                    />
+                                </div>
+                                <div
+                                    key="tab-2"
+                                    className={styles.myContainerTab}
+                                >
+                                    <DistributionRatingsGraph
+                                        /*backgroundColor={[
+                                            ChartConfig.color.negative,
+                                            ChartConfig.color.positive,
+                                        ]}*/
+                                        dataReady={!distribuzioneRecensioniData}
+                                        isReccomend={true}
+                                        chartdata={
+                                            distribuzioneRecensioniData?.data
+                                        }
+                                    />
+                                </div>
+                            </Tabs>
+                        </div>
+                    </CollapsableCard>
+                </div>
+                <div className={styles.rowHome}>
+                    {/*<BubbleChartHome
+                        dataReady={!bubbles.isLoading}
+                        bubbles={bubbles.data}
+                        heading={t('Word Cloud')}
+                        collapsible={true}
+                        reloadable={true}
+                        downloadble={true}
+                        onDownload={() => null}
+                        downloading={null}
+                        contentPopover={t('WordCloudHelper')}
+                    />*/}
                 </div>
             </div>
         </PageContainer>

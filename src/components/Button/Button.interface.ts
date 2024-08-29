@@ -17,4 +17,5 @@ export interface ButtonProps {
     customWidth?: number
     customHeight?: number
     icon?: string
+    className?: string
 }

@@ -1,0 +1,48 @@
+.tabs {
+    display: flex;
+    margin-left: 10px;
+}
+.tab {
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border: none;
+    color: #3f49fc;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: none;
+}
+.tab:not(:last-child) {
+
+}
+.tab.active {
+    background: #3f49fc;
+    font-weight: bold;
+    color: #fff !important;
+}
+.panel {
+    display: none;
+    padding: 10px;
+}
+
+.panelBlock {
+    display: none;
+    padding: 10px;
+}
+
+.panel.active {
+    display: block !important;
+}
+
+.panelBlock.active {
+    display: flex !important;
+}
+
+.tabsContentWrap {
+    width: 10%;
+    margin-top: 20px;
+}
+
+.panels {
+    width: 100%;
+}
