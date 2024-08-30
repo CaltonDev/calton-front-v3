@@ -34,6 +34,7 @@ import Tabs from '../../../components/TabsComponent/Tabs'
 import CollapsableCard from '../../../components/CollapsableCard/CollapsableCard'
 import DistributionRatingsGraph from '../../../components/Graphs/DistributionRatingsGraph/DistributionRatingsGraph'
 import { saveAs } from 'file-saver'
+import BubbleChartHome from '../../../components/Charts/BubbleCharts/BubbleChartHome/BubbleChartHome'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -309,17 +310,13 @@ function HomeReviews() {
                     </CollapsableCard>
                 </div>
                 <div className={styles.rowHome}>
-                    {/*<BubbleChartHome
-                        dataReady={!bubbles.isLoading}
-                        bubbles={bubbles.data}
-                        heading={t('Word Cloud')}
-                        collapsible={true}
-                        reloadable={true}
-                        downloadble={true}
-                        onDownload={() => null}
-                        downloading={null}
-                        contentPopover={t('WordCloudHelper')}
-                    />*/}
+                    {
+                        <BubbleChartHome
+                            dataReady={!bubbleData}
+                            bubbles={bubbleData.data}
+                            heading={t('Word Cloud')}
+                        />
+                    }
                 </div>
             </div>
         </PageContainer>
