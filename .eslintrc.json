@@ -26,5 +26,8 @@
     "import/resolver": {
       "typescript": {}
     }
-  }
+  },
+  "ignores": [
+    "*.md"
+  ]
 }

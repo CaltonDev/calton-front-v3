@@ -13,7 +13,7 @@ module.exports = {
         rules: [
             { test: /\.json$/, type: 'json' },
             {
-                test: /\.tsx?$/,
+                test: /\.[jt]sx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
@@ -84,7 +84,7 @@ module.exports = {
         }),
     ],
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.jsx', '.js'],
         alias: {
             '@Style': path.resolve(__dirname, 'src/style/'),
         },
