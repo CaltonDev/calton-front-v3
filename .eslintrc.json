@@ -27,7 +27,5 @@
       "typescript": {}
     }
   },
-  "ignores": [
-    "*.md"
-  ]
+  "ignorePatterns": ["*.md", "*.js"]
 }
