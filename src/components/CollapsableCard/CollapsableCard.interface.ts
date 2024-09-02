@@ -17,4 +17,5 @@ export interface CollapsableCardProps {
     externalSourceRefresher?: () => void
     isBeta?: boolean
     onDownload?: () => void
+    width?: string
 }

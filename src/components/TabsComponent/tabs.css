@@ -7,7 +7,7 @@
     align-items: center;
     background: #fff;
     border: none;
-    color: #3f49fc;
+    color: #3f49fc !important;
     border-radius: 50px;
     font-weight: bold;
     box-shadow: none;

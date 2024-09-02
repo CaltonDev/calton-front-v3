@@ -268,6 +268,7 @@ function HomeReviews() {
                         onDownload={saveCanvas}
                         closeable={false}
                         isAnt={true}
+                        width={'33%'}
                     >
                         <div>
                             <Tabs buttons={buttonList}>
