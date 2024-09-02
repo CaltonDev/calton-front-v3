@@ -1,0 +1,44 @@
+.myWidth {
+  width: 100%;
+}
+
+.myContainerTab {
+  padding-right: 0 !important;
+}
+
+.containerSwipe {
+  z-index: 900;
+  position: relative;
+  margin-bottom: -70px;
+  text-transform: capitalize !important;
+  top: -15px;
+  left: 10px;
+}
+
+.link {
+  border-radius: 17px !important;
+}
+
+.link .Mui-selected {
+  height: 27px !important;
+  background-color: #3f49fc !important;
+  min-width: 115px !important;
+}
+
+.link {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  margin: 0 20px 0 0 !important;
+  padding: 15px !important;
+  max-width: none !important;
+  min-width: auto;
+  text-transform: capitalize !important;
+  min-height: auto !important;
+  position: relative !important;
+  overflow: visible !important;
+  align-self: center !important;
+  background: transparent;
+}
+
+/*# sourceMappingURL=BubbleChartHome.module.css.map */

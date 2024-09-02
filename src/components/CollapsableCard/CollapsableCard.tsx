@@ -28,6 +28,7 @@ function CollapsableCard({
     externalSourceRefresher,
     isBeta,
     onDownload,
+    width,
 }: CollapsableCardProps) {
     const [reload, setReload] = useState(false)
     const [collapse, setCollapse] = useState(true)
@@ -59,6 +60,7 @@ function CollapsableCard({
 
     return (
         <div
+            style={{ width: width ? width : '' }}
             className={classnames(colClasses ? colClasses : '', {
                 'd-block': !collapse,
             })}

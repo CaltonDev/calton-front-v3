@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface SelectedWordsState {
-    SelectedWords: {
+    data: {
         word: any
         sentiment: boolean
         isText: boolean
@@ -9,7 +9,7 @@ export interface SelectedWordsState {
 }
 
 const initialState: SelectedWordsState = {
-    SelectedWords: {
+    data: {
         word: null,
         sentiment: false,
         isText: false,

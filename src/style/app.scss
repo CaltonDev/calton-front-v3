@@ -21,3 +21,53 @@ tr:last-child td:last-child { border-bottom-right-radius: 10px; }
 
 thead tr:first-child th:first-child { border-top-left-radius: 10px; }
 thead tr:first-child th:last-child { border-top-right-radius: 10px; }
+
+.bubble {
+  transition: fill 0.4s ease, opacity 0.4s ease, stroke 0.4s ease;
+  stroke: var(--white);
+  stroke-width: 2;
+}
+
+.bubble:focus {
+  outline: none;
+  stroke: #009ed2;
+}
+
+.lowBubble {
+  composes: bubble;
+  fill: var(--yellow);
+}
+
+.mediumBubble {
+  composes: bubble;
+  fill: var(--yellow);
+}
+
+.highBubble {
+  composes: bubble;
+  fill: var(--green);
+}
+
+.positiveBubble {
+  composes: bubble;
+  fill: var(--blue);
+}
+.gPositive {
+  fill: #34e0a1;
+}
+.gNeutral {
+  fill: #fcc207;
+}
+.gNegative {
+  fill: #ff6960;
+}
+
+.Toastify__toast-container--top-right {
+  margin-top: 60px;
+}
+
+.adjust_button_hover_drawer.ant-btn:hover { border-color: white !important; }
+
+.g2-tooltip > .g2-tooltip-title, .g2-tooltip > .g2-tooltip-list  {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}

@@ -34,6 +34,7 @@ import Tabs from '../../../components/TabsComponent/Tabs'
 import CollapsableCard from '../../../components/CollapsableCard/CollapsableCard'
 import DistributionRatingsGraph from '../../../components/Graphs/DistributionRatingsGraph/DistributionRatingsGraph'
 import { saveAs } from 'file-saver'
+import BubbleChartHome from '../../../components/Charts/BubbleCharts/BubbleChartHome/BubbleChartHome'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -84,7 +85,7 @@ function HomeReviews() {
         allFilters,
         20,
         getNoCodeFromPlatfrom()
-    )
+    )?.data
 
     const sourcesHomeData = HomeService.getSourcesHome(
         allFilters,
@@ -130,15 +131,6 @@ function HomeReviews() {
         true,
         undefined,
         !isCompact
-    )
-
-    console.log(
-        '1: ',
-        averageVotoByTime,
-        ' 2: ',
-        averageSentimentByTime,
-        ' 3: ',
-        averageReviewByTime
     )
 
     const distribuzioneRecensioniData =
@@ -276,6 +268,7 @@ function HomeReviews() {
                         onDownload={saveCanvas}
                         closeable={false}
                         isAnt={true}
+                        width={'33%'}
                     >
                         <div>
                             <Tabs buttons={buttonList}>
@@ -309,17 +302,13 @@ function HomeReviews() {
                     </CollapsableCard>
                 </div>
                 <div className={styles.rowHome}>
-                    {/*<BubbleChartHome
-                        dataReady={!bubbles.isLoading}
-                        bubbles={bubbles.data}
-                        heading={t('Word Cloud')}
-                        collapsible={true}
-                        reloadable={true}
-                        downloadble={true}
-                        onDownload={() => null}
-                        downloading={null}
-                        contentPopover={t('WordCloudHelper')}
-                    />*/}
+                    {
+                        <BubbleChartHome
+                            dataReady={bubbleData?.data}
+                            bubbles={bubbleData?.data}
+                            heading={t('Word Cloud')}
+                        />
+                    }
                 </div>
             </div>
         </PageContainer>

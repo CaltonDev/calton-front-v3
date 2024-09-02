@@ -175,7 +175,7 @@ function wordsCountBUBBLE(
     }
 
     return useQuery<any, Error>(
-        ['bubbles', 'bubblesId'],
+        ['bubbles', 'bubblesId', allFilters],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/wordCloud',
