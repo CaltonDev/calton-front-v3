@@ -39,6 +39,7 @@ function BubbleChart(props) {
     const [bubbleDrawer, setBubbleDrawer] = useState(null)
     const [center, setCenter] = useState({ x: 500, y: 300 })
 
+    console.log('bubbles: ', bubbles)
     useEffect(() => {
         if (svg) {
             let tmpSvg = JSON.parse(JSON.stringify(svg))

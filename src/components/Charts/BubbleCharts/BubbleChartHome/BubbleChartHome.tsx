@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next'
 import Tabs from '../../../TabsComponent/Tabs'
 //import LoaderChart from '../CardInsights/LoaderChart/LoaderChart';
 //import ServiceWrapper from "../../helpers/ServiceWrapper";
-import { selectAllFilters } from '../../../../store/selectors/selectorsSlice'
 import { BubbleChartHomeProps } from './BubbleChartHome.interface'
 import { RootState } from '../../../../store/store'
 import BubbleChart from '../BubbleChartCustom/BubbleChart'
@@ -27,8 +26,6 @@ function BubbleChartHome({
     const [indexExt, setIndexExt] = useState<number[]>([])
     const wordSelected = useSelector((state: RootState) => state.SelectedWords)
     const { t } = useTranslation()
-    const feedbacks = useSelector((state: RootState) => state.FeedbackHome)
-    const allFilters = useSelector(selectAllFilters)
 
     useEffect(() => {
         if (wordSelected.data && wordSelected.data.word) {

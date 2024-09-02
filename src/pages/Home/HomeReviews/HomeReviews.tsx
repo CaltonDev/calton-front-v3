@@ -85,7 +85,7 @@ function HomeReviews() {
         allFilters,
         20,
         getNoCodeFromPlatfrom()
-    )
+    )?.data
 
     const sourcesHomeData = HomeService.getSourcesHome(
         allFilters,
@@ -131,15 +131,6 @@ function HomeReviews() {
         true,
         undefined,
         !isCompact
-    )
-
-    console.log(
-        '1: ',
-        averageVotoByTime,
-        ' 2: ',
-        averageSentimentByTime,
-        ' 3: ',
-        averageReviewByTime
     )
 
     const distribuzioneRecensioniData =
@@ -312,8 +303,8 @@ function HomeReviews() {
                 <div className={styles.rowHome}>
                     {
                         <BubbleChartHome
-                            dataReady={!bubbleData}
-                            bubbles={bubbleData.data}
+                            dataReady={bubbleData?.data}
+                            bubbles={bubbleData?.data}
                             heading={t('Word Cloud')}
                         />
                     }
