@@ -35,6 +35,7 @@ import CollapsableCard from '../../../components/CollapsableCard/CollapsableCard
 import DistributionRatingsGraph from '../../../components/Graphs/DistributionRatingsGraph/DistributionRatingsGraph'
 import { saveAs } from 'file-saver'
 import BubbleChartHome from '../../../components/Charts/BubbleCharts/BubbleChartHome/BubbleChartHome'
+import TableSelector from '../../../components/TableSelector/TableSelector'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -95,7 +96,7 @@ function HomeReviews() {
         undefined,
         true,
         true
-    )
+    )?.data
 
     const averageVotoByTime = HomeService.getAverageByTime(
         allFilters,
@@ -140,7 +141,7 @@ function HomeReviews() {
             'Date',
             getNoCodeFromPlatfrom(),
             true
-        )
+        )?.data
 
     useEffect(() => {
         ServiceWrapper.wrapperLoadFilters(allFilters, dispatch, platformType, t)
@@ -179,6 +180,27 @@ function HomeReviews() {
             })
         }
     }
+
+    const tableSelectorData = [
+        {
+            key: 'luoghi',
+            label: t('Luoghi'),
+            data: {},
+            svg: 'location.svg',
+        },
+        {
+            key: 'canali',
+            label: t('Canali'),
+            data: {},
+            svg: 'channels.svg',
+        },
+        {
+            key: 'fonti',
+            label: t('Fonti'),
+            data: sourcesHomeData,
+            svg: 'Fonti.svg',
+        },
+    ]
 
     return (
         <PageContainer>
@@ -254,10 +276,11 @@ function HomeReviews() {
                     />
                 </div>
                 <div className={styles.rowHome}>
-                    <Table
-                        data={sources?.data}
-                        columnsData={sources?.data?.columns}
+                    <TableSelector
+                        data={tableSelectorData}
                         fullyLoaded={true}
+                        onDownload={saveCanvas}
+                        downloadble={true}
                     />
                     <CollapsableCard
                         colClasses={styles.myWidth}
@@ -268,7 +291,7 @@ function HomeReviews() {
                         onDownload={saveCanvas}
                         closeable={false}
                         isAnt={true}
-                        width={'33%'}
+                        width={'32.5%'}
                     >
                         <div>
                             <Tabs buttons={buttonList}>

@@ -1,0 +1,39 @@
+@import '@Style/app';
+
+.container {
+  border-radius: 10px;
+  background: #FFF;
+  width: 64.5%;
+  padding: 20px;
+  height: 484px;
+}
+
+.leftItemContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.body {
+
+}
+
+.headerLabelContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #0F1AF4;
+  cursor: pointer;
+}
+
+.headerLabelContainerDisabled {
+  @extend .headerLabelContainer;
+  border-bottom:  1px solid #E9E7EC;
+}
