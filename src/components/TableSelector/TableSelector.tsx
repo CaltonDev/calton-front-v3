@@ -31,11 +31,6 @@ const TableSelector = ({
         }, 1800)
     }
 
-    const locationData = FilterService.getLocationsFiltered(
-        getNoCodeFromPlatfrom(),
-        true
-    )?.data
-
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -88,8 +83,8 @@ const TableSelector = ({
             </div>
             <div className={styles.body}>
                 <Table
-                    data={data[activeTable]?.data?.data}
-                    columnsData={data[activeTable]?.data?.columns}
+                    data={data[activeTable]?.data?.data || []}
+                    columnsData={data[activeTable]?.data?.columns || []}
                     fullyLoaded={true}
                     customHeight={'370px'}
                     bottomNavigator={true}
