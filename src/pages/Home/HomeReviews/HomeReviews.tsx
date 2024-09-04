@@ -36,6 +36,7 @@ import DistributionRatingsGraph from '../../../components/Graphs/DistributionRat
 import { saveAs } from 'file-saver'
 import BubbleChartHome from '../../../components/Charts/BubbleCharts/BubbleChartHome/BubbleChartHome'
 import TableSelector from '../../../components/TableSelector/TableSelector'
+import FilterService from '../../../services/FilterService'
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -181,11 +182,16 @@ function HomeReviews() {
         }
     }
 
+    const locationData = FilterService.getLocationsFiltered(
+        getNoCodeFromPlatfrom(),
+        true
+    )?.data
+
     const tableSelectorData = [
         {
             key: 'luoghi',
             label: t('Luoghi'),
-            data: {},
+            data: locationData,
             svg: 'location.svg',
         },
         {
@@ -197,7 +203,7 @@ function HomeReviews() {
         {
             key: 'fonti',
             label: t('Fonti'),
-            data: sourcesHomeData,
+            data: {},
             svg: 'Fonti.svg',
         },
     ]

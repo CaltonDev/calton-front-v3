@@ -10,6 +10,8 @@ import DownloadIcon from '../DownloadIcon/DownloadIcon'
 import { GrClose } from 'react-icons/gr'
 import Table from '../Table/Table'
 import _ from 'lodash'
+import FilterService from '../../services/FilterService'
+import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 
 const TableSelector = ({
     data = [],
@@ -17,9 +19,7 @@ const TableSelector = ({
     downloadble = false,
     onDownload,
 }: TableSelectorProps) => {
-    const [activeTable, setActiveTable] = useState(
-        data?.length > 0 && data[0]?.key
-    )
+    const [activeTable, setActiveTable] = useState(0)
     const [downloading, setDownloading] = useState(false)
 
     const onDownloadInternal = () => {
@@ -30,17 +30,23 @@ const TableSelector = ({
             setDownloading(false)
         }, 1800)
     }
+
+    const locationData = FilterService.getLocationsFiltered(
+        getNoCodeFromPlatfrom(),
+        true
+    )?.data
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
                 <div className={styles.leftItemContainer}>
-                    {data?.map((obj) => {
+                    {data?.map((obj, idx) => {
                         return (
                             <div
                                 key={obj?.key}
-                                onClick={() => setActiveTable(obj?.key)}
+                                onClick={() => setActiveTable(idx)}
                                 className={
-                                    obj?.key === activeTable
+                                    idx === activeTable
                                         ? styles.headerLabelContainer
                                         : styles.headerLabelContainerDisabled
                                 }
@@ -49,7 +55,7 @@ const TableSelector = ({
                                     <SvgWrapper
                                         keySvg={obj.svg}
                                         color={
-                                            obj?.key === activeTable
+                                            idx === activeTable
                                                 ? 'secondary'
                                                 : 'disabled'
                                         }
@@ -61,9 +67,7 @@ const TableSelector = ({
                                     size={'bodyBig'}
                                     weight={'normal'}
                                     color={
-                                        obj?.key === activeTable
-                                            ? 'blue'
-                                            : 'grey'
+                                        idx === activeTable ? 'blue' : 'grey'
                                     }
                                 >
                                     {obj?.label}
@@ -84,14 +88,11 @@ const TableSelector = ({
             </div>
             <div className={styles.body}>
                 <Table
-                    data={
-                        data.find((el) => el?.key === activeTable)?.data?.data
-                    }
-                    columnsData={
-                        data.find((el) => el?.key === activeTable)?.data
-                            ?.columns
-                    }
+                    data={data[activeTable]?.data?.data}
+                    columnsData={data[activeTable]?.data?.columns}
                     fullyLoaded={true}
+                    customHeight={'370px'}
+                    bottomNavigator={true}
                 />{' '}
             </div>
         </div>

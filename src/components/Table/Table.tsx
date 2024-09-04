@@ -41,6 +41,8 @@ const Table = ({
     columnsData = [],
     fullyLoaded = false,
     fetchData,
+    customHeight,
+    bottomNavigator = false,
 }: TableProps) => {
     const columnHelper = createColumnHelper<any>()
 
@@ -156,20 +158,26 @@ const Table = ({
     }
 
     return (
-        <div className={styles.container}>
+        <div
+            className={
+                bottomNavigator ? styles.containerReverse : styles.container
+            }
+        >
             <div className={styles.header}>
-                <div className={styles.headerBtn}>
-                    <div
-                        className={styles.rowSelectionContainer}
-                        onClick={handleRowSelection}
-                    >
-                        <SvgWrapper
-                            keySvg={'rowSelection.svg'}
-                            size={'medium'}
-                            onClick={table.getToggleAllRowsSelectedHandler()}
-                        />
+                {!bottomNavigator && (
+                    <div className={styles.headerBtn}>
+                        <div
+                            className={styles.rowSelectionContainer}
+                            onClick={handleRowSelection}
+                        >
+                            <SvgWrapper
+                                keySvg={'rowSelection.svg'}
+                                size={'medium'}
+                                onClick={table.getToggleAllRowsSelectedHandler()}
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
                 <PageNavigator
                     pageElements={pagination.pageSize}
                     totalElements={data?.length}
@@ -178,7 +186,10 @@ const Table = ({
                     changeElementsPerPage={changeElementsPerPage}
                 />
             </div>
-            <div className={styles.tableContainer}>
+            <div
+                className={styles.tableContainer}
+                style={{ height: customHeight ? customHeight : '' }}
+            >
                 <table className={styles.table}>
                     <thead>
                         {table.getHeaderGroups().map((headerGroup) => (
