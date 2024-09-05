@@ -26,6 +26,7 @@ export interface TypographyProps {
         | 'grey'
         | 'blue'
         | 'black'
+        | 'green'
     italic?: boolean
     underline?: boolean
     uppercase?: boolean

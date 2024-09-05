@@ -12,6 +12,7 @@ import Table from '../Table/Table'
 import _ from 'lodash'
 import FilterService from '../../services/FilterService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
+import { PaginationState } from '@tanstack/react-table'
 
 const TableSelector = ({
     data = [],
@@ -21,7 +22,10 @@ const TableSelector = ({
 }: TableSelectorProps) => {
     const [activeTable, setActiveTable] = useState(0)
     const [downloading, setDownloading] = useState(false)
-
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    })
     const onDownloadInternal = () => {
         console.log('onDownload')
         setDownloading(true)
@@ -88,7 +92,9 @@ const TableSelector = ({
                     fullyLoaded={true}
                     customHeight={'370px'}
                     bottomNavigator={true}
-                />{' '}
+                    pagination={pagination}
+                    setPagination={setPagination}
+                />
             </div>
         </div>
     )

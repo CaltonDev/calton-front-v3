@@ -13,6 +13,13 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.reviewReply {
+  display: flex;
+  flex-direction: column;
 }
 
 .headerContainer {
@@ -63,7 +70,7 @@
 
 .reviewContainer {
   width: 608px;
-  height: 65px;
+  min-height: 65px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -86,4 +93,15 @@
 
 .labelContainer {
   padding-left: 12px;
+}
+
+.fontW{
+  font-family: "Roboto" !important;
+  font-size: 14px;
+  font-weight: 300;
+  color: #321D48;
+  line-height: 17.5px;
+  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
 }

@@ -24,8 +24,8 @@
 }
 
 .reviewsContainer {
-  display: flex;
-  flex-direction: row;
+  grid-template-columns: 49.5% 49.5%;
+  display: grid;
   gap: 20px;
   width: 100%;
 }

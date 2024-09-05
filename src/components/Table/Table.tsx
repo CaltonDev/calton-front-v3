@@ -43,6 +43,8 @@ const Table = ({
     fetchData,
     customHeight,
     bottomNavigator = false,
+    pagination,
+    setPagination,
 }: TableProps) => {
     const columnHelper = createColumnHelper<any>()
 
@@ -76,11 +78,6 @@ const Table = ({
                 footer: (info) => info.column.id,
             })
         )
-    })
-
-    const [pagination, setPagination] = React.useState<PaginationState>({
-        pageIndex: 0,
-        pageSize: 10,
     })
 
     const [rowSelection, setRowSelection] = React.useState({})
@@ -163,7 +160,11 @@ const Table = ({
                 bottomNavigator ? styles.containerReverse : styles.container
             }
         >
-            <div className={styles.header}>
+            <div
+                className={
+                    bottomNavigator ? styles.headerReverse : styles.header
+                }
+            >
                 {!bottomNavigator && (
                     <div className={styles.headerBtn}>
                         <div

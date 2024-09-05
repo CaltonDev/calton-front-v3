@@ -15,6 +15,8 @@ import Button from '../../components/Button/Button'
 import PageNavigator from '../../components/PageNavigator/PageNavigator'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 import FeedbackService from '../../services/FeedbackService'
+import { PaginationState } from '@tanstack/react-table'
+import search from '../../store/search/search'
 function Reviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -39,8 +41,6 @@ function Reviews() {
 
     const { t } = useTranslation()
 
-    const [currentPage, setCurrentPage] = useState(1)
-
     const tierList = [
         {
             label: 'The Fork',
@@ -56,32 +56,100 @@ function Reviews() {
         },
     ]
 
-    const changeElementsPerPage = (e: any) => {
-        //setCurrentPage(e.target.value)
-    }
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 20,
+    })
 
-    const changePage = (e: any) => {
-        setCurrentPage(e.target.value)
-    }
-
-    const feedbacks = FeedbackService.getFeedbacks(
-        undefined,
+    const feedbackInfo = FeedbackService.getInfoFeedbacks(
+        [],
         allFilters,
         undefined,
         false,
         getNoCodeFromPlatfrom(),
-        page * 20,
-        20,
-        sort,
+        pagination.pageIndex * pagination.pageSize,
+        pagination.pageSize,
+        [
+            {
+                name: 'data',
+                direction: 'desc',
+            },
+        ],
         search,
         false,
         undefined,
         'xlsx',
         undefined,
         undefined,
-        undefined,
+        null,
+        null,
+        true,
         undefined
-    )
+    )?.data?.data
+
+    const feedbacks = FeedbackService.getFeedbacks(
+        [],
+        allFilters,
+        undefined,
+        false,
+        getNoCodeFromPlatfrom(),
+        pagination.pageIndex * pagination.pageSize,
+        pagination.pageSize,
+        [
+            {
+                name: 'data',
+                direction: 'desc',
+            },
+        ],
+        search,
+        false,
+        undefined,
+        'xlsx',
+        undefined,
+        undefined,
+        null,
+        null,
+        true,
+        undefined
+    )?.data?.all_feed
+
+    const changePage = (direction: any) => {
+        if (direction === 'next') {
+            setPagination({
+                pageIndex: pagination.pageIndex + 1,
+                pageSize: pagination.pageSize,
+            })
+        } else if (direction === 'previous') {
+            setPagination({
+                pageIndex: pagination.pageIndex - 1,
+                pageSize: pagination.pageSize,
+            })
+        } else {
+            const number = Number(direction)
+            if (
+                number > 0 &&
+                number <=
+                    Math.ceil(feedbackInfo?.countFeed / pagination.pageSize)
+            ) {
+                setPagination({
+                    pageIndex: number - 1,
+                    pageSize: pagination.pageSize,
+                })
+            } else {
+                setPagination({
+                    pageIndex: 0,
+                    pageSize: pagination.pageSize,
+                })
+            }
+        }
+    }
+
+    const changeElementsPerPage = (e: any) => {
+        setPagination({
+            pageIndex: 0,
+            pageSize: e.value,
+        })
+    }
 
     return (
         <PageContainer>
@@ -122,17 +190,18 @@ function Reviews() {
                     </div>
                     <div>
                         <PageNavigator
-                            totalElements={255}
-                            currentPage={currentPage}
-                            pageElements={30}
+                            totalElements={feedbackInfo?.countFeed}
+                            currentPage={pagination.pageIndex}
+                            pageElements={pagination.pageSize}
                             changeElementsPerPage={changeElementsPerPage}
                             changePage={changePage}
                         />
                     </div>
                 </div>
                 <div className={styles.reviewsContainer}>
-                    <ReviewCard />
-                    <ReviewCard />
+                    {feedbacks?.map((feedback: any, idx: number) => {
+                        return <ReviewCard key={idx} feedback={feedback} />
+                    })}
                 </div>
             </div>
         </PageContainer>

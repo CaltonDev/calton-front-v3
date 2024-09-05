@@ -104,9 +104,6 @@ interface QueryData {
     // Add other properties as needed
 }
 
-export const fetchFeedbacks = (body: GetInfoFeedbacksBody) =>
-    apiService.apiFeedback.post('/getFeedback', body, getHeaders(false, true))
-
 function getFeedbacks(
     idSources: any | undefined,
     allFilters: AllFilters,
@@ -132,6 +129,7 @@ function getFeedbacks(
     const body: GetInfoFeedbacksBody = {
         idSources: idSources ? idSources : allFilters.selectedSource,
         columns,
+        channels: allFilters.selectedChannel,
         simplified,
         code,
         skip,
@@ -155,16 +153,14 @@ function getFeedbacks(
     }
 
     return useQuery<any, Error>(
-        ['idSources', idSources ?? allFilters.selectedSource],
-        () => fetchFeedbacks(body),
+        ['idFeedbacks', allFilters, skip, limit],
+        () =>
+            apiService.apiFeedback.post(
+                '/getFeedback',
+                body,
+                getHeaders(false, true)
+            ),
         {
-            initialData: () => {
-                return queryClient
-                    .getQueryData<QueryData[]>('idSources')
-                    ?.find(
-                        (d) => d.id === (idSources ?? allFilters.selectedSource)
-                    )
-            },
             staleTime: 0,
         }
     )
@@ -268,7 +264,7 @@ function getInfoFeedbacks(
     lemmas: any,
     returnAnt: boolean,
     wordFilter: any | undefined
-): Promise<any> {
+): UseQueryResult<any, Error> {
     const body: GetInfoFeedbacksBody = {
         idSources: idSources ? idSources : allFilters.selectedSource,
         columns,
@@ -294,7 +290,14 @@ function getInfoFeedbacks(
         lemmas,
         returnAnt,
     }
-    return apiService.apiFeedback.post('/getInfo', body, getHeaders())
+
+    return useQuery<any, Error>(
+        ['idInfoFeedbacks', allFilters],
+        () => apiService.apiFeedback.post('/getInfo', body, getHeaders()),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 const FeedbackService = {

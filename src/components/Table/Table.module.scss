@@ -17,6 +17,12 @@
   justify-content: space-between;
 }
 
+.headerReverse {
+  @extend .header;
+  justify-content: end;
+  margin-top: 10px;
+}
+
 .tableContainer {
   overflow-x: auto;
   margin-top: 20px;

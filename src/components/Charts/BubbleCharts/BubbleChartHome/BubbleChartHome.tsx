@@ -11,6 +11,7 @@ import Tabs from '../../../TabsComponent/Tabs'
 import { BubbleChartHomeProps } from './BubbleChartHome.interface'
 import { RootState } from '../../../../store/store'
 import BubbleChart from '../BubbleChartCustom/BubbleChart'
+import TableLastFeedbackHome from '../../../Tables/TableLastFeedbackHome/TableLastFeedbackHome'
 
 const CHART_HEIGHT = 543
 
@@ -26,9 +27,11 @@ function BubbleChartHome({
     const [indexExt, setIndexExt] = useState<number[]>([])
     const wordSelected = useSelector((state: RootState) => state.SelectedWords)
     const { t } = useTranslation()
+    const feedbacks = useSelector((state: RootState) => state.FeedbackHome) //TODO: probably we should remove it
 
     useEffect(() => {
-        if (wordSelected.data && wordSelected.data.word) {
+        //todo: check errors, strange error in payload
+        if (wordSelected) {
             setIndexExt([Math.random(), 1])
         }
     }, [wordSelected])
@@ -63,6 +66,7 @@ function BubbleChartHome({
         sentiment: string,
         isText: string
     ) => {
+        console.log('t: ', text, ' sent: ', sentiment, ' is: ', isText)
         if (text && text != '') {
             const payload = {
                 word: text,
@@ -144,25 +148,15 @@ function BubbleChartHome({
                             )}
                         </div>
                         <div key="panel-2" className={styles.myContainerTab}>
-                            {/*   <TableLastFeedbackHome
-                                    word={wordSelected.word}
-                                    countFeed={feedbacks.count}
-                                    sentiment={wordSelected.sentiment}
-                                    dataReady={
-                                        !feedbacks.isLoading &&
-                                        !feedbacks.isLoadingCount
-                                    }
-                                    columns={feedbacks?.columns}
-                                    dataTable={feedbacks?.feedback}
-                                    heading={t('Ultimi Feedback')}
-                                    collapsible={true}
-                                    reloadable={true}
-                                    downloadble={true}
-                                    onDownload={() => null}
-                                    downloading={null}
-                                    closeable={true}
-                                    contentPopover={t('UltimiFeedbackHelper')}
-                                />*/}
+                            <TableLastFeedbackHome
+                                word={wordSelected?.data?.word}
+                                countFeed={feedbacks.count}
+                                sentiment={wordSelected?.data?.sentiment}
+                                dataReady={
+                                    !feedbacks.isLoading &&
+                                    !feedbacks.isLoadingCount
+                                }
+                            />
                         </div>
                     </Tabs>
                 }

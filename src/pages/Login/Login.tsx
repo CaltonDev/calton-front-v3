@@ -89,6 +89,14 @@ function Login() {
         dispatch(setSourcesFiltered(null))
         dispatch(setPlatformType('reviews'))*/
 
+        dispatch(
+            setSelectedWord({
+                word: null,
+                sentiment: false,
+                isText: false,
+            })
+        )
+        dispatch(setWordSearched(null))
         dispatch(setChildUsers(null))
         dispatch(resetSearch())
         dispatch(resetSocketMessage())

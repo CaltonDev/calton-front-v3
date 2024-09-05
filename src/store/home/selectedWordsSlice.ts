@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export interface SelectedWordsState {
     data: {
         word: any
-        sentiment: boolean
+        sentiment: number
         isText: boolean
     }
 }
@@ -11,7 +11,7 @@ export interface SelectedWordsState {
 const initialState: SelectedWordsState = {
     data: {
         word: null,
-        sentiment: false,
+        sentiment: 0,
         isText: false,
     },
 }

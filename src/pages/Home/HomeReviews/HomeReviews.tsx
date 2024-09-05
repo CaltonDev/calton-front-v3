@@ -203,7 +203,7 @@ function HomeReviews() {
         {
             key: 'fonti',
             label: t('Fonti'),
-            data: {},
+            data: sourcesHomeData,
             svg: 'Fonti.svg',
         },
     ]

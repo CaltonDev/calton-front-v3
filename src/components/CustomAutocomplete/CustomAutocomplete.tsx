@@ -30,7 +30,6 @@ export default function CustomAutocomplete({
     disabled,
     displayType = 'core',
     floatingDisplay = false,
-    name = '',
     isThick = false,
     hasDropdown = false,
 }: CustomAutocompleteProps) {

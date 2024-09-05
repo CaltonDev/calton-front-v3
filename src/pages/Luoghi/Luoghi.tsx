@@ -5,6 +5,7 @@ import PageContainer from '../../components/PageComponents/PageContainer/PageCon
 import { useTranslation } from 'react-i18next'
 import FilterService from '../../services/FilterService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
+import { PaginationState } from '@tanstack/react-table'
 
 function Luoghi() {
     const { t } = useTranslation()
@@ -12,6 +13,10 @@ function Luoghi() {
         getNoCodeFromPlatfrom(),
         true
     )
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    })
 
     return (
         <PageContainer>
@@ -20,6 +25,8 @@ function Luoghi() {
                 data={locationData?.data?.data}
                 columnsData={locationData?.data?.columns}
                 fullyLoaded={true}
+                pagination={pagination}
+                setPagination={setPagination}
             />
         </PageContainer>
     )

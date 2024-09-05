@@ -13,25 +13,34 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../store/store'
 import Textarea from '../../Textarea/Textarea'
 import Hooks from '../../../utils/hooks/Hooks'
-function ReviewCard() {
+import { ReviewCardProps } from './ReviewCard.interface'
+import moment from 'moment'
+import ShowMoreText from 'react-show-more-text'
+
+function ReviewCard({ feedback }: ReviewCardProps) {
     const { t } = useTranslation()
-    const title = 'Daniel'
-    const sentiment = 'neutral'
+    const sentiment =
+        feedback?.integer?.isSentiment &&
+        feedback?.integer?.isSentiment[0]?.data != null
+            ? feedback?.integer?.isSentiment[0]?.data
+            : 0
+    const recensione = feedback?.string?.toAnalyse
+
     const [replyMessage, setReplyMessage] = useState<string>()
     const [showTextarea, setShowTextarea] = useState(false)
     const selectOptions = [
         {
-            value: 'positive',
+            value: 1,
             label: t('Sentiment'),
             icon: 'positiveSentiment.svg',
         },
         {
-            value: 'neutral',
+            value: 0,
             label: t('Sentiment'),
             icon: 'neutralSentiment.svg',
         },
         {
-            value: 'negative',
+            value: -1,
             label: t('Sentiment'),
             icon: 'negativeSentiment.svg',
         },
@@ -46,40 +55,68 @@ function ReviewCard() {
     }
     const ref = Hooks.useOutsideClick(handleClickOutside)
 
+    const sourceName = feedback?.string?.constant?.filter(
+        (elm: any) => elm.col === 'sourceName'
+    )[0]
+
+    const openInNewPage = () => {
+        if (
+            !sourceName.data.includes('GoogleMyBusinessAPI') &&
+            !sourceName.data.includes('Google Reviews') &&
+            feedback?.string?.isUrl
+        )
+            window.open(feedback?.string?.isUrl[0]?.data, '_blank')
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.paddedContainer}>
                 <div className={styles.headerContainer}>
                     <div className={styles.header}>
                         <div className={styles.title}>
-                            {true ? (
+                            {!feedback?.obj?.isReviewer[0]?.data?.photoUrl ? (
                                 <div className={styles.placeholderImg} />
                             ) : (
-                                <SvgWrapper
-                                    keySvg={'Facebook.svg'}
-                                    size={'small'}
+                                <img
+                                    src={
+                                        feedback?.obj?.isReviewer[0]?.data
+                                            ?.photoUrl
+                                    }
+                                    className={styles.placeholderImg}
                                 />
                             )}
                             <Typography size={'bodySmall'} weight={'light'}>
-                                {title}
+                                {
+                                    feedback?.string?.constant?.filter(
+                                        (elm: any) =>
+                                            elm.col === 'formatted_address'
+                                    )[0]?.data
+                                }
                             </Typography>
                         </div>
                         <SvgWrapper
                             keySvg={'openInNewPageIcon.svg'}
                             size={'small'}
+                            onClick={openInNewPage}
                         />
                     </div>
                     <div className={styles.contentDiv}>
                         <div className={styles.tagsContainer}>
                             <div className={styles.leftItem}>
-                                <TextContainer
-                                    label={'Location'}
-                                    color={'#0C14A1'}
-                                />
-                                <TextContainer
-                                    label={'Prezzo'}
-                                    color={'#0C14A1'}
-                                />
+                                {feedback?.list?.isTopic &&
+                                    feedback?.list?.isTopic.map((elm: any) => {
+                                        if (elm.data) {
+                                            return elm.data?.map(
+                                                (topic: any, idx: number) => (
+                                                    <TextContainer
+                                                        key={idx}
+                                                        label={topic?.name}
+                                                        color={'#0C14A1'}
+                                                    />
+                                                )
+                                            )
+                                        }
+                                    })}
                             </div>
                             <div>
                                 <Button
@@ -94,13 +131,23 @@ function ReviewCard() {
                         <div className={styles.tagsContainer}>
                             <div className={styles.leftItem}>
                                 <TextContainer
-                                    label={'23/04/2023'}
+                                    label={moment
+                                        .utc(
+                                            feedback?.datetime
+                                                ?.isDataFeedback[0]
+                                        )
+                                        .format('DD/MM/YYYY')}
                                     textColor={'black'}
                                     color={'#F1F1F1'}
                                     iconSvg={'Amazon.svg'}
                                 />
                                 {/*Add review stars*/}
-                                <TextContainer isRating={1} color={'#F1F1F1'} />
+                                <TextContainer
+                                    isRating={
+                                        feedback?.integer?.isRating[0]?.data
+                                    }
+                                    color={'#F1F1F1'}
+                                />
                             </div>
                             <CaltonSelect
                                 options={selectOptions}
@@ -121,39 +168,112 @@ function ReviewCard() {
                         </div>
                         <div className={styles.reviewContainer}>
                             <div className={styles.title}>
-                                {true ? (
+                                {!feedback?.obj?.isReviewer[0]?.data
+                                    ?.photoUrl ? (
                                     <div className={styles.placeholderImg} />
                                 ) : (
-                                    <SvgWrapper
-                                        keySvg={'Facebook.svg'}
-                                        size={'small'}
+                                    <img
+                                        src={
+                                            feedback?.obj?.isReviewer[0]?.data
+                                                ?.photoUrl
+                                        }
+                                        className={styles.placeholderImg}
                                     />
                                 )}
                                 <Typography size={'bodyMedium'} weight={'bold'}>
-                                    {title}
+                                    {feedback?.obj?.isReviewer[0]?.data?.name}
                                 </Typography>
                             </div>
                             <div className={styles.reviewContainer}>
-                                <Typography
-                                    size={'bodyMedium'}
-                                    weight={'normal'}
-                                >
-                                    {
-                                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-                                    }
-                                </Typography>
+                                {recensione &&
+                                    recensione[0]?.data &&
+                                    recensione[0]?.data != '' && (
+                                        <ShowMoreText
+                                            lines={2}
+                                            className={styles.fontW}
+                                            more={
+                                                <Typography
+                                                    size={'bodySmall'}
+                                                    weight={'light'}
+                                                    color={'blue'}
+                                                >
+                                                    {t('mostra tutto')}
+                                                </Typography>
+                                            }
+                                            less={
+                                                <Typography
+                                                    size={'bodySmall'}
+                                                    weight={'light'}
+                                                    color={'blue'}
+                                                >
+                                                    {t('nascondi')}
+                                                </Typography>
+                                            }
+                                        >
+                                            <Typography
+                                                size={'bodySmall'}
+                                                weight={'light'}
+                                            >
+                                                {recensione[0]?.data}
+                                            </Typography>
+                                        </ShowMoreText>
+                                    )}
                             </div>
+                            {feedback?.string?.isAnswer &&
+                                feedback?.string?.isAnswer[0]?.data?.text &&
+                                feedback?.string?.isAnswer[0]?.data?.text !=
+                                    '' && (
+                                    <div className={styles.reviewReply}>
+                                        <Typography
+                                            size={'bodyMedium'}
+                                            weight={'bold'}
+                                            color={'green'}
+                                        >
+                                            {t('Risposta')}
+                                        </Typography>
+                                        <Typography
+                                            size={'bodyMedium'}
+                                            weight={'bold'}
+                                            color={'grey'}
+                                        >
+                                            {
+                                                feedback?.string?.isAnswer[0]
+                                                    ?.data?.text
+                                            }
+                                        </Typography>
+                                    </div>
+                                )}
                         </div>
                     </div>
                 </div>
                 {!showTextarea && (
                     <div className={styles.footer}>
                         <Tag
-                            label={'Senza risposta'}
-                            type={'neutral'}
+                            label={
+                                feedback?.string?.isAnswer &&
+                                feedback?.string?.isAnswer[0]?.data?.text &&
+                                feedback?.string?.isAnswer[0]?.data?.text != ''
+                                    ? t('Risposta')
+                                    : t('Senza risposta')
+                            }
+                            type={
+                                feedback?.string?.isAnswer &&
+                                feedback?.string?.isAnswer[0]?.data?.text &&
+                                feedback?.string?.isAnswer[0]?.data?.text != ''
+                                    ? 'positive'
+                                    : 'neutral'
+                            }
                             iconSvg={'reply.svg'}
                         />
                         <SvgWrapper
+                            disabled={
+                                !(
+                                    feedback?.string?.isAnswer &&
+                                    feedback?.string?.isAnswer[0]?.data?.text &&
+                                    feedback?.string?.isAnswer[0]?.data?.text !=
+                                        ''
+                                )
+                            }
                             keySvg={'message.svg'}
                             size={'small'}
                             color={'secondary'}

@@ -11,6 +11,7 @@ import { InfoCircleOutlined } from '@ant-design/icons'
 import { Tooltip } from 'antd'
 import { saveAs } from 'file-saver'
 import { HeaderGraphProps } from './HeaderGraph.interface'
+import Typography from '../Typography/Typography'
 
 function HeaderGraph({
     title = '',
@@ -87,9 +88,9 @@ function HeaderGraph({
             <div className={styles.myExtContainerHeading}>
                 <div className={styles.myContainerHeading}>
                     <div className={styles.headingTextDiv}>
-                        <p className={styles.myHeadingText}>
+                        <Typography size={'h6'} weight={'bold'}>
                             {!option ? title : t('Sinonimi/Esclusioni')}
-                        </p>
+                        </Typography>
                         {dataReady && isInfoTooltip ? (
                             <div className={styles.tooltipDiv}>
                                 <Tooltip

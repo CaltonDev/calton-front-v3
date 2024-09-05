@@ -1,4 +1,3 @@
-export interface TagProps {
-    percentage: number
-    type: 'positive' | 'neutral' | 'negative'
+export interface ReviewCardProps {
+    feedback: any
 }
