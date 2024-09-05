@@ -1,5 +1,6 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
+import { useQuery } from 'react-query'
 
 interface AddEditSmartResponseBody {
     responseText: string
@@ -12,7 +13,7 @@ interface AddEditSmartResponseBody {
 }
 
 interface GetAllSmartResponsesBody {
-    returnAnt: boolean
+    returnAnt?: boolean
 }
 
 interface GenerateSmartBody {
@@ -23,9 +24,15 @@ interface RemoveSmartResponseBody {
     _id: string
 }
 
-function getAllSmartResponses(returnAnt: boolean) {
+function getAllSmartResponses(returnAnt?: false) {
     const body: GetAllSmartResponsesBody = { returnAnt }
-    return apiService.apiUrl.post('/smartResponse/get', body, getHeaders())
+    return useQuery<any, Error>(
+        ['smartResponses'],
+        () => apiService.apiUrl.post('/smartResponse/get', body, getHeaders()),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function generateSmart(idFeedback: string) {

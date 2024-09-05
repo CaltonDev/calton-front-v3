@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export interface SelectableFiltersState {
-    SelectableFilters: {
+    data: {
         allChannelSources: string[]
         allLocations: string[]
         allTopics: string[]
@@ -11,9 +11,8 @@ export interface SelectableFiltersState {
 }
 
 const initialState: SelectableFiltersState = {
-    SelectableFilters: {
+    data: {
         allChannelSources: [],
-
         allLocations: [],
         allTopics: [],
         allProducts: [],

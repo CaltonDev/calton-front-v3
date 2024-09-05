@@ -16,8 +16,18 @@ import Hooks from '../../../utils/hooks/Hooks'
 import { ReviewCardProps } from './ReviewCard.interface'
 import moment from 'moment'
 import ShowMoreText from 'react-show-more-text'
+import CustomAutocomplete from '../../CustomAutocomplete/CustomAutocomplete'
 
-function ReviewCard({ feedback }: ReviewCardProps) {
+function ReviewCard({
+    index,
+    feedback,
+    handleClickChangeSentiment,
+    handleChangeAnswer,
+    smartResponses,
+    handleChangeSmartResponse,
+    handleChangeTopic,
+    isFromCompetitor,
+}: ReviewCardProps) {
     const { t } = useTranslation()
     const sentiment =
         feedback?.integer?.isSentiment &&
@@ -25,7 +35,8 @@ function ReviewCard({ feedback }: ReviewCardProps) {
             ? feedback?.integer?.isSentiment[0]?.data
             : 0
     const recensione = feedback?.string?.toAnalyse
-
+    const allTopics = useSelector((state: RootState) => state.SelectableFilters)
+        ?.data?.allTopics //todo: move to react query
     const [replyMessage, setReplyMessage] = useState<string>()
     const [showTextarea, setShowTextarea] = useState(false)
     const selectOptions = [
@@ -119,13 +130,32 @@ function ReviewCard({ feedback }: ReviewCardProps) {
                                     })}
                             </div>
                             <div>
-                                <Button
-                                    size={'small'}
-                                    fullWidth={true}
-                                    customPadding={'7px 16px'}
-                                >
-                                    {t('Gestisci topic')}
-                                </Button>
+                                <CustomAutocomplete
+                                    displayType={'filter'}
+                                    label={
+                                        !feedback?.list?.isTopic ||
+                                        feedback?.list?.isTopic[0]?.data
+                                            .length === 0
+                                            ? t('Nessun Topic')
+                                            : feedback?.list?.isTopic[0]?.data
+                                                  .length +
+                                              ' ' +
+                                              t('topic')
+                                    }
+                                    placeholderInput={t('Cerca topic')}
+                                    primary={'name'}
+                                    secondary={'words'}
+                                    labels={allTopics}
+                                    type={'topics'}
+                                    handleChange={(e) =>
+                                        handleChangeTopic(e, index)
+                                    }
+                                    defaultValue={
+                                        feedback?.list?.isTopic[0]?.data
+                                    }
+                                    multiple={true}
+                                    hasDropdown={true}
+                                />
                             </div>
                         </div>
                         <div className={styles.tagsContainer}>
@@ -163,7 +193,14 @@ function ReviewCard({ feedback }: ReviewCardProps) {
                                 customColor={'none'}
                                 customHeight={'auto'}
                                 placeholderColor={'black'}
-                                onChange={handleSentimentChange}
+                                onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}
                             />
                         </div>
                         <div className={styles.reviewContainer}>
