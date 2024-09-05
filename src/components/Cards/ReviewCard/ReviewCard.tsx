@@ -267,20 +267,33 @@ function ReviewCard({ feedback }: ReviewCardProps) {
                         />
                         <SvgWrapper
                             disabled={
+                                feedback?.string?.isAnswer &&
+                                feedback?.string?.isAnswer[0]?.data?.text &&
+                                feedback?.string?.isAnswer[0]?.data?.text != ''
+                            }
+                            keySvg={'message.svg'}
+                            size={'small'}
+                            color={
                                 !(
                                     feedback?.string?.isAnswer &&
                                     feedback?.string?.isAnswer[0]?.data?.text &&
                                     feedback?.string?.isAnswer[0]?.data?.text !=
                                         ''
                                 )
+                                    ? 'secondary'
+                                    : 'disabled'
                             }
-                            keySvg={'message.svg'}
-                            size={'small'}
-                            color={'secondary'}
                             hasContainerProps={{
                                 hasContainer: true,
                                 containerSize: 32,
-                                border: '2px solid #3F49FC',
+                                border: !(
+                                    feedback?.string?.isAnswer &&
+                                    feedback?.string?.isAnswer[0]?.data?.text &&
+                                    feedback?.string?.isAnswer[0]?.data?.text !=
+                                        ''
+                                )
+                                    ? '2px solid #3F49FC'
+                                    : '2px solid #C0BBC5',
                                 outlined: true,
                             }}
                             onClick={() => setShowTextarea(true)}
