@@ -61,7 +61,7 @@ function Login() {
 
     useEffect(() => {
         sessionStorage.removeItem('unique')
-        /*dispatch(setDistribuzioniVoti(null))
+        dispatch(setDistribuzioniVoti(null))
         dispatch(setDistribuzioniRacc(null))
         dispatch(setAverageVotoByTime(null))
         dispatch(setAverageSentimentByTime(null))
@@ -87,7 +87,7 @@ function Login() {
         dispatch(setLocationFiltered(null))
 
         dispatch(setSourcesFiltered(null))
-        dispatch(setPlatformType('reviews'))*/
+        dispatch(setPlatformType('reviews'))
 
         dispatch(
             setSelectedWord({

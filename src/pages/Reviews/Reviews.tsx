@@ -121,7 +121,6 @@ function Reviews() {
     const smartResponse =
         SmartResponseService.getAllSmartResponses()?.data?.data
 
-    console.log('Smar:t', smartResponse)
     const handleChangeSmartResponse = (ev: any, index: number) => {
         //  console.log(ev)
         const smartSelected = ev
@@ -438,7 +437,7 @@ function Reviews() {
                             <ReviewCard
                                 key={idx}
                                 index={idx}
-                                smartResponses={{}}
+                                smartResponses={smartResponse}
                                 handleClickChangeSentiment={
                                     handleClickChangeSentiment
                                 }

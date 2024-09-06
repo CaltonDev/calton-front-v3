@@ -17,6 +17,9 @@ import { ReviewCardProps } from './ReviewCard.interface'
 import moment from 'moment'
 import ShowMoreText from 'react-show-more-text'
 import CustomAutocomplete from '../../CustomAutocomplete/CustomAutocomplete'
+import { SelectableFiltersState } from '../../../store/filters/selectableFiltersSlice'
+import FilterService from '../../../services/FilterService'
+import { selectAllFilters } from '../../../store/selectors/selectorsSlice'
 
 function ReviewCard({
     index,
@@ -35,8 +38,13 @@ function ReviewCard({
             ? feedback?.integer?.isSentiment[0]?.data
             : 0
     const recensione = feedback?.string?.toAnalyse
-    const allTopics = useSelector((state: RootState) => state.SelectableFilters)
-        ?.data?.allTopics //todo: move to react query
+    /*const allTopics = useSelector(
+        (state: RootState) => state.SelectableFilters.data
+    ) //todo: move to react query*/
+
+    const allTopics = FilterService.getTopicFiltered(true)?.data?.data
+
+    console.log('all: ', allTopics)
     const [replyMessage, setReplyMessage] = useState<string>()
     const [showTextarea, setShowTextarea] = useState(false)
     const selectOptions = [
@@ -78,6 +86,9 @@ function ReviewCard({
         )
             window.open(feedback?.string?.isUrl[0]?.data, '_blank')
     }
+
+    const handleChange = (event: any, type: string) => {}
+    const { selectedTopics, customFilters } = useSelector(selectAllFilters)
 
     return (
         <div className={styles.container}>
@@ -130,16 +141,66 @@ function ReviewCard({
                                     })}
                             </div>
                             <div>
+                                {/*
+                                    <CustomAutocomplete
+                                        displayType={'filter'}
+                                        label={
+                                            !feedback?.list?.isTopic ||
+                                            feedback?.list?.isTopic[0]?.data
+                                                .length === 0
+                                                ? t('Nessun Topic')
+                                                : feedback?.list?.isTopic[0]
+                                                      ?.data.length +
+                                                  ' ' +
+                                                  t('topic')
+                                        }
+                                        placeholderInput={t('Cerca topic')}
+                                        primary={'name'}
+                                        secondary={'words'}
+                                        labels={allTopics?.data}
+                                        type={'topics'}
+                                        handleChange={(e) =>
+                                            handleChangeTopic(e, index)
+                                        }
+                                        defaultValue={
+                                            feedback?.list?.isTopic[0]?.data
+                                        }
+                                        multiple={true}
+                                        hasDropdown={true}
+                                    />*/}
+                                {/*
+                                    <CustomAutocomplete
+                                        isButton={true}
+                                        label={
+                                            !feedback?.list?.isTopic ||
+                                            feedback?.list?.isTopic[0]?.data
+                                                .length === 0
+                                                ? t('Nessun Topic')
+                                                : feedback?.list?.isTopic[0]
+                                                      ?.data.length +
+                                                  ' ' +
+                                                  t('topic')
+                                        }
+                                        placeholderInput={t('Cerca topic')}
+                                        primary={'name'}
+                                        secondary={'words'}
+                                        labels={allTopics}
+                                        type={'topics'}
+                                        multiple={true}
+                                        defaultValue={
+                                            feedback?.list?.isTopic[0]?.data
+                                        }
+                                        handleChange={(e) =>
+                                            handleChangeTopic(e, index)
+                                        }
+                                    />*/}
                                 <CustomAutocomplete
                                     displayType={'filter'}
                                     label={
-                                        !feedback?.list?.isTopic ||
-                                        feedback?.list?.isTopic[0]?.data
-                                            .length === 0
-                                            ? t('Nessun Topic')
-                                            : feedback?.list?.isTopic[0]?.data
-                                                  .length +
-                                              ' ' +
+                                        selectedTopics &&
+                                        selectedTopics?.length == 0
+                                            ? t('Tutti i topic')
+                                            : selectedTopics?.length +
                                               t('topic')
                                     }
                                     placeholderInput={t('Cerca topic')}
@@ -147,12 +208,8 @@ function ReviewCard({
                                     secondary={'words'}
                                     labels={allTopics}
                                     type={'topics'}
-                                    handleChange={(e) =>
-                                        handleChangeTopic(e, index)
-                                    }
-                                    defaultValue={
-                                        feedback?.list?.isTopic[0]?.data
-                                    }
+                                    handleChange={handleChange}
+                                    defaultValue={selectedTopics}
                                     multiple={true}
                                     hasDropdown={true}
                                 />

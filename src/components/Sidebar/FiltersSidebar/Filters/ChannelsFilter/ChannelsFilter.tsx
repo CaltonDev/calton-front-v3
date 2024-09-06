@@ -7,12 +7,12 @@ import { SelectableFiltersState } from '../../../../../store/filters/selectableF
 import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { setStateSelect } from '../../../../../store/filters/filtersSlice'
 import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
+import { RootState } from '../../../../../store/store'
 
 function ChannelsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const dispatch = useDispatch()
     const allChannelSources = useSelector(
-        (state: SelectableFiltersState) =>
-            state.SelectableFilters.allChannelSources
+        (state: RootState) => state.SelectableFilters.data.allChannelSources
     )
     const { selectedChannel } = useSelector(selectAllFilters)
     const { t } = useTranslation()

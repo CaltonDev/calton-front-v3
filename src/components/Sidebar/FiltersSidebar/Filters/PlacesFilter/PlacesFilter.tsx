@@ -13,7 +13,7 @@ function PlacesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const { selectedLocation, selectedLocationDetails } =
         useSelector(selectAllFilters)
     const allLocations = useSelector(
-        (state: SelectableFiltersState) => state.SelectableFilters.allLocations
+        (state: RootState) => state.SelectableFilters.data.allLocations
     )
     const { t, i18n } = useTranslation()
     const platformType = useSelector(

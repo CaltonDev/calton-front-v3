@@ -7,6 +7,7 @@ import { SelectableFiltersState } from '../../../../../store/filters/selectableF
 import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { setStateSelect } from '../../../../../store/filters/filtersSlice'
 import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
+import { RootState } from '../../../../../store/store'
 
 function SourcesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const { t } = useTranslation()
@@ -14,7 +15,7 @@ function SourcesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
 
     const { selectedSource, sourceName } = useSelector(selectAllFilters)
     const allFonti = useSelector(
-        (state: SelectableFiltersState) => state.SelectableFilters.allSources
+        (state: RootState) => state.SelectableFilters.data.allSources
     )
 
     const equalsIgnoreOrder = (a: string[], b: string[]) => {

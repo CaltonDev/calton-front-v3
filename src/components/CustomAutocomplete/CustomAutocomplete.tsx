@@ -38,7 +38,7 @@ export default function CustomAutocomplete({
     const [usedPending, setUsedPending] = useState(false)
     const [displayOptions, setDisplayOptions] = useState(labels)
     const openPopperRef = useRef<any>(null)
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
     const [isPopperVisible, setPopperVisible] = useState(false)
     const [referenceElement, setReferenceElement] = useState<any>(null)
     const [popperElement, setPopperElement] = useState<any>(null)

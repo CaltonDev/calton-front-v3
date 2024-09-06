@@ -10,10 +10,11 @@ import {
     setStateSelect,
 } from '../../../../../store/filters/filtersSlice'
 import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
+import { RootState } from '../../../../../store/store'
 
 function ProductsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const allProducts = useSelector(
-        (state: SelectableFiltersState) => state.SelectableFilters.allProducts
+        (state: RootState) => state.SelectableFilters.data.allProducts
     )
     const { selectedProductsDetails, selectedProducts } =
         useSelector(selectAllFilters)

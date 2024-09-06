@@ -29,7 +29,6 @@ function getLocationsFiltered(code: any, returnAnt: any) {
         code,
         returnAnt,
     }
-    const queryClient = useQueryClient()
 
     return useQuery<any, Error>(
         ['location', 'locationId'],
@@ -40,21 +39,27 @@ function getLocationsFiltered(code: any, returnAnt: any) {
                 getHeaders()
             ),
         {
-            initialData: () => {
-                return queryClient
-                    .getQueryData<QueryData[]>('location')
-                    ?.find((d) => d.id === 'locationId')
-            },
             staleTime: 0,
         }
     )
 }
 
-function getTopicFiltered(includeNotAnalysed: any) {
+function getTopicFiltered(includeNotAnalysed: boolean) {
     const body: GetTopicFilteredBody = {
         includeNotAnalysed,
     }
-    return apiService.apiUrl.post('/topic/getTopicFiltered', body, getHeaders())
+    return useQuery<any, Error>(
+        ['topicFiltered'],
+        () =>
+            apiService.apiUrl.post(
+                '/topic/getTopicFiltered',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 /*
