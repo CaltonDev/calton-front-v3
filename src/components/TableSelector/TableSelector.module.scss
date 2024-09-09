@@ -5,7 +5,13 @@
   background: #FFF;
   width: 64.5%;
   padding: 20px;
-  height: 484px;
+  height: 700px;
+}
+
+.containerColumn {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .leftItemContainer {

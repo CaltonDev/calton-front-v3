@@ -37,55 +37,60 @@ const TableSelector = ({
 
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                <div className={styles.leftItemContainer}>
-                    {data?.map((obj, idx) => {
-                        return (
-                            <div
-                                key={obj?.key}
-                                onClick={() => setActiveTable(idx)}
-                                className={
-                                    idx === activeTable
-                                        ? styles.headerLabelContainer
-                                        : styles.headerLabelContainerDisabled
-                                }
-                            >
-                                {obj?.svg && (
-                                    <SvgWrapper
-                                        keySvg={obj.svg}
-                                        color={
-                                            idx === activeTable
-                                                ? 'secondary'
-                                                : 'disabled'
-                                        }
-                                        customWidth={20}
-                                        customHeight={20}
-                                    />
-                                )}
-                                <Typography
-                                    size={'bodyBig'}
-                                    weight={'normal'}
-                                    color={
-                                        idx === activeTable ? 'blue' : 'grey'
+            <div className={styles.containerColumn}>
+                <div className={styles.header}>
+                    <div className={styles.leftItemContainer}>
+                        {data?.map((obj, idx) => {
+                            return (
+                                <div
+                                    key={obj?.key}
+                                    onClick={() => setActiveTable(idx)}
+                                    className={
+                                        idx === activeTable
+                                            ? styles.headerLabelContainer
+                                            : styles.headerLabelContainerDisabled
                                     }
                                 >
-                                    {obj?.label}
-                                </Typography>
-                            </div>
-                        )
-                    })}
-                </div>
-                {downloadble && (
-                    <div className={styles.contextuaLink}>
-                        {downloadble && (
-                            <a onClick={() => onDownloadInternal()}>
-                                <DownloadIcon width={25} play={downloading} />
-                            </a>
-                        )}
+                                    {obj?.svg && (
+                                        <SvgWrapper
+                                            keySvg={obj.svg}
+                                            color={
+                                                idx === activeTable
+                                                    ? 'secondary'
+                                                    : 'disabled'
+                                            }
+                                            customWidth={20}
+                                            customHeight={20}
+                                        />
+                                    )}
+                                    <Typography
+                                        size={'bodyBig'}
+                                        weight={'normal'}
+                                        color={
+                                            idx === activeTable
+                                                ? 'blue'
+                                                : 'grey'
+                                        }
+                                    >
+                                        {obj?.label}
+                                    </Typography>
+                                </div>
+                            )
+                        })}
                     </div>
-                )}
-            </div>
-            <div className={styles.body}>
+                    {downloadble && (
+                        <div className={styles.contextuaLink}>
+                            {downloadble && (
+                                <a onClick={() => onDownloadInternal()}>
+                                    <DownloadIcon
+                                        width={25}
+                                        play={downloading}
+                                    />
+                                </a>
+                            )}
+                        </div>
+                    )}
+                </div>
                 <Table
                     data={data[activeTable]?.data?.data || []}
                     columnsData={data[activeTable]?.data?.columns || []}

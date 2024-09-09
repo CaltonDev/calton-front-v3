@@ -189,7 +189,7 @@ const Table = ({
             </div>
             <div
                 className={styles.tableContainer}
-                style={{ height: customHeight ? customHeight : '' }}
+                //style={{ height: customHeight ? customHeight : '' }}
             >
                 <table className={styles.table}>
                     <thead>
