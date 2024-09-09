@@ -13,7 +13,7 @@ export interface ButtonProps {
     customColor?: string
     customTextColor?: string
     customBorderColor?: string
-    color?: 'reviews' | 'surveys' | 'competitor' | 'listing' | 'white'
+    color?: 'reviews' | 'surveys' | 'competitor' | 'listing' | 'white' | 'black'
     customWidth?: number
     customHeight?: number
     icon?: string

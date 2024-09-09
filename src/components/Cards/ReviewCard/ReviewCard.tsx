@@ -44,7 +44,6 @@ function ReviewCard({
 
     const allTopics = FilterService.getTopicFiltered(true)?.data?.data
 
-    console.log('all: ', allTopics)
     const [replyMessage, setReplyMessage] = useState<string>()
     const [showTextarea, setShowTextarea] = useState(false)
     const selectOptions = [
@@ -168,7 +167,11 @@ function ReviewCard({
                                         multiple={true}
                                         hasDropdown={true}
                                     />*/}
-                                {/*
+                                <div
+                                    className={
+                                        styles.containerCustomAutocomplete
+                                    }
+                                >
                                     <CustomAutocomplete
                                         isButton={true}
                                         label={
@@ -193,26 +196,11 @@ function ReviewCard({
                                         handleChange={(e) =>
                                             handleChangeTopic(e, index)
                                         }
-                                    />*/}
-                                <CustomAutocomplete
-                                    displayType={'filter'}
-                                    label={
-                                        selectedTopics &&
-                                        selectedTopics?.length == 0
-                                            ? t('Tutti i topic')
-                                            : selectedTopics?.length +
-                                              t('topic')
-                                    }
-                                    placeholderInput={t('Cerca topic')}
-                                    primary={'name'}
-                                    secondary={'words'}
-                                    labels={allTopics}
-                                    type={'topics'}
-                                    handleChange={handleChange}
-                                    defaultValue={selectedTopics}
-                                    multiple={true}
-                                    hasDropdown={true}
-                                />
+                                        applySelection={() =>
+                                            console.log('ciao')
+                                        }
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className={styles.tagsContainer}>

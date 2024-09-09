@@ -2,7 +2,6 @@ import * as React from 'react'
 import { matchSorter } from 'match-sorter'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button } from 'antd'
 import { CaretDownFilled } from '@ant-design/icons'
 import stylesS from './CustomAutocomplete.module.scss'
 import { usePopper } from 'react-popper'
@@ -11,6 +10,8 @@ import { CustomAutocompleteProps } from './CustomAutocomplete.interface'
 import Checkbox from '../Checkbox/Checkbox'
 import Input from '../Input/Input'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import Button from '../Button/Button'
+import styles from '../Sidebar/FiltersSidebar/Filter/Filter.module.scss'
 
 export default function CustomAutocomplete({
     label,
@@ -32,6 +33,7 @@ export default function CustomAutocomplete({
     floatingDisplay = false,
     isThick = false,
     hasDropdown = false,
+    applySelection,
 }: CustomAutocompleteProps) {
     const [anchorEl, setAnchorEl] = useState<any>(null)
     const [pendingValue, setPendingValue] = useState<any>([])
@@ -347,9 +349,12 @@ export default function CustomAutocomplete({
                     style={
                         isButton || floatingDisplay
                             ? {
-                                  borderBottom: '1px solid #d9d9d9',
+                                  border: '1px solid #9D96A5',
                                   boxShadow: 'none !important',
                                   outline: 'none !important',
+                                  borderRadius: 10,
+                                  minWidth: 170,
+                                  minHeight: 36,
                               }
                             : isThick
                               ? {
@@ -367,31 +372,20 @@ export default function CustomAutocomplete({
                     }
                 >
                     <Button
+                        variant={'outline'}
+                        size={'small'}
                         className={
-                            floatingDisplay
+                            isButton || floatingDisplay
                                 ? stylesS.floatingButtonLabel
                                 : stylesS.buttonLabel
                         }
                         disabled={disabled}
                         aria-describedby={id}
                         onClick={handleClick}
-                        style={{ textTransform: 'none', paddingBottom: 0 }}
-                        type="link"
+                        icon={'arrowDownSvg'}
+                        arrowPlacement={'right'}
                     >
-                        <span
-                            key={label}
-                            className={
-                                classes && !onlyWrapper
-                                    ? classes
-                                    : stylesS.labelAutocomplete
-                            }
-                        >
-                            {label}
-                        </span>
-                        <CaretDownFilled
-                            className={classesIcon && classesIcon}
-                            style={classesIcon ? {} : { width: 25, height: 25 }}
-                        />
+                        {label}
                     </Button>
                 </div>
             )}
@@ -412,13 +406,13 @@ export default function CustomAutocomplete({
                                         ? setPopperElement
                                         : null
                                 }
-                                style={
+                                /*style={
                                     displayType === 'core'
                                         ? {
                                               ...styles.popper,
                                           }
                                         : {}
-                                }
+                                }*/
                                 className={
                                     displayType === 'core'
                                         ? stylesS.containerPopperCore
@@ -638,6 +632,19 @@ export default function CustomAutocomplete({
                                                 )
                                             })}
                                     </div>
+                                    {applySelection && (
+                                        <div
+                                            className={stylesS.footerContainer}
+                                        >
+                                            <Button
+                                                size={'small'}
+                                                disabled={false}
+                                                onClick={applySelection}
+                                            >
+                                                {t('Applica')}
+                                            </Button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         )}

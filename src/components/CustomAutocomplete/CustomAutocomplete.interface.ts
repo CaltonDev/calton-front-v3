@@ -19,4 +19,5 @@ export interface CustomAutocompleteProps {
     name?: string
     isThick?: boolean
     hasDropdown?: boolean
+    applySelection?: () => void
 }

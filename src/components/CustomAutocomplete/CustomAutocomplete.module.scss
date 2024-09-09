@@ -21,7 +21,8 @@
   color: #24292e;
   background-color: transparent;
 }
-.containerPopperCore {
+
+/*.containerPopperCore {
   display: flex;
   position: absolute;
   flex-direction: column;
@@ -35,7 +36,41 @@
   min-height: 350px;
   max-height: 420px;
   overflow-y: hidden;
+}*/
+
+
+.containerPopperCore {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  border-radius: 6px;
+  width: 320px;
+  z-index: 1300;
+  font-size: 13px;
+  color: #24292e;
+  background-color: white;
+  border: 1px solid rgb(225, 228, 232);
+  min-height: 350px;
+  max-height: 420px;
+  overflow-y: auto;
+  inset: 0px 0px auto auto;
+  transform: translate(-935px, 595px);
+  height: 100%;
 }
+
+.footerContainer {
+  gap: 10px;
+  padding: 10px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 26px;
+  background: var(--Neutral-200, #E9E7EC);
+}
+
+
 .containerAutoComplete {
   font-weight: 400;
   font-size: 1rem;
@@ -123,11 +158,11 @@
   outline: none !important;
   box-shadow: none !important;
   border: none!important;
-  display: flex!important;
-  align-items: baseline!important;
-  justify-content: space-between!important;
-  width: 100%!important;
-  padding: 6px 0 0 0;
+  font-size: 14px !important;
+  padding: 10px !important;
+  line-height: unset !important;
+  justify-content: space-between !important;
+  width: 100% !important;
 }
 
 .floatingButtonLabel:focus {
