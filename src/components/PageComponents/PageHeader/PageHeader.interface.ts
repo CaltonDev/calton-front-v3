@@ -7,4 +7,5 @@ export interface PageHeaderProps {
     setPreviousState?: (arg0: boolean) => void
     arrowBackUrl?: string
     showArrowBack?: boolean
+    hideFilters?: boolean
 }

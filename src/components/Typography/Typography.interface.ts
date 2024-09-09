@@ -20,6 +20,7 @@ export interface TypographyProps {
         | 'tertiary'
         | 'reviews'
         | 'surveys'
+        | 'settings'
         | 'competitor'
         | 'listing'
         | 'white'
@@ -34,4 +35,5 @@ export interface TypographyProps {
     customFontSize?: number
     children: string
     onClick?: React.MouseEventHandler<HTMLSpanElement>
+    boldText?: string
 }

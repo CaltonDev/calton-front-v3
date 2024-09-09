@@ -4,14 +4,22 @@ import Sidebar from '../Sidebar/Sidebar'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import SearchBar from '../SearchBar/SearchBar'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { debounce } from 'lodash'
+import { setPlatformType } from '../../store/settings/settingsSlice'
+import { useNavigate } from 'react-router-dom'
+import { RootState } from '../../store/store'
 
 function Header() {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const search = 'test' //useSelector((state) => state?.Search?.wordSearched)
     const [searchLocal, setSearchLocal] = useState(search)
+    const history = useNavigate()
+
+    const platformType = useSelector(
+        (state: RootState) => state?.Settings?.platformType
+    )
 
     const handler = useCallback(
         debounce(
@@ -49,6 +57,10 @@ function Header() {
         }
     }
 
+    const handleClickOnSettingsIcon = () => {
+        dispatch(setPlatformType('settings'))
+        history('./settings')
+    }
     return (
         <header className={styles.appHeader}>
             <div className={styles.containerHeader}>
@@ -78,12 +90,25 @@ function Header() {
                     <div className={styles.iconContainer}>
                         <SvgWrapper
                             keySvg={'settingsSvg'}
-                            color={'primaryIcon'}
+                            color={
+                                platformType === 'settings'
+                                    ? 'white'
+                                    : 'primaryIcon'
+                            }
                             size={'xlarge'}
-                            hasContainerProps={{
-                                hasContainer: true,
-                                containerSize: 45,
-                            }}
+                            hasContainerProps={
+                                platformType === 'settings'
+                                    ? {
+                                          hasContainer: true,
+                                          containerSize: 45,
+                                          background: '#C0BBC5',
+                                      }
+                                    : {
+                                          hasContainer: true,
+                                          containerSize: 45,
+                                      }
+                            }
+                            onClick={handleClickOnSettingsIcon}
                         />
                         <SvgWrapper
                             keySvg={'profileSvg'}

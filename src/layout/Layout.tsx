@@ -128,7 +128,8 @@ function Layout() {
                     el.path === 'home' || el.path.split('/')[0] === 'home'
             )
 
-            if (!found && !foundHome) {
+            //todo: add settings as routes in API
+            if (!found && !foundHome && platformType !== 'settings') {
                 history('../buyNow')
             } else if (!found && foundHome) {
                 history('../home')
@@ -250,11 +251,16 @@ function Layout() {
         return <Navigate to={'/login'} replace />
     }
 
+    const currentWindowPath = window.location.pathname
+
+    useEffect(() => {
+        console.log('curr: ', currentWindowPath)
+    }, [currentWindowPath])
     return (
         <div style={{ background: '#F5F5F5' }}>
             <ErrorSubscriptionModal />
             <Header />
-            <FiltersSidebar />
+            {currentWindowPath !== '/settings' && <FiltersSidebar />}
             <Chat />
             <Outlet />
         </div>

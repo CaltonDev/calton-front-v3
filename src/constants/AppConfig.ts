@@ -24,6 +24,7 @@ const AppConfig = {
         primary: '#3F49FC',
         secondary: '#677080',
         success: '#00D014',
+        settings: '#2EC4B6',
         danger: '#FF3739',
         warning: '#FFB70F',
         info: '#00D0BD',

@@ -13,6 +13,7 @@ const Typography = ({
     customTextColor,
     customFontSize,
     onClick,
+    boldText,
 }: TypographyProps) => {
     let className = styles[`${size}-${weight}-${color}`]
 

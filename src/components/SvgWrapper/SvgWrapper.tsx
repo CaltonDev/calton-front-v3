@@ -107,7 +107,9 @@ const SvgWrapper = ({
               ? primaryIconColor
               : color === 'black'
                 ? 'black'
-                : disabledColor
+                : color === 'white'
+                  ? 'white'
+                  : disabledColor
 
     const iconWidth = customWidth ? customWidth : iconSize
     const iconHeight = customHeight ? customHeight : iconSize

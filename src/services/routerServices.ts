@@ -47,6 +47,7 @@ const Products = lazy(() => lazyRetry(() => import("../pages/Products/Products")
 const Home = lazy(() => import('../pages/Home/Home'))
 const Luoghi = lazy(() => import('../pages/Luoghi/Luoghi'))
 const Reviews = lazy(() => import('../pages/Reviews/Reviews'))
+const Settings = lazy(() => import('../pages/Settings/Settings'))
 /*
 
 const AnalisiAvanzata = lazy(() => import("../pages/AnalisiAvanzata/AnalisiAvanzata"));
@@ -91,5 +92,9 @@ export const objRoutes = {
     Reviews: {
         path: 'reviews',
         component: Reviews,
+    },
+    Settings: {
+        path: 'settings',
+        component: Settings,
     },
 }
