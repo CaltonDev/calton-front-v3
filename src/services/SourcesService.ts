@@ -5,7 +5,7 @@ import { getHeaders } from './api/headers'
 import { useQuery } from 'react-query'
 
 interface SourceFilteredBody {
-    code: string
+    code: number[]
     fromSurveyTab?: boolean
 }
 
@@ -44,14 +44,14 @@ interface GetSurveysTPBody {
     // Define this based on actual requirements
 }*/
 
-function getSourcesFiltered(code: string, fromSurveyTab?: boolean) {
+function getSourcesFiltered(code: number[], fromSurveyTab?: boolean) {
     const body: SourceFilteredBody = {
         code,
         fromSurveyTab,
     }
 
     return useQuery<any, Error>(
-        ['sourcesFiltered', 'sourcesFilteredId'],
+        ['sourcesFiltered'],
         () =>
             apiService.apiUrl.post(
                 '/source/getSourcesFiltered',

@@ -6,19 +6,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SelectableFiltersState } from '../../../../../store/filters/selectableFiltersSlice'
 import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
-import { RootState } from '../../../../../store/store'
+import store, { RootState } from '../../../../../store/store'
+import FilterService from '../../../../../services/FilterService'
+import { getNoCodeFromPlatfrom } from '../../../../../helpers/helpers'
 
 function PlacesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
-    const dispatch = useDispatch()
     const { selectedLocation, selectedLocationDetails } =
         useSelector(selectAllFilters)
-    const allLocations = useSelector(
-        (state: RootState) => state.SelectableFilters.data.allLocations
-    )
-    const { t, i18n } = useTranslation()
     const platformType = useSelector(
         (state: RootState) => state.Settings.platformType
     )
+    const allLocations =
+        FilterService.getLocationsFiltered(
+            platformType === 'surveys'
+                ? [0, 1, 2, 3, 4]
+                : getNoCodeFromPlatfrom(),
+            false
+        )?.data?.data || []
+
+    const { t } = useTranslation()
 
     const equalsIgnoreOrder = (a: string[], b: string[]) => {
         if (a?.length !== b?.length) return false

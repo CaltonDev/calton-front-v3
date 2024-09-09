@@ -12,19 +12,21 @@ interface GetTopicFilteredBody {
 }
 
 function getChannelSourcesFiltered() {
-    return apiService.apiUrl.post(
-        '/source/getChannelSourcesFiltered',
-        {},
-        getHeaders()
+    return useQuery<any, Error>(
+        ['sourcesFiltered'],
+        () =>
+            apiService.apiUrl.post(
+                '/source/getChannelSourcesFiltered',
+                {},
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
-interface QueryData {
-    id: string | string[]
-    // Add other properties as needed
-}
-
-function getLocationsFiltered(code: any, returnAnt: any) {
+function getLocationsFiltered(code: any, returnAnt?: any) {
     const body: GetLocationsFilteredBody = {
         code,
         returnAnt,
@@ -62,42 +64,6 @@ function getTopicFiltered(includeNotAnalysed: boolean) {
     )
 }
 
-/*
-*
-function getTopicFiltered(includeNotAnalysed: any) {
-    const body: GetTopicFilteredBody = {
-        includeNotAnalysed,
-    }
-
-    return useQuery<any, Error>(
-        ['topic', 'topicId'],
-        () =>
-            apiService.apiUrl.post(
-                '/topic/getTopicFiltered',
-                body,
-                getHeaders()
-            ),
-        {
-            staleTime: 0,
-        }
-    )
-}
-
-function getChannelSourcesFiltered() {
-    return useQuery<any, Error>(
-        ['sources', 'sourcesId'],
-        () =>
-            apiService.apiUrl.post(
-                '/source/getChannelSourcesFiltered',
-                {},
-                getHeaders()
-            ),
-        {
-            staleTime: 0,
-        }
-    )
-}
-* */
 const FilterService = {
     getChannelSourcesFiltered,
     getLocationsFiltered,

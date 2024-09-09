@@ -66,7 +66,6 @@ function BubbleChartHome({
         sentiment: string,
         isText: string
     ) => {
-        console.log('t: ', text, ' sent: ', sentiment, ' is: ', isText)
         if (text && text != '') {
             const payload = {
                 word: text,

@@ -22,8 +22,7 @@ function TopicsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
         ) || [] //TODO: check filters, probably we should move this to react query and not set them undefined but []*/
     const { t } = useTranslation()
 
-    const allTopics = FilterService.getTopicFiltered(true)?.data?.data
-    console.log('allTopics: ', allTopics)
+    const allTopics = FilterService.getTopicFiltered(true)?.data?.data || []
     const equalsIgnoreOrder = (a: string[], b: string[]) => {
         if (a?.length !== b?.length) return false
         const uniqueValues = new Set([...a, ...b])

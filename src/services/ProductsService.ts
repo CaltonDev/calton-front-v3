@@ -1,12 +1,14 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
 import { AllFiltersInterface } from './interfaces/interfaces'
+import { useQuery } from 'react-query'
 
 interface GetProductsUnFilteredBody {
-    code: string
+    code: number[]
 }
 
 interface GetProductsFilteredBody extends GetProductsUnFilteredBody {
+    code: number[]
     channels: string[]
     idSource: string[]
     idLocations: string[]
@@ -20,14 +22,14 @@ interface RemoveProductBody {
     _id: string
 }
 
-function getProductsUnFiltered(code: string) {
+function getProductsUnFiltered(code: number[]) {
     const body: GetProductsUnFilteredBody = { code }
     return apiService.apiUrl.post('/product/getFiltered', body, getHeaders())
 }
 
 function getProductsFiltered(
     allFilters: AllFiltersInterface,
-    code: string,
+    code: number[],
     returnAnt: boolean
 ) {
     const {
@@ -50,7 +52,14 @@ function getProductsFiltered(
         returnAnt,
     }
 
-    return apiService.apiUrl.post('/product/getFiltered', body, getHeaders())
+    return useQuery<any, Error>(
+        ['productsFiltered'],
+        () =>
+            apiService.apiUrl.post('/product/getFiltered', body, getHeaders()),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function removeProduct(_id: string) {

@@ -8,12 +8,12 @@ import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { setStateSelect } from '../../../../../store/filters/filtersSlice'
 import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
 import { RootState } from '../../../../../store/store'
+import FilterService from '../../../../../services/FilterService'
 
 function ChannelsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
-    const dispatch = useDispatch()
-    const allChannelSources = useSelector(
-        (state: RootState) => state.SelectableFilters.data.allChannelSources
-    )
+    const allChannelSources =
+        FilterService.getChannelSourcesFiltered()?.data?.data || []
+
     const { selectedChannel } = useSelector(selectAllFilters)
     const { t } = useTranslation()
 

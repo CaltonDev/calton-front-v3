@@ -86,7 +86,6 @@ const SvgWrapper = ({
     onClick,
     disabled = false,
 }: SvgWrapperProps) => {
-    console.log('color: ', color)
     const iconSize =
         size === 'xsmall'
             ? iconExtraSmallSize

@@ -8,16 +8,17 @@ import { selectAllFilters } from '../../../../../store/selectors/selectorsSlice'
 import { setStateSelect } from '../../../../../store/filters/filtersSlice'
 import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
 import { RootState } from '../../../../../store/store'
+import SourcesService from '../../../../../services/SourcesService'
+import { getNoCodeFromPlatfrom } from '../../../../../helpers/helpers'
 
 function SourcesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     const { t } = useTranslation()
-    const dispatch = useDispatch()
 
     const { selectedSource, sourceName } = useSelector(selectAllFilters)
-    const allFonti = useSelector(
-        (state: RootState) => state.SelectableFilters.data.allSources
-    )
 
+    const allFonti =
+        SourcesService.getSourcesFiltered(getNoCodeFromPlatfrom())?.data
+            ?.data || []
     const equalsIgnoreOrder = (a: string[], b: string[]) => {
         if (a?.length !== b?.length) return false
         //check
@@ -89,7 +90,7 @@ function SourcesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
                 if (e && e._id && !allids.includes(e._id)) allids.push(e._id)
                 else if (e && !e._id) allids.push(e)
             })
-            allFonti.forEach((item: any, i) => {
+            allFonti.forEach((item: any, i: number) => {
                 allids.forEach((elm, i) => {
                     if (item._id == elm) {
                         allSourcesSelected.push(item)
