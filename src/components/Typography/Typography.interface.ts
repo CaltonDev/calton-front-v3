@@ -36,4 +36,5 @@ export interface TypographyProps {
     children: string
     onClick?: React.MouseEventHandler<HTMLSpanElement>
     boldText?: string
+    useSpan?: boolean
 }
