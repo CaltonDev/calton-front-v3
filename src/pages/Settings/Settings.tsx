@@ -85,13 +85,6 @@ function Settings() {
         },
     ]
 
-    const placeholderText =
-        t('Seleziona un') +
-        ' ' +
-        sectionData[activeSection]?.displayLabel +
-        ' ' +
-        t('per visualizzare le informazioni.')
-
     return (
         <PageContainer>
             <PageHeader
@@ -133,15 +126,29 @@ function Settings() {
                     <div className={styles.contentDiv}></div>
                     <div className={styles.placeholder}>
                         <div className={styles.placeholderText}>
-                            <Typography
-                                size={'h4'}
-                                weight={'normal'}
-                                boldText={
-                                    sectionData[activeSection]?.displayLabel
-                                }
-                            >
-                                {placeholderText}
-                            </Typography>
+                            <p>
+                                <Typography
+                                    size={'h4'}
+                                    weight={'normal'}
+                                    useSpan={true}
+                                >
+                                    {t('Seleziona un')}
+                                </Typography>
+                                <Typography
+                                    size={'h4'}
+                                    weight={'bold'}
+                                    useSpan={true}
+                                >
+                                    {sectionData[activeSection]?.key}
+                                </Typography>
+                                <Typography
+                                    size={'h4'}
+                                    weight={'normal'}
+                                    useSpan={true}
+                                >
+                                    {t('per visualizzare le informazioni.')}
+                                </Typography>
+                            </p>
                         </div>
                         <div className={styles.placeholderContent}>
                             <div>

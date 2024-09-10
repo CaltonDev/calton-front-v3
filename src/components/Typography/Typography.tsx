@@ -13,7 +13,6 @@ const Typography = ({
     customTextColor,
     customFontSize,
     onClick,
-    boldText,
     useSpan,
 }: TypographyProps) => {
     let className = styles[`${size}-${weight}-${color}`]
@@ -42,6 +41,7 @@ const Typography = ({
                 color: customTextColor ? customTextColor : '',
                 fontSize: customFontSize ? customFontSize : '',
                 cursor: onClick ? 'pointer' : '',
+                marginRight: useSpan ? '5px' : '',
             },
             className,
             onClick,

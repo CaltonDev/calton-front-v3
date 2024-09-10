@@ -73,6 +73,7 @@
   padding: 10px;
 }
 
+
 .barContainer {
   display: flex;
   flex-direction: row;
@@ -106,5 +107,8 @@
 }
 
 .placeholderText {
-  padding: 0 240px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 235px;
 }
