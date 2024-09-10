@@ -68,6 +68,8 @@ import ItaFlagIcon from './SvgIcons/ItaFlagIcon'
 import EsFlagIcon from './SvgIcons/EsFlagIcon'
 import EnFlagIcon from './SvgIcons/EnFlagIcon'
 import PlusSvg from './SvgIcons/PlusSvg'
+import TrashSvg from './SvgIcons/TrashSvg'
+import EditSvg from './SvgIcons/EditSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -87,7 +89,6 @@ const SvgWrapper = ({
     onClick,
     disabled = false,
 }: SvgWrapperProps) => {
-    console.log('color: ', color)
     const iconSize =
         size === 'xsmall'
             ? iconExtraSmallSize
@@ -369,6 +370,18 @@ const SvgWrapper = ({
                     <EnFlagIcon />
                 ) : keySvg === 'plusIcon' ? (
                     <PlusSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'trashIcon' ? (
+                    <TrashSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'editIcon' ? (
+                    <EditSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}

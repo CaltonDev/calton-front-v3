@@ -63,6 +63,17 @@
   gap: 25px;
 }
 
+.inputsContainer {
+  width: 50%;
+  background: white;
+  border-radius: 10px;
+  min-height: 70vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+}
+
 .leftItem {
   display: flex;
   flex-direction: column;

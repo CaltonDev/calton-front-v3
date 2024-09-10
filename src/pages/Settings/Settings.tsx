@@ -8,6 +8,7 @@ import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import CardSelection from '../../components/CardSelection/CardSelection'
 import { SectionDataType, SectionType } from './Settings.interface'
+import SettingsFieldsContainer from '../../components/SettingsFieldsContainer/SettingsFieldsContainer'
 
 function Settings() {
     const { t, i18n } = useTranslation()
@@ -17,6 +18,9 @@ function Settings() {
         index: 0,
         type: 'account',
     })
+
+    const [selectedCard, setSelectedCard] = useState(0)
+
     const sectionData: SectionDataType[] = [
         {
             key: 'account',
@@ -115,66 +119,102 @@ function Settings() {
                 </div>
                 <div className={styles.body}>
                     <div className={styles.contentDiv}>
-                        <CardSelection data={data} type={activeSection.type} />
+                        <CardSelection
+                            data={data}
+                            type={activeSection.type}
+                            setSelectedCard={setSelectedCard}
+                            activeCard={selectedCard}
+                        />
                     </div>
-                    <div className={styles.placeholder}>
-                        <div className={styles.placeholderText}>
-                            <p>
-                                <Typography
-                                    size={'h4'}
-                                    weight={'normal'}
-                                    useSpan={true}
-                                >
-                                    {t('Seleziona un')}
-                                </Typography>
-                                <Typography
-                                    size={'h4'}
-                                    weight={'bold'}
-                                    useSpan={true}
-                                >
-                                    {sectionData[activeSection.index]?.key}
-                                </Typography>
-                                <Typography
-                                    size={'h4'}
-                                    weight={'normal'}
-                                    useSpan={true}
-                                >
-                                    {t('per visualizzare le informazioni.')}
-                                </Typography>
-                            </p>
-                        </div>
-                        <div className={styles.placeholderContent}>
-                            <div>
-                                <div className={styles.leftItem}>
-                                    <div className={styles.bar} />
-                                    <div className={styles.bar} />
-                                    <div className={styles.bar} />
-                                    <div className={styles.bar} />
+
+                    <div
+                        className={
+                            selectedCard !== -2
+                                ? styles.inputsContainer
+                                : styles.placeholder
+                        }
+                    >
+                        {selectedCard !== -2 ? (
+                            <SettingsFieldsContainer
+                                data={data[selectedCard]}
+                                type={activeSection.type}
+                                isNew={selectedCard === -1}
+                            />
+                        ) : (
+                            <>
+                                <div className={styles.placeholderText}>
+                                    <p>
+                                        <Typography
+                                            size={'h4'}
+                                            weight={'normal'}
+                                            useSpan={true}
+                                        >
+                                            {t('Seleziona un')}
+                                        </Typography>
+                                        <Typography
+                                            size={'h4'}
+                                            weight={'bold'}
+                                            useSpan={true}
+                                        >
+                                            {
+                                                sectionData[activeSection.index]
+                                                    ?.key
+                                            }
+                                        </Typography>
+                                        <Typography
+                                            size={'h4'}
+                                            weight={'normal'}
+                                            useSpan={true}
+                                        >
+                                            {t(
+                                                'per visualizzare le informazioni.'
+                                            )}
+                                        </Typography>
+                                    </p>
                                 </div>
-                            </div>
-                            <div className={styles.rightItem}>
-                                <div className={styles.smallBar} />
-                                <div className={styles.barContainer}>
-                                    <div className={styles.smallBar} />
-                                    <div className={styles.smallBar} />
+
+                                <div className={styles.placeholderContent}>
+                                    <div>
+                                        <div className={styles.leftItem}>
+                                            <div className={styles.bar} />
+                                            <div className={styles.bar} />
+                                            <div className={styles.bar} />
+                                            <div className={styles.bar} />
+                                        </div>
+                                    </div>
+                                    <div className={styles.rightItem}>
+                                        <div className={styles.smallBar} />
+                                        <div className={styles.barContainer}>
+                                            <div className={styles.smallBar} />
+                                            <div className={styles.smallBar} />
+                                        </div>
+                                        <div className={styles.barContainer}>
+                                            <div className={styles.smallBar} />
+                                            <div className={styles.smallBar} />
+                                        </div>
+                                        <div className={styles.barContainer}>
+                                            <div className={styles.smallBar} />
+                                            <div className={styles.smallBar} />
+                                        </div>
+                                        <div className={styles.barContainer}>
+                                            <div
+                                                className={styles.smallestBar}
+                                            />
+                                            <div
+                                                className={styles.smallestBar}
+                                            />
+                                            <div
+                                                className={styles.smallestBar}
+                                            />
+                                            <div
+                                                className={styles.smallestBar}
+                                            />
+                                        </div>
+                                        <div className={styles.smallestBar} />
+                                    </div>
                                 </div>
-                                <div className={styles.barContainer}>
-                                    <div className={styles.smallBar} />
-                                    <div className={styles.smallBar} />
-                                </div>
-                                <div className={styles.barContainer}>
-                                    <div className={styles.smallBar} />
-                                    <div className={styles.smallBar} />
-                                </div>
-                                <div className={styles.barContainer}>
-                                    <div className={styles.smallestBar} />
-                                    <div className={styles.smallestBar} />
-                                    <div className={styles.smallestBar} />
-                                    <div className={styles.smallestBar} />
-                                </div>
-                                <div className={styles.smallestBar} />
-                            </div>
-                        </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

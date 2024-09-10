@@ -5,18 +5,45 @@ import Typography from '../Typography/Typography'
 import TextContainer from '../TextContainer/TextContainer'
 import { useTranslation } from 'react-i18next'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
-const CardSelection = ({ data, type }: CardSelectionProps) => {
+const CardSelection = ({
+    data,
+    type,
+    setSelectedCard,
+    activeCard,
+}: CardSelectionProps) => {
     const { t } = useTranslation()
+
+    const handleCardSelection = (idx: number) => {
+        if (setSelectedCard) setSelectedCard(idx)
+    }
+
     return (
         <div className={styles.container}>
-            <div className={styles.addNewCard}>
+            <div
+                className={
+                    activeCard === -1
+                        ? styles.addNewCardSelected
+                        : styles.addNewCard
+                }
+                onClick={() => handleCardSelection(-1)}
+            >
                 <Typography size={'bodyBig'} weight={'bold'} color={'blue'}>
                     {t('Crea nuovo report')}
                 </Typography>
                 <SvgWrapper keySvg={'plusIcon'} color={'secondary'} />
             </div>
             {data?.map((obj: any, idx: number) => (
-                <div key={idx} className={styles.card}>
+                <div
+                    key={idx}
+                    className={
+                        activeCard === -1
+                            ? styles.cardDisabled
+                            : activeCard === idx
+                              ? styles.cardSelected
+                              : styles.card
+                    }
+                    onClick={() => handleCardSelection(idx)}
+                >
                     <Typography size={'bodySmall'} weight={'bold'}>
                         {obj?.title}
                     </Typography>
