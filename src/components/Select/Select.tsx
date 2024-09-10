@@ -77,6 +77,11 @@ const CaltonSelect = ({
                 }}
                 options={options}
                 styles={{
+                    menu: (provided, state) => ({
+                        ...provided,
+                        boxShadow:
+                            '6px 3px 20px 0px rgba(50, 29, 72, 0.15) !important',
+                    }),
                     valueContainer: (baseStyles) => ({
                         ...baseStyles,
                         display: 'flex',

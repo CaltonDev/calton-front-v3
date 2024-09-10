@@ -12,12 +12,12 @@ function Chat() {
         <div>
             <div className={styles.container}>
                 <SvgWrapper
-                    customWidth={30}
-                    customHeight={30}
+                    customWidth={25}
+                    customHeight={25}
                     hasContainerProps={{
                         hasContainer: true,
-                        containerSize: 55,
-                        background: 'black',
+                        containerSize: 45,
+                        background: '#321D48',
                     }}
                     keySvg={'chatIcon.svg'}
                     onClick={() => setIsChatOpen(!isChatOpen)}
