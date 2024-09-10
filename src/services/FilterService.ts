@@ -13,7 +13,7 @@ interface GetTopicFilteredBody {
 
 function getChannelSourcesFiltered() {
     return useQuery<any, Error>(
-        ['sourcesFiltered'],
+        ['channelSourcesFiltered'],
         () =>
             apiService.apiUrl.post(
                 '/source/getChannelSourcesFiltered',
