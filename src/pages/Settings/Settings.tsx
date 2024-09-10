@@ -1,68 +1,23 @@
 import styles from './Settings.module.scss'
-import React, { useEffect, useState } from 'react'
-import LoginService from '../../services/LoginService'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setUser } from '../../store/user/userSlice'
 import { useNavigate } from 'react-router-dom'
-import { v5 as uuidv5 } from 'uuid'
-import AppConfig from '../../constants/AppConfig'
 import { useTranslation } from 'react-i18next'
-import Button from '../../components/Button/Button'
-import logoFull from '../../assets/img/logo-full.png'
-import moment from 'moment'
-import { setDistribuzioniVoti } from '../../store/home/distribuzioneVotiSlice'
-import { setDistribuzioniRacc } from '../../store/home/distribuzioneRaccomandazioni'
-import { setAverageVotoByTime } from '../../store/home/averageVotoByTimeSlice'
-import { setAverageSentimentByTime } from '../../store/home/averageSentimentByTime'
-import { setAverageReviewByTime } from '../../store/home/averageReviewByTime'
-import { setSources } from '../../store/home/sourceSlice'
-import { setBubbles } from '../../store/home/bubbleSlice'
-import { setMenusList } from '../../store/menus/menuSlice'
-import { setSelectedWord } from '../../store/home/selectedWordsSlice'
-import { resetSearch, setWordSearched } from '../../store/search/search'
-import {
-    setFeedbacks,
-    setFeedbacksCount,
-} from '../../store/home/feedbackHomeSlice'
-import {
-    setAllChannelSources,
-    setAllLocations,
-    setAllProducts,
-    setAllTopics,
-} from '../../store/filters/selectableFiltersSlice'
-import { setLocationFiltered } from '../../store/locations/locationFilteredSlice'
-import { setChildUsers } from '../../store/childUsers/childUsersSlice'
-import { setSourcesFiltered } from '../../store/sources/sourcesFilteredSlice'
-import {
-    setPlatformType,
-    setShowNumbers,
-} from '../../store/settings/settingsSlice'
-import {
-    setDistribuzioneTopicPerSentiment,
-    setVotoMedioTopic,
-} from '../../store/analisiAvanzataState/analisiAvanzataSlice'
-import { setCurrentToasts, showToast } from '../../store/toast/errorToastSlice'
-import { resetFilters } from '../../store/filters/filtersSlice'
-import { resetSocketMessage } from '../../store/socket/socketSlice'
 import Typography from '../../components/Typography/Typography'
-import { Field, Formik } from 'formik'
-import { Form } from 'formik-antd'
-import { isEmail, isWhiteSpaceString } from '../../helpers/helpers'
-import Checkbox from '../../components/Checkbox/Checkbox'
-import FormInputWrapper from '../../components/FormFieldsWrapper/FormInputWrapper/FormInputWrapper'
-import CaltonSelect from '../../components/Select/Select'
-import LanguageSelect from '../../components/LanguageSelect/LanguageSelect'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
-import SvgWrapper from '../../components/SvgWrapper/SvgWrapper'
-import DownloadIcon from '../../components/DownloadIcon/DownloadIcon'
+import CardSelection from '../../components/CardSelection/CardSelection'
+import { SectionDataType, SectionType } from './Settings.interface'
 
 function Settings() {
     const { t, i18n } = useTranslation()
     const dispatch = useDispatch()
     const history = useNavigate()
-    const [activeSection, setActiveSection] = useState(0)
-    const sectionData = [
+    const [activeSection, setActiveSection] = useState<SectionType>({
+        index: 0,
+        type: 'account',
+    })
+    const sectionData: SectionDataType[] = [
         {
             key: 'account',
             label: t('Gestisci account'),
@@ -85,6 +40,37 @@ function Settings() {
         },
     ]
 
+    const data = [
+        {
+            title: 'Nome del report',
+            value: ['report number'],
+        },
+        {
+            title: 'Nome del report',
+            value: ['report number', 'report number', 'report number'],
+        },
+        {
+            title: 'Nome del report',
+            value: ['report number'],
+        },
+        {
+            title: 'Nome del report',
+            value: ['report number'],
+        },
+        {
+            title: 'Nome del report',
+            value: ['report number'],
+        },
+        {
+            title: 'Nome del report',
+            value: ['report number'],
+        },
+        {
+            title: 'Nome del report',
+            value: ['report number'],
+        },
+    ]
+
     return (
         <PageContainer>
             <PageHeader
@@ -99,9 +85,14 @@ function Settings() {
                             return (
                                 <div
                                     key={obj?.key}
-                                    onClick={() => setActiveSection(idx)}
+                                    onClick={() =>
+                                        setActiveSection({
+                                            index: idx,
+                                            type: obj?.key,
+                                        })
+                                    }
                                     className={
-                                        idx === activeSection
+                                        idx === activeSection.index
                                             ? styles.headerLabelContainer
                                             : styles.headerLabelContainerDisabled
                                     }
@@ -110,7 +101,7 @@ function Settings() {
                                         size={'bodyBig'}
                                         weight={'normal'}
                                         color={
-                                            idx === activeSection
+                                            idx === activeSection.index
                                                 ? 'settings'
                                                 : 'grey'
                                         }
@@ -123,7 +114,9 @@ function Settings() {
                     </div>
                 </div>
                 <div className={styles.body}>
-                    <div className={styles.contentDiv}></div>
+                    <div className={styles.contentDiv}>
+                        <CardSelection data={data} type={activeSection.type} />
+                    </div>
                     <div className={styles.placeholder}>
                         <div className={styles.placeholderText}>
                             <p>
@@ -139,7 +132,7 @@ function Settings() {
                                     weight={'bold'}
                                     useSpan={true}
                                 >
-                                    {sectionData[activeSection]?.key}
+                                    {sectionData[activeSection.index]?.key}
                                 </Typography>
                                 <Typography
                                     size={'h4'}

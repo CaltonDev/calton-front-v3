@@ -67,6 +67,7 @@ import GoogleSvg from './SvgIcons/GoogleSvg'
 import ItaFlagIcon from './SvgIcons/ItaFlagIcon'
 import EsFlagIcon from './SvgIcons/EsFlagIcon'
 import EnFlagIcon from './SvgIcons/EnFlagIcon'
+import PlusSvg from './SvgIcons/PlusSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -366,6 +367,12 @@ const SvgWrapper = ({
                     <EsFlagIcon />
                 ) : keySvg === 'enFlag.svg' ? (
                     <EnFlagIcon />
+                ) : keySvg === 'plusIcon' ? (
+                    <PlusSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : (
                     <></>
                 )}
