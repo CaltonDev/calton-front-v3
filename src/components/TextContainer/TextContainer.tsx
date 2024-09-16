@@ -16,6 +16,7 @@ function TextContainer({
     customTextColor,
     iconColor,
     textSize,
+    iconCallback,
 }: TextContainerProps) {
     return (
         <div
@@ -31,6 +32,7 @@ function TextContainer({
                     customWidth={customIconWidth}
                     customHeight={customIconHeight}
                     customColor={iconColor}
+                    onClick={iconCallback && iconCallback}
                 />
             )}
             {label !== '' && (

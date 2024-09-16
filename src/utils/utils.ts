@@ -116,3 +116,9 @@ export const getBackgroundColor = (platformType: string) => {
                 ? settingsColor
                 : listingsColor
 }
+
+export const handleKeyDown = (event: any) => {
+    if (event.key === 'Enter') {
+        event.preventDefault()
+    }
+}

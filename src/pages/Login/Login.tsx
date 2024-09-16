@@ -52,6 +52,7 @@ import Checkbox from '../../components/Checkbox/Checkbox'
 import FormInputWrapper from '../../components/FormFieldsWrapper/FormInputWrapper/FormInputWrapper'
 import CaltonSelect from '../../components/Select/Select'
 import LanguageSelect from '../../components/LanguageSelect/LanguageSelect'
+import { handleKeyDown } from '../../utils/utils'
 
 function Login() {
     const { t, i18n } = useTranslation()
@@ -152,12 +153,6 @@ function Login() {
             console.log(e)
         }
         setIsLoading(false)
-    }
-
-    const handleKeyDown = (event: any) => {
-        if (event.key === 'Enter') {
-            event.preventDefault()
-        }
     }
 
     function validateLoginFields(values: string, fieldType: string) {

@@ -26,6 +26,7 @@ const Input = ({
     fullWidth = false,
     floatingDisplay = false,
     isSquared = false,
+    onKeyDown,
 }: InputProps) => {
     const colorClass = color ? styles[color] : ''
     const sizeClass = fullWidth ? styles['fullWidth'] : size ? styles[size] : ''
@@ -54,6 +55,12 @@ const Input = ({
             ? styles.iconContainerSuffixSmall
             : styles.iconContainerSuffixLarge
 
+    const handleKeyDown = (event: any) => {
+        if (event.key === 'Enter' && onKeyDown) {
+            console.log('Event: ', event)
+            onKeyDown(event.target.value)
+        }
+    }
     return (
         <div
             className={`${styles.container} ${containerSizeClass}`}
@@ -84,6 +91,7 @@ const Input = ({
                 </div>
             )}
             <input
+                onKeyDown={handleKeyDown}
                 name={name}
                 onBlur={onBlur}
                 className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${floatingDisplayClass}`}
