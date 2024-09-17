@@ -1,5 +1,6 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
+import { useQuery } from 'react-query'
 //import { setBestWorst } from '../redux/AnalisiAvanzataState'
 
 interface TopicServiceBody {
@@ -30,7 +31,14 @@ function getTopicFiltered(returnAnt: boolean) {
     const body: TopicServiceBody = {
         returnAnt,
     }
-    return apiService.apiTopic.post('/getTopicFiltered', body, getHeaders())
+
+    return useQuery<any, Error>(
+        ['topicFilterd'],
+        () => apiService.apiTopic.post('/getTopicFiltered', body, getHeaders()),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function addTopic(

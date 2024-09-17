@@ -28,11 +28,11 @@ const AnalisiAvanzata = lazy(() => lazyRetry(() => import("../pages/AnalisiAvanz
 //const Competitor = lazy(() => lazyRetry(() => import("../pages/Competitor/Competitor"), "Competitor"));
 const CreateSurvey = lazy(() => lazyRetry(() => import("../pages/Surveys/CreateSurvey/CreateSurvey"), "CreateSurvey"));
 const EditSurvey = lazy(() => lazyRetry(() => import("../pages/Surveys/EditSurvey/EditSurvey"), "EditSurvey"));
-const Fonti = lazy(() => lazyRetry(() => import("../pages/Fonti/Fonti"), "Fonti"));
+const Topic = lazy(() => lazyRetry(() => import("../pages/Topic/Topic"), "Topic"));
 const Grafo = lazy(() => lazyRetry(() => import("../pages/Grafo/Grafo"), "Grafo"));
-const Luoghi = lazy(() => lazyRetry(() => import("../pages/Luoghi/Luoghi"), "Luoghi"));
+const Canali = lazy(() => lazyRetry(() => import("../pages/Canali/Canali"), "Canali"));
 const Integrations = lazy(() => lazyRetry(() => import("../pages/Integrations/Integration"), "Integration"));
-const Luoghi = lazy(() => lazyRetry(() => import("../pages/Luoghi/Luoghi"), "Luoghi"));
+const Canali = lazy(() => lazyRetry(() => import("../pages/Canali/Canali"), "Canali"));
 const Profile = lazy(() => lazyRetry(() => import("../pages/Profile/Profile"), "Profile"));
 const ReviewsWrapper = lazy(() => lazyRetry(() => import("../pages/Reviews/ReviewsWrapper"), "ReviewsWrapper"));
 const SelectableCards = lazy(() => lazyRetry(() => import("../pages/SelectableCards/SelectableCards"), "SelectableCards"));
@@ -46,18 +46,29 @@ const Products = lazy(() => lazyRetry(() => import("../pages/Products/Products")
 
 const Home = lazy(() => import('../pages/Home/Home'))
 const Luoghi = lazy(() => import('../pages/Luoghi/Luoghi'))
+const Canali = lazy(() => import('../pages/Canali/Canali'))
 const Reviews = lazy(() => import('../pages/Reviews/Reviews'))
 const Settings = lazy(() => import('../pages/Settings/Settings'))
+const Fonti = lazy(() => import('../pages/Fonti/Fonti'))
+const SmartResponses = lazy(
+    () => import('../pages/SmartResponses/SmartResponses')
+)
+const AddFonti = lazy(() => import('../pages/AddFonti/AddFonti'))
+const SmartResponseEdit = lazy(
+    () => import('../pages/SmartResponseEdit/SmartResponsesEdit')
+)
+const Topic = lazy(() => import('../pages/Topic/Topic'))
+
 /*
 
 const AnalisiAvanzata = lazy(() => import("../pages/AnalisiAvanzata/AnalisiAvanzata"));
 //const Competitor = lazy(() => import("../pages/Competitor/Competitor"));
 const CreateSurvey = lazy(() => import("../pages/Surveys/CreateSurvey/CreateSurvey"));
 const EditSurvey = lazy(() => import("../pages/Surveys/EditSurvey/EditSurvey"));
-const Fonti = lazy(() => import("../pages/Fonti/Fonti"));
+const Topic = lazy(() => import("../pages/Topic/Topic"));
 const Grafo = lazy(() => import("../pages/Grafo/Grafo"));
 const Integrations = lazy(() => import("../pages/Integrations/Integration"));
-const Luoghi = lazy(() => import("../pages/Luoghi/Luoghi"));
+const Canali = lazy(() => import("../pages/Canali/Canali"));
 const Profile = lazy(() => import("../pages/Profile/Profile"));
 const ReviewsWrapper = lazy(() => import("../pages/Reviews/ReviewsWrapper"));
 const SelectableCards = lazy(() => import("../pages/SelectableCards/SelectableCards"));
@@ -89,6 +100,14 @@ export const objRoutes = {
         path: 'locations',
         component: Luoghi,
     },
+    Canali: {
+        path: 'channels',
+        component: Canali,
+    },
+    Fonti: {
+        path: 'fonti',
+        component: Fonti,
+    },
     Reviews: {
         path: 'reviews',
         component: Reviews,
@@ -96,5 +115,23 @@ export const objRoutes = {
     Settings: {
         path: 'settings',
         component: Settings,
+    },
+    //change path when available
+    SmartResponses: {
+        path: 'products',
+        component: SmartResponses,
+    },
+    AddFonti: {
+        path: 'chooseLocations',
+        component: AddFonti,
+    },
+    //change path when available
+    SmartResponseEdit: {
+        path: 'grafo',
+        component: SmartResponseEdit,
+    },
+    Topic: {
+        path: 'analisiavanzata',
+        component: Topic,
     },
 }

@@ -73,7 +73,13 @@ const Table = ({
         columns.push(
             columnHelper.accessor((row) => row[column?.title], {
                 id: column?._id ? column._id : idx,
-                cell: (info) => <i>{info.getValue()}</i>,
+                cell: (info) => (
+                    <i>
+                        {Array.isArray(info.getValue())
+                            ? info.getValue()?.join(', ')
+                            : info.getValue()}
+                    </i>
+                ),
                 header: () => <span>{column?.title}</span>,
                 footer: (info) => info.column.id,
             })

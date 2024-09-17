@@ -5,7 +5,7 @@ import { getHeaders } from './api/headers'
 import { useQuery } from 'react-query'
 
 interface SourceFilteredBody {
-    code: string
+    code: number[]
     fromSurveyTab?: boolean
 }
 
@@ -44,7 +44,7 @@ interface GetSurveysTPBody {
     // Define this based on actual requirements
 }*/
 
-function getSourcesFiltered(code: string, fromSurveyTab?: boolean) {
+function getSourcesFiltered(code: number[], fromSurveyTab?: boolean) {
     const body: SourceFilteredBody = {
         code,
         fromSurveyTab,
@@ -64,13 +64,24 @@ function getSourcesFiltered(code: string, fromSurveyTab?: boolean) {
     )
 }
 
-function getAllSources(code: string, returnAnt: boolean) {
+function getAllSources(code: number[], returnAnt: boolean) {
     const body = {
         code,
         returnAnt,
     }
 
-    return apiService.apiSource.post('/getSourcesFiltered', body, getHeaders())
+    return useQuery<any, Error>(
+        ['sourcesFiltered', 'sourcesFilteredId'],
+        () =>
+            apiService.apiSource.post(
+                '/getSourcesFiltered',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function removeSource(body: RemoveSourceBody) {

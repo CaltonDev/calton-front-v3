@@ -9,7 +9,7 @@ function TextContainer({
     color = '#0C14A1',
     iconSvg,
     textColor = 'white',
-    isRating,
+    isRating = -1,
     rightSideIcon = false,
     customIconWidth,
     customIconHeight,
@@ -17,13 +17,14 @@ function TextContainer({
     iconColor,
     textSize,
     iconCallback,
+    isRatingEditable,
 }: TextContainerProps) {
     return (
         <div
             className={
                 rightSideIcon ? styles.containerReverse : styles.container
             }
-            style={{ background: color }}
+            style={{ background: color, padding: color === 'white' ? 0 : '' }}
         >
             {iconSvg && (
                 <SvgWrapper
@@ -45,15 +46,15 @@ function TextContainer({
                     {label}
                 </Typography>
             )}
-            {isRating && (
+            {isRating > -1 && (
                 <ReactStars
                     count={5}
                     value={isRating}
                     size={16}
                     color2={'#ffd700'}
-                    color1={'#FFFFFF'}
+                    color1={customTextColor ? customTextColor : '#FFFFFF'}
                     half={false}
-                    edit={false}
+                    edit={isRatingEditable ? isRatingEditable : false}
                 />
             )}
         </div>

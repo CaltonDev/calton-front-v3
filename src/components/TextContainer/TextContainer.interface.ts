@@ -33,4 +33,5 @@ export interface TextContainerProps {
         | 'bodyXSmall'
         | 'bodyXXSmall'
     iconCallback?: (arg0: any) => void
+    isRatingEditable?: boolean
 }

@@ -3,16 +3,13 @@ import Table from '../../components/Table/Table'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import { useTranslation } from 'react-i18next'
-import FilterService from '../../services/FilterService'
-import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 import { PaginationState } from '@tanstack/react-table'
+import SmartResponseService from '../../services/SmartResponseService'
 
-function Luoghi() {
+function SmartResponses() {
     const { t } = useTranslation()
-    const locationData = FilterService.getLocationsFiltered(
-        getNoCodeFromPlatfrom(),
-        true
-    )?.data
+    const smartResponsesData =
+        SmartResponseService.getAllSmartResponses(true)?.data
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,
@@ -20,10 +17,13 @@ function Luoghi() {
 
     return (
         <PageContainer>
-            <PageHeader heading={t('Luoghi')} subheading={true}></PageHeader>
+            <PageHeader
+                heading={t('SmartResponses')}
+                subheading={true}
+            ></PageHeader>
             <Table
-                data={locationData?.data}
-                columnsData={locationData?.columns}
+                data={smartResponsesData?.data || []}
+                columnsData={smartResponsesData?.columns || []}
                 fullyLoaded={true}
                 pagination={pagination}
                 setPagination={setPagination}
@@ -32,4 +32,4 @@ function Luoghi() {
     )
 }
 
-export default Luoghi
+export default SmartResponses

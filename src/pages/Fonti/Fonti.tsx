@@ -3,13 +3,13 @@ import Table from '../../components/Table/Table'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import { useTranslation } from 'react-i18next'
-import FilterService from '../../services/FilterService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 import { PaginationState } from '@tanstack/react-table'
+import SourcesService from '../../services/SourcesService'
 
-function Luoghi() {
+function Fonti() {
     const { t } = useTranslation()
-    const locationData = FilterService.getLocationsFiltered(
+    const sourcesData = SourcesService.getAllSources(
         getNoCodeFromPlatfrom(),
         true
     )?.data
@@ -20,10 +20,10 @@ function Luoghi() {
 
     return (
         <PageContainer>
-            <PageHeader heading={t('Luoghi')} subheading={true}></PageHeader>
+            <PageHeader heading={t('Fonti')} subheading={true}></PageHeader>
             <Table
-                data={locationData?.data}
-                columnsData={locationData?.columns}
+                data={sourcesData?.data || []}
+                columnsData={sourcesData?.columns || []}
                 fullyLoaded={true}
                 pagination={pagination}
                 setPagination={setPagination}
@@ -32,4 +32,4 @@ function Luoghi() {
     )
 }
 
-export default Luoghi
+export default Fonti

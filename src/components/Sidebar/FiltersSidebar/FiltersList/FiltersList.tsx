@@ -25,7 +25,7 @@ function FiltersList({
         },
         {
             key: 'fonti',
-            svg: 'Fonti.svg',
+            svg: 'Topic.svg',
             label: t('Fonti'),
         },
         {

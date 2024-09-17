@@ -204,7 +204,7 @@ function HomeReviews() {
             key: 'fonti',
             label: t('Fonti'),
             data: sourcesHomeData,
-            svg: 'Fonti.svg',
+            svg: 'Topic.svg',
         },
     ]
 

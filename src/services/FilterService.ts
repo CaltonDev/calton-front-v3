@@ -12,10 +12,17 @@ interface GetTopicFilteredBody {
 }
 
 function getChannelSourcesFiltered() {
-    return apiService.apiUrl.post(
-        '/source/getChannelSourcesFiltered',
-        {},
-        getHeaders()
+    return useQuery<any, Error>(
+        ['location', 'locationId'],
+        () =>
+            apiService.apiUrl.post(
+                '/source/getChannelSourcesFiltered',
+                {},
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 

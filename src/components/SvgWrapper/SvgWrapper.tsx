@@ -225,7 +225,7 @@ const SvgWrapper = ({
                         fillColor={iconColor}
                         svgBackgroundColor={svgBackgroundColor}
                     />
-                ) : keySvg === 'Fonti.svg' ? (
+                ) : keySvg === 'Topic.svg' ? (
                     <FontiSvg
                         width={iconWidth}
                         height={iconHeight}
