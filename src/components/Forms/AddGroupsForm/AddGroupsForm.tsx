@@ -23,6 +23,7 @@ function AddGroupsForm({
         'report number',
         'report number',
     ])
+    const [inputValue, setInputValue] = useState<string>()
 
     const handleSubmit = async (values: {
         name: string
@@ -59,6 +60,9 @@ function AddGroupsForm({
         setAccounts(tmpAccounts)
     }
     const handleKeyDown = (e: any) => {
+        if (e.keyCode === 13) {
+            //todo add callback
+        }
         console.log('E: ', e)
     }
 
@@ -136,6 +140,10 @@ function AddGroupsForm({
                                             fullWidth={true}
                                             name="contacts"
                                             placeholder={t('Your contact')}
+                                            value={inputValue}
+                                            onChange={(e) =>
+                                                setInputValue(e.target.value)
+                                            }
                                             onKeyDown={handleKeyDown}
                                         />
                                     )}
