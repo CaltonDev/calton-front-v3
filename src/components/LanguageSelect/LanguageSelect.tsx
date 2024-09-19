@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import CaltonSelect from '../../components/Select/Select'
 
-function LanguageSelect() {
+function LanguageSelect({ borderColor = 'white' }: { borderColor?: string }) {
     const { i18n } = useTranslation()
     const lang = i18n.language.includes('-')
         ? i18n.language.split('-')[0]
@@ -48,6 +48,7 @@ function LanguageSelect() {
             }
             size={'small'}
             fontSize={'small'}
+            customBorderColor={borderColor}
             customColor={'white'}
             customHeight={'auto'}
             placeholderColor={'black'}
