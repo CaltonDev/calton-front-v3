@@ -7,7 +7,6 @@ import {
     getCoreRowModel,
     useReactTable,
     getSortedRowModel,
-    PaginationState,
     getPaginationRowModel,
 } from '@tanstack/react-table'
 import PageNavigator from '../PageNavigator/PageNavigator'
@@ -15,6 +14,8 @@ import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import Typography from '../Typography/Typography'
 import { useTranslation } from 'react-i18next'
 import Switch from '../Switch/Switch'
+import Button from '../Button/Button'
+import Hooks from '../../utils/hooks/Hooks'
 
 function IndeterminateCheckbox({
     indeterminate,
@@ -54,7 +55,6 @@ const Table = ({
     const [showTableColumnsVisibilityMenu, setShowTableColumnsVisibilityMenu] =
         useState(false)
     const columnHelper = createColumnHelper<any>()
-
     const columns: any[] = [
         columnHelper.accessor((row) => row, {
             id: 'select',
@@ -73,17 +73,15 @@ const Table = ({
             ),
         }),
     ]
-    const [columnVisibility, setColumnVisibility] = React.useState<any>({
-        select: false,
-    })
+    const [columnVisibility, setColumnVisibility] = React.useState<any>({})
 
     let idx = 0
+
     columnsData?.forEach((column: any) => {
-        columnVisibility[column?.title] = true
         idx += 1
         columns.push(
             columnHelper.accessor((row) => row[column?.title], {
-                id: column?._id ? column._id : idx,
+                id: column?._id ? column._id : column?.title,
                 cell: (info) => (
                     <i>
                         {Array.isArray(info.getValue())
@@ -96,6 +94,18 @@ const Table = ({
             })
         )
     })
+
+    useEffect(() => {
+        const tmpColumnsVisibility: any = {
+            select: false,
+        }
+
+        columnsData?.forEach((column: any) => {
+            tmpColumnsVisibility[column?.title] = true
+        })
+
+        setColumnVisibility(tmpColumnsVisibility)
+    }, [columnsData])
 
     const [rowSelection, setRowSelection] = React.useState({})
 
@@ -174,15 +184,22 @@ const Table = ({
     }
 
     const handleTableColumnsVisibility = () => {
+        //todo: check why this not working
         setShowTableColumnsVisibilityMenu(!showTableColumnsVisibilityMenu)
     }
 
     const setColumnVisible = (column: string) => {
         const tmpColumnVisibility = JSON.parse(JSON.stringify(columnVisibility))
+
         tmpColumnVisibility[column] = !tmpColumnVisibility[column]
 
         setColumnVisibility(tmpColumnVisibility)
     }
+
+    const handleClickOutside = () => {
+        setShowTableColumnsVisibilityMenu(false)
+    }
+    const ref = Hooks.useOutsideClick(handleClickOutside)
 
     return (
         <div
@@ -214,55 +231,53 @@ const Table = ({
                             />
                         </div>
                         {showTableColumnsVisibilityMenu && (
-                            <div className={styles.columnsMenu}>
-                                {columnsData?.map(
-                                    (column: any, idx: number) => {
-                                        return (
-                                            <div
-                                                key={idx}
-                                                className={styles.menuRow}
+                            <div className={styles.columnsMenu} ref={ref}>
+                                {columnsData?.map((column: any) => {
+                                    return (
+                                        <div
+                                            key={column?.title}
+                                            className={styles.menuRow}
+                                        >
+                                            <Typography
+                                                size={'bodySmall'}
+                                                weight={'light'}
                                             >
-                                                <Typography
-                                                    size={'bodySmall'}
-                                                    weight={'light'}
-                                                >
-                                                    {column?.title}
-                                                </Typography>
-                                                <div
-                                                    className={
-                                                        styles.menuIconsContainer
+                                                {column?.title}
+                                            </Typography>
+                                            <div
+                                                className={
+                                                    styles.menuIconsContainer
+                                                }
+                                            >
+                                                <Switch
+                                                    checked={
+                                                        columnVisibility[
+                                                            column?.title
+                                                        ]
                                                     }
-                                                >
-                                                    <Switch
-                                                        checked={
-                                                            columnVisibility[
-                                                                column?.title
-                                                            ]
-                                                        }
-                                                        disabled={false}
-                                                        onClick={() =>
-                                                            setColumnVisible(
-                                                                column?.title
-                                                            )
-                                                        }
-                                                        icon={true}
-                                                    />
-                                                    <SvgWrapper
-                                                        keySvg={'trashIcon'}
-                                                        size={'medium'}
-                                                        customColor={
-                                                            column?.type
-                                                                ? 'black'
-                                                                : '#C0BBC5'
-                                                        }
-                                                        disabled={!column?.type}
-                                                        //onClick={table.getToggleAllRowsSelectedHandler()}
-                                                    />
-                                                </div>
+                                                    disabled={false}
+                                                    onClick={() =>
+                                                        setColumnVisible(
+                                                            column?.title
+                                                        )
+                                                    }
+                                                    icon={true}
+                                                />
+                                                <SvgWrapper
+                                                    keySvg={'trashIcon'}
+                                                    size={'medium'}
+                                                    customColor={
+                                                        column?.type
+                                                            ? 'black'
+                                                            : '#C0BBC5'
+                                                    }
+                                                    disabled={!column?.type}
+                                                    //onClick={table.getToggleAllRowsSelectedHandler()}
+                                                />
                                             </div>
-                                        )
-                                    }
-                                )}
+                                        </div>
+                                    )
+                                })}
                             </div>
                         )}
                         <div className={styles.tableSizeSelectorContainer}>
