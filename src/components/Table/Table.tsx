@@ -75,10 +75,7 @@ const Table = ({
     ]
     const [columnVisibility, setColumnVisibility] = React.useState<any>({})
 
-    let idx = 0
-
     columnsData?.forEach((column: any) => {
-        idx += 1
         columns.push(
             columnHelper.accessor((row) => row[column?.title], {
                 id: column?._id ? column._id : column?.title,
@@ -121,7 +118,6 @@ const Table = ({
             columnVisibility,
         },
         enableRowSelection: true, //enable row selection for all rows
-        enableExpanding: true,
         onRowSelectionChange: setRowSelection,
         onColumnVisibilityChange: setColumnVisibility,
         getRowId: (row: any) => row?._id,
@@ -181,7 +177,6 @@ const Table = ({
     }
 
     const handleChangeTableSize = (value: boolean) => {
-        handleToggleAllRows(value)
         setTableSize(value ? 'large' : 'small')
     }
 
@@ -200,10 +195,6 @@ const Table = ({
 
     const handleClickOutside = () => {
         setShowTableColumnsVisibilityMenu(false)
-    }
-
-    const handleToggleAllRows = (value: boolean) => {
-        table.toggleAllRowsExpanded(value) // This will toggle the expanded state for all rows
     }
 
     const ref = Hooks.useOutsideClick(handleClickOutside)
@@ -292,20 +283,21 @@ const Table = ({
                                 className={styles.textContainer}
                                 onClick={() => handleChangeTableSize(true)}
                                 style={{
-                                    background: table.getIsAllRowsExpanded()
-                                        ? 'black'
-                                        : 'white',
+                                    background:
+                                        tableSize === 'large'
+                                            ? 'black'
+                                            : 'white',
                                     borderTopLeftRadius:
-                                        table.getIsAllRowsExpanded() ? 5 : 10,
+                                        tableSize === 'large' ? 5 : 10,
                                     borderBottomLeftRadius:
-                                        table.getIsAllRowsExpanded() ? 5 : 10,
+                                        tableSize === 'large' ? 5 : 10,
                                 }}
                             >
                                 <Typography
                                     size={'bodyMedium'}
                                     weight={'normal'}
                                     customTextColor={
-                                        table.getIsAllRowsExpanded()
+                                        tableSize === 'large'
                                             ? 'white'
                                             : 'black'
                                     }
@@ -317,20 +309,21 @@ const Table = ({
                                 className={styles.textContainer}
                                 onClick={() => handleChangeTableSize(false)}
                                 style={{
-                                    background: !table.getIsAllRowsExpanded()
-                                        ? 'black'
-                                        : 'white',
+                                    background:
+                                        tableSize === 'small'
+                                            ? 'black'
+                                            : 'white',
                                     borderTopRightRadius:
-                                        !table.getIsAllRowsExpanded() ? 5 : 10,
+                                        tableSize === 'small' ? 5 : 10,
                                     borderBottomRightRadius:
-                                        !table.getIsAllRowsExpanded() ? 5 : 10,
+                                        tableSize === 'small' ? 5 : 10,
                                 }}
                             >
                                 <Typography
                                     size={'bodyMedium'}
                                     weight={'normal'}
                                     customTextColor={
-                                        !table.getIsAllRowsExpanded()
+                                        tableSize === 'small'
                                             ? 'white'
                                             : 'black'
                                     }
@@ -389,7 +382,14 @@ const Table = ({
                         {table.getRowModel().rows.map((row) => (
                             <tr key={row.id}>
                                 {row.getVisibleCells().map((cell) => (
-                                    <td key={cell.id} className={styles.td}>
+                                    <td
+                                        key={cell.id}
+                                        className={
+                                            tableSize === 'large'
+                                                ? styles.tdLarge
+                                                : styles.tdSmall
+                                        }
+                                    >
                                         {flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()
