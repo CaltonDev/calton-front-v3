@@ -24,8 +24,10 @@ interface RemoveSmartResponseBody {
     _id: string
 }
 
-function getAllSmartResponses(returnAnt?: false) {
-    const body: GetAllSmartResponsesBody = { returnAnt }
+function getAllSmartResponses(returnAnt?: boolean) {
+    const body: GetAllSmartResponsesBody = {
+        returnAnt: returnAnt ? returnAnt : false,
+    }
     return useQuery<any, Error>(
         ['smartResponses'],
         () => apiService.apiUrl.post('/smartResponse/get', body, getHeaders()),

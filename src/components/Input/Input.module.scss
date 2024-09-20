@@ -30,14 +30,14 @@
 
 .container {
   position: relative;
-  width: map-get($input, width);
+  //width: map-get($input, width);
 
   &.smallContainer {
-    width: map-deep-get($input, size, small, width);
+    //width: map-deep-get($input, size, small, width);
   }
 
   &.mediumContainer {
-    width: map-deep-get($input, size, medium, width);
+    //width: map-deep-get($input, size, medium, width);
   }
 
   &.largeContainer {

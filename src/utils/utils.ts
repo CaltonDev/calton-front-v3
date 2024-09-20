@@ -17,6 +17,7 @@ import {
     competitorsColor,
     listingsColor,
     reviewsColor,
+    settingsColor,
     surveysColor,
 } from '../constants/constants'
 
@@ -111,5 +112,13 @@ export const getBackgroundColor = (platformType: string) => {
             ? competitorsColor
             : platformType === 'white'
               ? '#FFFFFF'
-              : listingsColor
+              : platformType === 'settings'
+                ? settingsColor
+                : listingsColor
+}
+
+export const handleKeyDown = (event: any) => {
+    if (event.key === 'Enter') {
+        event.preventDefault()
+    }
 }

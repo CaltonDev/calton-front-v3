@@ -1,17 +1,21 @@
 import styles from './Table.module.scss'
 import { TableProps } from './Table.interface'
-import React, { HTMLProps, useEffect } from 'react'
+import React, { HTMLProps, useEffect, useState } from 'react'
 import {
     createColumnHelper,
     flexRender,
     getCoreRowModel,
     useReactTable,
     getSortedRowModel,
-    PaginationState,
     getPaginationRowModel,
 } from '@tanstack/react-table'
 import PageNavigator from '../PageNavigator/PageNavigator'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import Typography from '../Typography/Typography'
+import { useTranslation } from 'react-i18next'
+import Switch from '../Switch/Switch'
+import Button from '../Button/Button'
+import Hooks from '../../utils/hooks/Hooks'
 
 function IndeterminateCheckbox({
     indeterminate,
@@ -46,8 +50,11 @@ const Table = ({
     pagination,
     setPagination,
 }: TableProps) => {
+    const { t } = useTranslation()
+    const [tableSize, setTableSize] = useState('small')
+    const [showTableColumnsVisibilityMenu, setShowTableColumnsVisibilityMenu] =
+        useState(false)
     const columnHelper = createColumnHelper<any>()
-
     const columns: any[] = [
         columnHelper.accessor((row) => row, {
             id: 'select',
@@ -66,24 +73,38 @@ const Table = ({
             ),
         }),
     ]
+    const [columnVisibility, setColumnVisibility] = React.useState<any>({})
 
-    let idx = 0
     columnsData?.forEach((column: any) => {
-        idx += 1
         columns.push(
             columnHelper.accessor((row) => row[column?.title], {
-                id: column?._id ? column._id : idx,
-                cell: (info) => <i>{info.getValue()}</i>,
+                id: column?._id ? column._id : column?.title,
+                cell: (info) => (
+                    <i>
+                        {Array.isArray(info.getValue())
+                            ? info.getValue()?.join(', ')
+                            : info.getValue()}
+                    </i>
+                ),
                 header: () => <span>{column?.title}</span>,
                 footer: (info) => info.column.id,
             })
         )
     })
 
+    useEffect(() => {
+        const tmpColumnsVisibility: any = {
+            select: false,
+        }
+
+        columnsData?.forEach((column: any) => {
+            tmpColumnsVisibility[column?.title] = true
+        })
+
+        setColumnVisibility(tmpColumnsVisibility)
+    }, [columnsData])
+
     const [rowSelection, setRowSelection] = React.useState({})
-    const [columnVisibility, setColumnVisibility] = React.useState<any>({
-        select: false,
-    })
 
     const table = useReactTable({
         data,
@@ -150,9 +171,33 @@ const Table = ({
         }
     }
 
+    //todo: move this outside table component
     const handleRowSelection = () => {
         setColumnVisibility({ select: true })
     }
+
+    const handleChangeTableSize = (value: boolean) => {
+        setTableSize(value ? 'large' : 'small')
+    }
+
+    const handleTableColumnsVisibility = () => {
+        //todo: check why this not working
+        setShowTableColumnsVisibilityMenu(!showTableColumnsVisibilityMenu)
+    }
+
+    const setColumnVisible = (column: string) => {
+        const tmpColumnVisibility = JSON.parse(JSON.stringify(columnVisibility))
+
+        tmpColumnVisibility[column] = !tmpColumnVisibility[column]
+
+        setColumnVisibility(tmpColumnVisibility)
+    }
+
+    const handleClickOutside = () => {
+        setShowTableColumnsVisibilityMenu(false)
+    }
+
+    const ref = Hooks.useOutsideClick(handleClickOutside)
 
     return (
         <div
@@ -169,13 +214,123 @@ const Table = ({
                     <div className={styles.headerBtn}>
                         <div
                             className={styles.rowSelectionContainer}
-                            onClick={handleRowSelection}
+                            onClick={handleTableColumnsVisibility}
                         >
                             <SvgWrapper
                                 keySvg={'rowSelection.svg'}
                                 size={'medium'}
-                                onClick={table.getToggleAllRowsSelectedHandler()}
+                                //onClick={table.getToggleAllRowsSelectedHandler()}
                             />
+                            <SvgWrapper
+                                keySvg={'arrowDownSvg'}
+                                size={'medium'}
+                                color={'black'}
+                                //onClick={table.getToggleAllRowsSelectedHandler()}
+                            />
+                        </div>
+                        {showTableColumnsVisibilityMenu && (
+                            <div className={styles.columnsMenu} ref={ref}>
+                                {columnsData?.map((column: any) => {
+                                    return (
+                                        <div
+                                            key={column?.title}
+                                            className={styles.menuRow}
+                                        >
+                                            <Typography
+                                                size={'bodySmall'}
+                                                weight={'light'}
+                                            >
+                                                {column?.title}
+                                            </Typography>
+                                            <div
+                                                className={
+                                                    styles.menuIconsContainer
+                                                }
+                                            >
+                                                <Switch
+                                                    checked={
+                                                        columnVisibility[
+                                                            column?.title
+                                                        ]
+                                                    }
+                                                    disabled={false}
+                                                    onClick={() =>
+                                                        setColumnVisible(
+                                                            column?.title
+                                                        )
+                                                    }
+                                                    icon={true}
+                                                />
+                                                <SvgWrapper
+                                                    keySvg={'trashIcon'}
+                                                    size={'medium'}
+                                                    customColor={
+                                                        column?.type
+                                                            ? 'black'
+                                                            : '#C0BBC5'
+                                                    }
+                                                    disabled={!column?.type}
+                                                    //onClick={table.getToggleAllRowsSelectedHandler()}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        )}
+                        <div className={styles.tableSizeSelectorContainer}>
+                            <div
+                                className={styles.textContainer}
+                                onClick={() => handleChangeTableSize(true)}
+                                style={{
+                                    background:
+                                        tableSize === 'large'
+                                            ? 'black'
+                                            : 'white',
+                                    borderTopLeftRadius:
+                                        tableSize === 'large' ? 5 : 10,
+                                    borderBottomLeftRadius:
+                                        tableSize === 'large' ? 5 : 10,
+                                }}
+                            >
+                                <Typography
+                                    size={'bodyMedium'}
+                                    weight={'normal'}
+                                    customTextColor={
+                                        tableSize === 'large'
+                                            ? 'white'
+                                            : 'black'
+                                    }
+                                >
+                                    {t('Large')}
+                                </Typography>
+                            </div>
+                            <div
+                                className={styles.textContainer}
+                                onClick={() => handleChangeTableSize(false)}
+                                style={{
+                                    background:
+                                        tableSize === 'small'
+                                            ? 'black'
+                                            : 'white',
+                                    borderTopRightRadius:
+                                        tableSize === 'small' ? 5 : 10,
+                                    borderBottomRightRadius:
+                                        tableSize === 'small' ? 5 : 10,
+                                }}
+                            >
+                                <Typography
+                                    size={'bodyMedium'}
+                                    weight={'normal'}
+                                    customTextColor={
+                                        tableSize === 'small'
+                                            ? 'white'
+                                            : 'black'
+                                    }
+                                >
+                                    {t('Small')}
+                                </Typography>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -189,7 +344,7 @@ const Table = ({
             </div>
             <div
                 className={styles.tableContainer}
-                style={{ height: customHeight ? customHeight : '' }}
+                //style={{ height: customHeight ? customHeight : '' }}
             >
                 <table className={styles.table}>
                     <thead>
@@ -227,7 +382,14 @@ const Table = ({
                         {table.getRowModel().rows.map((row) => (
                             <tr key={row.id}>
                                 {row.getVisibleCells().map((cell) => (
-                                    <td key={cell.id} className={styles.td}>
+                                    <td
+                                        key={cell.id}
+                                        className={
+                                            tableSize === 'large'
+                                                ? styles.tdLarge
+                                                : styles.tdSmall
+                                        }
+                                    >
                                         {flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()

@@ -13,9 +13,23 @@ export interface ButtonProps {
     customColor?: string
     customTextColor?: string
     customBorderColor?: string
-    color?: 'reviews' | 'surveys' | 'competitor' | 'listing' | 'white' | 'black'
+    color?:
+        | 'reviews'
+        | 'surveys'
+        | 'competitor'
+        | 'listing'
+        | 'white'
+        | 'black'
+        | 'settings'
     customWidth?: number
     customHeight?: number
     icon?: string
     className?: string
+    iconColor?:
+        | 'primary'
+        | 'secondary'
+        | 'disabled'
+        | 'primaryIcon'
+        | 'white'
+        | 'black'
 }

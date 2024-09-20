@@ -12,7 +12,7 @@ function Luoghi() {
     const locationData = FilterService.getLocationsFiltered(
         getNoCodeFromPlatfrom(),
         true
-    )
+    )?.data
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,
@@ -22,8 +22,8 @@ function Luoghi() {
         <PageContainer>
             <PageHeader heading={t('Luoghi')} subheading={true}></PageHeader>
             <Table
-                data={locationData?.data?.data}
-                columnsData={locationData?.data?.columns}
+                data={locationData?.data}
+                columnsData={locationData?.columns}
                 fullyLoaded={true}
                 pagination={pagination}
                 setPagination={setPagination}

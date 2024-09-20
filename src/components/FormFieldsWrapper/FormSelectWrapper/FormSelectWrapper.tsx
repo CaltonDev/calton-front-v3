@@ -22,7 +22,7 @@ function FormSelectWrapper({
                 {...field}
                 {...props}
                 customColor={'white'}
-                placeholderColor={'black'}
+                placeholderColor={'#9D96A5'}
                 size={'fullWidth'}
             />
             {touched[field.name] && errors[field.name] && (

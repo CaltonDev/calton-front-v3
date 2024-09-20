@@ -182,7 +182,7 @@ export default function CustomAutocomplete({
     useEffect(() => {
         if (handleChange) {
             handleChange(
-                !multiple ? pendingValue[0] ?? null : pendingValue,
+                !multiple ? (pendingValue[0] ?? null) : pendingValue,
                 type
             )
         }
@@ -192,7 +192,7 @@ export default function CustomAutocomplete({
     const handleSubmit = () => {
         if (handleChange) {
             handleChange(
-                !multiple ? pendingValue[0] ?? null : pendingValue,
+                !multiple ? (pendingValue[0] ?? null) : pendingValue,
                 type
             )
         }
@@ -332,7 +332,7 @@ export default function CustomAutocomplete({
     const colVirtualizer = useVirtualizer({
         count: displayOptions?.length,
         getScrollElement: () => parentRef.current,
-        estimateSize: () => 280,
+        estimateSize: () => 100,
         overscan: 40,
     })
 

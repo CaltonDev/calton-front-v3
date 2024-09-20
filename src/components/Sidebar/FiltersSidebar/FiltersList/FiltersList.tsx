@@ -25,7 +25,7 @@ function FiltersList({
         },
         {
             key: 'fonti',
-            svg: 'Fonti.svg',
+            svg: 'Topic.svg',
             label: t('Fonti'),
         },
         {
@@ -82,7 +82,9 @@ function FiltersList({
                               ? 'surveys'
                               : platformType === 'competitor'
                                 ? 'competitor'
-                                : 'listing'
+                                : platformType === 'settings'
+                                  ? 'settings'
+                                  : 'listing'
                     }
                 >
                     {t('Filtri')?.toUpperCase()}

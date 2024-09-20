@@ -62,6 +62,7 @@ const CaltonSelect = ({
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
             <Select
+                isDisabled={disabled}
                 classNames={{
                     control: () =>
                         `${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${fontSizeClass}`,
@@ -77,6 +78,11 @@ const CaltonSelect = ({
                 }}
                 options={options}
                 styles={{
+                    menu: (provided, state) => ({
+                        ...provided,
+                        boxShadow:
+                            '6px 3px 20px 0px rgba(50, 29, 72, 0.15) !important',
+                    }),
                     valueContainer: (baseStyles) => ({
                         ...baseStyles,
                         display: 'flex',
@@ -85,14 +91,18 @@ const CaltonSelect = ({
                             : 'white !important',
                     }),
                     control: (baseStyles) => ({
-                        borderColor: customBorderColor
-                            ? customBorderColor + '!important'
+                        borderColor: disabled
+                            ? '#9D96A5'
+                            : customBorderColor
+                              ? customBorderColor + '!important'
+                              : customColor
+                                ? customColor + '!important'
+                                : '',
+                        background: disabled
+                            ? '#9D96A5'
                             : customColor
                               ? customColor + '!important'
                               : '',
-                        background: customColor
-                            ? customColor + '!important'
-                            : '',
                         cursor: 'pointer',
                         height: customHeight ? customHeight : '',
                         ':active': {
@@ -107,7 +117,11 @@ const CaltonSelect = ({
                     }),
                     dropdownIndicator: (base, state) => ({
                         ...base,
-                        color: placeholderColor ? placeholderColor : 'white',
+                        color: disabled
+                            ? '#9D96A5'
+                            : placeholderColor
+                              ? placeholderColor
+                              : 'white',
                         transition: 'color 0.2s',
                         ':hover': {
                             color: '#d3d3d3',
@@ -121,7 +135,11 @@ const CaltonSelect = ({
                     }),
                     placeholder: (base) => ({
                         ...base,
-                        color: placeholderColor ? placeholderColor : 'white', // Change placeholder text color
+                        color: disabled
+                            ? '#9D96A5'
+                            : placeholderColor
+                              ? placeholderColor
+                              : 'white', // Change placeholder text color
                     }),
                     input: (base) => ({
                         ...base,

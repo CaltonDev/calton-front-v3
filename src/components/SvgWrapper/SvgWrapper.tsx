@@ -67,6 +67,9 @@ import GoogleSvg from './SvgIcons/GoogleSvg'
 import ItaFlagIcon from './SvgIcons/ItaFlagIcon'
 import EsFlagIcon from './SvgIcons/EsFlagIcon'
 import EnFlagIcon from './SvgIcons/EnFlagIcon'
+import PlusSvg from './SvgIcons/PlusSvg'
+import TrashSvg from './SvgIcons/TrashSvg'
+import EditSvg from './SvgIcons/EditSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -106,7 +109,9 @@ const SvgWrapper = ({
               ? primaryIconColor
               : color === 'black'
                 ? 'black'
-                : disabledColor
+                : color === 'white'
+                  ? 'white'
+                  : disabledColor
 
     const iconWidth = customWidth ? customWidth : iconSize
     const iconHeight = customHeight ? customHeight : iconSize
@@ -220,7 +225,7 @@ const SvgWrapper = ({
                         fillColor={iconColor}
                         svgBackgroundColor={svgBackgroundColor}
                     />
-                ) : keySvg === 'Fonti.svg' ? (
+                ) : keySvg === 'Topic.svg' ? (
                     <FontiSvg
                         width={iconWidth}
                         height={iconHeight}
@@ -363,6 +368,24 @@ const SvgWrapper = ({
                     <EsFlagIcon />
                 ) : keySvg === 'enFlag.svg' ? (
                     <EnFlagIcon />
+                ) : keySvg === 'plusIcon' ? (
+                    <PlusSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'trashIcon' ? (
+                    <TrashSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'editIcon' ? (
+                    <EditSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : (
                     <></>
                 )}

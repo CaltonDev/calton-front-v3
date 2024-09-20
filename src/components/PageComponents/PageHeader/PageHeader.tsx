@@ -20,6 +20,7 @@ function PageHeader({
     setPreviousState,
     arrowBackUrl,
     showArrowBack = false,
+    hideFilters = false,
 }: PageHeaderProps) {
     const dispatch = useDispatch()
     const history = useNavigate()
@@ -75,7 +76,7 @@ function PageHeader({
     return (
         <div style={{ marginBottom: '1.875rem' }}>
             <div className={styles.containerColumn}>
-                {subheading && (
+                {!hideFilters && subheading && (
                     <div className={styles.containerBreadcrumb}>
                         <Typography
                             size={'bodySmall'}
@@ -131,13 +132,14 @@ function PageHeader({
                                 'AddCompetitorsSource'
                             ) ||
                             window.location.pathname.includes('products')
-                        ) && (
-                            <div id={'test'}>
-                                <FiltersSummaryContainer
-                                    filter={getConfigFilter(filters, t)}
-                                />
-                            </div>
-                        )}
+                        ) &&
+                            !hideFilters && (
+                                <div id={'test'}>
+                                    <FiltersSummaryContainer
+                                        filter={getConfigFilter(filters, t)}
+                                    />
+                                </div>
+                            )}
                     </div>
                 )}
             </div>

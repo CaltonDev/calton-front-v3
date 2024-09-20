@@ -4,11 +4,28 @@
   display: flex;
   flex-direction: column;
   border-radius: 26px;
+  height: calc(100% - 40px);
 }
 
 .containerReverse {
   @extend .container;
   flex-direction: column-reverse;
+}
+
+.columnsMenu {
+  position: absolute;
+  top: 285px;
+  left: 105px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  //align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: white;
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 6px 3px 20px 0px rgba(50, 29, 72, 0.15);
 }
 
 .header {
@@ -28,19 +45,56 @@
   margin-top: 20px;
 }
 
+.tableSizeSelectorContainer {
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  border: 2px solid #321D48;
+  height: 44px;
+}
+
+.headerBtn {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.textContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  cursor: pointer;
+}
+
 .rowSelectionContainer {
   display: inline-flex;
   height: 44px;
   padding: 0px 10px;
   align-items: center;
-  gap: 5px;
   flex-shrink: 0;
-
+  gap: 10px;
   border-radius: 10px;
   border: 2px solid #321D48;
   background: #FFF;
 }
 
+.menuRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 215px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 2px dotted #C0BBC5;
+}
+
+.menuIconsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 
 .table {
   width: 100%;
@@ -65,7 +119,7 @@
   text-align: start;
 }
 
-.td {
+.tdLarge {
   padding: 16px 24px;
   gap: 10px;
   align-self: stretch;
@@ -80,4 +134,12 @@
   line-height: 125%; /* 20px */
 
   text-align: start;
+}
+
+.tdSmall {
+  @extend .tdLarge;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }

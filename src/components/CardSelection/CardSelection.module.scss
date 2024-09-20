@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  padding: 25px 20px;
+  align-items: center;
+  gap: 30px;
+  border-radius: 10px;
+  background: #FFF;
+  cursor: pointer;
+}
+
+.cardSelected {
+  @extend .card;
+  border: 2px solid var(--Button-500, #3F49FC);
+  background: var(--Button-50, #DFE0FF);
+}
+
+.cardDisabled {
+  @extend .card;
+  background: var(--Neutral-300, #E0DDE3);
+}
+
+.addNewCard {
+  @extend .card;
+  justify-content: space-between;
+  border: 2px dashed var(--Neutral-500, #C0BBC5);
+  background: var(--Neutral-50, #F1F1F1);
+}
+
+.addNewCardSelected {
+  @extend .addNewCard;
+  border: 2px solid var(--Button-500, #3F49FC);
+  background: #FFF;
+}

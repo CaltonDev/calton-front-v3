@@ -2,34 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ServiceWrapper from '../../../helpers/ServiceWrapper'
 import { selectAllFilters } from '../../../store/selectors/selectorsSlice'
-import { SelectedWordsState } from '../../../store/home/selectedWordsSlice'
 import { useTranslation } from 'react-i18next'
-import Hooks from '../../../utils/hooks/Hooks'
 import PageContainer from '../../../components/PageComponents/PageContainer/PageContainer'
 import PageHeader from '../../../components/PageComponents/PageHeader/PageHeader'
 import { RootState } from '../../../store/store'
-import DonutCard from '../../../components/DonutCard/DonutCard'
-import TrackerCard from '../../../components/TrackerCard/TrackerCard'
-import TierListCard from '../../../components/TierListCard/TierListCard'
 import styles from './HomeReviews.module.scss'
-import ReviewCard from '../../../components/Cards/ReviewCard/ReviewCard'
-import Button from '../../../components/Button/Button'
-import PageNavigator from '../../../components/PageNavigator/PageNavigator'
 import { getNoCodeFromPlatfrom } from '../../../helpers/helpers'
-import FeedbackService from '../../../services/FeedbackService'
 import LineChart from '../../../components/Charts/LineChart/LineChart'
 import ChartConfig from '../../../constants/ChartConfig'
-import CountUp from 'react-countup'
 import InfoCardViewer from '../../../components/InfoCardViewer/InfoCardViewer'
 import TextContainer from '../../../components/TextContainer/TextContainer'
 import HomeService from '../../../services/HomeService'
-import { setBubbles } from '../../../store/home/bubbleSlice'
-import { setSources } from '../../../store/home/sourceSlice'
-import { setAverageVotoByTime } from '../../../store/home/averageVotoByTimeSlice'
-import { setAverageReviewByTime } from '../../../store/home/averageReviewByTime'
-import { setAverageSentimentByTime } from '../../../store/home/averageSentimentByTime'
-import { setDistribuzioniRacc } from '../../../store/home/distribuzioneRaccomandazioni'
-import Table from '../../../components/Table/Table'
 import Tabs from '../../../components/TabsComponent/Tabs'
 import CollapsableCard from '../../../components/CollapsableCard/CollapsableCard'
 import DistributionRatingsGraph from '../../../components/Graphs/DistributionRatingsGraph/DistributionRatingsGraph'
@@ -37,6 +20,7 @@ import { saveAs } from 'file-saver'
 import BubbleChartHome from '../../../components/Charts/BubbleCharts/BubbleChartHome/BubbleChartHome'
 import TableSelector from '../../../components/TableSelector/TableSelector'
 import FilterService from '../../../services/FilterService'
+
 function HomeReviews() {
     const dispatch = useDispatch()
     const allFilters = useSelector(selectAllFilters)
@@ -204,7 +188,7 @@ function HomeReviews() {
             key: 'fonti',
             label: t('Fonti'),
             data: sourcesHomeData,
-            svg: 'Fonti.svg',
+            svg: 'Topic.svg',
         },
     ]
 

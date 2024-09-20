@@ -23,6 +23,7 @@ const Button = ({
     customWidth,
     customHeight,
     icon,
+    iconColor,
     className,
 }: ButtonProps) => {
     const variantClass = variant ? styles[variant] : ''
@@ -69,13 +70,15 @@ const Button = ({
                         <SvgWrapper
                             size={size}
                             color={
-                                variant === 'solid'
-                                    ? 'primary'
-                                    : disabled
-                                      ? 'disabled'
-                                      : 'black'
-                                        ? 'black'
-                                        : 'secondary'
+                                iconColor
+                                    ? iconColor
+                                    : variant === 'solid'
+                                      ? 'primary'
+                                      : disabled
+                                        ? 'disabled'
+                                        : 'black'
+                                          ? 'black'
+                                          : 'secondary'
                             }
                             keySvg={
                                 icon

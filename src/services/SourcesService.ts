@@ -64,13 +64,24 @@ function getSourcesFiltered(code: number[], fromSurveyTab?: boolean) {
     )
 }
 
-function getAllSources(code: string, returnAnt: boolean) {
+function getAllSources(code: number[], returnAnt: boolean) {
     const body = {
         code,
         returnAnt,
     }
 
-    return apiService.apiSource.post('/getSourcesFiltered', body, getHeaders())
+    return useQuery<any, Error>(
+        ['sourcesFiltered', 'sourcesFilteredId'],
+        () =>
+            apiService.apiSource.post(
+                '/getSourcesFiltered',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function removeSource(body: RemoveSourceBody) {

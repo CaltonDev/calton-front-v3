@@ -1,47 +1,14 @@
 import styles from './CompleteSignUp.module.scss'
 import React, { useEffect, useState } from 'react'
-import LoginService from '../../services/LoginService'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../store/user/userSlice'
 import { useNavigate } from 'react-router-dom'
-import { v5 as uuidv5 } from 'uuid'
-import AppConfig from '../../constants/AppConfig'
 import { useTranslation } from 'react-i18next'
 import Button from '../../components/Button/Button'
 import logoFull from '../../assets/img/logo-full.png'
-import moment from 'moment'
-import { setDistribuzioniVoti } from '../../store/home/distribuzioneVotiSlice'
-import { setDistribuzioniRacc } from '../../store/home/distribuzioneRaccomandazioni'
-import { setAverageVotoByTime } from '../../store/home/averageVotoByTimeSlice'
-import { setAverageSentimentByTime } from '../../store/home/averageSentimentByTime'
-import { setAverageReviewByTime } from '../../store/home/averageReviewByTime'
-import { setSources } from '../../store/home/sourceSlice'
-import { setBubbles } from '../../store/home/bubbleSlice'
-import { setMenusList } from '../../store/menus/menuSlice'
-import { setSelectedWord } from '../../store/home/selectedWordsSlice'
-import { resetSearch, setWordSearched } from '../../store/search/search'
-import {
-    setFeedbacks,
-    setFeedbacksCount,
-} from '../../store/home/feedbackHomeSlice'
-import {
-    setAllChannelSources,
-    setAllLocations,
-    setAllProducts,
-    setAllTopics,
-} from '../../store/filters/selectableFiltersSlice'
-import { setLocationFiltered } from '../../store/locations/locationFilteredSlice'
+import { resetSearch } from '../../store/search/search'
 import { setChildUsers } from '../../store/childUsers/childUsersSlice'
-import { setSourcesFiltered } from '../../store/sources/sourcesFilteredSlice'
-import {
-    setPlatformType,
-    setShowNumbers,
-} from '../../store/settings/settingsSlice'
-import {
-    setDistribuzioneTopicPerSentiment,
-    setVotoMedioTopic,
-} from '../../store/analisiAvanzataState/analisiAvanzataSlice'
-import { setCurrentToasts, showToast } from '../../store/toast/errorToastSlice'
+import { showToast } from '../../store/toast/errorToastSlice'
 import { resetFilters } from '../../store/filters/filtersSlice'
 import { resetSocketMessage } from '../../store/socket/socketSlice'
 import Typography from '../../components/Typography/Typography'
@@ -51,6 +18,7 @@ import { isEmail, isWhiteSpaceString } from '../../helpers/helpers'
 import FormInputWrapper from '../../components/FormFieldsWrapper/FormInputWrapper/FormInputWrapper'
 import FormSelectWrapper from '../../components/FormFieldsWrapper/FormSelectWrapper/FormSelectWrapper'
 import LanguageSelect from '../../components/LanguageSelect/LanguageSelect'
+import { handleKeyDown } from '../../utils/utils'
 
 function Login() {
     const { t } = useTranslation()
@@ -139,12 +107,6 @@ function Login() {
             console.log(e)
         }
         setIsLoading(false)
-    }
-
-    const handleKeyDown = (event: any) => {
-        if (event.key === 'Enter') {
-            event.preventDefault()
-        }
     }
 
     function validateLoginFields(values: string, fieldType: string) {
@@ -352,6 +314,9 @@ function Login() {
                                                             {t('Settore') + '*'}
                                                         </Typography>
                                                         <Field
+                                                            customBorderColor={
+                                                                '#9D96A5'
+                                                            }
                                                             name="sector"
                                                             component={
                                                                 FormSelectWrapper
@@ -386,6 +351,9 @@ function Login() {
                                                         </Typography>
                                                         <Field
                                                             name="businessType"
+                                                            customBorderColor={
+                                                                '#9D96A5'
+                                                            }
                                                             component={
                                                                 FormSelectWrapper
                                                             }
@@ -419,6 +387,9 @@ function Login() {
                                                         </Typography>
                                                         <Field
                                                             name="shoppingPoints"
+                                                            customBorderColor={
+                                                                '#9D96A5'
+                                                            }
                                                             component={
                                                                 FormSelectWrapper
                                                             }

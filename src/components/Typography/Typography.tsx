@@ -13,6 +13,7 @@ const Typography = ({
     customTextColor,
     customFontSize,
     onClick,
+    useSpan,
 }: TypographyProps) => {
     let className = styles[`${size}-${weight}-${color}`]
 
@@ -29,7 +30,9 @@ const Typography = ({
         h6: 'h6',
     }
 
-    const HeadingTag = headingMap[size as keyof typeof headingMap] || 'p'
+    const HeadingTag = useSpan
+        ? 'span'
+        : headingMap[size as keyof typeof headingMap] || 'p'
 
     return createElement(
         HeadingTag,
@@ -38,6 +41,7 @@ const Typography = ({
                 color: customTextColor ? customTextColor : '',
                 fontSize: customFontSize ? customFontSize : '',
                 cursor: onClick ? 'pointer' : '',
+                marginRight: useSpan ? '5px' : '',
             },
             className,
             onClick,

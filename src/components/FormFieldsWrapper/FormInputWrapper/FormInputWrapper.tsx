@@ -15,6 +15,7 @@ function FormInputWrapper({
         formikProps?.setFieldTouched(field.name, true)
     }, [field.value])
 
+    console.log('props: ', props)
     return (
         <div className={styles.div}>
             <Input

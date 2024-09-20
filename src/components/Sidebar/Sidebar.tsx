@@ -14,6 +14,8 @@ import { setPlatformType } from '../../store/settings/settingsSlice'
 
 import { getBackgroundColor } from '../../utils/utils'
 import { RootState } from '../../store/store'
+import Button from '../Button/Button'
+import { useNavigate } from 'react-router-dom'
 function Sidebar() {
     const { t } = useTranslation()
     const dispatch = useDispatch()
@@ -21,6 +23,8 @@ function Sidebar() {
     const platformType = useSelector(
         (state: RootState) => state.Settings.platformType
     )
+    const history = useNavigate()
+
     const handlePlatformTypeChange = (e: any) => {
         const value = e?.value
         dispatch(setCode(getCodeFromPlatformType(value)))
@@ -73,6 +77,11 @@ function Sidebar() {
             label: t('Listing'),
             className: styles.menuItem,
         },
+        {
+            value: 'settings',
+            label: t('Impostazioni'),
+            className: styles.menuItem,
+        },
     ]
 
     const getCodeFromPlatformType = (type: string) => {
@@ -91,27 +100,53 @@ function Sidebar() {
         return code
     }
 
+    const handleClickReturnToPlatform = () => {
+        dispatch(setPlatformType('reviews'))
+        history('/home')
+    }
     return (
         <div
             className={styles.sidebarContainer}
-            style={{ background: getBackgroundColor(platformType) }}
+            style={
+                platformType !== 'settings'
+                    ? { background: getBackgroundColor(platformType) }
+                    : {}
+            }
         >
-            <CaltonSelect
-                options={selectOptions}
-                value={
-                    selectOptions[
-                        selectOptions?.findIndex(
-                            (x) => x.value === platformType
-                        )
-                    ]
-                }
-                size={'small'}
-                fontSize={'large'}
-                customColor={getBackgroundColor(platformType)}
-                onChange={handlePlatformTypeChange}
-            />
-            <div className={styles.divider} />
-            <SidebarMenu />
+            {platformType === 'settings' ? (
+                <div className={styles.settingsSidebar}>
+                    <Button
+                        size={'medium'}
+                        color={'settings'}
+                        arrowPlacement={'left'}
+                        icon={'arrowBack'}
+                        iconColor={'white'}
+                        onClick={handleClickReturnToPlatform}
+                    >
+                        {t('Torna in piattaforma')}
+                    </Button>
+                    <SidebarMenu />
+                </div>
+            ) : (
+                <>
+                    <CaltonSelect
+                        options={selectOptions}
+                        value={
+                            selectOptions[
+                                selectOptions?.findIndex(
+                                    (x) => x.value === platformType
+                                )
+                            ]
+                        }
+                        size={'small'}
+                        fontSize={'large'}
+                        customColor={getBackgroundColor(platformType)}
+                        onChange={handlePlatformTypeChange}
+                    />
+                    <div className={styles.divider} />
+                    <SidebarMenu />
+                </>
+            )}
         </div>
     )
 }

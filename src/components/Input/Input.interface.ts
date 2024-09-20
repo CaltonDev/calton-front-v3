@@ -10,6 +10,7 @@ export interface InputProps {
     type?: 'text' | 'number' | 'email' | 'password' | 'date'
     value?: string | number
     onChange?: React.ChangeEventHandler<HTMLInputElement>
+    onKeyDown?: (arg0: any) => void
     prefix?: string
     suffix?: string
     iconCallback?: React.MouseEventHandler<HTMLDivElement>
