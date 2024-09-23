@@ -41,7 +41,8 @@ function ChannelsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
     return (
         <div className={styles.container}>
             <CustomAutocomplete
-                displayType={'channels'}
+                hasIcons={true}
+                displayType={'filter'}
                 label={
                     selectedChannel && selectedChannel?.length === 0
                         ? t('Tutti i canali')

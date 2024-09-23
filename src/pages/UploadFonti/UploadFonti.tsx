@@ -14,23 +14,27 @@ import CustomAutocomplete from '../../components/CustomAutocomplete/CustomAutoco
 import { useSelector } from 'react-redux'
 import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 import { RootState } from '../../store/store'
+import FilterService from '../../services/FilterService'
+import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 
 function UploadFonti({ data }: SmartResponseEditProps) {
     const { t } = useTranslation()
     const { selectedLocation, selectedLocationDetails } =
         useSelector(selectAllFilters)
-    const allLocations = useSelector(
-        (state: RootState) => state.SelectableFilters.data.allLocations
-    )
-
-    const allChannelSources = useSelector(
-        (state: RootState) => state.SelectableFilters.data.allChannelSources
-    )
-    const { selectedChannel } = useSelector(selectAllFilters)
-
     const platformType = useSelector(
         (state: RootState) => state.Settings.platformType
     )
+    const allLocations =
+        FilterService.getLocationsFiltered(
+            platformType === 'surveys'
+                ? [0, 1, 2, 3, 4]
+                : getNoCodeFromPlatfrom(),
+            false
+        )?.data?.data || []
+
+    const allChannelSources =
+        FilterService.getChannelSourcesFiltered()?.data?.data || []
+    const { selectedChannel } = useSelector(selectAllFilters)
 
     const equalsIgnoreOrder = (a: string[], b: string[]) => {
         if (a?.length !== b?.length) return false
@@ -76,7 +80,7 @@ function UploadFonti({ data }: SmartResponseEditProps) {
                             {t('Luogo')}
                         </Typography>
                         <CustomAutocomplete
-                            displayType={'filter'}
+                            displayType={'core'}
                             label={
                                 selectedLocationDetails &&
                                 selectedLocationDetails.length === 0
@@ -104,7 +108,8 @@ function UploadFonti({ data }: SmartResponseEditProps) {
                             {t('Canale')}
                         </Typography>
                         <CustomAutocomplete
-                            displayType={'channels'}
+                            hasIcons={true}
+                            displayType={'core'}
                             label={
                                 selectedChannel && selectedChannel?.length === 0
                                     ? t('Tutti i canali')
@@ -124,84 +129,29 @@ function UploadFonti({ data }: SmartResponseEditProps) {
                 </div>
                 <div className={styles.rightContainer}>
                     <Typography size={'bodyBig'} weight={'bold'}>
-                        {t('Condizioni opzionali')}
+                        {t('Associa tipo')}
                     </Typography>
-                    <div className={styles.selectContainer}>
-                        <Typography size={'bodySmall'} weight={'light'}>
-                            {t('Luoghi')}
-                        </Typography>
-                        <CaltonSelect
-                            size={'fullWidth'}
-                            //options={selectOptions}
-                            /*value={
-                            selectOptions[
-                                selectOptions?.findIndex(
-                                    (x) => x.value === sentiment
-                                )
-                            ]
-                        }*/
-                            fontSize={'small'}
-                            customColor={'none'}
-                            customHeight={'auto'}
-                            placeholderColor={'#9D96A5'}
-                            /*onChange={(data) => {
-                            handleClickChangeSentiment(
-                                typeof data?.value === 'number'
-                                    ? data?.value
-                                    : 0,
-                                index
-                            )
-                        }}*/
-                        />
-                    </div>
-                    <div className={styles.selectContainer}>
-                        <Typography size={'bodySmall'} weight={'light'}>
-                            {t('Topic')}
-                        </Typography>
-                        <CaltonSelect
-                            size={'fullWidth'}
-                            //options={selectOptions}
-                            /*value={
-                            selectOptions[
-                                selectOptions?.findIndex(
-                                    (x) => x.value === sentiment
-                                )
-                            ]
-                        }*/
-                            fontSize={'small'}
-                            customColor={'none'}
-                            customHeight={'auto'}
-                            placeholderColor={'#9D96A5'}
-                            /*onChange={(data) => {
-                            handleClickChangeSentiment(
-                                typeof data?.value === 'number'
-                                    ? data?.value
-                                    : 0,
-                                index
-                            )
-                        }}*/
-                        />
-                    </div>
-                    <div className={styles.selectContainerDual}>
-                        <div className={styles.selectBody}>
-                            <Typography size={'bodySmall'} weight={'light'}>
-                                {t('Sentiment')}
-                            </Typography>
-                            <CaltonSelect
-                                //options={selectOptions}
-                                /*value={
+                    <div className={styles.columnsContainer}>
+                        <div className={styles.selectContainerDual}>
+                            <div className={styles.selectBody}>
+                                <Typography size={'bodySmall'} weight={'light'}>
+                                    {t('Nome colonna')}
+                                </Typography>
+                                <CaltonSelect
+                                    //options={selectOptions}
+                                    /*value={
                                     selectOptions[
                                         selectOptions?.findIndex(
                                             (x) => x.value === sentiment
                                         )
                                     ]
                                 }*/
-                                size={'fullWidth'}
-                                fontSize={'small'}
-                                customColor={'none'}
-                                customHeight={'auto'}
-                                placeholderColor={'#9D96A5'}
-                                /*onChange={(data) => {
+                                    size={'fullWidth'}
+                                    fontSize={'small'}
+                                    customColor={'none'}
+                                    customHeight={'auto'}
+                                    placeholderColor={'#9D96A5'}
+                                    /*onChange={(data) => {
                                     handleClickChangeSentiment(
                                         typeof data?.value === 'number'
                                             ? data?.value
@@ -209,27 +159,34 @@ function UploadFonti({ data }: SmartResponseEditProps) {
                                         index
                                     )
                                 }}*/
-                            />
-                        </div>
-                        <div className={styles.selectBody}>
-                            <Typography size={'bodySmall'} weight={'light'}>
-                                {t('Test')}
-                            </Typography>
-                            <CaltonSelect
-                                //options={selectOptions}
-                                /*value={
+                                />
+                                <div className={styles.checkboxContainer}>
+                                    <Checkbox title={t('Da analizzare')} />
+                                    <Checkbox title={t('Originale')} />
+                                    <Checkbox title={t('Risposta')} />
+                                    <Checkbox title={t('Urls')} />
+                                    <Checkbox title={t('Tipo')} />
+                                </div>
+                            </div>
+                            <div className={styles.selectBody}>
+                                <Typography size={'bodySmall'} weight={'light'}>
+                                    {t('Nome colonna')}
+                                </Typography>
+                                <CaltonSelect
+                                    //options={selectOptions}
+                                    /*value={
                                     selectOptions[
                                         selectOptions?.findIndex(
                                             (x) => x.value === sentiment
                                         )
                                     ]
                                 }*/
-                                size={'fullWidth'}
-                                fontSize={'small'}
-                                customColor={'none'}
-                                customHeight={'auto'}
-                                placeholderColor={'#9D96A5'}
-                                /*onChange={(data) => {
+                                    size={'fullWidth'}
+                                    fontSize={'small'}
+                                    customColor={'none'}
+                                    customHeight={'auto'}
+                                    placeholderColor={'#9D96A5'}
+                                    /*onChange={(data) => {
                                     handleClickChangeSentiment(
                                         typeof data?.value === 'number'
                                             ? data?.value
@@ -237,30 +194,194 @@ function UploadFonti({ data }: SmartResponseEditProps) {
                                         index
                                     )
                                 }}*/
-                            />
+                                />
+                                <div className={styles.checkboxContainer}>
+                                    <Checkbox title={t('Rating')} />
+                                    <Checkbox title={t('NPS')} />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.ratingContainer}>
-                        <Typography size={'bodySmall'} weight={'normal'}>
-                            {t('Rating')}
-                        </Typography>
-                        <div className={styles.starsContainer}>
-                            <TextContainer
-                                isRating={0}
-                                color={'white'}
-                                customTextColor={'#F1F1F1'}
-                                isRatingEditable={true}
-                            />
-                            <Checkbox type={'radio'} title={t('Qualunque')} />
+                        <div className={styles.selectContainerDual}>
+                            <div className={styles.selectBody}>
+                                <Typography size={'bodySmall'} weight={'light'}>
+                                    {t('Nome colonna')}
+                                </Typography>
+                                <CaltonSelect
+                                    //options={selectOptions}
+                                    /*value={
+                                    selectOptions[
+                                        selectOptions?.findIndex(
+                                            (x) => x.value === sentiment
+                                        )
+                                    ]
+                                }*/
+                                    size={'fullWidth'}
+                                    fontSize={'small'}
+                                    customColor={'none'}
+                                    customHeight={'auto'}
+                                    placeholderColor={'#9D96A5'}
+                                    /*onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}*/
+                                />
+                                <div className={styles.checkboxContainer}>
+                                    <Checkbox title={t('Utente')} />
+                                </div>
+                            </div>
+                            <div className={styles.selectBody}>
+                                <Typography size={'bodySmall'} weight={'light'}>
+                                    {t('Nome colonna')}
+                                </Typography>
+                                <CaltonSelect
+                                    //options={selectOptions}
+                                    /*value={
+                                    selectOptions[
+                                        selectOptions?.findIndex(
+                                            (x) => x.value === sentiment
+                                        )
+                                    ]
+                                }*/
+                                    size={'fullWidth'}
+                                    fontSize={'small'}
+                                    customColor={'none'}
+                                    customHeight={'auto'}
+                                    placeholderColor={'#9D96A5'}
+                                    /*onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}*/
+                                />
+                                <div className={styles.checkboxContainer}>
+                                    <Checkbox
+                                        title={t('Data rilascio feedback')}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.ratingContainer}>
-                        <Typography size={'bodySmall'} weight={'normal'}>
-                            {t('Condizioni soddisfatte')}
-                        </Typography>
-                        <div className={styles.starsContainer}>
-                            <Checkbox type={'radio'} title={t('Almeno una')} />
-                            <Checkbox type={'radio'} title={t('Tutte')} />
+                        <div className={styles.selectContainerDual}>
+                            <div className={styles.selectBody}>
+                                <Typography size={'bodySmall'} weight={'light'}>
+                                    {t('Nome colonna')}
+                                </Typography>
+                                <CaltonSelect
+                                    //options={selectOptions}
+                                    /*value={
+                                    selectOptions[
+                                        selectOptions?.findIndex(
+                                            (x) => x.value === sentiment
+                                        )
+                                    ]
+                                }*/
+                                    size={'fullWidth'}
+                                    fontSize={'small'}
+                                    customColor={'none'}
+                                    customHeight={'auto'}
+                                    placeholderColor={'#9D96A5'}
+                                    /*onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}*/
+                                />
+                            </div>
+                            <div className={styles.selectBody}>
+                                <Typography size={'bodySmall'} weight={'light'}>
+                                    {t('Nome colonna')}
+                                </Typography>
+                                <CaltonSelect
+                                    //options={selectOptions}
+                                    /*value={
+                                    selectOptions[
+                                        selectOptions?.findIndex(
+                                            (x) => x.value === sentiment
+                                        )
+                                    ]
+                                }*/
+                                    size={'fullWidth'}
+                                    fontSize={'small'}
+                                    customColor={'none'}
+                                    customHeight={'auto'}
+                                    placeholderColor={'#9D96A5'}
+                                    /*onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}*/
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.selectContainerDual}>
+                            <div className={styles.selectBody}>
+                                <Typography size={'bodySmall'} weight={'light'}>
+                                    {t('Nome colonna')}
+                                </Typography>
+                                <CaltonSelect
+                                    //options={selectOptions}
+                                    /*value={
+                                    selectOptions[
+                                        selectOptions?.findIndex(
+                                            (x) => x.value === sentiment
+                                        )
+                                    ]
+                                }*/
+                                    size={'fullWidth'}
+                                    fontSize={'small'}
+                                    customColor={'none'}
+                                    customHeight={'auto'}
+                                    placeholderColor={'#9D96A5'}
+                                    /*onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}*/
+                                />
+                            </div>
+                            <div className={styles.selectBody}>
+                                <Typography size={'bodySmall'} weight={'light'}>
+                                    {t('Nome colonna')}
+                                </Typography>
+                                <CaltonSelect
+                                    //options={selectOptions}
+                                    /*value={
+                                    selectOptions[
+                                        selectOptions?.findIndex(
+                                            (x) => x.value === sentiment
+                                        )
+                                    ]
+                                }*/
+                                    size={'fullWidth'}
+                                    fontSize={'small'}
+                                    customColor={'none'}
+                                    customHeight={'auto'}
+                                    placeholderColor={'#9D96A5'}
+                                    /*onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}*/
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -34,6 +34,7 @@ export default function CustomAutocomplete({
     isThick = false,
     hasDropdown = false,
     applySelection,
+    hasIcons = false,
 }: CustomAutocompleteProps) {
     const [anchorEl, setAnchorEl] = useState<any>(null)
     const [pendingValue, setPendingValue] = useState<any>([])
@@ -182,7 +183,7 @@ export default function CustomAutocomplete({
     useEffect(() => {
         if (handleChange) {
             handleChange(
-                !multiple ? (pendingValue[0] ?? null) : pendingValue,
+                !multiple ? pendingValue[0] ?? null : pendingValue,
                 type
             )
         }
@@ -192,7 +193,7 @@ export default function CustomAutocomplete({
     const handleSubmit = () => {
         if (handleChange) {
             handleChange(
-                !multiple ? (pendingValue[0] ?? null) : pendingValue,
+                !multiple ? pendingValue[0] ?? null : pendingValue,
                 type
             )
         }
@@ -364,10 +365,20 @@ export default function CustomAutocomplete({
                                     paddingLeft: 5,
                                 }
                               : {
-                                    minWidth: 170,
-                                    border: '2px solid black',
-                                    borderRadius: 25,
-                                    paddingLeft: 5,
+                                    boxSizing: 'border-box',
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    padding: '12px 16px',
+                                    gap: '9px',
+                                    width: '100%',
+                                    background: '#FFFFFF',
+                                    border: '1px solid #9D96A5',
+                                    borderRadius: '10px',
+                                    flex: 'none',
+                                    order: 1,
+                                    flexGrow: 0,
+                                    fontFamily: 'Roboto',
                                 }
                     }
                 >
@@ -396,7 +407,7 @@ export default function CustomAutocomplete({
                             ref={
                                 displayType === 'core'
                                     ? setReferenceElement
-                                    : null
+                                    : setReferenceElement
                             }
                         ></div>
                         {(isPopperVisible || displayType !== 'core') && (
@@ -404,7 +415,7 @@ export default function CustomAutocomplete({
                                 ref={
                                     displayType === 'core'
                                         ? setPopperElement
-                                        : null
+                                        : setPopperElement
                                 }
                                 /*style={
                                     displayType === 'core'
@@ -416,7 +427,9 @@ export default function CustomAutocomplete({
                                 className={
                                     displayType === 'core'
                                         ? stylesS.containerPopperCore
-                                        : stylesS.containerPopper
+                                        : displayType === 'filter'
+                                          ? stylesS.containerPopperFilter
+                                          : stylesS.containerPopper
                                 }
                                 id={id}
                                 {...attributes.popper}
@@ -558,8 +571,7 @@ export default function CustomAutocomplete({
                                                                         )
                                                                     }}
                                                                     hasIcon={
-                                                                        displayType ===
-                                                                        'channels'
+                                                                        hasIcons
                                                                             ? `${option}.svg`
                                                                             : ''
                                                                     }

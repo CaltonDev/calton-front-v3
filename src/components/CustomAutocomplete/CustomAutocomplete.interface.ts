@@ -20,4 +20,5 @@ export interface CustomAutocompleteProps {
     isThick?: boolean
     hasDropdown?: boolean
     applySelection?: () => void
+    hasIcons?: boolean
 }
