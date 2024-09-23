@@ -1,0 +1,278 @@
+import React from 'react'
+import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
+import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
+import { useTranslation } from 'react-i18next'
+import styles from '../UploadFonti/UploadFonti.module.scss'
+import Typography from '../../components/Typography/Typography'
+import Button from '../../components/Button/Button'
+import Input from '../../components/Input/Input'
+import CaltonSelect from '../../components/Select/Select'
+import TextContainer from '../../components/TextContainer/TextContainer'
+import Checkbox from '../../components/Checkbox/Checkbox'
+import { SmartResponseEditProps } from './UploadFonti.interface'
+import CustomAutocomplete from '../../components/CustomAutocomplete/CustomAutocomplete'
+import { useSelector } from 'react-redux'
+import { selectAllFilters } from '../../store/selectors/selectorsSlice'
+import { RootState } from '../../store/store'
+
+function UploadFonti({ data }: SmartResponseEditProps) {
+    const { t } = useTranslation()
+    const { selectedLocation, selectedLocationDetails } =
+        useSelector(selectAllFilters)
+    const allLocations = useSelector(
+        (state: RootState) => state.SelectableFilters.data.allLocations
+    )
+
+    const allChannelSources = useSelector(
+        (state: RootState) => state.SelectableFilters.data.allChannelSources
+    )
+    const { selectedChannel } = useSelector(selectAllFilters)
+
+    const platformType = useSelector(
+        (state: RootState) => state.Settings.platformType
+    )
+
+    const equalsIgnoreOrder = (a: string[], b: string[]) => {
+        if (a?.length !== b?.length) return false
+        const uniqueValues = new Set([...a, ...b])
+        for (const v of uniqueValues) {
+            const aCount = a.filter((e) => e === v).length
+            const bCount = b.filter((e) => e === v).length
+            if (aCount !== bCount) return false
+        }
+        return true
+    }
+
+    const handleChange = (event: any, type: string) => {
+        if (!equalsIgnoreOrder(event, selectedChannel)) {
+            const payload = {
+                type,
+                value: event,
+            }
+            //setPreparedPayload(payload)
+        }
+    }
+
+    return (
+        <PageContainer>
+            <PageHeader
+                heading={t('Inserisci file')}
+                subheading={true}
+            ></PageHeader>
+            <div className={styles.container}>
+                <div className={styles.leftContainer}>
+                    <div className={styles.leftItemContainer}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('Nome')}
+                        </Typography>
+                        <Input
+                            fullWidth={true}
+                            size={'large'}
+                            placeholder={t('Inserisci...')}
+                        />
+                    </div>
+                    <div className={styles.leftItemContainer}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('Luogo')}
+                        </Typography>
+                        <CustomAutocomplete
+                            displayType={'filter'}
+                            label={
+                                selectedLocationDetails &&
+                                selectedLocationDetails.length === 0
+                                    ? t('Tutti i luoghi')
+                                    : selectedLocationDetails?.length +
+                                      t('luoghi')
+                            }
+                            placeholderInput={t('Cerca luoghi')}
+                            primary={
+                                platformType === 'listing'
+                                    ? 'title'
+                                    : 'locationName'
+                            }
+                            secondary={'formatted_address'}
+                            labels={allLocations}
+                            type={'locations'}
+                            handleChange={handleChange}
+                            defaultValue={selectedLocation}
+                            multiple={true}
+                            hasDropdown={true}
+                        />
+                    </div>
+                    <div className={styles.leftItemContainer}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('Canale')}
+                        </Typography>
+                        <CustomAutocomplete
+                            displayType={'channels'}
+                            label={
+                                selectedChannel && selectedChannel?.length === 0
+                                    ? t('Tutti i canali')
+                                    : selectedChannel?.length + t('canali')
+                            }
+                            placeholderInput={t('Cerca canali')}
+                            primary={''}
+                            secondary={''}
+                            labels={allChannelSources}
+                            type={'channelSources'}
+                            handleChange={handleChange}
+                            defaultValue={selectedChannel}
+                            multiple={true}
+                            hasDropdown={true}
+                        />
+                    </div>
+                </div>
+                <div className={styles.rightContainer}>
+                    <Typography size={'bodyBig'} weight={'bold'}>
+                        {t('Condizioni opzionali')}
+                    </Typography>
+                    <div className={styles.selectContainer}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('Luoghi')}
+                        </Typography>
+                        <CaltonSelect
+                            size={'fullWidth'}
+                            //options={selectOptions}
+                            /*value={
+                            selectOptions[
+                                selectOptions?.findIndex(
+                                    (x) => x.value === sentiment
+                                )
+                            ]
+                        }*/
+                            fontSize={'small'}
+                            customColor={'none'}
+                            customHeight={'auto'}
+                            placeholderColor={'#9D96A5'}
+                            /*onChange={(data) => {
+                            handleClickChangeSentiment(
+                                typeof data?.value === 'number'
+                                    ? data?.value
+                                    : 0,
+                                index
+                            )
+                        }}*/
+                        />
+                    </div>
+                    <div className={styles.selectContainer}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('Topic')}
+                        </Typography>
+                        <CaltonSelect
+                            size={'fullWidth'}
+                            //options={selectOptions}
+                            /*value={
+                            selectOptions[
+                                selectOptions?.findIndex(
+                                    (x) => x.value === sentiment
+                                )
+                            ]
+                        }*/
+                            fontSize={'small'}
+                            customColor={'none'}
+                            customHeight={'auto'}
+                            placeholderColor={'#9D96A5'}
+                            /*onChange={(data) => {
+                            handleClickChangeSentiment(
+                                typeof data?.value === 'number'
+                                    ? data?.value
+                                    : 0,
+                                index
+                            )
+                        }}*/
+                        />
+                    </div>
+                    <div className={styles.selectContainerDual}>
+                        <div className={styles.selectBody}>
+                            <Typography size={'bodySmall'} weight={'light'}>
+                                {t('Sentiment')}
+                            </Typography>
+                            <CaltonSelect
+                                //options={selectOptions}
+                                /*value={
+                                    selectOptions[
+                                        selectOptions?.findIndex(
+                                            (x) => x.value === sentiment
+                                        )
+                                    ]
+                                }*/
+                                size={'fullWidth'}
+                                fontSize={'small'}
+                                customColor={'none'}
+                                customHeight={'auto'}
+                                placeholderColor={'#9D96A5'}
+                                /*onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}*/
+                            />
+                        </div>
+                        <div className={styles.selectBody}>
+                            <Typography size={'bodySmall'} weight={'light'}>
+                                {t('Test')}
+                            </Typography>
+                            <CaltonSelect
+                                //options={selectOptions}
+                                /*value={
+                                    selectOptions[
+                                        selectOptions?.findIndex(
+                                            (x) => x.value === sentiment
+                                        )
+                                    ]
+                                }*/
+                                size={'fullWidth'}
+                                fontSize={'small'}
+                                customColor={'none'}
+                                customHeight={'auto'}
+                                placeholderColor={'#9D96A5'}
+                                /*onChange={(data) => {
+                                    handleClickChangeSentiment(
+                                        typeof data?.value === 'number'
+                                            ? data?.value
+                                            : 0,
+                                        index
+                                    )
+                                }}*/
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.ratingContainer}>
+                        <Typography size={'bodySmall'} weight={'normal'}>
+                            {t('Rating')}
+                        </Typography>
+                        <div className={styles.starsContainer}>
+                            <TextContainer
+                                isRating={0}
+                                color={'white'}
+                                customTextColor={'#F1F1F1'}
+                                isRatingEditable={true}
+                            />
+                            <Checkbox type={'radio'} title={t('Qualunque')} />
+                        </div>
+                    </div>
+                    <div className={styles.ratingContainer}>
+                        <Typography size={'bodySmall'} weight={'normal'}>
+                            {t('Condizioni soddisfatte')}
+                        </Typography>
+                        <div className={styles.starsContainer}>
+                            <Checkbox type={'radio'} title={t('Almeno una')} />
+                            <Checkbox type={'radio'} title={t('Tutte')} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.footer}>
+                <Button size={'medium'} variant={'outline'}>
+                    {t('Annulla')}
+                </Button>
+                <Button size={'medium'}>{t('Aggiungi')}</Button>
+            </div>
+        </PageContainer>
+    )
+}
+
+export default UploadFonti

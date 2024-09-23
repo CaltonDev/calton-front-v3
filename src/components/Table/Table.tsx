@@ -78,6 +78,7 @@ const Table = ({
     columnsData?.forEach((column: any) => {
         columns.push(
             columnHelper.accessor((row) => row[column?.title], {
+                //TODO: fix apis to get always the same field id
                 id: column?._id
                     ? column._id
                     : column?.name
