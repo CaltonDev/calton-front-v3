@@ -78,7 +78,11 @@ const Table = ({
     columnsData?.forEach((column: any) => {
         columns.push(
             columnHelper.accessor((row) => row[column?.title], {
-                id: column?._id ? column._id : column?.title,
+                id: column?._id
+                    ? column._id
+                    : column?.name
+                      ? column.name
+                      : column?.title,
                 cell: (info) => (
                     <i>
                         {Array.isArray(info.getValue())
