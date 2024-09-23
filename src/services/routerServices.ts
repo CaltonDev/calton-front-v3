@@ -57,6 +57,7 @@ const AddFonti = lazy(() => import('../pages/AddFonti/AddFonti'))
 const SmartResponseEdit = lazy(
     () => import('../pages/SmartResponseEdit/SmartResponsesEdit')
 )
+const UploadFonti = lazy(() => import('../pages/UploadFonti/UploadFonti'))
 const Topic = lazy(() => import('../pages/Topic/Topic'))
 
 /*
@@ -133,5 +134,9 @@ export const objRoutes = {
     Topic: {
         path: 'analisiavanzata',
         component: Topic,
+    },
+    UploadFonti: {
+        path: 'hours',
+        component: UploadFonti,
     },
 }
