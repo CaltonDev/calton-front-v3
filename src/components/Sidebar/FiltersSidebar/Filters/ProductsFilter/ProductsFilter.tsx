@@ -11,14 +11,21 @@ import {
 } from '../../../../../store/filters/filtersSlice'
 import { CustomAutocompleteFilter } from '../../Filter/Filter.interface'
 import { RootState } from '../../../../../store/store'
+import ProductsService from '../../../../../services/ProductsService'
+import { getNoCodeFromPlatfrom } from '../../../../../helpers/helpers'
 
 function ProductsFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
-    const allProducts = useSelector(
-        (state: RootState) => state.SelectableFilters.data.allProducts
-    )
+    const allFilters = useSelector(selectAllFilters)
+
     const { selectedProductsDetails, selectedProducts } =
         useSelector(selectAllFilters)
-    const dispatch = useDispatch()
+
+    const allProducts =
+        ProductsService.getProductsFiltered(
+            allFilters,
+            getNoCodeFromPlatfrom(),
+            false
+        )?.data?.data || []
 
     const equalsIgnoreOrder = (a: string[], b: string[]) => {
         if (a?.length !== b?.length) return false

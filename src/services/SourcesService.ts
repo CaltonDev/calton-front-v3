@@ -51,7 +51,7 @@ function getSourcesFiltered(code: number[], fromSurveyTab?: boolean) {
     }
 
     return useQuery<any, Error>(
-        ['sourcesFiltered', 'sourcesFilteredId'],
+        ['sourcesFiltered'],
         () =>
             apiService.apiUrl.post(
                 '/source/getSourcesFiltered',
