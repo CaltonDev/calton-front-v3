@@ -27,6 +27,9 @@ const Input = ({
     floatingDisplay = false,
     isSquared = false,
     onKeyDown,
+    isFromForm = false,
+    customClassName,
+    ref,
 }: InputProps) => {
     const colorClass = color ? styles[color] : ''
     const sizeClass = fullWidth ? styles['fullWidth'] : size ? styles[size] : ''
@@ -91,13 +94,15 @@ const Input = ({
                 </div>
             )}
             <input
+                ref={ref ? ref : null}
                 onKeyDown={handleKeyDown}
                 name={name}
                 onBlur={onBlur}
-                className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${floatingDisplayClass}`}
+                className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${floatingDisplayClass} ${customClassName}`}
                 style={{
                     paddingLeft: prefix ? iconSize + 5 : '',
                     width: isSquared ? 41 : '',
+                    marginBottom: isFromForm ? '3rem' : '0',
                 }}
                 disabled={disabled}
                 onChange={onChange}

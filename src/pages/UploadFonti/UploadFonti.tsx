@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +16,8 @@ import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 import { RootState } from '../../store/store'
 import FilterService from '../../services/FilterService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
+import CustomGooglePlacesAutocompleteAnt from '../../components/CustomGoogleAutocomplete/CustomGooglePlacesAutocomplete'
+import CustomGooglePlacesAutocomplete from '../../components/CustomGoogleAutocomplete/CustomGooglePlacesAutocomplete'
 
 function UploadFonti({ data }: SmartResponseEditProps) {
     const { t } = useTranslation()
@@ -57,6 +59,10 @@ function UploadFonti({ data }: SmartResponseEditProps) {
         }
     }
 
+    const [location, setLocation] = useState('ciao')
+    const handleGoogleAutocompleteLocation = (location: any) => {
+        setLocation(location.formatted_address)
+    }
     return (
         <PageContainer>
             <PageHeader
@@ -65,6 +71,17 @@ function UploadFonti({ data }: SmartResponseEditProps) {
             ></PageHeader>
             <div className={styles.container}>
                 <div className={styles.leftContainer}>
+                    <div className={styles.leftItemContainer}>
+                        <CustomGooglePlacesAutocomplete
+                            setLocationValue={handleGoogleAutocompleteLocation}
+                            locationInput={{
+                                address: location,
+                            }}
+                            placeHolder={t('Obbligatorio')}
+                            customClass={styles.inputCustomAutocomplete}
+                            fromForm={false}
+                        />
+                    </div>
                     <div className={styles.leftItemContainer}>
                         <Typography size={'bodySmall'} weight={'light'}>
                             {t('Nome')}
@@ -125,6 +142,24 @@ function UploadFonti({ data }: SmartResponseEditProps) {
                             multiple={true}
                             hasDropdown={true}
                         />
+                    </div>
+                    <div className={styles.leftItemContainer}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('File')}
+                        </Typography>
+                        <div className={styles.addFileContainer}>
+                            <Button
+                                variant={'outline'}
+                                icon={'uploadSvg'}
+                                size={'medium'}
+                                arrowPlacement={'left'}
+                            >
+                                {t('Scegli file')}
+                            </Button>
+                            <Typography size={'bodyXSmall'} weight={'light'}>
+                                {t('Nome file.xlsx')}
+                            </Typography>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.rightContainer}>
