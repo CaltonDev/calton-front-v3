@@ -29,8 +29,9 @@ const Input = ({
     onKeyDown,
     isFromForm = false,
     customClassName,
-    ref,
+    customRef,
 }: InputProps) => {
+    console.log('ref: ', customRef)
     const colorClass = color ? styles[color] : ''
     const sizeClass = fullWidth ? styles['fullWidth'] : size ? styles[size] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
@@ -94,7 +95,7 @@ const Input = ({
                 </div>
             )}
             <input
-                ref={ref ? ref : null}
+                ref={customRef}
                 onKeyDown={handleKeyDown}
                 name={name}
                 onBlur={onBlur}

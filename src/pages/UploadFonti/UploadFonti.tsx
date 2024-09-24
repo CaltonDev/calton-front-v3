@@ -7,7 +7,6 @@ import Typography from '../../components/Typography/Typography'
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
 import CaltonSelect from '../../components/Select/Select'
-import TextContainer from '../../components/TextContainer/TextContainer'
 import Checkbox from '../../components/Checkbox/Checkbox'
 import { SmartResponseEditProps } from './UploadFonti.interface'
 import CustomAutocomplete from '../../components/CustomAutocomplete/CustomAutocomplete'
@@ -16,8 +15,6 @@ import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 import { RootState } from '../../store/store'
 import FilterService from '../../services/FilterService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
-import CustomGooglePlacesAutocompleteAnt from '../../components/CustomGoogleAutocomplete/CustomGooglePlacesAutocomplete'
-import CustomGooglePlacesAutocomplete from '../../components/CustomGoogleAutocomplete/CustomGooglePlacesAutocomplete'
 
 function UploadFonti({ data }: SmartResponseEditProps) {
     const { t } = useTranslation()
@@ -59,10 +56,6 @@ function UploadFonti({ data }: SmartResponseEditProps) {
         }
     }
 
-    const [location, setLocation] = useState('ciao')
-    const handleGoogleAutocompleteLocation = (location: any) => {
-        setLocation(location.formatted_address)
-    }
     return (
         <PageContainer>
             <PageHeader
@@ -71,24 +64,6 @@ function UploadFonti({ data }: SmartResponseEditProps) {
             ></PageHeader>
             <div className={styles.container}>
                 <div className={styles.leftContainer}>
-                    <div className={styles.leftItemContainer}>
-                        <CustomGooglePlacesAutocomplete
-                            setLocationValue={handleGoogleAutocompleteLocation}
-                            locationInput={location}
-                            placeHolder={t('Obbligatorio')}
-                            customClass={styles.inputCustomAutocomplete}
-                            fromForm={false}
-                        />
-                    </div>
-                    <div className={styles.leftItemContainer}>
-                        <CustomGooglePlacesAutocompleteAnt
-                            setLocationValue={handleGoogleAutocompleteLocation}
-                            locationInput={location}
-                            placeHolder={t('Obbligatorio')}
-                            customClass={styles.inputCustomAutocomplete}
-                            fromForm={false}
-                        />
-                    </div>
                     <div className={styles.leftItemContainer}>
                         <Typography size={'bodySmall'} weight={'light'}>
                             {t('Nome')}

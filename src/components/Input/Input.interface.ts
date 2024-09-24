@@ -21,5 +21,5 @@ export interface InputProps {
     isSquared?: boolean
     isFromForm?: boolean
     customClassName?: CSS.Properties
-    ref?: any
+    customRef?: any
 }

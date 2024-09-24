@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tooltip } from 'antd'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { usePlacesWidget } from 'react-google-autocomplete'
 import AppConfig from '../../constants/AppConfig'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,7 @@ import FormInputWrapper from '../FormFieldsWrapper/FormInputWrapper/FormInputWra
 import { Field } from 'formik'
 import Input from '../Input/Input'
 
-const CustomGooglePlacesAutocompleteAnt = ({
+const CustomGooglePlacesAutocomplete = ({
     customClass,
     placeHolder,
     locationInput,
@@ -24,7 +24,6 @@ const CustomGooglePlacesAutocompleteAnt = ({
         lat: null,
         lng: null,
     })
-    const inputRef = useRef(null) // Define correct type
 
     const { ref }: any = usePlacesWidget({
         apiKey: AppConfig.googlePlaces.apiKey,
@@ -176,12 +175,7 @@ const CustomGooglePlacesAutocompleteAnt = ({
                     onChange={(event: any) => {
                         setAddress(event.target.value)
                     }}
-                    ref={(data: any) => {
-                        inputRef.current = data // Explicit type assertion if needed
-                        if (data) {
-                            ref.current = data.input
-                        }
-                    }}
+                    customRef={ref}
                     suffix
                 />
             ) : (
@@ -192,19 +186,13 @@ const CustomGooglePlacesAutocompleteAnt = ({
                     placeholder={placeHolder}
                     value={address}
                     onChange={(event) => {
-                        console.log('Event: ', event.target.value)
                         setAddress(event.target.value)
                     }}
-                    ref={(data: any) => {
-                        inputRef.current = data
-                        if (data) {
-                            ref.current = data.input
-                        }
-                    }}
+                    customRef={ref}
                 />
             )}
         </Tooltip>
     )
 }
 
-export default CustomGooglePlacesAutocompleteAnt
+export default CustomGooglePlacesAutocomplete
