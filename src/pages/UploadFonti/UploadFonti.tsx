@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import { useTranslation } from 'react-i18next'
@@ -7,7 +7,6 @@ import Typography from '../../components/Typography/Typography'
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
 import CaltonSelect from '../../components/Select/Select'
-import TextContainer from '../../components/TextContainer/TextContainer'
 import Checkbox from '../../components/Checkbox/Checkbox'
 import { SmartResponseEditProps } from './UploadFonti.interface'
 import CustomAutocomplete from '../../components/CustomAutocomplete/CustomAutocomplete'
@@ -125,6 +124,24 @@ function UploadFonti({ data }: SmartResponseEditProps) {
                             multiple={true}
                             hasDropdown={true}
                         />
+                    </div>
+                    <div className={styles.leftItemContainer}>
+                        <Typography size={'bodySmall'} weight={'light'}>
+                            {t('File')}
+                        </Typography>
+                        <div className={styles.addFileContainer}>
+                            <Button
+                                variant={'outline'}
+                                icon={'uploadSvg'}
+                                size={'medium'}
+                                arrowPlacement={'left'}
+                            >
+                                {t('Scegli file')}
+                            </Button>
+                            <Typography size={'bodyXSmall'} weight={'light'}>
+                                {t('Nome file.xlsx')}
+                            </Typography>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.rightContainer}>

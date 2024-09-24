@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { ChangeEvent } from 'react'
+import CSS from 'csstype'
+
 export interface InputProps {
     size?: 'small' | 'medium' | 'large' | 'xlarge'
     disabled?: boolean
@@ -17,4 +19,7 @@ export interface InputProps {
     fullWidth?: boolean
     floatingDisplay?: boolean
     isSquared?: boolean
+    isFromForm?: boolean
+    customClassName?: CSS.Properties
+    customRef?: any
 }

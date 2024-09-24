@@ -70,6 +70,7 @@ import EnFlagIcon from './SvgIcons/EnFlagIcon'
 import PlusSvg from './SvgIcons/PlusSvg'
 import TrashSvg from './SvgIcons/TrashSvg'
 import EditSvg from './SvgIcons/EditSvg'
+import UploadSvg from './SvgIcons/UploadSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -386,6 +387,8 @@ const SvgWrapper = ({
                         height={iconHeight}
                         fillColor={iconColor}
                     />
+                ) : keySvg === 'uploadSvg' ? (
+                    <UploadSvg width={iconWidth} height={iconHeight} />
                 ) : (
                     <></>
                 )}

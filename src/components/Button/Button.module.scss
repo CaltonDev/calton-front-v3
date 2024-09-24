@@ -14,7 +14,8 @@
   font-weight: map-get($button, font-weight);
   font-family: map-get($button, font-family);
   font-style: map-get($button, font-style);
-  line-height: map-get($button, line-height);
+  //TODO: probably we should remove line-height
+  //line-height: map-get($button, line-height);
   color: map-get($button, color);
   flex: map-get($button, flex);
   order: map-get($button, order);
