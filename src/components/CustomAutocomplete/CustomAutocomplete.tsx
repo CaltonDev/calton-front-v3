@@ -375,9 +375,6 @@ export default function CustomAutocomplete({
                                     background: '#FFFFFF',
                                     border: '1px solid #9D96A5',
                                     borderRadius: '10px',
-                                    flex: 'none',
-                                    order: 1,
-                                    flexGrow: 0,
                                     fontFamily: 'Roboto',
                                 }
                     }
@@ -403,27 +400,29 @@ export default function CustomAutocomplete({
             <div style={{ width: '100%' }}>
                 {
                     <>
-                        <div
-                            ref={
-                                displayType === 'core'
-                                    ? setReferenceElement
-                                    : setReferenceElement
-                            }
-                        ></div>
+                        {displayType === 'core' && (
+                            <div
+                                ref={
+                                    displayType === 'core'
+                                        ? setReferenceElement
+                                        : null
+                                }
+                            ></div>
+                        )}
                         {(isPopperVisible || displayType !== 'core') && (
                             <div
                                 ref={
                                     displayType === 'core'
                                         ? setPopperElement
-                                        : setPopperElement
+                                        : null
                                 }
-                                /*style={
+                                style={
                                     displayType === 'core'
                                         ? {
                                               ...styles.popper,
                                           }
                                         : {}
-                                }*/
+                                }
                                 className={
                                     displayType === 'core'
                                         ? stylesS.containerPopperCore
