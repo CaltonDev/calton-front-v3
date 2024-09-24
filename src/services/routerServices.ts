@@ -59,6 +59,9 @@ const SmartResponseEdit = lazy(
 )
 const UploadFonti = lazy(() => import('../pages/UploadFonti/UploadFonti'))
 const Topic = lazy(() => import('../pages/Topic/Topic'))
+const SelectableCards = lazy(
+    () => import('../pages/SelectableCards/SelectableCards')
+)
 
 /*
 
@@ -122,10 +125,10 @@ export const objRoutes = {
         path: 'products',
         component: SmartResponses,
     },
-    AddFonti: {
+    /*AddFonti: {
         path: 'chooseLocations',
         component: AddFonti,
-    },
+    },*/
     //change path when available
     SmartResponseEdit: {
         path: 'grafo',
@@ -138,5 +141,9 @@ export const objRoutes = {
     UploadFonti: {
         path: 'hours',
         component: UploadFonti,
+    },
+    SelectableCards: {
+        path: 'chooseLocations',
+        component: SelectableCards,
     },
 }

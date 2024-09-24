@@ -1,0 +1,98 @@
+.virtualDiv {
+  width: 300px;
+}
+
+.btnActive{
+  height: 35px!important;
+  border-radius: 25px!important;
+  background-color: #3e49fb!important;
+  font-weight: bold!important;
+  text-transform: none!important;
+  margin-bottom: 20px!important;
+  margin:5px!important;
+  width:250px
+}
+.spacerHorizontal{
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.cancelButtonColor{
+  color: #3e49fb;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.cancelButton{
+  font-weight: bold;
+}
+
+.btnConfirm{
+  height: 35px;
+  border-radius: 25px!important;
+  width: 96px;
+  background-color: #3e49fb!important;
+  font-weight: bold;
+  text-transform: none
+}
+.btnConfirm:hover{
+  background-color: #2029b6;
+
+}
+
+.accountDataContainer {
+  overflow-y: hidden;
+  margin-bottom: 1.875rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label{
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.customAutocomplete {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 16px;
+  border: 1.5px solid #321D48 !important;
+  color: black;
+  font-weight: 500 !important;
+  padding-left: 0px !important;
+  padding-top: 3px;
+}
+
+.showMoreBtn {
+  width: 7rem;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  font-size: 12px;
+  border: none !important;
+  background-color: transparent !important;
+  color: #3F49FC;
+  font-weight: 700;
+  box-shadow: none !important;
+}
+
+.showMoreBtn:hover {
+  background-color: transparent !important;
+  color: #3F49FC !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.showMoreBtn:active {
+  background-color: transparent !important;
+  color: #3F49FC !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.showMoreBtnDisabled {
+  @extend .showMoreBtn;
+  color: rgba(0, 0, 0, 0.25) !important;
+}

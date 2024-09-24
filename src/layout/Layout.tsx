@@ -18,11 +18,7 @@ import { setShowNumbers, setSidebar } from '../store/settings/settingsSlice'
 import { toast } from 'react-toastify'
 import Hotjar from '@hotjar/browser'
 import { v5 as uuidv5 } from 'uuid'
-import { EP_SERVER, IS_DEMO, IS_PROD } from '../constants/envrionment'
-import store from '../store/store'
-import { pushSocketMessage, SocketState } from '../store/socket/socketSlice'
 import { ErrorToastState, showToast } from '../store/toast/errorToastSlice'
-import FileDownload from 'js-file-download'
 
 function Layout() {
     const user = useSelector((state: RootState) => state.User)

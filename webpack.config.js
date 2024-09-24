@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const webpack = require('webpack')
+
 module.exports = {
     entry: './src/index.tsx',
     devtool: 'inline-source-map',
@@ -81,6 +83,9 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css',
             ignoreOrder: true, // Enable
+        }),
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(process.env),
         }),
     ],
     resolve: {

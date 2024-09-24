@@ -11,9 +11,9 @@ interface GetAllLocationsBody {
 }
 
 interface GetReviewsFromLocationBody {
-    locations: string[]
+    locations?: string[]
     accounts?: string[]
-    allLocations?: string[]
+    allLocations?: boolean
 }
 
 interface FacebookLoginBody {
@@ -38,9 +38,9 @@ function getAllLocations(accounts: string, nextPageToken?: string) {
 }
 
 function getReviewsFromLocation(
-    locations: string[],
+    locations?: string[],
     accounts?: string[],
-    allLocations?: string[]
+    allLocations?: boolean
 ) {
     const body: GetReviewsFromLocationBody = {
         locations,
