@@ -74,9 +74,16 @@ function UploadFonti({ data }: SmartResponseEditProps) {
                     <div className={styles.leftItemContainer}>
                         <CustomGooglePlacesAutocomplete
                             setLocationValue={handleGoogleAutocompleteLocation}
-                            locationInput={{
-                                address: location,
-                            }}
+                            locationInput={location}
+                            placeHolder={t('Obbligatorio')}
+                            customClass={styles.inputCustomAutocomplete}
+                            fromForm={false}
+                        />
+                    </div>
+                    <div className={styles.leftItemContainer}>
+                        <CustomGooglePlacesAutocompleteAnt
+                            setLocationValue={handleGoogleAutocompleteLocation}
+                            locationInput={location}
                             placeHolder={t('Obbligatorio')}
                             customClass={styles.inputCustomAutocomplete}
                             fromForm={false}

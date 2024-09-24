@@ -16,9 +16,8 @@ const CustomGooglePlacesAutocompleteAnt = ({
     setLocationValue,
     fromForm = false,
 }: CustomGooglePlacesAutocompleteProps) => {
-    console.log('loca: ', locationInput?.address)
     const { t } = useTranslation()
-    const [address, setAddress] = useState(locationInput.address ?? null)
+    const [address, setAddress] = useState(locationInput ?? null)
     const [newLocation, setNewLocation] = useState({
         idUser: locationInput?.idUser,
         _id: locationInput?._id,
