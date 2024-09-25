@@ -249,9 +249,6 @@ function Layout() {
 
     const currentWindowPath = window.location.pathname
 
-    useEffect(() => {
-        console.log('curr: ', currentWindowPath)
-    }, [currentWindowPath])
     return (
         <div style={{ background: '#F5F5F5' }}>
             <ErrorSubscriptionModal />

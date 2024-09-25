@@ -31,7 +31,6 @@ const Input = ({
     customClassName,
     customRef,
 }: InputProps) => {
-    console.log('ref: ', customRef)
     const colorClass = color ? styles[color] : ''
     const sizeClass = fullWidth ? styles['fullWidth'] : size ? styles[size] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''

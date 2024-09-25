@@ -37,7 +37,9 @@ export default function CustomAutocomplete({
     hasIcons = false,
 }: CustomAutocompleteProps) {
     const [anchorEl, setAnchorEl] = useState<any>(null)
-    const [pendingValue, setPendingValue] = useState<any>([])
+    const [pendingValue, setPendingValue] = useState<any>(
+        defaultValue ? defaultValue : []
+    )
     const [usedPending, setUsedPending] = useState(false)
     const [displayOptions, setDisplayOptions] = useState(labels)
     const openPopperRef = useRef<any>(null)
@@ -68,14 +70,13 @@ export default function CustomAutocomplete({
         setDisplayOptions(labels)
     }, [labels])
 
-    console.log('defqult ', defaultValue)
-    useEffect(() => {
+    /*useEffect(() => {
         if (multiple == false && defaultValue == null) {
             setPendingValue([])
         } else {
             defaultValue && setPendingValue(defaultValue)
         }
-    }, [defaultValue])
+    }, [defaultValue])*/
 
     const handleClick = () => {
         setPopperVisible(!isPopperVisible)
@@ -342,6 +343,7 @@ export default function CustomAutocomplete({
         setSearchWord(event?.target?.value)
         filterOptions(event.target.value)
     }
+
     return (
         <>
             {displayType === 'core' && (
@@ -576,38 +578,78 @@ export default function CustomAutocomplete({
                                                                             : ''
                                                                     }
                                                                     checked={
-                                                                        pendingValue?.findIndex(
-                                                                            (
-                                                                                item: any
-                                                                            ) =>
-                                                                                (item?._id !=
-                                                                                    null &&
-                                                                                    option?._id ==
-                                                                                        null &&
-                                                                                    item?._id ===
-                                                                                        option?._id) ||
-                                                                                item ===
-                                                                                    option?._id ||
-                                                                                item ===
-                                                                                    option ||
-                                                                                (customCheckEquality &&
-                                                                                    customCheckEquality?.length >
-                                                                                        0 &&
-                                                                                    option[
-                                                                                        customCheckEquality[0]
-                                                                                    ] !=
-                                                                                        null &&
-                                                                                    item[
-                                                                                        customCheckEquality[1]
-                                                                                    ] !=
-                                                                                        null &&
-                                                                                    option[
-                                                                                        customCheckEquality[0]
-                                                                                    ] ===
-                                                                                        item[
-                                                                                            customCheckEquality[1]
-                                                                                        ])
-                                                                        ) !== -1
+                                                                        multiple
+                                                                            ? pendingValue.findIndex(
+                                                                                  (
+                                                                                      item: any
+                                                                                  ) =>
+                                                                                      (item?._id !=
+                                                                                          null &&
+                                                                                          option?._id ==
+                                                                                              null &&
+                                                                                          item?._id ===
+                                                                                              option?._id) ||
+                                                                                      item ===
+                                                                                          option?._id ||
+                                                                                      item ===
+                                                                                          option ||
+                                                                                      (customCheckEquality &&
+                                                                                          customCheckEquality?.length >
+                                                                                              0 &&
+                                                                                          option[
+                                                                                              customCheckEquality[0]
+                                                                                          ] !=
+                                                                                              null &&
+                                                                                          item[
+                                                                                              customCheckEquality[1]
+                                                                                          ] !=
+                                                                                              null &&
+                                                                                          option[
+                                                                                              customCheckEquality[0]
+                                                                                          ] ===
+                                                                                              item[
+                                                                                                  customCheckEquality[1]
+                                                                                              ])
+                                                                              ) !==
+                                                                              -1
+                                                                            : [
+                                                                                  pendingValue,
+                                                                              ].findIndex(
+                                                                                  (
+                                                                                      item: any
+                                                                                  ) =>
+                                                                                      item[0]
+                                                                                          ?.accountName ===
+                                                                                          option?.accountName ||
+                                                                                      (item?._id !=
+                                                                                          null &&
+                                                                                          option?._id ==
+                                                                                              null &&
+                                                                                          item?._id ===
+                                                                                              option?._id) ||
+                                                                                      item ===
+                                                                                          option?._id ||
+                                                                                      item ===
+                                                                                          option ||
+                                                                                      (customCheckEquality &&
+                                                                                          customCheckEquality?.length >
+                                                                                              0 &&
+                                                                                          option[
+                                                                                              customCheckEquality[0]
+                                                                                          ] !=
+                                                                                              null &&
+                                                                                          item[
+                                                                                              customCheckEquality[1]
+                                                                                          ] !=
+                                                                                              null &&
+                                                                                          option[
+                                                                                              customCheckEquality[0]
+                                                                                          ] ===
+                                                                                              item[
+                                                                                                  customCheckEquality[1]
+                                                                                              ])
+                                                                              ) !==
+                                                                              -1
                                                                     }
                                                                     title={
                                                                         primary !==
