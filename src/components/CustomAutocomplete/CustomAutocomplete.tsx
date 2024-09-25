@@ -68,6 +68,7 @@ export default function CustomAutocomplete({
         setDisplayOptions(labels)
     }, [labels])
 
+    console.log('defqult ', defaultValue)
     useEffect(() => {
         if (multiple == false && defaultValue == null) {
             setPendingValue([])
@@ -575,7 +576,7 @@ export default function CustomAutocomplete({
                                                                             : ''
                                                                     }
                                                                     checked={
-                                                                        pendingValue.findIndex(
+                                                                        pendingValue?.findIndex(
                                                                             (
                                                                                 item: any
                                                                             ) =>

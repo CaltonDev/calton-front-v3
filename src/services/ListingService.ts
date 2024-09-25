@@ -1,6 +1,7 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
 import { getNoCodeFromPlatfrom } from '../helpers/helpers'
+import { useQuery } from 'react-query'
 
 interface ListingServiceBody {
     limit?: number
@@ -388,7 +389,14 @@ function getMediaUrlLocalPost(body: ListingServiceBody['body']) {
 
 function getAllAccounts() {
     const body: ListingServiceBody = {}
-    return apiService.apiListings.post('/getAllAccounts', body, getHeaders())
+    return useQuery<any, Error>(
+        ['allUsersAccounts'],
+        () =>
+            apiService.apiListings.post('/getAllAccounts', body, getHeaders()),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function fetchVerificationOptions(listingName: any, languageCode: any) {

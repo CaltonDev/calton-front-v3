@@ -104,11 +104,11 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
         (state: RootState) => state.Settings.platformType
     )
     const [formattedCards, setFormattedCards] = useState<any[]>([])
-    const [accountDataReady, setAccountDataReady] = useState(false)
+    //TODO: handle data ready in different way thx to react query
+    const [accountDataReady, setAccountDataReady] = useState(true)
     const [selectedAccount, setSelectAccount] = useState<any>({})
-    const [availableAccountsList, setAvailableAccountsList] = useState<any[]>(
-        []
-    )
+
+    const availableAccountsList = ListingService.getAllAccounts()?.data
     const [disableShowMore, setDisableShowMore] = useState(true)
     const [nextPageToken, setNextPageToken] = useState(null)
     const [checkBoxType, setCheckBoxType] = useState(1)
@@ -203,11 +203,12 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
         setFormattedCards(values)
     }, [search])
 
-    useEffect(() => {
+    //TODO:  remove
+    /*useEffect(() => {
         if (internalCode === 'google') {
             fetchAllAccounts()
         }
-    }, [internalCode])
+    }, [internalCode])*/
 
     useEffect(() => {
         dispatch(resetSearch())
@@ -222,7 +223,8 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
             setCode('trustpilot')
             setCodeToken(codeUrl)
         } else {
-            setCode(location?.state?.code ? location?.state?.code : code)
+            //TODO: check what's wrong with this
+            //setCode(location?.state?.code ? location?.state?.code : code)
         }
         if (
             (IS_DEMO || IS_BETA) &&
@@ -510,26 +512,31 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
     }
 
     const handleSelectedAccount = (account: any) => {
+        console.log('account: ', account)
         setSelectAccount(account)
     }
 
+    //TODO: remove
+    /*
     const fetchAllAccounts = async () => {
+
         setAccountDataReady(false)
         try {
             const response = await ListingService.getAllAccounts()
-            const accountList = response?.data?.accounts
+            console.log('REsp: ', response)
+            //const accountList = response?.accounts
             accountList.forEach((account: any) => {
                 account.translatedType = t(account?.type)
             })
 
-            setAvailableAccountsList(accountList)
+            //setAvailableAccountsList(accountList)
             setSelectAccount(accountList[0])
         } catch (e) {
             if (IS_LISTING)
                 dispatch(showToast({ type: 2, text: t('Listing non Trovato') }))
         }
         setAccountDataReady(true)
-    }
+    }*/
 
     const handleShowMore = () => {
         getAllgoogleLocation(false)
@@ -545,6 +552,9 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
         selectAllCards()
     }
 
+    useEffect(() => {
+        console.log(' avail: ', availableAccountsList)
+    }, [availableAccountsList])
     return (
         <PageContainer
         //isGrey={fromIntegration}
@@ -587,12 +597,12 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
                                 }
                                 primary={'accountName'}
                                 secondary={'translatedType'}
-                                labels={availableAccountsList}
-                                type={'locations'}
+                                labels={availableAccountsList?.accounts}
+                                type={'core'}
                                 handleChange={(acc) =>
                                     handleSelectedAccount(acc)
                                 }
-                                classes={styles.customAutocomplete}
+                                //classes={styles.customAutocomplete}
                                 onlyWrapper={true}
                                 multiple={false}
                                 defaultValue={selectedAccount}
