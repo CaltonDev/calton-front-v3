@@ -286,8 +286,8 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
                 selectedAccount ? selectedAccount : [],
                 nextPageToken
             )
-            const locations = response?.data?.locations || []
-            const newToken = response?.data?.nextPageToken
+            const locations = response?.locations || []
+            const newToken = response?.nextPageToken
 
             const newData = initialData.concat(locations)
 
@@ -512,7 +512,6 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
     }
 
     const handleSelectedAccount = (account: any) => {
-        console.log('account: ', account)
         setSelectAccount(account)
     }
 
@@ -552,9 +551,6 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
         selectAllCards()
     }
 
-    useEffect(() => {
-        console.log(' avail: ', availableAccountsList)
-    }, [availableAccountsList])
     return (
         <PageContainer
         //isGrey={fromIntegration}

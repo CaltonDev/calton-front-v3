@@ -27,7 +27,7 @@ const CustomGooglePlacesAutocomplete = ({
 
     const { ref }: any = usePlacesWidget({
         apiKey: AppConfig.googlePlaces.apiKey,
-        onPlaceSelected: (place) => {
+        onPlaceSelected: (place: any) => {
             setAddress(
                 place.formatted_address ? place.formatted_address : place.name
             )

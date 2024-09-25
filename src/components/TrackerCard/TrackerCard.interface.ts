@@ -1,4 +1,8 @@
+type TrackerObj = {
+    label: string
+    value: number
+    total: number
+}
 export interface TrackerCardProps {
-    numberOfReply: number
-    totalReply: number
+    data: TrackerObj[]
 }

@@ -71,6 +71,9 @@ import PlusSvg from './SvgIcons/PlusSvg'
 import TrashSvg from './SvgIcons/TrashSvg'
 import EditSvg from './SvgIcons/EditSvg'
 import UploadSvg from './SvgIcons/UploadSvg'
+import InfoIconSvg from './SvgIcons/InfoIconSvg'
+import QuestionIconSvg from './SvgIcons/QuestionIconSvg'
+import SurveyIconSvg from './SvgIcons/SurveyIconSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -389,6 +392,12 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'uploadSvg' ? (
                     <UploadSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'infoIconSvg' ? (
+                    <InfoIconSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'questionIconSvg' ? (
+                    <QuestionIconSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'surveyIconSvg' ? (
+                    <SurveyIconSvg width={iconWidth} height={iconHeight} />
                 ) : (
                     <></>
                 )}
