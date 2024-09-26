@@ -106,7 +106,7 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
     const [formattedCards, setFormattedCards] = useState<any[]>([])
     //TODO: handle data ready in different way thx to react query
     const [accountDataReady, setAccountDataReady] = useState(true)
-    const [selectedAccount, setSelectAccount] = useState<any>({})
+    const [selectedAccount, setSelectAccount] = useState<any>(null)
 
     const availableAccountsList = ListingService.getAllAccounts()?.data
     const [disableShowMore, setDisableShowMore] = useState(true)
@@ -512,6 +512,7 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
     }
 
     const handleSelectedAccount = (account: any) => {
+        console.log({ account })
         setSelectAccount(account)
     }
 
@@ -598,6 +599,7 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
                                 handleChange={(acc) =>
                                     handleSelectedAccount(acc)
                                 }
+                                customCheckEquality={['name', 'name']}
                                 //classes={styles.customAutocomplete}
                                 onlyWrapper={true}
                                 multiple={false}

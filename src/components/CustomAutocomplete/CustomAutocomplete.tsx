@@ -133,9 +133,7 @@ export default function CustomAutocomplete({
         setUsedPending(true)
         if (pendingValue && pendingValue?.length > 0) {
             let tmpPending = pendingValue
-            if (tmpPending?.length > 0 && !multiple) {
-                tmpPending = []
-            }
+
             const index = tmpPending.findIndex(
                 (item: any) =>
                     (item?._id != null &&
@@ -150,12 +148,14 @@ export default function CustomAutocomplete({
                         elm[customCheckEquality[0]] ===
                             item[customCheckEquality[1]])
             )
-
             if (index !== -1) {
                 const tmpVal = [...tmpPending]
                 tmpVal.splice(index, 1)
                 setPendingValue(tmpVal)
             } else {
+                if (tmpPending?.length > 0 && !multiple) {
+                    tmpPending = []
+                }
                 const tmpVal = [...tmpPending, elm]
                 setPendingValue(tmpVal)
             }
@@ -179,13 +179,14 @@ export default function CustomAutocomplete({
     const handleClose = () => {
         setPopperVisible(false)
         setDisplayOptions(labels)
-        setPendingValue(defaultValue ? defaultValue : [])
+        //rimosso state update
+        //setPendingValue(defaultValue ? defaultValue : [])
     }
 
     useEffect(() => {
         if (handleChange) {
             handleChange(
-                !multiple ? pendingValue[0] ?? null : pendingValue,
+                !multiple ? (pendingValue[0] ?? null) : pendingValue,
                 type
             )
         }
@@ -195,7 +196,7 @@ export default function CustomAutocomplete({
     const handleSubmit = () => {
         if (handleChange) {
             handleChange(
-                !multiple ? pendingValue[0] ?? null : pendingValue,
+                !multiple ? (pendingValue[0] ?? null) : pendingValue,
                 type
             )
         }
