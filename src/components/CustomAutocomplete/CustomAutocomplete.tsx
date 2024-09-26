@@ -2,7 +2,6 @@ import * as React from 'react'
 import { matchSorter } from 'match-sorter'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CaretDownFilled } from '@ant-design/icons'
 import stylesS from './CustomAutocomplete.module.scss'
 import { usePopper } from 'react-popper'
 import { useVirtualizer } from '@tanstack/react-virtual'
@@ -11,7 +10,6 @@ import Checkbox from '../Checkbox/Checkbox'
 import Input from '../Input/Input'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import Button from '../Button/Button'
-import styles from '../Sidebar/FiltersSidebar/Filter/Filter.module.scss'
 
 export default function CustomAutocomplete({
     label,
@@ -26,8 +24,6 @@ export default function CustomAutocomplete({
     customCheckEquality,
     isButton,
     classes,
-    classesIcon,
-    onlyWrapper = false,
     disabled,
     displayType = 'core',
     floatingDisplay = false,
@@ -60,7 +56,7 @@ export default function CustomAutocomplete({
             {
                 name: 'offset',
                 options: {
-                    offset: isButton ? [30, -20] : [0, -320],
+                    offset: isButton ? [30, -20] : [10, -500],
                 },
             },
         ],
@@ -134,6 +130,7 @@ export default function CustomAutocomplete({
         if (pendingValue && pendingValue?.length > 0) {
             let tmpPending = pendingValue
 
+            //TODO: change within the backend so we always have _id
             const index = tmpPending.findIndex(
                 (item: any) =>
                     (item?._id != null &&
@@ -186,7 +183,7 @@ export default function CustomAutocomplete({
     useEffect(() => {
         if (handleChange) {
             handleChange(
-                !multiple ? (pendingValue[0] ?? null) : pendingValue,
+                !multiple ? pendingValue[0] ?? null : pendingValue,
                 type
             )
         }
@@ -196,7 +193,7 @@ export default function CustomAutocomplete({
     const handleSubmit = () => {
         if (handleChange) {
             handleChange(
-                !multiple ? (pendingValue[0] ?? null) : pendingValue,
+                !multiple ? pendingValue[0] ?? null : pendingValue,
                 type
             )
         }
@@ -380,6 +377,8 @@ export default function CustomAutocomplete({
                                     border: '1px solid #9D96A5',
                                     borderRadius: '10px',
                                     fontFamily: 'Roboto',
+                                    minWidth: 400,
+                                    maxWidth: 500,
                                 }
                     }
                 >
@@ -438,75 +437,114 @@ export default function CustomAutocomplete({
                                 {...attributes.popper}
                             >
                                 <div>
-                                    <div className={stylesS.inputContainer}>
-                                        <div
-                                            className={stylesS.headerContainer}
-                                        >
-                                            <SvgWrapper
-                                                keySvg={'searchSvg'}
-                                                size={'medium'}
-                                                color={'black'}
-                                            />
+                                    {displayType === 'filter' ? (
+                                        <div className={stylesS.inputContainer}>
                                             <div
                                                 className={
-                                                    stylesS.floatingDisplayContainer
+                                                    stylesS.headerContainer
                                                 }
                                             >
-                                                <Input
-                                                    value={searchWord}
-                                                    floatingDisplay={true}
-                                                    fullWidth={true}
-                                                    type={'text'}
-                                                    placeholder={
-                                                        placeholderInput
-                                                    }
-                                                    onChange={(event: any) =>
-                                                        handleWordSearch(event)
-                                                    }
+                                                <SvgWrapper
+                                                    keySvg={'searchSvg'}
+                                                    size={'medium'}
+                                                    color={'black'}
                                                 />
+                                                <div
+                                                    className={
+                                                        stylesS.floatingDisplayContainer
+                                                    }
+                                                >
+                                                    <Input
+                                                        value={searchWord}
+                                                        floatingDisplay={true}
+                                                        fullWidth={true}
+                                                        type={'text'}
+                                                        placeholder={
+                                                            placeholderInput
+                                                        }
+                                                        onChange={(
+                                                            event: any
+                                                        ) =>
+                                                            handleWordSearch(
+                                                                event
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className={stylesS.inputContainer}>
+                                    ) : (
                                         <div
-                                            className={stylesS.headerContainer}
-                                        >
-                                            <Checkbox
-                                                type={'checkbox'}
-                                                title={
-                                                    pendingValue?.length +
-                                                    ' ' +
-                                                    t('elementi selezionati')
+                                            className={
+                                                stylesS.inputCustomAutocompleteHeader
+                                            }
+                                        ></div>
+                                    )}
+                                    {multiple && (
+                                        <div className={stylesS.inputContainer}>
+                                            <div
+                                                className={
+                                                    stylesS.headerContainer
                                                 }
-                                                checked={
-                                                    pendingValue?.length > 0 &&
-                                                    true
-                                                }
-                                                onClick={handleSelectAllBtn}
-                                                dropdown={hasDropdown}
-                                                dropdownOptions={[
-                                                    {
-                                                        key: 0,
-                                                        displayLabel:
-                                                            t(
-                                                                'Seleziona tutto'
-                                                            ),
-                                                        onClick: () =>
-                                                            selectAll(),
-                                                    },
-                                                    {
-                                                        key: 1,
-                                                        displayLabel:
-                                                            t(
-                                                                'Deseleziona tutto'
-                                                            ),
-                                                        onClick: () =>
-                                                            deselectAll(),
-                                                    },
-                                                ]}
-                                            />
+                                            >
+                                                <Checkbox
+                                                    type={'checkbox'}
+                                                    title={
+                                                        pendingValue?.length +
+                                                        ' ' +
+                                                        t(
+                                                            'elementi selezionati'
+                                                        )
+                                                    }
+                                                    checked={
+                                                        pendingValue?.length >
+                                                            0 && true
+                                                    }
+                                                    onClick={handleSelectAllBtn}
+                                                    dropdown={hasDropdown}
+                                                    dropdownOptions={[
+                                                        {
+                                                            key: 0,
+                                                            displayLabel:
+                                                                t(
+                                                                    'Seleziona tutto'
+                                                                ),
+                                                            onClick: () =>
+                                                                selectAll(),
+                                                        },
+                                                        {
+                                                            key: 1,
+                                                            displayLabel:
+                                                                t(
+                                                                    'Deseleziona tutto'
+                                                                ),
+                                                            onClick: () =>
+                                                                deselectAll(),
+                                                        },
+                                                    ]}
+                                                />
+                                                <div
+                                                    className={
+                                                        stylesS.headerBtnContainer
+                                                    }
+                                                >
+                                                    <Button
+                                                        size={'small'}
+                                                        variant={'ghost'}
+                                                        onClick={handleReset}
+                                                    >
+                                                        {t('Reset')}
+                                                    </Button>
+                                                    <Button
+                                                        size={'small'}
+                                                        onClick={handleSubmit}
+                                                    >
+                                                        {t('Applica')}
+                                                    </Button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
                                     <div
                                         className="List"
                                         ref={parentRef}

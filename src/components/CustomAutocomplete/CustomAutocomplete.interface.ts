@@ -11,8 +11,6 @@ export interface CustomAutocompleteProps {
     customCheckEquality?: any
     isButton?: boolean
     classes?: any
-    classesIcon?: any
-    onlyWrapper?: boolean
     disabled?: boolean
     displayType?: string
     floatingDisplay?: boolean
