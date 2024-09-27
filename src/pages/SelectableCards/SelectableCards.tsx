@@ -601,7 +601,6 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
                                 }
                                 customCheckEquality={['name', 'name']}
                                 //classes={styles.customAutocomplete}
-                                onlyWrapper={true}
                                 multiple={false}
                                 defaultValue={selectedAccount}
                             />
