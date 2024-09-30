@@ -1,22 +1,26 @@
 import React from 'react'
 import styles from './TrackerCard.module.scss'
 import Typography from '../Typography/Typography'
-import { useTranslation } from 'react-i18next'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import { TrackerCardProps } from './TrackerCard.interface'
-function TrackerCard({ data }: TrackerCardProps) {
-    const { t } = useTranslation()
-
+function TrackerCard({ data, maxHeight = false }: TrackerCardProps) {
     return (
         <div className={styles.container}>
-            {data?.map((obj) => {
+            {data?.map((obj, idx) => {
                 return (
-                    <div className={styles.contentDiv}>
-                        <div>
-                            <Typography size={'h6'} weight={'light'}>
+                    <div
+                        key={idx}
+                        className={
+                            maxHeight
+                                ? styles.contentDivMaxHeight
+                                : styles.contentDiv
+                        }
+                    >
+                        <div className={styles.headerContainer}>
+                            <Typography size={'h5'} weight={'bold'}>
                                 {obj.label}
                             </Typography>
-                            <Typography size={'h6'} weight={'bold'}>
+                            <Typography size={'h2'} weight={'light'}>
                                 {obj.value.toString()}
                             </Typography>
                         </div>

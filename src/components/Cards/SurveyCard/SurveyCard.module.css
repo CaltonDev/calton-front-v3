@@ -1,0 +1,109 @@
+.containerSurvey {
+  display: flex;
+  width: 28vw;
+  height: 280px;
+  border-radius: 17px;
+  background: #fff;
+  padding-top: 25px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-bottom: 5px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.labelShow {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: left;
+  text-decoration: underline;
+  color: #3f49fc;
+}
+
+.containerColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerCard {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 17px;
+  text-align: left;
+  color: #321d48;
+  width: 25vw;
+  max-width: 25vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.containerChip {
+  width: 107px;
+  height: 28px;
+  border-radius: 14px;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.labelDate {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: 500;
+  font-size: 12px;
+  text-align: left;
+  color: #321d48;
+  opacity: 0.55;
+}
+
+.containerInfo {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rowInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.labelData {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: normal;
+  font-size: 15px;
+  text-align: left;
+  color: #321d48;
+}
+
+.containerFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.labelData b, .containerChip {
+  margin-left: 15px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .containerSurvey {
+    width: 42vw;
+  }
+  .containerInfo {
+    margin-top: 10px;
+  }
+  .rowInfo {
+    margin-bottom: 3px;
+  }
+}
+
+/*# sourceMappingURL=SurveyCard.module.css.map */

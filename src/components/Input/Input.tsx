@@ -60,7 +60,6 @@ const Input = ({
 
     const handleKeyDown = (event: any) => {
         if (event.key === 'Enter' && onKeyDown) {
-            console.log('Event: ', event)
             onKeyDown(event.target.value)
         }
     }

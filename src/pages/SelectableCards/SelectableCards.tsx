@@ -512,7 +512,6 @@ const SelectableCards = ({ code, callback }: SelectableCardsProps) => {
     }
 
     const handleSelectedAccount = (account: any) => {
-        console.log({ account })
         setSelectAccount(account)
     }
 

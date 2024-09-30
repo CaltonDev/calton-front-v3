@@ -74,6 +74,9 @@ import UploadSvg from './SvgIcons/UploadSvg'
 import InfoIconSvg from './SvgIcons/InfoIconSvg'
 import QuestionIconSvg from './SvgIcons/QuestionIconSvg'
 import SurveyIconSvg from './SvgIcons/SurveyIconSvg'
+import CheckmarkSvg from './SvgIcons/CheckmarkSvg'
+import PeopleSvg from './SvgIcons/PeopleSvg'
+import EyeSvg from './SvgIcons/EyeSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -398,6 +401,24 @@ const SvgWrapper = ({
                     <QuestionIconSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'surveyIconSvg' ? (
                     <SurveyIconSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'checkmarkSvg' ? (
+                    <CheckmarkSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'peopleSvg' ? (
+                    <PeopleSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'eyeSvg' ? (
+                    <EyeSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : (
                     <></>
                 )}

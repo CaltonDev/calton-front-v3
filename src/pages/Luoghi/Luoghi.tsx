@@ -13,6 +13,7 @@ function Luoghi() {
         getNoCodeFromPlatfrom(),
         true
     )?.data
+
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,

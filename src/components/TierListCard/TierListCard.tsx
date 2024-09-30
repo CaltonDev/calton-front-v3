@@ -4,17 +4,17 @@ import styles from './TierListCard.module.scss'
 import Typography from '../Typography/Typography'
 import { useTranslation } from 'react-i18next'
 import { TierListCardProps } from './TierListCard.interface'
-function TierListCard({ tierList }: TierListCardProps) {
+function TierListCard({ tierList, label }: TierListCardProps) {
     const { t } = useTranslation()
 
     return (
         <div className={styles.container}>
             <div className={styles.headerContainer}>
-                <Typography size={'h6'} weight={'bold'}>
+                <Typography size={'h5'} weight={'bold'}>
                     {t('Top 3')}
                 </Typography>
-                <Typography size={'h6'} weight={'normal'}>
-                    {t('dei canali con più recensioni')}
+                <Typography size={'h5'} weight={'normal'}>
+                    {label}
                 </Typography>
             </div>
             <div className={styles.tierListContainer}>

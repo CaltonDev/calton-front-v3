@@ -5,4 +5,5 @@ type TrackerObj = {
 }
 export interface TrackerCardProps {
     data: TrackerObj[]
+    maxHeight?: boolean
 }

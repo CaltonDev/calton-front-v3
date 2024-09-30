@@ -481,7 +481,13 @@ export default function CustomAutocomplete({
                                         ></div>
                                     )}
                                     {multiple && (
-                                        <div className={stylesS.inputContainer}>
+                                        <div
+                                            className={
+                                                displayType === 'filter'
+                                                    ? stylesS.inputContainerFilter
+                                                    : stylesS.inputContainer
+                                            }
+                                        >
                                             <div
                                                 className={
                                                     stylesS.headerContainer
@@ -523,25 +529,31 @@ export default function CustomAutocomplete({
                                                         },
                                                     ]}
                                                 />
-                                                <div
-                                                    className={
-                                                        stylesS.headerBtnContainer
-                                                    }
-                                                >
-                                                    <Button
-                                                        size={'small'}
-                                                        variant={'ghost'}
-                                                        onClick={handleReset}
+                                                {displayType !== 'filter' && (
+                                                    <div
+                                                        className={
+                                                            stylesS.headerBtnContainer
+                                                        }
                                                     >
-                                                        {t('Reset')}
-                                                    </Button>
-                                                    <Button
-                                                        size={'small'}
-                                                        onClick={handleSubmit}
-                                                    >
-                                                        {t('Applica')}
-                                                    </Button>
-                                                </div>
+                                                        <Button
+                                                            size={'small'}
+                                                            variant={'ghost'}
+                                                            onClick={
+                                                                handleReset
+                                                            }
+                                                        >
+                                                            {t('Reset')}
+                                                        </Button>
+                                                        <Button
+                                                            size={'small'}
+                                                            onClick={
+                                                                handleSubmit
+                                                            }
+                                                        >
+                                                            {t('Applica')}
+                                                        </Button>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     )}

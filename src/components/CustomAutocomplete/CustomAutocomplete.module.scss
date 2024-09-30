@@ -93,7 +93,8 @@
   flex-direction: column;
   color: #888eff !important;
   font-family: "Montserrat", "Heebo", sans-serif !important;
-  height: 45px;
+  height: auto;
+  min-height: 45px;
 }
 .myLiCore {
   display: flex;
@@ -360,6 +361,11 @@
   flex-shrink: 0;
   background: var(--Neutral-200, #E9E7EC);
   padding: 13px 28px;
+}
+
+.inputContainerFilter {
+  @extend .inputContainer;
+  height: auto;
 }
 
 .inputCustomAutocompleteHeader {

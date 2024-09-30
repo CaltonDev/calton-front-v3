@@ -9,9 +9,21 @@
   height: 100%;
 }
 
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .contentDiv {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 120px;
+}
+
+.contentDivMaxHeight {
+  @extend .contentDiv;
+  height: 175px;
+  width: 100%;
 }

@@ -1,0 +1,66 @@
+
+.containerSurvey{
+  display: flex;
+  border-radius: 10px;
+  background: #FFF;
+  padding: 35px 40px;
+  //width: 551px;
+  height: 280px;
+  flex-shrink: 0;
+}
+
+.typographyNumberDiv {
+  margin-left: 25px;
+}
+
+.containerColumn{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 30px;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 25%;
+}
+
+.labelContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.containerInfo{
+  display: flex;
+  flex-direction: row;
+}
+
+.progessBarTypography {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 75%;
+}
+
+.containerFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

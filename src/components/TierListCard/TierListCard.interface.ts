@@ -5,4 +5,5 @@ interface TierListFields {
 
 export interface TierListCardProps {
     tierList: TierListFields[]
+    label: string
 }

@@ -412,7 +412,10 @@ function Reviews() {
                         <TrackerCard data={trackerData} />
                     </div>
                     <div className={styles.itemContainer}>
-                        <TierListCard tierList={tierList} />
+                        <TierListCard
+                            tierList={tierList}
+                            label={t('dei canali con più recensioni')}
+                        />
                     </div>
                 </div>
                 <div className={styles.navigatorRow}>

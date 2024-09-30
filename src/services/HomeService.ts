@@ -279,7 +279,7 @@ function getSourcesHome(
         fromHome,
     }
     return useQuery<any, Error>(
-        ['sourcesHome', 'sourcesHomeId'],
+        ['sourcesHome', allFilters],
         () =>
             apiService.apiSource.post(
                 '/getSourcesFiltered',

@@ -754,7 +754,6 @@ async function wrapperGetFeedbacks(
     t
 ) {
     try {
-        console.log('Adas')
         const response = FeedbackService.getFeedbacks(
             undefined,
             allFilters,
@@ -771,7 +770,6 @@ async function wrapperGetFeedbacks(
             undefined,
             undefined
         )
-        console.log('Response: ', response)
         if (response.data) {
             return response
         } else {
