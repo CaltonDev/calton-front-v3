@@ -238,6 +238,35 @@ function getHours(
     return apiService.apiListings.post('/getHours', body, getHeaders())
 }
 
+function getHoursData(
+    listingsName: any[] = [],
+    skip = 0,
+    limit = 15,
+    returnAnt = true,
+    code: any[] = [6],
+    isSingle = true,
+    nextPageToken = null
+) {
+    console.log('test')
+
+    return useQuery<any, Error>(
+        ['hoursData'],
+        () =>
+            getHours(
+                listingsName,
+                skip,
+                limit,
+                returnAnt,
+                code,
+                isSingle,
+                nextPageToken
+            ),
+        {
+            staleTime: 0,
+        }
+    )
+}
+
 function getSpecialHours(
     listingsName: any[] = [],
     code: any[] = [6],
@@ -542,6 +571,7 @@ const ListingService = {
     updateListing,
     getCategoriesList,
     getHours,
+    getHoursData,
     getSpecialHours,
     getMoreHours,
     getPerformance,
