@@ -57,8 +57,9 @@ const AddFonti = lazy(() => import('../pages/AddFonti/AddFonti'))
 const SmartResponseEdit = lazy(
     () => import('../pages/SmartResponseEdit/SmartResponsesEdit')
 )
-const UploadFonti = lazy(() => import('../pages/UploadFonti/UploadFonti'))
+// const UploadFonti = lazy(() => import('../pages/UploadFonti/UploadFonti'))
 const Topic = lazy(() => import('../pages/Topic/Topic'))
+const Hours = lazy(() => import('../pages/Hours/Hours'))
 const SelectableCards = lazy(
     () => import('../pages/SelectableCards/SelectableCards')
 )
@@ -137,9 +138,9 @@ export const objRoutes = {
         path: 'analisiavanzata',
         component: Topic,
     },
-    UploadFonti: {
+    Hours: {
         path: 'hours',
-        component: UploadFonti,
+        component: Hours,
     },
     SelectableCards: {
         path: 'chooseLocations',
