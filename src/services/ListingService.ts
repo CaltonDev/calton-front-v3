@@ -247,8 +247,6 @@ function getHoursData(
     isSingle = true,
     nextPageToken = null
 ) {
-    console.log('test')
-
     return useQuery<any, Error>(
         ['hoursData'],
         () =>
@@ -468,11 +466,11 @@ function completeListingVerification(listingName: any, pin: any) {
 }
 
 function getLocalPosts(
+    viewBy: any,
     listingsName: any[] = [],
     skip = 0,
     limit = 15,
     returnAnt = false,
-    viewBy: any,
     nextPageToken: any = null,
     postsName: any[] = [],
     postsHash: any[] = [],
@@ -482,11 +480,11 @@ function getLocalPosts(
     fromCalendar = false
 ) {
     const body: ListingServiceBody = {
-        returnAnt,
+        viewBy,
         listingsName,
         skip,
         limit,
-        viewBy,
+        returnAnt,
         nextPageToken,
         postsName,
         postsHash,
@@ -499,6 +497,44 @@ function getLocalPosts(
         '/getLocalPostsFromDb',
         body,
         getHeaders()
+    )
+}
+
+function getLocalPostsData(
+    viewBy: any = 'listing',
+    listingsName: any[] = [],
+    skip = 0,
+    limit = 15,
+    returnAnt = true,
+    nextPageToken: any = null,
+    postsName: any[] = [],
+    postsHash: any[] = [],
+    returnLocations = false,
+    startDate: any = null,
+    endDate: any = null,
+    fromCalendar = false
+) {
+    return useQuery<any, Error>(
+        ['localPostsData', viewBy],
+        () =>
+            getLocalPosts(
+                viewBy,
+                listingsName,
+                skip,
+                limit,
+                returnAnt,
+                nextPageToken,
+                postsName,
+                postsHash,
+                returnLocations,
+                startDate,
+                endDate,
+                fromCalendar
+            ),
+        {
+            staleTime: 0,
+            keepPreviousData: true,
+        }
     )
 }
 
@@ -591,6 +627,7 @@ const ListingService = {
     completeListingVerification,
     deleteDuplicateListing,
     getLocalPosts,
+    getLocalPostsData,
     getNumberOfItems,
     getPostsGroupedByStatus,
     getListingsFromPost,

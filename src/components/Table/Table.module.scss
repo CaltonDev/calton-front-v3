@@ -1,145 +1,153 @@
 @import '@Style/app';
 
 .container {
-  display: flex;
-  flex-direction: column;
-  border-radius: 26px;
-  height: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    border-radius: 26px;
+    height: calc(100% - 40px);
 }
 
 .containerReverse {
-  @extend .container;
-  flex-direction: column-reverse;
+    @extend .container;
+    flex-direction: column-reverse;
 }
 
 .columnsMenu {
-  position: absolute;
-  top: 285px;
-  left: 105px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  //align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background: white;
-  z-index: 1000;
-  border-radius: 10px;
-  box-shadow: 6px 3px 20px 0px rgba(50, 29, 72, 0.15);
+    position: absolute;
+    top: 285px;
+    left: 105px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 6px 3px 20px 0px rgba(50, 29, 72, 0.15);
 }
 
 .header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .headerReverse {
-  @extend .header;
-  justify-content: end;
-  margin-top: 10px;
+    @extend .header;
+    justify-content: end;
+    margin-top: 10px;
 }
 
 .tableContainer {
-  overflow-x: auto;
-  margin-top: 20px;
+    overflow-x: auto;
+    margin-top: 20px;
 }
 
 .tableSizeSelectorContainer {
-  display: flex;
-  flex-direction: row;
-  border-radius: 10px;
-  border: 2px solid #321D48;
-  height: 44px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    border: 2px solid #321d48;
+    height: 44px;
+}
+
+.tableCustomToggleButtonContainer {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    border: 2px solid #321d48;
+    height: 44px;
 }
 
 .headerBtn {
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }
 
 .textContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    cursor: pointer;
 }
 
 .rowSelectionContainer {
-  display: inline-flex;
-  height: 44px;
-  padding: 0px 10px;
-  align-items: center;
-  flex-shrink: 0;
-  gap: 10px;
-  border-radius: 10px;
-  border: 2px solid #321D48;
-  background: #FFF;
+    display: inline-flex;
+    height: 44px;
+    padding: 0px 10px;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 10px;
+    border-radius: 10px;
+    border: 2px solid #321d48;
+    background: #fff;
 }
 
 .menuRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 215px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-bottom: 2px dotted #C0BBC5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 215px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 2px dotted #c0bbc5;
 }
 
 .menuIconsContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .table {
-  width: 100%;
-  border-radius: 10px;
-  gap: 3px;
+    width: 100%;
+    border-radius: 10px;
+    gap: 3px;
 }
 
 .th {
-  cursor: pointer;
-  padding: 16px 24px;
-  gap: 10px;
-  background: var(--Neutral-200, #E9E7EC);
+    cursor: pointer;
+    padding: 16px 24px;
+    gap: 10px;
+    background: var(--Neutral-200, #e9e7ec);
 
-  color: var(--Neutral-900, #321D48);
+    color: var(--Neutral-900, #321d48);
 
-  /* Body02/Bold */
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 125%; /* 20px */
-  text-align: start;
+    /* Body02/Bold */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 125%; /* 20px */
+    text-align: start;
 }
 
 .tdLarge {
-  padding: 16px 24px;
-  gap: 10px;
-  align-self: stretch;
-  background: #FFF;
+    padding: 16px 24px;
+    gap: 10px;
+    align-self: stretch;
+    background: #fff;
 
-  color: var(--Neutral-900, #321D48);
-  /* Body02/regular */
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 125%; /* 20px */
+    color: var(--Neutral-900, #321d48);
+    /* Body02/regular */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 125%; /* 20px */
 
-  text-align: start;
+    text-align: start;
 }
 
 .tdSmall {
-  @extend .tdLarge;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 200px;
+    @extend .tdLarge;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }

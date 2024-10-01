@@ -49,6 +49,7 @@ const Table = ({
     bottomNavigator = false,
     pagination,
     setPagination,
+    customToggleButton = undefined,
 }: TableProps) => {
     const { t } = useTranslation()
     const [tableSize, setTableSize] = useState('small')
@@ -337,6 +338,74 @@ const Table = ({
                                 </Typography>
                             </div>
                         </div>
+                        {customToggleButton && (
+                            <div
+                                className={
+                                    styles.tableCustomToggleButtonContainer
+                                }
+                            >
+                                <div
+                                    className={styles.textContainer}
+                                    onClick={() =>
+                                        customToggleButton.handleToggle(true)
+                                    }
+                                    style={{
+                                        background:
+                                            customToggleButton.currentState ===
+                                            customToggleButton.leftValue.value
+                                                ? 'black'
+                                                : 'white',
+                                        borderTopLeftRadius:
+                                            tableSize === 'large' ? 5 : 10,
+                                        borderBottomLeftRadius:
+                                            tableSize === 'large' ? 5 : 10,
+                                    }}
+                                >
+                                    <Typography
+                                        size={'bodyMedium'}
+                                        weight={'normal'}
+                                        customTextColor={
+                                            customToggleButton.currentState ===
+                                            customToggleButton.leftValue.value
+                                                ? 'white'
+                                                : 'black'
+                                        }
+                                    >
+                                        {t(customToggleButton.leftValue.label)}
+                                    </Typography>
+                                </div>
+                                <div
+                                    className={styles.textContainer}
+                                    onClick={() =>
+                                        customToggleButton.handleToggle(false)
+                                    }
+                                    style={{
+                                        background:
+                                            customToggleButton.currentState ===
+                                            customToggleButton.rightValue.value
+                                                ? 'black'
+                                                : 'white',
+                                        borderTopRightRadius:
+                                            tableSize === 'small' ? 5 : 10,
+                                        borderBottomRightRadius:
+                                            tableSize === 'small' ? 5 : 10,
+                                    }}
+                                >
+                                    <Typography
+                                        size={'bodyMedium'}
+                                        weight={'normal'}
+                                        customTextColor={
+                                            customToggleButton.currentState ===
+                                            customToggleButton.rightValue.value
+                                                ? 'white'
+                                                : 'black'
+                                        }
+                                    >
+                                        {t(customToggleButton.rightValue.label)}
+                                    </Typography>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
                 <PageNavigator
