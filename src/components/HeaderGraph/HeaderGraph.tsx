@@ -120,7 +120,7 @@ function HeaderGraph({
                                 {' '}
                                 <img
                                     src={settings}
-                                    alt="Settings"
+                                    alt="Surveys"
                                     style={{
                                         width: 25,
                                         marginRight: 10,

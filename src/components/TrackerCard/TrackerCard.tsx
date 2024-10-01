@@ -21,7 +21,7 @@ function TrackerCard({ data, maxHeight = false }: TrackerCardProps) {
                                 {obj.label}
                             </Typography>
                             <Typography size={'h2'} weight={'light'}>
-                                {obj.value.toString()}
+                                {obj.displayLabel}
                             </Typography>
                         </div>
                         <div className={styles.progressBar}>

@@ -386,11 +386,13 @@ function Reviews() {
     const trackerData = [
         {
             label: t('Percentuale risposte'),
+            displayLabel: '5463',
             value: 5463,
             total: 15000,
         },
         {
             label: t('Percentuale di risposta'),
+            displayLabel: (5463 * 100) / 15000 + '%',
             value: (5463 * 100) / 15000,
             total: 15000,
         },

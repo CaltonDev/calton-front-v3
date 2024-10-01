@@ -9,6 +9,7 @@ import AddAccountForm from '../Forms/AddAccountForm/AddAccountForm'
 import { FormikProps } from 'formik'
 import { AddAccountFormData } from '../Forms/AddAccountForm/AddAccountForm.interface'
 import AddGroupsForm from '../Forms/AddGroupsForm/AddGroupsForm'
+import AddSurveyForm from '../Forms/AddSurveyForm/AddSurveyForm'
 const SettingsFieldsContainer = ({
     data,
     type,
@@ -22,7 +23,9 @@ const SettingsFieldsContainer = ({
               ? t('Crea nuovo gruppo')
               : type === 'report'
                 ? t('Crea nuovo report')
-                : type === t('Aggiungi smart response')
+                : type === 'surveys'
+                  ? t('Crea nuovo sondaggio')
+                  : type === t('Aggiungi smart response')
     const [isOnEdit, setIsOnEdit] = useState(false)
     const formRef = useRef<FormikProps<any>>(null)
 
@@ -39,14 +42,29 @@ const SettingsFieldsContainer = ({
         <div className={styles.container}>
             <div className={styles.header}>
                 <Typography size={'bodyBig'} weight={'bold'} color={'black'}>
-                    {isNew ? newDataTitle : data?.title}
+                    {type === 'surveys'
+                        ? t('Anteprima')
+                        : isNew
+                          ? newDataTitle
+                          : data?.title}
                 </Typography>
                 <div
                     className={
                         isNew ? styles.btnContainer : styles.iconsContainer
                     }
                 >
-                    {isOnEdit ? (
+                    {type === 'surveys' ? (
+                        <>
+                            <SvgWrapper keySvg={'shareIcon'} color={'black'} />
+                            <SvgWrapper keySvg={'copyIcon'} color={'black'} />
+                            <SvgWrapper
+                                keySvg={'editIcon'}
+                                color={'black'}
+                                onClick={() => setIsOnEdit(true)}
+                            />
+                            <SvgWrapper keySvg={'trashIcon'} color={'black'} />
+                        </>
+                    ) : isOnEdit ? (
                         <>
                             <Button
                                 variant={'outline'}
@@ -75,24 +93,30 @@ const SettingsFieldsContainer = ({
                     )}
                 </div>
             </div>
-            <div className={styles.body}>
-                {type === 'account' ? (
-                    <AddAccountForm
+
+            {type === 'account' ? (
+                <AddAccountForm
+                    formData={formData}
+                    formRef={formRef}
+                    isOnEdit={isOnEdit}
+                />
+            ) : type === 'gruppi' ? (
+                <AddGroupsForm
+                    formData={formData}
+                    formRef={formRef}
+                    isNew={isNew}
+                    isOnEdit={isOnEdit}
+                />
+            ) : (
+                type === 'surveys' && (
+                    <AddSurveyForm
                         formData={formData}
                         formRef={formRef}
+                        isNew={isNew}
                         isOnEdit={isOnEdit}
                     />
-                ) : (
-                    type === 'gruppi' && (
-                        <AddGroupsForm
-                            formData={formData}
-                            formRef={formRef}
-                            isNew={isNew}
-                            isOnEdit={isOnEdit}
-                        />
-                    )
-                )}
-            </div>
+                )
+            )}
         </div>
     )
 }

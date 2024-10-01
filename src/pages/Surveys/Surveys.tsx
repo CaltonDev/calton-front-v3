@@ -1,44 +1,21 @@
-import styles from './Settings.module.scss'
+import styles from './Surveys.module.scss'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Typography from '../../components/Typography/Typography'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import CardSelection from '../../components/CardSelection/CardSelection'
-import { SectionDataType, SectionType } from './Settings.interface'
+import { SectionDataType, SectionType } from './Surveys.interface'
 import SettingsFieldsContainer from '../../components/SettingsFieldsContainer/SettingsFieldsContainer'
+import { PaginationState } from '@tanstack/react-table'
+import PageNavigator from '../../components/PageNavigator/PageNavigator'
 
-function Settings() {
+function Surveys() {
     const { t } = useTranslation()
-    const [activeSection, setActiveSection] = useState<SectionType>({
-        index: 0,
-        type: 'account',
-    })
 
-    const [selectedCard, setSelectedCard] = useState(0)
-
-    const sectionData: SectionDataType[] = [
-        {
-            key: 'account',
-            label: t('Gestisci account'),
-            displayLabel: t('account'),
-        },
-        {
-            key: 'smart_response',
-            label: t('Smart response'),
-            displayLabel: t('smart response'),
-        },
-        {
-            key: 'gruppi',
-            label: t('Gestisci gruppi'),
-            displayLabel: t('gruppo'),
-        },
-        {
-            key: 'report',
-            label: t('Gestitsci report'),
-            displayLabel: t('report'),
-        },
-    ]
+    const [selectedCard, setSelectedCard] = useState(-2)
 
     const data = [
         {
@@ -71,55 +48,73 @@ function Settings() {
         },
     ]
 
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    })
+
+    const changePage = (direction: any) => {
+        if (direction === 'next') {
+            setPagination({
+                pageIndex: pagination.pageIndex + 1,
+                pageSize: pagination.pageSize,
+            })
+        } else if (direction === 'previous') {
+            setPagination({
+                pageIndex: pagination.pageIndex - 1,
+                pageSize: pagination.pageSize,
+            })
+        } else {
+            const number = Number(direction)
+            //TODO: we need to paginate the api
+            /* if (
+                number > 0 &&
+                number <= Math.ceil(surveys?.countFeed / pagination.pageSize)
+            ) {
+                setPagination({
+                    pageIndex: number - 1,
+                    pageSize: pagination.pageSize,
+                })
+            } else {
+                setPagination({
+                    pageIndex: 0,
+                    pageSize: pagination.pageSize,
+                })
+            }*/
+        }
+    }
+
+    const changeElementsPerPage = (e: any) => {
+        setPagination({
+            pageIndex: 0,
+            pageSize: e.value,
+        })
+    }
+
     return (
         <PageContainer>
             <PageHeader
-                heading={t('Impostazioni')}
+                heading={t('Sondaggi')}
                 subheading={true}
                 hideFilters={true}
             ></PageHeader>
             <div className={styles.container}>
-                <div className={styles.header}>
-                    <div className={styles.leftItemContainer}>
-                        {sectionData?.map((obj, idx) => {
-                            return (
-                                <div
-                                    key={obj?.key}
-                                    onClick={() =>
-                                        setActiveSection({
-                                            index: idx,
-                                            type: obj?.key,
-                                        })
-                                    }
-                                    className={
-                                        idx === activeSection.index
-                                            ? styles.headerLabelContainer
-                                            : styles.headerLabelContainerDisabled
-                                    }
-                                >
-                                    <Typography
-                                        size={'bodyBig'}
-                                        weight={'normal'}
-                                        color={
-                                            idx === activeSection.index
-                                                ? 'settings'
-                                                : 'grey'
-                                        }
-                                    >
-                                        {obj?.label}
-                                    </Typography>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
                 <div className={styles.body}>
                     <div className={styles.contentDiv}>
+                        <div className={styles.pageNavigatorContainer}>
+                            <PageNavigator
+                                pageElements={pagination.pageSize}
+                                totalElements={data?.length}
+                                currentPage={pagination.pageIndex}
+                                changePage={changePage}
+                                changeElementsPerPage={changeElementsPerPage}
+                            />
+                        </div>
                         <CardSelection
                             data={data}
                             setSelectedCard={setSelectedCard}
                             activeCard={selectedCard}
-                            title={t('Crea nuovo report')}
+                            title={t('Crea nuovo sondaggio')}
                         />
                     </div>
 
@@ -133,7 +128,7 @@ function Settings() {
                         {selectedCard !== -2 ? (
                             <SettingsFieldsContainer
                                 data={data[selectedCard]}
-                                type={activeSection.type}
+                                type={'surveys'}
                                 isNew={selectedCard === -1}
                             />
                         ) : (
@@ -152,10 +147,7 @@ function Settings() {
                                             weight={'bold'}
                                             useSpan={true}
                                         >
-                                            {
-                                                sectionData[activeSection.index]
-                                                    ?.key
-                                            }
+                                            {t('sondaggio')}
                                         </Typography>
                                         <Typography
                                             size={'h4'}
@@ -218,4 +210,4 @@ function Settings() {
     )
 }
 
-export default Settings
+export default Surveys

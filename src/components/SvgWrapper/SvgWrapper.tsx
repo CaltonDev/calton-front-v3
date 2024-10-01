@@ -77,6 +77,8 @@ import SurveyIconSvg from './SvgIcons/SurveyIconSvg'
 import CheckmarkSvg from './SvgIcons/CheckmarkSvg'
 import PeopleSvg from './SvgIcons/PeopleSvg'
 import EyeSvg from './SvgIcons/EyeSvg'
+import CopySvg from './SvgIcons/CopySvg'
+import ShareSvg from './SvgIcons/ShareSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -322,6 +324,8 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'hours.svg' ? (
                     <HoursSvg
+                        width={iconWidth}
+                        height={iconHeight}
                         fillColor={iconColor}
                         svgBackgroundColor={svgBackgroundColor}
                     />
@@ -352,11 +356,20 @@ const SvgWrapper = ({
                 ) : keySvg === 'reply.svg' ? (
                     <ReplySvg fillColor={iconColor} />
                 ) : keySvg === 'negativeSentiment.svg' ? (
-                    <NegativeSentimentIcon />
+                    <NegativeSentimentIcon
+                        width={iconWidth}
+                        height={iconHeight}
+                    />
                 ) : keySvg === 'neutralSentiment.svg' ? (
-                    <NeutralSentimentIcon />
+                    <NeutralSentimentIcon
+                        width={iconWidth}
+                        height={iconHeight}
+                    />
                 ) : keySvg === 'positiveSentiment.svg' ? (
-                    <PositiveSentimentIcon />
+                    <PositiveSentimentIcon
+                        width={iconWidth}
+                        height={iconHeight}
+                    />
                 ) : keySvg === 'sendIcon.svg' ? (
                     <SendIconSvg />
                 ) : keySvg === 'rowSelection.svg' ? (
@@ -383,6 +396,18 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'trashIcon' ? (
                     <TrashSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'copyIcon' ? (
+                    <CopySvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'shareIcon' ? (
+                    <ShareSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}

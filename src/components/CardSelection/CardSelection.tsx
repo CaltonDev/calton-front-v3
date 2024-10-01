@@ -6,13 +6,11 @@ import TextContainer from '../TextContainer/TextContainer'
 import { useTranslation } from 'react-i18next'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 const CardSelection = ({
+    title,
     data,
-    type,
     setSelectedCard,
     activeCard,
 }: CardSelectionProps) => {
-    const { t } = useTranslation()
-
     const handleCardSelection = (idx: number) => {
         if (setSelectedCard) setSelectedCard(idx)
     }
@@ -28,7 +26,7 @@ const CardSelection = ({
                 onClick={() => handleCardSelection(-1)}
             >
                 <Typography size={'bodyBig'} weight={'bold'} color={'blue'}>
-                    {t('Crea nuovo report')}
+                    {title}
                 </Typography>
                 <SvgWrapper keySvg={'plusIcon'} color={'secondary'} />
             </div>

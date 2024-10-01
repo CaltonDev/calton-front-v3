@@ -6,6 +6,10 @@ import { useTranslation } from 'react-i18next'
 import FilterService from '../../services/FilterService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 import { PaginationState } from '@tanstack/react-table'
+import FeedbackService from '../../services/FeedbackService'
+import { useSelector } from 'react-redux'
+import { selectAllFilters } from '../../store/selectors/selectorsSlice'
+import { RootState } from '../../store/store'
 
 function Luoghi() {
     const { t } = useTranslation()

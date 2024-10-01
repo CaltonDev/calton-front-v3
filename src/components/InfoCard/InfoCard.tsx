@@ -5,9 +5,13 @@ import Typography from '../Typography/Typography'
 import { useTranslation } from 'react-i18next'
 import { InfoCardProps } from './InfoCard.interface'
 
-function InfoCard({ value, label, icon }: InfoCardProps) {
-    const { t } = useTranslation()
-
+function InfoCard({
+    value,
+    label,
+    icon,
+    iconColor,
+    backgroundIconColor,
+}: InfoCardProps) {
     return (
         <div className={styles.container}>
             <div className={styles.contentDiv}>
@@ -18,10 +22,13 @@ function InfoCard({ value, label, icon }: InfoCardProps) {
                             hasContainer: true,
                             containerSize: 60,
                             outlined: false,
-                            background: '#EEDFFF',
+                            background: backgroundIconColor
+                                ? backgroundIconColor
+                                : '#EEDFFF',
                         }}
                         customWidth={40}
                         customHeight={40}
+                        customColor={iconColor}
                     />
                     <SvgWrapper
                         keySvg={'infoIconSvg'}
@@ -34,7 +41,7 @@ function InfoCard({ value, label, icon }: InfoCardProps) {
                         {label}
                     </Typography>
                     <Typography size={'h2'} weight={'light'}>
-                        {value.toString()}
+                        {value ? value.toString() : ''}
                     </Typography>
                 </div>
             </div>

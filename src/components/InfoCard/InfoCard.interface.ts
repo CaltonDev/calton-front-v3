@@ -1,5 +1,7 @@
 export interface InfoCardProps {
-    value: number
+    value?: number
     label: string
     icon: string
+    iconColor?: string
+    backgroundIconColor?: string
 }

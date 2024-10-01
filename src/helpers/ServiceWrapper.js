@@ -558,7 +558,7 @@ async function wrapperGetMenusRedux(dispatch) {
 }
 //endregion
 
-//region Settings
+//region Surveys
 
 async function wrappeGetProductsService(dispatch, platformType, t) {
     try {

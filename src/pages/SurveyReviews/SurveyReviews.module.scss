@@ -1,0 +1,36 @@
+.container {
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.leftItemContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.line {
+  height: 3px;
+  background: #C0BBC5;
+}
+
+.lineSelected {
+  @extend .line;
+  background: #B57DFA;
+}
+
+.headerLabelContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

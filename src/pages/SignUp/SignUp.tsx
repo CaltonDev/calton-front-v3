@@ -291,7 +291,7 @@ function Login() {
                                             arrowPlacement={'left'}
                                             icon={'Google.svg'}
                                         >
-                                            {t('Settings con Google')}
+                                            {t('Surveys con Google')}
                                         </Button>
                                     </Form>
                                 )

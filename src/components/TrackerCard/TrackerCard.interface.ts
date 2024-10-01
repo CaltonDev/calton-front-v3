@@ -1,5 +1,6 @@
 type TrackerObj = {
     label: string
+    displayLabel: string
     value: number
     total: number
 }

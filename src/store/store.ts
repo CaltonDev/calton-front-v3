@@ -38,7 +38,7 @@ import { combineReducers } from '@reduxjs/toolkit'
 /*
 export interface StoreState {
         user: userSlice,
-        Settings: settingsSlice,
+        Surveys: settingsSlice,
         AverageReviewByTime: averageReviewByTimeSlice,
         AverageVotoByTime: averageVotoByTimeSlice,
         AverageSentimentByTime: averageSentimentByTimeSlice,

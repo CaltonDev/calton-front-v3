@@ -1,0 +1,19 @@
+.container {
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.leftItemContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -153,7 +153,7 @@ function CardSurvey({
                             {t('Tasso di completamente')}
                         </Typography>
                         <Typography size={'bodyMedium'} weight={'bold'}>
-                            {completition.toString() + ' %'}
+                            {completition?.toString() + ' %'}
                         </Typography>
                     </div>
                     <div>

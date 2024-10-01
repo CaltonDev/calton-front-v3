@@ -40,7 +40,7 @@ function Layout() {
     const [compId, setCompId] = useState(sessionStorage.getItem('unique'))
     const dispatch = useDispatch()
     const showNumbers = useSelector(
-        (state: RootState) => state.Settings.showNumbers
+        (state: RootState) => state.Surveys.showNumbers
     )
     const { t } = useTranslation()
     const socketMessage = useSelector(
@@ -53,7 +53,7 @@ function Layout() {
     const location = useLocation()
     const routes = useSelector((state: RootState) => state?.User?.routes)
     const platformType = useSelector(
-        (state: RootState) => state.Settings.platformType
+        (state: RootState) => state.Surveys.platformType
     )
     useEffect(() => {
         dispatch(resetUploadPhotos())
