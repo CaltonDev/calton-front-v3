@@ -31,7 +31,6 @@ function Hours() {
         return formatedItem
     })
 
-    // debugger
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,
