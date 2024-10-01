@@ -355,10 +355,8 @@ const Table = ({
                                             customToggleButton.leftValue.value
                                                 ? 'black'
                                                 : 'white',
-                                        borderTopLeftRadius:
-                                            tableSize === 'large' ? 5 : 10,
-                                        borderBottomLeftRadius:
-                                            tableSize === 'large' ? 5 : 10,
+                                        borderTopLeftRadius: 7,
+                                        borderBottomLeftRadius: 7,
                                     }}
                                 >
                                     <Typography
@@ -385,10 +383,8 @@ const Table = ({
                                             customToggleButton.rightValue.value
                                                 ? 'black'
                                                 : 'white',
-                                        borderTopRightRadius:
-                                            tableSize === 'small' ? 5 : 10,
-                                        borderBottomRightRadius:
-                                            tableSize === 'small' ? 5 : 10,
+                                        borderTopRightRadius: 7,
+                                        borderBottomRightRadius: 7,
                                     }}
                                 >
                                     <Typography

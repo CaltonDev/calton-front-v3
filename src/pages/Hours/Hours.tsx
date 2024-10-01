@@ -5,10 +5,13 @@ import PageContainer from '../../components/PageComponents/PageContainer/PageCon
 import { useTranslation } from 'react-i18next'
 import ListingService from '../../services/ListingService'
 import { PaginationState } from '@tanstack/react-table'
+import { useSelector } from 'react-redux'
+import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 
 function Hours() {
     const { t } = useTranslation()
-    const hoursData = ListingService.getHoursData()?.data
+    const { selectedLocationListing } = useSelector(selectAllFilters)
+    const hoursData = ListingService.getHoursData(selectedLocationListing)?.data
     const formatHours = (dayData: any) => {
         if (!dayData || dayData.length === 0) return ''
         const { openHours, openMinutes, closeHours, closeMinutes } = dayData[0]

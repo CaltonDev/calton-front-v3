@@ -5,11 +5,17 @@ import PageContainer from '../../components/PageComponents/PageContainer/PageCon
 import { useTranslation } from 'react-i18next'
 import ListingService from '../../services/ListingService'
 import { PaginationState } from '@tanstack/react-table'
+import { useSelector } from 'react-redux'
+import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 
 function LocalPost() {
     const { t } = useTranslation()
+    const { selectedLocationListing } = useSelector(selectAllFilters)
     const [viewBy, setViewBy] = React.useState('listing')
-    const postsData = ListingService.getLocalPostsData(viewBy)?.data
+    const postsData = ListingService.getLocalPostsData(
+        viewBy,
+        selectedLocationListing
+    )?.data
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,

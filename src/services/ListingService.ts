@@ -248,7 +248,7 @@ function getHoursData(
     nextPageToken = null
 ) {
     return useQuery<any, Error>(
-        ['hoursData'],
+        ['hoursData', listingsName],
         () =>
             getHours(
                 listingsName,
@@ -261,6 +261,7 @@ function getHoursData(
             ),
         {
             staleTime: 0,
+            keepPreviousData: true,
         }
     )
 }
@@ -515,7 +516,7 @@ function getLocalPostsData(
     fromCalendar = false
 ) {
     return useQuery<any, Error>(
-        ['localPostsData', viewBy],
+        ['localPostsData', viewBy, listingsName],
         () =>
             getLocalPosts(
                 viewBy,
