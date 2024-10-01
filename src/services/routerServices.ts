@@ -139,7 +139,7 @@ export const objRoutes = {
         path: 'analisiavanzata',
         component: Topic,
     },
-    UploadFonti: {
+    Hours: {
         path: 'hours',
         component: Hours,
     },
