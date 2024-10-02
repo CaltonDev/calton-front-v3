@@ -10,12 +10,22 @@ import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 
 function LocalPost() {
     const { t } = useTranslation()
-    const { selectedLocationListing } = useSelector(selectAllFilters)
+    const allFilters = useSelector(selectAllFilters)
     const [viewBy, setViewBy] = React.useState('listing')
-    const postsData = ListingService.getLocalPostsData(
-        viewBy,
-        selectedLocationListing
-    )?.data
+    const postsData = ListingService.getLocalPosts({
+        viewBy: viewBy,
+        listingsName: allFilters?.selectedLocationListing,
+        skip: 0,
+        limit: 15,
+        returnAnt: true,
+        nextPageToken: null,
+        postsName: [],
+        postsHash: [],
+        returnLocations: false,
+        startDate: null,
+        endDate: null,
+        fromCalendar: false,
+    })?.data
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,

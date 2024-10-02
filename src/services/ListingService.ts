@@ -217,15 +217,15 @@ function editHours(
     return apiService.apiListings.post('/editHours', body, getHeaders())
 }
 
-function getHours(
-    listingsName: any[] = [],
+function getHours({
+    listingsName = [],
     skip = 0,
     limit = 15,
     returnAnt = false,
-    code: any[] = [6],
+    code = [6],
     isSingle = true,
-    nextPageToken = null
-) {
+    nextPageToken = null,
+}: ListingServiceBody) {
     const body: ListingServiceBody = {
         listingsName,
         skip,
@@ -235,30 +235,9 @@ function getHours(
         isSingle,
         nextPageToken,
     }
-    return apiService.apiListings.post('/getHours', body, getHeaders())
-}
-
-function getHoursData(
-    listingsName: any[] = [],
-    skip = 0,
-    limit = 15,
-    returnAnt = true,
-    code: any[] = [6],
-    isSingle = true,
-    nextPageToken = null
-) {
     return useQuery<any, Error>(
-        ['hoursData', listingsName],
-        () =>
-            getHours(
-                listingsName,
-                skip,
-                limit,
-                returnAnt,
-                code,
-                isSingle,
-                nextPageToken
-            ),
+        ['hours', body],
+        () => apiService.apiListings.post('/getHours', body, getHeaders()),
         {
             staleTime: 0,
             keepPreviousData: true,
@@ -466,20 +445,20 @@ function completeListingVerification(listingName: any, pin: any) {
     )
 }
 
-function getLocalPosts(
-    viewBy: any,
-    listingsName: any[] = [],
+function getLocalPosts({
+    viewBy = 'listing',
+    listingsName = [],
     skip = 0,
     limit = 15,
     returnAnt = false,
-    nextPageToken: any = null,
-    postsName: any[] = [],
-    postsHash: any[] = [],
+    nextPageToken = null,
+    postsName = [],
+    postsHash = [],
     returnLocations = false,
-    startDate: any,
-    endDate: any,
-    fromCalendar = false
-) {
+    startDate,
+    endDate,
+    fromCalendar = false,
+}: ListingServiceBody) {
     const body: ListingServiceBody = {
         viewBy,
         listingsName,
@@ -494,43 +473,13 @@ function getLocalPosts(
         endDate,
         fromCalendar,
     }
-    return apiService.apiListings.post(
-        '/getLocalPostsFromDb',
-        body,
-        getHeaders()
-    )
-}
-
-function getLocalPostsData(
-    viewBy: any = 'listing',
-    listingsName: any[] = [],
-    skip = 0,
-    limit = 15,
-    returnAnt = true,
-    nextPageToken: any = null,
-    postsName: any[] = [],
-    postsHash: any[] = [],
-    returnLocations = false,
-    startDate: any = null,
-    endDate: any = null,
-    fromCalendar = false
-) {
     return useQuery<any, Error>(
-        ['localPostsData', viewBy, listingsName],
+        ['localPosts', body],
         () =>
-            getLocalPosts(
-                viewBy,
-                listingsName,
-                skip,
-                limit,
-                returnAnt,
-                nextPageToken,
-                postsName,
-                postsHash,
-                returnLocations,
-                startDate,
-                endDate,
-                fromCalendar
+            apiService.apiListings.post(
+                '/getLocalPostsFromDb',
+                body,
+                getHeaders()
             ),
         {
             staleTime: 0,
@@ -608,7 +557,6 @@ const ListingService = {
     updateListing,
     getCategoriesList,
     getHours,
-    getHoursData,
     getSpecialHours,
     getMoreHours,
     getPerformance,
@@ -628,7 +576,6 @@ const ListingService = {
     completeListingVerification,
     deleteDuplicateListing,
     getLocalPosts,
-    getLocalPostsData,
     getNumberOfItems,
     getPostsGroupedByStatus,
     getListingsFromPost,

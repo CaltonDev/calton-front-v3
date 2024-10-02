@@ -10,8 +10,16 @@ import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 
 function Hours() {
     const { t } = useTranslation()
-    const { selectedLocationListing } = useSelector(selectAllFilters)
-    const hoursData = ListingService.getHoursData(selectedLocationListing)?.data
+    const allFilters = useSelector(selectAllFilters)
+    const hoursData = ListingService.getHours({
+        listingsName: allFilters?.selectedLocationListing,
+        skip: 0,
+        limit: 15,
+        returnAnt: true,
+        code: [6],
+        isSingle: true,
+        nextPageToken: null,
+    })?.data
     const formatHours = (dayData: any) => {
         if (!dayData || dayData.length === 0) return ''
         const { openHours, openMinutes, closeHours, closeMinutes } = dayData[0]
