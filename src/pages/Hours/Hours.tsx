@@ -7,16 +7,20 @@ import ListingService from '../../services/ListingService'
 import { PaginationState } from '@tanstack/react-table'
 import { useSelector } from 'react-redux'
 import { selectAllFilters } from '../../store/selectors/selectorsSlice'
+import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 
 function Hours() {
     const { t } = useTranslation()
+    const [skip, setSkip] = React.useState(0)
+    const [limit, setLimit] = React.useState(10)
     const allFilters = useSelector(selectAllFilters)
+    const count = ListingService.getCountOfListings()?.data?.count
     const hoursData = ListingService.getHours({
         listingsName: allFilters?.selectedLocationListing,
-        skip: 0,
-        limit: 15,
+        skip,
+        limit,
         returnAnt: true,
-        code: [6],
+        code: getNoCodeFromPlatfrom(),
         isSingle: true,
         nextPageToken: null,
     })?.data
@@ -43,9 +47,14 @@ function Hours() {
     })
 
     const [pagination, setPagination] = React.useState<PaginationState>({
-        pageIndex: 0,
-        pageSize: 10,
+        pageIndex: skip,
+        pageSize: limit,
     })
+
+    const handleChangePagination = (pageIndex: number, pageSize: number) => {
+        setSkip(pageIndex * pageSize)
+        setLimit(pageSize)
+    }
 
     return (
         <PageContainer>
@@ -53,9 +62,11 @@ function Hours() {
             <Table
                 data={hoursDataFormated}
                 columnsData={hoursData?.columns}
-                fullyLoaded={true}
+                fullyLoaded={false}
                 pagination={pagination}
                 setPagination={setPagination}
+                fetchData={handleChangePagination}
+                totalItems={count}
             />
         </PageContainer>
     )

@@ -10,13 +10,19 @@ import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 
 function LocalPost() {
     const { t } = useTranslation()
+    const [skip, setSkip] = React.useState(0)
+    const [limit, setLimit] = React.useState(10)
     const allFilters = useSelector(selectAllFilters)
     const [viewBy, setViewBy] = React.useState('listing')
+    const count = ListingService.getCountOfItems({
+        viewBy: viewBy,
+        listingsName: allFilters?.selectedLocationListing,
+    })?.data?.count
     const postsData = ListingService.getLocalPosts({
         viewBy: viewBy,
         listingsName: allFilters?.selectedLocationListing,
-        skip: 0,
-        limit: 15,
+        skip,
+        limit,
         returnAnt: true,
         nextPageToken: null,
         postsName: [],
@@ -27,9 +33,14 @@ function LocalPost() {
         fromCalendar: false,
     })?.data
     const [pagination, setPagination] = React.useState<PaginationState>({
-        pageIndex: 0,
-        pageSize: 10,
+        pageIndex: skip,
+        pageSize: limit,
     })
+
+    const handleChangePagination = (pageIndex: number, pageSize: number) => {
+        setSkip(pageIndex * pageSize)
+        setLimit(pageSize)
+    }
 
     return (
         <PageContainer>
@@ -37,9 +48,10 @@ function LocalPost() {
             <Table
                 data={postsData?.data}
                 columnsData={postsData?.columns}
-                fullyLoaded={true}
+                fullyLoaded={false}
                 pagination={pagination}
                 setPagination={setPagination}
+                fetchData={handleChangePagination}
                 bottomNavigator={false}
                 customToggleButton={{
                     leftValue: {
@@ -55,6 +67,7 @@ function LocalPost() {
                         setViewBy(value ? 'listing' : 'post')
                     },
                 }}
+                totalItems={count}
             />
         </PageContainer>
     )

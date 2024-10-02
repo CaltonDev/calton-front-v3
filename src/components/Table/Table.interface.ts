@@ -23,4 +23,5 @@ export interface TableProps {
         currentState: string
         handleToggle: (arg?: any) => void
     }
+    totalItems?: number | undefined
 }

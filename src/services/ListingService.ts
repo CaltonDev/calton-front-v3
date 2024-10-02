@@ -106,6 +106,34 @@ function getNumberOfListings(
     )
 }
 
+function getCountOfListings(
+    listingsName: any[] = [],
+    listingStateObj: ListingServiceBody['listingStateObj'] = {
+        toVerify: null,
+        pendingVerification: null,
+        isDuplicated: null,
+        missedStoreCode: null,
+    }
+) {
+    const body: ListingServiceBody = {
+        listingsName,
+        listingStateObj,
+    }
+    return useQuery<any, Error>(
+        ['countOfListings', body],
+        () =>
+            apiService.apiListings.post(
+                '/getNumberOfListings',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+            keepPreviousData: true,
+        }
+    )
+}
+
 function updateListing(
     listingsName: any[],
     data: any,
@@ -220,7 +248,7 @@ function editHours(
 function getHours({
     listingsName = [],
     skip = 0,
-    limit = 15,
+    limit = 10,
     returnAnt = false,
     code = [6],
     isSingle = true,
@@ -449,7 +477,7 @@ function getLocalPosts({
     viewBy = 'listing',
     listingsName = [],
     skip = 0,
-    limit = 15,
+    limit = 10,
     returnAnt = false,
     nextPageToken = null,
     postsName = [],
@@ -494,6 +522,29 @@ function getNumberOfItems(listingsName: any[] = [], viewBy = 'listing') {
         viewBy,
     }
     return apiService.apiListings.post('/getNumberOfItems', body, getHeaders())
+}
+
+function getCountOfItems({
+    listingsName = [],
+    viewBy = 'listing',
+}: ListingServiceBody) {
+    const body: ListingServiceBody = {
+        listingsName,
+        viewBy,
+    }
+    return useQuery<any, Error>(
+        ['countOfItems', body],
+        () =>
+            apiService.apiListings.post(
+                '/getNumberOfItems',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+            keepPreviousData: true,
+        }
+    )
 }
 
 function getPostsGroupedByStatus(
@@ -554,6 +605,7 @@ const ListingService = {
     setAllLocations,
     getListings,
     getNumberOfListings,
+    getCountOfListings,
     updateListing,
     getCategoriesList,
     getHours,
@@ -577,6 +629,7 @@ const ListingService = {
     deleteDuplicateListing,
     getLocalPosts,
     getNumberOfItems,
+    getCountOfItems,
     getPostsGroupedByStatus,
     getListingsFromPost,
     deleteLocalPost,

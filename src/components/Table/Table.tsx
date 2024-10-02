@@ -14,7 +14,6 @@ import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import Typography from '../Typography/Typography'
 import { useTranslation } from 'react-i18next'
 import Switch from '../Switch/Switch'
-import Button from '../Button/Button'
 import Hooks from '../../utils/hooks/Hooks'
 
 function IndeterminateCheckbox({
@@ -50,6 +49,7 @@ const Table = ({
     pagination,
     setPagination,
     customToggleButton = undefined,
+    totalItems = undefined,
 }: TableProps) => {
     const { t } = useTranslation()
     const [tableSize, setTableSize] = useState('small')
@@ -110,19 +110,31 @@ const Table = ({
         setColumnVisibility(tmpColumnsVisibility)
     }, [columnsData])
 
-    const [rowSelection, setRowSelection] = React.useState({})
+    useEffect(() => {
+        if (!fullyLoaded) {
+            if (fetchData) {
+                fetchData(pagination.pageIndex, pagination.pageSize)
+            }
+        }
+    }, [pagination])
 
+    const [rowSelection, setRowSelection] = React.useState({})
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        state: {
-            pagination,
-            rowSelection,
-            columnVisibility,
-        },
+        state: fullyLoaded
+            ? {
+                  pagination,
+                  rowSelection,
+                  columnVisibility,
+              }
+            : {
+                  rowSelection,
+                  columnVisibility,
+              },
         enableRowSelection: true, //enable row selection for all rows
         onRowSelectionChange: setRowSelection,
         onColumnVisibilityChange: setColumnVisibility,
@@ -144,7 +156,11 @@ const Table = ({
             const number = Number(direction)
             if (
                 number > 0 &&
-                number <= Math.ceil(data?.length / pagination.pageSize)
+                number <=
+                    Math.ceil(
+                        (totalItems ? totalItems : data?.length) /
+                            pagination.pageSize
+                    )
             ) {
                 setPagination({
                     pageIndex: number - 1,
@@ -157,11 +173,11 @@ const Table = ({
                 })
             }
         }
-        if (!fullyLoaded) {
-            if (fetchData) {
-                fetchData(pagination.pageIndex, pagination.pageSize)
-            }
-        }
+        // if (!fullyLoaded) {
+        //     if (fetchData) {
+        //         fetchData(pagination.pageIndex, pagination.pageSize)
+        //     }
+        // }
     }
 
     const changeElementsPerPage = (e: any) => {
@@ -406,7 +422,7 @@ const Table = ({
                 )}
                 <PageNavigator
                     pageElements={pagination.pageSize}
-                    totalElements={data?.length}
+                    totalElements={totalItems ? totalItems : data?.length}
                     currentPage={pagination.pageIndex}
                     changePage={changePage}
                     changeElementsPerPage={changeElementsPerPage}
