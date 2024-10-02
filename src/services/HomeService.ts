@@ -64,7 +64,7 @@ function getDistribuzioneVoti(
     columns: any[] = [],
     returnAnt = false,
     colX: string | undefined = undefined,
-    compactValues: boolean,
+    compactValues: boolean | undefined,
     idSources: string[] | undefined = undefined
 ) {
     const {
@@ -247,7 +247,7 @@ function getSourcesHome(
     columnDateToGroup: string | null = null,
     returnAnt = true,
     fromHome = false,
-    id: string | undefined = undefined
+    id: string[] | string | undefined = undefined
 ) {
     const {
         startDate,

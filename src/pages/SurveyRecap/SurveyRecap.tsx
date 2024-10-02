@@ -1,18 +1,19 @@
 import styles from './SurveyRecap.module.scss'
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import Typography from '../../components/Typography/Typography'
-import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
-import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
-import CardSelection from '../../components/CardSelection/CardSelection'
-import { SectionDataType, SectionType } from './SurveyRecap.interface'
-import SettingsFieldsContainer from '../../components/SettingsFieldsContainer/SettingsFieldsContainer'
 import InfoCard from '../../components/InfoCard/InfoCard'
 import TrackerCard from '../../components/TrackerCard/TrackerCard'
-import TierListCard from '../../components/TierListCard/TierListCard'
+import Table from '../../components/Table/Table'
+import { PaginationState } from '@tanstack/react-table'
+import HomeService from '../../services/HomeService'
+import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
+import { useSelector } from 'react-redux'
+import { selectAllFilters } from '../../store/selectors/selectorsSlice'
+import { SurveyRecapProps } from './SurveyRecap.interface'
 
-function SurveyRecap() {
+function SurveyRecap({ id }: SurveyRecapProps) {
     const { t } = useTranslation()
+    const allFilters = useSelector(selectAllFilters)
 
     const trackerData = [
         {
@@ -22,6 +23,23 @@ function SurveyRecap() {
             total: 15000,
         },
     ]
+
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    })
+
+    const surveyData = HomeService.getSourcesHome(
+        allFilters,
+        getNoCodeFromPlatfrom(),
+        true,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        [id]
+    )?.data
+
     return (
         <div className={styles.container}>
             <div className={styles.headerContainer}>
@@ -61,6 +79,13 @@ function SurveyRecap() {
                     <TrackerCard data={trackerData} maxHeight={true} />
                 </div>
             </div>
+            <Table
+                data={surveyData?.typeformInfo?.fields || []}
+                columnsData={surveyData?.columns || []}
+                fullyLoaded={true}
+                pagination={pagination}
+                setPagination={setPagination}
+            />
         </div>
     )
 }

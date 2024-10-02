@@ -116,7 +116,6 @@ function SurveyReplies({
             data={feedbacks?.all_feed?.feedback || []}
             columnsData={feedbacks?.all_feed?.columns || []}
             fullyLoaded={true}
-            bottomNavigator={true}
             pagination={pagination}
             setPagination={setPagination}
         />

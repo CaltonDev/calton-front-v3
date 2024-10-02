@@ -1,0 +1,86 @@
+.menubtn {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+}
+
+.menubtn:hover {
+  border: 2px solid #444dde;
+  display: flex;
+}
+.menubtnO{
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  border: 2px solid #444dde;
+  display: flex;
+}
+
+.dropcontainer {
+  display: none;
+  width: 190px;
+  background-color: #f8f9fa;
+  animation: animateFromBottom .3s;
+}
+
+.dropcontainerShow {
+  display: block;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  margin-top: 10px;
+  position: absolute;
+  margin-left: -160px;
+  z-index: 1;
+}
+
+.dropcontainer.show.animate-out {
+  animation: animateToBottom .3s;
+}
+
+.dropcontainer>.item {
+  display: flex;
+  color: #321d48;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  flex-direction: row;
+  cursor: pointer;
+  gap: 10px;
+  padding: 12px;
+}
+
+.disabledItem{
+  display: flex;
+  flex-direction: row;
+  text-decoration: underline;
+  gap: 10px;
+  padding: 12px;
+  color: #36313a;
+  cursor: not-allowed;
+}
+
+.item:hover{
+  background: #4d54d2;
+  color: #FFFFFF;
+}
+
+@keyframes animateFromBottom {
+  from {
+    transform: translate3d(0, 10px, 0);
+    opacity: 0
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1
+  }
+}
+
+@keyframes animateToBottom {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1
+  }
+  to {
+    transform: translate3d(0, 10px, 0);
+    opacity: 0
+  }
+}

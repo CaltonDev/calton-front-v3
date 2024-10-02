@@ -505,6 +505,383 @@ function getAvgSentiment(
     })
 }
 
+function npsTempo(
+    allFilters: AllFilters,
+    columns: any[] = [],
+    returnAnt = false,
+    colX = 'isNPS',
+    idSources: string[] | undefined = undefined
+) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        groupby,
+        customFilters,
+    } = allFilters
+
+    const body = {
+        idSources: idSources ? idSources : selectedSource,
+        startDate: startDate,
+        endDate: endDate,
+        groupby: groupby,
+        channels: selectedChannel,
+        idLocations: selectedLocation,
+        customFilters,
+        code: getNoCodeFromPlatfrom(),
+        idTopics: selectedTopics,
+        colX: colX,
+        columns: columns,
+        returnAnt: returnAnt,
+    }
+    return apiService.apiAnalysisGeneric.post(
+        'analisiGenerica/npsTempo',
+        body,
+        getHeaders()
+    )
+}
+
+function getDistVotiPerData(
+    allFilters: AllFilters,
+    columns: any[] = [],
+    returnAnt = false,
+    colX: string | undefined = undefined,
+    colY = 'isDataFeedback',
+    isMultiChoice = false,
+    idSources: string[] | undefined = undefined
+) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        groupby,
+        customFilters,
+    } = allFilters
+
+    const body = {
+        idSources: idSources ? idSources : selectedSource,
+        startDate: startDate,
+        endDate: endDate,
+        groupby: groupby,
+        channels: selectedChannel,
+        idLocations: selectedLocation,
+        customFilters,
+        code: getNoCodeFromPlatfrom(),
+        idTopics: selectedTopics,
+        // colX: colX,
+        colY: colY,
+        columns: columns,
+        returnAnt: returnAnt,
+        isMultiChoice: isMultiChoice,
+    }
+    return apiService.apiAnalysisGeneric.post(
+        'analisiGenerica/distValByDate',
+        body,
+        getHeaders()
+    )
+}
+
+function distTopicPerData(
+    allFilters: AllFilters,
+    columns: any[] | undefined = undefined,
+    returnAnt = false,
+    idSources: string[] | undefined = undefined
+) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        groupby,
+        customFilters,
+        selectedProducts,
+    } = allFilters
+
+    const body = {
+        idSources: idSources ? idSources : selectedSource,
+        startDate: startDate,
+        endDate: endDate,
+        groupby: groupby,
+        channels: selectedChannel,
+        customFilters,
+        code: getNoCodeFromPlatfrom(),
+        idLocations: selectedLocation,
+        idTopics: selectedTopics,
+        columns: columns,
+        returnAnt: returnAnt,
+        idProducts: selectedProducts,
+    }
+    return apiService.apiAnalAdvTopic.post(
+        'distribuzioneTopicPerData',
+        body,
+        getHeaders()
+    )
+}
+
+function getDistribuzioneNps(
+    allFilters: AllFilters,
+    columns: any[] = [],
+    returnAnt = false,
+    idSources: string[] | undefined = undefined
+) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        customFilters,
+    } = allFilters
+
+    const body = {
+        idSources: idSources ? idSources : selectedSource,
+        startDate: startDate,
+        endDate: endDate,
+        channels: selectedChannel,
+        idLocations: selectedLocation,
+        customFilters,
+        code: getNoCodeFromPlatfrom(),
+        idTopics: selectedTopics,
+        columns: columns,
+        returnAnt: returnAnt,
+    }
+    return apiService.apiAnalysisGeneric.post(
+        'analisiGenerica/distribuzioneNps',
+        body,
+        getHeaders()
+    )
+}
+
+function getDistTopicSentiment(
+    allFilters: AllFilters,
+    columns: any[] = [],
+    idSources: string[] | undefined = undefined
+) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        groupby,
+        customFilters,
+        selectedProducts,
+    } = allFilters
+
+    const body = {
+        idSources: idSources ? idSources : selectedSource,
+        startDate: startDate,
+        endDate: endDate,
+        groupby: groupby,
+        channels: selectedChannel,
+        customFilters,
+        code: getNoCodeFromPlatfrom(),
+        idLocations: selectedLocation,
+        idTopics: selectedTopics,
+        columns: columns,
+        idProducts: selectedProducts,
+    }
+    return apiService.apiAnalAdvTopic.post(
+        'distribuzioneTopicPerSentiment',
+        body,
+        getHeaders()
+    )
+}
+
+function getDistSentiment(
+    allFilters: AllFilters,
+    columns: any[] = [],
+    returnAnt = true,
+    idSources: string[]
+) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        customFilters,
+    } = allFilters
+
+    const body = {
+        idSources: idSources ? idSources : selectedSource,
+        startDate,
+        endDate,
+        channels: selectedChannel,
+        idLocations: selectedLocation,
+        idTopics: selectedTopics,
+        code: getNoCodeFromPlatfrom(),
+        customFilters,
+        columns: columns,
+        returnAnt: returnAnt,
+    }
+    return apiService.apiAnalysisGeneric.post(
+        'analisiGenerica/distribuzioneSentiment',
+        body,
+        getHeaders()
+    )
+}
+
+function compareTrendRecensioni(allFilters: AllFilters) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        groupby,
+    } = allFilters
+
+    return apiService.apiAnalysisComp.post(
+        'analisiCompetitor/compareTrend',
+        {
+            idSources: selectedSource,
+            channels: selectedChannel,
+            idLocations: selectedLocation,
+            idTopics: selectedTopics,
+            startDate: startDate,
+            endDate: endDate,
+            groupKey: 'competitorName',
+            groupby: groupby,
+            xAxes: 'date',
+            xAxesType: 'data_feedback',
+            xAxesCond: {},
+            yAxes: 'groupDates',
+            yAxesCond: {},
+            yAxesType: 'countByTime',
+            rAxes: null,
+            rAxesCond: {},
+            rAxesType: null,
+            returnAnt: true,
+        },
+        getHeaders()
+    )
+}
+
+function compareTrend(allFilters: AllFilters) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        groupby,
+    } = allFilters
+    return apiService.apiAnalysisComp.post(
+        'analisiCompetitor/compareTrend',
+        {
+            idSources: selectedSource,
+            channels: selectedChannel,
+            idLocations: selectedLocation,
+            idTopics: selectedTopics,
+            startDate: startDate,
+            endDate: endDate,
+            groupKey: 'competitorName',
+            groupby: groupby,
+            xAxes: 'date',
+            xAxesType: 'data_rating',
+            xAxesCond: {},
+            yAxes: 'groupDates',
+            yAxesCond: {},
+            yAxesType: 'meanByTime',
+            rAxes: null,
+            rAxesCond: {},
+            rAxesType: null,
+            returnAnt: true,
+        },
+        getHeaders()
+    )
+}
+
+function compareCols(allFilters: AllFilters, code = [0, 1, 2, 3]) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+    } = allFilters
+
+    return apiService.apiAnalysisGeneric.post(
+        'analisiGenerica/compareCols',
+        {
+            idSources: selectedSource,
+            channels: selectedChannel,
+            idLocations: selectedLocation,
+            idTopics: selectedTopics,
+            startDate: startDate,
+            endDate: endDate,
+            code: code,
+            groupby: 'locationName',
+            xAxes: 'sentOriginal',
+            xAxesType: 'percentage',
+            xAxesCond: {
+                value: 1,
+            },
+            yAxes: 'rating',
+            yAxesCond: {},
+            yAxesType: 'average',
+            rAxes: '_id',
+            rAxesCond: {},
+            rAxesType: 'occurences',
+        },
+        getHeaders()
+    )
+}
+
+function getDistribuzioneVotiPerData(
+    allFilters: AllFilters,
+    code: number[],
+    returnAnt: boolean,
+    colX: string,
+    colY: string
+) {
+    const {
+        startDate,
+        endDate,
+        selectedLocation,
+        selectedChannel,
+        selectedTopics,
+        selectedSource,
+        groupby,
+        customFilters,
+    } = allFilters
+
+    const body = {
+        idSources: selectedSource,
+        startDate,
+        endDate,
+        groupby,
+        channels: selectedChannel,
+        idLocations: selectedLocation,
+        customFilters,
+        code,
+        topics: selectedTopics,
+        returnAnt,
+        colX,
+        colY,
+    }
+    return apiService.apiAnalysisGeneric.post(
+        'analisiGenerica/distValByDate',
+        body,
+        getHeaders()
+    )
+}
+
 const AnalisiAvanzataService = {
     getTopicFiltered,
     getDistribuzioneTopic,
@@ -517,6 +894,16 @@ const AnalisiAvanzataService = {
     getReviewsInfos,
     getAvgRating,
     getAvgSentiment,
+    getDistribuzioneVotiPerData,
+    compareCols,
+    compareTrend,
+    compareTrendRecensioni,
+    getDistSentiment,
+    getDistTopicSentiment,
+    getDistVotiPerData,
+    distTopicPerData,
+    getDistribuzioneNps,
+    npsTempo,
 }
 
 export default AnalisiAvanzataService

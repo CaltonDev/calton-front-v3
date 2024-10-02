@@ -82,9 +82,9 @@ function SurveyReviews() {
                     </div>
                 </div>
                 {activeSection.type === 'riepilogo' ? (
-                    <SurveyRecap />
+                    <SurveyRecap id={'66601ecd0bac942433a24fdf'} />
                 ) : activeSection.type === 'insights' ? (
-                    <SurveysInsights />
+                    <SurveysInsights id={'66601ecd0bac942433a24fdf'} />
                 ) : (
                     <SurveyReplies />
                 )}
