@@ -7,5 +7,5 @@ export interface CardInsightsProps {
     idColumns: string[]
     idOriginal: string[]
     type: string
-    sourceId: string[]
+    sourceId: string[] | undefined
 }
