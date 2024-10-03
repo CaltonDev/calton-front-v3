@@ -11,14 +11,16 @@ import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 
 function Hours() {
     const { t } = useTranslation()
-    const [skip, setSkip] = React.useState(0)
-    const [limit, setLimit] = React.useState(10)
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    })
     const allFilters = useSelector(selectAllFilters)
     const count = ListingService.getCountOfListings()?.data?.count
     const hoursData = ListingService.getHours({
         listingsName: allFilters?.selectedLocationListing,
-        skip,
-        limit,
+        skip: pagination.pageIndex * pagination.pageSize,
+        limit: pagination.pageSize,
         returnAnt: true,
         code: getNoCodeFromPlatfrom(),
         isSingle: true,
@@ -46,16 +48,6 @@ function Hours() {
         return formatedItem
     })
 
-    const [pagination, setPagination] = React.useState<PaginationState>({
-        pageIndex: skip,
-        pageSize: limit,
-    })
-
-    const handleChangePagination = (pageIndex: number, pageSize: number) => {
-        setSkip(pageIndex * pageSize)
-        setLimit(pageSize)
-    }
-
     return (
         <PageContainer>
             <PageHeader heading={t('Orario')} subheading={true}></PageHeader>
@@ -65,7 +57,6 @@ function Hours() {
                 fullyLoaded={false}
                 pagination={pagination}
                 setPagination={setPagination}
-                fetchData={handleChangePagination}
                 totalItems={count}
             />
         </PageContainer>

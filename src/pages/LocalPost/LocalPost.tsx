@@ -10,8 +10,10 @@ import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 
 function LocalPost() {
     const { t } = useTranslation()
-    const [skip, setSkip] = React.useState(0)
-    const [limit, setLimit] = React.useState(10)
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    })
     const allFilters = useSelector(selectAllFilters)
     const [viewBy, setViewBy] = React.useState('listing')
     const count = ListingService.getCountOfItems({
@@ -21,8 +23,8 @@ function LocalPost() {
     const postsData = ListingService.getLocalPosts({
         viewBy: viewBy,
         listingsName: allFilters?.selectedLocationListing,
-        skip,
-        limit,
+        skip: pagination.pageIndex * pagination.pageSize,
+        limit: pagination.pageSize,
         returnAnt: true,
         nextPageToken: null,
         postsName: [],
@@ -32,14 +34,13 @@ function LocalPost() {
         endDate: null,
         fromCalendar: false,
     })?.data
-    const [pagination, setPagination] = React.useState<PaginationState>({
-        pageIndex: skip,
-        pageSize: limit,
-    })
 
-    const handleChangePagination = (pageIndex: number, pageSize: number) => {
-        setSkip(pageIndex * pageSize)
-        setLimit(pageSize)
+    const handleToggle = (value: string) => {
+        setViewBy(value ? 'listing' : 'post')
+        setPagination({
+            pageIndex: 0,
+            pageSize: 10,
+        })
     }
 
     return (
@@ -51,7 +52,6 @@ function LocalPost() {
                 fullyLoaded={false}
                 pagination={pagination}
                 setPagination={setPagination}
-                fetchData={handleChangePagination}
                 bottomNavigator={false}
                 customToggleButton={{
                     leftValue: {
@@ -63,9 +63,7 @@ function LocalPost() {
                         value: 'post',
                     },
                     currentState: viewBy,
-                    handleToggle: (value) => {
-                        setViewBy(value ? 'listing' : 'post')
-                    },
+                    handleToggle,
                 }}
                 totalItems={count}
             />
