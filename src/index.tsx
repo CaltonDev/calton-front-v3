@@ -28,7 +28,6 @@ const LazyComponentWrapper = ({
         <Component />
     </Suspense>
 )
-
 const children: RouteObject[] = []
 for (const [key, value] of Object.entries(objRoutes)) {
     children.push({

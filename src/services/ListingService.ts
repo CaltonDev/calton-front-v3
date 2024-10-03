@@ -223,17 +223,17 @@ function getPhotos(
     return apiService.apiListings.post('/getPhotos', body, getHeaders())
 }
 
-function editHours(
-    hours: any,
-    listingsName: any[] = [],
+export function editHours({
+    hours,
+    listingsName = [],
     isRegular = true,
     isSpecial = false,
     isMore = false,
     isNotSpecified = false,
     isTemporarilyClosed = false,
     isPermanentlyClosed = false,
-    toOverwrite = true
-) {
+    toOverwrite = true,
+}: ListingServiceBody) {
     const body: ListingServiceBody = {
         hours,
         listingsName,

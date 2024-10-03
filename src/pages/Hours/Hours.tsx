@@ -8,9 +8,12 @@ import { PaginationState } from '@tanstack/react-table'
 import { useSelector } from 'react-redux'
 import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
+import { useNavigate } from 'react-router-dom'
 
 function Hours() {
     const { t } = useTranslation()
+    const history = useNavigate()
+
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,
@@ -50,6 +53,17 @@ function Hours() {
         return formatedItem
     })
 
+    const handleClickEdit = async (ev: any, obj: any) => {
+        ev.preventDefault()
+        history(`edit`, {
+            state: {
+                item: obj?.idAccountLocationGbp,
+                // selectedListings: selectedRowKeys,
+                locationName: obj?.title,
+            },
+        })
+    }
+
     return (
         <PageContainer>
             <PageHeader heading={t('Orario')} subheading={true}></PageHeader>
@@ -60,6 +74,7 @@ function Hours() {
                 pagination={pagination}
                 setPagination={setPagination}
                 totalItems={count}
+                handleEditIconClick={handleClickEdit}
             />
         </PageContainer>
     )

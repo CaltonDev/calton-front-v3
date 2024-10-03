@@ -24,6 +24,11 @@ const SelectableCards = lazy(
     () => import('../pages/SelectableCards/SelectableCards')
 )
 const LocalPost = lazy(() => import('../pages/LocalPost/LocalPost'))
+// const EditHours = lazy(() => import('../pages/EditHours/EditHours'))
+const ListingEditHours = lazy(
+    () => import('../pages/ListingEditHours/ListingEditHours')
+)
+
 export const objRoutes = {
     Dashboards: {
         path: 'home',
@@ -82,5 +87,10 @@ export const objRoutes = {
     LocalPost: {
         path: 'localPost',
         component: LocalPost,
+    },
+
+    ListingEditHours: {
+        path: 'hours/edit',
+        component: ListingEditHours,
     },
 }

@@ -10,26 +10,28 @@ const CardSelection = ({
     data,
     setSelectedCard,
     activeCard,
+    addNewCard = true,
 }: CardSelectionProps) => {
     const handleCardSelection = (idx: number) => {
         if (setSelectedCard) setSelectedCard(idx)
     }
-
     return (
         <div className={styles.container}>
-            <div
-                className={
-                    activeCard === -1
-                        ? styles.addNewCardSelected
-                        : styles.addNewCard
-                }
-                onClick={() => handleCardSelection(-1)}
-            >
-                <Typography size={'bodyBig'} weight={'bold'} color={'blue'}>
-                    {title}
-                </Typography>
-                <SvgWrapper keySvg={'plusIcon'} color={'secondary'} />
-            </div>
+            {addNewCard && (
+                <div
+                    className={
+                        activeCard === -1
+                            ? styles.addNewCardSelected
+                            : styles.addNewCard
+                    }
+                    onClick={() => handleCardSelection(-1)}
+                >
+                    <Typography size={'bodyBig'} weight={'bold'} color={'blue'}>
+                        {title}
+                    </Typography>
+                    <SvgWrapper keySvg={'plusIcon'} color={'secondary'} />
+                </div>
+            )}
             {data?.map((obj: any, idx: number) => (
                 <div
                     key={idx}
@@ -42,9 +44,14 @@ const CardSelection = ({
                     }
                     onClick={() => handleCardSelection(idx)}
                 >
-                    <Typography size={'bodySmall'} weight={'bold'}>
-                        {obj?.title}
-                    </Typography>
+                    <div>
+                        <Typography size={'bodySmall'} weight={'bold'}>
+                            {obj?.title}
+                        </Typography>
+                        <Typography size={'bodyXXSmall'} weight={'light'}>
+                            {obj?.description}
+                        </Typography>
+                    </div>
                     {obj?.value?.map((value: string, textIdx: number) => (
                         <TextContainer
                             key={textIdx}

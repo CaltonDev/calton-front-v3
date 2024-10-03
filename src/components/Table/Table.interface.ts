@@ -24,4 +24,5 @@ export interface TableProps {
         handleToggle: (arg?: any) => void
     }
     totalItems?: number | undefined
+    handleEditIconClick?: (arg0: any, arg1: any) => void
 }

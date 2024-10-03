@@ -3,4 +3,5 @@ export interface CardSelectionProps {
     data: any[]
     activeCard?: number
     setSelectedCard?: (arg0: any) => void
+    addNewCard?: boolean
 }

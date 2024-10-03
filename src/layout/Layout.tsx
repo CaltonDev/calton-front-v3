@@ -118,7 +118,6 @@ function Layout() {
                     el.path.split('/')[0] === actualLocation ||
                     actualLocation === 'buyNow'
             )
-
             const foundHome = routes[platformType]?.some(
                 (el: any) =>
                     el.path === 'home' || el.path.split('/')[0] === 'home'

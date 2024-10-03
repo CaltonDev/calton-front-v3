@@ -1,0 +1,18 @@
+.timePickerContainer {
+    display: flex;
+    margin-right: 1em;
+    font-family: Montserrat;
+    margin-bottom: 0.5em;
+}
+
+.timePickers {
+    margin-left: 1em;
+}
+
+.picker {
+    height: 3em;
+    width: 12em;
+    border: 1.5px solid #321d488c;
+    border-radius: 100px;
+    border-inline-end-width: 1.5px;
+}
