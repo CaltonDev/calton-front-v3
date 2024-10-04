@@ -132,6 +132,7 @@ const Table = ({
                   columnVisibility,
               }
             : {
+                  pagination: { pageIndex: 0, pageSize: pagination.pageSize },
                   rowSelection,
                   columnVisibility,
               },
