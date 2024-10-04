@@ -33,6 +33,8 @@ function LocalPost() {
         startDate: null,
         endDate: null,
         fromCalendar: false,
+        prefetchNextPage: true,
+        totalNumberOfRecords: count,
     })?.data
 
     const handleToggle = (value: string) => {

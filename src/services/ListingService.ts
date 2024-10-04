@@ -1,7 +1,7 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
 import { getNoCodeFromPlatfrom } from '../helpers/helpers'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 
 interface ListingServiceBody {
     limit?: number
@@ -62,6 +62,8 @@ interface ListingServiceBody {
     locationAssociation?: {
         category?: string
     }
+    totalNumberOfRecords?: number
+    prefetchNextPage?: boolean
 }
 
 function getListings(
@@ -128,7 +130,7 @@ function getCountOfListings(
                 getHeaders()
             ),
         {
-            staleTime: 0,
+            staleTime: 5 * 60 * 1000,
             keepPreviousData: true,
         }
     )
@@ -253,6 +255,8 @@ function getHours({
     code = [6],
     isSingle = true,
     nextPageToken = null,
+    totalNumberOfRecords = 0,
+    prefetchNextPage = false,
 }: ListingServiceBody) {
     const body: ListingServiceBody = {
         listingsName,
@@ -263,7 +267,7 @@ function getHours({
         isSingle,
         nextPageToken,
     }
-    return useQuery<any, Error>(
+    const queryResult = useQuery<any, Error>(
         ['hours', body],
         () => apiService.apiListings.post('/getHours', body, getHeaders()),
         {
@@ -271,6 +275,33 @@ function getHours({
             keepPreviousData: true,
         }
     )
+
+    // Prefetch next page if prefetchNextPage is true and there's more data to fetch
+    if (prefetchNextPage && skip + limit < totalNumberOfRecords) {
+        const nextPageIndex = skip / limit + 1
+        useQueryClient().prefetchQuery(
+            [
+                'hours',
+                {
+                    ...body,
+                    skip: nextPageIndex * limit,
+                },
+            ],
+            () =>
+                apiService.apiListings.post(
+                    '/getHours',
+                    {
+                        ...body,
+                        skip: nextPageIndex * limit,
+                    },
+                    getHeaders()
+                ),
+            {
+                staleTime: 5 * 60 * 1000,
+            }
+        )
+    }
+    return queryResult
 }
 
 function getSpecialHours(
@@ -486,6 +517,8 @@ function getLocalPosts({
     startDate,
     endDate,
     fromCalendar = false,
+    totalNumberOfRecords = 0,
+    prefetchNextPage = false,
 }: ListingServiceBody) {
     const body: ListingServiceBody = {
         viewBy,
@@ -501,7 +534,7 @@ function getLocalPosts({
         endDate,
         fromCalendar,
     }
-    return useQuery<any, Error>(
+    const queryResult = useQuery<any, Error>(
         ['localPosts', body],
         () =>
             apiService.apiListings.post(
@@ -514,6 +547,34 @@ function getLocalPosts({
             keepPreviousData: true,
         }
     )
+
+    // Prefetch next page if prefetchNextPage is true and there's more data to fetch
+    if (prefetchNextPage && skip + limit < totalNumberOfRecords) {
+        const nextPageIndex = skip / limit + 1
+        useQueryClient().prefetchQuery(
+            [
+                'localPosts',
+                {
+                    ...body,
+                    skip: nextPageIndex * limit,
+                },
+            ],
+            () =>
+                apiService.apiListings.post(
+                    '/getLocalPostsFromDb',
+                    {
+                        ...body,
+                        skip: nextPageIndex * limit,
+                    },
+                    getHeaders()
+                ),
+            {
+                staleTime: 5 * 60 * 1000,
+            }
+        )
+    }
+
+    return queryResult
 }
 
 function getNumberOfItems(listingsName: any[] = [], viewBy = 'listing') {
@@ -541,7 +602,7 @@ function getCountOfItems({
                 getHeaders()
             ),
         {
-            staleTime: 0,
+            staleTime: 5 * 60 * 1000,
             keepPreviousData: true,
         }
     )
