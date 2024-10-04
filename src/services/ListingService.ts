@@ -267,7 +267,7 @@ function getHours({
         ['hours', body],
         () => apiService.apiListings.post('/getHours', body, getHeaders()),
         {
-            staleTime: 0,
+            staleTime: 5 * 60 * 1000,
             keepPreviousData: true,
         }
     )
@@ -510,7 +510,7 @@ function getLocalPosts({
                 getHeaders()
             ),
         {
-            staleTime: 0,
+            staleTime: 5 * 60 * 1000,
             keepPreviousData: true,
         }
     )
