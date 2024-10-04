@@ -136,7 +136,7 @@ function getFeedbacks(
         limit,
         sort,
         search,
-        customFilters: wordFilter ?? allFilters.customFilters,
+        customFilters: wordFilter ? allFilters.customFilters : [],
         download,
         returnFormatted,
         typeDownload,

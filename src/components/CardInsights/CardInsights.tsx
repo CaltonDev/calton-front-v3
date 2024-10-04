@@ -49,13 +49,14 @@ function CardInsights({
     idColumns,
     idOriginal,
     type,
-    sourceId,
+    sourceId = [''],
 }: CardInsightsProps) {
+    console.log('soirceOId: ', sourceId)
     const { t } = useTranslation()
     const chipTopics = useSelector(
         (state: RootState) => state.AnalisiAvanzataState.chipTopics
     )
-    const isRequired = title.startsWith('*')
+    const isRequired = title?.startsWith('*')
     const [isLoading, setIsLoading] = useState(true)
     const [isExpanded, setIsExpanded] = useState(false)
     const [chartTypeVisualization, setChartTypeVisualization] = useState(
@@ -88,6 +89,139 @@ function CardInsights({
     } = useSelector(selectAllFilters)
     const allFilters = useSelector(selectAllFilters)
 
+    const ratingChartInfoDistVotiPerData =
+        AnalisiAvanzataService.getDistVotiPerData(
+            allFilters,
+            idColumns,
+            true,
+            'Date',
+            undefined,
+            false,
+            sourceId
+        )?.data
+
+    const ratingChartInfoGetDistribuzioneVoti =
+        HomeService.getDistribuzioneVoti(
+            allFilters,
+            'Date',
+            idColumns,
+            true,
+            undefined,
+            undefined,
+            sourceId
+        )?.data
+
+    const ratingChartInfoGetAverageByTime = HomeService.getAverageByTime(
+        allFilters,
+        'rating',
+        undefined,
+        getNoCodeFromPlatfrom(),
+        idColumns,
+        true,
+        undefined,
+        sourceId
+    )?.data
+
+    const distSentimentGetAverageByTime = HomeService.getAverageByTime(
+        allFilters,
+        'sentiment',
+        undefined,
+        getNoCodeFromPlatfrom(),
+        idColumns,
+        true,
+        undefined,
+        sourceId
+    )?.data
+
+    const distSentimentGetDistSentiment =
+        AnalisiAvanzataService.getDistSentiment(
+            allFilters,
+            idOriginal,
+            true,
+            sourceId
+        )?.data
+
+    const distTopicSentimentDistTopicPerData =
+        AnalisiAvanzataService.distTopicPerData(
+            allFilters,
+            idOriginal,
+            false,
+            sourceId
+        )?.data
+
+    const distTopicSentimentGetDistTopicSentiment =
+        AnalisiAvanzataService.getDistTopicSentiment(
+            allFilters,
+            idOriginal,
+            sourceId
+        )?.data
+
+    const npsChartInfoGetDistribuzioneVoti = HomeService.getDistribuzioneVoti(
+        allFilters,
+        'Date',
+        idColumns,
+        true,
+        'isNPS',
+        undefined,
+        sourceId
+    )?.data
+
+    const npsChartInfoGetDistVotiPerData =
+        AnalisiAvanzataService.getDistVotiPerData(
+            allFilters,
+            idColumns,
+            true,
+            'isNPS',
+            undefined,
+            undefined,
+            sourceId
+        )?.data
+
+    const npsChartInfoGetDistribuzioneNps =
+        AnalisiAvanzataService.getDistribuzioneNps(
+            allFilters,
+            idOriginal,
+            true,
+            sourceId
+        )?.data
+
+    const npsChartInfoNPSTempo = AnalisiAvanzataService.npsTempo(
+        allFilters,
+        idOriginal,
+        true,
+        'isNPS',
+        sourceId
+    )?.data
+
+    const distAnswersRecensioniPerData =
+        HomeService.distribuzioneRecensioniPerData(
+            allFilters,
+            getNoCodeFromPlatfrom(),
+            idColumns,
+            false,
+            sourceId
+        )?.data
+
+    const otherChartGetDistVotiPerData =
+        AnalisiAvanzataService.getDistVotiPerData(
+            allFilters,
+            idColumns,
+            true,
+            'Date',
+            'isDataFeedback',
+            type === 'multiple_choice',
+            sourceId
+        )?.data
+
+    const otherChartGetCountCols = HomeService.getCountCols(
+        allFilters,
+        'Date',
+        idColumns,
+        true,
+        undefined,
+        type === 'multiple_choice',
+        sourceId
+    )?.data
     useEffect(() => {
         if (chartType === 'rating') {
             if (configDropDown.length === 2) {
@@ -99,11 +233,11 @@ function CardInsights({
                 })
                 setConfigDropDown(tmpConf)
             }
-            getRatingChartInfo(idColumns)
+            getRatingChartInfo()
         } else if (chartType === 'sentiment') {
-            getDistSentiment(idOriginal, idColumns)
+            getDistSentiment()
         } else if (chartType === 'topic') {
-            getDistTopicSentiment(idOriginal)
+            getDistTopicSentiment()
         } else if (chartType === 'nps') {
             if (configDropDown.length === 2) {
                 const tmpConf = configDropDown
@@ -121,16 +255,12 @@ function CardInsights({
                 )
                 setConfigDropDown(tmpConf)
             }
-            getNpsChartInfo(idColumns)
+            getNpsChartInfo()
         } else if (chartType === 'review') {
-            getDistAnswers(idColumns)
+            getDistAnswers()
         } else {
             if (type === 'yes_no' || type === 'multiple_choice') {
-                getOtherChart(
-                    idColumns,
-                    type === 'multiple_choice',
-                    type === 'yes_no'
-                )
+                getOtherChart()
             }
         }
     }, [
@@ -146,146 +276,71 @@ function CardInsights({
         isExpanded,
     ])
 
-    const getRatingChartInfo = async (columnsSelected: any) => {
+    const getRatingChartInfo = () => {
         try {
-            setIsLoading(true)
-            let response
-            let response2
-            let response3
             if (isExpanded) {
-                ;[response, response2, response3] = await Promise.all([
-                    AnalisiAvanzataService.getDistVotiPerData(
-                        allFilters,
-                        columnsSelected,
-                        true,
-                        'Date',
-                        undefined,
-                        false,
-                        [localData._id]
-                    ),
-                    HomeService.getDistribuzioneVoti(
-                        allFilters,
-                        'Date',
-                        columnsSelected,
-                        true,
-                        undefined,
-                        undefined,
-                        [localData._id]
-                    ),
-                    HomeService.getAverageByTime(
-                        allFilters,
-                        'rating',
-                        undefined,
-                        getNoCodeFromPlatfrom(),
-                        idColumns,
-                        true,
-                        undefined,
-                        [localData._id]
-                    ),
+                setChildren([
+                    <BarChartGrades
+                        key={ratingChartInfoGetDistribuzioneVoti?.toString()}
+                        response={ratingChartInfoGetDistribuzioneVoti}
+                    />,
+                    <MultiLineChart
+                        key={ratingChartInfoDistVotiPerData?.toString()}
+                        response={ratingChartInfoDistVotiPerData}
+                    />,
+                    <TinyMultiLineChart
+                        key={ratingChartInfoGetAverageByTime?.toString()}
+                        data={
+                            ratingChartInfoGetAverageByTime
+                                ? ratingChartInfoGetAverageByTime?.data?.values
+                                : {}
+                        }
+                        xField={'data'}
+                        yField={'value'}
+                        seriesField={''}
+                        colorField={'value'}
+                        colorFunction={3}
+                        smooth={true}
+                    />,
                 ])
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.absolute
             ) {
-                response = await AnalisiAvanzataService.getDistVotiPerData(
-                    allFilters,
-                    columnsSelected,
-                    true,
-                    'Date',
-                    undefined,
-                    undefined,
-                    [localData._id]
+                setChildren(
+                    <MultiLineChart response={ratingChartInfoDistVotiPerData} />
                 )
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.standard
             ) {
-                response = await HomeService.getDistribuzioneVoti(
-                    allFilters,
-                    'Date',
-                    columnsSelected,
-                    true,
-                    undefined,
-                    undefined,
-                    [localData._id]
+                setChildren(
+                    <BarChartGrades
+                        response={ratingChartInfoGetDistribuzioneVoti}
+                    />
                 )
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.mean
             ) {
-                response = await HomeService.getAverageByTime(
-                    allFilters,
-                    'rating',
-                    undefined,
-                    getNoCodeFromPlatfrom(),
-                    idColumns,
-                    true,
-                    undefined,
-                    [localData._id]
-                )
-            }
-            if (response.status === 200) {
-                setIsLoading(false)
-                if (isExpanded) {
-                    setChildren([
-                        <BarChartGrades
-                            key={response2?.toString()}
-                            response={response2}
-                        />,
-                        <MultiLineChart
-                            key={response?.toString()}
-                            response={response}
-                        />,
+                setChildren(
+                    <>
+                        <ChartHeader
+                            // title={t("Sentiment")}
+                            // contentPopover={t("SetimentHelper")}
+                            dataReady={true}
+                            numberToShow={
+                                ratingChartInfoGetAverageByTime?.data?.tot
+                            }
+                            decimals={2}
+                        />
                         <TinyMultiLineChart
-                            key={response3?.toString()}
-                            data={response3 ? response3.data?.data?.values : {}}
+                            data={ratingChartInfoGetAverageByTime?.data?.values}
                             xField={'data'}
                             yField={'value'}
                             seriesField={''}
                             colorField={'value'}
                             colorFunction={3}
                             smooth={true}
-                        />,
-                    ])
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.absolute
-                ) {
-                    setChildren(<MultiLineChart response={response} />)
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.standard
-                ) {
-                    setChildren(<BarChartGrades response={response} />)
-                } else if (
-                    chartTypeVisualization === CustomConstants.chartType.mean
-                ) {
-                    setChildren(
-                        <>
-                            <ChartHeader
-                                // title={t("Sentiment")}
-                                // contentPopover={t("SetimentHelper")}
-                                dataReady={true}
-                                numberToShow={response.data?.data?.tot}
-                                decimals={2}
-                            />
-                            <TinyMultiLineChart
-                                data={response.data?.data?.values}
-                                xField={'data'}
-                                yField={'value'}
-                                seriesField={''}
-                                colorField={'value'}
-                                colorFunction={3}
-                                smooth={true}
-                            />
-                        </>
-                    )
-                }
-            } else {
-                setChildren(<div>{t('Nessun dato da visualizzare')}</div>)
-                setIsLoading(false)
-                dispatch(
-                    showToast({
-                        type: 2,
-                        text: 'Non sono presenti dati per ' + title,
-                    })
+                        />
+                    </>
                 )
             }
         } catch (e) {
@@ -301,95 +356,37 @@ function CardInsights({
         }
     }
 
-    const getOtherChart = async (
-        columnsSelected: any[],
-        isMultiChoice = false,
-        isYesNo = false
-    ) => {
+    const getOtherChart = () => {
         try {
             setIsLoading(true)
-            let response
-            let response2
+
             if (isExpanded) {
-                ;[response, response2] = await Promise.all([
-                    AnalisiAvanzataService.getDistVotiPerData(
-                        allFilters,
-                        columnsSelected,
-                        true,
-                        'Date',
-                        'isDataFeedback',
-                        isMultiChoice,
-                        [localData._id]
-                    ),
-                    HomeService.getCountCols(
-                        allFilters,
-                        'Date',
-                        columnsSelected,
-                        true,
-                        undefined,
-                        isMultiChoice,
-                        [localData._id]
-                    ),
+                setChildren([
+                    <BarChartSentiment
+                        key={otherChartGetCountCols.toString()}
+                        response={otherChartGetCountCols}
+                    />,
+                    <MultiLineChart
+                        key={otherChartGetDistVotiPerData?.toString()}
+                        response={otherChartGetDistVotiPerData}
+                        isYesNo={false}
+                    />,
                 ])
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.absolute
             ) {
-                response = await AnalisiAvanzataService.getDistVotiPerData(
-                    allFilters,
-                    columnsSelected,
-                    true,
-                    'Date',
-                    'isDataFeedback',
-                    isMultiChoice,
-                    [localData._id]
+                setChildren(
+                    <MultiLineChart
+                        response={otherChartGetDistVotiPerData}
+                        isYesNo={type === 'yes_no'}
+                    />
                 )
-                // response = await HomeService.getAverageByTime([localData._id], null, startDate, endDate, groupby, selectedChannel, undefined, selectedLocation, getNoCodeFromPlatfrom(), selectedTopics, customFilters, idColumns, false, isMultiChoice)
             } else {
-                response = await HomeService.getCountCols(
-                    allFilters,
-                    'Date',
-                    columnsSelected,
-                    true,
-                    undefined,
-                    isMultiChoice,
-                    [localData._id]
+                setChildren(
+                    <BarChartSentiment response={otherChartGetCountCols} />
                 )
             }
-
-            if (response.status === 200) {
-                if (isExpanded) {
-                    setChildren([
-                        <BarChartSentiment
-                            key={response2?.toString()}
-                            response={response2}
-                        />,
-                        <MultiLineChart
-                            key={response?.toString()}
-                            response={response}
-                            isYesNo={false}
-                        />,
-                    ])
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.absolute
-                ) {
-                    setChildren(
-                        <MultiLineChart response={response} isYesNo={isYesNo} />
-                    )
-                } else {
-                    setChildren(<BarChartSentiment response={response} />)
-                }
-                setIsLoading(false)
-            } else {
-                setChildren(<div>{t('Nessun dato da visualizzare')}</div>)
-                setIsLoading(false)
-                dispatch(
-                    showToast({
-                        type: 2,
-                        text: t('Non sono presenti dati per ') + title,
-                    })
-                )
-            }
+            setIsLoading(false)
         } catch (e) {
             console.log(e)
             setChildren(<div>Errore</div>)
@@ -403,160 +400,69 @@ function CardInsights({
         }
     }
 
-    const getNpsChartInfo = async (columnsSelected: any[], colX = 'isNPS') => {
+    const getNpsChartInfo = () => {
         try {
             setIsLoading(true)
-            let response
-            let response2
-            let response3
-            let response4
+
+            setIsLoading(false)
             if (isExpanded) {
-                ;[response, response2, response3, response4] =
-                    await Promise.all([
-                        await HomeService.getDistribuzioneVoti(
-                            allFilters,
-                            'Date',
-                            columnsSelected,
-                            true,
-                            colX,
-                            undefined,
-                            [localData._id]
-                        ),
-                        await AnalisiAvanzataService.getDistVotiPerData(
-                            allFilters,
-                            columnsSelected,
-                            true,
-                            colX,
-                            undefined,
-                            undefined,
-                            [localData._id]
-                        ),
-                        await AnalisiAvanzataService.getDistribuzioneNps(
-                            allFilters,
-                            columnsSelected,
-                            true,
-                            [localData._id]
-                        ),
-                        await AnalisiAvanzataService.npsTempo(
-                            allFilters,
-                            columnsSelected,
-                            true,
-                            colX,
-                            [localData._id]
-                        ),
-                    ])
+                setChildren([
+                    <BarChartNPS
+                        key={npsChartInfoGetDistribuzioneVoti?.toString()}
+                        response={npsChartInfoGetDistribuzioneVoti}
+                    />,
+                    <MultiLineChart
+                        key={npsChartInfoGetDistVotiPerData?.toString()}
+                        response={npsChartInfoGetDistVotiPerData}
+                        isYesNo={false}
+                    />,
+                    <div
+                        key={npsChartInfoGetDistribuzioneVoti?.toString()}
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            width: '100%',
+                        }}
+                    >
+                        <HeaderNPS response={npsChartInfoGetDistribuzioneNps} />
+                        <PieNPS response={npsChartInfoGetDistribuzioneNps} />
+                    </div>,
+                    <>
+                        <BarChartNPSTime response={npsChartInfoNPSTempo} />
+                    </>,
+                ])
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.absolute
             ) {
-                response = await AnalisiAvanzataService.getDistVotiPerData(
-                    allFilters,
-                    columnsSelected,
-                    true,
-                    colX,
-                    undefined,
-                    undefined,
-                    [localData._id]
+                setChildren(
+                    <MultiLineChart
+                        response={npsChartInfoGetDistVotiPerData}
+                        isYesNo={false}
+                    />
                 )
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.standard
             ) {
-                response = await HomeService.getDistribuzioneVoti(
-                    allFilters,
-                    'Date',
-                    columnsSelected,
-                    true,
-                    colX,
-                    undefined,
-                    [localData._id]
+                setChildren(
+                    <BarChartNPS response={npsChartInfoGetDistribuzioneVoti} />
                 )
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.mean
             ) {
-                response = await AnalisiAvanzataService.getDistribuzioneNps(
-                    allFilters,
-                    columnsSelected,
-                    true,
-                    [localData._id]
+                setChildren(
+                    <>
+                        <HeaderNPS response={npsChartInfoGetDistribuzioneNps} />
+                        <PieNPS response={npsChartInfoGetDistribuzioneNps} />
+                    </>
                 )
             } else if (
                 chartTypeVisualization ===
                 CustomConstants.chartType.distribution
             ) {
-                response = await AnalisiAvanzataService.npsTempo(
-                    allFilters,
-                    columnsSelected,
-                    true,
-                    colX,
-                    [localData._id]
-                )
-            }
-            if (response.status === 200) {
-                setIsLoading(false)
-                if (isExpanded) {
-                    setChildren([
-                        <BarChartNPS
-                            key={response?.toString()}
-                            response={response}
-                        />,
-                        <MultiLineChart
-                            key={response2?.toString()}
-                            response={response2}
-                            isYesNo={false}
-                        />,
-                        <div
-                            key={response?.toString()}
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                width: '100%',
-                            }}
-                        >
-                            <HeaderNPS response={response3} />
-                            <PieNPS response={response3} />
-                        </div>,
-                        <>
-                            <BarChartNPSTime response={response4} />
-                        </>,
-                    ])
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.absolute
-                ) {
-                    setChildren(
-                        <MultiLineChart response={response} isYesNo={false} />
-                    )
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.standard
-                ) {
-                    setChildren(<BarChartNPS response={response} />)
-                } else if (
-                    chartTypeVisualization === CustomConstants.chartType.mean
-                ) {
-                    setChildren(
-                        <>
-                            <HeaderNPS response={response} />
-                            <PieNPS response={response} />
-                        </>
-                    )
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.distribution
-                ) {
-                    setChildren(
-                        <>
-                            <BarChartNPSTime response={response} />
-                        </>
-                    )
-                }
-            } else {
-                setChildren(<div>{t('Nessun dato da visualizzare')}</div>)
-                setIsLoading(false)
-                dispatch(
-                    showToast({
-                        type: 2,
-                        text: t('Non sono presenti dati per ') + title,
-                    })
+                setChildren(
+                    <>
+                        <BarChartNPSTime response={npsChartInfoNPSTempo} />
+                    </>
                 )
             }
         } catch (e) {
@@ -571,54 +477,9 @@ function CardInsights({
         }
     }
 
-    const getDistSentiment = async (
-        columnsSelected: any[],
-        idColumns: any[]
-    ) => {
+    const getDistSentiment = () => {
         try {
-            setIsLoading(true)
-            let response
-            let response2
-            if (isExpanded) {
-                ;[response, response2] = await Promise.all([
-                    HomeService.getAverageByTime(
-                        allFilters,
-                        'sentiment',
-                        undefined,
-                        getNoCodeFromPlatfrom(),
-                        idColumns,
-                        true,
-                        undefined,
-                        [localData._id]
-                    ),
-                    AnalisiAvanzataService.getDistSentiment(
-                        allFilters,
-                        columnsSelected,
-                        true,
-                        [localData._id]
-                    ),
-                ])
-            } else if (
-                chartTypeVisualization === CustomConstants.chartType.absolute
-            ) {
-                response = await HomeService.getAverageByTime(
-                    allFilters,
-                    'sentiment',
-                    undefined,
-                    getNoCodeFromPlatfrom(),
-                    idColumns,
-                    true,
-                    undefined,
-                    [localData._id]
-                )
-            } else {
-                response = await AnalisiAvanzataService.getDistSentiment(
-                    allFilters,
-                    columnsSelected,
-                    true,
-                    [localData._id]
-                )
-            }
+            /*TODO: check if necessary
             const countsUp = (
                 <>
                     <CountUp
@@ -640,64 +501,59 @@ function CardInsights({
                         useEasing={true}
                     />
                 </>
-            )
+            )*/
 
             const dateChart = (
                 <TinyAreaChart
                     label={t('Sentiment')}
-                    chartdata={response.data?.data?.data}
+                    chartdata={
+                        chartTypeVisualization !==
+                            CustomConstants.chartType.absolute || !isExpanded
+                            ? distSentimentGetDistSentiment?.data
+                            : distSentimentGetAverageByTime?.data
+                    }
                 />
             )
 
-            if (response.status === 200) {
-                if (isExpanded) {
-                    setChildren([
-                        <BarChartPos
-                            key={response2?.toString()}
-                            response={response2}
-                        />,
-                        <>
-                            <ChartHeader
-                                dataReady={true}
-                                numberToShowComponent={
-                                    response.data?.data?.countNeg
-                                }
-                                decimals={0}
-                            />
-                            {dateChart}
-                        </>,
-                    ])
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.absolute
-                ) {
-                    //todo: check number to show component e countup
-                    setChildren(
-                        <>
-                            <ChartHeader
-                                dataReady={true}
-                                numberToShowComponent={
-                                    response.data?.data?.countPos
-                                }
-                                decimals={0}
-                            />
-                            {dateChart}
-                        </>
-                    )
-                } else {
-                    setChildren(<BarChartPos response={response} />)
-                }
-                setIsLoading(false)
+            if (isExpanded) {
+                setChildren([
+                    <BarChartPos
+                        key={distSentimentGetDistSentiment?.toString()}
+                        response={distSentimentGetDistSentiment}
+                    />,
+                    <>
+                        <ChartHeader
+                            dataReady={true}
+                            numberToShowComponent={
+                                distSentimentGetAverageByTime?.data?.countNeg
+                            }
+                            decimals={0}
+                        />
+                        {dateChart}
+                    </>,
+                ])
+            } else if (
+                chartTypeVisualization === CustomConstants.chartType.absolute
+            ) {
+                //todo: check number to show component e countup
+                setChildren(
+                    <>
+                        <ChartHeader
+                            dataReady={true}
+                            numberToShowComponent={
+                                distSentimentGetAverageByTime?.data?.countPos
+                            }
+                            decimals={0}
+                        />
+                        {dateChart}
+                    </>
+                )
             } else {
-                setChildren(<div>{t('Nessun dato da visualizzare')}</div>)
-                setIsLoading(false)
-                dispatch(
-                    showToast({
-                        type: 2,
-                        text: t('Non sono presenti dati per ') + title,
-                    })
+                setChildren(
+                    <BarChartPos response={distSentimentGetAverageByTime} />
                 )
             }
+            setIsLoading(false)
         } catch (e) {
             console.log(e)
             setChildren(<div>Errore</div>)
@@ -807,10 +663,9 @@ function CardInsights({
         }
     }, [feedbackInfo])
 
-    const getDistAnswers = async (columnsSelected: any[]) => {
+    const getDistAnswers = () => {
         try {
             setIsLoading(true)
-            let response
             const table = (
                 <Table
                     data={feedbacks?.all_feed?.feedback || []}
@@ -821,56 +676,25 @@ function CardInsights({
                 />
             )
             if (isExpanded) {
-                response = await HomeService.distribuzioneRecensioniPerData(
-                    allFilters,
-                    getNoCodeFromPlatfrom(),
-                    columnsSelected,
-                    false,
-                    [localData._id]
-                )
+                setChildren([
+                    table,
+                    <>
+                        {getHeaderReview(distAnswersRecensioniPerData)}
+                        {getGraphReview(distAnswersRecensioniPerData)}
+                    </>,
+                ])
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.standard
             ) {
                 setChildren(table)
-            }
-            if (isExpanded) {
-                setChildren([
-                    table,
-                    <>
-                        {getHeaderReview(response)}
-                        {getGraphReview(response)}
-                    </>,
-                ])
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.absolute
             ) {
-                response = await HomeService.distribuzioneRecensioniPerData(
-                    allFilters,
-                    getNoCodeFromPlatfrom(),
-                    columnsSelected,
-                    false,
-                    [localData._id]
-                )
-                if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.absolute
-                ) {
-                    setChildren(
-                        <>
-                            {getHeaderReview(response)}
-                            {getGraphReview(response)}
-                        </>
-                    )
-                }
-                setIsLoading(false)
-            } else {
-                setChildren(<div>{t('Nessun dato da visualizzare')}</div>)
-                setIsLoading(false)
-                dispatch(
-                    showToast({
-                        type: 2,
-                        text: t('Non sono presenti dati per ') + title,
-                    })
+                setChildren(
+                    <>
+                        {getHeaderReview(distAnswersRecensioniPerData)}
+                        {getGraphReview(distAnswersRecensioniPerData)}
+                    </>
                 )
             }
             setIsLoading(false)
@@ -887,77 +711,33 @@ function CardInsights({
         }
     }
 
-    const getDistTopicSentiment = async (columnsSelected: any[]) => {
+    const getDistTopicSentiment = () => {
         try {
             setIsLoading(true)
-            let response
-            let response2
+
+            const stacked = (
+                <StackedBarChart
+                    chipTopics={chipTopics}
+                    data={distTopicSentimentGetDistTopicSentiment?.data}
+                    showPercentage={false}
+                />
+            )
+            const line = (
+                <LineChartAnalisi
+                    chipTopics={chipTopics}
+                    data={distTopicSentimentDistTopicPerData?.data}
+                />
+            )
             if (isExpanded) {
-                ;[response, response2] = await Promise.all([
-                    AnalisiAvanzataService.distTopicPerData(
-                        allFilters,
-                        columnsSelected,
-                        false,
-                        [localData._id]
-                    ),
-                    AnalisiAvanzataService.getDistTopicSentiment(
-                        allFilters,
-                        columnsSelected,
-                        [localData._id]
-                    ),
-                ])
+                setChildren([stacked, line])
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.absolute
             ) {
-                response = await AnalisiAvanzataService.distTopicPerData(
-                    allFilters,
-                    columnsSelected,
-                    false,
-                    [localData._id]
-                )
+                setChildren(line)
             } else {
-                response = await AnalisiAvanzataService.getDistTopicSentiment(
-                    allFilters,
-                    columnsSelected,
-                    [localData._id]
-                )
+                setChildren(stacked)
             }
-
-            if (response.status === 200) {
-                const stacked = (
-                    <StackedBarChart
-                        chipTopics={chipTopics}
-                        data={response2?.data?.data}
-                        showPercentage={false}
-                    />
-                )
-                const line = (
-                    <LineChartAnalisi
-                        chipTopics={chipTopics}
-                        data={response.data?.data}
-                    />
-                )
-                if (isExpanded) {
-                    setChildren([stacked, line])
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.absolute
-                ) {
-                    setChildren(line)
-                } else {
-                    setChildren(stacked)
-                }
-                setIsLoading(false)
-            } else {
-                setChildren(<div>{t('Nessun dato da visualizzare')}</div>)
-                setIsLoading(false)
-                dispatch(
-                    showToast({
-                        type: 2,
-                        text: t('Non sono presenti dati per ') + title,
-                    })
-                )
-            }
+            setIsLoading(false)
         } catch (e) {
             console.log(e)
             setChildren(<div>Errore</div>)
@@ -975,6 +755,9 @@ function CardInsights({
         setChartTypeVisualization(key)
     }
 
+    useEffect(() => {
+        console.log('Children: ', children)
+    }, [children])
     return (
         <div style={{ marginTop: 30 }} key={idx}>
             <div
@@ -1068,6 +851,16 @@ function CardInsights({
                     ) : (
                         children
                     )*/}
+                    {Array.isArray(children)
+                        ? children?.map((elm, index) => (
+                              <div
+                                  key={index}
+                                  style={{ width: '47%', display: 'flex' }}
+                              >
+                                  {elm}
+                              </div>
+                          ))
+                        : children}
                 </div>
             </div>
             {footer && <p>{footer}</p>}

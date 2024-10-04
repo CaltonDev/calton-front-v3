@@ -1,6 +1,7 @@
 import apiService from './api/apiService'
 import { generateRandomColor, getNoCodeFromPlatfrom } from '../helpers/helpers'
 import { getHeaders } from './api/headers'
+import { useQuery } from 'react-query'
 
 interface AllFilters {
     startDate: string
@@ -537,10 +538,17 @@ function npsTempo(
         columns: columns,
         returnAnt: returnAnt,
     }
-    return apiService.apiAnalysisGeneric.post(
-        'analisiGenerica/npsTempo',
-        body,
-        getHeaders()
+    return useQuery<any, Error>(
+        ['npsTempo', allFilters.toString(), idSources],
+        () =>
+            apiService.apiAnalysisGeneric.post(
+                'analisiGenerica/npsTempo',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
@@ -580,10 +588,17 @@ function getDistVotiPerData(
         returnAnt: returnAnt,
         isMultiChoice: isMultiChoice,
     }
-    return apiService.apiAnalysisGeneric.post(
-        'analisiGenerica/distValByDate',
-        body,
-        getHeaders()
+    return useQuery<any, Error>(
+        ['getDistVotiPerData', allFilters, idSources],
+        () =>
+            apiService.apiAnalysisStandard.post(
+                'analisiGenerica/distValByDate',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
@@ -619,10 +634,18 @@ function distTopicPerData(
         returnAnt: returnAnt,
         idProducts: selectedProducts,
     }
-    return apiService.apiAnalAdvTopic.post(
-        'distribuzioneTopicPerData',
-        body,
-        getHeaders()
+
+    return useQuery<any, Error>(
+        ['distribuzioneTopicPerData', allFilters.toString(), idSources],
+        () =>
+            apiService.apiAnalAdvTopic.post(
+                'distribuzioneTopicPerData',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
@@ -654,10 +677,18 @@ function getDistribuzioneNps(
         columns: columns,
         returnAnt: returnAnt,
     }
-    return apiService.apiAnalysisGeneric.post(
-        'analisiGenerica/distribuzioneNps',
-        body,
-        getHeaders()
+
+    return useQuery<any, Error>(
+        ['getDistribuzioneNps', allFilters.toString(), idSources],
+        () =>
+            apiService.apiAnalysisGeneric.post(
+                'analisiGenerica/distribuzioneNps',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
@@ -691,10 +722,18 @@ function getDistTopicSentiment(
         columns: columns,
         idProducts: selectedProducts,
     }
-    return apiService.apiAnalAdvTopic.post(
-        'distribuzioneTopicPerSentiment',
-        body,
-        getHeaders()
+
+    return useQuery<any, Error>(
+        ['distribuzioneTopicPerSentiment', allFilters.toString(), idSources],
+        () =>
+            apiService.apiAnalAdvTopic.post(
+                'distribuzioneTopicPerSentiment',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
@@ -726,10 +765,18 @@ function getDistSentiment(
         columns: columns,
         returnAnt: returnAnt,
     }
-    return apiService.apiAnalysisGeneric.post(
-        'analisiGenerica/distribuzioneSentiment',
-        body,
-        getHeaders()
+
+    return useQuery<any, Error>(
+        ['distribuzioneSentiment', allFilters.toString(), idSources],
+        () =>
+            apiService.apiAnalysisGeneric.post(
+                'analisiGenerica/distribuzioneSentiment',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
