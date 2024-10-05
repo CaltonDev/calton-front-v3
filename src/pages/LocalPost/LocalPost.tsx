@@ -33,7 +33,7 @@ function LocalPost() {
         startDate: null,
         endDate: null,
         fromCalendar: false,
-        prefetchNextPage: true,
+        isPrefetchNextPage: true,
         totalNumberOfRecords: count,
     })?.data
 

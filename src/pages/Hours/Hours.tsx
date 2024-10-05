@@ -25,7 +25,7 @@ function Hours() {
         code: getNoCodeFromPlatfrom(),
         isSingle: true,
         nextPageToken: null,
-        prefetchNextPage: true,
+        isPrefetchNextPage: true,
         totalNumberOfRecords: count,
     })?.data
     const formatHours = (dayData: any) => {

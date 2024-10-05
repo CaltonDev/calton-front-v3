@@ -2,8 +2,9 @@ import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
 import { getNoCodeFromPlatfrom } from '../helpers/helpers'
 import { useQuery, useQueryClient } from 'react-query'
+import { prefetchNextPage } from '../helpers/reactQueryHelpers'
 
-interface ListingServiceBody {
+export interface ListingServiceBody {
     limit?: number
     skip?: number
     listingsName?: any[]
@@ -63,7 +64,7 @@ interface ListingServiceBody {
         category?: string
     }
     totalNumberOfRecords?: number
-    prefetchNextPage?: boolean
+    isPrefetchNextPage?: boolean
 }
 
 function getListings(
@@ -256,7 +257,7 @@ function getHours({
     isSingle = true,
     nextPageToken = null,
     totalNumberOfRecords = 0,
-    prefetchNextPage = false,
+    isPrefetchNextPage = false,
 }: ListingServiceBody) {
     const body: ListingServiceBody = {
         listingsName,
@@ -276,31 +277,18 @@ function getHours({
         }
     )
 
-    // Prefetch next page if prefetchNextPage is true and there's more data to fetch
-    if (prefetchNextPage && skip + limit < totalNumberOfRecords) {
-        const nextPageIndex = skip / limit + 1
-        useQueryClient().prefetchQuery(
-            [
-                'hours',
-                {
-                    ...body,
-                    skip: nextPageIndex * limit,
-                },
-            ],
-            () =>
-                apiService.apiListings.post(
-                    '/getHours',
-                    {
-                        ...body,
-                        skip: nextPageIndex * limit,
-                    },
-                    getHeaders()
-                ),
-            {
-                staleTime: 5 * 60 * 1000,
-            }
-        )
+    if (isPrefetchNextPage) {
+        prefetchNextPage({
+            queryKey: 'hours',
+            endpoint: 'getHours',
+            body,
+            skip,
+            limit,
+            totalNumberOfRecords,
+            staleTime: 5 * 60 * 1000,
+        })
     }
+
     return queryResult
 }
 
@@ -518,7 +506,7 @@ function getLocalPosts({
     endDate,
     fromCalendar = false,
     totalNumberOfRecords = 0,
-    prefetchNextPage = false,
+    isPrefetchNextPage = false,
 }: ListingServiceBody) {
     const body: ListingServiceBody = {
         viewBy,
@@ -548,30 +536,16 @@ function getLocalPosts({
         }
     )
 
-    // Prefetch next page if prefetchNextPage is true and there's more data to fetch
-    if (prefetchNextPage && skip + limit < totalNumberOfRecords) {
-        const nextPageIndex = skip / limit + 1
-        useQueryClient().prefetchQuery(
-            [
-                'localPosts',
-                {
-                    ...body,
-                    skip: nextPageIndex * limit,
-                },
-            ],
-            () =>
-                apiService.apiListings.post(
-                    '/getLocalPostsFromDb',
-                    {
-                        ...body,
-                        skip: nextPageIndex * limit,
-                    },
-                    getHeaders()
-                ),
-            {
-                staleTime: 5 * 60 * 1000,
-            }
-        )
+    if (isPrefetchNextPage) {
+        prefetchNextPage({
+            queryKey: 'localPosts',
+            endpoint: 'getLocalPostsFromDb',
+            body,
+            skip,
+            limit,
+            totalNumberOfRecords,
+            staleTime: 5 * 60 * 1000,
+        })
     }
 
     return queryResult
