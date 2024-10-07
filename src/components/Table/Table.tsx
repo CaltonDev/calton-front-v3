@@ -14,7 +14,6 @@ import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import Typography from '../Typography/Typography'
 import { useTranslation } from 'react-i18next'
 import Switch from '../Switch/Switch'
-import Button from '../Button/Button'
 import Hooks from '../../utils/hooks/Hooks'
 
 function IndeterminateCheckbox({
@@ -49,6 +48,8 @@ const Table = ({
     bottomNavigator = false,
     pagination,
     setPagination,
+    customToggleButton = undefined,
+    totalItems = undefined,
 }: TableProps) => {
     const { t } = useTranslation()
     const [tableSize, setTableSize] = useState('small')
@@ -109,19 +110,32 @@ const Table = ({
         setColumnVisibility(tmpColumnsVisibility)
     }, [columnsData])
 
-    const [rowSelection, setRowSelection] = React.useState({})
+    useEffect(() => {
+        if (!fullyLoaded) {
+            if (fetchData) {
+                fetchData(pagination.pageIndex, pagination.pageSize)
+            }
+        }
+    }, [pagination])
 
+    const [rowSelection, setRowSelection] = React.useState({})
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        state: {
-            pagination,
-            rowSelection,
-            columnVisibility,
-        },
+        state: fullyLoaded
+            ? {
+                  pagination,
+                  rowSelection,
+                  columnVisibility,
+              }
+            : {
+                  pagination: { pageIndex: 0, pageSize: pagination.pageSize },
+                  rowSelection,
+                  columnVisibility,
+              },
         enableRowSelection: true, //enable row selection for all rows
         onRowSelectionChange: setRowSelection,
         onColumnVisibilityChange: setColumnVisibility,
@@ -143,7 +157,11 @@ const Table = ({
             const number = Number(direction)
             if (
                 number > 0 &&
-                number <= Math.ceil(data?.length / pagination.pageSize)
+                number <=
+                    Math.ceil(
+                        (totalItems ? totalItems : data?.length) /
+                            pagination.pageSize
+                    )
             ) {
                 setPagination({
                     pageIndex: number - 1,
@@ -156,11 +174,11 @@ const Table = ({
                 })
             }
         }
-        if (!fullyLoaded) {
-            if (fetchData) {
-                fetchData(pagination.pageIndex, pagination.pageSize)
-            }
-        }
+        // if (!fullyLoaded) {
+        //     if (fetchData) {
+        //         fetchData(pagination.pageIndex, pagination.pageSize)
+        //     }
+        // }
     }
 
     const changeElementsPerPage = (e: any) => {
@@ -337,11 +355,75 @@ const Table = ({
                                 </Typography>
                             </div>
                         </div>
+                        {customToggleButton && (
+                            <div
+                                className={
+                                    styles.tableCustomToggleButtonContainer
+                                }
+                            >
+                                <div
+                                    className={styles.textContainer}
+                                    onClick={() =>
+                                        customToggleButton.handleToggle(true)
+                                    }
+                                    style={{
+                                        background:
+                                            customToggleButton.currentState ===
+                                            customToggleButton.leftValue.value
+                                                ? 'black'
+                                                : 'white',
+                                        borderTopLeftRadius: 7,
+                                        borderBottomLeftRadius: 7,
+                                    }}
+                                >
+                                    <Typography
+                                        size={'bodyMedium'}
+                                        weight={'normal'}
+                                        customTextColor={
+                                            customToggleButton.currentState ===
+                                            customToggleButton.leftValue.value
+                                                ? 'white'
+                                                : 'black'
+                                        }
+                                    >
+                                        {t(customToggleButton.leftValue.label)}
+                                    </Typography>
+                                </div>
+                                <div
+                                    className={styles.textContainer}
+                                    onClick={() =>
+                                        customToggleButton.handleToggle(false)
+                                    }
+                                    style={{
+                                        background:
+                                            customToggleButton.currentState ===
+                                            customToggleButton.rightValue.value
+                                                ? 'black'
+                                                : 'white',
+                                        borderTopRightRadius: 7,
+                                        borderBottomRightRadius: 7,
+                                    }}
+                                >
+                                    <Typography
+                                        size={'bodyMedium'}
+                                        weight={'normal'}
+                                        customTextColor={
+                                            customToggleButton.currentState ===
+                                            customToggleButton.rightValue.value
+                                                ? 'white'
+                                                : 'black'
+                                        }
+                                    >
+                                        {t(customToggleButton.rightValue.label)}
+                                    </Typography>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 )}
                 <PageNavigator
                     pageElements={pagination.pageSize}
-                    totalElements={data?.length}
+                    totalElements={totalItems ? totalItems : data?.length}
                     currentPage={pagination.pageIndex}
                     changePage={changePage}
                     changeElementsPerPage={changeElementsPerPage}

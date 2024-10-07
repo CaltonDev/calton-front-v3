@@ -11,4 +11,17 @@ export interface TableProps {
     bottomNavigator?: boolean
     pagination: Pagination
     setPagination: (arg0: Pagination) => void
+    customToggleButton?: {
+        leftValue: {
+            label: string
+            value: string
+        }
+        rightValue: {
+            label: string
+            value: string
+        }
+        currentState: string
+        handleToggle: (arg?: any) => void
+    }
+    totalItems?: number | undefined
 }

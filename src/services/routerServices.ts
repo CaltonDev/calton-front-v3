@@ -23,6 +23,7 @@ const Hours = lazy(() => import('../pages/Hours/Hours'))
 const SelectableCards = lazy(
     () => import('../pages/SelectableCards/SelectableCards')
 )
+const LocalPost = lazy(() => import('../pages/LocalPost/LocalPost'))
 export const objRoutes = {
     Dashboards: {
         path: 'home',
@@ -77,5 +78,9 @@ export const objRoutes = {
     Surveys: {
         path: 'surveys',
         component: Surveys,
+    },
+    LocalPost: {
+        path: 'localPost',
+        component: LocalPost,
     },
 }

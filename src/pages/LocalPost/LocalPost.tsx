@@ -7,62 +7,70 @@ import ListingService from '../../services/ListingService'
 import { PaginationState } from '@tanstack/react-table'
 import { useSelector } from 'react-redux'
 import { selectAllFilters } from '../../store/selectors/selectorsSlice'
-import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 
-function Hours() {
+function LocalPost() {
     const { t } = useTranslation()
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,
     })
     const allFilters = useSelector(selectAllFilters)
-    const count = ListingService.getCountOfListings()?.data?.count
-    const hoursData = ListingService.getHours({
+    const [viewBy, setViewBy] = React.useState('listing')
+    const count = ListingService.getCountOfItems({
+        viewBy: viewBy,
+        listingsName: allFilters?.selectedLocationListing,
+    })?.data?.count
+    const postsData = ListingService.getLocalPosts({
+        viewBy: viewBy,
         listingsName: allFilters?.selectedLocationListing,
         skip: pagination.pageIndex * pagination.pageSize,
         limit: pagination.pageSize,
         returnAnt: true,
-        code: getNoCodeFromPlatfrom(),
-        isSingle: true,
         nextPageToken: null,
+        postsName: [],
+        postsHash: [],
+        returnLocations: false,
+        startDate: null,
+        endDate: null,
+        fromCalendar: false,
         isPrefetchNextPage: true,
         totalNumberOfRecords: count,
     })?.data
-    const formatHours = (dayData: any) => {
-        if (!dayData || dayData.length === 0) return ''
-        const { openHours, openMinutes, closeHours, closeMinutes } = dayData[0]
-        return `${openHours}:${openMinutes ? openMinutes : '00'} - ${closeHours}:${closeMinutes ? closeMinutes : '00'}`
-    }
-    const daysOfWeek = [
-        'MONDAY',
-        'TUESDAY',
-        'WEDNESDAY',
-        'THURSDAY',
-        'FRIDAY',
-        'SATURDAY',
-        'SUNDAY',
-    ]
-    const hoursDataFormated = hoursData?.data.map((item: any) => {
-        const formatedItem: any = { ...item }
-        daysOfWeek.forEach((day) => {
-            formatedItem[day] = formatHours(item[day])
+
+    const handleToggle = (value: string) => {
+        setViewBy(value ? 'listing' : 'post')
+        setPagination({
+            pageIndex: 0,
+            pageSize: 10,
         })
-        return formatedItem
-    })
+    }
 
     return (
         <PageContainer>
-            <PageHeader heading={t('Orario')} subheading={true}></PageHeader>
+            <PageHeader heading={t('Local posts')}></PageHeader>
             <Table
-                data={hoursDataFormated}
-                columnsData={hoursData?.columns}
+                data={postsData?.data}
+                columnsData={postsData?.columns}
                 fullyLoaded={false}
                 pagination={pagination}
                 setPagination={setPagination}
+                bottomNavigator={false}
+                customToggleButton={{
+                    leftValue: {
+                        label: 'Places',
+                        value: 'listing',
+                    },
+                    rightValue: {
+                        label: 'Post',
+                        value: 'post',
+                    },
+                    currentState: viewBy,
+                    handleToggle,
+                }}
                 totalItems={count}
             />
         </PageContainer>
     )
 }
 
-export default Hours
+export default LocalPost
