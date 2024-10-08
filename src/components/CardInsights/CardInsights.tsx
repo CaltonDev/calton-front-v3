@@ -51,7 +51,6 @@ function CardInsights({
     type,
     sourceId = [''],
 }: CardInsightsProps) {
-    console.log('soirceOId: ', sourceId)
     const { t } = useTranslation()
     const chipTopics = useSelector(
         (state: RootState) => state.AnalisiAvanzataState.chipTopics
@@ -110,6 +109,11 @@ function CardInsights({
             undefined,
             sourceId
         )?.data
+
+    console.log(
+        'ratingChartInfoGetDistribuzioneVoti: ',
+        ratingChartInfoGetDistribuzioneVoti
+    )
 
     const ratingChartInfoGetAverageByTime = HomeService.getAverageByTime(
         allFilters,
@@ -222,6 +226,7 @@ function CardInsights({
         type === 'multiple_choice',
         sourceId
     )?.data
+
     useEffect(() => {
         if (chartType === 'rating') {
             if (configDropDown.length === 2) {
@@ -235,9 +240,9 @@ function CardInsights({
             }
             getRatingChartInfo()
         } else if (chartType === 'sentiment') {
-            getDistSentiment()
+            //getDistSentiment()
         } else if (chartType === 'topic') {
-            getDistTopicSentiment()
+            //getDistTopicSentiment()
         } else if (chartType === 'nps') {
             if (configDropDown.length === 2) {
                 const tmpConf = configDropDown
@@ -255,12 +260,12 @@ function CardInsights({
                 )
                 setConfigDropDown(tmpConf)
             }
-            getNpsChartInfo()
+            //getNpsChartInfo()
         } else if (chartType === 'review') {
-            getDistAnswers()
+            //getDistAnswers()
         } else {
             if (type === 'yes_no' || type === 'multiple_choice') {
-                getOtherChart()
+                //getOtherChart()
             }
         }
     }, [
@@ -274,74 +279,109 @@ function CardInsights({
         selectedProducts,
         chartTypeVisualization,
         isExpanded,
+        ratingChartInfoGetAverageByTime,
+        ratingChartInfoGetDistribuzioneVoti,
+        ratingChartInfoDistVotiPerData,
     ])
 
     const getRatingChartInfo = () => {
         try {
-            if (isExpanded) {
-                setChildren([
-                    <BarChartGrades
-                        key={ratingChartInfoGetDistribuzioneVoti?.toString()}
-                        response={ratingChartInfoGetDistribuzioneVoti}
-                    />,
-                    <MultiLineChart
-                        key={ratingChartInfoDistVotiPerData?.toString()}
-                        response={ratingChartInfoDistVotiPerData}
-                    />,
-                    <TinyMultiLineChart
-                        key={ratingChartInfoGetAverageByTime?.toString()}
-                        data={
-                            ratingChartInfoGetAverageByTime
-                                ? ratingChartInfoGetAverageByTime?.data?.values
-                                : {}
-                        }
-                        xField={'data'}
-                        yField={'value'}
-                        seriesField={''}
-                        colorField={'value'}
-                        colorFunction={3}
-                        smooth={true}
-                    />,
-                ])
-            } else if (
-                chartTypeVisualization === CustomConstants.chartType.absolute
+            if (
+                ratingChartInfoGetAverageByTime &&
+                ratingChartInfoGetDistribuzioneVoti &&
+                ratingChartInfoDistVotiPerData
             ) {
-                setChildren(
-                    <MultiLineChart response={ratingChartInfoDistVotiPerData} />
-                )
-            } else if (
-                chartTypeVisualization === CustomConstants.chartType.standard
-            ) {
-                setChildren(
-                    <BarChartGrades
-                        response={ratingChartInfoGetDistribuzioneVoti}
-                    />
-                )
-            } else if (
-                chartTypeVisualization === CustomConstants.chartType.mean
-            ) {
-                setChildren(
-                    <>
-                        <ChartHeader
-                            // title={t("Sentiment")}
-                            // contentPopover={t("SetimentHelper")}
-                            dataReady={true}
-                            numberToShow={
-                                ratingChartInfoGetAverageByTime?.data?.tot
+                if (isExpanded) {
+                    setChildren([
+                        <BarChartGrades
+                            key={ratingChartInfoGetDistribuzioneVoti?.toString()}
+                            response={
+                                ratingChartInfoGetDistribuzioneVoti
+                                    ? ratingChartInfoGetDistribuzioneVoti
+                                    : []
                             }
-                            decimals={2}
-                        />
+                        />,
+                        <MultiLineChart
+                            key={ratingChartInfoDistVotiPerData?.toString()}
+                            response={
+                                ratingChartInfoDistVotiPerData
+                                    ? ratingChartInfoDistVotiPerData
+                                    : []
+                            }
+                        />,
                         <TinyMultiLineChart
-                            data={ratingChartInfoGetAverageByTime?.data?.values}
+                            key={ratingChartInfoGetAverageByTime?.toString()}
+                            data={
+                                ratingChartInfoGetAverageByTime
+                                    ? ratingChartInfoGetAverageByTime?.data
+                                          ?.values
+                                    : []
+                            }
                             xField={'data'}
                             yField={'value'}
                             seriesField={''}
                             colorField={'value'}
                             colorFunction={3}
                             smooth={true}
+                        />,
+                    ])
+                } else if (
+                    chartTypeVisualization ===
+                    CustomConstants.chartType.absolute
+                ) {
+                    setChildren(
+                        <MultiLineChart
+                            response={
+                                ratingChartInfoDistVotiPerData
+                                    ? ratingChartInfoDistVotiPerData
+                                    : []
+                            }
                         />
-                    </>
-                )
+                    )
+                } else if (
+                    chartTypeVisualization ===
+                    CustomConstants.chartType.standard
+                ) {
+                    setChildren(
+                        <BarChartGrades
+                            response={
+                                ratingChartInfoGetDistribuzioneVoti
+                                    ? ratingChartInfoGetDistribuzioneVoti
+                                    : []
+                            }
+                        />
+                    )
+                } else if (
+                    chartTypeVisualization === CustomConstants.chartType.mean
+                ) {
+                    setChildren(
+                        <>
+                            <ChartHeader
+                                // title={t("Sentiment")}
+                                // contentPopover={t("SetimentHelper")}
+                                dataReady={true}
+                                numberToShow={
+                                    ratingChartInfoGetAverageByTime?.data?.tot
+                                }
+                                decimals={2}
+                            />
+                            <TinyMultiLineChart
+                                data={
+                                    ratingChartInfoGetAverageByTime
+                                        ? ratingChartInfoGetAverageByTime?.data
+                                              ?.values
+                                        : []
+                                }
+                                xField={'data'}
+                                yField={'value'}
+                                seriesField={''}
+                                colorField={'value'}
+                                colorFunction={3}
+                                smooth={true}
+                            />
+                        </>
+                    )
+                }
             }
         } catch (e) {
             console.log(e)
@@ -625,7 +665,7 @@ function CardInsights({
         wordSelected?.word || null,
         true,
         false
-    )?.data?.data
+    )?.data
 
     const feedbacks = FeedbackService.getFeedbacks(
         sourceId,
@@ -651,7 +691,7 @@ function CardInsights({
         wordSelected?.word || null,
         true,
         false
-    )?.data?.all_feed
+    )?.data
 
     useEffect(() => {
         //wrong
@@ -668,8 +708,8 @@ function CardInsights({
             setIsLoading(true)
             const table = (
                 <Table
-                    data={feedbacks?.all_feed?.feedback || []}
-                    columnsData={feedbacks?.all_feed?.columns || []}
+                    data={feedbacks?.data?.feedback || []}
+                    columnsData={feedbacks?.data?.columns || []}
                     fullyLoaded={true}
                     pagination={pagination}
                     setPagination={setPagination}
@@ -755,9 +795,6 @@ function CardInsights({
         setChartTypeVisualization(key)
     }
 
-    useEffect(() => {
-        console.log('Children: ', children)
-    }, [children])
     return (
         <div style={{ marginTop: 30 }} key={idx}>
             <div

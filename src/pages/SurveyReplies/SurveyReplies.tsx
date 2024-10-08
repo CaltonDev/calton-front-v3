@@ -8,13 +8,16 @@ import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 import { RootState } from '../../store/store'
 import FeedbackService from '../../services/FeedbackService'
 import { SurveyRepliesProps } from './SurveyReplies.interface'
+import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
+import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
+import { useTranslation } from 'react-i18next'
 
 function SurveyReplies({
-    data,
     sourceId,
     idColumns,
     isFromHome = false,
 }: SurveyRepliesProps) {
+    const { t } = useTranslation()
     const [pagination, setPagination] = React.useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,
@@ -62,7 +65,7 @@ function SurveyReplies({
                     selectedCustom: [wordSelected.sentiment],
                 },
             ]
-    )?.data?.data
+    )?.data
 
     const feedbacks = FeedbackService.getFeedbacks(
         sourceId,
@@ -99,8 +102,9 @@ function SurveyReplies({
                     selectedCustom: [wordSelected.sentiment],
                 },
             ]
-    )?.data?.all_feed
+    )?.data
 
+    console.log('getfe: ', feedbacks, ' info: ', feedbackInfo)
     useEffect(() => {
         //wrong
         if (feedbackInfo) {
@@ -112,13 +116,31 @@ function SurveyReplies({
     }, [feedbackInfo])
 
     return (
-        <Table
-            data={feedbacks?.all_feed?.feedback || []}
-            columnsData={feedbacks?.all_feed?.columns || []}
-            fullyLoaded={true}
-            pagination={pagination}
-            setPagination={setPagination}
-        />
+        <>
+            {isFromHome ? (
+                <PageContainer>
+                    <PageHeader
+                        heading={t('Risposte')}
+                        subheading={true}
+                    ></PageHeader>
+                    <Table
+                        data={feedbacks?.data?.feedback || []}
+                        columnsData={feedbacks?.data?.columns || []}
+                        fullyLoaded={true}
+                        pagination={pagination}
+                        setPagination={setPagination}
+                    />
+                </PageContainer>
+            ) : (
+                <Table
+                    data={feedbacks?.data?.feedback || []}
+                    columnsData={feedbacks?.data?.columns || []}
+                    fullyLoaded={true}
+                    pagination={pagination}
+                    setPagination={setPagination}
+                />
+            )}
+        </>
     )
 }
 

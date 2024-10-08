@@ -147,7 +147,7 @@ function getCountCols(
         isMultiChoice: isMultiChoice,
     }
     return useQuery<any, Error>(
-        ['getCountCols', allFilters.toString(), idSources],
+        [`getCountCols/${idSources}`, allFilters.toString(), idSources],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/countCols',

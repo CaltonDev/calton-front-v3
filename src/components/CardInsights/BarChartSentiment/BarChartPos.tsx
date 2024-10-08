@@ -3,6 +3,7 @@ import HorizontalBar from '../../Charts/HorizontalBar/HorizontalBarAnt'
 import React from 'react'
 
 function BarChartSentiment(response: any) {
+    console.log('response: ', response)
     return (
         <HorizontalBar
             config={{

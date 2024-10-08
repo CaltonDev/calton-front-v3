@@ -4,14 +4,15 @@ import { useTranslation } from 'react-i18next'
 import Typography from '../../components/Typography/Typography'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
-import CardSelection from '../../components/CardSelection/CardSelection'
 import { SectionDataType, SectionType } from './SurveyReviews.interface'
-import SettingsFieldsContainer from '../../components/SettingsFieldsContainer/SettingsFieldsContainer'
 import SurveyRecap from '../SurveyRecap/SurveyRecap'
 import SurveysInsights from '../SurveyInsights/SurveysInsights'
 import SurveyReplies from '../SurveyReplies/SurveyReplies'
+import { useParams } from 'react-router-dom'
 
 function SurveyReviews() {
+    const { id } = useParams()
+
     const { t } = useTranslation()
     const [activeSection, setActiveSection] = useState<SectionType>({
         index: 0,
@@ -82,9 +83,9 @@ function SurveyReviews() {
                     </div>
                 </div>
                 {activeSection.type === 'riepilogo' ? (
-                    <SurveyRecap id={'66601ecd0bac942433a24fdf'} />
+                    <SurveyRecap id={id ? id : ''} />
                 ) : activeSection.type === 'insights' ? (
-                    <SurveysInsights id={'66601ecd0bac942433a24fdf'} />
+                    <SurveysInsights id={id ? id : ''} />
                 ) : (
                     <SurveyReplies />
                 )}

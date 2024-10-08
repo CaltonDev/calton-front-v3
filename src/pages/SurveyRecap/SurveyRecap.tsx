@@ -40,8 +40,6 @@ function SurveyRecap({ id }: SurveyRecapProps) {
         [id]
     )?.data
 
-    console.log('survey: ', surveyData)
-
     return (
         <div className={styles.container}>
             <div className={styles.headerContainer}>

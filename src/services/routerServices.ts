@@ -1,5 +1,6 @@
 // routes
 import { lazy } from 'react'
+import SurveysInsights from '../pages/SurveyInsights/SurveysInsights'
 
 const Home = lazy(() => import('../pages/Home/Home'))
 const Luoghi = lazy(() => import('../pages/Luoghi/Luoghi'))
@@ -23,6 +24,8 @@ const Hours = lazy(() => import('../pages/Hours/Hours'))
 const SelectableCards = lazy(
     () => import('../pages/SelectableCards/SelectableCards')
 )
+const SurveyReviews = lazy(() => import('../pages/SurveyReviews/SurveyReviews'))
+
 export const objRoutes = {
     Dashboards: {
         path: 'home',
@@ -77,5 +80,9 @@ export const objRoutes = {
     Surveys: {
         path: 'surveys',
         component: Surveys,
+    },
+    InsightsSurvey: {
+        path: 'insights/:id',
+        component: SurveyReviews,
     },
 }
