@@ -15,7 +15,7 @@ interface StandardHoursProps {
     listing: ListingProps | null
     setListing: React.Dispatch<React.SetStateAction<ListingProps | null>>
     refetch?: () => void
-    selectedListings?: any[]
+    selectedListings?: string[]
 }
 
 function StandardHours({
@@ -88,6 +88,7 @@ function StandardHours({
                 regularHoursBooleans['CLOSED_PERMANENTLY']
             ),
             toOverwrite: true,
+            queryStr: 'hours',
         })
     }
 

@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { CardSelectionProps } from './CardSelection.interface'
 import styles from './CardSelection.module.scss'
 import Typography from '../Typography/Typography'
 import TextContainer from '../TextContainer/TextContainer'
 import { useTranslation } from 'react-i18next'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import Button from '../Button/Button'
+
 const CardSelection = ({
     title,
     data,
     setSelectedCard,
     activeCard,
     addNewCard = true,
+    wrappedComponent = <></>,
+    isWrappedComponent = false,
+    wrappedKey,
+    isDeleteButton = false,
+    handleDelete,
 }: CardSelectionProps) => {
     const handleCardSelection = (idx: number) => {
         if (setSelectedCard) setSelectedCard(idx)
@@ -51,6 +58,23 @@ const CardSelection = ({
                         <Typography size={'bodyXXSmall'} weight={'light'}>
                             {obj?.description}
                         </Typography>
+
+                        {isWrappedComponent &&
+                            obj?.title === wrappedKey &&
+                            wrappedComponent}
+                        {isDeleteButton && handleDelete && (
+                            <Button
+                                onClick={(event) => {
+                                    event.stopPropagation()
+                                    handleDelete(idx)
+                                }}
+                                // color={'secondary'}
+                                size={'small'}
+                                // text={'Delete'}
+                            >
+                                X
+                            </Button>
+                        )}
                     </div>
                     {obj?.value?.map((value: string, textIdx: number) => (
                         <TextContainer

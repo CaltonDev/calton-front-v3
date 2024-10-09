@@ -1,0 +1,28 @@
+.container {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: 1.5px solid #321d488c;
+    border-radius: 25px;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0.3rem 0.3rem 0.3rem 0;
+    transition: box-shadow 0.2s ease;
+}
+.container:hover {
+    border-color: #3f49fc;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container:active {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.displayName {
+    margin-left: 8px;
+    font-family: Montserrat;
+    color: #321d48;
+}

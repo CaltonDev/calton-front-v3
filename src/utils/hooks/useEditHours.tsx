@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { editHours, ListingServiceBody } from '../../services/ListingService'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -17,6 +17,7 @@ interface useEditHoursResponse {
 function useEditHours() {
     const { t } = useTranslation()
     const dispatch = useDispatch()
+    const queryClient = useQueryClient()
 
     return useMutation(
         (params: ListingServiceBody) => {
@@ -30,6 +31,7 @@ function useEditHours() {
                 isTemporarilyClosed = false,
                 isPermanentlyClosed = false,
                 toOverwrite = false,
+                queryStr,
             } = params
             return editHours({
                 hours,
@@ -44,7 +46,10 @@ function useEditHours() {
             })
         },
         {
-            onSuccess: (response: useEditHoursResponse) => {
+            onSuccess: (
+                response: useEditHoursResponse,
+                variables: ListingServiceBody
+            ) => {
                 if (response?.idTask) {
                     const message =
                         t('Caricati ') +
@@ -62,6 +67,7 @@ function useEditHours() {
                             autoClose: 900000,
                         })
                     )
+                    queryClient.invalidateQueries(variables.queryStr)
                 }
             },
             onError: (error) => {

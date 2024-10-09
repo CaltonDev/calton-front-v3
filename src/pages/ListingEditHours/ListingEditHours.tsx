@@ -5,17 +5,28 @@ import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import CardSelection from '../../components/CardSelection/CardSelection'
 import StandardHours from '../../components/StandardHours/StandardHours'
-import HolidayTime from '../../components/HolidayTime/HolidayTime'
-import AddMoreTimes from '../../components/AddMoreTimes/AddMoreTimes'
+import SpecialHours from '../../components/SpecialHours/SpecialHours'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import ListingService from '../../services/ListingService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
-import { ListingProps } from './ListingEditHours.interface'
+import {
+    ListingMoreHoursProps,
+    ListingProps,
+    ListingSpecialHoursProps,
+    IMoreHours,
+} from './ListingEditHours.interface'
+import MoreHours from '../../components/MoreHours/MoreHours'
+import AddMoreHours from '../../components/AddMoreHours/AddMoreHours'
+import { isUndefined, set } from 'lodash'
+import { useQueryClient } from 'react-query'
+import useEditHours from '../../utils/hooks/useEditHours'
 
 function ListingEditHours() {
     const { t } = useTranslation()
     const location = useLocation()
+    const queryClient = useQueryClient()
+    const mutation = useEditHours()
     const selectedListings = location?.state?.item
         ? [location?.state?.item]
         : []
@@ -24,10 +35,29 @@ function ListingEditHours() {
         returnAnt: true,
         code: getNoCodeFromPlatfrom(),
     })
+    const { data: specialHours, refetch: refetchSpecialHours } =
+        ListingService.getSpecialHours({
+            listingsName: selectedListings,
+            isSingle: true,
+            code: getNoCodeFromPlatfrom(),
+        })
+    const { data: moreHours, refetch: refetchMoreHours } =
+        ListingService.getMoreHours({
+            listingsName: selectedListings,
+            code: getNoCodeFromPlatfrom(),
+            isSingle: true,
+        })
     const [listingHours, setListingHours] = React.useState<ListingProps | null>(
         null
     )
+    const [listingSpecialHours, setListingSpecialHours] =
+        React.useState<ListingSpecialHoursProps | null>(null)
+    const [listingMoreHours, setListingMoreHours] =
+        React.useState<ListingMoreHoursProps | null>(null)
     const [selectedCard, setSelectedCard] = React.useState(0)
+    const [subCardMoreHours, setSubCardMoreHours] = React.useState()
+    const cardRef = React.useRef<HTMLDivElement>(null)
+    const subCardRef = React.useRef<HTMLDivElement>(null)
 
     const data = [
         {
@@ -50,25 +80,151 @@ function ListingEditHours() {
         },
     ]
 
+    const addMoreOnClick = (hourId: string) => {
+        const tmp = listingMoreHours
+        let elem: IMoreHours[] = []
+
+        const newHoursType = {
+            hoursTypeId: hourId,
+            displayName: hourId.charAt(0) + hourId.substring(1).toLowerCase(),
+            periods: [],
+        }
+
+        if (tmp && tmp['moreHours'] !== null) {
+            elem = tmp['moreHours']
+        }
+
+        elem.push(newHoursType)
+        if (tmp) tmp['moreHours'] = elem
+        setListingMoreHours(JSON.parse(JSON.stringify(tmp)))
+    }
+
+    const handleDeleteSubCard = (index: number) => {
+        const nextListingMoreHours = {
+            ...listingMoreHours,
+            moreHours: listingMoreHours?.moreHours?.filter(
+                (item, i) => i !== index
+            ),
+        }
+        queryClient.removeQueries('moreHours')
+
+        setSelectedCard(2)
+        setSubCardMoreHours(undefined)
+        refetchMoreHours()
+    }
+
+    const handleSaveMoreHours = () => {
+        mutation.mutate({
+            hours: { ...listingMoreHours },
+            listingsName: selectedListings,
+            isMore: true,
+            isNotSpecified: false,
+            isPermanentlyClosed: false,
+            isRegular: false,
+            isSpecial: false,
+            isTemporarilyClosed: false,
+            toOverwrite: true,
+            queryStr: 'moreHours',
+        })
+    }
+
+    const handleCancelMoreHours = () => {
+        setListingMoreHours(null)
+        queryClient.removeQueries('moreHours')
+        setSubCardMoreHours(undefined)
+        setSelectedCard(2)
+        refetchMoreHours()
+    }
     React.useEffect(() => {
         if (hours?.data && hours?.data?.length > 0) {
             setListingHours(hours?.data[0])
         }
     }, [hours])
 
+    React.useEffect(() => {
+        if (specialHours?.data) {
+            setListingSpecialHours(specialHours.data)
+        }
+    }, [specialHours])
+    React.useEffect(() => {
+        if (moreHours?.data) {
+            setListingMoreHours(moreHours.data)
+        }
+    }, [moreHours, refetchMoreHours])
+
+    React.useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                subCardRef.current &&
+                !subCardRef.current.contains(event.target as Node) &&
+                cardRef.current &&
+                cardRef.current.contains(event.target as Node)
+            )
+                setSubCardMoreHours(undefined)
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [cardRef, subCardRef])
+
+    React.useEffect(() => {
+        console.log('listingMoreHours', listingMoreHours)
+    }, [listingMoreHours])
     return (
         <>
             <PageContainer>
                 <PageHeader heading={t('Edit Hours')}></PageHeader>
                 <div className={styles.container}>
                     <div className={styles.body}>
-                        <div className={styles.leftContainer}>
+                        <div
+                            className={styles.leftContainer}
+                            ref={cardRef}
+                            key={
+                                listingMoreHours?.moreHours?.length
+                                    ? selectedCard +
+                                      listingMoreHours?.moreHours?.length
+                                    : selectedCard
+                            }
+                        >
                             <CardSelection
                                 data={data}
                                 title={t('Edit Hours')}
                                 activeCard={selectedCard}
                                 setSelectedCard={setSelectedCard}
                                 addNewCard={false}
+                                isWrappedComponent={true}
+                                wrappedKey={t('Aggiungi altri orari') + ' >'}
+                                wrappedComponent={
+                                    <div ref={subCardRef}>
+                                        <CardSelection
+                                            data={
+                                                listingMoreHours?.moreHours?.map(
+                                                    (m) => {
+                                                        const displayName =
+                                                            listingMoreHours?.moreHoursTypes?.find(
+                                                                (itemType) =>
+                                                                    itemType?.hoursTypeId ===
+                                                                    m?.hoursTypeId
+                                                            )?.displayName
+                                                        return {
+                                                            title: `${t('Orario di')} ${displayName}`,
+                                                        }
+                                                    }
+                                                ) || []
+                                            }
+                                            title={t('')}
+                                            addNewCard={false}
+                                            activeCard={subCardMoreHours}
+                                            setSelectedCard={
+                                                setSubCardMoreHours
+                                            }
+                                            isDeleteButton={true}
+                                            handleDelete={handleDeleteSubCard}
+                                        />
+                                    </div>
+                                }
                             />
                         </div>
                         <div className={styles.rigthContainer}>
@@ -80,8 +236,53 @@ function ListingEditHours() {
                                     refetch={refetch}
                                 />
                             )}
-                            {selectedCard === 1 && <HolidayTime />}
-                            {selectedCard === 2 && <AddMoreTimes />}
+                            {selectedCard === 1 && (
+                                <SpecialHours
+                                    listing={listingSpecialHours}
+                                    refetch={refetchSpecialHours}
+                                    selectedListings={selectedListings}
+                                    toOverwrite={true}
+                                />
+                            )}
+                            {selectedCard === 2 &&
+                                !isUndefined(subCardMoreHours) &&
+                                listingMoreHours?.moreHours &&
+                                listingMoreHours.moreHours &&
+                                listingMoreHours.moreHours[subCardMoreHours] &&
+                                listingMoreHours.moreHours[subCardMoreHours]
+                                    .hoursTypeId && (
+                                    <div
+                                        className={styles.hoursOptionContainer}
+                                        key={subCardMoreHours}
+                                    >
+                                        <MoreHours
+                                            hoursTypeId={
+                                                listingMoreHours?.moreHours[
+                                                    subCardMoreHours
+                                                ]?.hoursTypeId
+                                            }
+                                            index={subCardMoreHours}
+                                            listing={listingMoreHours}
+                                            setListing={setListingMoreHours}
+                                            selectedListings={selectedListings}
+                                            refetch={refetchMoreHours}
+                                            handleSave={handleSaveMoreHours}
+                                            handleCancel={handleCancelMoreHours}
+                                        />
+                                    </div>
+                                )}
+                            {selectedCard === 2 &&
+                                isUndefined(subCardMoreHours) && (
+                                    <div
+                                        className={styles.hoursOptionContainer}
+                                        key={subCardMoreHours}
+                                    >
+                                        <AddMoreHours
+                                            onClick={addMoreOnClick}
+                                            listingItem={listingMoreHours}
+                                        />
+                                    </div>
+                                )}
                         </div>
                     </div>
                 </div>

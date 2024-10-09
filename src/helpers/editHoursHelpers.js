@@ -123,10 +123,13 @@ export function handleDeleteSpecialTimeInterval(
 }
 
 export function formatDataValue(hours, minutes) {
-    if (hours === null && minutes === null) return '00:00:00'
-    if (hours < 10) hours = '0' + hours
-
-    if (minutes < 10) minutes = '0' + minutes
+    if (!hours && !minutes) return '00:00:00'
+    if (!hours) {
+        hours = '00'
+    } else if (hours < 10) hours = '0' + hours
+    if (!minutes) {
+        minutes = '00'
+    } else if (minutes < 10) minutes = '0' + minutes
 
     return hours + ':' + minutes + ':00'
 }
