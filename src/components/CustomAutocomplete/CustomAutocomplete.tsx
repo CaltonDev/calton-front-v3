@@ -572,6 +572,27 @@ export default function CustomAutocomplete({
                                                 const option =
                                                     displayOptions[index]
 
+                                                console.log(
+                                                    'option: ',
+                                                    option?.accountName,
+                                                    ' pending: ',
+                                                    pendingValue[0]
+                                                        ?.accountName,
+                                                    'check: ',
+                                                    [pendingValue].findIndex(
+                                                        (item: any) =>
+                                                            (item?._id !=
+                                                                null &&
+                                                                option?._id ==
+                                                                    null &&
+                                                                item?._id ===
+                                                                    option?._id) ||
+                                                            item ===
+                                                                option?._id ||
+                                                            item === option
+                                                    )
+                                                )
+
                                                 const selected =
                                                     getSelected(option)
                                                 return (
@@ -669,9 +690,10 @@ export default function CustomAutocomplete({
                                                                                   (
                                                                                       item: any
                                                                                   ) =>
-                                                                                      item[0]
-                                                                                          ?.accountName ===
-                                                                                          option?.accountName ||
+                                                                                      (item[0] &&
+                                                                                          item[0]
+                                                                                              ?.accountName ===
+                                                                                              option?.accountName) ||
                                                                                       (item?._id !=
                                                                                           null &&
                                                                                           option?._id ==

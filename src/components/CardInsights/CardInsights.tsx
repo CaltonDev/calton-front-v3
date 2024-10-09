@@ -39,6 +39,7 @@ import { RootState } from '../../store/store'
 import Table from '../Table/Table'
 import FeedbackService from '../../services/FeedbackService'
 import { PaginationState } from '@tanstack/react-table'
+import CustomAutocomplete from '../CustomAutocomplete/CustomAutocomplete'
 
 function CardInsights({
     title,
@@ -64,11 +65,13 @@ function CardInsights({
     const [children, setChildren] = useState<any>()
     const [configDropDown, setConfigDropDown] = useState([
         {
+            _id: CustomConstants.chartType.standard,
             name: t('Distribuzione risposte'),
             icon: distribuzione,
             key: CustomConstants.chartType.standard,
         },
         {
+            _id: CustomConstants.chartType.absolute,
             name: t('Count tempo'),
             icon: multicount,
             key: CustomConstants.chartType.absolute,
@@ -227,6 +230,7 @@ function CardInsights({
             if (configDropDown.length === 2) {
                 const tmpConf = configDropDown
                 tmpConf.push({
+                    _id: CustomConstants.chartType.mean,
                     name: t('Media nel tempo'),
                     icon: count,
                     key: CustomConstants.chartType.mean,
@@ -243,11 +247,13 @@ function CardInsights({
                 const tmpConf = configDropDown
                 tmpConf.push(
                     {
+                        _id: CustomConstants.chartType.mean,
                         name: t('Distribuzione clienti'),
                         icon: distribuzionePie,
                         key: CustomConstants.chartType.mean,
                     },
                     {
+                        _id: CustomConstants.chartType.distribution,
                         name: t('Distribuzione clienti nel tempo'),
                         icon: nps,
                         key: CustomConstants.chartType.distribution,
@@ -704,7 +710,7 @@ function CardInsights({
     )?.data
 
     useEffect(() => {
-        //wrong
+        //todo: check why is wrong, if it is
         if (feedbackInfo) {
             setPagination({
                 pageIndex: pagination.pageIndex,
@@ -809,8 +815,8 @@ function CardInsights({
         }
     }
 
-    const changeValue = (key: any) => {
-        setChartTypeVisualization(key)
+    const changeValue = (value: any) => {
+        setChartTypeVisualization(value?.length > 0 ? value[0]?.key : 0)
     }
 
     return (
@@ -827,22 +833,37 @@ function CardInsights({
                 }
             >
                 <div className={styles.divTitle}>
-                    <div className={styles.headerCard}>
-                        {isRequired ? title.replaceAll('*', '') : title}
-                        {isRequired ? (
-                            <span>{t('Obbligatoria')}</span>
-                        ) : (
-                            <span>{t('Opzionale')}</span>
-                        )}
+                    <div className={styles.headerContainer}>
+                        <div className={styles.headerCard}>
+                            {isRequired ? title.replaceAll('*', '') : title}
+                            {isRequired ? (
+                                <span>{t('Obbligatoria')}</span>
+                            ) : (
+                                <span>{t('Opzionale')}</span>
+                            )}
+                        </div>
+                        <CustomAutocomplete
+                            hasIcons={true}
+                            displayType={'core'}
+                            label={configDropDown[chartTypeVisualization]?.name}
+                            placeholderInput={t('Seleziona grafico')}
+                            primary={'name'}
+                            secondary={''}
+                            labels={configDropDown ? configDropDown : []}
+                            type={'channelSources'}
+                            handleChange={changeValue}
+                            defaultValue={selectedChannel}
+                            multiple={false}
+                        />
                     </div>
 
                     <div className={styles.containerIcons}>
                         {!isExpanded && (
                             <div className={styles.smallButton}>
-                                <DropdownButton
+                                {/*<DropdownButton
                                     config={configDropDown}
                                     onChange={changeValue}
-                                />
+                                />*/}
                             </div>
                         )}
                         {isExpanded ? (
