@@ -1,10 +1,10 @@
 import React from 'react'
-import { Column } from '@ant-design/plots'
+import { Column, ColumnConfig } from '@ant-design/plots'
 
-function HorizontalBar(config: any) {
+function HorizontalBar(config: ColumnConfig) {
     return (
         <div style={{ width: '100%' }}>
-            <Column {...config.config} />
+            <Column {...config} />
         </div>
     )
 }
