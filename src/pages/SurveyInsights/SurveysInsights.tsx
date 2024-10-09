@@ -19,7 +19,6 @@ function SurveysInsights({ id }: SurveyInsightsProps) {
         [id]
     )?.data
 
-    console.log('local: ', localData?.data)
     const colsToAvoid = ['data_inizio_risposta', 'data_risposta', 'durata']
     const columns =
         Array.isArray(localData?.data) && localData?.data?.length > 0
@@ -29,7 +28,6 @@ function SurveysInsights({ id }: SurveyInsightsProps) {
     const [chartConfig, setChartConfig] = useState(
         columns.reduce(function (result: any, el: any, idx: number) {
             if (!colsToAvoid.includes(el.name)) {
-                console.log('EL: ', el)
                 let chartType = ''
                 let title = ''
                 let idOriginal = ''
@@ -125,9 +123,6 @@ function SurveysInsights({ id }: SurveyInsightsProps) {
         )
     }, [localData])
 
-    useEffect(() => {
-        //console.log('chart: ', chartConfig)
-    }, [chartConfig])
     return (
         <div className={styles.containerCards} key={0}>
             {chartConfig &&

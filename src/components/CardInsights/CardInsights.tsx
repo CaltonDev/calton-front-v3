@@ -110,11 +110,6 @@ function CardInsights({
             sourceId
         )?.data
 
-    console.log(
-        'ratingChartInfoGetDistribuzioneVoti: ',
-        ratingChartInfoGetDistribuzioneVoti
-    )
-
     const ratingChartInfoGetAverageByTime = HomeService.getAverageByTime(
         allFilters,
         'rating',
@@ -160,7 +155,7 @@ function CardInsights({
             sourceId
         )?.data
 
-    const npsChartInfoGetDistribuzioneVoti = HomeService.getDistribuzioneVoti(
+    /*const npsChartInfoGetDistribuzioneVoti = HomeService.getDistribuzioneVoti(
         allFilters,
         'Date',
         idColumns,
@@ -168,7 +163,7 @@ function CardInsights({
         'isNPS',
         undefined,
         sourceId
-    )?.data
+    )?.data*/
 
     const npsChartInfoGetDistVotiPerData =
         AnalisiAvanzataService.getDistVotiPerData(
@@ -286,31 +281,86 @@ function CardInsights({
 
     const getRatingChartInfo = () => {
         try {
-            if (
-                ratingChartInfoGetAverageByTime &&
-                ratingChartInfoGetDistribuzioneVoti &&
-                ratingChartInfoDistVotiPerData
+            console.log(
+                'ratingChartInfoGetDistribuzioneVoti: ',
+                ratingChartInfoGetDistribuzioneVoti
+            )
+            if (isExpanded) {
+                /*setChildren([
+                    <BarChartGrades
+                        key={ratingChartInfoGetDistribuzioneVoti?.toString()}
+                        response={
+                            ratingChartInfoGetDistribuzioneVoti
+                                ? ratingChartInfoGetDistribuzioneVoti
+                                : []
+                        }
+                    />,
+                    {
+
+                    <MultiLineChart
+                        key={ratingChartInfoDistVotiPerData?.toString()}
+                        response={
+                            ratingChartInfoDistVotiPerData
+                                ? ratingChartInfoDistVotiPerData
+                                : []
+                        }
+                    />,
+                    <TinyMultiLineChart
+                        key={ratingChartInfoGetAverageByTime?.toString()}
+                        data={
+                            ratingChartInfoGetAverageByTime
+                                ? ratingChartInfoGetAverageByTime?.data?.values
+                                : []
+                        }
+                        xField={'data'}
+                        yField={'value'}
+                        seriesField={''}
+                        colorField={'value'}
+                        colorFunction={3}
+                        smooth={true}
+                    />,
+
+                    },
+                ])*/
+            } else if (
+                chartTypeVisualization === CustomConstants.chartType.absolute
             ) {
-                if (isExpanded) {
-                    setChildren([
-                        <BarChartGrades
-                            key={ratingChartInfoGetDistribuzioneVoti?.toString()}
-                            response={
-                                ratingChartInfoGetDistribuzioneVoti
-                                    ? ratingChartInfoGetDistribuzioneVoti
-                                    : []
+                /*setChildren(
+                    <MultiLineChart
+                        response={
+                            ratingChartInfoDistVotiPerData
+                                ? ratingChartInfoDistVotiPerData
+                                : []
+                        }
+                    />
+                )*/
+            } else if (
+                chartTypeVisualization === CustomConstants.chartType.standard
+            ) {
+                setChildren(
+                    <BarChartGrades
+                        response={
+                            ratingChartInfoGetDistribuzioneVoti
+                                ? ratingChartInfoGetDistribuzioneVoti
+                                : []
+                        }
+                    />
+                )
+            } else if (
+                chartTypeVisualization === CustomConstants.chartType.mean
+            ) {
+                /*setChildren(
+                    <>
+                        <ChartHeader
+                            // title={t("Sentiment")}
+                            // contentPopover={t("SetimentHelper")}
+                            dataReady={true}
+                            numberToShow={
+                                ratingChartInfoGetAverageByTime?.data?.tot
                             }
-                        />,
-                        <MultiLineChart
-                            key={ratingChartInfoDistVotiPerData?.toString()}
-                            response={
-                                ratingChartInfoDistVotiPerData
-                                    ? ratingChartInfoDistVotiPerData
-                                    : []
-                            }
-                        />,
+                            decimals={2}
+                        />
                         <TinyMultiLineChart
-                            key={ratingChartInfoGetAverageByTime?.toString()}
                             data={
                                 ratingChartInfoGetAverageByTime
                                     ? ratingChartInfoGetAverageByTime?.data
@@ -323,65 +373,9 @@ function CardInsights({
                             colorField={'value'}
                             colorFunction={3}
                             smooth={true}
-                        />,
-                    ])
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.absolute
-                ) {
-                    setChildren(
-                        <MultiLineChart
-                            response={
-                                ratingChartInfoDistVotiPerData
-                                    ? ratingChartInfoDistVotiPerData
-                                    : []
-                            }
                         />
-                    )
-                } else if (
-                    chartTypeVisualization ===
-                    CustomConstants.chartType.standard
-                ) {
-                    setChildren(
-                        <BarChartGrades
-                            response={
-                                ratingChartInfoGetDistribuzioneVoti
-                                    ? ratingChartInfoGetDistribuzioneVoti
-                                    : []
-                            }
-                        />
-                    )
-                } else if (
-                    chartTypeVisualization === CustomConstants.chartType.mean
-                ) {
-                    setChildren(
-                        <>
-                            <ChartHeader
-                                // title={t("Sentiment")}
-                                // contentPopover={t("SetimentHelper")}
-                                dataReady={true}
-                                numberToShow={
-                                    ratingChartInfoGetAverageByTime?.data?.tot
-                                }
-                                decimals={2}
-                            />
-                            <TinyMultiLineChart
-                                data={
-                                    ratingChartInfoGetAverageByTime
-                                        ? ratingChartInfoGetAverageByTime?.data
-                                              ?.values
-                                        : []
-                                }
-                                xField={'data'}
-                                yField={'value'}
-                                seriesField={''}
-                                colorField={'value'}
-                                colorFunction={3}
-                                smooth={true}
-                            />
-                        </>
-                    )
-                }
+                    </>
+                )*/
             }
         } catch (e) {
             console.log(e)
@@ -440,7 +434,7 @@ function CardInsights({
         }
     }
 
-    const getNpsChartInfo = () => {
+    /*const getNpsChartInfo = () => {
         try {
             setIsLoading(true)
 
@@ -515,7 +509,7 @@ function CardInsights({
                 })
             )
         }
-    }
+    }*/
 
     const getDistSentiment = () => {
         try {

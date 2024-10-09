@@ -99,7 +99,11 @@ function getDistribuzioneVoti(
         compactValues,
     }
     return useQuery<any, Error>(
-        ['distribuzioneVoti', allFilters.toString(), idSources],
+        [
+            `distribuzioneVoti${(idSources ? idSources : '') + (colX + '')}`,
+            allFilters.toString(),
+            idSources,
+        ],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/countSingleCol',

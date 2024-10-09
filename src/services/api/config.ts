@@ -9,7 +9,7 @@ export function getConfig() {
         case 'localhost':
         case '0.0.0.0':
         case '127.0.0.1':
-        case 'beta.calton.io':
+        /*case 'beta.calton.io':
             return {
                 //apiUrl: 'http://localhost:5004',
                 apiUrl: 'https://api-voixhub-test.herokuapp.com',
@@ -77,7 +77,7 @@ export function getConfig() {
                 apiAnalysisStandard:
                     'https://twie8a17e6.execute-api.eu-south-1.amazonaws.com/',
                 apiSource:
-                    'https://20t4dfoas6.execute-api.eu-south-1.amazonaws.com/',
+                    'https://5k1l1yn9z4.execute-api.eu-south-1.amazonaws.com/dev/',
                 apiAnalysisGeneric:
                     'https://wamepdxy68.execute-api.eu-south-1.amazonaws.com/',
                 apiInfos:
@@ -114,7 +114,7 @@ export function getConfig() {
                     'https://6ejcfxvb1d.execute-api.eu-south-1.amazonaws.com/',
                 apiListings:
                     'https://2qka5n4k81.execute-api.eu-south-1.amazonaws.com/',
-            }
+            }*/
         default:
             return {
                 apiUrl: 'https://api-voixhub-prod.herokuapp.com',
@@ -127,7 +127,7 @@ export function getConfig() {
                 apiAnalysisStandard:
                     'https://gh9bq98mhi.execute-api.eu-south-1.amazonaws.com/',
                 apiSource:
-                    'https://lilim6wlg8.execute-api.eu-south-1.amazonaws.com/',
+                    'https://1gmj20az2e.execute-api.eu-south-1.amazonaws.com/prod/',
                 apiAnalysisGeneric:
                     'https://wamepdxy68.execute-api.eu-south-1.amazonaws.com/',
                 apiInfos:
