@@ -283,6 +283,17 @@ function CardInsights({
         ratingChartInfoGetAverageByTime,
         ratingChartInfoGetDistribuzioneVoti,
         ratingChartInfoDistVotiPerData,
+        distSentimentGetAverageByTime,
+        distSentimentGetDistSentiment,
+        distTopicSentimentDistTopicPerData,
+        distTopicSentimentGetDistTopicSentiment,
+        npsChartInfoGetDistribuzioneVoti,
+        npsChartInfoGetDistVotiPerData,
+        npsChartInfoGetDistribuzioneNps,
+        npsChartInfoNPSTempo,
+        distAnswersRecensioniPerData,
+        otherChartGetDistVotiPerData,
+        otherChartGetCountCols,
     ])
 
     const getRatingChartInfo = () => {
