@@ -104,7 +104,6 @@ function SurveyReplies({
             ]
     )?.data
 
-    console.log('getfe: ', feedbacks, ' info: ', feedbackInfo)
     useEffect(() => {
         //wrong
         if (feedbackInfo) {

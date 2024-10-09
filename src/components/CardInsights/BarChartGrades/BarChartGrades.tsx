@@ -4,7 +4,6 @@ import React from 'react'
 import { ColumnConfig } from '@ant-design/plots'
 
 function BarChartGrades(response: any) {
-    console.log(response?.response?.data)
     const config: ColumnConfig = {
         data: response?.response?.data ?? [],
         xAxis: {

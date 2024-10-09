@@ -1,38 +1,40 @@
 import AppConfig from '../../../constants/AppConfig'
 import HorizontalBar from '../../Charts/HorizontalBar/HorizontalBarAnt'
 import React from 'react'
+import { ColumnConfig } from '@ant-design/plots'
 
 function BarChartSentiment(response: any) {
-    console.log('response: ', response)
+    const config: ColumnConfig = {
+        data: response?.response?.data,
+        xField: 'type',
+        yField: 'value',
+        seriesField: '',
+        xAxis: {
+            label: {
+                autoRotate: true,
+                autoEllipsis: true,
+                autoHide: false,
+                formatter: (label: string) => {
+                    return label.split(' ').join('\n')
+                },
+            },
+        },
+        color: (type: any) => {
+            if (type === 'True') {
+                return AppConfig.themeColors.positive
+            } else if (type === 'False') {
+                return AppConfig.themeColors.negative
+            } else {
+                return AppConfig.themeColors.primary
+            }
+        },
+    }
     return (
-        <HorizontalBar
-            config={{
-                data: response?.data?.data,
-                xField: 'type',
-                yField: 'value',
-                seriesField: '',
-                legend: true,
-                xAxis: {
-                    label: {
-                        autoRotate: true,
-                        autoEllipsis: true,
-                        autoHide: false,
-                        formatter: (label: string) => {
-                            return label.split(' ').join('\n')
-                        },
-                    },
-                },
-                color: (type: string) => {
-                    if (type === 'True') {
-                        return AppConfig.themeColors.positive
-                    } else if (type === 'False') {
-                        return AppConfig.themeColors.negative
-                    } else {
-                        return AppConfig.themeColors.primary
-                    }
-                },
-            }}
-        />
+        <>
+            {!response || response?.response?.length === 0 ? null : (
+                <HorizontalBar {...config} />
+            )}
+        </>
     )
 }
 

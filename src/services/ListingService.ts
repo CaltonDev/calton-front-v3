@@ -247,8 +247,6 @@ function getHoursData(
     isSingle = true,
     nextPageToken = null
 ) {
-    console.log('test')
-
     return useQuery<any, Error>(
         ['hoursData'],
         () =>

@@ -155,7 +155,7 @@ function CardInsights({
             sourceId
         )?.data
 
-    /*const npsChartInfoGetDistribuzioneVoti = HomeService.getDistribuzioneVoti(
+    const npsChartInfoGetDistribuzioneVoti = HomeService.getDistribuzioneVoti(
         allFilters,
         'Date',
         idColumns,
@@ -163,7 +163,7 @@ function CardInsights({
         'isNPS',
         undefined,
         sourceId
-    )?.data*/
+    )?.data
 
     const npsChartInfoGetDistVotiPerData =
         AnalisiAvanzataService.getDistVotiPerData(
@@ -235,9 +235,9 @@ function CardInsights({
             }
             getRatingChartInfo()
         } else if (chartType === 'sentiment') {
-            //getDistSentiment()
+            getDistSentiment()
         } else if (chartType === 'topic') {
-            //getDistTopicSentiment()
+            getDistTopicSentiment()
         } else if (chartType === 'nps') {
             if (configDropDown.length === 2) {
                 const tmpConf = configDropDown
@@ -255,12 +255,12 @@ function CardInsights({
                 )
                 setConfigDropDown(tmpConf)
             }
-            //getNpsChartInfo()
+            getNpsChartInfo()
         } else if (chartType === 'review') {
-            //getDistAnswers()
+            getDistAnswers()
         } else {
             if (type === 'yes_no' || type === 'multiple_choice') {
-                //getOtherChart()
+                getOtherChart()
             }
         }
     }, [
@@ -281,12 +281,8 @@ function CardInsights({
 
     const getRatingChartInfo = () => {
         try {
-            console.log(
-                'ratingChartInfoGetDistribuzioneVoti: ',
-                ratingChartInfoGetDistribuzioneVoti
-            )
             if (isExpanded) {
-                /*setChildren([
+                setChildren([
                     <BarChartGrades
                         key={ratingChartInfoGetDistribuzioneVoti?.toString()}
                         response={
@@ -295,8 +291,6 @@ function CardInsights({
                                 : []
                         }
                     />,
-                    {
-
                     <MultiLineChart
                         key={ratingChartInfoDistVotiPerData?.toString()}
                         response={
@@ -319,13 +313,11 @@ function CardInsights({
                         colorFunction={3}
                         smooth={true}
                     />,
-
-                    },
-                ])*/
+                ])
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.absolute
             ) {
-                /*setChildren(
+                setChildren(
                     <MultiLineChart
                         response={
                             ratingChartInfoDistVotiPerData
@@ -333,7 +325,7 @@ function CardInsights({
                                 : []
                         }
                     />
-                )*/
+                )
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.standard
             ) {
@@ -349,7 +341,7 @@ function CardInsights({
             } else if (
                 chartTypeVisualization === CustomConstants.chartType.mean
             ) {
-                /*setChildren(
+                setChildren(
                     <>
                         <ChartHeader
                             // title={t("Sentiment")}
@@ -375,7 +367,7 @@ function CardInsights({
                             smooth={true}
                         />
                     </>
-                )*/
+                )
             }
         } catch (e) {
             console.log(e)
@@ -398,11 +390,17 @@ function CardInsights({
                 setChildren([
                     <BarChartSentiment
                         key={otherChartGetCountCols.toString()}
-                        response={otherChartGetCountCols}
+                        response={
+                            otherChartGetCountCols ? otherChartGetCountCols : []
+                        }
                     />,
                     <MultiLineChart
                         key={otherChartGetDistVotiPerData?.toString()}
-                        response={otherChartGetDistVotiPerData}
+                        response={
+                            otherChartGetDistVotiPerData
+                                ? otherChartGetDistVotiPerData
+                                : []
+                        }
                         isYesNo={false}
                     />,
                 ])
@@ -411,13 +409,21 @@ function CardInsights({
             ) {
                 setChildren(
                     <MultiLineChart
-                        response={otherChartGetDistVotiPerData}
+                        response={
+                            otherChartGetDistVotiPerData
+                                ? otherChartGetDistVotiPerData
+                                : []
+                        }
                         isYesNo={type === 'yes_no'}
                     />
                 )
             } else {
                 setChildren(
-                    <BarChartSentiment response={otherChartGetCountCols} />
+                    <BarChartSentiment
+                        response={
+                            otherChartGetCountCols ? otherChartGetCountCols : []
+                        }
+                    />
                 )
             }
             setIsLoading(false)
@@ -434,7 +440,7 @@ function CardInsights({
         }
     }
 
-    /*const getNpsChartInfo = () => {
+    const getNpsChartInfo = () => {
         try {
             setIsLoading(true)
 
@@ -509,7 +515,7 @@ function CardInsights({
                 })
             )
         }
-    }*/
+    }
 
     const getDistSentiment = () => {
         try {
@@ -553,7 +559,11 @@ function CardInsights({
                 setChildren([
                     <BarChartPos
                         key={distSentimentGetDistSentiment?.toString()}
-                        response={distSentimentGetDistSentiment}
+                        response={
+                            distSentimentGetDistSentiment
+                                ? distSentimentGetDistSentiment
+                                : []
+                        }
                     />,
                     <>
                         <ChartHeader
@@ -584,7 +594,13 @@ function CardInsights({
                 )
             } else {
                 setChildren(
-                    <BarChartPos response={distSentimentGetAverageByTime} />
+                    <BarChartPos
+                        response={
+                            distSentimentGetAverageByTime
+                                ? distSentimentGetAverageByTime
+                                : []
+                        }
+                    />
                 )
             }
             setIsLoading(false)
@@ -752,14 +768,22 @@ function CardInsights({
             const stacked = (
                 <StackedBarChart
                     chipTopics={chipTopics}
-                    data={distTopicSentimentGetDistTopicSentiment?.data}
+                    data={
+                        distTopicSentimentGetDistTopicSentiment
+                            ? distTopicSentimentGetDistTopicSentiment?.data
+                            : []
+                    }
                     showPercentage={false}
                 />
             )
             const line = (
                 <LineChartAnalisi
                     chipTopics={chipTopics}
-                    data={distTopicSentimentDistTopicPerData?.data}
+                    data={
+                        distTopicSentimentDistTopicPerData
+                            ? distTopicSentimentDistTopicPerData?.data
+                            : []
+                    }
                 />
             )
             if (isExpanded) {
