@@ -79,6 +79,7 @@ import PeopleSvg from './SvgIcons/PeopleSvg'
 import EyeSvg from './SvgIcons/EyeSvg'
 import CopySvg from './SvgIcons/CopySvg'
 import ShareSvg from './SvgIcons/ShareSvg'
+import OutlinedCheckmarkSvg from './SvgIcons/OutlinedCheckmarkSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -428,6 +429,12 @@ const SvgWrapper = ({
                     <SurveyIconSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'checkmarkSvg' ? (
                     <CheckmarkSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'outlinedCheckmarkSvg' ? (
+                    <OutlinedCheckmarkSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}

@@ -10,6 +10,7 @@ import { FormikProps } from 'formik'
 import { AddAccountFormData } from '../Forms/AddAccountForm/AddAccountForm.interface'
 import AddGroupsForm from '../Forms/AddGroupsForm/AddGroupsForm'
 import AddSurveyForm from '../Forms/AddSurveyForm/AddSurveyForm'
+import CustomGooglePlacesAutocomplete from '../CustomGoogleAutocomplete/CustomGooglePlacesAutocomplete'
 const AddAnalisiCompetitorContainer = ({
     data,
     type,
@@ -28,6 +29,8 @@ const AddAnalisiCompetitorContainer = ({
                   : type === t('Aggiungi smart response')
     const [isOnEdit, setIsOnEdit] = useState(false)
     const formRef = useRef<FormikProps<any>>(null)
+    const [locationInput, setLocationInput] = useState('')
+    const [objPlace, setObjPlace] = useState(null)
 
     const handleSaveBtn = () => {
         setIsOnEdit(false)
@@ -41,82 +44,50 @@ const AddAnalisiCompetitorContainer = ({
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <Typography size={'bodyBig'} weight={'bold'} color={'black'}>
-                    {type === 'surveys'
-                        ? t('Anteprima')
-                        : isNew
-                          ? newDataTitle
-                          : data?.title}
-                </Typography>
-                <div
-                    className={
-                        isNew ? styles.btnContainer : styles.iconsContainer
-                    }
-                >
-                    {type === 'surveys' ? (
-                        <>
-                            <SvgWrapper keySvg={'shareIcon'} color={'black'} />
-                            <SvgWrapper keySvg={'copyIcon'} color={'black'} />
-                            <SvgWrapper
-                                keySvg={'editIcon'}
-                                color={'black'}
-                                onClick={() => setIsOnEdit(true)}
-                            />
-                            <SvgWrapper keySvg={'trashIcon'} color={'black'} />
-                        </>
-                    ) : isOnEdit ? (
-                        <>
-                            <Button
-                                variant={'outline'}
-                                size={'small'}
-                                onClick={() => setIsOnEdit(false)}
-                            >
-                                {t('Annulla')}
-                            </Button>
-                            <Button
-                                variant={'solid'}
-                                size={'small'}
-                                onClick={handleSaveBtn}
-                            >
-                                {t('Salva')}
-                            </Button>
-                        </>
-                    ) : (
-                        <>
-                            <SvgWrapper
-                                keySvg={'editIcon'}
-                                color={'black'}
-                                onClick={() => setIsOnEdit(true)}
-                            />
-                            <SvgWrapper keySvg={'trashIcon'} color={'black'} />
-                        </>
-                    )}
+                <div className={styles.textHeader}>
+                    <Typography size={'h5'} weight={'bold'} color={'black'}>
+                        {t('Analisi competitor')}
+                    </Typography>
+                    <Typography size={'h5'} weight={'light'} color={'black'}>
+                        {' - ' + data?.title}
+                    </Typography>
+                </div>
+                <div className={styles.btnContainer}>
+                    <Button
+                        variant={'outline'}
+                        size={'small'}
+                        onClick={() => setIsOnEdit(false)}
+                    >
+                        {t('Annulla')}
+                    </Button>
+                    <Button
+                        variant={'solid'}
+                        size={'small'}
+                        onClick={handleSaveBtn}
+                    >
+                        {t('Salva')}
+                    </Button>
                 </div>
             </div>
-
-            {type === 'account' ? (
-                <AddAccountForm
-                    formData={formData}
-                    formRef={formRef}
-                    isOnEdit={isOnEdit}
+            <div className={styles.description}>
+                <Typography
+                    size={'bodySmall'}
+                    weight={'normal'}
+                    color={'black'}
+                >
+                    {t(
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                    )}
+                </Typography>
+            </div>
+            <div className={styles.body}>
+                <CustomGooglePlacesAutocomplete
+                    placeHolder={t('Cerca un punto vendita da aggiungere')}
+                    customClass={styles.containerGoogle}
+                    locationInput={locationInput}
+                    setLocationValue={setObjPlace}
                 />
-            ) : type === 'gruppi' ? (
-                <AddGroupsForm
-                    formData={formData}
-                    formRef={formRef}
-                    isNew={isNew}
-                    isOnEdit={isOnEdit}
-                />
-            ) : (
-                type === 'surveys' && (
-                    <AddSurveyForm
-                        formData={formData}
-                        formRef={formRef}
-                        isNew={isNew}
-                        isOnEdit={isOnEdit}
-                    />
-                )
-            )}
+            </div>
         </div>
     )
 }

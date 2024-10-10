@@ -26,6 +26,11 @@
   cursor: pointer;
 }
 
+.cardHeaderDisabled {
+  @extend .cardHeader;
+  background: var(--Neutral-300, #E0DDE3);
+}
+
 .competitorContainer {
   display: flex;
   padding: 25px 20px;
@@ -77,10 +82,12 @@
   justify-content: space-between;
   border: 2px dashed var(--Neutral-500, #C0BBC5);
   background: var(--Neutral-50, #F1F1F1);
+  align-items: center;
 }
 
 .addNewCardSelected {
   @extend .addNewCard;
   border: 2px solid var(--Button-500, #3F49FC);
   background: #FFF;
+  align-items: center;
 }

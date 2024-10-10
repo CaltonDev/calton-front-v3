@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CardSelectionCompetitorProps } from './CardSelectionCompetitor.interface'
 import styles from './CardSelectionCompetitor.module.scss'
 import Typography from '../../Typography/Typography'
 import SvgWrapper from '../../SvgWrapper/SvgWrapper'
 import { useTranslation } from 'react-i18next'
 import TextContainer from '../../TextContainer/TextContainer'
+import Input from '../../Input/Input'
 const CardSelectionCompetitor = ({
     title,
     data,
@@ -12,6 +13,7 @@ const CardSelectionCompetitor = ({
     activeCard,
 }: CardSelectionCompetitorProps) => {
     const { t } = useTranslation()
+    const [newGroupTitle, setNewGroupTitle] = useState('')
     const handleCardSelection = (idx: number) => {
         if (setSelectedCard) {
             if (idx === activeCard) {
@@ -21,6 +23,8 @@ const CardSelectionCompetitor = ({
             }
         }
     }
+
+    const handleCreateNewCompetitorGroup = () => {}
 
     return (
         <div className={styles.container}>
@@ -32,10 +36,40 @@ const CardSelectionCompetitor = ({
                 }
                 onClick={() => handleCardSelection(-1)}
             >
-                <Typography size={'bodyBig'} weight={'bold'} color={'blue'}>
-                    {title}
-                </Typography>
-                <SvgWrapper keySvg={'plusIcon'} color={'secondary'} />
+                {activeCard !== -1 ? (
+                    <>
+                        <Typography
+                            size={'bodyBig'}
+                            weight={'bold'}
+                            color={'blue'}
+                        >
+                            {title}
+                        </Typography>
+                        <SvgWrapper keySvg={'plusIcon'} color={'secondary'} />
+                    </>
+                ) : (
+                    <>
+                        <div className={styles.competitorContainerText}>
+                            <div className={styles.dot} />
+                            <div style={{ width: '100%' }}>
+                                <Input
+                                    fullWidth={true}
+                                    placeholder={t('Inserisci nome gruppo')}
+                                    value={newGroupTitle}
+                                    onChange={(e) =>
+                                        setNewGroupTitle(e.target.value)
+                                    }
+                                />
+                            </div>
+                        </div>
+                        <SvgWrapper
+                            size={'medium'}
+                            keySvg={'outlinedCheckmarkSvg'}
+                            color={'secondary'}
+                            onClick={handleCreateNewCompetitorGroup}
+                        />
+                    </>
+                )}
             </div>
             {data?.map((obj: any, idx: number) => (
                 <div
@@ -49,7 +83,13 @@ const CardSelectionCompetitor = ({
                     }
                     onClick={() => handleCardSelection(idx)}
                 >
-                    <div className={styles.cardHeader}>
+                    <div
+                        className={
+                            activeCard === -1
+                                ? styles.cardHeaderDisabled
+                                : styles.cardHeader
+                        }
+                    >
                         <div className={styles.dot} />
                         <div className={styles.titleContainer}>
                             <Typography size={'h5'} weight={'bold'}>
