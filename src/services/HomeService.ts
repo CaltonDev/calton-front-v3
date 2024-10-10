@@ -463,31 +463,38 @@ function compareCols(allFilters: AllFiltersInterface) {
         selectedSource,
     } = allFilters
 
-    return apiService.apiAnalysisComp.post(
-        '/analisiCompetitor/compareCols',
+    return useQuery<any, Error>(
+        [`compareCols${selectedSource}`],
+        () =>
+            apiService.apiAnalysisComp.post(
+                '/analisiCompetitor/compareCols',
+                {
+                    idSources: selectedSource,
+                    channels: selectedChannel,
+                    idLocations: selectedLocation,
+                    idTopics: selectedTopics,
+                    startDate: startDate,
+                    endDate: endDate,
+                    groupby: 'competitorName',
+                    xAxes: 'sentOriginal',
+                    xAxesType: 'percentage',
+                    xAxesCond: {
+                        value: 1,
+                    },
+                    yAxes: 'rating',
+                    yAxesCond: {},
+                    yAxesType: 'average',
+                    rAxes: '_id',
+                    rAxesCond: {},
+                    rAxesType: 'occurences',
+                    returnAnt: true,
+                    selectedProducts,
+                },
+                getHeaders()
+            ),
         {
-            idSources: selectedSource,
-            channels: selectedChannel,
-            idLocations: selectedLocation,
-            idTopics: selectedTopics,
-            startDate: startDate,
-            endDate: endDate,
-            groupby: 'competitorName',
-            xAxes: 'sentOriginal',
-            xAxesType: 'percentage',
-            xAxesCond: {
-                value: 1,
-            },
-            yAxes: 'rating',
-            yAxesCond: {},
-            yAxesType: 'average',
-            rAxes: '_id',
-            rAxesCond: {},
-            rAxesType: 'occurences',
-            returnAnt: true,
-            selectedProducts,
-        },
-        getHeaders()
+            staleTime: 0,
+        }
     )
 }
 
@@ -505,20 +512,27 @@ function compareMainKPI(
         selectedSource,
     } = allFilters
 
-    return apiService.apiAnalysisComp.post(
-        '/analisiCompetitor/compareMainKPI',
+    return useQuery<any, Error>(
+        [`compareMainKPI${selectedSource}`],
+        () =>
+            apiService.apiAnalysisComp.post(
+                '/analisiCompetitor/compareMainKPI',
+                {
+                    idSources: selectedSource,
+                    channels: selectedChannel,
+                    idLocations: selectedLocation,
+                    idTopics: selectedTopics,
+                    startDate: startDate,
+                    endDate: endDate,
+                    groupKey: 'competitorName',
+                    returnSentiment: returnSentiment,
+                    selectedProducts,
+                },
+                getHeaders()
+            ),
         {
-            idSources: selectedSource,
-            channels: selectedChannel,
-            idLocations: selectedLocation,
-            idTopics: selectedTopics,
-            startDate: startDate,
-            endDate: endDate,
-            groupKey: 'competitorName',
-            returnSentiment: returnSentiment,
-            selectedProducts,
-        },
-        getHeaders()
+            staleTime: 0,
+        }
     )
 }
 

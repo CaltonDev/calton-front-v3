@@ -4,6 +4,7 @@ import { RootState } from '../../store/store'
 import Reviews from '../Reviews/Reviews'
 import SurveyReviews from '../SurveyReviews/SurveyReviews'
 import SurveryReviewsTable from '../SurveryReviewsTable/SurveryReviewsTable'
+import ReviewsCompetitor from '../ReviewsCompetitor/ReviewsCompetitor'
 
 function ReviewsRedirect() {
     const platformType = useSelector(
@@ -11,7 +12,13 @@ function ReviewsRedirect() {
     )
     return (
         <>
-            {platformType === 'reviews' ? <Reviews /> : <SurveryReviewsTable />}
+            {platformType === 'reviews' ? (
+                <Reviews />
+            ) : platformType === 'competitor' ? (
+                <ReviewsCompetitor />
+            ) : (
+                <SurveryReviewsTable />
+            )}
         </>
     )
 }
