@@ -5,13 +5,16 @@ import Typography from '../Typography/Typography'
 import TextContainer from '../TextContainer/TextContainer'
 import { useTranslation } from 'react-i18next'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import { useNavigate } from 'react-router-dom'
 const CardSelection = ({
     title,
     data,
     setSelectedCard,
     activeCard,
 }: CardSelectionProps) => {
+    const history = useNavigate()
     const handleCardSelection = (idx: number) => {
+        if (idx === -1) history('/surveys/new')
         if (setSelectedCard) setSelectedCard(idx)
     }
 

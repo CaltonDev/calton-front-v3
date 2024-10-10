@@ -18,14 +18,14 @@ const AddFonti = lazy(() => import('../pages/AddFonti/AddFonti'))
 const SmartResponseEdit = lazy(
     () => import('../pages/SmartResponseEdit/SmartResponsesEdit')
 )
-// const UploadFonti = lazy(() => import('../pages/UploadFonti/UploadFonti'))
+const UploadFonti = lazy(() => import('../pages/UploadFonti/UploadFonti'))
 const Topic = lazy(() => import('../pages/Topic/Topic'))
 const Hours = lazy(() => import('../pages/Hours/Hours'))
 const SelectableCards = lazy(
     () => import('../pages/SelectableCards/SelectableCards')
 )
 const SurveyReviews = lazy(() => import('../pages/SurveyReviews/SurveyReviews'))
-
+const SurveyCreate = lazy(() => import('../pages/SurveyCreate/SurveyCreate'))
 export const objRoutes = {
     Dashboards: {
         path: 'home',
@@ -84,5 +84,9 @@ export const objRoutes = {
     InsightsSurvey: {
         path: 'insights/:id',
         component: SurveyReviews,
+    },
+    CreateSurvey: {
+        path: 'surveys/new',
+        component: SurveyCreate,
     },
 }
