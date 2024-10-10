@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.btnContainer {
+  @extend .iconsContainer;
+  gap: 10px;
+}

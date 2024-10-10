@@ -314,7 +314,7 @@ const SvgWrapper = ({
                 ) : keySvg === 'TheFork.svg' ? (
                     <TheForkSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'close.svg' ? (
-                    <CloseIconSvg />
+                    <CloseIconSvg fillColor={iconColor} />
                 ) : keySvg === 'expand.svg' ? (
                     <ExpandIconSvg />
                 ) : keySvg === 'menu.svg' ? (
