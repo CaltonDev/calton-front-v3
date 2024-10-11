@@ -27,10 +27,10 @@ const LocalPost = lazy(() => import('../pages/LocalPost/LocalPost'))
 const AddCompetitor = lazy(() => import('../pages/AddCompetitor/AddCompetitor'))
 
 export const objRoutes = {
-    /*Dashboards: {
+    Dashboards: {
         path: 'home',
         component: Home,
-    },*/
+    },
     Luoghi: {
         path: 'locations',
         component: Luoghi,
@@ -86,8 +86,8 @@ export const objRoutes = {
         component: LocalPost,
     },
     AddCompetitorsSource: {
-        //path: 'home/AddCompetitorsSource',
-        path: 'home',
+        path: 'home/AddCompetitorsSource',
+        //path: 'home',
         component: AddCompetitor,
     },
 }
