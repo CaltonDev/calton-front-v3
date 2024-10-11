@@ -189,7 +189,9 @@ function getMenus(
     skip = 0,
     limit = 15,
     isSingle = false,
-    isFilter = false
+    isFilter = false,
+    totalNumberOfRecords = 0,
+    isPrefetchNextPage = false
 ) {
     const body: ListingServiceBody = {
         code,
@@ -199,7 +201,29 @@ function getMenus(
         isSingle,
         isFilter,
     }
-    return apiService.apiListings.post('/getMenus', body, getHeaders())
+
+    const queryResult = useQuery<any, Error>(
+        ['menus', body],
+        () => apiService.apiListings.post('/getMenus', body, getHeaders()),
+        {
+            staleTime: 5 * 60 * 1000,
+            keepPreviousData: true,
+        }
+    )
+
+    if (isPrefetchNextPage) {
+        prefetchNextPage({
+            queryKey: 'menus',
+            endpoint: 'getMenus',
+            body,
+            skip,
+            limit,
+            totalNumberOfRecords,
+            staleTime: 5 * 60 * 1000,
+        })
+    }
+
+    return queryResult
 }
 
 function getPhotos(
@@ -209,7 +233,9 @@ function getPhotos(
     returnAnt = false,
     fromCustomers = false,
     sourcePhoto = null,
-    nextPageToken = null
+    nextPageToken = null,
+    totalNumberOfRecords = 0,
+    isPrefetchNextPage = false
 ) {
     const body: ListingServiceBody = {
         listingsName,
@@ -220,7 +246,28 @@ function getPhotos(
         nextPageToken,
         fromCustomers,
     }
-    return apiService.apiListings.post('/getPhotos', body, getHeaders())
+    const queryResult = useQuery<any, Error>(
+        ['photos', body],
+        () => apiService.apiListings.post('/getPhotos', body, getHeaders()),
+        {
+            staleTime: 5 * 60 * 1000,
+            keepPreviousData: true,
+        }
+    )
+
+    if (isPrefetchNextPage) {
+        prefetchNextPage({
+            queryKey: 'photos',
+            endpoint: 'getPhotos',
+            body,
+            skip,
+            limit,
+            totalNumberOfRecords,
+            staleTime: 5 * 60 * 1000,
+        })
+    }
+
+    return queryResult
 }
 
 function editHours(

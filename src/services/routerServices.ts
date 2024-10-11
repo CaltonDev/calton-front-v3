@@ -25,6 +25,8 @@ const SelectableCards = lazy(
 )
 const LocalPost = lazy(() => import('../pages/LocalPost/LocalPost'))
 const AddCompetitor = lazy(() => import('../pages/AddCompetitor/AddCompetitor'))
+const Menus = lazy(() => import('../pages/Menus/Menus'))
+const Photos = lazy(() => import('../pages/Photos/Photos'))
 
 export const objRoutes = {
     Dashboards: {
@@ -89,5 +91,13 @@ export const objRoutes = {
         path: 'home/AddCompetitorsSource',
         //path: 'home',
         component: AddCompetitor,
+    },
+    ListingMenu: {
+        path: 'menu',
+        component: Menus,
+    },
+    ListingPhotos: {
+        path: 'photo',
+        component: Photos,
     },
 }
