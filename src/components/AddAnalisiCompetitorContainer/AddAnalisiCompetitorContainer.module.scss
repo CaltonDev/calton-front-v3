@@ -28,3 +28,421 @@
 .description {
   width: 60%;
 }
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardContainer {
+  gap: 25px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+
+
+
+
+
+.containerExt{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.containerBig{
+  flex-grow: 1;
+  flex-basis: 70%;
+  width: 70%;
+}
+.swatch{
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+  margin-left: 50px;
+}
+.wrapperName{
+  margin-left: 20px;
+  width: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.colorIcon{
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+  margin-left: 5px;
+}
+.containerSmall{
+  flex-grow: 1;
+  flex-basis: 25%;
+  width: 25%;
+  padding: 20px;
+  height: 87.5vh;
+  max-height: 87.5vh;
+  border-radius: 14px;
+  background: #fff;
+  margin-left: 4%;
+  box-shadow: 0px 16px 25px rgba(209, 213, 214, 0.35);
+}
+.headerSmall{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: left;
+  color: #321d48;
+}
+.subheader{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: left;
+  color: #321d48;
+  margin-bottom: 40px;
+}
+.descLottie{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: normal;
+  margin-top: 25px;
+  font-size: 18px;
+  text-align: left;
+  color: #321d48;
+  margin-bottom: 40px;
+}
+.searcher{
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0px 16px 25px rgba(209, 213, 214, 0.35);
+}
+.searcherBlue:focus, .searcherBlue:focus{
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  border: none;
+}
+.smallH3{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: left;
+  color: #321d48;
+}
+.containerFlex{
+  display: flex;
+  justify-content: space-between;
+}
+.recapTitile{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  max-width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: left;
+  color: #321d48;
+}
+.containerLottie{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+.searcherBlue{
+  width: 85%;
+  height: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 12px;
+  background: #3f49fc;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: left;
+  color: #fff;
+  padding-left: 30px;
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  border: none;
+}
+.containerRecap{
+  overflow-y: scroll;
+  max-height: 72vh;
+}
+.containerResult{
+  display: flex;
+  width: 100%;
+  padding-top: 10px;
+  cursor: pointer;
+  text-align: left;
+  color: #3f49fc;
+}
+.addButton{
+  width: 30px;
+  height: 30px;
+  background: #3f49fc;
+  cursor: pointer;
+  border-radius: 100px;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  color: white;
+  margin-right: 10px;
+}
+.textName {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: 600;
+  font-size: 18px;
+}
+.textAddress {
+  font-weight: 400;
+  font-size: 16px;
+}
+.addButton:before{
+  content: "+";
+}
+.selectedButton{
+  background-color: #34e0a1;
+  font-size: 14px;
+  -webkit-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
+}
+.selectedButton:before{
+  content: "✓";
+}
+.pagination{
+  display: flex;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: right;
+  color: #3f49fc;
+  width: 30%;
+  cursor: pointer;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.selectAll{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  color: #34e0a1;
+}
+.myH4{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: left;
+  color: #321d48;
+  margin-left: 20px;
+}
+
+.cardRecap{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-bottom: 25px;
+  height: 85px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0px 16px 25px rgba(209, 213, 214, 0.35);
+}
+.myParagraph{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: normal;
+  font-size: 12px;
+  text-align: left;
+  line-height: 13px;
+  color: #8e839b;
+  margin-top: 1px;
+  margin-bottom: 0px;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.myParagraph2{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: left;
+  line-height: 16px;
+  color: #8e839b;
+  margin-top: 1px;
+  margin-bottom: 0px;
+  max-width: 100%;
+}
+.myAccordion{
+  border: none;
+  outline: none;
+  box-shadow: none!important;
+  background: white;
+}
+.myAccordion:before{
+  background-color: transparent!important;
+}
+.addGroup{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  color: #3f49fc;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1300px) {
+  .containerBig{
+    flex-grow: 1;
+    flex-basis: 100%;
+    width: 100%;
+  }
+  .containerSmall{
+    flex-grow: 1;
+    flex-basis: 100%;
+    width: 100%;
+  }
+  .containerRecap{
+    margin-left: 0%;
+  }
+}
+.containerCard{
+  display: flex;
+  flex-wrap: wrap;
+}
+.myH3{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: left;
+  color: #321d48;
+}
+.suggested{
+  padding: 30px;
+  margin-top: 50px;
+  width: 100%;
+  height: 450px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0px 16px 25px rgba(209, 213, 214, 0.35);
+}
+.btnActive{
+  color: white !important;
+  height: 35px!important;
+  border-radius: 25px!important;
+  background-color: #3e49fb!important;
+  font-weight: bold!important;
+  text-transform: none!important;
+  margin-bottom: 20px!important;
+  margin:5px!important;
+  width:250px!important;
+}
+.divAddBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+.iconBtn{
+  width: 20px;
+  color: #321d48
+}
+.searchBox{
+  position: absolute;
+  top: 47vh;
+  left: 250px;
+  z-index: 10;
+  height: 440px;
+  max-height: 440px;
+  overflow-y: scroll;
+  width: 47vw;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0px 25px 99px rgba(0, 0, 0, 0.16);
+  animation: fadeIn 0.5s ease-in both;
+}
+@media only screen and (min-width: 920px)  {
+  .searchBox{
+    top: 41vh;
+  }
+}
+@media screen
+and (min-device-width: 1200px)
+and (max-device-width: 1600px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (min-resolution: 192dpi) {
+  .searchBox{
+    top: 48vh;
+  }
+}
+
+.hide{
+  animation: fadeOut 0.3s ease-in both;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -5vh, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, -3vh, 0);
+    visibility: hidden;
+  }
+}
+.containerHeaderRecap{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.toolbarBoxLabel{
+  white-space: nowrap;
+  font-size: 15px;
+  margin: 0 15px;
+  color: #321d48;
+  font-weight: 700;
+  font-family: "Montserrat", "Heebo", sans-serif!important;
+  text-align: center
+}
+.toolbarBoxLabelOf {
+  margin: 0 5px;
+  width: 65px
+}
+.searcherBlue::placeholder{
+  color: rgba(255, 255, 255, 0.83);
+}

@@ -6,6 +6,7 @@ import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import AddAnalisiCompetitorContainer from '../../components/AddAnalisiCompetitorContainer/AddAnalisiCompetitorContainer'
 import CardSelectionCompetitor from '../../components/CardSelection/CardSelectionCompetitor/CardSelectionCompetitor'
+import CompetitorService from '../../services/CompetitorService'
 
 function AddCompetitor() {
     const { t } = useTranslation()
@@ -82,8 +83,6 @@ function AddCompetitor() {
                         {selectedCard !== -2 ? (
                             <AddAnalisiCompetitorContainer
                                 data={data[selectedCard]}
-                                type={'account'}
-                                isNew={selectedCard === -1}
                             />
                         ) : (
                             <>

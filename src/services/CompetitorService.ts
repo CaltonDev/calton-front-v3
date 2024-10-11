@@ -1,5 +1,6 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
+import { useQuery } from 'react-query'
 
 interface AddCompetitorBody {
     lat: number
@@ -70,7 +71,7 @@ function addCompetitor(
     )
 }
 
-function getCompetitor(type: string, text: string): Promise<any> {
+function getCompetitor(type: string[], text: string): Promise<any> {
     const body = {
         type,
         text,
@@ -83,13 +84,18 @@ function getCompetitor(type: string, text: string): Promise<any> {
     )
 }
 
-function getAllCompetitor(): Promise<any> {
-    const body = {}
-
-    return apiService.apiUrl.post(
-        '/competitors/getAllCompetitor',
-        body,
-        getHeaders()
+function getAllCompetitor() {
+    return useQuery<any, Error>(
+        ['competitors/getAllCompetitor'],
+        () =>
+            apiService.apiUrl.post(
+                '/competitors/getAllCompetitor',
+                {},
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
     )
 }
 
