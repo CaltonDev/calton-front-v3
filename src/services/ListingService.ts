@@ -76,7 +76,9 @@ function getListings(
         pendingVerification: null,
         isDuplicated: null,
         missedStoreCode: null,
-    }
+    },
+    totalNumberOfRecords = 0,
+    isPrefetchNextPage = false
 ) {
     const body: ListingServiceBody = {
         limit,
@@ -84,7 +86,29 @@ function getListings(
         listingsName,
         listingStateObj,
     }
-    return apiService.apiListings.post('/getListings', body, getHeaders())
+
+    const queryResult = useQuery<any, Error>(
+        ['getListings', body],
+        () => apiService.apiListings.post('/getListings', body, getHeaders()),
+        {
+            staleTime: 5 * 60 * 1000,
+            keepPreviousData: true,
+        }
+    )
+
+    if (isPrefetchNextPage) {
+        prefetchNextPage({
+            queryKey: 'allListings',
+            endpoint: 'getListings',
+            body,
+            skip,
+            limit,
+            totalNumberOfRecords,
+            staleTime: 5 * 60 * 1000,
+        })
+    }
+
+    return queryResult
 }
 
 function getNumberOfListings(
@@ -102,11 +126,22 @@ function getNumberOfListings(
         fromMenu,
         listingStateObj,
     }
-    return apiService.apiListings.post(
-        '/getNumberOfListings',
-        body,
-        getHeaders()
+
+    const queryResult = useQuery<any, Error>(
+        ['getNumberOfListings', body],
+        () =>
+            apiService.apiListings.post(
+                '/getNumberOfListings',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 5 * 60 * 1000,
+            keepPreviousData: true,
+        }
     )
+
+    return queryResult
 }
 
 function getCountOfListings(

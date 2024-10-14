@@ -28,6 +28,8 @@ export interface TypographyProps {
         | 'blue'
         | 'black'
         | 'green'
+        | 'yellow'
+        | 'red'
     italic?: boolean
     underline?: boolean
     uppercase?: boolean

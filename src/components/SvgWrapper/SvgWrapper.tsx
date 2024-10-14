@@ -80,6 +80,9 @@ import EyeSvg from './SvgIcons/EyeSvg'
 import CopySvg from './SvgIcons/CopySvg'
 import ShareSvg from './SvgIcons/ShareSvg'
 import OutlinedCheckmarkSvg from './SvgIcons/OutlinedCheckmarkSvg'
+import PuntiVenditaSvg from './SvgIcons/PuntiVenditaSvg'
+import PhoneSvg from './SvgIcons/PhoneSvg'
+import WorldSvg from './SvgIcons/WorldSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -427,6 +430,12 @@ const SvgWrapper = ({
                     <QuestionIconSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'surveyIconSvg' ? (
                     <SurveyIconSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'puntiVenditaSvg' ? (
+                    <PuntiVenditaSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'phoneSvg' ? (
+                    <PhoneSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'worldSvg' ? (
+                    <WorldSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'checkmarkSvg' ? (
                     <CheckmarkSvg
                         width={iconWidth}

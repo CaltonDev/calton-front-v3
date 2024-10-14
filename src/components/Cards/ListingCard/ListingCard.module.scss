@@ -1,0 +1,114 @@
+.container {
+  border-radius: 10px;
+  background: #FFF;
+  //height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.containerCustomAutocomplete {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+.paddedContainer {
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.reviewReply {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.contentDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.leftItem {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.reviewContainer {
+  width: 608px;
+  min-height: 65px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.placeholderImg {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: #C0BBC5;
+}
+
+.textareaContainer {
+  padding: 6px 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.labelContainer {
+  padding-left: 12px;
+}
+
+.fontW{
+  font-family: "Roboto" !important;
+  font-size: 14px;
+  font-weight: 300;
+  color: #321D48;
+  line-height: 17.5px;
+  margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
+}
