@@ -62,6 +62,22 @@
   gap: 10px;
 }
 
+.iconsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.storeCodeContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 5px 10px;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid var(--Neutral-900, #321D48);
+}
+
 .tagsContainer {
   display: flex;
   flex-direction: row;

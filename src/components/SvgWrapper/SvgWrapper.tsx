@@ -83,6 +83,8 @@ import OutlinedCheckmarkSvg from './SvgIcons/OutlinedCheckmarkSvg'
 import PuntiVenditaSvg from './SvgIcons/PuntiVenditaSvg'
 import PhoneSvg from './SvgIcons/PhoneSvg'
 import WorldSvg from './SvgIcons/WorldSvg'
+import ExclamationPointSvg from './SvgIcons/ExclamationPointSvg'
+import SinglePencilSvg from './SvgIcons/SinglePencilSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -359,6 +361,8 @@ const SvgWrapper = ({
                     <MessageSvg fillColor={iconColor} />
                 ) : keySvg === 'reply.svg' ? (
                     <ReplySvg fillColor={iconColor} />
+                ) : keySvg === 'exclamationPoint.svg' ? (
+                    <ExclamationPointSvg fillColor={iconColor} />
                 ) : keySvg === 'negativeSentiment.svg' ? (
                     <NegativeSentimentIcon
                         width={iconWidth}
@@ -424,6 +428,8 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'uploadSvg' ? (
                     <UploadSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'singlePencilSvg' ? (
+                    <SinglePencilSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'infoIconSvg' ? (
                     <InfoIconSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'questionIconSvg' ? (

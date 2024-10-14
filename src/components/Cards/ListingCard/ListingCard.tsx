@@ -24,11 +24,18 @@ function ListingCard({ index, listing }: ListingCardProps) {
                                 {listing?.companyName}
                             </Typography>
                         </div>
-                        <SvgWrapper
-                            keySvg={'openInNewPageIcon.svg'}
-                            size={'small'}
-                            onClick={openInNewPage}
-                        />
+                        <div className={styles.iconsContainer}>
+                            <SvgWrapper
+                                keySvg={'openInNewPageIcon.svg'}
+                                size={'small'}
+                                onClick={openInNewPage}
+                            />
+                            <SvgWrapper
+                                keySvg={'burgerIconDot.svg'}
+                                size={'small'}
+                                onClick={openInNewPage}
+                            />
+                        </div>
                     </div>
                     <div className={styles.contentDiv}>
                         <div className={styles.title}>
@@ -57,12 +64,19 @@ function ListingCard({ index, listing }: ListingCardProps) {
                     </div>
                     <div className={styles.tagsContainer}>
                         <div className={styles.leftItem}>
-                            <TextContainer
-                                label={listing?.storeCode}
-                                textColor={'black'}
-                                color={'#F1F1F1'}
-                                iconSvg={'Amazon.svg'}
-                            />
+                            <div className={styles.storeCodeContainer}>
+                                <Typography
+                                    size={'bodyMedium'}
+                                    weight={'light'}
+                                >
+                                    {t('Codice negozio: ') + listing?.storeCode}
+                                </Typography>
+                                <SvgWrapper
+                                    keySvg={'singlePencilSvg'}
+                                    size={'small'}
+                                    onClick={openInNewPage}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className={styles.reviewContainer}>
@@ -70,15 +84,12 @@ function ListingCard({ index, listing }: ListingCardProps) {
                             <Typography size={'bodyMedium'} weight={'bold'}>
                                 {t('Categorie')}
                             </Typography>
-                            <Typography size={'bodyMedium'} weight={'light'}>
+                            <Typography size={'bodyMedium'} weight={'normal'}>
                                 {formatCategories()}
                             </Typography>
                         </div>
                         <div className={styles.title}>
-                            <Typography size={'bodyMedium'} weight={'bold'}>
-                                {t('Descrizione')}
-                            </Typography>
-                            <Typography size={'bodyMedium'} weight={'light'}>
+                            <Typography size={'bodyMedium'} weight={'normal'}>
                                 {listing?.profile?.description}
                             </Typography>
                         </div>
@@ -105,7 +116,13 @@ function ListingCard({ index, listing }: ListingCardProps) {
                                   ? 'negative'
                                   : 'neutral'
                         }
-                        iconSvg={'reply.svg'}
+                        iconSvg={
+                            listing?.metadata?.hasVoiceOfMerchant
+                                ? 'checkmarkSvg'
+                                : listing?.metadata?.duplicateLocation
+                                  ? 'exclamationPoint.svg'
+                                  : 'close.svg'
+                        }
                     />
                 </div>
             </div>
