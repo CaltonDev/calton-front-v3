@@ -827,7 +827,9 @@ function CardInsights({
     }
 
     const changeValue = (value: any) => {
-        setChartTypeVisualization(value?.length > 0 ? value[0]?.key : 0)
+        setChartTypeVisualization(
+            value?.key ?? CustomConstants.chartType.standard
+        )
     }
 
     return (
@@ -859,7 +861,6 @@ function CardInsights({
                             label={configDropDown[chartTypeVisualization]?.name}
                             placeholderInput={t('Seleziona grafico')}
                             primary={'name'}
-                            secondary={''}
                             labels={configDropDown ? configDropDown : []}
                             type={'channelSources'}
                             handleChange={changeValue}

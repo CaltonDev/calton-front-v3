@@ -183,7 +183,7 @@ export default function CustomAutocomplete({
     useEffect(() => {
         if (handleChange) {
             handleChange(
-                !multiple ? pendingValue[0] ?? null : pendingValue,
+                !multiple ? (pendingValue[0] ?? null) : pendingValue,
                 type
             )
         }
@@ -193,7 +193,7 @@ export default function CustomAutocomplete({
     const handleSubmit = () => {
         if (handleChange) {
             handleChange(
-                !multiple ? pendingValue[0] ?? null : pendingValue,
+                !multiple ? (pendingValue[0] ?? null) : pendingValue,
                 type
             )
         }
@@ -572,29 +572,9 @@ export default function CustomAutocomplete({
                                                 const option =
                                                     displayOptions[index]
 
-                                                console.log(
-                                                    'option: ',
-                                                    option?.accountName,
-                                                    ' pending: ',
-                                                    pendingValue[0]
-                                                        ?.accountName,
-                                                    'check: ',
-                                                    [pendingValue].findIndex(
-                                                        (item: any) =>
-                                                            (item?._id !=
-                                                                null &&
-                                                                option?._id ==
-                                                                    null &&
-                                                                item?._id ===
-                                                                    option?._id) ||
-                                                            item ===
-                                                                option?._id ||
-                                                            item === option
-                                                    )
-                                                )
-
                                                 const selected =
                                                     getSelected(option)
+                                                console.log({ selected })
                                                 return (
                                                     <li
                                                         className={
@@ -650,79 +630,7 @@ export default function CustomAutocomplete({
                                                                             : ''
                                                                     }
                                                                     checked={
-                                                                        multiple
-                                                                            ? pendingValue.findIndex(
-                                                                                  (
-                                                                                      item: any
-                                                                                  ) =>
-                                                                                      (item?._id !=
-                                                                                          null &&
-                                                                                          option?._id ==
-                                                                                              null &&
-                                                                                          item?._id ===
-                                                                                              option?._id) ||
-                                                                                      item ===
-                                                                                          option?._id ||
-                                                                                      item ===
-                                                                                          option ||
-                                                                                      (customCheckEquality &&
-                                                                                          customCheckEquality?.length >
-                                                                                              0 &&
-                                                                                          option[
-                                                                                              customCheckEquality[0]
-                                                                                          ] !=
-                                                                                              null &&
-                                                                                          item[
-                                                                                              customCheckEquality[1]
-                                                                                          ] !=
-                                                                                              null &&
-                                                                                          option[
-                                                                                              customCheckEquality[0]
-                                                                                          ] ===
-                                                                                              item[
-                                                                                                  customCheckEquality[1]
-                                                                                              ])
-                                                                              ) !==
-                                                                              -1
-                                                                            : [
-                                                                                  pendingValue,
-                                                                              ].findIndex(
-                                                                                  (
-                                                                                      item: any
-                                                                                  ) =>
-                                                                                      (item[0] &&
-                                                                                          item[0]
-                                                                                              ?.accountName ===
-                                                                                              option?.accountName) ||
-                                                                                      (item?._id !=
-                                                                                          null &&
-                                                                                          option?._id ==
-                                                                                              null &&
-                                                                                          item?._id ===
-                                                                                              option?._id) ||
-                                                                                      item ===
-                                                                                          option?._id ||
-                                                                                      item ===
-                                                                                          option ||
-                                                                                      (customCheckEquality &&
-                                                                                          customCheckEquality?.length >
-                                                                                              0 &&
-                                                                                          option[
-                                                                                              customCheckEquality[0]
-                                                                                          ] !=
-                                                                                              null &&
-                                                                                          item[
-                                                                                              customCheckEquality[1]
-                                                                                          ] !=
-                                                                                              null &&
-                                                                                          option[
-                                                                                              customCheckEquality[0]
-                                                                                          ] ===
-                                                                                              item[
-                                                                                                  customCheckEquality[1]
-                                                                                              ])
-                                                                              ) !==
-                                                                              -1
+                                                                        selected
                                                                     }
                                                                     title={
                                                                         primary !==
