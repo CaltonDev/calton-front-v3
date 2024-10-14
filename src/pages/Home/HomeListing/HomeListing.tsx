@@ -375,7 +375,11 @@ function HomeListing() {
 
     return (
         <PageContainer>
-            <PageHeader heading={t('Home')} subheading={true}></PageHeader>
+            <PageHeader
+                heading={t('Home')}
+                subheading={true}
+                bulkEdit={true}
+            ></PageHeader>
             <div className={styles.container}>
                 <div className={styles.headerContainer}>
                     <InfoCardViewer data={AiData} customWidth={'45%'} />

@@ -1,5 +1,3 @@
-import { ReactElement } from 'react'
-
 export interface PageHeaderProps {
     heading: string
     subheading?: boolean | string
@@ -8,4 +6,5 @@ export interface PageHeaderProps {
     arrowBackUrl?: string
     showArrowBack?: boolean
     hideFilters?: boolean
+    bulkEdit?: boolean
 }

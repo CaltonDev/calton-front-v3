@@ -12,6 +12,7 @@ import { getConfigFilter } from '../../../utils/filterHelpers'
 import FiltersSummaryContainer from '../FiltersSummaryContainer/FiltersSummaryContainer'
 import Typography from '../../Typography/Typography'
 import { RootState } from '../../../store/store'
+import Button from '../../Button/Button'
 
 function PageHeader({
     heading,
@@ -21,6 +22,7 @@ function PageHeader({
     arrowBackUrl,
     showArrowBack = false,
     hideFilters = false,
+    bulkEdit = false,
 }: PageHeaderProps) {
     const dispatch = useDispatch()
     const history = useNavigate()
@@ -89,7 +91,10 @@ function PageHeader({
                 )}
                 {heading && (
                     <div className={styles.headingContainer}>
-                        <div onClick={handleHeadingClick}>
+                        <div
+                            onClick={handleHeadingClick}
+                            className={styles.headingContainer}
+                        >
                             {showArrowBack && (
                                 <div>
                                     <span
@@ -117,29 +122,49 @@ function PageHeader({
                             <Typography size={'h1'} weight={'bold'}>
                                 {t(heading)}
                             </Typography>
+                            {!(
+                                window.location.pathname.includes(
+                                    'locations'
+                                ) ||
+                                window.location.pathname.includes('fonti') ||
+                                window.location.pathname.includes(
+                                    'integrazioniOnboarding'
+                                ) ||
+                                window.location.pathname.includes(
+                                    'integrations'
+                                ) ||
+                                window.location.pathname.includes(
+                                    'chooseLocations'
+                                ) ||
+                                window.location.pathname.includes(
+                                    'AddCompetitorsSource'
+                                ) ||
+                                window.location.pathname.includes('products')
+                            ) &&
+                                !hideFilters && (
+                                    <div id={'test'}>
+                                        <FiltersSummaryContainer
+                                            filter={getConfigFilter(filters, t)}
+                                        />
+                                    </div>
+                                )}
                         </div>
-                        {!(
-                            window.location.pathname.includes('locations') ||
-                            window.location.pathname.includes('fonti') ||
-                            window.location.pathname.includes(
-                                'integrazioniOnboarding'
-                            ) ||
-                            window.location.pathname.includes('integrations') ||
-                            window.location.pathname.includes(
-                                'chooseLocations'
-                            ) ||
-                            window.location.pathname.includes(
-                                'AddCompetitorsSource'
-                            ) ||
-                            window.location.pathname.includes('products')
-                        ) &&
-                            !hideFilters && (
-                                <div id={'test'}>
-                                    <FiltersSummaryContainer
-                                        filter={getConfigFilter(filters, t)}
-                                    />
-                                </div>
-                            )}
+                        {bulkEdit && (
+                            <div className={styles.btnContainer}>
+                                <Button
+                                    variant={'outline'}
+                                    size={'small'}
+                                    arrowPlacement={'right'}
+                                    icon={'arrowDownSvg'}
+                                    iconColor={'secondary'}
+                                >
+                                    {t('Operazioni in bulk')}
+                                </Button>
+                                <Button variant={'solid'} size={'small'}>
+                                    {t('Aggiungi locale')}
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
