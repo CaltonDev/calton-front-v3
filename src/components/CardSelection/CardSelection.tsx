@@ -52,10 +52,10 @@ const CardSelection = ({
                     onClick={() => handleCardSelection(idx)}
                 >
                     <div>
-                        <Typography size={'bodySmall'} weight={'bold'}>
+                        <Typography size={'h5'} weight={'bold'}>
                             {obj?.title}
                         </Typography>
-                        <Typography size={'bodyXXSmall'} weight={'light'}>
+                        <Typography size={'bodySmall'} weight={'light'}>
                             {obj?.description}
                         </Typography>
 

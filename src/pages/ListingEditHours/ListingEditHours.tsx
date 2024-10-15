@@ -6,8 +6,7 @@ import PageContainer from '../../components/PageComponents/PageContainer/PageCon
 import CardSelection from '../../components/CardSelection/CardSelection'
 import StandardHours from '../../components/StandardHours/StandardHours'
 import SpecialHours from '../../components/SpecialHours/SpecialHours'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import ListingService from '../../services/ListingService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 import {
@@ -101,21 +100,25 @@ function ListingEditHours() {
 
     const handleDeleteSubCard = (index: number) => {
         const nextListingMoreHours = {
-            ...listingMoreHours,
-            moreHours: listingMoreHours?.moreHours?.filter(
-                (item, i) => i !== index
-            ),
+            moreHours:
+                listingMoreHours?.moreHours?.filter((item, i) => i !== index) ||
+                null,
+            formatted_address: listingMoreHours?.formatted_address || '',
+            title: listingMoreHours?.title || '',
+            moreHoursTypes: listingMoreHours?.moreHoursTypes || null,
         }
         queryClient.removeQueries('moreHours')
-
+        handleSaveMoreHours(nextListingMoreHours)
         setSelectedCard(2)
         setSubCardMoreHours(undefined)
         refetchMoreHours()
     }
 
-    const handleSaveMoreHours = () => {
+    const handleSaveMoreHours = (
+        optionalData: ListingMoreHoursProps | null = null
+    ) => {
         mutation.mutate({
-            hours: { ...listingMoreHours },
+            hours: optionalData ? { ...optionalData } : { ...listingMoreHours },
             listingsName: selectedListings,
             isMore: true,
             isNotSpecified: false,
