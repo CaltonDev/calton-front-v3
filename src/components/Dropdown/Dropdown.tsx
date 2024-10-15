@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import Button from '../Button/Button'
 import Typography from '../Typography/Typography'
+import Hooks from '../../utils/hooks/Hooks'
 
 const Dropdown = ({
     isButton = false,
@@ -11,6 +12,12 @@ const Dropdown = ({
     dropdownData,
 }: DropdownProps) => {
     const [openDropdown, setOpenDropdown] = useState(false)
+
+    const handleClickOutside = () => {
+        setOpenDropdown(false)
+    }
+
+    const ref = Hooks.useOutsideClick(handleClickOutside)
 
     return (
         <div className={styles.container}>
@@ -34,6 +41,7 @@ const Dropdown = ({
             )}
             {openDropdown && (
                 <div
+                    ref={ref}
                     className={
                         isButton ? styles.dropdownMenuBtn : styles.dropdownMenu
                     }

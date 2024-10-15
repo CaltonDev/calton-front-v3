@@ -8,4 +8,9 @@ export interface PageHeaderProps {
     hideFilters?: boolean
     bulkEdit?: boolean
     dropdownData?: any
+    isOnBulkEdit?: boolean
+    setIsOnBulkEdit?: (arg0: boolean) => void
+    selectAllListing?: () => void
+    allSelected?: boolean
+    bulkOperationType?: string
 }

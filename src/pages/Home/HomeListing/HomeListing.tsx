@@ -7,32 +7,10 @@ import PageContainer from '../../../components/PageComponents/PageContainer/Page
 import PageHeader from '../../../components/PageComponents/PageHeader/PageHeader'
 import { RootState } from '../../../store/store'
 import styles from './HomeListing.module.scss'
-import { getNoCodeFromPlatfrom } from '../../../helpers/helpers'
-import LineChart from '../../../components/Charts/LineChart/LineChart'
-import ChartConfig from '../../../constants/ChartConfig'
 import InfoCardViewer from '../../../components/InfoCardViewer/InfoCardViewer'
-import TextContainer from '../../../components/TextContainer/TextContainer'
-import HomeService from '../../../services/HomeService'
-import Tabs from '../../../components/TabsComponent/Tabs'
-import CollapsableCard from '../../../components/CollapsableCard/CollapsableCard'
-import DistributionRatingsGraph from '../../../components/Graphs/DistributionRatingsGraph/DistributionRatingsGraph'
-import { saveAs } from 'file-saver'
-import BubbleChartHome from '../../../components/Charts/BubbleCharts/BubbleChartHome/BubbleChartHome'
-import TableSelector from '../../../components/TableSelector/TableSelector'
-import FilterService from '../../../services/FilterService'
 import TrackerCard from '../../../components/TrackerCard/TrackerCard'
-import DonutCard from '../../../components/DonutCard/DonutCard'
-import TierListCard from '../../../components/TierListCard/TierListCard'
-import Button from '../../../components/Button/Button'
 import PageNavigator from '../../../components/PageNavigator/PageNavigator'
-import ReviewCard from '../../../components/Cards/ReviewCard/ReviewCard'
 import { PaginationState } from '@tanstack/react-table'
-import FeedbackService from '../../../services/FeedbackService'
-import SmartResponseService from '../../../services/SmartResponseService'
-import _ from 'lodash'
-import TopicService from '../../../services/TopicService'
-import { showToast } from '../../../store/toast/errorToastSlice'
-import ScraperService from '../../../services/ScraperService'
 import InfoCard from '../../../components/InfoCard/InfoCard'
 import ListingService from '../../../services/ListingService'
 import ListingCard from '../../../components/Cards/ListingCard/ListingCard'
@@ -52,7 +30,16 @@ function HomeListing() {
     const filteredListings = useSelector(
         (state: RootState) => state.Filters.selectedLocationListing
     )
+    //TODO: check if this all locations is useful
+    const allLocations = useSelector(
+        (state: RootState) => state.SelectableFilters.data
+    )
 
+    const { selectedLocationListing } = useSelector(selectAllFilters)
+    const [bulkEdit, setBulkEdit] = useState(false)
+    const [selectAllListing, setSelectAllListing] = useState(false)
+    const [bulkList, setBulkList] = useState([])
+    const [bulkOperationType, setBulkOperationType] = useState('edit')
     useEffect(() => {
         ServiceWrapper.wrapperLoadFilters(allFilters, dispatch, platformType, t)
     }, [])
@@ -88,213 +75,6 @@ function HomeListing() {
         pageIndex: 0,
         pageSize: 20,
     })
-
-    const feedbackInfo = FeedbackService.getInfoFeedbacks(
-        [],
-        allFilters,
-        undefined,
-        false,
-        getNoCodeFromPlatfrom(),
-        pagination.pageIndex * pagination.pageSize,
-        pagination.pageSize,
-        [
-            {
-                name: 'data',
-                direction: 'desc',
-            },
-        ],
-        search,
-        false,
-        undefined,
-        'xlsx',
-        undefined,
-        undefined,
-        null,
-        null,
-        true,
-        undefined
-    )?.data?.data
-
-    const feedbacks = FeedbackService.getFeedbacks(
-        [],
-        allFilters,
-        undefined,
-        false,
-        getNoCodeFromPlatfrom(),
-        pagination.pageIndex * pagination.pageSize,
-        pagination.pageSize,
-        [
-            {
-                name: 'data',
-                direction: 'desc',
-            },
-        ],
-        search,
-        false,
-        undefined,
-        'xlsx',
-        undefined,
-        undefined,
-        null,
-        null,
-        true,
-        undefined
-    )?.data?.all_feed
-
-    const smartResponse =
-        SmartResponseService.getAllSmartResponses()?.data?.data
-
-    const handleChangeSmartResponse = (ev: any, index: number) => {
-        //  console.log(ev)
-        const smartSelected = ev
-        const foundedFeed = feedbacks[index]
-        const indiceToChange = index
-        if (smartSelected && smartSelected.srName) {
-            if (foundedFeed?.obj?.isReviewer[0]?.data?.name) {
-                const nameToAdd = foundedFeed?.obj?.isReviewer[0]?.data?.name
-                if (nameToAdd.split(' ').length > 0) {
-                    smartSelected.responseText =
-                        smartSelected?.responseText?.replace(
-                            new RegExp(/{{(.*?)}}/),
-                            nameToAdd.split(' ')[0]
-                        )
-                } else {
-                    smartSelected.responseText =
-                        smartSelected?.responseText?.replace(
-                            new RegExp(/{{(.*?)}}/),
-                            nameToAdd
-                        )
-                }
-            }
-            foundedFeed.string.isAnswer[0].data['smartSelected'] = smartSelected
-        } else {
-            foundedFeed.string.isAnswer[0].data['smartSelected'] = undefined
-        }
-        const tmp = JSON.parse(JSON.stringify(feedbacks))
-        tmp[indiceToChange] = foundedFeed
-        //setFeedbacks(tmp) //todo: check if necessary with davide
-    }
-
-    const handleChangeTopic = async (topics: any, index: number) => {
-        const idFeedback = feedbacks[index]?.string?.constant?.find(
-            (elm: any) => elm.col === '_id'
-        )?.data
-        let foundedFeed = feedbacks[index]
-
-        const beforeChangeTopic = JSON.parse(JSON.stringify(feedbacks[index]))
-        if (_.isEqual(beforeChangeTopic?.list?.isTopic[0]?.data, topics)) {
-            return
-        }
-        if (foundedFeed?.list?.isTopic[0]?.data) {
-            foundedFeed.list.isTopic[0].data = topics
-        } else {
-            foundedFeed.list.isTopic = [{ data: topics }]
-        }
-        const tmp = JSON.parse(JSON.stringify(feedbacks))
-        tmp[index] = foundedFeed
-        //setFeedbacks(tmp) //todo: check if necessary with davide
-        try {
-            await TopicService.handleTopicToFeedback(idFeedback, topics)
-            //loadFeedbacks() //setFeedbacks(tmp) //todo: check if necessary with davide
-        } catch (e) {
-            dispatch(
-                showToast({
-                    type: 2,
-                    text: t(
-                        'Impossibile modificare i topic, riprovare più tardi'
-                    ),
-                })
-            )
-            foundedFeed = beforeChangeTopic
-            const tmp = JSON.parse(JSON.stringify(feedbacks))
-            tmp[index] = foundedFeed
-            //setFeedbacks(tmp) //todo: check if necessary with davide
-        }
-    }
-
-    const handleClickChangeSentiment = async (
-        sentiment: any,
-        index: number
-    ) => {
-        const idFeedback = feedbacks[index]?.string?.constant?.find(
-            (elm: any) => elm.col === '_id'
-        )?.data
-        const idSource = feedbacks[index]?.string?.constant?.find(
-            (elm: any) => elm.col === 'idSource'
-        )?.data
-        let foundedFeed = feedbacks[index]
-
-        const beforeChangeSentiment = JSON.parse(
-            JSON.stringify(feedbacks[index])
-        )
-        foundedFeed.integer.isSentiment[0].data = sentiment
-        const tmp = JSON.parse(JSON.stringify(feedbacks))
-        tmp[index] = foundedFeed
-        //setFeedbacks(tmp) //todo: check if necessary with davide
-        try {
-            await FeedbackService.editFeedbackSentiment(
-                idFeedback,
-                undefined,
-                undefined,
-                undefined,
-                idSource,
-                undefined,
-                sentiment,
-                undefined
-            )
-            //loadFeedbacks() //todo: check if necessary with davide
-        } catch (e) {
-            dispatch(
-                showToast({
-                    type: 2,
-                    text: t(
-                        'Impossibile modificare il sentiment, riprovare più tardi'
-                    ),
-                })
-            )
-            foundedFeed = beforeChangeSentiment
-            const tmp = JSON.parse(JSON.stringify(feedbacks))
-            tmp[index] = foundedFeed
-            //setFeedbacks(tmp) //todo: check if necessary with davide
-        }
-    }
-
-    const handleChangeAnswer = async (
-        ev: any,
-        index: number,
-        toMod: boolean
-    ) => {}
-
-    const changePage = (direction: any) => {
-        if (direction === 'next') {
-            setPagination({
-                pageIndex: pagination.pageIndex + 1,
-                pageSize: pagination.pageSize,
-            })
-        } else if (direction === 'previous') {
-            setPagination({
-                pageIndex: pagination.pageIndex - 1,
-                pageSize: pagination.pageSize,
-            })
-        } else {
-            const number = Number(direction)
-            if (
-                number > 0 &&
-                number <=
-                    Math.ceil(feedbackInfo?.countFeed / pagination.pageSize)
-            ) {
-                setPagination({
-                    pageIndex: number - 1,
-                    pageSize: pagination.pageSize,
-                })
-            } else {
-                setPagination({
-                    pageIndex: 0,
-                    pageSize: pagination.pageSize,
-                })
-            }
-        }
-    }
 
     const changeElementsPerPage = (e: any) => {
         setPagination({
@@ -373,21 +153,73 @@ function HomeListing() {
         filterListingStateHelper()
     )?.data?.data
 
-    const modifyBulk = () => {}
+    const handleBulkEditBtn = (type: string) => {
+        setBulkEdit(!bulkEdit)
+        setBulkOperationType(type)
+    }
     const dropdownData = [
         {
             label: t('Modifica'),
             labelColor: 'black',
             labelIcon: 'editIcon',
-            onClickAction: modifyBulk,
+            onClickAction: () => handleBulkEditBtn('edit'),
         },
         {
             label: t('Elimina'),
             labelColor: 'red',
             labelIcon: 'trashIcon',
-            onClickAction: modifyBulk,
+            onClickAction: () => handleBulkEditBtn('delete'),
         },
     ]
+
+    const handleSelectAllListing = () => {
+        if (selectAllListing) {
+            setBulkList([])
+            setSelectAllListing(false)
+        } else {
+            setSelectAllListing(!selectAllListing)
+            //TODO: check if this all locations is useful
+            //setBulkList(selectedLocationListing?.length === 0 ? allLocations : listings)
+
+            setBulkList(listings)
+        }
+    }
+
+    useEffect(() => {
+        if (bulkList?.length < listings?.length) {
+            setSelectAllListing(false)
+        }
+    }, [bulkList])
+
+    const changePage = (direction: any) => {
+        if (direction === 'next') {
+            setPagination({
+                pageIndex: pagination.pageIndex + 1,
+                pageSize: pagination.pageSize,
+            })
+        } else if (direction === 'previous') {
+            setPagination({
+                pageIndex: pagination.pageIndex - 1,
+                pageSize: pagination.pageSize,
+            })
+        } else {
+            const number = Number(direction)
+            if (
+                number > 0 &&
+                number <= Math.ceil(numberOfListings / pagination.pageSize)
+            ) {
+                setPagination({
+                    pageIndex: number - 1,
+                    pageSize: pagination.pageSize,
+                })
+            } else {
+                setPagination({
+                    pageIndex: 0,
+                    pageSize: pagination.pageSize,
+                })
+            }
+        }
+    }
 
     return (
         <PageContainer>
@@ -395,23 +227,30 @@ function HomeListing() {
                 heading={t('Home')}
                 subheading={true}
                 bulkEdit={true}
+                isOnBulkEdit={bulkEdit}
+                setIsOnBulkEdit={setBulkEdit}
                 dropdownData={dropdownData}
+                selectAllListing={handleSelectAllListing}
+                allSelected={selectAllListing}
+                bulkOperationType={bulkOperationType}
             ></PageHeader>
             <div className={styles.container}>
-                <div className={styles.headerContainer}>
-                    <InfoCardViewer data={AiData} customWidth={'45%'} />
-                    <div className={styles.itemContainer}>
-                        <InfoCard
-                            value={64}
-                            label={t('Totale punti vendita')}
-                            icon={'puntiVenditaSvg'}
-                            backgroundIconColor={'#E1F6FF'}
-                        />
+                {!bulkEdit && (
+                    <div className={styles.headerContainer}>
+                        <InfoCardViewer data={AiData} customWidth={'45%'} />
+                        <div className={styles.itemContainer}>
+                            <InfoCard
+                                value={64}
+                                label={t('Totale punti vendita')}
+                                icon={'puntiVenditaSvg'}
+                                backgroundIconColor={'#E1F6FF'}
+                            />
+                        </div>
+                        <div className={styles.itemContainer}>
+                            <TrackerCard data={trackerData} maxHeight={true} />
+                        </div>
                     </div>
-                    <div className={styles.itemContainer}>
-                        <TrackerCard data={trackerData} maxHeight={true} />
-                    </div>
-                </div>
+                )}
                 <div className={styles.navigatorRow}>
                     <div>
                         <PageNavigator
@@ -427,9 +266,17 @@ function HomeListing() {
                     {listings?.map((listing: any, idx: number) => {
                         return (
                             <ListingCard
+                                isOnBulkEdit={bulkEdit}
                                 key={idx}
                                 index={idx}
                                 listing={listing}
+                                isSelected={bulkList?.find(
+                                    (elm: any) =>
+                                        elm?.idAccountLocationGbp ===
+                                        listing?.idAccountLocationGbp
+                                )}
+                                bulkList={bulkList}
+                                setBulkList={setBulkList}
                             />
                         )
                     })}

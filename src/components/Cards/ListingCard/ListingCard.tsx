@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './ListingCard.module.scss'
 import { useTranslation } from 'react-i18next'
 import Typography from '../../Typography/Typography'
@@ -7,7 +7,15 @@ import Tag from '../../Tag/Tag'
 import TextContainer from '../../TextContainer/TextContainer'
 import { ListingCardProps } from './ListingCard.interface'
 import Dropdown from '../../Dropdown/Dropdown'
-function ListingCard({ index, listing }: ListingCardProps) {
+import Checkbox from '../../Checkbox/Checkbox'
+function ListingCard({
+    index,
+    listing,
+    isOnBulkEdit = false,
+    isSelected = false,
+    bulkList = [],
+    setBulkList,
+}: ListingCardProps) {
     const { t } = useTranslation()
 
     const openInNewPage = () => {}
@@ -45,8 +53,33 @@ function ListingCard({ index, listing }: ListingCardProps) {
             onClickAction: verifiyListing,
         },
     ]
+
+    const onChange = () => {
+        if (isSelected) {
+            //Remove from list
+            const objToRemove = bulkList.findIndex(
+                (obj) => obj._id === listing._id
+            )
+            const tmpArrayBulk = [...bulkList]
+            tmpArrayBulk.splice(objToRemove, 1)
+            if (setBulkList) {
+                setBulkList(tmpArrayBulk)
+            }
+        } else {
+            //Add to list
+            if (setBulkList) {
+                setBulkList([...bulkList, listing])
+            }
+        }
+    }
+
     return (
-        <div className={styles.container} key={index}>
+        <div
+            className={
+                isOnBulkEdit ? styles.containerDisabled : styles.container
+            }
+            key={index}
+        >
             <div className={styles.paddedContainer}>
                 <div className={styles.headerContainer}>
                     <div className={styles.header}>
@@ -56,12 +89,23 @@ function ListingCard({ index, listing }: ListingCardProps) {
                             </Typography>
                         </div>
                         <div className={styles.iconsContainer}>
-                            <SvgWrapper
-                                keySvg={'openInNewPageIcon.svg'}
-                                size={'small'}
-                                onClick={openInNewPage}
-                            />
-                            <Dropdown dropdownData={dropdownData} />
+                            {!isOnBulkEdit ? (
+                                <>
+                                    {' '}
+                                    <SvgWrapper
+                                        keySvg={'openInNewPageIcon.svg'}
+                                        size={'small'}
+                                        onClick={openInNewPage}
+                                    />
+                                    <Dropdown dropdownData={dropdownData} />
+                                </>
+                            ) : (
+                                <Checkbox
+                                    onClick={onChange}
+                                    checked={isSelected}
+                                    color={'shadow'}
+                                />
+                            )}
                         </div>
                     </div>
                     <div className={styles.contentDiv}>
@@ -101,6 +145,7 @@ function ListingCard({ index, listing }: ListingCardProps) {
                                 <SvgWrapper
                                     keySvg={'singlePencilSvg'}
                                     size={'small'}
+                                    disabled={isOnBulkEdit}
                                     onClick={openInNewPage}
                                 />
                             </div>

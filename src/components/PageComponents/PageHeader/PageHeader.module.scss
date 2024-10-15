@@ -21,4 +21,10 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
+  align-items: center;
+}
+
+.bulkEditBtnContainer {
+  @extend .btnContainer;
+  gap: 25px;
 }

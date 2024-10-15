@@ -8,6 +8,12 @@
   width: 100%;
 }
 
+.containerDisabled {
+  @extend .container;
+  border: 2px solid #C0BBC5;
+  background: #F1F1F1;
+}
+
 .containerCustomAutocomplete {
     display: flex;
     width: 100%;

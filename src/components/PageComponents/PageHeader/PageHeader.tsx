@@ -14,6 +14,7 @@ import Typography from '../../Typography/Typography'
 import { RootState } from '../../../store/store'
 import Button from '../../Button/Button'
 import Dropdown from '../../Dropdown/Dropdown'
+import Checkbox from '../../Checkbox/Checkbox'
 
 function PageHeader({
     heading,
@@ -25,6 +26,11 @@ function PageHeader({
     hideFilters = false,
     bulkEdit = false,
     dropdownData,
+    isOnBulkEdit = false,
+    setIsOnBulkEdit,
+    selectAllListing,
+    allSelected = false,
+    bulkOperationType = 'edit',
 }: PageHeaderProps) {
     const dispatch = useDispatch()
     const history = useNavigate()
@@ -143,7 +149,8 @@ function PageHeader({
                                 ) ||
                                 window.location.pathname.includes('products')
                             ) &&
-                                !hideFilters && (
+                                !hideFilters &&
+                                !isOnBulkEdit && (
                                     <div id={'test'}>
                                         <FiltersSummaryContainer
                                             filter={getConfigFilter(filters, t)}
@@ -151,7 +158,49 @@ function PageHeader({
                                     </div>
                                 )}
                         </div>
-                        {bulkEdit && (
+                        {isOnBulkEdit && (
+                            <div className={styles.bulkEditBtnContainer}>
+                                <Checkbox
+                                    checked={allSelected}
+                                    color={'shadow'}
+                                    title={t('Seleziona tutto')}
+                                    onClick={
+                                        selectAllListing && selectAllListing
+                                    }
+                                />
+                                <div className={styles.btnContainer}>
+                                    <Button
+                                        variant={'outline'}
+                                        size={'small'}
+                                        onClick={() =>
+                                            setIsOnBulkEdit &&
+                                            setIsOnBulkEdit(false)
+                                        }
+                                    >
+                                        {t('Annulla')}
+                                    </Button>
+                                    <Button
+                                        variant={'solid'}
+                                        size={'small'}
+                                        customColor={
+                                            bulkOperationType === 'delete'
+                                                ? '#FF1654'
+                                                : ''
+                                        }
+                                        customTextColor={
+                                            bulkOperationType === 'delete'
+                                                ? '#FFD3DF'
+                                                : ''
+                                        }
+                                    >
+                                        {bulkOperationType === 'edit'
+                                            ? t('Modifica')
+                                            : t('Elimina')}
+                                    </Button>
+                                </div>
+                            </div>
+                        )}
+                        {bulkEdit && !isOnBulkEdit && (
                             <div className={styles.btnContainer}>
                                 <Dropdown
                                     isButton={true}
