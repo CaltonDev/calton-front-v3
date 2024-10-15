@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next'
 import React from 'react'
 import styles from './SpecialTimeInput.module.scss'
-import { PlusOutlined } from '@ant-design/icons'
 import { handleAddingSpecialTimeInterval } from '../../helpers/editHoursHelpers'
-import StyledDatePicker from '../StyledDatePicker/StyledDatePicker'
 import Checkbox from '../Checkbox/Checkbox'
 import { SpecialHoursProps } from '../../pages/ListingEditHours/ListingEditHours.interface'
 import ListingSpecialHoursTimePicker from '../ListingSpecialHoursTimePicker/ListingSpecialHoursTimePicker'
+import { default as DatePicker } from '../DatePicker/DatePicker'
+import Button from '../Button/Button'
 
 interface SpecialTimeInputProps {
     index: number
@@ -15,11 +15,6 @@ interface SpecialTimeInputProps {
         React.SetStateAction<SpecialHoursProps[]>
     >
     period: SpecialHoursProps
-}
-
-interface CustomInputProps {
-    value: string
-    onClick: () => void
 }
 
 function SpecialTimeInput({
@@ -79,20 +74,6 @@ function SpecialTimeInput({
         setDistinctPeriods(tmpPeriod)
     }
 
-    const CustomInput = React.forwardRef<HTMLInputElement, CustomInputProps>(
-        ({ value, onClick }, ref) => (
-            <input
-                className={styles.customInput}
-                readOnly
-                onClick={onClick}
-                ref={ref}
-                value={value}
-            />
-        )
-    )
-
-    CustomInput.displayName = 'CustomInput'
-
     const handleAddMore = (startDate: any, endDate: any) => {
         handleAddingSpecialTimeInterval(
             startDate,
@@ -128,65 +109,49 @@ function SpecialTimeInput({
             key={period?.toString() + index}
         >
             <div className={styles.holidayContent}>
-                <StyledDatePicker
+                <DatePicker
+                    variant={'primary'}
                     selected={startDate}
                     onChange={(date: any) => handleSetStartDate(date)}
-                    selectsRange={false}
-                    isClearable={false}
-                    shouldCloseOnSelect={true}
-                    startOpen={false}
-                    preventOpenOnFocus={true}
-                    allowSameDay={true}
-                    //locale={i18n.language}
-                    placeholderText="00/00/0000"
-                    dateFormat="dd/MM/yyyy"
-                    // customInput={<CustomInput />}
                 />
                 <div className={styles.timePickerContainer}>
-                    <div className={styles.timePickerRow}>
-                        {!checkedStatus && period?.hours?.length > 0
-                            ? period?.hours?.map((h, i) => {
-                                  return (
-                                      <div
-                                          key={
-                                              h?.openTime?.hours
-                                                  ? index + h.openTime.hours + i
-                                                  : index + i
-                                          }
-                                      >
-                                          <ListingSpecialHoursTimePicker
-                                              periodIndex={index}
-                                              hourIndex={i}
-                                              hour={h}
-                                              distinctPeriods={distinctPeriods}
-                                              setDistinctPeriods={
-                                                  setDistinctPeriods
-                                              }
-                                              lastElementIndex={
-                                                  period?.hours?.length - 1
-                                              }
-                                          />
-                                      </div>
-                                  )
-                              })
-                            : !checkedStatus && (
+                    {!checkedStatus && period?.hours?.length > 0
+                        ? period?.hours?.map((h, i) => {
+                              return (
                                   <div
-                                      style={{
-                                          cursor: 'pointer',
-                                          marginLeft: '1em',
-                                          marginRight: 'auto',
-                                          marginBottom: '3px',
-                                      }}
-                                      onClick={() =>
-                                          handleAddMore(startDate, endDate)
+                                      key={
+                                          h?.openTime?.hours
+                                              ? index + h.openTime.hours + i
+                                              : index + i
                                       }
                                   >
-                                      <PlusOutlined
-                                          style={{ verticalAlign: 0 }}
+                                      <ListingSpecialHoursTimePicker
+                                          periodIndex={index}
+                                          hourIndex={i}
+                                          hour={h}
+                                          distinctPeriods={distinctPeriods}
+                                          setDistinctPeriods={
+                                              setDistinctPeriods
+                                          }
+                                          lastElementIndex={
+                                              period?.hours?.length - 1
+                                          }
                                       />
                                   </div>
-                              )}
-                    </div>
+                              )
+                          })
+                        : !checkedStatus && (
+                              <Button
+                                  onClick={() =>
+                                      handleAddMore(startDate, endDate)
+                                  }
+                                  size={'small'}
+                                  variant={'ghost'}
+                                  icon={'plusIcon'}
+                                  arrowPlacement={'center'}
+                                  iconOnly={true}
+                              />
+                          )}
                 </div>
             </div>
             <div className={styles.dayCheckbox}>
@@ -196,7 +161,6 @@ function SpecialTimeInput({
                     title={t('Chiuso')}
                 />
                 <Checkbox
-                    // style={{ marginLeft: 20 }}
                     onClick={() => handleH24Location()}
                     checked={openCheckedStatus}
                     title={t('Aperto H24')}

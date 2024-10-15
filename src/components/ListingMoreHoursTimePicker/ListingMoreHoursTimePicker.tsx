@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import { TimePicker } from 'antd'
 import styles from './ListingMoreHoursTimePicker.module.scss'
-import {
-    CaretDownOutlined,
-    CaretRightOutlined,
-    PlusOutlined,
-} from '@ant-design/icons'
-import moment from 'moment'
-import elimina_svg from '../../assets/img/elimina.svg'
-import {
-    // handleAddingMoreTimeInterval,
-    formatDataValue,
-    // handleDeleteMoreHoursTimeInterval,
-} from '../../helpers/editHoursHelpers'
+import moment, { Moment } from 'moment'
+import { formatDataValue } from '../../helpers/editHoursHelpers'
 import {
     handleDeleteMoreHoursTimeInterval,
     handleAddingMoreTimeInterval,
@@ -24,6 +13,8 @@ import {
     PeriodsMoreHoursProps,
 } from '../../pages/ListingEditHours/ListingEditHours.interface'
 import { weekdaysConstant } from '../../constants/CustomConstants'
+import { default as TimePicker } from '../TimePicker/TimePicker'
+import Button from '../Button/Button'
 
 dayjs.extend(customParseFormat)
 
@@ -50,17 +41,14 @@ const ListingMoreHoursTimePicker = ({
     period,
     currentPickerIdx,
 }: ListingMoreHoursTimePickerProps) => {
-    const [isTimePickerStart, setIsTimePickerStart] = useState(false)
-    const [isTimePickerEnd, setIsTimePickerEnd] = useState(false)
-
     const [valueStartTime, setValueStartTime] = useState(
-        dayjs(
+        moment(
             formatDataValue(period?.openTime?.hours, period?.openTime?.minutes),
             'HH:mm:ss'
         )
     )
     const [valueEndTime, setValueEndTime] = useState(
-        dayjs(
+        moment(
             formatDataValue(
                 period?.closeTime?.hours,
                 period?.closeTime?.minutes
@@ -81,17 +69,8 @@ const ListingMoreHoursTimePicker = ({
           })
         : null
 
-    const onSelectStartTime = (time: any) => {
+    const onSelectStartTime = (time: Moment) => {
         setValueStartTime(time)
-
-        // const currentPeriod = JSON.parse(JSON.stringify(distinctPeriod))
-
-        // currentPeriod.moreHours[periodIndex].periods[hourIndex].openTime = {
-        //     hours: time ? time['$H'] : null,
-        //     minutes: time ? time['$m'] : null,
-        // }
-
-        // setDistinctPeriod(currentPeriod)
 
         setDistinctPeriod((prevState: ListingMoreHoursProps | null) => {
             if (prevState && prevState.moreHours) {
@@ -106,9 +85,11 @@ const ListingMoreHoursTimePicker = ({
                                         return {
                                             ...period,
                                             openTime: {
-                                                hours: time ? time['$H'] : null,
+                                                hours: time
+                                                    ? time.hour()
+                                                    : null,
                                                 minutes: time
-                                                    ? time['$m']
+                                                    ? time.minute()
                                                     : null,
                                             },
                                         }
@@ -125,22 +106,9 @@ const ListingMoreHoursTimePicker = ({
         })
     }
 
-    const onSelectEndTime = (time: any) => {
+    const onSelectEndTime = (time: Moment) => {
         setValueEndTime(time)
 
-        // const currentPeriod = JSON.parse(JSON.stringify(distinctPeriod))
-        // const currentPeriod = { ...distinctPeriod }
-
-        // currentPeriod.moreHours[periodIndex].periods[hourIndex].closeTime = {
-        //     hours: time ? time['$H'] : null,
-        //     minutes: time ? time['$m'] : null,
-        // }
-        // currentPeriod[hourIndex].closeTime = {
-        //     hours: time ? time['$H'] : null,
-        //     minutes: time ? time['$m'] : null,
-        // }
-
-        // setDistinctPeriod(currentPeriod)
         setDistinctPeriod((prevState: ListingMoreHoursProps | null) => {
             if (prevState && prevState.moreHours) {
                 return {
@@ -154,9 +122,11 @@ const ListingMoreHoursTimePicker = ({
                                         return {
                                             ...period,
                                             closeTime: {
-                                                hours: time ? time['$H'] : null,
+                                                hours: time
+                                                    ? time.hour()
+                                                    : null,
                                                 minutes: time
-                                                    ? time['$m']
+                                                    ? time.minute()
                                                     : null,
                                             },
                                         }
@@ -174,12 +144,8 @@ const ListingMoreHoursTimePicker = ({
     }
 
     useEffect(() => {
-        const formatedDate = formatDataValue(
-            period?.openTime?.hours,
-            period?.openTime?.minutes
-        )
         setValueStartTime(
-            dayjs(
+            moment(
                 formatDataValue(
                     period?.openTime?.hours,
                     period?.openTime?.minutes
@@ -188,7 +154,7 @@ const ListingMoreHoursTimePicker = ({
             )
         )
         setValueEndTime(
-            dayjs(
+            moment(
                 formatDataValue(
                     period?.closeTime?.hours,
                     period?.closeTime?.minutes
@@ -202,85 +168,53 @@ const ListingMoreHoursTimePicker = ({
         <div className={styles.timePickerContainer} key={weekday}>
             <div className={styles.timePickers}>
                 <TimePicker
-                    className={styles.picker}
-                    onOpenChange={(e) => setIsTimePickerStart(e)}
-                    // placeholder={`Open at: ${startTime.format('HH:mm')}`}
                     onChange={onSelectStartTime}
-                    suffixIcon={
-                        isTimePickerStart ? (
-                            <CaretDownOutlined />
-                        ) : (
-                            <CaretRightOutlined />
-                        )
-                    }
-                    format="HH:mm"
-                    // picker="time"
-                    minuteStep={5}
                     value={valueStartTime}
+                    variant={'primary'}
                 />
-            </div>
-            <div className={styles.timePickers}>
                 <TimePicker
-                    className={styles.picker}
-                    onOpenChange={(e) => setIsTimePickerEnd(e)}
-                    // placeholder={`Close at: ${endTime.format('HH:mm')}`}
                     onChange={onSelectEndTime}
-                    suffixIcon={
-                        isTimePickerEnd ? (
-                            <CaretDownOutlined />
-                        ) : (
-                            <CaretRightOutlined />
-                        )
-                    }
-                    format="HH:mm"
-                    // picker="time"
-                    minuteStep={5}
                     value={valueEndTime}
+                    variant={'primary'}
                 />
             </div>
-            {
-                <div
-                    onClick={() =>
-                        handleDeleteMoreHoursTimeInterval(
-                            weekday,
-                            periodIndex,
-                            hourIndex,
-                            distinctPeriod,
-                            setDistinctPeriod
-                        )
-                    }
-                    style={{ alignSelf: 'center', marginLeft: '1em' }}
-                >
-                    <img
-                        style={{ cursor: 'pointer' }}
-                        src={elimina_svg}
-                        width="20"
-                        height="20"
-                        alt=""
+            <div className={styles.actions}>
+                {
+                    <Button
+                        size={'small'}
+                        variant={'ghost'}
+                        icon={'trashIcon'}
+                        arrowPlacement={'center'}
+                        iconOnly={true}
+                        onClick={() =>
+                            handleDeleteMoreHoursTimeInterval(
+                                weekday,
+                                periodIndex,
+                                hourIndex,
+                                distinctPeriod,
+                                setDistinctPeriod
+                            )
+                        }
                     />
-                </div>
-            }
-            {currentPickerIdx === lastElementIndex && (
-                <div
-                    style={{
-                        cursor: 'pointer',
-                        marginLeft: '1em',
-                        marginRight: 'auto',
-                        marginTop: '5px',
-                        alignSelf: 'center',
-                    }}
-                    onClick={() =>
-                        handleAddingMoreTimeInterval(
-                            weekday,
-                            periodIndex,
-                            distinctPeriod,
-                            setDistinctPeriod
-                        )
-                    }
-                >
-                    <PlusOutlined style={{ verticalAlign: 0 }} />
-                </div>
-            )}
+                }
+                {currentPickerIdx === lastElementIndex && (
+                    <Button
+                        size={'small'}
+                        variant={'ghost'}
+                        icon={'plusIcon'}
+                        arrowPlacement={'center'}
+                        iconOnly={true}
+                        onClick={() =>
+                            handleAddingMoreTimeInterval(
+                                weekday,
+                                periodIndex,
+                                distinctPeriod,
+                                setDistinctPeriod
+                            )
+                        }
+                    />
+                )}
+            </div>
         </div>
     )
 }

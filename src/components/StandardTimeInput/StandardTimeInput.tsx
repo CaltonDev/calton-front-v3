@@ -9,6 +9,7 @@ import {
     PeriodProps,
 } from '../../pages/ListingEditHours/ListingEditHours.interface'
 import ConfirmClosedHoursModal from '../ConfirmClosedHoursModal/ConfirmClosedHoursModal'
+import Typography from '../Typography/Typography'
 
 interface StandardTimeInputProps {
     listing: ListingProps | null
@@ -74,44 +75,38 @@ export const StandardTimeInput = ({
             />
             {weekdaysConstant.map((d, i) => (
                 <div className={styles.openDayRow} key={i}>
-                    <div className={styles.dayTitle}>
-                        <span>{d}</span>
+                    <div className={styles.dayLabelContainer}>
+                        <Typography weight={'bold'} size={'bodyMedium'}>
+                            {t(d)}
+                        </Typography>
                     </div>
-                    <div className={styles.dayCheckbox}>
-                        <Checkbox
-                            onClick={() => handleCheckboxChange(i)}
-                            title={t('Chiuso')}
-                            checked={checkedStatus[i]}
-                            value={i}
-                        />
-                    </div>
+                    <Checkbox
+                        onClick={() => handleCheckboxChange(i)}
+                        title={t('Chiuso')}
+                        checked={checkedStatus[i]}
+                        value={i}
+                    />
                     <div className={styles.timePickerContainer}>
-                        <div className={styles.timePickerRow}>
-                            {!checkedStatus[i] &&
-                                listing &&
-                                listing[d] &&
-                                listing?.[d]?.map(
-                                    (period: PeriodProps, index: number) => {
-                                        return (
-                                            <div
-                                                className={styles.timePickerRow}
-                                                key={'standard' + d + index}
-                                            >
-                                                <ListingStandarHoursTimePicker
-                                                    listing={listing}
-                                                    setListing={setListing}
-                                                    period={period}
-                                                    weekday={d}
-                                                    index={index}
-                                                    lastElementIndex={
-                                                        listing?.[d]?.length - 1
-                                                    }
-                                                />
-                                            </div>
-                                        )
-                                    }
-                                )}
-                        </div>
+                        {!checkedStatus[i] &&
+                            listing &&
+                            listing[d] &&
+                            listing?.[d]?.map(
+                                (period: PeriodProps, index: number) => {
+                                    return (
+                                        <ListingStandarHoursTimePicker
+                                            key={'standard' + d + index}
+                                            listing={listing}
+                                            setListing={setListing}
+                                            period={period}
+                                            weekday={d}
+                                            index={index}
+                                            lastElementIndex={
+                                                listing?.[d]?.length - 1
+                                            }
+                                        />
+                                    )
+                                }
+                            )}
                     </div>
                 </div>
             ))}

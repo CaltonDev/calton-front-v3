@@ -5,7 +5,7 @@ export interface CardSelectionProps {
     setSelectedCard?: (arg0: any) => void
     addNewCard?: boolean
     wrappedComponent?: any
-    isWrappedComponent?: boolean
+    hasWrappedComponent?: boolean
     wrappedKey?: string
     isDeleteButton?: boolean
     handleDelete?: (arg0: any) => void

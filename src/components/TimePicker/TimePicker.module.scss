@@ -1,0 +1,74 @@
+@import '@Style/app';
+
+@mixin common-styles {
+    display: flex;
+    width: 100%;
+    min-width: 200px;
+    max-width: 500px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px 15px;
+    fonfont-family: map-deep-get($input, font-family);
+    font-style: map-deep-get($input, font-style);
+    font-weight: map-deep-get($input, font-weight);
+    font-size: map-deep-get($input, font-size);
+    line-height: map-deep-get($input, line-height);
+    color: map-deep-get($input, color);
+}
+
+.picker {
+    &.primary input {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, primary, border);
+    }
+
+    &.secondary input {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, secondary, border);
+    }
+
+    &.error input {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, error, border);
+        box-shadow: map-deep-get($input, colorKey, error, box-shadow);
+    }
+
+    &.success input {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, success, border);
+        box-shadow: map-deep-get($input, colorKey, success, box-shadow);
+    }
+
+    &.disabled input {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, disabled, border);
+        border-radius: map-deep-get($input, colorKey, disabled, border-radius);
+        background: map-deep-get($input, colorKey, disabled, background);
+    }
+
+    &.outlined input {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, outlined, border);
+        box-shadow: map-deep-get($input, colorKey, outlined, box-shadow);
+    }
+}
+
+.timePickerWrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    width: 16px; /* Ajuste o tamanho conforme necessário */
+    height: 16px; /* Ajuste o tamanho conforme necessário */
+    color: #000; /* Ajuste a cor conforme necessário */
+}

@@ -1,46 +1,44 @@
 .standardHoursContainer {
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
     flex-direction: column;
+    gap: 30px;
+}
+
+.standardHoursTitleContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
 }
 
 .customRow {
     display: flex;
     flex-wrap: wrap;
-    margin-left: -8px;
-    margin-right: -8px;
+    gap: 30px;
 }
 
 .customCol {
-    flex: 0 0 50%;
+    flex: 0 0 32%;
     max-width: 50%;
-    margin-bottom: 16px;
 }
 
 .labelContainer {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    margin-bottom: 25px;
+    gap: 10px;
 }
 
-.footer {
-    display: inline-flex;
-    margin-left: auto;
-    align-self: flex-end;
-    font-family: 'Montserrat', 'Heebo', sans-serif !important;
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
-.cancelButton {
-    width: 7rem;
-    text-align: center;
-    font-family: 'Montserrat', 'Heebo', sans-serif !important;
-    height: 2.5rem;
-    border-radius: 25px !important;
-    font-size: 12px;
-    border: none;
-    background-color: transparent;
-    color: #3f49fc;
-    font-weight: 700;
-    transition: box-shadow 0.2s ease;
+.buttonContainer button {
+    width: 42px;
 }

@@ -1,26 +1,20 @@
 import styles from './ListingStandardHoursTimePicker.module.scss'
 import React from 'react'
-import CustomTimePicker from '../CustomTimePicker/CustomTimePicker'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import {
     formatDataValue,
     handleDeleteTimeInterval,
     handleAddingTimeInterval,
 } from '../../helpers/editHoursHelpers'
-import { TimePicker } from 'antd'
 import {
     ListingProps,
     PeriodProps,
 } from '../../pages/ListingEditHours/ListingEditHours.interface'
 import { Weekdays } from '../../constants/CustomConstants'
-import moment from 'moment'
-import elimina_svg from '../../assets/img/elimina.svg'
-import {
-    CaretDownOutlined,
-    CaretRightOutlined,
-    PlusOutlined,
-} from '@ant-design/icons'
+import moment, { Moment } from 'moment'
+import { default as TimePicker } from '../TimePicker/TimePicker'
+import Button from '../Button/Button'
 
 dayjs.extend(customParseFormat)
 
@@ -42,13 +36,13 @@ const ListingStandarHoursTimePicker = ({
     lastElementIndex,
 }: ListingStandarHoursTimePickerProps) => {
     const [valueStartTime, setValueStartTime] = React.useState(
-        dayjs(
+        moment(
             formatDataValue(period?.openHours, period?.openMinutes),
             'HH:mm:ss'
         )
     )
     const [valueEndTime, setValueEndTime] = React.useState(
-        dayjs(
+        moment(
             formatDataValue(period?.closeHours, period?.closeMinutes),
             'HH:mm:ss'
         )
@@ -66,7 +60,7 @@ const ListingStandarHoursTimePicker = ({
           })
         : null
 
-    const onSelectStartTime = (time: Dayjs) => {
+    const onSelectStartTime = (time: Moment) => {
         if (!time) return
         setValueStartTime(time)
         if (!listing) return
@@ -84,7 +78,7 @@ const ListingStandarHoursTimePicker = ({
         setListing(currentList)
     }
 
-    const onSelectEndTime = (time: Dayjs) => {
+    const onSelectEndTime = (time: Moment) => {
         setValueEndTime(time)
         if (!listing) return
         const currentList = { ...listing }
@@ -99,21 +93,21 @@ const ListingStandarHoursTimePicker = ({
 
         currentList[weekday][index] = {
             ...period,
-            closeHours: time ? +time.format('$H') : 0,
-            closeMinutes: time ? +time.format('$m') : 0,
+            closeHours: time ? +time.format('H') : 0,
+            closeMinutes: time ? +time.format('m') : 0,
         }
         setListing(currentList)
     }
 
     React.useEffect(() => {
         setValueStartTime(
-            dayjs(
+            moment(
                 formatDataValue(period?.openHours, period?.openMinutes),
                 'HH:mm:ss'
             )
         )
         setValueEndTime(
-            dayjs(
+            moment(
                 formatDataValue(period?.closeHours, period?.closeMinutes),
                 'HH:mm:ss'
             )
@@ -121,64 +115,52 @@ const ListingStandarHoursTimePicker = ({
     }, [period])
 
     return (
-        <div className={styles.timePickerContainer} key={weekday}>
+        <div className={styles.timePickerContainer}>
             <div className={styles.timePickers}>
                 <TimePicker
-                    className={styles.picker}
-                    value={valueStartTime}
                     onChange={onSelectStartTime}
-                    format={'HH:mm'}
-                    minuteStep={5}
+                    value={valueStartTime}
+                    variant={'primary'}
                 />
-            </div>
-            <div className={styles.timePickers}>
                 <TimePicker
-                    className={styles.picker}
-                    value={valueEndTime}
                     onChange={onSelectEndTime}
-                    format={'HH:mm'}
-                    minuteStep={5}
+                    value={valueEndTime}
+                    variant={'primary'}
                 />
             </div>
-            {
-                <div
-                    onClick={() =>
-                        handleDeleteTimeInterval(
-                            weekday,
-                            startTime,
-                            endTime,
-                            index,
-                            setListing,
-                            listing
-                        )
-                    }
-                    style={{ alignSelf: 'center', marginLeft: '1em' }}
-                >
-                    <img
-                        style={{ cursor: 'pointer' }}
-                        src={elimina_svg}
-                        width="20"
-                        height="20"
-                        alt=""
+            <div className={styles.actions}>
+                {
+                    <Button
+                        size={'small'}
+                        variant={'ghost'}
+                        icon={'trashIcon'}
+                        arrowPlacement={'center'}
+                        iconOnly={true}
+                        onClick={() =>
+                            handleDeleteTimeInterval(
+                                weekday,
+                                startTime,
+                                endTime,
+                                index,
+                                setListing,
+                                listing
+                            )
+                        }
                     />
-                </div>
-            }
-            {index === lastElementIndex && (
-                <div
-                    style={{
-                        cursor: 'pointer',
-                        marginLeft: '1em',
-                        marginRight: 'auto',
-                        marginTop: '5px',
-                        alignSelf: 'center',
-                    }}
-                    onClick={() =>
-                        handleAddingTimeInterval(weekday, setListing)
-                    }
-                >
-                    <PlusOutlined style={{ verticalAlign: 0 }} />
-                </div>
-            )}
+                }
+                {index === lastElementIndex && (
+                    <Button
+                        size={'small'}
+                        variant={'ghost'}
+                        icon={'plusIcon'}
+                        arrowPlacement={'center'}
+                        iconOnly={true}
+                        onClick={() =>
+                            handleAddingTimeInterval(weekday, setListing)
+                        }
+                    />
+                )}
+            </div>
         </div>
     )
 }

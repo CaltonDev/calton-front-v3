@@ -17,6 +17,8 @@ import { objRoutes } from './services/routerServices'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import SignUp from './pages/SignUp/SignUp'
 import CompleteSignUp from './pages/CompleteSignUp/CompleteSignUp'
+import 'rc-time-picker/assets/index.css'
+
 const persistor = persistStore(store)
 
 const LazyComponentWrapper = ({

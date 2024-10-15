@@ -1,126 +1,132 @@
 @import '@Style/app';
 
-
 .button {
-  display: map-get($button, display);
-  flex-direction: map-get($button, flex-direction);
-  justify-content: map-get($button, justify-content);
-  align-items: map-get($button, align-items);
-  padding: map-get($button, padding);
-  //gap: map-get($button, gap);
-  background: map-get($button, background);
-  border-radius: map-get($button, border-radius);
-  font-size: map-get($button, font-size);
-  font-weight: map-get($button, font-weight);
-  font-family: map-get($button, font-family);
-  font-style: map-get($button, font-style);
-  //TODO: probably we should remove line-height
-  //line-height: map-get($button, line-height);
-  color: map-get($button, color);
-  flex: map-get($button, flex);
-  order: map-get($button, order);
-  flex-grow: map-get($button, flex-grow);
-  border: map-get($button, border);
-  cursor: pointer;
+    display: map-get($button, display);
+    flex-direction: map-get($button, flex-direction);
+    justify-content: map-get($button, justify-content);
+    align-items: map-get($button, align-items);
+    padding: map-get($button, padding);
+    //gap: map-get($button, gap);
+    background: map-get($button, background);
+    border-radius: map-get($button, border-radius);
+    font-size: map-get($button, font-size);
+    font-weight: map-get($button, font-weight);
+    font-family: map-get($button, font-family);
+    font-style: map-get($button, font-style);
+    //TODO: probably we should remove line-height
+    //line-height: map-get($button, line-height);
+    color: map-get($button, color);
+    flex: map-get($button, flex);
+    order: map-get($button, order);
+    flex-grow: map-get($button, flex-grow);
+    border: map-get($button, border);
+    cursor: pointer;
 
-  &.small {
-    height: map-deep-get($button, size, small, height);
-    //width: map-deep-get($button, size, small, width);
-    font-size: map-deep-get($button, size, small, font-size);
-  }
+    &.small {
+        height: map-deep-get($button, size, small, height);
+        // width: map-deep-get($button, size, small, width);
+        font-size: map-deep-get($button, size, small, font-size);
+    }
 
-  &.medium {
-    height: map-deep-get($button, size, medium, height);
-    //width: map-deep-get($button, size, medium, width);
-    font-size: map-deep-get($button, size, medium, font-size);
-  }
+    &.medium {
+        height: map-deep-get($button, size, medium, height);
+        // width: map-deep-get($button, size, medium, width);
+        font-size: map-deep-get($button, size, medium, font-size);
+    }
 
-  &.large {
-    height: map-deep-get($button, size, large, height);
-    //width: map-deep-get($button, size, large, width);
-    font-size: map-deep-get($button, size, large, font-size);
-  }
+    &.large {
+        height: map-deep-get($button, size, large, height);
+        // width: map-deep-get($button, size, large, width);
+        font-size: map-deep-get($button, size, large, font-size);
+    }
 
-  &.solid {
-    color: map-deep-get($button, variant, solid, color);
-  }
+    &.solid {
+        color: map-deep-get($button, variant, solid, color);
+    }
 
-  &.outline {
-    color: map-deep-get($button, variant, outline, color);
-    background: map-deep-get($button, variant, outline, background);
-    border: map-deep-get($button, variant, outline, border);
-  }
+    &.outline {
+        color: map-deep-get($button, variant, outline, color);
+        background: map-deep-get($button, variant, outline, background);
+        border: map-deep-get($button, variant, outline, border);
+    }
 
-  &.ghost {
-    color: map-deep-get($button, variant, ghost, color);
-    background: map-deep-get($button, variant, ghost, background);
-    border: map-deep-get($button, variant, ghost, border);
-  }
+    &.ghost {
+        color: map-deep-get($button, variant, ghost, color);
+        background: map-deep-get($button, variant, ghost, background);
+        border: map-deep-get($button, variant, ghost, border);
+    }
 
-  .disabled {
-    color: map-get($button, disabled, color);
-    background: map-get($button, disabled, background);
-  }
+    .disabled {
+        color: map-get($button, disabled, color);
+        background: map-get($button, disabled, background);
+    }
 
-  &.disabled-solid {
-    @extend .disabled;
-    color: map-deep-get($button, disabled, variant, solid, color);
-    background: map-deep-get($button, disabled, variant, solid, background);
-  }
+    &.disabled-solid {
+        @extend .disabled;
+        color: map-deep-get($button, disabled, variant, solid, color);
+        background: map-deep-get($button, disabled, variant, solid, background);
+    }
 
-  &.disabled-outline {
-    @extend .disabled;
-    color: map-deep-get($button, disabled, variant, outline, color);
-    background: map-deep-get($button, disabled, variant, outline, background);
-    border: map-deep-get($button, disabled, variant, outline, border);
-  }
+    &.disabled-outline {
+        @extend .disabled;
+        color: map-deep-get($button, disabled, variant, outline, color);
+        background: map-deep-get(
+            $button,
+            disabled,
+            variant,
+            outline,
+            background
+        );
+        border: map-deep-get($button, disabled, variant, outline, border);
+    }
 
-  &.disabled-ghost {
-    @extend .disabled;
-    color: map-deep-get($button, disabled, variant, ghost, color);
-    background: map-deep-get($button, disabled, variant, ghost, background);
-    border: map-deep-get($button, disabled, variant, ghost, border);
-  }
+    &.disabled-ghost {
+        @extend .disabled;
+        color: map-deep-get($button, disabled, variant, ghost, color);
+        background: map-deep-get($button, disabled, variant, ghost, background);
+        border: map-deep-get($button, disabled, variant, ghost, border);
+    }
 
-  &.arrowRight {}
+    &.arrowRight {
+    }
 
-  &.arrowLeft {
-    flex-direction: row-reverse;
-    margin-right: 5px;
-  }
+    &.arrowLeft {
+        flex-direction: row-reverse;
+        margin-right: 5px;
+    }
 
-  &.iconOnly-small {
-    height: map-deep-get($button, size, small, height);
-    width: map-deep-get($button, size, small, height);
-    padding: 0;
-  }
+    &.iconOnly-small {
+        height: map-deep-get($button, size, small, height);
+        width: map-deep-get($button, size, small, height);
+        padding: 0;
+    }
 
-  &.iconOnly-medium {
-    height: map-deep-get($button, size, medium, height);
-    width: map-deep-get($button, size, medium, height);
-    padding: 0;
-  }
+    &.iconOnly-medium {
+        height: map-deep-get($button, size, medium, height);
+        width: map-deep-get($button, size, medium, height);
+        padding: 0;
+    }
 
-  &.iconOnly-large {
-    height: map-deep-get($button, size, large, height);
-    width: map-deep-get($button, size, large, height);
-    padding: 0;
-  }
+    &.iconOnly-large {
+        height: map-deep-get($button, size, large, height);
+        width: map-deep-get($button, size, large, height);
+        padding: 0;
+    }
 
-  &.rounded-small {
-    border-radius: map-deep-get($button, size, small, height);
-  }
+    &.rounded-small {
+        border-radius: map-deep-get($button, size, small, height);
+    }
 
-  &.rounded-medium {
-    border-radius: map-deep-get($button, size, medium, height);
-  }
+    &.rounded-medium {
+        border-radius: map-deep-get($button, size, medium, height);
+    }
 
-  &.rounded-large {
-    border-radius: map-deep-get($button, size, large, height);
-  }
+    &.rounded-large {
+        border-radius: map-deep-get($button, size, large, height);
+    }
 }
 
 .fullwidth {
-  width: 100% !important;
-  height: auto;
+    width: 100% !important;
+    height: auto;
 }

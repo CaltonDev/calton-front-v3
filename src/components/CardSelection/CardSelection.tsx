@@ -14,7 +14,7 @@ const CardSelection = ({
     activeCard,
     addNewCard = true,
     wrappedComponent = <></>,
-    isWrappedComponent = false,
+    hasWrappedComponent = false,
     wrappedKey,
     isDeleteButton = false,
     handleDelete,
@@ -23,7 +23,14 @@ const CardSelection = ({
         if (setSelectedCard) setSelectedCard(idx)
     }
     return (
-        <div className={styles.container}>
+        <div
+            // className={
+            //     hasWrappedComponent
+            //         ? styles.container
+            //         : styles.containerWrappedComponent
+            // }
+            className={styles.container}
+        >
             {addNewCard && (
                 <div
                     className={
@@ -45,37 +52,83 @@ const CardSelection = ({
                     className={
                         activeCard === -1
                             ? styles.cardDisabled
-                            : activeCard === idx
+                            : activeCard === idx && hasWrappedComponent
                               ? styles.cardSelected
-                              : styles.card
+                              : activeCard === idx && !hasWrappedComponent
+                                ? styles.cardSelectedWrapped
+                                : hasWrappedComponent
+                                  ? styles.card
+                                  : styles.cardWrapped
                     }
                     onClick={() => handleCardSelection(idx)}
                 >
-                    <div>
-                        <Typography size={'bodySmall'} weight={'bold'}>
-                            {obj?.title}
-                        </Typography>
-                        <Typography size={'bodyXXSmall'} weight={'light'}>
-                            {obj?.description}
-                        </Typography>
-
-                        {isWrappedComponent &&
-                            obj?.title === wrappedKey &&
-                            wrappedComponent}
-                        {isDeleteButton && handleDelete && (
-                            <Button
-                                onClick={(event) => {
-                                    event.stopPropagation()
-                                    handleDelete(idx)
-                                }}
-                                // color={'secondary'}
-                                size={'small'}
-                                // text={'Delete'}
+                    {/* <div> */}
+                    <div
+                        className={
+                            hasWrappedComponent
+                                ? styles.cardTitleContainer
+                                : activeCard === idx
+                                  ? styles.cardTitleContainerWrappedSelected
+                                  : styles.cardTitleContainerWrapped
+                        }
+                    >
+                        {hasWrappedComponent ? (
+                            <Typography size={'h5'} weight={'bold'}>
+                                {obj?.title}
+                            </Typography>
+                        ) : (
+                            <Typography
+                                size={'bodySmall'}
+                                weight={'normal'}
+                                color={activeCard === idx ? 'white' : 'blue'}
                             >
-                                X
-                            </Button>
+                                {obj?.title}
+                            </Typography>
                         )}
+                        {hasWrappedComponent && (
+                            <SvgWrapper
+                                keySvg={'arrowForward'}
+                                color={'primaryIcon'}
+                                customHeight={24}
+                                customWidth={24}
+                            />
+                        )}
+                        {isDeleteButton &&
+                            handleDelete &&
+                            !hasWrappedComponent && (
+                                <Button
+                                    onClick={(event) => {
+                                        event.stopPropagation()
+                                        handleDelete(idx)
+                                    }}
+                                    variant={
+                                        activeCard === idx ? 'solid' : 'ghost'
+                                    }
+                                    size={'small'}
+                                    iconColor={
+                                        activeCard === idx
+                                            ? 'white'
+                                            : 'secondary'
+                                    }
+                                    arrowPlacement={'right'}
+                                    icon={'xIcon'}
+                                />
+                            )}
                     </div>
+
+                    <Typography size={'bodySmall'} weight={'light'}>
+                        {obj?.description}
+                    </Typography>
+
+                    {/* <div className={styles.containerWrappedCard}> */}
+                    {hasWrappedComponent && obj?.title === wrappedKey && (
+                        <div className={styles.wrappedComponentContainer}>
+                            {wrappedComponent}
+                        </div>
+                    )}
+
+                    {/* </div> */}
+                    {/* </div> */}
                     {obj?.value?.map((value: string, textIdx: number) => (
                         <TextContainer
                             key={textIdx}

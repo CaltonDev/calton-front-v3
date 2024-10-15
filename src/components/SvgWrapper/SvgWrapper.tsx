@@ -79,6 +79,7 @@ import PeopleSvg from './SvgIcons/PeopleSvg'
 import EyeSvg from './SvgIcons/EyeSvg'
 import CopySvg from './SvgIcons/CopySvg'
 import ShareSvg from './SvgIcons/ShareSvg'
+import XIcon from './SvgIcons/XIcon'
 
 const SvgWrapper = ({
     keySvg,
@@ -440,6 +441,12 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'eyeSvg' ? (
                     <EyeSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'xIcon' ? (
+                    <XIcon
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}

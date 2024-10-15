@@ -1,26 +1,13 @@
 .timePickerContainer {
     display: flex;
-    margin-right: 1em;
-    font-family: Montserrat;
-    margin-bottom: 0.5em;
+    gap: 20px;
 }
 
 .timePickers {
-    margin-left: 1em;
+    display: flex;
+    gap: 20px;
 }
 
-.picker {
-    height: 3em;
-    width: 12em;
-    border: 1.5px solid #321d488c;
-    border-radius: 100px;
-    border-inline-end-width: 1.5px;
-}
-
-input::placeholder {
-    color: #321d488c !important;
-}
-
-.picker:hover {
-    border: 1.5px solid #3f49fc;
+.actions {
+    display: flex;
 }

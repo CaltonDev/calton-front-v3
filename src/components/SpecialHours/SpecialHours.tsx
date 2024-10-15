@@ -13,6 +13,7 @@ import Tooltip from 'rc-tooltip'
 import useEditHours from '../../utils/hooks/useEditHours'
 import Button from '../Button/Button'
 import SpecialTimeInput from '../SpecialTimeInput/SpecialTimeInput'
+import Typography from '../Typography/Typography'
 
 interface SpecialHoursComponentProps {
     listing: ListingSpecialHoursProps | null
@@ -94,6 +95,12 @@ function SpecialHours({
         })
     }
 
+    const handleCancelMoreHours = () => {
+        console.log('handleCancelMoreHours')
+        setDistinctPeriods([])
+        refetch && refetch()
+    }
+
     React.useEffect(() => {
         let currMsg: { type?: string } = {}
 
@@ -109,68 +116,59 @@ function SpecialHours({
 
     return (
         <div className={styles.hoursContainer}>
+            <div className={styles.specialHoursTitleContainer}>
+                <div className={styles.labelContainer}>
+                    <Typography weight={'bold'} size={'h5'}>
+                        {t('Orario festivo')}
+                    </Typography>
+                    <Typography weight={'normal'} size={'bodyMedium'}>
+                        {t(
+                            "Conferma l'orario per i giorni di festa per indicare ai tuoi clienti le aperture della tua attività."
+                        )}
+                    </Typography>
+                </div>
+                {distinctPeriods.length > 0 && (
+                    <div className={styles.buttonContainer}>
+                        <Button
+                            onClick={handleCancelMoreHours}
+                            size="small"
+                            variant="outline"
+                        >
+                            {t('Annulla')}
+                        </Button>
+                        <Button
+                            onClick={handleSave}
+                            size="small"
+                            variant="solid"
+                        >
+                            {t('Salva')}
+                        </Button>
+                    </div>
+                )}
+            </div>
             <div className={styles.dateHours} key={distinctPeriods?.toString()}>
                 {distinctPeriods?.map((period, idx) => {
                     return (
-                        <div
-                            style={{ margin: '1em 0' }}
+                        <SpecialTimeInput
                             key={period?.toString() + idx}
-                        >
-                            <span style={{ fontWeight: 700, fontSize: '1em' }}>
-                                {t('Data')}
-                            </span>
-                            <Tooltip
-                                // style={{ margin: '0 auto' }}
-                                overlay={t('Elimina')}
-                                placement={'top'}
-                            >
-                                {/* <Button
-                                    icon={'trashIcon'}
-                                    iconOnly={true}
-                                    iconColor={'white'}
-                                    variant={'outline'}
-                                    onClick={() => handleRemovePeriod(idx)}
-                                /> */}
-                                <button>
-                                    <BsTrash
-                                        onClick={() => handleRemovePeriod(idx)}
-                                    />
-                                </button>
-                            </Tooltip>
-                            <SpecialTimeInput
-                                index={idx}
-                                distinctPeriods={distinctPeriods}
-                                setDistinctPeriods={setDistinctPeriods}
-                                period={period}
-                            />
-                        </div>
+                            index={idx}
+                            distinctPeriods={distinctPeriods}
+                            setDistinctPeriods={setDistinctPeriods}
+                            period={period}
+                        />
                     )
                 })}
-                <div style={{ marginTop: 20 }}>
-                    <span onClick={addEmptyDate} className={styles.addDate}>
+                {/* <div style={{ marginTop: 20 }}> */}
+                <div onClick={addEmptyDate} className={styles.addDate}>
+                    <Typography
+                        weight={'normal'}
+                        size={'bodySmall'}
+                        color={'blue'}
+                    >
                         {t('+ Aggiungi una data')}
-                    </span>
+                    </Typography>
                 </div>
-            </div>
-            <div className={styles.footer}>
-                <div>
-                    <Button
-                        // type="text"
-                        className={styles.cancelButton}
-                    >
-                        {t('Annulla')}
-                    </Button>
-                </div>
-                <div>
-                    <Button
-                        onClick={handleSave}
-                        className={styles.saveButton}
-                        // type="primary"
-                        // shape="round"
-                    >
-                        {t('Salva')}
-                    </Button>
-                </div>
+                {/* </div> */}
             </div>
         </div>
     )

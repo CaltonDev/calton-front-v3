@@ -5,15 +5,13 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { PeriodsMoreHoursProps } from '../../pages/ListingEditHours/ListingEditHours.interface'
 import { weekdaysConstant } from '../../constants/CustomConstants'
-import { handleAddingMoreTimeInterval } from '../../helpers/editHoursHelpers'
-import { PlusOutlined } from '@ant-design/icons'
 import Checkbox from '../Checkbox/Checkbox'
 import ListingMoreHoursTimePicker from '../ListingMoreHoursTimePicker/ListingMoreHoursTimePicker'
+import Typography from '../Typography/Typography'
 
 interface AddMoreTimeInputProps {
     type: string
     index: number
-    // distinctPeriod: ListingMoreHoursProps
     distinctPeriod: PeriodsMoreHoursProps[]
     setDistinctPeriod: React.Dispatch<
         React.SetStateAction<ListingMoreHoursProps | null>
@@ -31,15 +29,6 @@ function AddMoreTimeInput({
     hoursTypeId,
 }: AddMoreTimeInputProps) {
     const { t } = useTranslation()
-    // const [allPeriods, setAllPeriods] = React.useState(
-    //     distinctPeriod &&
-    //         'moreHours' in distinctPeriod &&
-    //         distinctPeriod.moreHours
-    //         ? distinctPeriod?.moreHours[index]?.periods
-    //         : []
-    // )
-    // const [allPeriods, setAllPeriods] =
-    //     React.useState<PeriodsMoreHoursProps[]>(distinctPeriod)
     const initCheckedStatusArray = (periods: PeriodsMoreHoursProps[]) => {
         const tmpCheckedStatus = Array(7).fill(false)
         weekdaysConstant.forEach((d, i) => {
@@ -56,12 +45,8 @@ function AddMoreTimeInput({
     }
     const [checkedStatus, setCheckedStatus] = React.useState(
         distinctPeriod
-            ? // 'moreHours' in distinctPeriod &&
-              // distinctPeriod.moreHours
-              // ? initCheckedStatusArray(distinctPeriod?.moreHours[index]?.periods)
-              initCheckedStatusArray(distinctPeriod)
+            ? initCheckedStatusArray(distinctPeriod)
             : Array(7).fill(false)
-        //   false
     )
     const [openModal, setOpenModal] = React.useState(false)
     const [checkBoxIdx, setCheckBoxIdx] = React.useState<number | null>(null)
@@ -79,43 +64,6 @@ function AddMoreTimeInput({
         // )
         console.log('add more')
     }
-
-    // const handleConfirmOld = () => {
-    //     if (checkBoxIdx === null) return
-    //     let tmpDistinctPeriod = JSON.parse(JSON.stringify(distinctPeriod))
-    //     // tmpDistinctPeriod.moreHours[index].periods =
-    //     //     tmpDistinctPeriod.moreHours[index]?.periods?.filter(
-    //     //         (p: any) =>
-    //     //             p.openDay !== weekdaysConstant[checkBoxIdx] &&
-    //     //             p.closeDay !== weekdaysConstant[checkBoxIdx]
-    //     //     )
-    //     tmpDistinctPeriod = tmpDistinctPeriod.filter(
-    //         (p: any) =>
-    //             p.openDay !== weekdaysConstant[checkBoxIdx] &&
-    //             p.closeDay !== weekdaysConstant[checkBoxIdx]
-    //     )
-    //     // tmpDistinctPeriod.moreHours[index].periods.push({
-    //     tmpDistinctPeriod.push({
-    //         openDay: weekdaysConstant[checkBoxIdx],
-    //         closeDay: weekdaysConstant[checkBoxIdx],
-    //         openTime: {
-    //             hours: null,
-    //             minutes: null,
-    //         },
-    //         closeTime: {
-    //             hours: null,
-    //             minutes: null,
-    //         },
-    //     })
-    //     setDistinctPeriod(tmpDistinctPeriod)
-
-    //     setCheckedStatus((prevStatus) => ({
-    //         ...prevStatus,
-    //         [checkBoxIdx]: !prevStatus[checkBoxIdx],
-    //     }))
-
-    //     setOpenModal(false)
-    // }
 
     const handleConfirm = () => {
         if (checkBoxIdx === null) return
@@ -182,18 +130,18 @@ function AddMoreTimeInput({
 
                     return (
                         <div key={i} className={styles.openDayRow}>
-                            <div className={styles.dayTitle}>
-                                <span>{d}</span>
+                            <div className={styles.typographyContainer}>
+                                <Typography weight={'bold'} size={'bodyMedium'}>
+                                    {t(d)}
+                                </Typography>
                             </div>
-                            <div
-                                className={styles.dayCheckbox}
-                                key={distinctPeriod?.toString()}
-                            >
+                            <div key={distinctPeriod?.toString()}>
                                 <Checkbox
                                     onClick={() => handleCheckboxChange(i)}
                                     checked={checkedStatus[i]}
                                     value={i}
-                                    title={checkedStatus[i] ? t('Chiuso') : ''}
+                                    // title={checkedStatus[i] ? t('Chiuso') : ''}
+                                    title={t('Chiuso')}
                                 />
                             </div>
                             <div className={styles.timePickerContainer}>

@@ -1,5 +1,5 @@
-import { PlusOutlined } from '@ant-design/icons'
 import styles from './AddMoreTag.module.scss'
+import Button from '../Button/Button'
 import React from 'react'
 
 interface AddMoreTagProps {
@@ -14,12 +14,17 @@ const AddMoreTag = ({
     hoursTypeId,
 }: AddMoreTagProps) => {
     return (
-        <div className={styles.container} onClick={() => onClick(hoursTypeId)}>
-            <div>
-                <PlusOutlined style={{ color: '#3F49FC' }} />
-            </div>
-            <div className={styles.displayName}>{nameToBeAdded}</div>
-        </div>
+        <Button
+            className={styles.container}
+            onClick={() => onClick(hoursTypeId)}
+            variant={'outline'}
+            size={'small'}
+            arrowPlacement={'left'}
+            icon={'plusIcon'}
+            iconColor={'secondary'}
+        >
+            {nameToBeAdded}
+        </Button>
     )
 }
 

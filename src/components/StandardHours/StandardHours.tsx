@@ -106,15 +106,25 @@ function StandardHours({
 
     return (
         <div className={styles.standardHoursContainer}>
-            <div className={styles.labelContainer}>
-                <Typography weight={'bold'} size={'h5'}>
-                    {t('Standard time')}
-                </Typography>
-                <Typography weight={'normal'} size={'bodyMedium'}>
-                    {t(
-                        'Set key opening hours or mark your business as closed.'
-                    )}
-                </Typography>
+            <div className={styles.standardHoursTitleContainer}>
+                <div className={styles.labelContainer}>
+                    <Typography weight={'bold'} size={'h5'}>
+                        {t('Standard time')}
+                    </Typography>
+                    <Typography weight={'normal'} size={'bodyMedium'}>
+                        {t(
+                            'Set key opening hours or mark your business as closed.'
+                        )}
+                    </Typography>
+                </div>
+                <div className={styles.buttonContainer}>
+                    <Button onClick={refetch} size="small" variant="outline">
+                        {t('Annulla')}
+                    </Button>
+                    <Button onClick={handleSave} size="small" variant="solid">
+                        {t('Salva')}
+                    </Button>
+                </div>
             </div>
 
             <div className={styles.customRow}>
@@ -160,18 +170,6 @@ function StandardHours({
             {isLocationOpen && (
                 <StandardTimeInput listing={listing} setListing={setListing} />
             )}
-            <div className={styles.footer}>
-                <div>
-                    <Button className={styles.cancelButton}>
-                        {t('Annulla')}
-                    </Button>
-                </div>
-                <div>
-                    <Button onClick={handleSave} className={styles.saveButton}>
-                        {t('Salva')}
-                    </Button>
-                </div>
-            </div>
         </div>
     )
 }

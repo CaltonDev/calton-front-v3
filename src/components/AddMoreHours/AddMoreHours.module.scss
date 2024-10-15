@@ -6,3 +6,22 @@
     border: none;
     background-color: transparent;
 }
+
+.labelContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.specialHoursContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}

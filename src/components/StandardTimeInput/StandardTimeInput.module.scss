@@ -3,41 +3,22 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    margin: 1rem 0 1rem 0;
+    gap: 25px;
 }
 
 .openDayRow {
-    display: inline-flex;
-    justify-content: flex-start;
-    width: 100%;
-    min-height: 5rem;
+    display: flex;
     align-items: baseline;
+    width: 100%;
+    gap: 20px;
 }
 
-.dayTitle {
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: 'Montserrat', 'Heebo', sans-serif !important;
-    margin-right: 1em;
-    width: 10rem;
-    align-self: flex-start;
-    padding-top: 10px;
-}
-
-.dayCheckbox {
-    font-family: 'Montserrat', 'Heebo', sans-serif !important;
-    margin-bottom: 10px;
-    margin-top: 10px;
+.dayLabelContainer {
+    min-width: 100px;
 }
 
 .timePickerContainer {
-    display: inline-flex;
+    display: flex;
     width: 100%;
-}
-.timePickerRow {
-    margin-bottom: 2rem;
-}
-
-.timePickers {
-    margin-left: 1em;
+    flex-direction: column;
 }

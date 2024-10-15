@@ -1,12 +1,12 @@
 import styles from './MoreHours.module.scss'
 import React from 'react'
-import { Button as ButtonAnt } from 'antd'
 import Button from '../Button/Button'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { manageLocalToastWSAndReload } from '../../helpers/helpers'
 import AddMoreTimeInput from '../AddMoreTimeInput/AddMoreTimeInput'
 import { ListingMoreHoursProps } from '../../pages/ListingEditHours/ListingEditHours.interface'
+import Typography from '../Typography/Typography'
 
 interface MoreHoursProps {
     listing: ListingMoreHoursProps | null
@@ -26,6 +26,7 @@ function MoreHours({
     listing,
     setListing,
     hoursTypeId,
+    hoursTypeName,
     index,
     selectedListings,
     refetch,
@@ -54,6 +55,27 @@ function MoreHours({
 
     return (
         <div className={styles.moreHoursContainer}>
+            <div className={styles.moreHoursTitleContainer}>
+                {hoursTypeName && (
+                    <div className={styles.labelContainer}>
+                        <Typography weight={'bold'} size={'h5'}>
+                            {`Time of ${t(hoursTypeName)}`}
+                        </Typography>
+                    </div>
+                )}
+                <div className={styles.buttonContainer}>
+                    <Button
+                        onClick={handleCancel}
+                        size="small"
+                        variant="outline"
+                    >
+                        {t('Annulla')}
+                    </Button>
+                    <Button onClick={handleSave} size="small" variant="solid">
+                        {t('Salva')}
+                    </Button>
+                </div>
+            </div>
             {listing && listing.moreHours && (
                 <React.Fragment>
                     <AddMoreTimeInput
@@ -64,26 +86,6 @@ function MoreHours({
                         distinctPeriod={listing.moreHours[index]?.periods}
                         setDistinctPeriod={setListing}
                     />
-                    <div className={styles.footer}>
-                        <div>
-                            <Button
-                                className={styles.cancelButton}
-                                onClick={handleCancel}
-                            >
-                                {t('Annulla')}
-                            </Button>
-                        </div>
-                        <div>
-                            <Button
-                                onClick={handleSave}
-                                className={styles.saveButton}
-                                // type="primary"
-                                // shape="round"
-                            >
-                                {t('Salva')}
-                            </Button>
-                        </div>
-                    </div>
                 </React.Fragment>
             )}
         </div>

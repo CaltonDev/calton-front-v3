@@ -6,8 +6,7 @@ import PageContainer from '../../components/PageComponents/PageContainer/PageCon
 import CardSelection from '../../components/CardSelection/CardSelection'
 import StandardHours from '../../components/StandardHours/StandardHours'
 import SpecialHours from '../../components/SpecialHours/SpecialHours'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import ListingService from '../../services/ListingService'
 import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 import {
@@ -18,7 +17,7 @@ import {
 } from './ListingEditHours.interface'
 import MoreHours from '../../components/MoreHours/MoreHours'
 import AddMoreHours from '../../components/AddMoreHours/AddMoreHours'
-import { isUndefined, set } from 'lodash'
+import { isUndefined } from 'lodash'
 import { useQueryClient } from 'react-query'
 import useEditHours from '../../utils/hooks/useEditHours'
 
@@ -67,13 +66,13 @@ function ListingEditHours() {
             ),
         },
         {
-            title: t('Orario festivo') + ' >',
+            title: t('Orario festivo'),
             description: t(
                 "Conferma l'orario per i giorni di festa per indicare ai tuoi clienti le aperture della tua attività."
             ),
         },
         {
-            title: t('Aggiungi altri orari') + ' >',
+            title: t('Aggiungi altri orari'),
             description: t(
                 "Gli altri orari sono visibili solo se hai già impostato orari standard. In genere, dovresti impostarli come sottoinsieme dell'orario principale."
             ),
@@ -101,20 +100,32 @@ function ListingEditHours() {
 
     const handleDeleteSubCard = (index: number) => {
         const nextListingMoreHours = {
-            ...listingMoreHours,
-            moreHours: listingMoreHours?.moreHours?.filter(
-                (item, i) => i !== index
-            ),
+            moreHours:
+                listingMoreHours?.moreHours?.filter((item, i) => i !== index) ||
+                null,
+            formatted_address: listingMoreHours?.formatted_address || '',
+            title: listingMoreHours?.title || '',
+            moreHoursTypes: listingMoreHours?.moreHoursTypes || null,
         }
         queryClient.removeQueries('moreHours')
+        handleSaveMoreHours(nextListingMoreHours)
 
         setSelectedCard(2)
         setSubCardMoreHours(undefined)
         refetchMoreHours()
     }
 
-    const handleSaveMoreHours = () => {
+    const handleSaveMoreHours = (
+        optionalData: ListingMoreHoursProps | null = null
+    ) => {
+        const nextMoreHours = optionalData
+            ? { ...optionalData }
+            : {
+                  ...listingMoreHours,
+              }
+        console.log('save more hours')
         mutation.mutate({
+            // hours: nextMoreHours,
             hours: { ...listingMoreHours },
             listingsName: selectedListings,
             isMore: true,
@@ -172,6 +183,7 @@ function ListingEditHours() {
     React.useEffect(() => {
         console.log('listingMoreHours', listingMoreHours)
     }, [listingMoreHours])
+
     return (
         <>
             <PageContainer>
@@ -194,8 +206,8 @@ function ListingEditHours() {
                                 activeCard={selectedCard}
                                 setSelectedCard={setSelectedCard}
                                 addNewCard={false}
-                                isWrappedComponent={true}
-                                wrappedKey={t('Aggiungi altri orari') + ' >'}
+                                hasWrappedComponent={true}
+                                wrappedKey={t('Aggiungi altri orari')}
                                 wrappedComponent={
                                     <div ref={subCardRef}>
                                         <CardSelection
@@ -260,6 +272,16 @@ function ListingEditHours() {
                                                 listingMoreHours?.moreHours[
                                                     subCardMoreHours
                                                 ]?.hoursTypeId
+                                            }
+                                            hoursTypeName={
+                                                listingMoreHours?.moreHoursTypes?.find(
+                                                    (item) =>
+                                                        item.hoursTypeId ===
+                                                        listingMoreHours
+                                                            ?.moreHours?.[
+                                                            subCardMoreHours
+                                                        ]?.hoursTypeId
+                                                )?.displayName
                                             }
                                             index={subCardMoreHours}
                                             listing={listingMoreHours}

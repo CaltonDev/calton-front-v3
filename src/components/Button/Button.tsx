@@ -40,6 +40,8 @@ const Button = ({
     const iconOnlyClass = iconOnly ? styles[`iconOnly-${size}`] : ''
     const roundedClass = rounded ? styles[`rounded-${size}`] : ''
 
+    if (iconOnly) console.log('iconOnly', iconOnlyClass)
+
     return (
         <>
             <button
@@ -77,8 +79,6 @@ const Button = ({
                                       : disabled
                                         ? 'disabled'
                                         : 'black'
-                                //   ? 'black'
-                                //   : 'secondary'
                             }
                             keySvg={
                                 icon
