@@ -13,6 +13,7 @@ import FiltersSummaryContainer from '../FiltersSummaryContainer/FiltersSummaryCo
 import Typography from '../../Typography/Typography'
 import { RootState } from '../../../store/store'
 import Button from '../../Button/Button'
+import Dropdown from '../../Dropdown/Dropdown'
 
 function PageHeader({
     heading,
@@ -23,6 +24,7 @@ function PageHeader({
     showArrowBack = false,
     hideFilters = false,
     bulkEdit = false,
+    dropdownData,
 }: PageHeaderProps) {
     const dispatch = useDispatch()
     const history = useNavigate()
@@ -151,15 +153,11 @@ function PageHeader({
                         </div>
                         {bulkEdit && (
                             <div className={styles.btnContainer}>
-                                <Button
-                                    variant={'outline'}
-                                    size={'small'}
-                                    arrowPlacement={'right'}
-                                    icon={'arrowDownSvg'}
-                                    iconColor={'secondary'}
-                                >
-                                    {t('Operazioni in bulk')}
-                                </Button>
+                                <Dropdown
+                                    isButton={true}
+                                    dropdownData={dropdownData}
+                                    btnTitle={t('Operazioni in bulk')}
+                                />
                                 <Button variant={'solid'} size={'small'}>
                                     {t('Aggiungi locale')}
                                 </Button>

@@ -68,7 +68,7 @@
 .cardSelected {
   @extend .card;
   border: 2px solid var(--Button-500, #3F49FC);
-  //background: var(--Button-50, #DFE0FF);
+  //background: var(--Dropdown-50, #DFE0FF);
 }
 
 .cardDisabled {

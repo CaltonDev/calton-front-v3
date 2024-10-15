@@ -41,14 +41,14 @@ function ErrorSubscriptionModal() {
                     Contatta il team Sales per continuare ad utilizzare Calton!
                     <br />
                     <br />
-                    <Button
+                    <Dropdown
                         onClick={() =>
                             (window.location = 'mailto:dario@calton.io')
                         }
                         size={'large'}
                     >
                         Contattaci
-                    </Button>
+                    </Dropdown>
                 </div>
             </div>
         </Modal>*/

@@ -85,6 +85,7 @@ import PhoneSvg from './SvgIcons/PhoneSvg'
 import WorldSvg from './SvgIcons/WorldSvg'
 import ExclamationPointSvg from './SvgIcons/ExclamationPointSvg'
 import SinglePencilSvg from './SvgIcons/SinglePencilSvg'
+import DuplicateDeleteSvg from './SvgIcons/DuplicateDeleteSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -462,6 +463,12 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'eyeSvg' ? (
                     <EyeSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'duplicateDeleteIcon' ? (
+                    <DuplicateDeleteSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}

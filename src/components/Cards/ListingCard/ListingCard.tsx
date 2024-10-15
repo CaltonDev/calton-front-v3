@@ -6,6 +6,7 @@ import SvgWrapper from '../../SvgWrapper/SvgWrapper'
 import Tag from '../../Tag/Tag'
 import TextContainer from '../../TextContainer/TextContainer'
 import { ListingCardProps } from './ListingCard.interface'
+import Dropdown from '../../Dropdown/Dropdown'
 function ListingCard({ index, listing }: ListingCardProps) {
     const { t } = useTranslation()
 
@@ -14,6 +15,36 @@ function ListingCard({ index, listing }: ListingCardProps) {
     const formatCategories = () => {
         return 'food, pet'
     }
+
+    const verifiyListing = () => {
+        console.log('Clicked')
+    }
+    const dropdownData = [
+        {
+            label: t('Verifica'),
+            labelColor: 'black',
+            labelIcon: 'outlinedCheckmarkSvg',
+            onClickAction: verifiyListing,
+        },
+        {
+            label: t('Completa verifica'),
+            labelColor: 'black',
+            labelIcon: 'checkmarkSvg',
+            onClickAction: verifiyListing,
+        },
+        {
+            label: t('Elimina'),
+            labelColor: 'red',
+            labelIcon: 'trashIcon',
+            onClickAction: verifiyListing,
+        },
+        {
+            label: t('Elimina duplicato'),
+            labelColor: 'red',
+            labelIcon: 'duplicateDeleteIcon',
+            onClickAction: verifiyListing,
+        },
+    ]
     return (
         <div className={styles.container} key={index}>
             <div className={styles.paddedContainer}>
@@ -30,11 +61,7 @@ function ListingCard({ index, listing }: ListingCardProps) {
                                 size={'small'}
                                 onClick={openInNewPage}
                             />
-                            <SvgWrapper
-                                keySvg={'burgerIconDot.svg'}
-                                size={'small'}
-                                onClick={openInNewPage}
-                            />
+                            <Dropdown dropdownData={dropdownData} />
                         </div>
                     </div>
                     <div className={styles.contentDiv}>

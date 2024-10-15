@@ -373,12 +373,29 @@ function HomeListing() {
         filterListingStateHelper()
     )?.data?.data
 
+    const modifyBulk = () => {}
+    const dropdownData = [
+        {
+            label: t('Modifica'),
+            labelColor: 'black',
+            labelIcon: 'editIcon',
+            onClickAction: modifyBulk,
+        },
+        {
+            label: t('Elimina'),
+            labelColor: 'red',
+            labelIcon: 'trashIcon',
+            onClickAction: modifyBulk,
+        },
+    ]
+
     return (
         <PageContainer>
             <PageHeader
                 heading={t('Home')}
                 subheading={true}
                 bulkEdit={true}
+                dropdownData={dropdownData}
             ></PageHeader>
             <div className={styles.container}>
                 <div className={styles.headerContainer}>

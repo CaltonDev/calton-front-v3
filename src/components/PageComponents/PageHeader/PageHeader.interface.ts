@@ -7,4 +7,5 @@ export interface PageHeaderProps {
     showArrowBack?: boolean
     hideFilters?: boolean
     bulkEdit?: boolean
+    dropdownData?: any
 }
