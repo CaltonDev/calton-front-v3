@@ -233,6 +233,8 @@ function HomeListing() {
                 selectAllListing={handleSelectAllListing}
                 allSelected={selectAllListing}
                 bulkOperationType={bulkOperationType}
+                bulkBtnDisabled={bulkList?.length === 0}
+                bulkList={bulkList}
             ></PageHeader>
             <div className={styles.container}>
                 {!bulkEdit && (

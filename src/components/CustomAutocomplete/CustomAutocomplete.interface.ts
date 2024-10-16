@@ -19,4 +19,5 @@ export interface CustomAutocompleteProps {
     hasDropdown?: boolean
     applySelection?: () => void
     hasIcons?: boolean
+    fullwidth?: boolean
 }

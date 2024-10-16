@@ -1,11 +1,17 @@
 import React from 'react'
-import styles from './AddLocationModal.module.scss'
+import styles from './ListingBulkDeleteModal.module.scss'
 import { useTranslation } from 'react-i18next'
 import Typography from '../../Typography/Typography'
-import Input from '../../Input/Input'
 import Button from '../../Button/Button'
-import { AddLocationModalProps } from './AddLocationModal.interface'
-function AddLocationModal({ isOpen, setIsOpen }: AddLocationModalProps) {
+import { ListingBulkDeleteModalProps } from './ListingBulkDeleteModal.interface'
+function ListingBulkDeleteModal({
+    isOpen,
+    setIsOpen,
+    textDelete,
+    textBold,
+    onConfirm,
+    question,
+}: ListingBulkDeleteModalProps) {
     const { t } = useTranslation()
 
     return (
@@ -19,14 +25,19 @@ function AddLocationModal({ isOpen, setIsOpen }: AddLocationModalProps) {
                     <div className={styles.container}>
                         <div className={styles.header}>
                             <Typography size={'bodyBig'} weight={'bold'}>
-                                {t('Aggiungi Luogo')}
+                                {t('Attenzione')}
                             </Typography>
                         </div>
                         <div className={styles.body}>
                             <Typography size={'bodySmall'} weight={'light'}>
-                                {t('Luogo')}
+                                {textDelete ? textDelete : t('Elimina')}
                             </Typography>
-                            <Input fullWidth={true} />
+                            <Typography size={'bodySmall'} weight={'bold'}>
+                                {textBold ? ' ' + textBold : ''}
+                            </Typography>
+                            <Typography size={'bodySmall'} weight={'light'}>
+                                {question ? '?' : ''}
+                            </Typography>
                         </div>
                         <div className={styles.footer}>
                             <Button
@@ -36,7 +47,9 @@ function AddLocationModal({ isOpen, setIsOpen }: AddLocationModalProps) {
                             >
                                 {t('Annulla')}
                             </Button>
-                            <Button size={'medium'}>{t('Aggiungi')}</Button>
+                            <Button size={'medium'} onClick={onConfirm}>
+                                {t('Elimina')}
+                            </Button>
                         </div>
                     </div>
                 </>
@@ -45,4 +58,4 @@ function AddLocationModal({ isOpen, setIsOpen }: AddLocationModalProps) {
     )
 }
 
-export default AddLocationModal
+export default ListingBulkDeleteModal

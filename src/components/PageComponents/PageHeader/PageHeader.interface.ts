@@ -13,4 +13,6 @@ export interface PageHeaderProps {
     selectAllListing?: () => void
     allSelected?: boolean
     bulkOperationType?: string
+    bulkBtnDisabled?: boolean
+    bulkList?: any[]
 }

@@ -137,7 +137,6 @@ const AddAnalisiCompetitorContainer = ({
     const searchAPI = async (text: string) => {
         try {
             const response = await CompetitorService.getCompetitor(type, text)
-            console.log('Res: ', response)
             setCards(response.suggested)
             setSearchResult(response.search)
         } catch (e) {

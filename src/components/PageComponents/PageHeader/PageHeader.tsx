@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PageHeaderProps } from './PageHeader.interface'
 import styles from './PageHeader.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +15,10 @@ import { RootState } from '../../../store/store'
 import Button from '../../Button/Button'
 import Dropdown from '../../Dropdown/Dropdown'
 import Checkbox from '../../Checkbox/Checkbox'
+import ListingBulkEditModal from '../../Modals/ListingBulkEditModal/ListingBulkEditModal'
+import ListingService from '../../../services/ListingService'
+import ServiceWrapper from '../../../helpers/ServiceWrapper'
+import ListingBulkDeleteModal from '../../Modals/ListingBulkDeleteModal/ListingBulkDeleteModal'
 
 function PageHeader({
     heading,
@@ -31,6 +35,8 @@ function PageHeader({
     selectAllListing,
     allSelected = false,
     bulkOperationType = 'edit',
+    bulkBtnDisabled = false,
+    bulkList = [],
 }: PageHeaderProps) {
     const dispatch = useDispatch()
     const history = useNavigate()
@@ -41,6 +47,32 @@ function PageHeader({
     const platformType = useSelector(
         (state: RootState) => state.Settings.platformType
     )
+    const allFilters = useSelector(selectAllFilters)
+    const [openBulkEditModal, setOpenBulkEditModal] = useState(false)
+    const [openBulkDeleteModal, setOpenBulkDeleteModal] = useState(false)
+
+    const handleDeleteBulk = async () => {
+        try {
+            const formatted_listings = bulkList?.map((item: any) => {
+                return item?.idAccountLocationGbp
+            })
+            await ListingService.deleteListing(formatted_listings)
+            //dispatch(showToast({ type: 0, text: t('Location eliminata con successo') }));
+            //dispatch(resetFiltersByPayload("selectedLocation"))
+            await ServiceWrapper.wrapperLoadFilters(
+                allFilters,
+                dispatch,
+                platformType,
+                t
+            )
+            if (setIsOnBulkEdit) {
+                setIsOnBulkEdit(false)
+            }
+        } catch (e) {
+            console.log('E: ', e)
+        }
+        setOpenBulkDeleteModal(false)
+    }
 
     useEffect(() => {
         if (
@@ -83,8 +115,31 @@ function PageHeader({
         }
     }
 
+    const handleBulkEdit = () => {
+        if (bulkOperationType === 'delete') {
+            setOpenBulkDeleteModal(true)
+        } else {
+            setOpenBulkEditModal(true)
+        }
+    }
     return (
         <div style={{ marginBottom: '1.875rem' }}>
+            <ListingBulkEditModal
+                setIsOpen={setOpenBulkEditModal}
+                isOpen={openBulkEditModal}
+                labels={bulkList}
+                label={t('Seleziona la location da modificare')}
+            />
+            <ListingBulkDeleteModal
+                setIsOpen={setOpenBulkDeleteModal}
+                isOpen={openBulkDeleteModal}
+                textDelete={
+                    t('Sicuro di voler eliminare questi listing') + ': '
+                }
+                textBold={bulkList?.length}
+                onConfirm={handleDeleteBulk}
+                question={true}
+            />
             <div className={styles.containerColumn}>
                 {!hideFilters && subheading && (
                     <div className={styles.containerBreadcrumb}>
@@ -180,6 +235,7 @@ function PageHeader({
                                         {t('Annulla')}
                                     </Button>
                                     <Button
+                                        disabled={bulkBtnDisabled}
                                         variant={'solid'}
                                         size={'small'}
                                         customColor={
@@ -192,6 +248,7 @@ function PageHeader({
                                                 ? '#FFD3DF'
                                                 : ''
                                         }
+                                        onClick={handleBulkEdit}
                                     >
                                         {bulkOperationType === 'edit'
                                             ? t('Modifica')
