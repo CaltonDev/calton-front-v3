@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './ListingCard.module.scss'
 import { useTranslation } from 'react-i18next'
 import Typography from '../../Typography/Typography'

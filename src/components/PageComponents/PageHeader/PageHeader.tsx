@@ -4,7 +4,10 @@ import styles from './PageHeader.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { selectAllFilters } from '../../../store/selectors/selectorsSlice'
-import { setStateSelect } from '../../../store/filters/filtersSlice'
+import {
+    resetFiltersByPayload,
+    setStateSelect,
+} from '../../../store/filters/filtersSlice'
 import { useTranslation } from 'react-i18next'
 import SvgWrapper from '../../SvgWrapper/SvgWrapper'
 import moment from 'moment'
@@ -19,6 +22,7 @@ import ListingBulkEditModal from '../../Modals/ListingBulkEditModal/ListingBulkE
 import ListingService from '../../../services/ListingService'
 import ServiceWrapper from '../../../helpers/ServiceWrapper'
 import ListingBulkDeleteModal from '../../Modals/ListingBulkDeleteModal/ListingBulkDeleteModal'
+import { showToast } from '../../../store/toast/errorToastSlice'
 
 function PageHeader({
     heading,
@@ -57,8 +61,13 @@ function PageHeader({
                 return item?.idAccountLocationGbp
             })
             await ListingService.deleteListing(formatted_listings)
-            //dispatch(showToast({ type: 0, text: t('Location eliminata con successo') }));
-            //dispatch(resetFiltersByPayload("selectedLocation"))
+            dispatch(
+                showToast({
+                    type: 0,
+                    text: t('Location eliminata con successo'),
+                })
+            )
+            dispatch(resetFiltersByPayload('selectedLocation'))
             await ServiceWrapper.wrapperLoadFilters(
                 allFilters,
                 dispatch,
