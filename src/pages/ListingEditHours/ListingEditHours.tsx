@@ -17,7 +17,7 @@ import {
 } from './ListingEditHours.interface'
 import MoreHours from '../../components/MoreHours/MoreHours'
 import AddMoreHours from '../../components/AddMoreHours/AddMoreHours'
-import { isUndefined, set } from 'lodash'
+import { isUndefined } from 'lodash'
 import { useQueryClient } from 'react-query'
 import useEditHours from '../../utils/hooks/useEditHours'
 
@@ -66,13 +66,13 @@ function ListingEditHours() {
             ),
         },
         {
-            title: t('Orario festivo') + ' >',
+            title: t('Orario festivo'),
             description: t(
                 "Conferma l'orario per i giorni di festa per indicare ai tuoi clienti le aperture della tua attività."
             ),
         },
         {
-            title: t('Aggiungi altri orari') + ' >',
+            title: t('Aggiungi altri orari'),
             description: t(
                 "Gli altri orari sono visibili solo se hai già impostato orari standard. In genere, dovresti impostarli come sottoinsieme dell'orario principale."
             ),
@@ -109,6 +109,7 @@ function ListingEditHours() {
         }
         queryClient.removeQueries('moreHours')
         handleSaveMoreHours(nextListingMoreHours)
+
         setSelectedCard(2)
         setSubCardMoreHours(undefined)
         refetchMoreHours()
@@ -117,8 +118,15 @@ function ListingEditHours() {
     const handleSaveMoreHours = (
         optionalData: ListingMoreHoursProps | null = null
     ) => {
+        const nextMoreHours = optionalData
+            ? { ...optionalData }
+            : {
+                  ...listingMoreHours,
+              }
+        console.log('save more hours')
         mutation.mutate({
-            hours: optionalData ? { ...optionalData } : { ...listingMoreHours },
+            // hours: nextMoreHours,
+            hours: { ...listingMoreHours },
             listingsName: selectedListings,
             isMore: true,
             isNotSpecified: false,
@@ -172,9 +180,6 @@ function ListingEditHours() {
         }
     }, [cardRef, subCardRef])
 
-    React.useEffect(() => {
-        console.log('listingMoreHours', listingMoreHours)
-    }, [listingMoreHours])
     return (
         <>
             <PageContainer>

@@ -106,15 +106,7 @@ function StandardHours({
 
     return (
         <div className={styles.standardHoursContainer}>
-            <div className={styles.standardHoursContainer}>
-                <div className={styles.buttonContainer}>
-                    <Button onClick={refetch} className={styles.cancelButton}>
-                        {t('Annulla')}
-                    </Button>
-                    <Button onClick={handleSave} className={styles.saveButton}>
-                        {t('Salva')}
-                    </Button>
-                </div>
+            <div className={styles.standardHoursTitleContainer}>
                 <div className={styles.labelContainer}>
                     <Typography weight={'bold'} size={'h5'}>
                         {t('Standard time')}
@@ -124,6 +116,14 @@ function StandardHours({
                             'Set key opening hours or mark your business as closed.'
                         )}
                     </Typography>
+                </div>
+                <div className={styles.buttonContainer}>
+                    <Button onClick={refetch} size="small" variant="outline">
+                        {t('Annulla')}
+                    </Button>
+                    <Button onClick={handleSave} size="small" variant="solid">
+                        {t('Salva')}
+                    </Button>
                 </div>
             </div>
 

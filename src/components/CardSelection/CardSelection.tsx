@@ -51,31 +51,40 @@ const CardSelection = ({
                     }
                     onClick={() => handleCardSelection(idx)}
                 >
-                    <div>
+                    {/* <div> */}
+                    <div className={styles.cardTitleContainer}>
                         <Typography size={'h5'} weight={'bold'}>
                             {obj?.title}
                         </Typography>
-                        <Typography size={'bodySmall'} weight={'light'}>
-                            {obj?.description}
-                        </Typography>
-
-                        {isWrappedComponent &&
-                            obj?.title === wrappedKey &&
-                            wrappedComponent}
-                        {isDeleteButton && handleDelete && (
-                            <Button
-                                onClick={(event) => {
-                                    event.stopPropagation()
-                                    handleDelete(idx)
-                                }}
-                                // color={'secondary'}
-                                size={'small'}
-                                // text={'Delete'}
-                            >
-                                X
-                            </Button>
-                        )}
+                        <SvgWrapper
+                            keySvg={'arrowForward'}
+                            color={'primaryIcon'}
+                            customHeight={24}
+                            customWidth={24}
+                        />
                     </div>
+
+                    <Typography size={'bodySmall'} weight={'light'}>
+                        {obj?.description}
+                    </Typography>
+
+                    {isWrappedComponent &&
+                        obj?.title === wrappedKey &&
+                        wrappedComponent}
+                    {isDeleteButton && handleDelete && (
+                        <Button
+                            onClick={(event) => {
+                                event.stopPropagation()
+                                handleDelete(idx)
+                            }}
+                            // color={'secondary'}
+                            size={'small'}
+                            // text={'Delete'}
+                        >
+                            X
+                        </Button>
+                    )}
+                    {/* </div> */}
                     {obj?.value?.map((value: string, textIdx: number) => (
                         <TextContainer
                             key={textIdx}

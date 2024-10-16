@@ -8,19 +8,22 @@ import {
     handleDeleteTimeInterval,
     handleAddingTimeInterval,
 } from '../../helpers/editHoursHelpers'
-import { TimePicker } from 'antd'
+import { TimePicker as AntdTimePicker } from 'antd'
 import {
     ListingProps,
     PeriodProps,
 } from '../../pages/ListingEditHours/ListingEditHours.interface'
 import { Weekdays } from '../../constants/CustomConstants'
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 import elimina_svg from '../../assets/img/elimina.svg'
 import {
     CaretDownOutlined,
     CaretRightOutlined,
     PlusOutlined,
 } from '@ant-design/icons'
+import { default as RCTimePicker } from 'rc-time-picker'
+import { default as TimePicker } from '../TimePicker/TimePicker'
+import { IoIosArrowDown } from 'react-icons/io'
 
 dayjs.extend(customParseFormat)
 
@@ -42,13 +45,13 @@ const ListingStandarHoursTimePicker = ({
     lastElementIndex,
 }: ListingStandarHoursTimePickerProps) => {
     const [valueStartTime, setValueStartTime] = React.useState(
-        dayjs(
+        moment(
             formatDataValue(period?.openHours, period?.openMinutes),
             'HH:mm:ss'
         )
     )
     const [valueEndTime, setValueEndTime] = React.useState(
-        dayjs(
+        moment(
             formatDataValue(period?.closeHours, period?.closeMinutes),
             'HH:mm:ss'
         )
@@ -66,7 +69,7 @@ const ListingStandarHoursTimePicker = ({
           })
         : null
 
-    const onSelectStartTime = (time: Dayjs) => {
+    const onSelectStartTime = (time: Moment) => {
         if (!time) return
         setValueStartTime(time)
         if (!listing) return
@@ -84,7 +87,7 @@ const ListingStandarHoursTimePicker = ({
         setListing(currentList)
     }
 
-    const onSelectEndTime = (time: Dayjs) => {
+    const onSelectEndTime = (time: Moment) => {
         setValueEndTime(time)
         if (!listing) return
         const currentList = { ...listing }
@@ -99,21 +102,21 @@ const ListingStandarHoursTimePicker = ({
 
         currentList[weekday][index] = {
             ...period,
-            closeHours: time ? +time.format('$H') : 0,
-            closeMinutes: time ? +time.format('$m') : 0,
+            closeHours: time ? +time.format('H') : 0,
+            closeMinutes: time ? +time.format('m') : 0,
         }
         setListing(currentList)
     }
 
     React.useEffect(() => {
         setValueStartTime(
-            dayjs(
+            moment(
                 formatDataValue(period?.openHours, period?.openMinutes),
                 'HH:mm:ss'
             )
         )
         setValueEndTime(
-            dayjs(
+            moment(
                 formatDataValue(period?.closeHours, period?.closeMinutes),
                 'HH:mm:ss'
             )
@@ -123,22 +126,22 @@ const ListingStandarHoursTimePicker = ({
     return (
         <div className={styles.timePickerContainer} key={weekday}>
             <div className={styles.timePickers}>
-                <TimePicker
-                    className={styles.picker}
-                    value={valueStartTime}
-                    onChange={onSelectStartTime}
-                    format={'HH:mm'}
-                    minuteStep={5}
-                />
+                <div className={styles.timePickerWrapper}>
+                    <TimePicker
+                        onChange={onSelectStartTime}
+                        value={valueStartTime}
+                        variant={'primary'}
+                    />
+                </div>
             </div>
             <div className={styles.timePickers}>
-                <TimePicker
-                    className={styles.picker}
-                    value={valueEndTime}
-                    onChange={onSelectEndTime}
-                    format={'HH:mm'}
-                    minuteStep={5}
-                />
+                <div className={styles.timePickerWrapper}>
+                    <TimePicker
+                        onChange={onSelectEndTime}
+                        value={valueEndTime}
+                        variant={'primary'}
+                    />
+                </div>
             </div>
             {
                 <div

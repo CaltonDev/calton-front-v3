@@ -9,10 +9,25 @@
     margin-left: 1em;
 }
 
-.picker {
-    height: 3em;
-    width: 12em;
-    border: 1.5px solid #321d488c;
-    border-radius: 100px;
-    border-inline-end-width: 1.5px;
+.picker .rc-time-picker-input {
+    border: 2px solid #4caf50; /* Customize your border color and style */
+    border-radius: 4px; /* Optional: Customize the border-radius */
+    padding: 5px; /* Optional: Customize padding */
+}
+
+.timePickerWrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    width: 16px; /* Ajuste o tamanho conforme necessário */
+    height: 16px; /* Ajuste o tamanho conforme necessário */
+    color: #000; /* Ajuste a cor conforme necessário */
 }
