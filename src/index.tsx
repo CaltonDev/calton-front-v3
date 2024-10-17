@@ -17,6 +17,7 @@ import { objRoutes } from './services/routerServices'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import SignUp from './pages/SignUp/SignUp'
 import CompleteSignUp from './pages/CompleteSignUp/CompleteSignUp'
+import { ToastContainer } from 'react-toastify'
 const persistor = persistStore(store)
 
 const LazyComponentWrapper = ({
@@ -64,6 +65,7 @@ ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
+                <ToastContainer autoClose={2000} position="top-right" />
                 <PersistGate loading={null} persistor={persistor}>
                     <RouterProvider router={router} />
                 </PersistGate>

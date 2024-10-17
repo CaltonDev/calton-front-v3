@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.itemContainer {
+  width: 33%;
+  height: 100%;
+}
+
+.headerContainer{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+
+.navigatorRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewsContainer {
+  grid-template-columns: 49.5% 49.5%;
+  display: grid;
+  gap: 20px;
+  width: 100%;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

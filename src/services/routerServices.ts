@@ -26,6 +26,11 @@ const SelectableCards = lazy(
 )
 const SurveyReviews = lazy(() => import('../pages/SurveyReviews/SurveyReviews'))
 const SurveyCreate = lazy(() => import('../pages/SurveyCreate/SurveyCreate'))
+const LocalPost = lazy(() => import('../pages/LocalPost/LocalPost'))
+const AddCompetitor = lazy(() => import('../pages/AddCompetitor/AddCompetitor'))
+const Menus = lazy(() => import('../pages/Menus/Menus'))
+const Photos = lazy(() => import('../pages/Photos/Photos'))
+
 export const objRoutes = {
     Dashboards: {
         path: 'home',
@@ -88,5 +93,22 @@ export const objRoutes = {
     CreateSurvey: {
         path: 'surveys/new',
         component: SurveyCreate,
+    },
+  LocalPost: {
+        path: 'localPost',
+        component: LocalPost,
+    },
+    AddCompetitorsSource: {
+        path: 'home/AddCompetitorsSource',
+        //path: 'home',
+        component: AddCompetitor,
+    },
+    ListingMenu: {
+        path: 'menu',
+        component: Menus,
+    },
+    ListingPhotos: {
+        path: 'photo',
+        component: Photos,
     },
 }

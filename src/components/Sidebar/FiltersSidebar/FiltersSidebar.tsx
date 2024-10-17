@@ -25,54 +25,72 @@ function FiltersSidebar() {
     )
     const commonFilters = [
         {
-            nameButton: t('Raggruppa'),
-            idx: 0,
+            key: 'raggruppa',
+            svg: 'raggruppa.svg',
+            label: t('Raggruppa'),
         },
         {
-            nameButton: t('Fonte'),
-            idx: 1,
+            key: 'fonti',
+            svg: 'Topic.svg',
+            label: t('Fonti'),
         },
         {
-            nameButton: t('Canale'),
-            idx: 2,
+            key: 'channels',
+            svg: 'channels.svg',
+            label: t('Canali'),
         },
         {
-            nameButton: t('Tempo'),
-            idx: 3,
+            key: 'tempo',
+            svg: 'tempo.svg',
+            label: t('Tempo'),
         },
         {
-            nameButton: t('Luogo'),
-            idx: 4,
+            key: 'location',
+            svg: 'location.svg',
+            label: t('Luogo'),
         },
         {
-            nameButton: t('Topic'),
-            idx: 5,
+            key: 'topic',
+            svg: 'topic.svg',
+            label: t('Topic'),
         },
         {
-            nameButton: t('Products'),
-            idx: 6,
+            key: 'products',
+            svg: 'products.svg',
+            label: t('Prodotti'),
         },
         !window.location.pathname.includes('grafo') && {
-            nameButton: t('Altri filtri'),
-            idx: 7,
+            key: 'others',
+            svg: 'others.svg',
+            label: t('Altri'),
+        },
+        {
+            key: 'customFilters',
+            svg: 'customFilters.svg',
+            label: t('I tuoi filtri'),
         },
     ]
     const listingFilters = [
         window.location.pathname.includes('performance') && {
-            nameButton: t('Raggruppa'),
-            idx: 0,
+            key: 'raggruppa',
+            svg: 'raggruppa.svg',
+            label: t('Raggruppa'),
         },
         {
-            nameButton: t('Luogo'),
-            idx: 4,
+            key: 'location',
+            svg: 'location.svg',
+            label: t('Luogo'),
         },
         window.location.pathname.includes('home') && {
             nameButton: t('Stato'),
-            idx: 8,
+            key: 'stato',
+            svg: 'statp.svg',
+            label: t('Stato'),
         },
         window.location.pathname.includes('performance') && {
-            nameButton: t('Tempo'),
-            idx: 3,
+            key: 'tempo',
+            svg: 'tempo.svg',
+            label: t('Tempo'),
         },
     ]
 
@@ -130,6 +148,7 @@ function FiltersSidebar() {
             )}
             {showFilterList && (
                 <FiltersList
+                    filters={filters}
                     setSelectedFilter={handleSelectFilter}
                     blockSidebar={blockSidebar}
                     setBlockSidebar={setBlockSidebar}

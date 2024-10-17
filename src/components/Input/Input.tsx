@@ -9,12 +9,14 @@ import {
     iconSmallSize,
     iconXLargeSize,
 } from '../../constants/constants'
+import { onFocus } from '@reduxjs/toolkit/dist/query/core/setupListeners'
 
 const Input = ({
     size,
     disabled = false,
     name,
     onBlur,
+    onFocus,
     color = 'primary',
     onChange,
     placeholder = '',
@@ -97,6 +99,7 @@ const Input = ({
                 onKeyDown={handleKeyDown}
                 name={name}
                 onBlur={onBlur}
+                onFocus={onFocus}
                 className={`${styles.input} ${colorClass} ${sizeClass} ${disabledClass} ${floatingDisplayClass} ${customClassName}`}
                 style={{
                     paddingLeft: prefix ? iconSize + 5 : '',

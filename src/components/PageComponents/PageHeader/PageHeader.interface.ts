@@ -1,5 +1,3 @@
-import { ReactElement } from 'react'
-
 export interface PageHeaderProps {
     heading: string
     subheading?: boolean | string
@@ -8,4 +6,13 @@ export interface PageHeaderProps {
     arrowBackUrl?: string
     showArrowBack?: boolean
     hideFilters?: boolean
+    bulkEdit?: boolean
+    dropdownData?: any
+    isOnBulkEdit?: boolean
+    setIsOnBulkEdit?: (arg0: boolean) => void
+    selectAllListing?: () => void
+    allSelected?: boolean
+    bulkOperationType?: string
+    bulkBtnDisabled?: boolean
+    bulkList?: any[]
 }

@@ -10,26 +10,37 @@ function AddLocationModal({ isOpen, setIsOpen }: AddLocationModalProps) {
 
     return (
         <>
-            <div className={styles.darkBG} onClick={() => setIsOpen(!isOpen)} />
-            <div className={styles.container}>
-                <div className={styles.header}>
-                    <Typography size={'bodyBig'} weight={'bold'}>
-                        {t('Aggiungi Luogo')}
-                    </Typography>
-                </div>
-                <div className={styles.body}>
-                    <Typography size={'bodySmall'} weight={'light'}>
-                        {t('Luogo')}
-                    </Typography>
-                    <Input fullWidth={true} />
-                </div>
-                <div className={styles.footer}>
-                    <Button size={'medium'} variant={'outline'}>
-                        {t('Annulla')}
-                    </Button>
-                    <Button size={'medium'}>{t('Aggiungi')}</Button>
-                </div>
-            </div>
+            {isOpen && (
+                <>
+                    <div
+                        className={styles.darkBG}
+                        onClick={() => setIsOpen(!isOpen)}
+                    />
+                    <div className={styles.container}>
+                        <div className={styles.header}>
+                            <Typography size={'bodyBig'} weight={'bold'}>
+                                {t('Aggiungi Luogo')}
+                            </Typography>
+                        </div>
+                        <div className={styles.body}>
+                            <Typography size={'bodySmall'} weight={'light'}>
+                                {t('Luogo')}
+                            </Typography>
+                            <Input fullWidth={true} />
+                        </div>
+                        <div className={styles.footer}>
+                            <Button
+                                size={'medium'}
+                                variant={'outline'}
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {t('Annulla')}
+                            </Button>
+                            <Button size={'medium'}>{t('Aggiungi')}</Button>
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     )
 }

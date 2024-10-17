@@ -29,3 +29,9 @@
   flex-direction: column;
   align-items: center;
 }
+
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px
+}

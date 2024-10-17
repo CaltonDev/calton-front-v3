@@ -5,10 +5,29 @@ import PageContainer from '../../components/PageComponents/PageContainer/PageCon
 import { useTranslation } from 'react-i18next'
 import ListingService from '../../services/ListingService'
 import { PaginationState } from '@tanstack/react-table'
+import { useSelector } from 'react-redux'
+import { selectAllFilters } from '../../store/selectors/selectorsSlice'
+import { getNoCodeFromPlatfrom } from '../../helpers/helpers'
 
 function Hours() {
     const { t } = useTranslation()
-    const hoursData = ListingService.getHoursData()?.data
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    })
+    const allFilters = useSelector(selectAllFilters)
+    const count = ListingService.getCountOfListings()?.data?.count
+    const hoursData = ListingService.getHours({
+        listingsName: allFilters?.selectedLocationListing,
+        skip: pagination.pageIndex * pagination.pageSize,
+        limit: pagination.pageSize,
+        returnAnt: true,
+        code: getNoCodeFromPlatfrom(),
+        isSingle: true,
+        nextPageToken: null,
+        isPrefetchNextPage: true,
+        totalNumberOfRecords: count,
+    })?.data
     const formatHours = (dayData: any) => {
         if (!dayData || dayData.length === 0) return ''
         const { openHours, openMinutes, closeHours, closeMinutes } = dayData[0]
@@ -31,20 +50,16 @@ function Hours() {
         return formatedItem
     })
 
-    const [pagination, setPagination] = React.useState<PaginationState>({
-        pageIndex: 0,
-        pageSize: 10,
-    })
-
     return (
         <PageContainer>
             <PageHeader heading={t('Orario')} subheading={true}></PageHeader>
             <Table
                 data={hoursDataFormated}
                 columnsData={hoursData?.columns}
-                fullyLoaded={true}
+                fullyLoaded={false}
                 pagination={pagination}
                 setPagination={setPagination}
+                totalItems={count}
             />
         </PageContainer>
     )

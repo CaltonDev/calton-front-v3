@@ -5,4 +5,5 @@ type InfoCardViewerData = {
 
 export interface InfoCardViewerProps {
     data: InfoCardViewerData[]
+    customWidth?: string
 }

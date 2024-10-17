@@ -31,6 +31,7 @@ export default function CustomAutocomplete({
     hasDropdown = false,
     applySelection,
     hasIcons = false,
+    fullwidth = false,
 }: CustomAutocompleteProps) {
     const [anchorEl, setAnchorEl] = useState<any>(null)
     const [pendingValue, setPendingValue] = useState<any>(
@@ -365,21 +366,36 @@ export default function CustomAutocomplete({
                                     borderRadius: 25,
                                     paddingLeft: 5,
                                 }
-                              : {
-                                    boxSizing: 'border-box',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    padding: '12px 16px',
-                                    gap: '9px',
-                                    width: '100%',
-                                    background: '#FFFFFF',
-                                    border: '1px solid #9D96A5',
-                                    borderRadius: '10px',
-                                    fontFamily: 'Roboto',
-                                    minWidth: 400,
-                                    maxWidth: 500,
-                                }
+                              : fullwidth
+                                ? {
+                                      boxSizing: 'border-box',
+                                      display: 'flex',
+                                      flexDirection: 'row',
+                                      alignItems: 'center',
+                                      padding: '12px 16px',
+                                      gap: '9px',
+                                      width: '100%',
+                                      background: '#FFFFFF',
+                                      border: '1px solid #9D96A5',
+                                      borderRadius: '10px',
+                                      fontFamily: 'Roboto',
+                                      minWidth: 400,
+                                  }
+                                : {
+                                      boxSizing: 'border-box',
+                                      display: 'flex',
+                                      flexDirection: 'row',
+                                      alignItems: 'center',
+                                      padding: '12px 16px',
+                                      gap: '9px',
+                                      width: '100%',
+                                      background: '#FFFFFF',
+                                      border: '1px solid #9D96A5',
+                                      borderRadius: '10px',
+                                      fontFamily: 'Roboto',
+                                      minWidth: 400,
+                                      maxWidth: 500,
+                                  }
                     }
                 >
                     <Button

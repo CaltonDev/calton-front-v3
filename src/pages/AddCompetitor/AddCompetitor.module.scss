@@ -1,0 +1,131 @@
+.container {
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.leftItemContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerLabelContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #2EC4B6;
+  cursor: pointer;
+}
+
+.headerLabelContainerDisabled {
+  @extend .headerLabelContainer;
+  border-bottom:  1px solid #E9E7EC;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 95%;
+  margin-top: 50px;
+  gap: 20px;
+}
+
+.contentDiv {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.placeholder {
+  width: 50%;
+  background: white;
+  border-radius: 10px;
+  min-height: 70vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.inputsContainer {
+  width: 50%;
+  background: white;
+  border-radius: 10px;
+  min-height: 70vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+}
+
+.leftItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rightItem {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  border: 2px solid #C0BBC5;
+  background: #FFF;
+  padding: 10px;
+}
+
+
+.barContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.bar {
+  width: 128px;
+  height: 18px;
+  border-radius: 3px;
+  background: #E9E7EC;
+}
+
+.smallBar {
+  width: 75px;
+  height: 11px;
+  border-radius: 3px;
+  background: #D3CFD7;
+}
+
+.smallestBar {
+  @extend .smallBar;
+  width: 36px;
+}
+
+.placeholderContent {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+
+.placeholderText {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 235px;
+}
