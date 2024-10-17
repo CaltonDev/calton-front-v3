@@ -17,7 +17,6 @@ import { objRoutes } from './services/routerServices'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import SignUp from './pages/SignUp/SignUp'
 import CompleteSignUp from './pages/CompleteSignUp/CompleteSignUp'
-import TimePicker from 'rc-time-picker'
 import 'rc-time-picker/assets/index.css'
 
 const persistor = persistStore(store)
@@ -68,7 +67,6 @@ ReactDOM.createRoot(rootElement).render(
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <RouterProvider router={router} />
-                    <TimePicker />
                 </PersistGate>
             </Provider>
         </QueryClientProvider>
