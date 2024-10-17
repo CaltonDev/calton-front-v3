@@ -350,6 +350,7 @@ function getHours({
         isSingle,
         nextPageToken,
     }
+    
     const queryResult = useQuery<any, Error>(
         ['hours', body],
         () => apiService.apiListings.post('/getHours', body, getHeaders()),

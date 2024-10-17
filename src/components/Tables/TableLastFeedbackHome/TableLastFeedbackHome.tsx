@@ -134,8 +134,8 @@ function TableLastFeedbackHome({
                         />
                     )}
                     <Table
-                        data={feedbacks?.all_feed?.feedback || []}
-                        columnsData={feedbacks?.all_feed?.columns || []}
+                        data={feedbacks?.data?.feedback || []}
+                        columnsData={feedbacks?.data?.columns || []}
                         fullyLoaded={true}
                         bottomNavigator={true}
                         pagination={pagination}

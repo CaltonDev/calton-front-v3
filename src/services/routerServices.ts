@@ -1,5 +1,6 @@
 // routes
 import { lazy } from 'react'
+import SurveysInsights from '../pages/SurveyInsights/SurveysInsights'
 
 const Home = lazy(() => import('../pages/Home/Home'))
 const Luoghi = lazy(() => import('../pages/Luoghi/Luoghi'))
@@ -17,12 +18,14 @@ const AddFonti = lazy(() => import('../pages/AddFonti/AddFonti'))
 const SmartResponseEdit = lazy(
     () => import('../pages/SmartResponseEdit/SmartResponsesEdit')
 )
-// const UploadFonti = lazy(() => import('../pages/UploadFonti/UploadFonti'))
+const UploadFonti = lazy(() => import('../pages/UploadFonti/UploadFonti'))
 const Topic = lazy(() => import('../pages/Topic/Topic'))
 const Hours = lazy(() => import('../pages/Hours/Hours'))
 const SelectableCards = lazy(
     () => import('../pages/SelectableCards/SelectableCards')
 )
+const SurveyReviews = lazy(() => import('../pages/SurveyReviews/SurveyReviews'))
+const SurveyCreate = lazy(() => import('../pages/SurveyCreate/SurveyCreate'))
 const LocalPost = lazy(() => import('../pages/LocalPost/LocalPost'))
 const AddCompetitor = lazy(() => import('../pages/AddCompetitor/AddCompetitor'))
 const Menus = lazy(() => import('../pages/Menus/Menus'))
@@ -83,7 +86,15 @@ export const objRoutes = {
         path: 'surveys',
         component: Surveys,
     },
-    LocalPost: {
+    InsightsSurvey: {
+        path: 'insights/:id',
+        component: SurveyReviews,
+    },
+    CreateSurvey: {
+        path: 'surveys/new',
+        component: SurveyCreate,
+    },
+  LocalPost: {
         path: 'localPost',
         component: LocalPost,
     },

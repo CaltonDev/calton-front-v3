@@ -1,19 +1,6 @@
-.container {
-  height: 100vh;
-  box-sizing: border-box;
+.containerCards{
   display: flex;
-  flex-direction: column;
-}
-
-.leftItemContainer {
-  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  gap: 15px;
-}
-
-.header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  gap: 1.7vw;
 }
