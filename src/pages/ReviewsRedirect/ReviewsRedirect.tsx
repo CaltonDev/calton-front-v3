@@ -18,11 +18,11 @@ function ReviewsRedirect() {
                 <Reviews />
             ) : platformType === 'competitor' ? (
                 <ReviewsCompetitor />
-            ): (
+            ) : (
                 platformType === 'surveys' && (
                     <SurveyReplies isFromHome={true} />
                 )
-            }
+            )}
         </>
     )
 }
