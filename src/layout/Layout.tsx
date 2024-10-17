@@ -21,7 +21,7 @@ import { v5 as uuidv5 } from 'uuid'
 import { ErrorToastState, showToast } from '../store/toast/errorToastSlice'
 import { EP_SERVER, IS_PROD } from '../constants/environment'
 import { pushSocketMessage } from '../store/socket/socketSlice'
-import { semverGreaterThan } from '../CacheBuster'
+import { semverGreaterThan } from '../helpers/helpers'
 import FileDownload from 'js-file-download'
 
 function Layout() {

@@ -339,3 +339,19 @@ export function isEmail(email) {
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )
 }
+
+export const semverGreaterThan = (versionA, versionB) => {
+    const versionsA = versionA.split(/\./g)
+
+    const versionsB = versionB.split(/\./g)
+    while (versionsA.length || versionsB.length) {
+        const a = Number(versionsA.shift())
+
+        const b = Number(versionsB.shift())
+        // eslint-disable-next-line no-continue
+        if (a === b) continue
+        // eslint-disable-next-line no-restricted-globals
+        return a > b || isNaN(b)
+    }
+    return false
+}
