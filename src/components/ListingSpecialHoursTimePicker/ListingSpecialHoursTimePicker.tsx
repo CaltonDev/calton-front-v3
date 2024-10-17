@@ -1,14 +1,13 @@
 import React from 'react'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import { TimePicker } from 'antd'
+// import { TimePicker } from 'antd'
 import styles from './ListingSpecialHoursTimePicker.module.scss'
 import {
     CaretDownOutlined,
     CaretRightOutlined,
     PlusOutlined,
 } from '@ant-design/icons'
-import moment from 'moment'
 import elimina_svg from '../../assets/img/elimina.svg'
 import {
     formatDataValue,
@@ -19,6 +18,8 @@ import {
     SpecialHoursProps,
     IWorkingHours,
 } from '../../pages/ListingEditHours/ListingEditHours.interface'
+import { default as TimePicker } from '../TimePicker/TimePicker'
+import moment, { Moment } from 'moment'
 
 dayjs.extend(customParseFormat)
 
@@ -47,31 +48,31 @@ function ListingSpecialHoursTimePicker({
     const [isTimePickerEnd, setIsTimePickerEnd] = React.useState(false)
 
     const [valueStartTime, setValueStartTime] = React.useState(
-        dayjs(
+        moment(
             formatDataValue(hour?.openTime?.hours, hour?.openTime?.minutes),
             'HH:mm:ss'
         )
     )
     const [valueEndTime, setValueEndTime] = React.useState(
-        dayjs(
+        moment(
             formatDataValue(hour?.closeTime?.hours, hour?.closeTime?.minutes),
             'HH:mm:ss'
         )
     )
-    const startTime = hour
-        ? moment({
-              hours: hour?.openTime?.hours ?? 0,
-              minutes: hour?.openTime?.minutes ?? 0,
-          })
-        : null
-    const endTime = hour
-        ? moment({
-              hours: hour?.closeTime?.hours ?? 0,
-              minutes: hour?.closeTime?.minutes ?? 0,
-          })
-        : null
+    // const startTime = hour
+    //     ? moment({
+    //           hours: hour?.openTime?.hours ?? 0,
+    //           minutes: hour?.openTime?.minutes ?? 0,
+    //       })
+    //     : null
+    // const endTime = hour
+    //     ? moment({
+    //           hours: hour?.closeTime?.hours ?? 0,
+    //           minutes: hour?.closeTime?.minutes ?? 0,
+    //       })
+    //     : null
 
-    const onSelectStartTime = (time: dayjs.Dayjs) => {
+    const onSelectStartTime = (time: Moment) => {
         setValueStartTime(time)
         const tmpPeriod = [...distinctPeriods]
         tmpPeriod[periodIndex].hours[hourIndex].openTime = {
@@ -81,7 +82,7 @@ function ListingSpecialHoursTimePicker({
         setDistinctPeriods(tmpPeriod)
     }
 
-    const onSelectEndTime = (time: dayjs.Dayjs) => {
+    const onSelectEndTime = (time: Moment) => {
         setValueEndTime(time)
         const tmpPeriod = [...distinctPeriods]
         tmpPeriod[periodIndex].hours[hourIndex].closeTime = {
@@ -93,13 +94,13 @@ function ListingSpecialHoursTimePicker({
 
     React.useEffect(() => {
         setValueStartTime(
-            dayjs(
+            moment(
                 formatDataValue(hour?.openTime?.hours, hour?.openTime?.minutes),
                 'HH:mm:ss'
             )
         )
         setValueEndTime(
-            dayjs(
+            moment(
                 formatDataValue(
                     hour?.closeTime?.hours,
                     hour?.closeTime?.minutes
@@ -113,85 +114,57 @@ function ListingSpecialHoursTimePicker({
         <div className={styles.timePickerContainer} key={hourIndex}>
             <div className={styles.timePickers}>
                 <TimePicker
-                    className={styles.picker}
-                    onOpenChange={(e) => setIsTimePickerStart(e)}
-                    placeholder={`Open at: ${startTime?.format('HH:mm')}`}
                     onChange={onSelectStartTime}
-                    suffixIcon={
-                        isTimePickerStart ? (
-                            <CaretDownOutlined />
-                        ) : (
-                            <CaretRightOutlined />
-                        )
-                    }
-                    format="HH:mm"
-                    // picker="time"
-                    minuteStep={5}
                     value={valueStartTime}
+                    variant={'primary'}
                 />
-            </div>
-            <div className={styles.timePickers}>
+                {/* </div> */}
+                {/* <div className={styles.timePickers}> */}
                 <TimePicker
-                    className={styles.picker}
-                    onOpenChange={(e) => setIsTimePickerEnd(e)}
-                    placeholder={`Close at: ${endTime?.format('HH:mm')}`}
                     onChange={onSelectEndTime}
-                    suffixIcon={
-                        isTimePickerEnd ? (
-                            <CaretDownOutlined />
-                        ) : (
-                            <CaretRightOutlined />
-                        )
-                    }
-                    format="HH:mm"
-                    // picker="time"
-                    minuteStep={5}
                     value={valueEndTime}
+                    variant={'primary'}
                 />
             </div>
-            {
-                <div
-                    onClick={() =>
-                        handleDeleteSpecialTimeInterval(
-                            hourIndex,
-                            periodIndex,
-                            distinctPeriods,
-                            setDistinctPeriods
-                        )
-                    }
-                    style={{ alignSelf: 'center', marginLeft: '1em' }}
-                >
-                    <img
-                        style={{ cursor: 'pointer' }}
-                        src={elimina_svg}
-                        width="20"
-                        height="20"
-                        alt=""
-                    />
-                </div>
-            }
-            {hourIndex === lastElementIndex && (
-                <div
-                    style={{
-                        cursor: 'pointer',
-                        marginLeft: '1em',
-                        marginRight: 'auto',
-                        marginTop: '5px',
-                        alignSelf: 'center',
-                    }}
-                    onClick={() =>
-                        handleAddingSpecialTimeInterval(
-                            startDate,
-                            endDate,
-                            distinctPeriods,
-                            setDistinctPeriods,
-                            periodIndex
-                        )
-                    }
-                >
-                    <PlusOutlined style={{ verticalAlign: 0 }} />
-                </div>
-            )}
+            <div className={styles.specialHoursActionsContainer}>
+                {
+                    <div
+                        className={styles.deleteSpecialHoursContainer}
+                        onClick={() =>
+                            handleDeleteSpecialTimeInterval(
+                                hourIndex,
+                                periodIndex,
+                                distinctPeriods,
+                                setDistinctPeriods
+                            )
+                        }
+                    >
+                        <img
+                            className={styles.deleteImg}
+                            src={elimina_svg}
+                            width="20"
+                            height="20"
+                            alt=""
+                        />
+                    </div>
+                }
+                {hourIndex === lastElementIndex && (
+                    <div
+                        className={styles.addSpecialHoursContainer}
+                        onClick={() =>
+                            handleAddingSpecialTimeInterval(
+                                startDate,
+                                endDate,
+                                distinctPeriods,
+                                setDistinctPeriods,
+                                periodIndex
+                            )
+                        }
+                    >
+                        <PlusOutlined className={styles.plusOutlined} />
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

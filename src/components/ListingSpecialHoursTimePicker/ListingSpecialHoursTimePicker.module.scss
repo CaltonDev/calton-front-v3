@@ -1,12 +1,14 @@
 .timePickerContainer {
     display: flex;
-    margin-right: 1em;
-    font-family: Montserrat;
-    margin-bottom: 0.5em;
+    gap: 20px;
+    // margin-right: 1em;
+    // font-family: Montserrat;
 }
 
 .timePickers {
-    margin-left: 1em;
+    // margin-left: 1em;
+    display: flex;
+    gap: 20px;
 }
 
 .picker {
@@ -25,4 +27,26 @@
 
 .picker:hover {
     border: 1.5px solid #3f49fc;
+}
+
+.deleteSpecialHoursContainer {
+    align-self: center;
+}
+
+.deleteImg {
+    cursor: pointer;
+}
+
+.addSpecialHoursContainer {
+    cursor: pointer;
+    align-self: center;
+}
+
+.plusOutlined {
+    vertical-align: 0;
+}
+
+.specialHoursActionsContainer {
+    display: flex;
+    gap: 15px;
 }

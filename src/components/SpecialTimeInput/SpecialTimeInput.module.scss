@@ -25,20 +25,23 @@
 }
 
 .dayCheckbox {
-    font-family: 'Montserrat', 'Heebo', sans-serif !important;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    // font-family: 'Montserrat', 'Heebo', sans-serif !important;
+    display: flex;
+    gap: 20px;
 }
 
 .holidayContainer {
-    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
 }
 
 .holidayContent {
-    align-items: baseline;
-    display: inline-flex;
+    align-items: flex-end;
+    display: flex;
     width: 100%;
-    vertical-align: center;
+    // vertical-align: center;
+    gap: 50px;
 }
 
 .customInput {
@@ -54,9 +57,6 @@
 .timePickerContainer {
     display: inline-flex;
     width: 100%;
-}
-.timePickerRow {
-    margin-bottom: 2rem;
 }
 .plusAtNull {
     cursor: pointer;

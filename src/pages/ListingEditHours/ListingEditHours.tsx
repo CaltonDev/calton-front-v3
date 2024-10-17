@@ -180,6 +180,10 @@ function ListingEditHours() {
         }
     }, [cardRef, subCardRef])
 
+    React.useEffect(() => {
+        console.log('listingSpecialHours', listingSpecialHours)
+    }, [listingSpecialHours])
+
     return (
         <>
             <PageContainer>

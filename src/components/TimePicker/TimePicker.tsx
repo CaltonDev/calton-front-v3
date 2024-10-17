@@ -12,20 +12,18 @@ const CaltonTimePicker: React.FC<TimePickerProps> = ({
     const variantClass = variant ? styles[variant] : ''
 
     return (
-        <div className={styles.timePickers}>
-            <div className={styles.timePickerWrapper}>
-                <TimePicker
-                    showSecond={false}
-                    onChange={onChange}
-                    use12Hours
-                    className={`${styles.picker} ${variantClass} `}
-                    value={value}
-                    format={'HH:mm'}
-                    minuteStep={5}
-                    allowEmpty={false}
-                />
-                <IoIosArrowDown className={styles.icon} />
-            </div>
+        <div className={styles.timePickerWrapper}>
+            <TimePicker
+                showSecond={false}
+                onChange={onChange}
+                use12Hours
+                className={`${styles.picker} ${variantClass}`}
+                value={value}
+                format={'HH:mm'}
+                minuteStep={5}
+                allowEmpty={false}
+            />
+            <IoIosArrowDown className={styles.icon} />
         </div>
     )
 }
