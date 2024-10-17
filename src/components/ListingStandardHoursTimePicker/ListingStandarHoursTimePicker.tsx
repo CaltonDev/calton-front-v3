@@ -1,14 +1,12 @@
 import styles from './ListingStandardHoursTimePicker.module.scss'
 import React from 'react'
-import CustomTimePicker from '../CustomTimePicker/CustomTimePicker'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import {
     formatDataValue,
     handleDeleteTimeInterval,
     handleAddingTimeInterval,
 } from '../../helpers/editHoursHelpers'
-import { TimePicker as AntdTimePicker } from 'antd'
 import {
     ListingProps,
     PeriodProps,
@@ -16,14 +14,8 @@ import {
 import { Weekdays } from '../../constants/CustomConstants'
 import moment, { Moment } from 'moment'
 import elimina_svg from '../../assets/img/elimina.svg'
-import {
-    CaretDownOutlined,
-    CaretRightOutlined,
-    PlusOutlined,
-} from '@ant-design/icons'
-import { default as RCTimePicker } from 'rc-time-picker'
+import { PlusOutlined } from '@ant-design/icons'
 import { default as TimePicker } from '../TimePicker/TimePicker'
-import { IoIosArrowDown } from 'react-icons/io'
 
 dayjs.extend(customParseFormat)
 
@@ -125,24 +117,17 @@ const ListingStandarHoursTimePicker = ({
 
     return (
         <>
-            {/* <div className={styles.timePickerContainer} key={weekday}> */}
             <div className={styles.timePickers}>
-                {/* <div className={styles.timePickerWrapper}> */}
                 <TimePicker
                     onChange={onSelectStartTime}
                     value={valueStartTime}
                     variant={'primary'}
                 />
-                {/* </div> */}
-                {/* </div> */}
-                {/* <div className={styles.timePickers}> */}
-                {/* <div className={styles.timePickerWrapper}> */}
                 <TimePicker
                     onChange={onSelectEndTime}
                     value={valueEndTime}
                     variant={'primary'}
                 />
-                {/* </div> */}
             </div>
             {
                 <div
@@ -157,7 +142,6 @@ const ListingStandarHoursTimePicker = ({
                             listing
                         )
                     }
-                    // style={{ alignSelf: 'center', marginLeft: '1em' }}
                 >
                     <img
                         style={{ cursor: 'pointer' }}
@@ -170,13 +154,7 @@ const ListingStandarHoursTimePicker = ({
             }
             {index === lastElementIndex && (
                 <div
-                    style={{
-                        cursor: 'pointer',
-                        marginLeft: '1em',
-                        marginRight: 'auto',
-                        marginTop: '5px',
-                        alignSelf: 'center',
-                    }}
+                    className={styles.addTimeIntervalContainer}
                     onClick={() =>
                         handleAddingTimeInterval(weekday, setListing)
                     }
@@ -184,7 +162,6 @@ const ListingStandarHoursTimePicker = ({
                     <PlusOutlined style={{ verticalAlign: 0 }} />
                 </div>
             )}
-            {/* </div> */}
         </>
     )
 }
