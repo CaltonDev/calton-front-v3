@@ -124,27 +124,29 @@ const ListingStandarHoursTimePicker = ({
     }, [period])
 
     return (
-        <div className={styles.timePickerContainer} key={weekday}>
+        <>
+            {/* <div className={styles.timePickerContainer} key={weekday}> */}
             <div className={styles.timePickers}>
-                <div className={styles.timePickerWrapper}>
-                    <TimePicker
-                        onChange={onSelectStartTime}
-                        value={valueStartTime}
-                        variant={'primary'}
-                    />
-                </div>
-            </div>
-            <div className={styles.timePickers}>
-                <div className={styles.timePickerWrapper}>
-                    <TimePicker
-                        onChange={onSelectEndTime}
-                        value={valueEndTime}
-                        variant={'primary'}
-                    />
-                </div>
+                {/* <div className={styles.timePickerWrapper}> */}
+                <TimePicker
+                    onChange={onSelectStartTime}
+                    value={valueStartTime}
+                    variant={'primary'}
+                />
+                {/* </div> */}
+                {/* </div> */}
+                {/* <div className={styles.timePickers}> */}
+                {/* <div className={styles.timePickerWrapper}> */}
+                <TimePicker
+                    onChange={onSelectEndTime}
+                    value={valueEndTime}
+                    variant={'primary'}
+                />
+                {/* </div> */}
             </div>
             {
                 <div
+                    className={styles.deleteTimeIntervalContainer}
                     onClick={() =>
                         handleDeleteTimeInterval(
                             weekday,
@@ -155,7 +157,7 @@ const ListingStandarHoursTimePicker = ({
                             listing
                         )
                     }
-                    style={{ alignSelf: 'center', marginLeft: '1em' }}
+                    // style={{ alignSelf: 'center', marginLeft: '1em' }}
                 >
                     <img
                         style={{ cursor: 'pointer' }}
@@ -182,7 +184,8 @@ const ListingStandarHoursTimePicker = ({
                     <PlusOutlined style={{ verticalAlign: 0 }} />
                 </div>
             )}
-        </div>
+            {/* </div> */}
+        </>
     )
 }
 
