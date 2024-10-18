@@ -1,0 +1,26 @@
+.heading {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: left;
+  color: #321d48;
+  padding-bottom: 15px;
+}
+
+.wrapperDiv {
+  margin-top: 10px;
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+}
+
+.specialIcon {
+  position: relative;
+  top: 15px;
+  right: 0px;
+  float: right;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=HeadingChart.module.css.map */

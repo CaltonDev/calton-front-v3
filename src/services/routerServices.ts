@@ -30,6 +30,9 @@ const LocalPost = lazy(() => import('../pages/LocalPost/LocalPost'))
 const AddCompetitor = lazy(() => import('../pages/AddCompetitor/AddCompetitor'))
 const Menus = lazy(() => import('../pages/Menus/Menus'))
 const Photos = lazy(() => import('../pages/Photos/Photos'))
+const ListingPerformance = lazy(
+    () => import('../pages/ListingPerformance/ListingPerformance')
+)
 
 export const objRoutes = {
     Dashboards: {
@@ -110,5 +113,9 @@ export const objRoutes = {
     ListingPhotos: {
         path: 'photo',
         component: Photos,
+    },
+    ListingPerformance: {
+        path: 'performance',
+        component: ListingPerformance,
     },
 }

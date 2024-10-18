@@ -1,7 +1,7 @@
 import apiService from './api/apiService'
 import { getHeaders } from './api/headers'
 import { getNoCodeFromPlatfrom } from '../helpers/helpers'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
 import { prefetchNextPage } from '../helpers/reactQueryHelpers'
 
 export interface ListingServiceBody {
@@ -350,7 +350,7 @@ function getHours({
         isSingle,
         nextPageToken,
     }
-    
+
     const queryResult = useQuery<any, Error>(
         ['hours', body],
         () => apiService.apiListings.post('/getHours', body, getHeaders()),
@@ -416,7 +416,15 @@ function getPerformance(
         groupby,
         code,
     }
-    return apiService.apiListings.post('/getPerformance', body, getHeaders())
+    return useQuery<any, Error>(
+        [`performance/${metric}`, body],
+        () =>
+            apiService.apiListings.post('/getPerformance', body, getHeaders()),
+        {
+            staleTime: 5 * 60 * 1000,
+            keepPreviousData: true,
+        }
+    )
 }
 
 function getSearchKeywords(
