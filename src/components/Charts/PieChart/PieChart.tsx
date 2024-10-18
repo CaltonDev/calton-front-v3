@@ -19,8 +19,8 @@ const PieChart = ({ title, data, colors, height = '370px' }: PieChartProps) => {
         innerRadius: 0.5,
         appendPadding: 10,
         legend: false,
-        color: (type: any) => {
-            return colors.find((item: any) => item?.type === type)?.color
+        color: (obj: any) => {
+            return colors.find((item: any) => item?.type === obj?.type)?.color
         },
         label: showNumbers
             ? {

@@ -1,14 +1,13 @@
 import styles from './ListingPerformance.module.scss'
 import SmallGraphHome from '../../components/Graphs/SmallGraphHome/SmallGraphHome'
-import { useDispatch, useSelector } from 'react-redux'
-import React, { useMemo, useState } from 'react'
+import { useSelector } from 'react-redux'
+import React from 'react'
 import PageHeader from '../../components/PageComponents/PageHeader/PageHeader'
 import { useTranslation } from 'react-i18next'
-import { showToast } from '../../store/toast/errorToastSlice'
 import HeadingChart from '../../components/Charts/HeadingChart/HeadingChart'
 import SmallTableGraphHome from '../../components/Graphs/SmallTableGraphHome/SmallTableGraphHome'
 import ListingService from '../../services/ListingService'
-import PieChart from '../../components/Charts/PieChart/PieChartImp'
+import PieChart from '../../components/Charts/PieChart/PieChart'
 import ChartConfig from '../../constants/ChartConfig'
 import AnalisiInfoCardListing from '../../components/Charts/AnalisiInfoCardListing/AnalisiInfoCardListing'
 import {
@@ -88,7 +87,6 @@ function ListingPerformance() {
         platformCode
     )?.data
 
-    console.log('b: ', businessDirectionData)
     const businessFoodOrdersData = ListingService.getPerformance(
         allFilters,
         filteredListings,
@@ -162,19 +160,19 @@ function ListingPerformance() {
     const doughnutData = [
         {
             type: 'googleMapsDesktop',
-            value: businessImpressionsDesktopMapsData?.data,
+            value: businessImpressionsDesktopMapsData?.tot,
         },
         {
             type: 'googleMapsMobile',
-            value: businessImpressionsMobileMapsData?.data,
+            value: businessImpressionsMobileMapsData?.tot,
         },
         {
             type: 'googleSearchDesktop',
-            value: businessImpressionsDesktopSearchData?.data,
+            value: businessImpressionsDesktopSearchData?.tot,
         },
         {
             type: 'googleSearchMobile',
-            value: businessImpressionsMobileSearchData?.data,
+            value: businessImpressionsMobileSearchData?.tot,
         },
     ]
     const searchTotal =
@@ -183,7 +181,6 @@ function ListingPerformance() {
         businessImpressionsDesktopMapsData?.tot +
         businessImpressionsMobileMapsData?.tot
 
-    console.log('DAta: ', doughnutData, ' tot: ', searchTotal)
     return (
         <PageContainer>
             <PageHeader heading={t('Performance')} />
