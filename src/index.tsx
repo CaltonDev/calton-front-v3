@@ -18,6 +18,7 @@ import { QueryClientProvider, QueryClient } from 'react-query'
 import SignUp from './pages/SignUp/SignUp'
 import CompleteSignUp from './pages/CompleteSignUp/CompleteSignUp'
 import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const persistor = persistStore(store)
 
 const LazyComponentWrapper = ({
