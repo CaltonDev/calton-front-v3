@@ -1,8 +1,7 @@
 .rowHome{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  //justify-content: space-around;
+  gap: 20px;
   justify-content: space-between;
   align-content: center;
 }
@@ -13,7 +12,7 @@
 }
 
 .pieSection {
-  width: 52%;
+  width: 45%;
   padding: 20px;
 }
 
@@ -35,14 +34,13 @@
 .subSectionWidth {
   @extend .subSection;
   justify-content: center;
-  align-items: end;
+  align-items: center;
 }
 
 .lastRowHome{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  //justify-content: space-around;
+  gap: 20px;
   justify-content: space-between;
   align-content: center;
 }
@@ -149,3 +147,25 @@
   width: 33%;
 }
 
+
+
+.singleInfoCardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.infoCardContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding-right: 25px;
+  width: 45%;
+  align-items: center;
+}
+
+.infoCardTitle {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

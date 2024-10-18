@@ -27,6 +27,8 @@ import {
 import { selectAllFilters } from '../../store/selectors/selectorsSlice'
 import PageContainer from '../../components/PageComponents/PageContainer/PageContainer'
 import { RootState } from '../../store/store'
+import Typography from '../../components/Typography/Typography'
+import SvgWrapper from '../../components/SvgWrapper/SvgWrapper'
 
 function ListingPerformance() {
     const platformCode = useSelector(
@@ -98,13 +100,6 @@ function ListingPerformance() {
         allFilters,
         filteredListings,
         [businessFoodMenuClicks],
-        platformCode
-    )?.data
-
-    const businessConversationsData = ListingService.getPerformance(
-        allFilters,
-        filteredListings,
-        [businessConversations],
         platformCode
     )?.data
 
@@ -253,115 +248,117 @@ function ListingPerformance() {
                                 </div>
                             </div>
 
-                            <div
-                                style={{
-                                    paddingTop: '25px',
-                                    paddingRight: '25px',
-                                    width: '45%',
-                                }}
-                            >
-                                <AnalisiInfoCardListing
-                                    dataReady={
-                                        businessImpressionsDesktopSearchData
-                                    }
-                                    label={t(
-                                        `Ricerca Google – Computer desktop`
-                                    )}
-                                    value={
-                                        businessImpressionsDesktopSearchData?.tot
-                                    }
-                                    percentageValue={(
-                                        (businessImpressionsDesktopSearchData?.tot *
-                                            100) /
-                                        searchTotal
-                                    ).toFixed(2)}
-                                    color={colors[2]?.color}
-                                />
-                                <AnalisiInfoCardListing
-                                    dataReady={
-                                        businessImpressionsMobileSearchData
-                                    }
-                                    label={t(
-                                        `Ricerca Google – Dispositivi mobili`
-                                    )}
-                                    value={
-                                        businessImpressionsMobileSearchData?.tot
-                                    }
-                                    percentageValue={(
-                                        (businessImpressionsMobileSearchData?.tot *
-                                            100) /
-                                        searchTotal
-                                    ).toFixed(2)}
-                                    color={colors[3]?.color}
-                                />
-                                <AnalisiInfoCardListing
-                                    dataReady={
-                                        businessImpressionsMobileMapsData
-                                    }
-                                    label={t(
-                                        `Google Maps – Dispositivi mobili`
-                                    )}
-                                    value={
-                                        businessImpressionsMobileMapsData?.tot
-                                    }
-                                    percentageValue={(
-                                        (businessImpressionsMobileMapsData?.tot *
-                                            100) /
-                                        searchTotal
-                                    ).toFixed(2)}
-                                    color={colors[1]?.color}
-                                />
-                                <AnalisiInfoCardListing
-                                    dataReady={
-                                        businessImpressionsDesktopMapsData
-                                    }
-                                    label={t(`Google Maps – Computer desktop`)}
-                                    value={
-                                        businessImpressionsDesktopMapsData?.tot
-                                    }
-                                    percentageValue={(
-                                        (businessImpressionsDesktopMapsData?.tot *
-                                            100) /
-                                        searchTotal
-                                    ).toFixed(2)}
-                                    color={colors[0]?.color}
-                                />
+                            <div className={styles.infoCardContainer}>
+                                <div className={styles.singleInfoCardContainer}>
+                                    <div className={styles.infoCardTitle}>
+                                        <SvgWrapper
+                                            keySvg={'Google.svg'}
+                                            customWidth={32}
+                                            customHeight={32}
+                                        />
+                                        <Typography
+                                            size={'bodyBig'}
+                                            weight={'bold'}
+                                        >
+                                            {t('Ricerca Google')}
+                                        </Typography>
+                                    </div>
+                                    <AnalisiInfoCardListing
+                                        dataReady={
+                                            businessImpressionsDesktopSearchData
+                                        }
+                                        label={t(`Computer desktop`)}
+                                        value={
+                                            businessImpressionsDesktopSearchData?.tot
+                                        }
+                                        percentageValue={(
+                                            (businessImpressionsDesktopSearchData?.tot *
+                                                100) /
+                                            searchTotal
+                                        ).toFixed(2)}
+                                        color={colors[2]?.color}
+                                        iconSvg={'PcIconSvg'}
+                                    />
+                                    <AnalisiInfoCardListing
+                                        dataReady={
+                                            businessImpressionsMobileSearchData
+                                        }
+                                        label={t(`Dispositivi mobili`)}
+                                        value={
+                                            businessImpressionsMobileSearchData?.tot
+                                        }
+                                        percentageValue={(
+                                            (businessImpressionsMobileSearchData?.tot *
+                                                100) /
+                                            searchTotal
+                                        ).toFixed(2)}
+                                        color={colors[3]?.color}
+                                        iconSvg={'MobileIconSvg'}
+                                    />
+                                </div>
+
+                                <div className={styles.singleInfoCardContainer}>
+                                    <div className={styles.infoCardTitle}>
+                                        <SvgWrapper keySvg={'GoogleMaps.svg'} />
+                                        <Typography
+                                            size={'bodyBig'}
+                                            weight={'bold'}
+                                        >
+                                            {t('Google Maps')}
+                                        </Typography>
+                                    </div>
+                                    <AnalisiInfoCardListing
+                                        dataReady={
+                                            businessImpressionsDesktopMapsData
+                                        }
+                                        label={t(`Computer desktop`)}
+                                        value={
+                                            businessImpressionsDesktopMapsData?.tot
+                                        }
+                                        percentageValue={(
+                                            (businessImpressionsDesktopMapsData?.tot *
+                                                100) /
+                                            searchTotal
+                                        ).toFixed(2)}
+                                        color={colors[0]?.color}
+                                        iconSvg={'PcIconSvg'}
+                                    />
+                                    <AnalisiInfoCardListing
+                                        dataReady={
+                                            businessImpressionsMobileMapsData
+                                        }
+                                        label={t(`Dispositivi mobili`)}
+                                        value={
+                                            businessImpressionsMobileMapsData?.tot
+                                        }
+                                        percentageValue={(
+                                            (businessImpressionsMobileMapsData?.tot *
+                                                100) /
+                                            searchTotal
+                                        ).toFixed(2)}
+                                        color={colors[1]?.color}
+                                        iconSvg={'MobileIconSvg'}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className={styles.verticalSection}>
-                    <SmallGraphHome
-                        dataReady={businessConversationsData}
-                        color={ChartConfig.color.lightBlue}
-                        title={t('Messaggi')}
-                        styleCounter={styles.countUpMessages}
-                        numberToShow={businessConversationsData?.tot}
-                        label={t('Messaggi')}
-                        chartdata={businessConversationsData?.data}
-                        isTwoCols={true}
-                        fullWidth={true}
-                        mediaQuery={true}
-                        isRound={true}
-                        isInfoTooltip={true}
-                        infoTooltip={t('Messaggi')}
-                    />
-                    <SmallGraphHome
-                        dataReady={websiteClicksData}
-                        color={ChartConfig.color.purple}
-                        title={t('Click sul sito web')}
-                        numberToShow={websiteClicksData?.tot}
-                        label={t('Click sul sito web')}
-                        styleCounter={styles.countUpClicks}
-                        chartdata={websiteClicksData?.data}
-                        isTwoCols={true}
-                        fullWidth={true}
-                        mediaQuery={true}
-                        isRound={true}
-                        isInfoTooltip={true}
-                        infoTooltip={t('Click sul sito web')}
-                    />
-                </div>
+                <SmallGraphHome
+                    dataReady={websiteClicksData}
+                    color={ChartConfig.color.purple}
+                    title={t('Click sul sito web')}
+                    numberToShow={websiteClicksData?.tot}
+                    label={t('Click sul sito web')}
+                    styleCounter={styles.countUpClicks}
+                    chartdata={websiteClicksData?.data}
+                    isTwoCols={true}
+                    fullWidth={false}
+                    mediaQuery={true}
+                    isRound={true}
+                    isInfoTooltip={true}
+                    infoTooltip={t('Click sul sito web')}
+                />
             </div>
             <div className={styles.lastRowHome}>
                 <SmallTableGraphHome

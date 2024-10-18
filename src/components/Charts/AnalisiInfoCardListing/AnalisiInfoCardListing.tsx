@@ -5,10 +5,14 @@ import CountUp from 'react-countup'
 //todo: check what is ant badge
 import AntBadge from '../../../components/AntBadge/AntBadge'
 import { AnalisiInfoCardListingProps } from './AnalisiInfoCardListing.interface'
+import SvgWrapper from '../../SvgWrapper/SvgWrapper'
+import Typography from '../../Typography/Typography'
+import { disabledColor } from '../../../constants/constants'
 
 function AnalisiInfoCardListing({
     label,
     value,
+    iconSvg = '',
     percentageValue,
     decimals,
     dataReady = false,
@@ -17,45 +21,30 @@ function AnalisiInfoCardListing({
     return (
         <>
             {dataReady ? (
-                <div className={styles.rangeContainer}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        <div className={styles.coloredPoint}>
-                            <AntBadge
-                                count={0}
-                                size={'default'}
-                                color={color}
-                            />
-                        </div>
-                        <div className={styles.valueBody}>
-                            <span className={styles.valueTextInner}>
-                                <CountUp
-                                    separator=","
-                                    start={0}
-                                    end={value}
-                                    duration={3}
-                                    decimals={decimals}
-                                    useEasing={true}
-                                />
-                                {' - '}
-                                <CountUp
-                                    separator=","
-                                    start={0}
-                                    end={Number(percentageValue)}
-                                    duration={3}
-                                    decimals={decimals}
-                                    useEasing={true}
-                                />
-                                %
-                            </span>
-                        </div>
-                        <div className={styles.labelBody}>
-                            <label className={styles.labelText}>{label}</label>
+                <div className={styles.container}>
+                    <div className={styles.title}>
+                        <SvgWrapper
+                            keySvg={iconSvg}
+                            size={'medium'}
+                            customColor={'#C0BBC5'}
+                        />
+                        <Typography
+                            size={'bodySmall'}
+                            weight={'light'}
+                            customTextColor={disabledColor}
+                        >
+                            {label}
+                        </Typography>
+                    </div>
+                    <div className={styles.body}>
+                        <AntBadge count={0} size={'default'} color={color} />
+                        <div className={styles.bodyText}>
+                            <Typography size={'h6'} weight={'normal'}>
+                                {value.toString() + ' - '}
+                            </Typography>
+                            <Typography size={'h6'} weight={'bold'}>
+                                {percentageValue + '%'}
+                            </Typography>
                         </div>
                     </div>
                 </div>

@@ -43,7 +43,7 @@ const PieChart = ({ title, data, colors, height = '370px' }: PieChartProps) => {
     return (
         <>
             {data && data?.length > 0 ? (
-                <div id={title} style={{ height, width: '100%' }}>
+                <div id={title} style={{ height: 230, width: '100%' }}>
                     <Pie {...config} />
                 </div>
             ) : (

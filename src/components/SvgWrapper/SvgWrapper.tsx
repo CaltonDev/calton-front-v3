@@ -86,6 +86,9 @@ import WorldSvg from './SvgIcons/WorldSvg'
 import ExclamationPointSvg from './SvgIcons/ExclamationPointSvg'
 import SinglePencilSvg from './SvgIcons/SinglePencilSvg'
 import DuplicateDeleteSvg from './SvgIcons/DuplicateDeleteSvg'
+import GoogleMapsSvg from './SvgIcons/GoogleMapsSvg'
+import PcIconSvg from './SvgIcons/PcIconSvg'
+import MobileIconSvg from './SvgIcons/MobileIconSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -309,7 +312,21 @@ const SvgWrapper = ({
                 ) : keySvg === 'GoogleMyBusiness.svg' ? (
                     <GoogleMyBusinessSvg />
                 ) : keySvg === 'Google.svg' ? (
-                    <GoogleSvg />
+                    <GoogleSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'GoogleMaps.svg' ? (
+                    <GoogleMapsSvg />
+                ) : keySvg === 'PcIconSvg' ? (
+                    <PcIconSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'MobileIconSvg' ? (
+                    <MobileIconSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'Trustpilot.svg' ? (
                     <TrustpilotSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'Trusted shops.svg' ? (

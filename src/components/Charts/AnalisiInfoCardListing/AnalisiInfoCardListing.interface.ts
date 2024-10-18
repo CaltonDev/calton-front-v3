@@ -5,4 +5,5 @@ export interface AnalisiInfoCardListingProps {
     decimals?: number
     dataReady?: boolean
     color?: string
+    iconSvg?: string
 }
