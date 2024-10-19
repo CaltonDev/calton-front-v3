@@ -79,6 +79,16 @@ import PeopleSvg from './SvgIcons/PeopleSvg'
 import EyeSvg from './SvgIcons/EyeSvg'
 import CopySvg from './SvgIcons/CopySvg'
 import ShareSvg from './SvgIcons/ShareSvg'
+import OutlinedCheckmarkSvg from './SvgIcons/OutlinedCheckmarkSvg'
+import PuntiVenditaSvg from './SvgIcons/PuntiVenditaSvg'
+import PhoneSvg from './SvgIcons/PhoneSvg'
+import WorldSvg from './SvgIcons/WorldSvg'
+import ExclamationPointSvg from './SvgIcons/ExclamationPointSvg'
+import SinglePencilSvg from './SvgIcons/SinglePencilSvg'
+import DuplicateDeleteSvg from './SvgIcons/DuplicateDeleteSvg'
+import GoogleMapsSvg from './SvgIcons/GoogleMapsSvg'
+import PcIconSvg from './SvgIcons/PcIconSvg'
+import MobileIconSvg from './SvgIcons/MobileIconSvg'
 import XIcon from './SvgIcons/XIcon'
 
 const SvgWrapper = ({
@@ -303,7 +313,21 @@ const SvgWrapper = ({
                 ) : keySvg === 'GoogleMyBusiness.svg' ? (
                     <GoogleMyBusinessSvg />
                 ) : keySvg === 'Google.svg' ? (
-                    <GoogleSvg />
+                    <GoogleSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'GoogleMaps.svg' ? (
+                    <GoogleMapsSvg />
+                ) : keySvg === 'PcIconSvg' ? (
+                    <PcIconSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'MobileIconSvg' ? (
+                    <MobileIconSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
                 ) : keySvg === 'Trustpilot.svg' ? (
                     <TrustpilotSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'Trusted shops.svg' ? (
@@ -315,7 +339,7 @@ const SvgWrapper = ({
                 ) : keySvg === 'TheFork.svg' ? (
                     <TheForkSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'close.svg' ? (
-                    <CloseIconSvg />
+                    <CloseIconSvg fillColor={iconColor} />
                 ) : keySvg === 'expand.svg' ? (
                     <ExpandIconSvg />
                 ) : keySvg === 'menu.svg' ? (
@@ -356,6 +380,8 @@ const SvgWrapper = ({
                     <MessageSvg fillColor={iconColor} />
                 ) : keySvg === 'reply.svg' ? (
                     <ReplySvg fillColor={iconColor} />
+                ) : keySvg === 'exclamationPoint.svg' ? (
+                    <ExclamationPointSvg fillColor={iconColor} />
                 ) : keySvg === 'negativeSentiment.svg' ? (
                     <NegativeSentimentIcon
                         width={iconWidth}
@@ -421,14 +447,28 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'uploadSvg' ? (
                     <UploadSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'singlePencilSvg' ? (
+                    <SinglePencilSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'infoIconSvg' ? (
                     <InfoIconSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'questionIconSvg' ? (
                     <QuestionIconSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'surveyIconSvg' ? (
                     <SurveyIconSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'puntiVenditaSvg' ? (
+                    <PuntiVenditaSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'phoneSvg' ? (
+                    <PhoneSvg width={iconWidth} height={iconHeight} />
+                ) : keySvg === 'worldSvg' ? (
+                    <WorldSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'checkmarkSvg' ? (
                     <CheckmarkSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'outlinedCheckmarkSvg' ? (
+                    <OutlinedCheckmarkSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}
@@ -441,6 +481,12 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'eyeSvg' ? (
                     <EyeSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'duplicateDeleteIcon' ? (
+                    <DuplicateDeleteSvg
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}

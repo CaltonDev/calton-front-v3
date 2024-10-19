@@ -28,6 +28,7 @@ $default-colors: (
     listing: #63d2ff,
     grey: #c0bbc5,
     blue: #3f49fc,
+    red: #ff608b,
 );
 
 $typography: (
@@ -345,7 +346,7 @@ $select: (
         large: (),
     ),
     outlined: (
-        border-color: #321d48 !important,
+        border-color: #321d48,
         background: none,
     ),
 );

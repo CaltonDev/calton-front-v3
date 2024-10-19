@@ -1,0 +1,29 @@
+.containerCheck {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.linkText {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: left;
+  color: #3f49fc;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.buttonDownload {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.cancelButtonColor {
+  color: #3e49fb;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=ModalDownload.module.css.map */

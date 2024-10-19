@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, FocusEventHandler } from 'react'
 import CSS from 'csstype'
 
 export interface InputProps {
@@ -9,6 +9,7 @@ export interface InputProps {
     placeholder?: string
     name?: string
     onBlur?: (e: ChangeEvent<HTMLInputElement>) => void
+    onFocus?: FocusEventHandler<HTMLInputElement>
     type?: 'text' | 'number' | 'email' | 'password' | 'date'
     value?: string | number
     onChange?: React.ChangeEventHandler<HTMLInputElement>

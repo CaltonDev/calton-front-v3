@@ -8,11 +8,14 @@ import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import Typography from '../Typography/Typography'
 import Button from '../Button/Button'
 
-function InfoCardViewer({ data }: InfoCardViewerProps) {
+function InfoCardViewer({ data, customWidth }: InfoCardViewerProps) {
     const { t } = useTranslation()
     const [suggestionIndex, setSuggestionIndex] = useState(0)
     return (
-        <div className={styles.container}>
+        <div
+            className={styles.container}
+            style={{ width: customWidth ? customWidth : '' }}
+        >
             <SvgWrapper
                 keySvg={'highlighter.svg'}
                 hasContainerProps={{

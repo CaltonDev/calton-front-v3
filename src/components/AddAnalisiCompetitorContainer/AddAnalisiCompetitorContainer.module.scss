@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.textHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.description {
+  width: 60%;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardContainer {
+  gap: 25px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}

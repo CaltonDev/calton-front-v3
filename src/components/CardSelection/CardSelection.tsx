@@ -6,6 +6,7 @@ import TextContainer from '../TextContainer/TextContainer'
 import { useTranslation } from 'react-i18next'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import Button from '../Button/Button'
+import { useNavigate } from 'react-router-dom'
 
 const CardSelection = ({
     title,
@@ -19,7 +20,9 @@ const CardSelection = ({
     isDeleteButton = false,
     handleDelete,
 }: CardSelectionProps) => {
+    const history = useNavigate()
     const handleCardSelection = (idx: number) => {
+        if (idx === -1) history('/surveys/new')
         if (setSelectedCard) setSelectedCard(idx)
     }
     return (

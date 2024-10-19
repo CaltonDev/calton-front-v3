@@ -45,7 +45,12 @@ function getAverageByTime(
     }
 
     return useQuery<any, Error>(
-        ['averageByTime', `averageByTimeId + ${type}`, allFilters.toString()],
+        [
+            'averageByTime',
+            `averageByTimeId + ${type}`,
+            allFilters.toString(),
+            idSources,
+        ],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/getAverageByTime',
@@ -64,7 +69,7 @@ function getDistribuzioneVoti(
     columns: any[] = [],
     returnAnt = false,
     colX: string | undefined = undefined,
-    compactValues: boolean,
+    compactValues: boolean | undefined,
     idSources: string[] | undefined = undefined
 ) {
     const {
@@ -94,7 +99,11 @@ function getDistribuzioneVoti(
         compactValues,
     }
     return useQuery<any, Error>(
-        ['distribuzioneVoti', 'distribuzioneVotiId', allFilters],
+        [
+            `distribuzioneVoti${(idSources ? idSources : '') + (colX + '')}`,
+            allFilters.toString(),
+            idSources,
+        ],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/countSingleCol',
@@ -141,7 +150,18 @@ function getCountCols(
         colX: colX,
         isMultiChoice: isMultiChoice,
     }
-    return apiService.apiAnalysisStandard.post('/countCols', body, getHeaders())
+    return useQuery<any, Error>(
+        [`getCountCols/${idSources}`, allFilters.toString(), idSources],
+        () =>
+            apiService.apiAnalysisStandard.post(
+                '/countCols',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 0,
+        }
+    )
 }
 
 function wordsCountBUBBLE(
@@ -175,7 +195,7 @@ function wordsCountBUBBLE(
     }
 
     return useQuery<any, Error>(
-        ['bubbles', 'bubblesId', allFilters],
+        ['bubbles', 'bubblesId', allFilters.toString()],
         () =>
             apiService.apiAnalysisStandard.post(
                 '/wordCloud',
@@ -247,7 +267,7 @@ function getSourcesHome(
     columnDateToGroup: string | null = null,
     returnAnt = true,
     fromHome = false,
-    id: string | undefined = undefined
+    id: string[] | string | undefined = undefined
 ) {
     const {
         startDate,
@@ -279,7 +299,7 @@ function getSourcesHome(
         fromHome,
     }
     return useQuery<any, Error>(
-        ['sourcesHome', allFilters],
+        ['sourcesHome', allFilters.toString(), id],
         () =>
             apiService.apiSource.post(
                 '/getSourcesFiltered',
@@ -463,31 +483,38 @@ function compareCols(allFilters: AllFiltersInterface) {
         selectedSource,
     } = allFilters
 
-    return apiService.apiAnalysisComp.post(
-        '/analisiCompetitor/compareCols',
+    return useQuery<any, Error>(
+        [`compareCols${selectedSource}`],
+        () =>
+            apiService.apiAnalysisComp.post(
+                '/analisiCompetitor/compareCols',
+                {
+                    idSources: selectedSource,
+                    channels: selectedChannel,
+                    idLocations: selectedLocation,
+                    idTopics: selectedTopics,
+                    startDate: startDate,
+                    endDate: endDate,
+                    groupby: 'competitorName',
+                    xAxes: 'sentOriginal',
+                    xAxesType: 'percentage',
+                    xAxesCond: {
+                        value: 1,
+                    },
+                    yAxes: 'rating',
+                    yAxesCond: {},
+                    yAxesType: 'average',
+                    rAxes: '_id',
+                    rAxesCond: {},
+                    rAxesType: 'occurences',
+                    returnAnt: true,
+                    selectedProducts,
+                },
+                getHeaders()
+            ),
         {
-            idSources: selectedSource,
-            channels: selectedChannel,
-            idLocations: selectedLocation,
-            idTopics: selectedTopics,
-            startDate: startDate,
-            endDate: endDate,
-            groupby: 'competitorName',
-            xAxes: 'sentOriginal',
-            xAxesType: 'percentage',
-            xAxesCond: {
-                value: 1,
-            },
-            yAxes: 'rating',
-            yAxesCond: {},
-            yAxesType: 'average',
-            rAxes: '_id',
-            rAxesCond: {},
-            rAxesType: 'occurences',
-            returnAnt: true,
-            selectedProducts,
-        },
-        getHeaders()
+            staleTime: 0,
+        }
     )
 }
 
@@ -505,20 +532,27 @@ function compareMainKPI(
         selectedSource,
     } = allFilters
 
-    return apiService.apiAnalysisComp.post(
-        '/analisiCompetitor/compareMainKPI',
+    return useQuery<any, Error>(
+        [`compareMainKPI${selectedSource}`],
+        () =>
+            apiService.apiAnalysisComp.post(
+                '/analisiCompetitor/compareMainKPI',
+                {
+                    idSources: selectedSource,
+                    channels: selectedChannel,
+                    idLocations: selectedLocation,
+                    idTopics: selectedTopics,
+                    startDate: startDate,
+                    endDate: endDate,
+                    groupKey: 'competitorName',
+                    returnSentiment: returnSentiment,
+                    selectedProducts,
+                },
+                getHeaders()
+            ),
         {
-            idSources: selectedSource,
-            channels: selectedChannel,
-            idLocations: selectedLocation,
-            idTopics: selectedTopics,
-            startDate: startDate,
-            endDate: endDate,
-            groupKey: 'competitorName',
-            returnSentiment: returnSentiment,
-            selectedProducts,
-        },
-        getHeaders()
+            staleTime: 0,
+        }
     )
 }
 

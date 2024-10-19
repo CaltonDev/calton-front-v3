@@ -31,6 +31,7 @@ export default function CustomAutocomplete({
     hasDropdown = false,
     applySelection,
     hasIcons = false,
+    fullwidth = false,
 }: CustomAutocompleteProps) {
     const [anchorEl, setAnchorEl] = useState<any>(null)
     const [pendingValue, setPendingValue] = useState<any>(
@@ -183,7 +184,7 @@ export default function CustomAutocomplete({
     useEffect(() => {
         if (handleChange) {
             handleChange(
-                !multiple ? pendingValue[0] ?? null : pendingValue,
+                !multiple ? (pendingValue[0] ?? null) : pendingValue,
                 type
             )
         }
@@ -193,7 +194,7 @@ export default function CustomAutocomplete({
     const handleSubmit = () => {
         if (handleChange) {
             handleChange(
-                !multiple ? pendingValue[0] ?? null : pendingValue,
+                !multiple ? (pendingValue[0] ?? null) : pendingValue,
                 type
             )
         }
@@ -365,21 +366,36 @@ export default function CustomAutocomplete({
                                     borderRadius: 25,
                                     paddingLeft: 5,
                                 }
-                              : {
-                                    boxSizing: 'border-box',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    padding: '12px 16px',
-                                    gap: '9px',
-                                    width: '100%',
-                                    background: '#FFFFFF',
-                                    border: '1px solid #9D96A5',
-                                    borderRadius: '10px',
-                                    fontFamily: 'Roboto',
-                                    minWidth: 400,
-                                    maxWidth: 500,
-                                }
+                              : fullwidth
+                                ? {
+                                      boxSizing: 'border-box',
+                                      display: 'flex',
+                                      flexDirection: 'row',
+                                      alignItems: 'center',
+                                      padding: '12px 16px',
+                                      gap: '9px',
+                                      width: '100%',
+                                      background: '#FFFFFF',
+                                      border: '1px solid #9D96A5',
+                                      borderRadius: '10px',
+                                      fontFamily: 'Roboto',
+                                      minWidth: 400,
+                                  }
+                                : {
+                                      boxSizing: 'border-box',
+                                      display: 'flex',
+                                      flexDirection: 'row',
+                                      alignItems: 'center',
+                                      padding: '12px 16px',
+                                      gap: '9px',
+                                      width: '100%',
+                                      background: '#FFFFFF',
+                                      border: '1px solid #9D96A5',
+                                      borderRadius: '10px',
+                                      fontFamily: 'Roboto',
+                                      minWidth: 400,
+                                      maxWidth: 500,
+                                  }
                     }
                 >
                     <Button
@@ -574,6 +590,7 @@ export default function CustomAutocomplete({
 
                                                 const selected =
                                                     getSelected(option)
+                                                console.log({ selected })
                                                 return (
                                                     <li
                                                         className={
@@ -629,78 +646,7 @@ export default function CustomAutocomplete({
                                                                             : ''
                                                                     }
                                                                     checked={
-                                                                        multiple
-                                                                            ? pendingValue.findIndex(
-                                                                                  (
-                                                                                      item: any
-                                                                                  ) =>
-                                                                                      (item?._id !=
-                                                                                          null &&
-                                                                                          option?._id ==
-                                                                                              null &&
-                                                                                          item?._id ===
-                                                                                              option?._id) ||
-                                                                                      item ===
-                                                                                          option?._id ||
-                                                                                      item ===
-                                                                                          option ||
-                                                                                      (customCheckEquality &&
-                                                                                          customCheckEquality?.length >
-                                                                                              0 &&
-                                                                                          option[
-                                                                                              customCheckEquality[0]
-                                                                                          ] !=
-                                                                                              null &&
-                                                                                          item[
-                                                                                              customCheckEquality[1]
-                                                                                          ] !=
-                                                                                              null &&
-                                                                                          option[
-                                                                                              customCheckEquality[0]
-                                                                                          ] ===
-                                                                                              item[
-                                                                                                  customCheckEquality[1]
-                                                                                              ])
-                                                                              ) !==
-                                                                              -1
-                                                                            : [
-                                                                                  pendingValue,
-                                                                              ].findIndex(
-                                                                                  (
-                                                                                      item: any
-                                                                                  ) =>
-                                                                                      item[0]
-                                                                                          ?.accountName ===
-                                                                                          option?.accountName ||
-                                                                                      (item?._id !=
-                                                                                          null &&
-                                                                                          option?._id ==
-                                                                                              null &&
-                                                                                          item?._id ===
-                                                                                              option?._id) ||
-                                                                                      item ===
-                                                                                          option?._id ||
-                                                                                      item ===
-                                                                                          option ||
-                                                                                      (customCheckEquality &&
-                                                                                          customCheckEquality?.length >
-                                                                                              0 &&
-                                                                                          option[
-                                                                                              customCheckEquality[0]
-                                                                                          ] !=
-                                                                                              null &&
-                                                                                          item[
-                                                                                              customCheckEquality[1]
-                                                                                          ] !=
-                                                                                              null &&
-                                                                                          option[
-                                                                                              customCheckEquality[0]
-                                                                                          ] ===
-                                                                                              item[
-                                                                                                  customCheckEquality[1]
-                                                                                              ])
-                                                                              ) !==
-                                                                              -1
+                                                                        selected
                                                                     }
                                                                     title={
                                                                         primary !==

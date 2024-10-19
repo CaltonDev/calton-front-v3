@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  min-width: 170px;
+  display: inline-flex;
+  top: 25px;
+  position: absolute;
+  right: 0;
+  padding: 15px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 6px 3px 30px 0px rgba(50, 29, 72, 0.15);
+  z-index: 999;
+}
+
+.dropdownMenuBtn {
+  @extend .dropdownMenu;
+  right: auto;
+  top: 40px;
+  min-width: 150px;
+}
+
+.dropdownTextLine {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}

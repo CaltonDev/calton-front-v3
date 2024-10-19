@@ -1,0 +1,56 @@
+.chipsContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.chipSubContainer{
+    height: auto;
+   // overflow-x: visible;
+  //  overflow-x: hidden;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+}
+.chipBody{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.buttonContainer{
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.chipButton{
+    display: block !important;
+    opacity: 1;
+    width: 100%;
+    min-width: 70px;
+    color: white !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 20px !important;
+    padding: 5px 10px !important;
+    font-size: 10px !important;
+    margin-bottom: 10px !important;
+    border: none!important;
+}
+.chipButtonDisable{
+    display: block !important;
+    opacity: 0.5;
+    width: 100%;
+    color: white !important;
+    text-decoration: line-through !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 20px !important;
+    padding: 5px 10px !important;
+    font-size: 10px !important;
+    margin-bottom: 10px !important;
+}

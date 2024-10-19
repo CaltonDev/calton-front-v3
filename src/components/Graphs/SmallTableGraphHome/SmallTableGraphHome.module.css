@@ -1,0 +1,100 @@
+.rctBlock {
+  width: 32%;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.rctBlockTwoCols {
+  width: 49.5%;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.rctBlockMediaQuery {
+  width: 49.5%;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+@media screen and (max-width: 1600px) {
+  .rctBlockMediaQuery {
+    width: 49.5% !important;
+  }
+}
+.myMargin {
+  margin-bottom: 7%;
+}
+
+.rctBlock:hover {
+  box-shadow: 0 1px 15px 1px rgba(69, 65, 78, 0.08);
+}
+
+@media screen and (max-width: 768px) {
+  .rctBlock {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.4s ease-in-out 0s;
+    margin-bottom: 24px;
+    position: relative;
+  }
+}
+.titleLabel {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #321D48;
+}
+
+.valueLabel {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #321D48;
+}
+
+.totalNumber {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  color: #321D48;
+}
+
+.totalNumberLabel {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-size: 15px;
+  line-height: 18px;
+  color: #321D48;
+}
+
+/*# sourceMappingURL=SmallTableGraphHome.module.css.map */

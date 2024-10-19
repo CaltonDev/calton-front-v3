@@ -8,10 +8,23 @@
 .headingContainer {
   display: flex;
   gap: 20px;
+  justify-content: space-between;
 }
 
 .containerBreadcrumb{
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.bulkEditBtnContainer {
+  @extend .btnContainer;
+  gap: 25px;
 }

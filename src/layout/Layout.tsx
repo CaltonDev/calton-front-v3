@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../store/store'
+import store, { RootState } from '../store/store'
 import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import ErrorSubscriptionModal from '../components/ErrorSubscriptionModal/ErrorSubscriptionModal'
@@ -19,6 +19,10 @@ import { toast } from 'react-toastify'
 import Hotjar from '@hotjar/browser'
 import { v5 as uuidv5 } from 'uuid'
 import { ErrorToastState, showToast } from '../store/toast/errorToastSlice'
+import { EP_SERVER, IS_PROD } from '../constants/environment'
+import { pushSocketMessage } from '../store/socket/socketSlice'
+import { semverGreaterThan } from '../helpers/helpers'
+import FileDownload from 'js-file-download'
 
 function Layout() {
     const user = useSelector((state: RootState) => state.User)
@@ -143,11 +147,11 @@ function Layout() {
     }
 
     //todo: find errors
-    /*useEffect(() => {
+    useEffect(() => {
         try {
             if (compId) {
                 const ws = new WebSocket(
-                    `wss://${EP_SERVER}/handleUpdatesData/client/${store.getState()?.user?.data?.user?.token}/${compId}`
+                    `wss://${EP_SERVER}/handleUpdatesData/client/${user?.user?.token}/${compId}`
                 )
                 // const ws = new WebSocket(`ws://localhost:5001/handleUpdatesData/client/${store.getState()?.user?.data?.user?.token}/${compId}`);
 
@@ -233,7 +237,68 @@ function Layout() {
         } catch (e) {
             console.log(e)
         }
-    }, [compId])*/
+    }, [compId])
+
+    useEffect(() => {
+        try {
+            const ws = new WebSocket(`wss://${EP_SERVER}/checkUpdatesPlatform`)
+
+            // const apiCall = {
+            //     event: "bts:subscribe",
+            //     // data: { channel: "order_book_btcusd" },
+            // };
+
+            ws.onopen = (event) => {
+                // console.log(event);
+                // ws.send(JSON.stringify(apiCall));
+            }
+
+            ws.onerror = function (error) {
+                console.log('WEBSOCKET error:', error)
+            }
+
+            ws.onmessage = async function (event) {
+                try {
+                    const json = JSON.parse(event.data)
+                    const latestVersion = json['version']
+                    console.log(`current version - ${json['version']}.`)
+
+                    //todo: solve this error on global
+
+                    // @ts-ignore
+                    const currentVersion = global?.appVersion
+                    const shouldForceRefresh = semverGreaterThan(
+                        json['version'],
+                        currentVersion
+                    )
+                    if (shouldForceRefresh) {
+                        console.log(
+                            `We have a new version - ${latestVersion}. Should force refresh`
+                        )
+                        if (caches) {
+                            // Service worker cache should be cleared with caches.delete()
+                            const names = await caches.keys()
+                            await Promise.all(
+                                names.map((name) => caches.delete(name))
+                            )
+                        }
+                        // delete browser cache and hard reload
+                        window.location.reload()
+                    } else {
+                        console.log(
+                            `You already have the latest version - ${latestVersion}. No cache refresh needed.`
+                        )
+                    }
+                } catch (err) {
+                    if (!IS_PROD) {
+                        console.log(err)
+                    }
+                }
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }, [])
 
     const currentToast = useSelector(
         (state: ErrorToastState) => state.currentToast

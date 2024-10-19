@@ -9,6 +9,7 @@ interface User {
     id?: string
     email?: string
     token?: string
+    typeAccount?: number
 }
 
 export interface UserData {

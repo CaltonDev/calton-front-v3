@@ -126,7 +126,7 @@ function SourcesFilter({ setPreparedPayload }: CustomAutocompleteFilter) {
                 secondary={'formatted_address'}
                 labels={allFonti ? allFonti : []}
                 type={'source'}
-                multiple={true}
+                multiple={false}
                 handleChange={handleChange}
                 defaultValue={selectedSource}
                 hasDropdown={true}

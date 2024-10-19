@@ -1,0 +1,104 @@
+.containerCards{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1.7vw;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  width: 44vw;
+  min-width: 44vw;
+  overflow: auto;
+  background: #fff;
+  transition:all 0.7s ease;
+  border-radius: 10px;
+}
+
+.card2{
+  width: 89.7vw!important;
+}
+.card4{
+  width: 89.7vw!important;
+  height: 1000px;
+}
+
+.textForNumber {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.countUpNPS {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #255aee;
+}
+
+.containerIcons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.iconBigSmall{
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.divTitle {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+
+.countUpPos {
+  font-size: 1.4rem;
+  color: #34E0A1;
+}
+
+.countUpNeg {
+  font-size: 1.4rem;
+  color: #ff6960;
+  padding-left: 2vh;
+}
+.smallButton{
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+}
+.headerContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
+}
+
+.headerCard{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: left;
+  color: #321d48;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.headerCard span{
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 100;
+  color: #321d48;
+}
+
+.paperCard{
+  padding: 20px;
+  height: 100%;
+}
+.bigPaperCard {
+  width: 100%;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

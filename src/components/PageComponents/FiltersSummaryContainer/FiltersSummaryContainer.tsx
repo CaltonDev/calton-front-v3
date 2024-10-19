@@ -14,7 +14,6 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
     const [more, setMore] = useState(false)
     const [showAllFilters, setShowAllFilters] = useState(false)
     const { t } = useTranslation()
-    const dispatch = useDispatch()
     const platformType = useSelector(
         (state: RootState) => state.Settings.platformType
     )

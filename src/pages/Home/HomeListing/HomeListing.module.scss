@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rowHome{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.showComponentContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.itemContainer {
+  width: 33%;
+  height: 100%;
+}
+
+.infoCardViewerContainer {
+  @extend .itemContainer;
+  width: 50%;
+}
+
+.headerContainer{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+}
+
+.navigatorRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+
+.reviewsContainer {
+  grid-template-columns: 49.5% 49.5%;
+  display: grid;
+  gap: 20px;
+  width: 100%;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
