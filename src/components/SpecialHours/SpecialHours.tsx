@@ -158,7 +158,6 @@ function SpecialHours({
                         />
                     )
                 })}
-                {/* <div style={{ marginTop: 20 }}> */}
                 <div onClick={addEmptyDate} className={styles.addDate}>
                     <Typography
                         weight={'normal'}
@@ -168,7 +167,6 @@ function SpecialHours({
                         {t('+ Aggiungi una data')}
                     </Typography>
                 </div>
-                {/* </div> */}
             </div>
         </div>
     )

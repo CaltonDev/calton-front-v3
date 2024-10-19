@@ -140,7 +140,6 @@ function AddMoreTimeInput({
                                     onClick={() => handleCheckboxChange(i)}
                                     checked={checkedStatus[i]}
                                     value={i}
-                                    // title={checkedStatus[i] ? t('Chiuso') : ''}
                                     title={t('Chiuso')}
                                 />
                             </div>
@@ -148,7 +147,7 @@ function AddMoreTimeInput({
                                 <div className={styles.timePickerRow}>
                                     {!checkedStatus[i] && (
                                         <div className={styles.timePickerRow}>
-                                            {periods?.length > 0 ? (
+                                            {periods?.length > 0 &&
                                                 periods?.map((period, idx) => {
                                                     return (
                                                         <div key={type + d + i}>
@@ -176,32 +175,10 @@ function AddMoreTimeInput({
                                                                     periods?.length -
                                                                     1
                                                                 }
-                                                                // hoursTypeId={
-                                                                //     hoursTypeId
-                                                                // }
                                                             />
                                                         </div>
                                                     )
-                                                })
-                                            ) : (
-                                                <div
-                                                    style={{
-                                                        cursor: 'pointer',
-                                                        marginLeft: '1em',
-                                                        marginRight: 'auto',
-                                                        alignSelf: 'center',
-                                                    }}
-                                                >
-                                                    {/* <PlusOutlined
-                                                        style={{
-                                                            verticalAlign: 0,
-                                                        }}
-                                                        onClick={() =>
-                                                            handleAddMore(d)
-                                                        }
-                                                    /> */}
-                                                </div>
-                                            )}
+                                                })}
                                         </div>
                                     )}
                                 </div>

@@ -32,7 +32,6 @@ export const userSlice = createSlice({
     reducers: {
         setUser: (state, action: PayloadAction<UserData | null>) => {
             if (action.payload) {
-                console.log('action.payload', action.payload)
                 return {
                     ...state,
                     user: action.payload.user,

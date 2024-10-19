@@ -26,14 +26,7 @@ const CardSelection = ({
         if (setSelectedCard) setSelectedCard(idx)
     }
     return (
-        <div
-            // className={
-            //     hasWrappedComponent
-            //         ? styles.container
-            //         : styles.containerWrappedComponent
-            // }
-            className={styles.container}
-        >
+        <div className={styles.container}>
             {addNewCard && (
                 <div
                     className={
@@ -65,7 +58,6 @@ const CardSelection = ({
                     }
                     onClick={() => handleCardSelection(idx)}
                 >
-                    {/* <div> */}
                     <div
                         className={
                             hasWrappedComponent
@@ -123,15 +115,12 @@ const CardSelection = ({
                         {obj?.description}
                     </Typography>
 
-                    {/* <div className={styles.containerWrappedCard}> */}
                     {hasWrappedComponent && obj?.title === wrappedKey && (
                         <div className={styles.wrappedComponentContainer}>
                             {wrappedComponent}
                         </div>
                     )}
 
-                    {/* </div> */}
-                    {/* </div> */}
                     {obj?.value?.map((value: string, textIdx: number) => (
                         <TextContainer
                             key={textIdx}

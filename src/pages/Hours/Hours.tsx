@@ -58,7 +58,6 @@ function Hours() {
         history(`edit`, {
             state: {
                 item: obj?.idAccountLocationGbp,
-                // selectedListings: selectedRowKeys,
                 locationName: obj?.title,
             },
         })
