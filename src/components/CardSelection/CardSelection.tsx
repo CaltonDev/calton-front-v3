@@ -16,7 +16,6 @@ const CardSelection = ({
     addNewCard = true,
     wrappedComponent = <></>,
     hasWrappedComponent = false,
-    wrappedKey,
     isDeleteButton = false,
     handleDelete,
 }: CardSelectionProps) => {
@@ -42,7 +41,7 @@ const CardSelection = ({
                     <SvgWrapper keySvg={'plusIcon'} color={'secondary'} />
                 </div>
             )}
-            {data?.map((obj: any, idx: number) => (
+            {data?.map((obj, idx: number) => (
                 <div
                     key={idx}
                     className={
@@ -112,10 +111,10 @@ const CardSelection = ({
                     </div>
 
                     <Typography size={'bodySmall'} weight={'light'}>
-                        {obj?.description}
+                        {obj?.description || ''}
                     </Typography>
 
-                    {hasWrappedComponent && obj?.title === wrappedKey && (
+                    {hasWrappedComponent && obj?.wrappedKey === 'moreHours' && (
                         <div className={styles.wrappedComponentContainer}>
                             {wrappedComponent}
                         </div>
