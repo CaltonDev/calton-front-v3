@@ -21,6 +21,10 @@ import { isUndefined } from 'lodash'
 import { useQueryClient } from 'react-query'
 import useEditHours from '../../utils/hooks/useEditHours'
 import { DataType } from '../../components/CardSelection/CardSelection.interface'
+import {
+    OptionsWrappedKeyType,
+    OptionsCardSelectionType,
+} from '../../components/CardSelection/CardSelection.interface'
 
 function ListingEditHours() {
     const { t } = useTranslation()
@@ -65,21 +69,21 @@ function ListingEditHours() {
             description: t(
                 "Imposta l'orario di apertura principale o contrassegna la tua attività come chiusa."
             ),
-            wrappedKey: 'standardHours',
+            wrappedKey: OptionsWrappedKeyType.standardHours,
         },
         {
             title: t('Orario festivo'),
             description: t(
                 "Conferma l'orario per i giorni di festa per indicare ai tuoi clienti le aperture della tua attività."
             ),
-            wrappedKey: 'specialHours',
+            wrappedKey: OptionsWrappedKeyType.specialHours,
         },
         {
             title: t('Aggiungi altri orari'),
             description: t(
                 "Gli altri orari sono visibili solo se hai già impostato orari standard. In genere, dovresti impostarli come sottoinsieme dell'orario principale."
             ),
-            wrappedKey: 'moreHours',
+            wrappedKey: OptionsWrappedKeyType.moreHours,
         },
     ]
 
@@ -211,6 +215,9 @@ function ListingEditHours() {
                                 setSelectedCard={setSelectedCard}
                                 addNewCard={false}
                                 hasWrappedComponent={true}
+                                type={
+                                    OptionsCardSelectionType.hasWrappedComponent
+                                }
                                 wrappedComponent={
                                     <div ref={subCardRef}>
                                         <CardSelection
@@ -237,6 +244,9 @@ function ListingEditHours() {
                                             }
                                             isDeleteButton={true}
                                             handleDelete={handleDeleteSubCard}
+                                            type={
+                                                OptionsCardSelectionType.isWrappedComponent
+                                            }
                                         />
                                     </div>
                                 }

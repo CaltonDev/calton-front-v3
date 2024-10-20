@@ -1,12 +1,15 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { CardSelectionProps } from './CardSelection.interface'
 import styles from './CardSelection.module.scss'
 import Typography from '../Typography/Typography'
 import TextContainer from '../TextContainer/TextContainer'
-import { useTranslation } from 'react-i18next'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import Button from '../Button/Button'
 import { useNavigate } from 'react-router-dom'
+import {
+    OptionsCardSelectionType,
+    OptionsWrappedKeyType,
+} from './CardSelection.interface'
 
 const CardSelection = ({
     title,
@@ -18,6 +21,7 @@ const CardSelection = ({
     hasWrappedComponent = false,
     isDeleteButton = false,
     handleDelete,
+    type = OptionsCardSelectionType.standard,
 }: CardSelectionProps) => {
     const history = useNavigate()
     const handleCardSelection = (idx: number) => {
@@ -59,14 +63,18 @@ const CardSelection = ({
                 >
                     <div
                         className={
-                            hasWrappedComponent
+                            type === OptionsCardSelectionType.standard ||
+                            type ===
+                                OptionsCardSelectionType.hasWrappedComponent
                                 ? styles.cardTitleContainer
                                 : activeCard === idx
                                   ? styles.cardTitleContainerWrappedSelected
                                   : styles.cardTitleContainerWrapped
                         }
                     >
-                        {hasWrappedComponent ? (
+                        {type === OptionsCardSelectionType.standard ||
+                        type ===
+                            OptionsCardSelectionType.hasWrappedComponent ? (
                             <Typography size={'h5'} weight={'bold'}>
                                 {obj?.title}
                             </Typography>
@@ -79,17 +87,20 @@ const CardSelection = ({
                                 {obj?.title}
                             </Typography>
                         )}
-                        {hasWrappedComponent && (
-                            <SvgWrapper
-                                keySvg={'arrowForward'}
-                                color={'primaryIcon'}
-                                customHeight={24}
-                                customWidth={24}
-                            />
-                        )}
+                        {type === OptionsCardSelectionType.standard ||
+                            (type ===
+                                OptionsCardSelectionType.hasWrappedComponent && (
+                                <SvgWrapper
+                                    keySvg={'arrowForward'}
+                                    color={'primaryIcon'}
+                                    customHeight={24}
+                                    customWidth={24}
+                                />
+                            ))}
                         {isDeleteButton &&
                             handleDelete &&
-                            !hasWrappedComponent && (
+                            type ===
+                                OptionsCardSelectionType.isWrappedComponent && (
                                 <Button
                                     onClick={(event) => {
                                         event.stopPropagation()
@@ -114,22 +125,24 @@ const CardSelection = ({
                         {obj?.description || ''}
                     </Typography>
 
-                    {hasWrappedComponent && obj?.wrappedKey === 'moreHours' && (
-                        <div className={styles.wrappedComponentContainer}>
-                            {wrappedComponent}
-                        </div>
-                    )}
+                    {type === OptionsCardSelectionType.hasWrappedComponent &&
+                        obj?.wrappedKey === OptionsWrappedKeyType.moreHours && (
+                            <div className={styles.wrappedComponentContainer}>
+                                {wrappedComponent}
+                            </div>
+                        )}
 
-                    {obj?.value?.map((value: string, textIdx: number) => (
-                        <TextContainer
-                            key={textIdx}
-                            label={value}
-                            textColor={'black'}
-                            color={'#F1F1F1'}
-                            rightSideIcon={true}
-                            textSize={'bodySmall'}
-                        />
-                    ))}
+                    {type === OptionsCardSelectionType.standard &&
+                        obj?.value?.map((value: string, textIdx: number) => (
+                            <TextContainer
+                                key={textIdx}
+                                label={value}
+                                textColor={'black'}
+                                color={'#F1F1F1'}
+                                rightSideIcon={true}
+                                textSize={'bodySmall'}
+                            />
+                        ))}
                 </div>
             ))}
         </div>
