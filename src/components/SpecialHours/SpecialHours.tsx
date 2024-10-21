@@ -61,7 +61,7 @@ function SpecialHours({
             ],
         }
 
-        setDistinctPeriod([newPeriod])
+        setDistinctPeriod([...distinctPeriod, newPeriod])
     }
 
     const handleSave = () => {
@@ -146,17 +146,15 @@ function SpecialHours({
                         />
                     )
                 })}
-                {distinctPeriod.length === 0 && (
-                    <div onClick={addEmptyDate} className={styles.addDate}>
-                        <Typography
-                            weight={'normal'}
-                            size={'bodySmall'}
-                            color={'blue'}
-                        >
-                            {t('+ Aggiungi una data')}
-                        </Typography>
-                    </div>
-                )}
+                <div onClick={addEmptyDate} className={styles.addDate}>
+                    <Typography
+                        weight={'normal'}
+                        size={'bodySmall'}
+                        color={'blue'}
+                    >
+                        {t('+ Aggiungi una data')}
+                    </Typography>
+                </div>
             </div>
         </div>
     )
