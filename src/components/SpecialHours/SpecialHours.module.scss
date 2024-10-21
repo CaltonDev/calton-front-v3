@@ -1,0 +1,43 @@
+.hoursContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    font-family: Montserrat;
+    gap: 30px;
+}
+
+.dateHours {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.addDate {
+    padding: 7px 16px;
+    cursor: pointer;
+}
+
+.specialHoursTitleContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.labelContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.buttonContainer button {
+    width: 42px;
+}

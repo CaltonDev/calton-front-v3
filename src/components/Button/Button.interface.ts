@@ -1,10 +1,11 @@
 import * as React from 'react'
+import { SvgKeyType } from '../SvgWrapper/SvgWrapper.interface'
 export interface ButtonProps {
     size?: 'small' | 'medium' | 'large'
     disabled?: boolean
     iconOnly?: boolean
     rounded?: boolean
-    arrowPlacement?: 'left' | 'right' | 'none'
+    arrowPlacement?: 'left' | 'right' | 'none' | 'center'
     variant?: 'solid' | 'outline' | 'ghost'
     onClick?: React.MouseEventHandler<HTMLButtonElement>
     children?: string
@@ -23,7 +24,7 @@ export interface ButtonProps {
         | 'settings'
     customWidth?: number
     customHeight?: number
-    icon?: string
+    icon?: SvgKeyType
     className?: string
     iconColor?:
         | 'primary'

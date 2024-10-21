@@ -33,6 +33,9 @@ const Photos = lazy(() => import('../pages/Photos/Photos'))
 const ListingPerformance = lazy(
     () => import('../pages/ListingPerformance/ListingPerformance')
 )
+const ListingEditHours = lazy(
+    () => import('../pages/ListingEditHours/ListingEditHours')
+)
 
 export const objRoutes = {
     Dashboards: {
@@ -97,7 +100,7 @@ export const objRoutes = {
         path: 'surveys/new',
         component: SurveyCreate,
     },
-  LocalPost: {
+    LocalPost: {
         path: 'localPost',
         component: LocalPost,
     },
@@ -117,5 +120,10 @@ export const objRoutes = {
     ListingPerformance: {
         path: 'performance',
         component: ListingPerformance,
+    },
+
+    ListingEditHours: {
+        path: 'hours/edit',
+        component: ListingEditHours,
     },
 }

@@ -441,4 +441,23 @@ export const listingStateObj = {
     },
 }
 
+export const weekdaysConstant = [
+    'SUNDAY',
+    'MONDAY',
+    'TUESDAY',
+    'WEDNESDAY',
+    'THURSDAY',
+    'FRIDAY',
+    'SATURDAY',
+] as const
+
+export type Weekdays = (typeof weekdaysConstant)[number]
+
+export const regularHoursBooleans = {
+    OPEN: '1',
+    OPEN_FOR_BUSINESS_UNSPECIFIED: '2',
+    CLOSED_TEMPORARILY: '3',
+    CLOSED_PERMANENTLY: '4',
+}
+
 export default CustomConstants

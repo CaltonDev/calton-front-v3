@@ -104,6 +104,7 @@ const Checkbox = ({
                             checked={checked}
                             onClick={onClick}
                             disabled={disabled}
+                            value={value}
                         />
                         <span
                             onClick={onClick}

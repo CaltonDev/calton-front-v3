@@ -15,6 +15,8 @@ import Typography from '../Typography/Typography'
 import { useTranslation } from 'react-i18next'
 import Switch from '../Switch/Switch'
 import Hooks from '../../utils/hooks/Hooks'
+import { HiOutlinePencil } from 'react-icons/hi'
+import { pointer } from 'd3-selection'
 
 function IndeterminateCheckbox({
     indeterminate,
@@ -50,6 +52,7 @@ const Table = ({
     setPagination,
     customToggleButton = undefined,
     totalItems = undefined,
+    handleEditIconClick = undefined,
 }: TableProps) => {
     const { t } = useTranslation()
     const [tableSize, setTableSize] = useState('small')
@@ -75,7 +78,6 @@ const Table = ({
         }),
     ]
     const [columnVisibility, setColumnVisibility] = React.useState<any>({})
-
     columnsData?.forEach((column: any) => {
         columns.push(
             columnHelper.accessor((row) => row[column?.title], {
@@ -85,19 +87,45 @@ const Table = ({
                     : column?.name
                       ? column.name
                       : column?.title,
-                cell: (info) => (
-                    <i>
-                        {Array.isArray(info.getValue())
-                            ? info.getValue()?.join(', ')
-                            : info.getValue()}
-                    </i>
-                ),
-                header: () => <span>{column?.title}</span>,
+                cell: (info) => {
+                    if (column?.title === 'analize') {
+                        return (
+                            <i
+                                onClick={(e) =>
+                                    handleEditIconClick &&
+                                    handleEditIconClick(e, info.row.original)
+                                }
+                                style={{ cursor: 'pointer' }}
+                            >
+                                <HiOutlinePencil />
+                            </i>
+                        )
+                    }
+                    return (
+                        <i>
+                            {Array.isArray(info.getValue())
+                                ? info.getValue()?.join(', ')
+                                : info.getValue()}
+                        </i>
+                    )
+                },
+                header: () => {
+                    if (column?.title === 'analize') {
+                        return <span>{t('Options')}</span>
+                    }
+                    if (column?.title === 'title') {
+                        return <span>{t('Name')}</span>
+                    }
+                    if (column?.title === 'formatted_address') {
+                        return <span>{t('Address')}</span>
+                    }
+                    return <span>{column?.title}</span>
+                },
+
                 footer: (info) => info.column.id,
             })
         )
     })
-
     useEffect(() => {
         const tmpColumnsVisibility: any = {
             select: false,

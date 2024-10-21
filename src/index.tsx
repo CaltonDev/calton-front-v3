@@ -19,6 +19,8 @@ import SignUp from './pages/SignUp/SignUp'
 import CompleteSignUp from './pages/CompleteSignUp/CompleteSignUp'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import 'rc-time-picker/assets/index.css'
+
 const persistor = persistStore(store)
 
 const LazyComponentWrapper = ({
@@ -30,7 +32,6 @@ const LazyComponentWrapper = ({
         <Component />
     </Suspense>
 )
-
 const children: RouteObject[] = []
 for (const [key, value] of Object.entries(objRoutes)) {
     children.push({

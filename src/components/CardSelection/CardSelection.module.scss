@@ -1,41 +1,102 @@
+@import '@Style/app';
+
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  height: 100%;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    justify-content: center;
 }
 
 .card {
-  display: flex;
-  padding: 25px 20px;
-  align-items: center;
-  gap: 30px;
-  border-radius: 10px;
-  background: #FFF;
-  cursor: pointer;
+    display: flex;
+    // width: 551px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+
+    border-radius: 10px;
+    background: #fff;
+}
+
+.wrappedCard {
+    display: flex;
+    // width: 551px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+
+    border-radius: 10px;
+    background: #fff;
 }
 
 .cardSelected {
-  @extend .card;
-  border: 2px solid var(--Button-500, #3F49FC);
-  background: var(--Button-50, #DFE0FF);
+    @extend .card;
+    border-radius: 10px;
+    border: 2px solid var(--Button-500, #3f49fc);
+}
+
+.cardSelectedWrapped {
+    border-radius: 10px;
+    background: map-deep-get($default-colors, blue);
 }
 
 .cardDisabled {
-  @extend .card;
-  background: var(--Neutral-300, #E0DDE3);
+    @extend .card;
+    background: var(--Neutral-300, #e0dde3);
 }
 
 .addNewCard {
-  @extend .card;
-  justify-content: space-between;
-  border: 2px dashed var(--Neutral-500, #C0BBC5);
-  background: var(--Neutral-50, #F1F1F1);
+    @extend .card;
+    justify-content: space-between;
+    border: 2px dashed var(--Neutral-500, #c0bbc5);
+    background: var(--Neutral-50, #f1f1f1);
+    align-items: center;
+    gap: 10px;
 }
 
 .addNewCardSelected {
-  @extend .addNewCard;
-  border: 2px solid var(--Button-500, #3F49FC);
-  background: #FFF;
+    @extend .addNewCard;
+    border: 2px solid var(--Button-500, #3f49fc);
+    background: #fff;
+}
+
+.cardTitleContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-direction: row;
+}
+
+.cardTitleContainerWrapped {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+    background: var(--Neutral-50, #f1f1f1);
+    border-radius: 10px;
+}
+
+.cardTitleContainerWrappedSelected {
+    @extend .cardTitleContainerWrapped;
+    background: map-deep-get($default-colors, blue);
+}
+
+.wrappedComponentContainer {
+    width: 100%;
+}
+
+.wrappedComponentContainer div {
+    width: 99%;
+}
+
+.wrappedComponentContainer button {
+    width: 15px;
+    padding: none;
 }

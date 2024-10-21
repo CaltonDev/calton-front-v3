@@ -44,3 +44,16 @@ export interface AllFiltersInterface {
     feedbackFilters: any[] // Update to more specific type if known
     selectedProductsDetails: string | null
 }
+
+interface IColumns {
+    title: string
+    key: string
+    dataIndex: string
+}
+export interface QueryResponse<T> {
+    aVers?: string
+    code?: number
+    data: T
+    message?: string
+    columns?: IColumns[]
+}
