@@ -28,40 +28,41 @@ $default-colors: (
         listing: #63D2FF,
         grey: #C0BBC5,
         blue: #3F49FC,
-        red: #FF608B
+        red: #FF608B,
+        lightGrey: #81788A
 );
 
 $typography: (
         headline: (
                 h1: (
-                        fontSize: 44px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 56.25px
-                ),
-                h2: (
                         fontSize: 40px,
                         fontWeight: (
                                 light: 300,
                                 normal: 400,
                                 bold: 700
                         ),
-                        lineHeight: 46.88px
+                        lineHeight: 50.25px
                 ),
-                h3: (
-                        fontSize: 32px,
+                h2: (
+                        fontSize: 36px,
                         fontWeight: (
                                 light: 300,
                                 normal: 400,
                                 bold: 700
                         ),
-                        lineHeight: 37.5px
+                        lineHeight: 40.88px
+                ),
+                h3: (
+                        fontSize: 28px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 32.5px
                 ),
                 h4: (
-                        fontSize: 28px,
+                        fontSize: 24px,
                         fontWeight: (
                                 light: 300,
                                 normal: 400,
@@ -70,33 +71,24 @@ $typography: (
                         lineHeight: 32.81px
                 ),
                 h5: (
-                        fontSize: 24px,
+                        fontSize: 20px,
                         fontWeight: (
                                 light: 300,
                                 normal: 400,
                                 bold: 700
                         ),
-                        lineHeight: 28.13px
+                        lineHeight: 24.13px
                 ),
                 h6: (
-                        fontSize: 20px,
+                        fontSize: 16px,
                         fontWeight: (
                                 light: 300,
                                 normal: 400,
                                 bold: 700
                         ),
-                        lineHeight: 23.44px
+                        lineHeight: 18.44px
                 ),
                 bodyBig: (
-                        fontSize: 20px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 25px
-                ),
-                bodyMedium: (
                         fontSize: 16px,
                         fontWeight: (
                                 light: 300,
@@ -105,32 +97,41 @@ $typography: (
                         ),
                         lineHeight: 20px
                 ),
-                bodySmall: (
-                        fontSize: 14px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 17.5px
-                ),
-                bodyXSmall: (
+                bodyMedium: (
                         fontSize: 12px,
                         fontWeight: (
                                 light: 300,
                                 normal: 400,
                                 bold: 700
                         ),
-                        lineHeight: 17.5px
+                        lineHeight: 16px
                 ),
-                bodyXXSmall: (
+                bodySmall: (
+                        fontSize: 12px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 14.5px
+                ),
+                bodyXSmall: (
                         fontSize: 10px,
                         fontWeight: (
                                 light: 300,
                                 normal: 400,
                                 bold: 700
                         ),
-                        lineHeight: 12px
+                        lineHeight: 12.5px
+                ),
+                bodyXXSmall: (
+                        fontSize: 8px,
+                        fontWeight: (
+                                light: 300,
+                                normal: 400,
+                                bold: 700
+                        ),
+                        lineHeight: 10px
                 ),
         ),
 );

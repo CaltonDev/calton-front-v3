@@ -108,7 +108,7 @@ function TinyMultiAreaChart({
     return (
         <>
             {chartdata && chartdata?.length > 0 && (
-                <div id={title} style={{ height: '185px', width: '100%' }}>
+                <div id={title} style={{ height: '165px', width: '100%' }}>
                     <Area {...config} />
                 </div>
             )}

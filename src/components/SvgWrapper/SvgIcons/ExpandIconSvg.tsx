@@ -2,8 +2,8 @@ import React from 'react'
 import { SvgProps } from '../SvgWrapper.interface'
 
 const ExpandIconSvg = ({
-    width = 15,
-    height = 15,
+    width = 12,
+    height = 12,
     fillColor = '#81788A',
 }: SvgProps) => {
     return (

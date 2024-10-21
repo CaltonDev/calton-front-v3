@@ -2,8 +2,8 @@ import React from 'react'
 import { SvgProps } from '../SvgWrapper.interface'
 
 const HighlighterSvg = ({
-    width = 40,
-    height = 40,
+    width = 35,
+    height = 35,
     fillColor = '#7161EF',
 }: SvgProps) => {
     return (

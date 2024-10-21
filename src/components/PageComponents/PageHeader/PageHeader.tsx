@@ -132,7 +132,7 @@ function PageHeader({
         }
     }
     return (
-        <div style={{ marginBottom: '1.875rem' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
             <ListingBulkEditModal
                 setIsOpen={setOpenBulkEditModal}
                 isOpen={openBulkEditModal}

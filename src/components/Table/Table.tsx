@@ -86,11 +86,11 @@ const Table = ({
                       ? column.name
                       : column?.title,
                 cell: (info) => (
-                    <i>
+                    <>
                         {Array.isArray(info.getValue())
                             ? info.getValue()?.join(', ')
                             : info.getValue()}
-                    </i>
+                    </>
                 ),
                 header: () => <span>{column?.title}</span>,
                 footer: (info) => info.column.id,

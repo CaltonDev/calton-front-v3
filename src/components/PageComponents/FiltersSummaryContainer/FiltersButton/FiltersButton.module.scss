@@ -3,13 +3,13 @@
   flex-direction: column;
   padding: 6px 5px;
   align-items: flex-start;
-  gap: 10px;
+  gap: 4px;
   border-radius: 5px;
   background: var(--Neutral-200, #E9E7EC);
   justify-content: space-between;
   width: 150px;
   height: 100%;
-  min-height: 45px;
+  min-height: 36px;
   max-height: 150px;
 }
 
@@ -30,6 +30,10 @@
 .textContainer {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   overflow: auto;
+}
+.textContainer p {
+  margin-left: 5px;
 }

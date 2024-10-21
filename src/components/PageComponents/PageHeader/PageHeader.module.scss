@@ -9,6 +9,10 @@
   display: flex;
   gap: 20px;
   justify-content: space-between;
+  align-items: flex-end;
+}
+.headingContainer h1 {
+  line-height: 35px;
 }
 
 .containerBreadcrumb{
