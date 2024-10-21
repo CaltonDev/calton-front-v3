@@ -25,9 +25,33 @@ import {
     OptionsWrappedKeyType,
     OptionsCardSelectionType,
 } from '../../components/CardSelection/CardSelection.interface'
+import SpecialHoursList from '../../components/SpecialHoursList/SpecialHoursList'
 
 function ListingEditHours() {
     const { t } = useTranslation()
+    const initialData: DataType[] = [
+        {
+            title: t('Orario standard'),
+            description: t(
+                "Imposta l'orario di apertura principale o contrassegna la tua attività come chiusa."
+            ),
+            wrappedKey: OptionsWrappedKeyType.standardHours,
+        },
+        {
+            title: t('Orario festivo'),
+            description: t(
+                "Conferma l'orario per i giorni di festa per indicare ai tuoi clienti le aperture della tua attività."
+            ),
+            wrappedKey: OptionsWrappedKeyType.specialHours,
+        },
+        {
+            title: t('Aggiungi altri orari'),
+            description: t(
+                "Gli altri orari sono visibili solo se hai già impostato orari standard. In genere, dovresti impostarli come sottoinsieme dell'orario principale."
+            ),
+            wrappedKey: OptionsWrappedKeyType.moreHours,
+        },
+    ]
     const location = useLocation()
     const queryClient = useQueryClient()
     const mutation = useEditHours()
@@ -59,33 +83,12 @@ function ListingEditHours() {
     const [listingMoreHours, setListingMoreHours] =
         React.useState<ListingMoreHoursProps | null>(null)
     const [selectedCard, setSelectedCard] = React.useState(0)
+    const [subCardSpecialHours, setSubCardSpecialHours] = React.useState()
     const [subCardMoreHours, setSubCardMoreHours] = React.useState()
+    const [data, setData] = React.useState<DataType[]>(initialData)
     const cardRef = React.useRef<HTMLDivElement>(null)
-    const subCardRef = React.useRef<HTMLDivElement>(null)
-
-    const data: DataType[] = [
-        {
-            title: t('Orario standard'),
-            description: t(
-                "Imposta l'orario di apertura principale o contrassegna la tua attività come chiusa."
-            ),
-            wrappedKey: OptionsWrappedKeyType.standardHours,
-        },
-        {
-            title: t('Orario festivo'),
-            description: t(
-                "Conferma l'orario per i giorni di festa per indicare ai tuoi clienti le aperture della tua attività."
-            ),
-            wrappedKey: OptionsWrappedKeyType.specialHours,
-        },
-        {
-            title: t('Aggiungi altri orari'),
-            description: t(
-                "Gli altri orari sono visibili solo se hai già impostato orari standard. In genere, dovresti impostarli come sottoinsieme dell'orario principale."
-            ),
-            wrappedKey: OptionsWrappedKeyType.moreHours,
-        },
-    ]
+    const subCardSpecialHoursRef = React.useRef<HTMLDivElement>(null)
+    const subCardMoreHoursRef = React.useRef<HTMLDivElement>(null)
 
     const addMoreOnClick = (hourId: string) => {
         const tmp = listingMoreHours
@@ -131,7 +134,6 @@ function ListingEditHours() {
             : {
                   ...listingMoreHours,
               }
-        console.log('save more hours')
         mutation.mutate({
             // hours: nextMoreHours,
             hours: { ...listingMoreHours },
@@ -165,6 +167,51 @@ function ListingEditHours() {
             setListingSpecialHours(specialHours.data)
         }
     }, [specialHours])
+
+    React.useEffect(() => {
+        setData((prevData) => {
+            return prevData.map((item) => {
+                if (
+                    item.wrappedKey === OptionsWrappedKeyType.specialHours &&
+                    listingSpecialHours &&
+                    listingSpecialHours?.specialHours.length > 0
+                ) {
+                    return {
+                        ...item,
+                        wrappedComponent: (
+                            <div ref={subCardSpecialHoursRef}>
+                                <CardSelection
+                                    data={
+                                        listingSpecialHours &&
+                                        listingSpecialHours.title
+                                            ? [
+                                                  {
+                                                      title: `${t(listingSpecialHours?.title)}`,
+                                                      wrappedKey:
+                                                          OptionsWrappedKeyType.specialHours,
+                                                  },
+                                              ]
+                                            : []
+                                    }
+                                    title={t('')}
+                                    addNewCard={false}
+                                    activeCard={subCardSpecialHours}
+                                    setSelectedCard={setSubCardSpecialHours}
+                                    isDeleteButton={true}
+                                    handleDelete={handleDeleteSubCard}
+                                    type={
+                                        OptionsCardSelectionType.isWrappedComponent
+                                    }
+                                />
+                            </div>
+                        ),
+                    }
+                }
+                return item
+            })
+        })
+    }, [listingSpecialHours, subCardSpecialHours])
+
     React.useEffect(() => {
         if (moreHours?.data) {
             setListingMoreHours(moreHours.data)
@@ -172,25 +219,75 @@ function ListingEditHours() {
     }, [moreHours, refetchMoreHours])
 
     React.useEffect(() => {
+        setData((prevData) => {
+            return prevData.map((item) => {
+                if (item.wrappedKey === OptionsWrappedKeyType.moreHours) {
+                    return {
+                        ...item,
+                        wrappedComponent: (
+                            <div ref={subCardMoreHoursRef}>
+                                <CardSelection
+                                    data={
+                                        listingMoreHours?.moreHours?.map(
+                                            (m) => {
+                                                const displayName =
+                                                    listingMoreHours?.moreHoursTypes?.find(
+                                                        (itemType) =>
+                                                            itemType?.hoursTypeId ===
+                                                            m?.hoursTypeId
+                                                    )?.displayName
+                                                return {
+                                                    title: `${t('Orario di')} ${displayName}`,
+                                                    wrappedKey:
+                                                        OptionsWrappedKeyType.moreHours,
+                                                }
+                                            }
+                                        ) || []
+                                    }
+                                    title={t('')}
+                                    addNewCard={false}
+                                    activeCard={subCardMoreHours}
+                                    setSelectedCard={setSubCardMoreHours}
+                                    isDeleteButton={true}
+                                    handleDelete={handleDeleteSubCard}
+                                    type={
+                                        OptionsCardSelectionType.isWrappedComponent
+                                    }
+                                />
+                            </div>
+                        ),
+                    }
+                }
+                return item
+            })
+        })
+    }, [listingMoreHours, subCardMoreHours])
+
+    React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
-                subCardRef.current &&
-                !subCardRef.current.contains(event.target as Node) &&
+                subCardMoreHoursRef.current &&
+                !subCardMoreHoursRef.current.contains(event.target as Node) &&
                 cardRef.current &&
                 cardRef.current.contains(event.target as Node)
             )
                 setSubCardMoreHours(undefined)
+            if (
+                subCardSpecialHoursRef.current &&
+                !subCardSpecialHoursRef.current.contains(
+                    event.target as Node
+                ) &&
+                cardRef.current &&
+                cardRef.current.contains(event.target as Node)
+            )
+                setSubCardSpecialHours(undefined)
         }
 
         document.addEventListener('mousedown', handleClickOutside)
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
-    }, [cardRef, subCardRef])
-
-    React.useEffect(() => {
-        console.log('listingSpecialHours', listingSpecialHours)
-    }, [listingSpecialHours])
+    }, [cardRef, subCardMoreHoursRef])
 
     return (
         <>
@@ -214,41 +311,8 @@ function ListingEditHours() {
                                 activeCard={selectedCard}
                                 setSelectedCard={setSelectedCard}
                                 addNewCard={false}
-                                hasWrappedComponent={true}
                                 type={
                                     OptionsCardSelectionType.hasWrappedComponent
-                                }
-                                wrappedComponent={
-                                    <div ref={subCardRef}>
-                                        <CardSelection
-                                            data={
-                                                listingMoreHours?.moreHours?.map(
-                                                    (m) => {
-                                                        const displayName =
-                                                            listingMoreHours?.moreHoursTypes?.find(
-                                                                (itemType) =>
-                                                                    itemType?.hoursTypeId ===
-                                                                    m?.hoursTypeId
-                                                            )?.displayName
-                                                        return {
-                                                            title: `${t('Orario di')} ${displayName}`,
-                                                        }
-                                                    }
-                                                ) || []
-                                            }
-                                            title={t('')}
-                                            addNewCard={false}
-                                            activeCard={subCardMoreHours}
-                                            setSelectedCard={
-                                                setSubCardMoreHours
-                                            }
-                                            isDeleteButton={true}
-                                            handleDelete={handleDeleteSubCard}
-                                            type={
-                                                OptionsCardSelectionType.isWrappedComponent
-                                            }
-                                        />
-                                    </div>
                                 }
                             />
                         </div>
@@ -261,14 +325,24 @@ function ListingEditHours() {
                                     refetch={refetch}
                                 />
                             )}
-                            {selectedCard === 1 && (
-                                <SpecialHours
-                                    listing={listingSpecialHours}
-                                    refetch={refetchSpecialHours}
-                                    selectedListings={selectedListings}
-                                    toOverwrite={true}
-                                />
-                            )}
+                            {selectedCard === 1 &&
+                                isUndefined(subCardSpecialHours) && (
+                                    <SpecialHours
+                                        listing={listingSpecialHours}
+                                        refetch={refetchSpecialHours}
+                                        selectedListings={selectedListings}
+                                        toOverwrite={true}
+                                    />
+                                )}
+                            {selectedCard === 1 &&
+                                !isUndefined(subCardSpecialHours) && (
+                                    <SpecialHoursList
+                                        listing={listingSpecialHours}
+                                        refetch={refetchSpecialHours}
+                                        selectedListings={selectedListings}
+                                        toOverwrite={true}
+                                    />
+                                )}
                             {selectedCard === 2 &&
                                 !isUndefined(subCardMoreHours) &&
                                 listingMoreHours?.moreHours &&

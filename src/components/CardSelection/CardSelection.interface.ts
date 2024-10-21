@@ -1,3 +1,5 @@
+import React from 'react'
+
 export const OptionsCardSelectionType = {
     standard: 'standard',
     hasWrappedComponent: 'hasWrappedComponent',
@@ -21,6 +23,7 @@ export type DataType = {
     description?: string
     wrappedKey?: WrappedKeyType
     value?: any[]
+    wrappedComponent?: React.ReactNode
 }
 
 export interface CardSelectionProps {
@@ -29,8 +32,8 @@ export interface CardSelectionProps {
     activeCard?: number
     setSelectedCard?: (arg0: any) => void
     addNewCard?: boolean
-    wrappedComponent?: any
-    hasWrappedComponent?: boolean
+    // wrappedComponent?: React.ReactNode
+    // hasWrappedComponent?: boolean
     isDeleteButton?: boolean
     handleDelete?: (arg0: any) => void
     type?: WrappedComponentType
