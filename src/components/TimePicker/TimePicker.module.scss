@@ -11,7 +11,7 @@
     border-radius: 10px;
     background: #fff;
     padding: 10px 15px;
-    fonfont-family: map-deep-get($input, font-family);
+    font-family: map-deep-get($input, font-family);
     font-style: map-deep-get($input, font-style);
     font-weight: map-deep-get($input, font-weight);
     font-size: map-deep-get($input, font-size);

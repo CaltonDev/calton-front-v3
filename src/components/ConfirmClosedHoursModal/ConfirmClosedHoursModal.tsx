@@ -1,13 +1,13 @@
 import { CloseOutlined } from '@ant-design/icons'
 import styles from './ConfirmClosedHoursModal.module.scss'
-import { Button } from 'antd'
+import Button from '../Button/Button'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import AntModal from './AntModal'
 
 function ConfirmClosedHoursModal(props: any) {
     const { openModal, setOpenModal, checkedStatus, handleConfirm } = props
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
     const handleCloseDeleteInternal = () => {
         setOpenModal(false)
     }
@@ -51,9 +51,6 @@ function ConfirmClosedHoursModal(props: any) {
                             </a>
                         </span>
                         <Button
-                            // variant="contained"
-                            variant="text"
-                            color="primary"
                             onClick={handleConfirmModal}
                             className={`text-white pt-8 pb-8 ${styles.btnConfirm}`}
                         >
