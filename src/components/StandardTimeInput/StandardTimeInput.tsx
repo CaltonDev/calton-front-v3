@@ -10,6 +10,7 @@ import {
 } from '../../pages/ListingEditHours/ListingEditHours.interface'
 import ConfirmClosedHoursModal from '../ConfirmClosedHoursModal/ConfirmClosedHoursModal'
 import Typography from '../Typography/Typography'
+import Button from '../Button/Button'
 
 interface StandardTimeInputProps {
     listing: ListingProps | null
@@ -49,6 +50,23 @@ export const StandardTimeInput = ({
         ]
         setListing(tmpListing)
         setOpenModal(false)
+    }
+
+    const addEmptyPeriod = (weekday: string) => {
+        setListing((prev) => {
+            if (!prev) return null
+            return {
+                ...prev,
+                [weekday]: [
+                    {
+                        closeHours: null,
+                        closeMinutes: null,
+                        openHours: null,
+                        openMinutes: null,
+                    },
+                ],
+            }
+        })
     }
 
     React.useEffect(() => {
@@ -106,6 +124,19 @@ export const StandardTimeInput = ({
                                         />
                                     )
                                 }
+                            )}
+                        {!checkedStatus[i] &&
+                            listing &&
+                            listing[d] &&
+                            listing[d].length === 0 && (
+                                <Button
+                                    size={'small'}
+                                    variant={'ghost'}
+                                    icon={'plusIcon'}
+                                    arrowPlacement={'center'}
+                                    iconOnly={true}
+                                    onClick={() => addEmptyPeriod(d)}
+                                />
                             )}
                     </div>
                 </div>
