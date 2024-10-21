@@ -6,12 +6,13 @@ import { useTranslation } from 'react-i18next'
 import { Button, InputNumber, Tooltip } from 'antd'
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 import { SmallTableGraphHomeProps } from './SmallTableGraphHome.interface'
+import PageNavigator from '../../PageNavigator/PageNavigator'
+import { PaginationState } from '@tanstack/react-table'
 
 function SmallTableGraphHome({
     title,
     dataReady,
     extraImg,
-    styleCounter,
     isTwoCols = false,
     fullWidth = false,
     data,
@@ -22,20 +23,51 @@ function SmallTableGraphHome({
     infoTooltip,
 }: SmallTableGraphHomeProps) {
     const totalPageNumber = Math.ceil(data?.length / 8)
-    const [currentPageNumber, setCurrentPageNumber] = useState(0)
-    const onChangeInputNumber = (page: any) => {
-        if (page === null) {
-            setCurrentPageNumber(0)
+
+    const { t } = useTranslation()
+
+    const [pagination, setPagination] = React.useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 8,
+    })
+
+    const changePage = (direction: any) => {
+        if (direction === 'next') {
+            setPagination({
+                pageIndex: pagination.pageIndex + 1,
+                pageSize: pagination.pageSize,
+            })
+        } else if (direction === 'previous') {
+            setPagination({
+                pageIndex: pagination.pageIndex - 1,
+                pageSize: pagination.pageSize,
+            })
         } else {
-            setCurrentPageNumber(page - 1)
+            const number = Number(direction)
+            if (
+                number > 0 &&
+                number <= Math.ceil(data?.length / pagination.pageSize)
+            ) {
+                setPagination({
+                    pageIndex: number - 1,
+                    pageSize: pagination.pageSize,
+                })
+            } else {
+                setPagination({
+                    pageIndex: 0,
+                    pageSize: pagination.pageSize,
+                })
+            }
         }
     }
 
-    const handlePageChange = (page: any) => {
-        setCurrentPageNumber(page)
+    const changeElementsPerPage = (e: any) => {
+        setPagination({
+            pageIndex: 0,
+            pageSize: e.value,
+        })
     }
 
-    const { t } = useTranslation()
     return (
         <>
             <div
@@ -48,65 +80,14 @@ function SmallTableGraphHome({
                 }
                 style={{ width: fullWidth ? '100%' : isImportant ? '66%' : '' }}
             >
-                <div className={styles.headerContainer}>
-                    <HeaderGraph
-                        title={title}
-                        styleCounter={styleCounter}
-                        extraImg={extraImg}
-                        dataReady={dataReady}
-                        isAnt={true}
-                        isInfoTooltip={isInfoTooltip}
-                        infoTooltip={infoTooltip}
-                    />
-                    {dataReady && (
-                        <div>
-                            <span className={styles.pageLabel}>
-                                {t('Pagina')}
-                            </span>
-                            <InputNumber
-                                min={1}
-                                max={totalPageNumber}
-                                defaultValue={1}
-                                placeholder={currentPageNumber + 1 + ''}
-                                value={currentPageNumber + 1}
-                                onChange={onChangeInputNumber}
-                                className={styles.inputNumber}
-                            />
-                            <Button
-                                color="primary"
-                                aria-label="prev"
-                                size="small"
-                                onClick={() =>
-                                    handlePageChange(currentPageNumber - 1)
-                                }
-                                disabled={currentPageNumber === 0}
-                                className={styles.iconBtnLeft}
-                                icon={<AiOutlineCaretLeft fontSize="large" />}
-                            />
-                            <span className={styles.pageLabel}>
-                                {currentPageNumber +
-                                    1 +
-                                    ' ' +
-                                    t('di') +
-                                    ' ' +
-                                    totalPageNumber}
-                            </span>
-                            <Button
-                                color="primary"
-                                aria-label="succ"
-                                size="small"
-                                onClick={() =>
-                                    handlePageChange(currentPageNumber + 1)
-                                }
-                                disabled={
-                                    currentPageNumber === totalPageNumber - 1
-                                }
-                                className={styles.iconBtnRight}
-                                icon={<AiOutlineCaretRight fontSize="large" />}
-                            />
-                        </div>
-                    )}
-                </div>
+                <HeaderGraph
+                    title={title}
+                    extraImg={extraImg}
+                    dataReady={dataReady}
+                    isAnt={true}
+                    isInfoTooltip={isInfoTooltip}
+                    infoTooltip={infoTooltip}
+                />
                 {!dataReady ? (
                     <div id={title} style={{ height: '165px', width: '100%' }}>
                         {/*<LoaderChart type={'smallTable'} />*/}
@@ -119,8 +100,8 @@ function SmallTableGraphHome({
                         >
                             {data
                                 ?.slice(
-                                    currentPageNumber * 8,
-                                    currentPageNumber * 8 + 8
+                                    pagination?.pageIndex * 8,
+                                    pagination?.pageIndex * 8 + 8
                                 )
                                 ?.map((obj: any, idx: number) => {
                                     return (
@@ -137,7 +118,7 @@ function SmallTableGraphHome({
                                                         styles.titleLabel
                                                     }
                                                 >
-                                                    {currentPageNumber * 8 +
+                                                    {pagination?.pageIndex * 8 +
                                                         idx +
                                                         1 +
                                                         '. ' +
@@ -164,18 +145,30 @@ function SmallTableGraphHome({
                                     )
                                 })}
                         </div>
-                        <div className={styles.footer}>
-                            <span className={styles.totalNumber}>
-                                {totalNumber && totalNumber + ' '}
-                            </span>
-                            <span className={styles.totalNumberLabel}>
-                                {t(
-                                    'Ricerche che hanno mostrato il profilo della tua attività nei relativi risultati'
-                                )}
-                            </span>
-                        </div>
                     </div>
                 )}
+                <div className={styles.footer}>
+                    <div>
+                        <span className={styles.totalNumber}>
+                            {totalNumber && totalNumber + ' '}
+                        </span>
+                        <span className={styles.totalNumberLabel}>
+                            {t(
+                                'Ricerche che hanno mostrato il profilo della tua attività nei relativi risultati'
+                            )}
+                        </span>
+                    </div>
+
+                    {dataReady && (
+                        <PageNavigator
+                            totalElements={totalPageNumber}
+                            currentPage={pagination.pageIndex}
+                            pageElements={pagination.pageSize}
+                            changePage={changePage}
+                            hideChangeElementsPerPage={true}
+                        />
+                    )}
+                </div>
             </div>
         </>
     )

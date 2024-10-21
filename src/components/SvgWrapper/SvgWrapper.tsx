@@ -89,6 +89,7 @@ import DuplicateDeleteSvg from './SvgIcons/DuplicateDeleteSvg'
 import GoogleMapsSvg from './SvgIcons/GoogleMapsSvg'
 import PcIconSvg from './SvgIcons/PcIconSvg'
 import MobileIconSvg from './SvgIcons/MobileIconSvg'
+import DownloadSvg from './SvgIcons/DownloadSvg'
 
 const SvgWrapper = ({
     keySvg,
@@ -149,6 +150,9 @@ const SvgWrapper = ({
                     : '',
                 border: hasContainerProps?.outlined
                     ? hasContainerProps?.border
+                    : '',
+                borderRadius: hasContainerProps?.borderRadius
+                    ? hasContainerProps?.borderRadius
                     : '',
                 cursor: !disabled ? 'pointer' : '',
             }}
@@ -214,6 +218,8 @@ const SvgWrapper = ({
                         height={iconHeight}
                         fillColor={iconColor}
                     />
+                ) : keySvg === 'downloadSvg' ? (
+                    <DownloadSvg width={iconWidth} height={iconHeight} />
                 ) : keySvg === 'caltonLogoSvg' ? (
                     <CaltonLogoSvg />
                 ) : keySvg === 'home.svg' ? (

@@ -80,7 +80,6 @@ function CollapsableCard({
                             download={!downloadble}
                             title={heading}
                             isBubble={isBubble}
-                            widthIcon={widthIcon}
                             isAnt={isAnt}
                             optionable={optionable}
                             option={option}

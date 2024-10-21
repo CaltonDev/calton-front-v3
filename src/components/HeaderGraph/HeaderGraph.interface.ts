@@ -9,10 +9,8 @@ export interface HeaderGraphProps {
     sizeImg?: number
     textForNumber?: string | undefined
     classTextForNumber?: string | undefined
-    styleCounter?: string | undefined
     download?: boolean
     isBubble?: boolean
-    widthIcon?: number
     isAnt?: boolean
     option?: boolean
     setOption?: (arg0: boolean) => void
