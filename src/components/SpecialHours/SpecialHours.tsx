@@ -65,23 +65,23 @@ function SpecialHours({
     }
 
     const handleSave = () => {
-        // Todo: implement this
-        // const listingsToEdit =
-        //     selectedListings instanceof Array
-        //         ? selectedListings
-        //         : [selectedListings]
-        // mutation.mutate({
-        //     hours: distinctPeriod,
-        //     listingsName: listingsToEdit,
-        //     isRegular: false,
-        //     isSpecial: true,
-        //     isMore: false,
-        //     isNotSpecified: true,
-        //     isTemporarilyClosed: false,
-        //     isPermanentlyClosed: false,
-        //     toOverwrite: toOverwrite,
-        //     queryStr: 'specialHours',
-        // })
+        const listingsToEdit =
+            selectedListings instanceof Array
+                ? selectedListings
+                : [selectedListings]
+
+        mutation.mutate({
+            hours: [...(listing?.specialHours || []), ...distinctPeriod],
+            listingsName: listingsToEdit,
+            isRegular: false,
+            isSpecial: true,
+            isMore: false,
+            isNotSpecified: true,
+            isTemporarilyClosed: false,
+            isPermanentlyClosed: false,
+            toOverwrite: toOverwrite,
+            queryStr: 'specialHours',
+        })
     }
 
     const handleCancelMoreHours = () => {

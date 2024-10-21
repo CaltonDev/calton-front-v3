@@ -9,12 +9,14 @@ import useEditHours from '../../utils/hooks/useEditHours'
 import Button from '../Button/Button'
 import SpecialTimeInput from '../SpecialTimeInput/SpecialTimeInput'
 import Typography from '../Typography/Typography'
+import { isUndefined } from 'lodash'
 
 interface SpecialHoursComponentProps {
     listing: ListingSpecialHoursProps | null
     refetch?: () => void
     selectedListings?: string[]
     toOverwrite?: boolean
+    index?: number
 }
 
 function SpecialHoursList({
@@ -22,6 +24,7 @@ function SpecialHoursList({
     selectedListings,
     refetch,
     toOverwrite = true,
+    index,
 }: SpecialHoursComponentProps) {
     const { t } = useTranslation()
     const mutation = useEditHours()
@@ -91,7 +94,8 @@ function SpecialHoursList({
     }
 
     const handleCancelMoreHours = () => {
-        setDistinctPeriods([])
+        // setDistinctPeriods([])
+        // setDistinctPeriods(listing?.specialHours ? listing?.specialHours : [])
         refetch && refetch()
     }
 
@@ -108,20 +112,26 @@ function SpecialHoursList({
         } catch (err) {}
     }, [consumeLocallySocket])
 
+    React.useEffect(() => {
+        setDistinctPeriods(listing?.specialHours ? listing?.specialHours : [])
+    }, [listing])
+
     return (
         <div className={styles.hoursContainer}>
             <div className={styles.specialHoursTitleContainer}>
-                {/* <div className={styles.labelContainer}>
+                <div className={styles.labelContainer}>
                     <Typography weight={'bold'} size={'h5'}>
-                        {t('Orario festivo')}
+                        {!isUndefined(index)
+                            ? `${distinctPeriods[index]?.startDate?.day}/${distinctPeriods[index]?.startDate?.month}/${distinctPeriods[index]?.startDate?.year}`
+                            : ''}
                     </Typography>
-                    <Typography weight={'normal'} size={'bodyMedium'}>
+                    {/* <Typography weight={'normal'} size={'bodyMedium'}>
                         {t(
                             "Conferma l'orario per i giorni di festa per indicare ai tuoi clienti le aperture della tua attività."
                         )}
-                    </Typography>
-                </div> */}
-                {/* {distinctPeriods.length > 0 && (
+                    </Typography> */}
+                </div>
+                {distinctPeriods.length > 0 && (
                     <div className={styles.buttonContainer}>
                         <Button
                             onClick={handleCancelMoreHours}
@@ -138,19 +148,21 @@ function SpecialHoursList({
                             {t('Salva')}
                         </Button>
                     </div>
-                )} */}
+                )}
             </div>
             <div className={styles.dateHours} key={distinctPeriods?.toString()}>
                 {distinctPeriods?.map((period, idx) => {
-                    return (
-                        <SpecialTimeInput
-                            key={period?.toString() + idx}
-                            index={idx}
-                            distinctPeriods={distinctPeriods}
-                            setDistinctPeriods={setDistinctPeriods}
-                            period={period}
-                        />
-                    )
+                    if (idx === index) {
+                        return (
+                            <SpecialTimeInput
+                                key={period?.toString() + idx}
+                                index={idx}
+                                distinctPeriods={distinctPeriods}
+                                setDistinctPeriods={setDistinctPeriods}
+                                period={period}
+                            />
+                        )
+                    }
                 })}
                 {/* {distinctPeriods.length === 0 && (
                     <div onClick={addEmptyDate} className={styles.addDate}>

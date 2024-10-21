@@ -83,8 +83,12 @@ function ListingEditHours() {
     const [listingMoreHours, setListingMoreHours] =
         React.useState<ListingMoreHoursProps | null>(null)
     const [selectedCard, setSelectedCard] = React.useState(0)
-    const [subCardSpecialHours, setSubCardSpecialHours] = React.useState()
-    const [subCardMoreHours, setSubCardMoreHours] = React.useState()
+    const [subCardSpecialHours, setSubCardSpecialHours] = React.useState<
+        number | undefined
+    >()
+    const [subCardMoreHours, setSubCardMoreHours] = React.useState<
+        number | undefined
+    >()
     const [data, setData] = React.useState<DataType[]>(initialData)
     const cardRef = React.useRef<HTMLDivElement>(null)
     const subCardSpecialHoursRef = React.useRef<HTMLDivElement>(null)
@@ -109,7 +113,7 @@ function ListingEditHours() {
         setListingMoreHours(JSON.parse(JSON.stringify(tmp)))
     }
 
-    const handleDeleteSubCard = (index: number) => {
+    const handleDeleteMoreHoursSubCard = (index: number) => {
         const nextListingMoreHours = {
             moreHours:
                 listingMoreHours?.moreHours?.filter((item, i) => i !== index) ||
@@ -124,6 +128,31 @@ function ListingEditHours() {
         setSelectedCard(2)
         setSubCardMoreHours(undefined)
         refetchMoreHours()
+    }
+
+    const handleDeleteSpecialHoursSubcard = (index: number) => {
+        const nextListingSpecialHours: ListingSpecialHoursProps = {
+            ...listingSpecialHours,
+            specialHours:
+                listingSpecialHours?.specialHours?.filter(
+                    (item, i) => i !== index
+                ) || [],
+        }
+        setListingSpecialHours(nextListingSpecialHours)
+        mutation.mutate({
+            hours: nextListingSpecialHours.specialHours,
+            listingsName: selectedListings,
+            isRegular: false,
+            isSpecial: true,
+            isMore: false,
+            isNotSpecified: true,
+            isTemporarilyClosed: false,
+            isPermanentlyClosed: false,
+            toOverwrite: true,
+            queryStr: 'specialHours',
+        })
+        queryClient.removeQueries('specialHours')
+        refetchSpecialHours()
     }
 
     const handleSaveMoreHours = (
@@ -181,24 +210,23 @@ function ListingEditHours() {
                         wrappedComponent: (
                             <div ref={subCardSpecialHoursRef}>
                                 <CardSelection
-                                    data={
-                                        listingSpecialHours &&
-                                        listingSpecialHours.title
-                                            ? [
-                                                  {
-                                                      title: `${t(listingSpecialHours?.title)}`,
-                                                      wrappedKey:
-                                                          OptionsWrappedKeyType.specialHours,
-                                                  },
-                                              ]
-                                            : []
-                                    }
+                                    data={listingSpecialHours?.specialHours?.map(
+                                        (date) => {
+                                            return {
+                                                title: `${date.startDate.day}/${date.startDate.month}/${date.startDate.year}`,
+                                                wrappedKey:
+                                                    OptionsWrappedKeyType.specialHours,
+                                            }
+                                        }
+                                    )}
                                     title={t('')}
                                     addNewCard={false}
                                     activeCard={subCardSpecialHours}
                                     setSelectedCard={setSubCardSpecialHours}
                                     isDeleteButton={true}
-                                    handleDelete={handleDeleteSubCard}
+                                    handleDelete={
+                                        handleDeleteSpecialHoursSubcard
+                                    }
                                     type={
                                         OptionsCardSelectionType.isWrappedComponent
                                     }
@@ -249,7 +277,7 @@ function ListingEditHours() {
                                     activeCard={subCardMoreHours}
                                     setSelectedCard={setSubCardMoreHours}
                                     isDeleteButton={true}
-                                    handleDelete={handleDeleteSubCard}
+                                    handleDelete={handleDeleteMoreHoursSubCard}
                                     type={
                                         OptionsCardSelectionType.isWrappedComponent
                                     }
@@ -341,6 +369,7 @@ function ListingEditHours() {
                                         refetch={refetchSpecialHours}
                                         selectedListings={selectedListings}
                                         toOverwrite={true}
+                                        index={subCardSpecialHours}
                                     />
                                 )}
                             {selectedCard === 2 &&
