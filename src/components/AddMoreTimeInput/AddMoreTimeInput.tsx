@@ -170,60 +170,56 @@ function AddMoreTimeInput({
                                 />
                             </div>
                             <div className={styles.timePickerContainer}>
-                                <div className={styles.timePickerRow}>
-                                    {!checkedStatus[i] && (
-                                        <div className={styles.timePickerRow}>
-                                            {periods?.length > 0 &&
-                                                periods?.map((period, idx) => {
-                                                    return (
-                                                        <div key={type + d + i}>
-                                                            <ListingMoreHoursTimePicker
-                                                                periodIndex={
-                                                                    index
-                                                                }
-                                                                hourIndex={
-                                                                    occurrences[
-                                                                        idx
-                                                                    ]
-                                                                }
-                                                                weekday={d}
-                                                                distinctPeriod={
-                                                                    distinctPeriod
-                                                                }
-                                                                setListing={
-                                                                    setListing
-                                                                }
-                                                                period={period}
-                                                                currentPickerIdx={
-                                                                    idx
-                                                                }
-                                                                lastElementIndex={
-                                                                    periods?.length -
-                                                                    1
-                                                                }
-                                                            />
-                                                        </div>
-                                                    )
-                                                })}
-                                        </div>
-                                    )}
-                                    {!checkedStatus[i] && (
-                                        <div className={styles.timePickerRow}>
-                                            {periods?.length == 0 && (
-                                                <Button
-                                                    size={'small'}
-                                                    variant={'ghost'}
-                                                    icon={'plusIcon'}
-                                                    arrowPlacement={'center'}
-                                                    iconOnly={true}
-                                                    onClick={() =>
-                                                        addEmptyPeriod(d)
-                                                    }
-                                                />
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
+                                {!checkedStatus[i] && (
+                                    <div className={styles.timePickerRows}>
+                                        {periods?.length > 0 &&
+                                            periods?.map((period, idx) => {
+                                                return (
+                                                    <div key={type + d + i}>
+                                                        <ListingMoreHoursTimePicker
+                                                            periodIndex={index}
+                                                            hourIndex={
+                                                                occurrences[idx]
+                                                            }
+                                                            weekday={d}
+                                                            distinctPeriod={
+                                                                distinctPeriod
+                                                            }
+                                                            setListing={
+                                                                setListing
+                                                            }
+                                                            period={period}
+                                                            currentPickerIdx={
+                                                                idx
+                                                            }
+                                                            lastElementIndex={
+                                                                periods?.length -
+                                                                1
+                                                            }
+                                                        />
+                                                    </div>
+                                                )
+                                            })}
+                                    </div>
+                                )}
+                                {!checkedStatus[i] && (
+                                    <div
+                                        className={styles.timePickerPlusButton}
+                                    >
+                                        {periods?.length == 0 && (
+                                            <Button
+                                                size={'small'}
+                                                variant={'ghost'}
+                                                icon={'plusIcon'}
+                                                arrowPlacement={'center'}
+                                                iconOnly={true}
+                                                onClick={() =>
+                                                    addEmptyPeriod(d)
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )

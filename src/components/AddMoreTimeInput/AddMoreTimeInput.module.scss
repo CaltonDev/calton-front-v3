@@ -14,10 +14,22 @@
 }
 
 .timePickerContainer {
-    display: inline-flex;
+    display: flex;
     width: 100%;
+    align-items: baseline;
 }
 
 .typographyContainer {
     min-width: 100px;
+}
+
+.timePickerRows {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.timePickerPlusButton {
+    display: flex;
+    align-items: center;
 }

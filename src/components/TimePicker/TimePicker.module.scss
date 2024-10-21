@@ -14,9 +14,10 @@
     font-family: map-deep-get($input, font-family);
     font-style: map-deep-get($input, font-style);
     font-weight: map-deep-get($input, font-weight);
-    font-size: map-deep-get($input, font-size);
+    font-size: map-deep-get($input, fontSize, medium, font-size);
     line-height: map-deep-get($input, line-height);
     color: map-deep-get($input, color);
+    height: 100%;
 }
 
 .picker {
