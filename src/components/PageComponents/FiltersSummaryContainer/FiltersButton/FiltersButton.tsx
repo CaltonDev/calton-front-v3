@@ -89,7 +89,7 @@ function FiltersButton({
                 <Typography
                     size={'bodyXSmall'}
                     weight={'light'}
-                    color={'primary'}
+                    color={'lightGrey'}
                 >
                     {isMore && !showAllFilters
                         ? title

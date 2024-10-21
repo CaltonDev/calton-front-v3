@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chart.js": "^4.4.5",
     "@ant-design/charts": "1.4.3",
     "@ant-design/icons": "5.3.7",
     "@ant-design/plots": "1.2.5",

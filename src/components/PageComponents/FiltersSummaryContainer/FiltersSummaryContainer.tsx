@@ -191,7 +191,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                     return (
                         <FiltersButton
                             showCancel={elm.showCancel}
-                            value={value}
+                            value={'ADSDA'}
                             key={elm.key}
                             title={display}
                             keyUpdate={elm.key}
@@ -234,7 +234,7 @@ function FiltersSummaryContainer(filters: FilterSummaryContainerProps) {
                     return (
                         <FiltersButton
                             showCancel={elm.showCancel}
-                            value={displayableValue}
+                            value={'ADSDA'}
                             title={displayableValue?.join(', ')}
                             keyUpdate={elm.key}
                             key={elm.key}
