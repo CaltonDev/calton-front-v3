@@ -7,7 +7,7 @@ const ProgressBar = ({
     progressText = '',
 }: ProgressBarProps) => {
     const _progress = Math.min(
-        Math.max(0, (progress * 100) / progressTotal),
+        Math.max(5, (progress * 100) / progressTotal),
         100
     )
     return (

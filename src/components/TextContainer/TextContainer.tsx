@@ -18,11 +18,16 @@ function TextContainer({
     textSize,
     iconCallback,
     isRatingEditable,
+    isChip,
 }: TextContainerProps) {
     return (
         <div
             className={
-                rightSideIcon ? styles.containerReverse : styles.container
+                isChip
+                    ? styles.containerChip
+                    : rightSideIcon
+                      ? styles.containerReverse
+                      : styles.container
             }
             style={{ background: color, padding: color === 'white' ? 0 : '' }}
         >
@@ -50,7 +55,7 @@ function TextContainer({
                 <ReactStars
                     count={5}
                     value={isRating}
-                    size={16}
+                    size={18}
                     color2={'#ffd700'}
                     color1={customTextColor ? customTextColor : '#FFFFFF'}
                     half={false}

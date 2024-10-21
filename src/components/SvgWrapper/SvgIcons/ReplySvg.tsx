@@ -2,8 +2,8 @@ import React from 'react'
 import { SvgProps } from '../SvgWrapper.interface'
 
 const ReplySvg = ({
-    width = 16,
-    height = 16,
+    width = 18,
+    height = 18,
     fillColor = '#1DBD82',
 }: SvgProps) => {
     return (
@@ -11,7 +11,7 @@ const ReplySvg = ({
             <svg
                 width={width}
                 height={height}
-                viewBox="0 0 16 16"
+                viewBox="0 0 15 15"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >

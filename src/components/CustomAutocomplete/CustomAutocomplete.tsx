@@ -32,6 +32,7 @@ export default function CustomAutocomplete({
     applySelection,
     hasIcons = false,
     fullwidth = false,
+    isFromReview,
 }: CustomAutocompleteProps) {
     const [anchorEl, setAnchorEl] = useState<any>(null)
     const [pendingValue, setPendingValue] = useState<any>(
@@ -350,52 +351,61 @@ export default function CustomAutocomplete({
                     className={classes && classes}
                     ref={openPopperRef}
                     style={
-                        isButton || floatingDisplay
+                        isFromReview
                             ? {
                                   border: '1px solid #9D96A5',
                                   boxShadow: 'none !important',
                                   outline: 'none !important',
                                   borderRadius: 10,
                                   minWidth: 170,
-                                  minHeight: 36,
+                                  minHeight: 30,
                               }
-                            : isThick
+                            : isButton || floatingDisplay
                               ? {
+                                    border: '1px solid #9D96A5',
+                                    boxShadow: 'none !important',
+                                    outline: 'none !important',
+                                    borderRadius: 10,
                                     minWidth: 170,
-                                    border: '1px solid',
-                                    borderRadius: 25,
-                                    paddingLeft: 5,
+                                    minHeight: 36,
                                 }
-                              : fullwidth
+                              : isThick
                                 ? {
-                                      boxSizing: 'border-box',
-                                      display: 'flex',
-                                      flexDirection: 'row',
-                                      alignItems: 'center',
-                                      padding: '12px 16px',
-                                      gap: '9px',
-                                      width: '100%',
-                                      background: '#FFFFFF',
-                                      border: '1px solid #9D96A5',
-                                      borderRadius: '10px',
-                                      fontFamily: 'Roboto',
-                                      minWidth: 400,
+                                      minWidth: 170,
+                                      border: '1px solid',
+                                      borderRadius: 25,
+                                      paddingLeft: 5,
                                   }
-                                : {
-                                      boxSizing: 'border-box',
-                                      display: 'flex',
-                                      flexDirection: 'row',
-                                      alignItems: 'center',
-                                      padding: '12px 16px',
-                                      gap: '9px',
-                                      width: '100%',
-                                      background: '#FFFFFF',
-                                      border: '1px solid #9D96A5',
-                                      borderRadius: '10px',
-                                      fontFamily: 'Roboto',
-                                      minWidth: 400,
-                                      maxWidth: 500,
-                                  }
+                                : fullwidth
+                                  ? {
+                                        boxSizing: 'border-box',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        padding: '12px 16px',
+                                        gap: '9px',
+                                        width: '100%',
+                                        background: '#FFFFFF',
+                                        border: '1px solid #9D96A5',
+                                        borderRadius: '10px',
+                                        fontFamily: 'Roboto',
+                                        minWidth: 400,
+                                    }
+                                  : {
+                                        boxSizing: 'border-box',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        padding: '12px 16px',
+                                        gap: '9px',
+                                        width: '100%',
+                                        background: '#FFFFFF',
+                                        border: '1px solid #9D96A5',
+                                        borderRadius: '10px',
+                                        fontFamily: 'Roboto',
+                                        minWidth: 400,
+                                        maxWidth: 500,
+                                    }
                     }
                 >
                     <Button
@@ -407,6 +417,7 @@ export default function CustomAutocomplete({
                                 : stylesS.buttonLabel
                         }
                         disabled={disabled}
+                        customHeight={isFromReview ? 30 : undefined}
                         aria-describedby={id}
                         onClick={handleClick}
                         icon={'arrowDownSvg'}

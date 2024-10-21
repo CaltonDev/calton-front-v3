@@ -63,10 +63,10 @@ function DonutCard({
             </div>
             <div className={styles.rightItemContainer}>
                 <div className={styles.header}>
-                    <Typography size={'h6'} weight={'light'}>
+                    <Typography size={'h5'} weight={'light'}>
                         {t('Le mie recensioni')}
                     </Typography>
-                    <Typography size={'h6'} weight={'bold'}>
+                    <Typography size={'h5'} weight={'bold'}>
                         {numberOfReviews.toString()}
                     </Typography>{' '}
                 </div>

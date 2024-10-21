@@ -12,11 +12,15 @@
 .headerContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.headerContainer span:last-child{
+  margin-left: 3px;
 }
 
 .contentDiv {
   display: flex;
+  width: 45%;
   flex-direction: column;
   justify-content: space-between;
   height: 120px;

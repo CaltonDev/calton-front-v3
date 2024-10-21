@@ -71,7 +71,7 @@ function PageNavigator({
         <div className={styles.container}>
             <div className={styles.elementsPerPageSelector}>
                 {!hideChangeElementsPerPage && (
-                    <Typography size={'bodySmall'} weight={'light'}>
+                    <Typography size={'bodyMedium'} weight={'light'}>
                         {t('Elementi per pagina')}
                     </Typography>
                 )}
@@ -116,11 +116,13 @@ function PageNavigator({
                 />
 
                 {calculatePageSelector()?.map((index) => {
+                    //TODO Remove multiple button and put in place an input
                     return (
                         <Button
                             key={index}
-                            size={'small'}
+                            size={'medium'}
                             variant={'outline'}
+                            customColor={'#fff'}
                             customBorderColor={
                                 index === currentPage ? 'blue' : '#C0BBC5'
                             }

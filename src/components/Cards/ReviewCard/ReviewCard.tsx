@@ -133,6 +133,7 @@ function ReviewCard({
                                                         key={idx}
                                                         label={topic?.name}
                                                         color={'#0C14A1'}
+                                                        isChip={true}
                                                     />
                                                 )
                                             )
@@ -174,6 +175,7 @@ function ReviewCard({
                                 >
                                     <CustomAutocomplete
                                         isButton={true}
+                                        isFromReview={true}
                                         label={
                                             !feedback?.list?.isTopic ||
                                             feedback?.list?.isTopic[0]?.data
@@ -215,6 +217,7 @@ function ReviewCard({
                                     textColor={'black'}
                                     color={'#F1F1F1'}
                                     iconSvg={'Amazon.svg'}
+                                    isChip={true}
                                 />
                                 {/*Add review stars*/}
                                 <TextContainer
@@ -222,6 +225,7 @@ function ReviewCard({
                                         feedback?.integer?.isRating[0]?.data
                                     }
                                     color={'#F1F1F1'}
+                                    isChip={true}
                                 />
                             </div>
                             <CaltonSelect
@@ -236,7 +240,7 @@ function ReviewCard({
                                 size={'small'}
                                 fontSize={'small'}
                                 customColor={'none'}
-                                customHeight={'auto'}
+                                customHeight={'30px'}
                                 placeholderColor={'black'}
                                 onChange={(data) => {
                                     handleClickChangeSentiment(
@@ -248,7 +252,7 @@ function ReviewCard({
                                 }}
                             />
                         </div>
-                        <div className={styles.reviewContainer}>
+                        <div className={styles.reviewContainerFirst}>
                             <div className={styles.title}>
                                 {!feedback?.obj?.isReviewer[0]?.data
                                     ?.photoUrl ? (
@@ -313,9 +317,10 @@ function ReviewCard({
                                         >
                                             {t('Risposta')}
                                         </Typography>
+                                        <br />
                                         <Typography
                                             size={'bodyMedium'}
-                                            weight={'bold'}
+                                            weight={'normal'}
                                             color={'grey'}
                                         >
                                             {

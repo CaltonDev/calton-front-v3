@@ -46,7 +46,7 @@
 .contentDiv {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 10px;
 }
 
 .footer {
@@ -77,18 +77,24 @@
 }
 
 .reviewContainer {
-  width: 608px;
   min-height: 65px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.reviewContainerFirst{
+  @extend .reviewContainer;
+  margin-top: 10px;
 }
 
 .placeholderImg {
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
+  width: 23px;
+  height: 23px;
+  border-radius: 100px;
   background: #C0BBC5;
 }
 
