@@ -8,12 +8,13 @@ import { weekdaysConstant } from '../../constants/CustomConstants'
 import Checkbox from '../Checkbox/Checkbox'
 import ListingMoreHoursTimePicker from '../ListingMoreHoursTimePicker/ListingMoreHoursTimePicker'
 import Typography from '../Typography/Typography'
+import Button from '../Button/Button'
 
 interface AddMoreTimeInputProps {
     type: string
     index: number
     distinctPeriod: PeriodsMoreHoursProps[]
-    setDistinctPeriod: React.Dispatch<
+    setListing: React.Dispatch<
         React.SetStateAction<ListingMoreHoursProps | null>
     >
     listing: ListingMoreHoursProps | null
@@ -25,7 +26,7 @@ function AddMoreTimeInput({
     type,
     index,
     distinctPeriod,
-    setDistinctPeriod,
+    setListing,
     hoursTypeId,
 }: AddMoreTimeInputProps) {
     const { t } = useTranslation()
@@ -67,7 +68,7 @@ function AddMoreTimeInput({
 
     const handleConfirm = () => {
         if (checkBoxIdx === null) return
-        setDistinctPeriod((prevState: ListingMoreHoursProps | null) => {
+        setListing((prevState: ListingMoreHoursProps | null) => {
             if (!prevState || !prevState.moreHours) {
                 return prevState
             }
@@ -102,6 +103,31 @@ function AddMoreTimeInput({
             }
         })
         setOpenModal(false)
+    }
+
+    const addEmptyPeriod = (weekday: (typeof weekdaysConstant)[number]) => {
+        setListing((prevState: ListingMoreHoursProps | null) => {
+            if (!prevState || !prevState.moreHours) {
+                return prevState
+            }
+            const tmpDistinctPeriod = { ...prevState }
+            if (!tmpDistinctPeriod || !tmpDistinctPeriod.moreHours) {
+                return prevState
+            }
+            tmpDistinctPeriod.moreHours[index].periods.push({
+                openDay: weekday,
+                closeDay: weekday,
+                openTime: {
+                    hours: null,
+                    minutes: null,
+                },
+                closeTime: {
+                    hours: null,
+                    minutes: null,
+                },
+            })
+            return tmpDistinctPeriod
+        })
     }
 
     return (
@@ -164,8 +190,8 @@ function AddMoreTimeInput({
                                                                 distinctPeriod={
                                                                     distinctPeriod
                                                                 }
-                                                                setDistinctPeriod={
-                                                                    setDistinctPeriod
+                                                                setListing={
+                                                                    setListing
                                                                 }
                                                                 period={period}
                                                                 currentPickerIdx={
@@ -179,6 +205,22 @@ function AddMoreTimeInput({
                                                         </div>
                                                     )
                                                 })}
+                                        </div>
+                                    )}
+                                    {!checkedStatus[i] && (
+                                        <div className={styles.timePickerRow}>
+                                            {periods?.length == 0 && (
+                                                <Button
+                                                    size={'small'}
+                                                    variant={'ghost'}
+                                                    icon={'plusIcon'}
+                                                    arrowPlacement={'center'}
+                                                    iconOnly={true}
+                                                    onClick={() =>
+                                                        addEmptyPeriod(d)
+                                                    }
+                                                />
+                                            )}
                                         </div>
                                     )}
                                 </div>

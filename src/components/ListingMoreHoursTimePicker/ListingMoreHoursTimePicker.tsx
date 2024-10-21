@@ -20,7 +20,7 @@ dayjs.extend(customParseFormat)
 
 interface ListingMoreHoursTimePickerProps {
     distinctPeriod: PeriodsMoreHoursProps[]
-    setDistinctPeriod: React.Dispatch<
+    setListing: React.Dispatch<
         React.SetStateAction<ListingMoreHoursProps | null>
     >
     weekday: (typeof weekdaysConstant)[number]
@@ -33,7 +33,7 @@ interface ListingMoreHoursTimePickerProps {
 
 const ListingMoreHoursTimePicker = ({
     distinctPeriod,
-    setDistinctPeriod,
+    setListing,
     weekday,
     periodIndex,
     hourIndex,
@@ -72,7 +72,7 @@ const ListingMoreHoursTimePicker = ({
     const onSelectStartTime = (time: Moment) => {
         setValueStartTime(time)
 
-        setDistinctPeriod((prevState: ListingMoreHoursProps | null) => {
+        setListing((prevState: ListingMoreHoursProps | null) => {
             if (prevState && prevState.moreHours) {
                 return {
                     ...prevState,
@@ -109,7 +109,7 @@ const ListingMoreHoursTimePicker = ({
     const onSelectEndTime = (time: Moment) => {
         setValueEndTime(time)
 
-        setDistinctPeriod((prevState: ListingMoreHoursProps | null) => {
+        setListing((prevState: ListingMoreHoursProps | null) => {
             if (prevState && prevState.moreHours) {
                 return {
                     ...prevState,
@@ -192,7 +192,7 @@ const ListingMoreHoursTimePicker = ({
                                 periodIndex,
                                 hourIndex,
                                 distinctPeriod,
-                                setDistinctPeriod
+                                setListing
                             )
                         }
                     />
@@ -209,7 +209,7 @@ const ListingMoreHoursTimePicker = ({
                                 weekday,
                                 periodIndex,
                                 distinctPeriod,
-                                setDistinctPeriod
+                                setListing
                             )
                         }
                     />

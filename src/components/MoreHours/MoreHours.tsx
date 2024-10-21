@@ -84,7 +84,7 @@ function MoreHours({
                         index={index}
                         hoursTypeId={hoursTypeId}
                         distinctPeriod={listing.moreHours[index]?.periods}
-                        setDistinctPeriod={setListing}
+                        setListing={setListing}
                     />
                 </React.Fragment>
             )}
