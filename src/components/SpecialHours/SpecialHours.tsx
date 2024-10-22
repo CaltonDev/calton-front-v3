@@ -146,15 +146,17 @@ function SpecialHours({
                         />
                     )
                 })}
-                <div onClick={addEmptyDate} className={styles.addDate}>
-                    <Typography
-                        weight={'normal'}
-                        size={'bodySmall'}
-                        color={'blue'}
-                    >
-                        {t('+ Aggiungi una data')}
-                    </Typography>
-                </div>
+                {distinctPeriod.length === 0 && (
+                    <div onClick={addEmptyDate} className={styles.addDate}>
+                        <Typography
+                            weight={'normal'}
+                            size={'bodySmall'}
+                            color={'blue'}
+                        >
+                            {t('+ Aggiungi una data')}
+                        </Typography>
+                    </div>
+                )}
             </div>
         </div>
     )
