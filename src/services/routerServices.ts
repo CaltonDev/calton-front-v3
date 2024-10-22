@@ -37,6 +37,9 @@ const ListingEditHours = lazy(
     () => import('../pages/ListingEditHours/ListingEditHours')
 )
 
+const ListingCalendarPost = lazy(
+    () => import('../pages/ListingCalendarPost/ListingCalendarPost')
+)
 export const objRoutes = {
     Dashboards: {
         path: 'home',
@@ -121,9 +124,12 @@ export const objRoutes = {
         path: 'performance',
         component: ListingPerformance,
     },
-
     ListingEditHours: {
         path: 'hours/edit',
         component: ListingEditHours,
+    },
+    ListingCalendarPost: {
+        path: 'localPost/calendar',
+        component: ListingCalendarPost,
     },
 }

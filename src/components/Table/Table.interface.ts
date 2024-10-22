@@ -25,4 +25,5 @@ export interface TableProps {
     }
     totalItems?: number | undefined
     handleEditIconClick?: (arg0: any, arg1: any) => void
+    openCalendarButton?: boolean
 }
