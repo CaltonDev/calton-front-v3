@@ -1,0 +1,92 @@
+.editInfoContainer {
+  background-color: transparent;
+  border: none;
+}
+
+.editInfoComponents {
+  margin-top: 30px;
+}
+
+.btnPublish {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 17px 30px 17px 25px;
+  gap: 10px;
+  background: #3F49FC;
+  bddorder: 2px solid white;
+  border-radius: 100px;
+  color: white;
+  font-weight: bold;
+}
+
+.btnPublish:focus {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 17px 30px 17px 25px;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 2px solid #3F49FC;
+  border-radius: 100px;
+  color: #3F49FC;
+  font-weight: bold;
+}
+
+.editInfoHeader {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 1.875rem;
+}
+
+
+.accordionHeader {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-bottom: 20px;
+}
+.accordionCollapse {
+  background-color: #FFFFFF !important;
+  padding: 30px;
+}
+
+.editOptionContainer {
+  padding-bottom: 1em;
+}
+
+.ant-modal  > .ant-modal-content {
+  background-color: #3F49FC !important;
+  width: fit-content;
+}
+
+.accordionContent {
+  border-top: none;
+  display: flex;
+}
+
+.divider {
+  margin-left: 50px;
+  margin-right: 50px;
+  border: 1px solid rgba(50, 29, 72, 0.55);
+}
+
+.containerSearchLabel{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 0.7em;
+  font-weight: 700;
+  color: #255aee;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}

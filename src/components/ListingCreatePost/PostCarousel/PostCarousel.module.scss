@@ -1,0 +1,481 @@
+.carousel {
+  margin-bottom: 5px;
+  width: 150px;
+  height: 150px;
+  margin-right: 20px;
+}
+
+.carouselPreview {
+  width: 100%;
+  height: 300px;
+  margin-right: 20px;
+}
+
+.carouselPopper {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.timePickerContainer {
+  display: flex;
+  margin-right: 1em;
+  font-family: Montserrat;
+  margin-bottom: .5em;
+}
+
+.timePickers {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.picker {
+  height: 3em;
+  width: 90%;
+  border: 1.5px solid black;
+  border-radius: 100px;
+  border-inline-end-width: 1.5px;
+}
+
+
+.timePickerContainer::placeholder,.timePickers::placeholder,.picker::placeholder {
+  color: #321D488c !important;
+}
+
+.picker:hover {
+  border: 1.5px solid #3F49FC;
+}
+
+
+.containerInput {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.containerEditInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.standardHoursContentTitle {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.containerSearchLabel{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 0.7em;
+  font-weight: 700;
+  color: #255aee;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.standardHoursContentDescription {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: .8em;
+  font-weight: 300;
+}
+
+.standardHoursRatioContent {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.imgLabel {
+  position: absolute;
+  top: 450px;
+  right: 145px;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #321D48;
+  border-radius: 6px 0px 0px 6px;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 20px;
+  width: 60px;
+  display: flex;
+}
+
+.card {
+  opacity: 80%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border: 2px solid rgba(50, 29, 72, 0.55) !important;
+  border-radius: 10px;
+  color: rgba(50, 29, 72, 0.55);
+}
+
+.cardPreview {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  color: rgba(50, 29, 72, 0.55);
+}
+
+.wrongCard {
+  @extend .card;
+  border: 2px solid red !important;
+}
+
+.imgCard {
+  object-fit: cover;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.cardOverlay {
+  @extend .card;
+  border: 2px solid rgba(40, 36, 44, 0.3) !important;
+}
+
+.cardOverlay::after {
+  content: ""; // ::before and ::after both require content
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(40, 36, 44, 0.3);
+  opacity: .7;
+}
+
+.imgCardFromPreview {
+  object-fit: scale-down;
+  width: 100%;
+  height: 100%;
+}
+
+.cardFromPopper {
+  @extend .card;
+  height: 100px;
+  width: 100px;
+}
+
+.wrongCardFromPopper {
+  @extend .cardFromPopper;
+  border: 2px solid red !important;
+}
+
+.imgCardPlaceholder {
+  -webkit-transition: opacity 0.4s linear;
+  transition: opacity 0.4s linear;
+  z-index: 2;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  color: white;
+}
+
+.imgCardPlaceholderFixed {
+  @extend .imgCardPlaceholder;
+}
+
+.deleteImg{
+  -webkit-transition: opacity 0.4s linear;
+  transition: opacity 0.4s linear;
+  z-index: 2;
+  cursor: pointer;
+  position: absolute;
+  color: white;
+  left: 70%;
+  top: 5px;
+}
+
+.label{
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.footer {
+  display: inline-flex;
+  margin-left: auto;
+  align-self: flex-end;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.saveButton {
+  margin-left: 10px;
+  width: 7rem;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 12px;
+  border: none;
+  background-color: #3F49FC;
+  font-weight: 700;
+  transition: box-shadow 0.2s ease;
+}
+.saveButton:hover {
+  background-color: #3F49FC !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.saveButton:active {
+  background-color: #3F49FC !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.cancelButton {
+  width: 7rem;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 12px;
+  border: none;
+  background-color: transparent;
+  color: #3F49FC;
+  font-weight: 700;
+  transition: box-shadow 0.2s ease;
+}
+.cancelButton:hover {
+  background-color: transparent !important;
+  color: #3F49FC !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.cancelButton:active {
+  background-color: transparent !important;
+  color: #3F49FC !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  margin-bottom: 3rem;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 16px;
+  border: 1.5px solid #321D48;
+  color: black;
+  font-weight: 500;
+}
+.input:hover{
+  border: 1.5px solid #321D48;
+}
+.input:focus{
+  border: 1.5px solid #321D48;
+}
+
+.inputTextArea {
+  margin-bottom: 3rem;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 150px !important;
+  border-radius: 25px !important;
+  font-size: 16px;
+  border: 1.5px solid #321D48;
+  color: black;
+  text-align: left;
+  font-weight: 500;
+  resize: none !important;
+  padding-top: 8px;
+  padding-left: 12px;
+}
+
+.inputTextArea:hover{
+  border: 1.5px solid #321D48;
+}
+.inputTextArea:focus{
+  border: 1.5px solid #321D48;
+}
+
+
+.menuItem {
+  color: black;
+  display: -webkit-inline-flex!important;
+  z-index: 10000!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  -webkit-align-items: center!important;
+  -webkit-box-align: center!important;
+  -ms-flex-align: center!important;
+  align-items: center!important;
+  -webkit-box-pack: center!important;
+  -ms-flex-pack: center!important;
+  -webkit-justify-content: center!important;
+  justify-content: center!important;
+  position: relative!important;
+  box-sizing: border-box!important;
+  -webkit-tap-highlight-color: transparent!important;
+  background-color: transparent!important;
+  outline: 0!important;
+  border: 0!important;
+  margin: 0!important;
+  border-radius: 0!important;
+  padding: 0!important;
+  cursor: pointer!important;
+  -webkit-user-select: none!important;
+  -moz-user-select: none!important;
+  -ms-user-select: none!important;
+  user-select: none!important;
+  vertical-align: middle!important;
+  -moz-appearance: none!important;
+  -webkit-appearance: none!important;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif!important;
+  font-weight: 400!important;
+  font-size: 1rem!important;
+  line-height: 1.5!important;
+  letter-spacing: 0.00938em!important;
+  display: -webkit-box!important;
+  display: -webkit-flex!important;
+  display: -ms-flexbox!important;
+  display: flex!important;
+  -webkit-box-pack: start!important;
+  -ms-flex-pack: start!important;
+  -webkit-justify-content: flex-start!important;
+  justify-content: flex-start!important;
+  -webkit-align-items: center!important;
+  -webkit-box-align: center!important;
+  -ms-flex-align: center!important;
+  align-items: center!important;
+  position: relative!important;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  min-height: 48px!important;
+  padding-top: 6px!important;
+  padding-bottom: 6px!important;
+  box-sizing: border-box!important;
+  white-space: nowrap!important;
+  padding-left: 16px!important;
+  padding-right: 16px!important;
+}
+
+.addGroup{
+  margin-bottom: 3rem;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  color: #3f49fc;
+  cursor: pointer;
+}
+
+.standardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 3rem 0 1rem 0;
+}
+
+.openDayRow {
+  display: inline-flex;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 5rem;
+  align-items: baseline;
+}
+
+.dayTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  margin-right: 1em;
+  width: 10rem;
+  align-self: flex-start;
+  padding-top: 10px;
+}
+
+.dayCheckbox {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.holidayContainer {
+  margin-top: 1em;
+}
+
+.holidayContent {
+  align-items: baseline;
+  display: inline-flex;
+  width: 100%;
+  vertical-align: center;
+}
+
+.customInput {
+  padding-left: 12px;
+  width: 90%;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 16px;
+  border: 1.5px solid #321D48;
+}
+
+.timePickerContainer {
+  display: inline-flex;
+  width: 100%;
+}
+.timePickerRow {
+  margin-bottom: 2rem;
+}
+.plusAtNull {
+  cursor: pointer;
+  margin-left: 1em;
+  margin-right: auto;
+  align-self: center;
+  vertical-align: center;
+  margin-top: 8px
+}
+
+.checkboxText {
+  font-weight:700;
+  font-family: "Montserrat", "Heebo", sans-serif;
+  margin-left: 1em;
+}
+
+.containerInputLeftItem {
+  margin-right: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.containerInputRightItem {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.accordionHeaderTitle {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+.accordionHeaderDescription {
+  font-weight: 300;
+  font-size: 16px;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,107 @@
+.editInfoHeader {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 1.875rem;
+}
+
+.typeEvent{
+  font-size: 12px;
+  font-style: italic;
+  padding: 5px;
+}
+
+.popperHeader {
+  background: #d9d9d9;
+  height: 40px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+}
+.popperHeaderFull{
+    @extend .popperHeader;
+    border-radius: 0px;
+    cursor: auto;
+}
+
+.eventColor{
+  background-color: #3e49fb;
+  color: white;
+}
+.eventColorDraft{
+  color: white;
+  background-color: #d9d9d9;
+  font-size: 13px;
+  font-weight: 500;
+}
+.eventPast{
+  background-color: rgba(62, 73, 251, 0.55);
+  opacity: 0.7;
+}
+
+.ourSmallModalContainer{
+  position: absolute;
+  flex-direction: column;
+  border-radius: 6px;
+  width: 500px;
+  z-index: 1000;
+  font-size: 13px;
+  color: #24292e;
+  background-color: white;
+  border: 1px solid rgb(225, 228, 232);
+  min-height: 550px;
+  max-height: 650px;
+}
+
+.ourSmallModal{
+  padding: 6px;
+  border-radius: 6px;
+  background-color: white;
+  min-height: 550px;
+  max-height: 750px;
+  flex-direction: column;
+}
+
+.calendarMomentHeading{
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #24292e;
+  margin-left: 10px;
+}
+
+.containerHead{
+  display: flex;
+  align-items: flex-end;
+}
+
+.fullWidthModalContainer {
+  position: absolute;
+  flex-direction: column;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  z-index: 13;
+  font-size: 13px;
+  color: #24292e;
+  background-color: white;
+  border: 1px solid rgb(225, 228, 232);
+  transform: none !important;
+}
+
+.fullWidthModal {
+  padding-top: 20px;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}

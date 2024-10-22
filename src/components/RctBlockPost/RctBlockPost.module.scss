@@ -1,0 +1,65 @@
+.textContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerTitle {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #321D48;
+}
+
+.headerSubtitle {
+  @extend .headerTitle;
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.rctBlock {
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  margin-bottom: 24px;
+  position: relative;
+}
+.rctBlock {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.rctBlockWithoutMarginBottom {
+  @extend .rctBlock;
+  margin-bottom: 0;
+}
+
+.rctBlockPostPreview {
+  height: 100px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  position: relative;
+}
+
+.rctBlockPostPreviewRightCols {
+  height: 100%;
+  min-height: 100px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.4s ease-in-out 0s;
+  position: relative;
+}
+
+.rct-block-title {
+  padding: 25px;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  color: #321d48;
+}

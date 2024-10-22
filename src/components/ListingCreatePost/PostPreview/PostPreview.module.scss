@@ -1,0 +1,360 @@
+.cardContainerFullView {
+  width: 300px;
+}
+
+.cardContainer {
+  width: 100%;
+}
+
+.carousel {
+  width: 300px;
+  height: 300px;
+}
+
+.containerInput {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.containerInputPlaceholder {
+  @extend .containerInput;
+  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+}
+
+.containerEditInfoCard {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.containerEditInfo {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.standardHoursContentTitle {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.containerSearchLabel{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 0.7em;
+  font-weight: 700;
+  color: #255aee;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.standardHoursContentDescription {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: .8em;
+  font-weight: 300;
+}
+
+.standardHoursRatioContent {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(50, 29, 72, 0.55) !important;
+  border-radius: 10px;
+  background: #AFA8B7;
+}
+
+.imgCard {
+  background: grey;
+  object-fit: cover;
+  border-radius: 7px;
+  width: 100%;
+  height: 100%;
+}
+
+.imgCardPlaceholder {
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.label{
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.footer {
+  display: inline-flex;
+  margin-left: auto;
+  align-self: flex-end;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.infoBtnContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.infoBtn {
+  text-decoration: none;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 100px;
+  font-size: 12px;
+  border: none;
+  background-color: #321D48;
+  font-weight: 700;
+  transition: box-shadow 0.2s ease;
+}
+.infoBtn:hover {
+  background-color: #3F49FC !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.infoBtn:active {
+  background-color: #3F49FC !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.cancelButton {
+  width: 7rem;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 12px;
+  border: none;
+  background-color: transparent;
+  color: #3F49FC;
+  font-weight: 700;
+  transition: box-shadow 0.2s ease;
+}
+.cancelButton:hover {
+  background-color: transparent !important;
+  color: #3F49FC !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.cancelButton:active {
+  background-color: transparent !important;
+  color: #3F49FC !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  margin-bottom: 3rem;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 16px;
+  border: 1.5px solid #321D48;
+  color: black;
+  font-weight: 500;
+}
+.input:hover{
+  border: 1.5px solid #321D48;
+}
+.input:focus{
+  border: 1.5px solid #321D48;
+}
+
+.inputTextArea {
+  margin-bottom: 3rem;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 150px !important;
+  border-radius: 25px !important;
+  font-size: 16px;
+  border: 1.5px solid #321D48;
+  color: black;
+  text-align: left;
+  font-weight: 500;
+  resize: none !important;
+}
+.inputTextArea:hover{
+  border: 1.5px solid #321D48;
+}
+.inputTextArea:focus{
+  border: 1.5px solid #321D48;
+}
+
+
+.menuItem {
+  color: black;
+  display: -webkit-inline-flex!important;
+  z-index: 10000!important;
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+  -webkit-align-items: center!important;
+  -webkit-box-align: center!important;
+  -ms-flex-align: center!important;
+  align-items: center!important;
+  -webkit-box-pack: center!important;
+  -ms-flex-pack: center!important;
+  -webkit-justify-content: center!important;
+  justify-content: center!important;
+  position: relative!important;
+  box-sizing: border-box!important;
+  -webkit-tap-highlight-color: transparent!important;
+  background-color: transparent!important;
+  outline: 0!important;
+  border: 0!important;
+  margin: 0!important;
+  border-radius: 0!important;
+  padding: 0!important;
+  cursor: pointer!important;
+  -webkit-user-select: none!important;
+  -moz-user-select: none!important;
+  -ms-user-select: none!important;
+  user-select: none!important;
+  vertical-align: middle!important;
+  -moz-appearance: none!important;
+  -webkit-appearance: none!important;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif!important;
+  font-weight: 400!important;
+  font-size: 1rem!important;
+  line-height: 1.5!important;
+  letter-spacing: 0.00938em!important;
+  display: -webkit-box!important;
+  display: -webkit-flex!important;
+  display: -ms-flexbox!important;
+  display: flex!important;
+  -webkit-box-pack: start!important;
+  -ms-flex-pack: start!important;
+  -webkit-justify-content: flex-start!important;
+  justify-content: flex-start!important;
+  -webkit-align-items: center!important;
+  -webkit-box-align: center!important;
+  -ms-flex-align: center!important;
+  align-items: center!important;
+  position: relative!important;
+  -webkit-text-decoration: none!important;
+  text-decoration: none!important;
+  min-height: 48px!important;
+  padding-top: 6px!important;
+  padding-bottom: 6px!important;
+  box-sizing: border-box!important;
+  white-space: nowrap!important;
+  padding-left: 16px!important;
+  padding-right: 16px!important;
+}
+
+.addGroup{
+  margin-bottom: 3rem;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  color: #3f49fc;
+  cursor: pointer;
+}
+
+.accordionHeaderTitle {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.headerContainer {
+  margin-bottom: 20px;
+}
+
+.description {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #321D48;
+}
+
+.titleHeader {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #321D48;
+}
+
+.title {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #321D48;
+}
+
+.link {
+  padding: 0;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: #321D48;
+}
+
+.daytime {
+  cursor: pointer;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 17px;
+  color: #321D48;
+}
+
+.link {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #3F49FC;
+  font-weight: bold;
+  text-decoration: underline !important;
+  text-align: start;
+  margin-top: 20px;
+}
+
+.coupon {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  height: 100px;
+  border: 1px dashed #AFA8B7;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}

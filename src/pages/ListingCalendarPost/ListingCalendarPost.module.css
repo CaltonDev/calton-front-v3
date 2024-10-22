@@ -1,0 +1,48 @@
+.editInfoContainer {
+  background-color: transparent;
+  border: none;
+}
+
+.editInfoHeader {
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 1.875rem;
+}
+
+.accordionHeader {
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+.accordionCollapse {
+  background-color: #FFFFFF !important;
+}
+
+.accordionHeaderTitle {
+  font-size: 1em;
+  font-weight: 700;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.accordionHeaderDescription {
+  font-weight: 300;
+  font-size: 0.8em;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.editOptionContainer {
+  padding-bottom: 1em;
+}
+
+.ant-modal > .ant-modal-content {
+  background-color: #3F49FC !important;
+  width: fit-content;
+}
+
+/*# sourceMappingURL=ListingCalendarPost.module.css.map */

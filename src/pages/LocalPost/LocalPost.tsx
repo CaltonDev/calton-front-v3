@@ -68,6 +68,7 @@ function LocalPost() {
                     handleToggle,
                 }}
                 totalItems={count}
+                openCalendarButton={true}
             />
         </PageContainer>
     )

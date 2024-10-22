@@ -1,0 +1,203 @@
+.containerEditInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.standardHoursContentTitle {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.standardHoursContentDescription {
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+.standardHoursRatioContent {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.label {
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.footer {
+  display: inline-flex;
+  margin-left: auto;
+  align-self: flex-end;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+}
+
+.saveButton {
+  margin-left: 10px;
+  width: 7rem;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 12px;
+  border: none;
+  background-color: #3F49FC;
+  font-weight: 700;
+  transition: box-shadow 0.2s ease;
+}
+
+.saveButton:hover {
+  background-color: #3F49FC !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.saveButton:active {
+  background-color: #3F49FC !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.cancelButton {
+  width: 7rem;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 12px;
+  border: none;
+  background-color: transparent;
+  color: #3F49FC;
+  font-weight: 700;
+  transition: box-shadow 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: transparent !important;
+  color: #3F49FC !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cancelButton:active {
+  background-color: transparent !important;
+  color: #3F49FC !important;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  margin-bottom: 3rem;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 16px;
+  border: 1.5px solid #321D48;
+  color: black;
+  font-weight: 500;
+}
+
+.input:hover {
+  border: 1.5px solid #321D48;
+}
+
+.input:focus {
+  border: 1.5px solid #321D48;
+}
+
+.inputTextArea {
+  margin-bottom: 3rem;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 2.5rem;
+  border-radius: 25px !important;
+  font-size: 16px;
+  border: 1.5px solid #321D48;
+  color: black;
+  text-align: left;
+  font-weight: 500;
+  resize: none !important;
+}
+
+.inputTextArea:hover {
+  border: 1.5px solid #321D48;
+}
+
+.inputTextArea:focus {
+  border: 1.5px solid #321D48;
+}
+
+.menuItem {
+  color: black;
+  display: -webkit-inline-flex !important;
+  z-index: 10000 !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-flex !important;
+  -webkit-align-items: center !important;
+  -webkit-box-align: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  -webkit-justify-content: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  -webkit-tap-highlight-color: transparent !important;
+  background-color: transparent !important;
+  outline: 0 !important;
+  border: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  vertical-align: middle !important;
+  -moz-appearance: none !important;
+  -webkit-appearance: none !important;
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.00938em !important;
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: start !important;
+  -ms-flex-pack: start !important;
+  -webkit-justify-content: flex-start !important;
+  justify-content: flex-start !important;
+  -webkit-align-items: center !important;
+  -webkit-box-align: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+  position: relative !important;
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+  min-height: 48px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.addGroup {
+  margin-bottom: 3rem;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  color: #3f49fc;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=AddEvent.module.css.map */

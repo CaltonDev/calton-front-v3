@@ -1,0 +1,172 @@
+.cancelButtonColor {
+  color: #3e49fb;
+  margin-left: 20px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.cancelButton{
+  width: 7rem;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 3rem;
+  border-radius: 25px !important;
+  font-size: 15px;
+  border: none;
+  background-color: transparent;
+  color: #3F49FC;
+  font-weight: 700;
+  transition: box-shadow 0.2s ease;
+}
+.btnDisabled{
+  height: 45px;
+  border-radius: 25px;
+  width: 96px;
+  background-color: #979797;
+  font-weight: bold !important;
+  text-transform: none;
+  padding:5px 0px !important;
+}
+
+.btnSave {
+  margin-left: 30px;
+  text-align: center;
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  height: 45px;
+  width: 150px;
+  border-radius: 25px !important;
+  font-size: 15px;
+  border: none;
+  background-color: #3F49FC !important;
+  font-weight: 700;
+  transition: box-shadow 0.2s ease;
+}
+
+@media only screen and (max-width: 1200px) {
+  .btnSave {
+    width: 120px;
+    margin-left: 30px;
+  }
+
+  .cancelButtonColor {
+    margin-left: 0 !important;
+  }
+}
+
+.editInfoContainer {
+  background-color: transparent;
+  border: none;
+  overflow-y: auto;
+  max-height: 650px;
+}
+
+.editInfoComponents {
+  margin-top: 30px;
+}
+
+.btnPublish {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 17px 30px 17px 25px;
+  gap: 10px;
+  background: #3F49FC;
+  bddorder: 2px solid white;
+  border-radius: 100px;
+  color: white;
+  font-weight: bold;
+}
+
+.btnPublish:focus {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 17px 30px 17px 25px;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 2px solid #3F49FC;
+  border-radius: 100px;
+  color: #3F49FC;
+  font-weight: bold;
+}
+
+.editInfoHeader {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 1.875rem;
+}
+
+.label{
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.containerInputPopper {
+  padding-left: 25px;
+  padding-right: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popperSave{
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+}
+
+.accordionHeader {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-bottom: 20px;
+}
+.accordionCollapse {
+  background-color: #FFFFFF !important;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.editOptionContainer {
+  //padding-bottom: 1em;
+}
+
+.ant-modal  > .ant-modal-content {
+  background-color: #3F49FC !important;
+  width: fit-content;
+}
+
+.accordionContent {
+  border-top: none;
+  display: flex;
+}
+
+.divider {
+  margin-left: 50px;
+  margin-right: 50px;
+  border: 1px solid rgba(50, 29, 72, 0.55);
+}
+
+.containerSearchLabel{
+  font-family: "Montserrat", "Heebo", sans-serif !important;
+  font-size: 0.7em;
+  font-weight: 700;
+  color: #255aee;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
