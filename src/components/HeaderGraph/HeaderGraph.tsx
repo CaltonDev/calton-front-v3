@@ -12,6 +12,8 @@ import { Tooltip } from 'antd'
 import { saveAs } from 'file-saver'
 import { HeaderGraphProps } from './HeaderGraph.interface'
 import Typography from '../Typography/Typography'
+import SvgWrapper from '../SvgWrapper/SvgWrapper'
+import { listingsColor } from '../../constants/constants'
 
 function HeaderGraph({
     title = '',
@@ -24,10 +26,8 @@ function HeaderGraph({
     sizeImg = 40,
     textForNumber = undefined,
     classTextForNumber = undefined,
-    styleCounter = undefined,
     download = true,
     isBubble,
-    widthIcon = 20,
     isAnt = true,
     option,
     setOption,
@@ -131,75 +131,78 @@ function HeaderGraph({
                             </a>
                         )}
                         {download && dataReady && (
-                            <a onClick={() => onDownload()}>
-                                <DownloadIcon
-                                    width={widthIcon}
-                                    play={downloading}
-                                    optionable={optionable}
-                                />
-                            </a>
+                            <SvgWrapper
+                                keySvg={'downloadSvg'}
+                                hasContainerProps={{
+                                    hasContainer: true,
+                                    containerSize: 32,
+                                    background: listingsColor,
+                                    borderRadius: 32,
+                                }}
+                                onClick={onDownload}
+                            />
                         )}
                     </div>
                 ) : (
                     download &&
                     dataReady && (
-                        <a onClick={() => onDownload()}>
-                            <DownloadIcon
-                                width={widthIcon}
-                                play={downloading}
-                                optionable={optionable}
-                            />
-                        </a>
+                        <SvgWrapper
+                            keySvg={'downloadSvg'}
+                            hasContainerProps={{
+                                hasContainer: true,
+                                containerSize: 32,
+                                background: listingsColor,
+                                borderRadius: 32,
+                            }}
+                            onClick={onDownload}
+                        />
                     )
                 )}
             </div>
-            <div>
-                <div className="float-right pr-10 hidden-md-down">
-                    <div
-                        style={{ float: 'right' }}
-                        className="featured-section-icon"
-                    >
-                        {textForNumber && (
-                            <span
-                                className={
-                                    classTextForNumber ? classTextForNumber : ''
-                                }
-                            >
-                                {textForNumber}
-                            </span>
-                        )}
-                        <span className={styles.counterPoint}>
-                            {numberToShowComponent ? (
-                                numberToShowComponent
-                            ) : numberToShow === 0 ? (
-                                <span>0</span>
-                            ) : numberToShow ? (
-                                <CountUp
-                                    separator=","
-                                    className={styleCounter ? styleCounter : ''}
-                                    start={0}
-                                    end={numberToShow}
-                                    duration={3}
-                                    decimals={decimals}
-                                    useEasing={true}
-                                />
-                            ) : extraImg && dataReady && onClickImg ? (
-                                <div onClick={() => onClickImg()}>
-                                    <img
-                                        alt={''}
-                                        width={sizeImg}
-                                        src={extraImg}
-                                        style={{
-                                            marginRight: 20,
-                                            cursor: 'pointer',
-                                        }}
-                                    />
-                                </div>
-                            ) : (
-                                ''
-                            )}
+            <div className={styles.tooltTipContainer}>
+                <div>
+                    {textForNumber && (
+                        <span
+                            className={
+                                classTextForNumber ? classTextForNumber : ''
+                            }
+                        >
+                            {textForNumber}
                         </span>
-                    </div>
+                    )}
+                    <span className={styles.counterPoint}>
+                        {numberToShowComponent ? (
+                            numberToShowComponent
+                        ) : numberToShow === 0 ? (
+                            <span className={styles.styleCounterDefault}>
+                                0
+                            </span>
+                        ) : numberToShow ? (
+                            <CountUp
+                                separator=","
+                                className={styles.styleCounterDefault}
+                                start={0}
+                                end={numberToShow}
+                                duration={3}
+                                decimals={decimals}
+                                useEasing={true}
+                            />
+                        ) : extraImg && dataReady && onClickImg ? (
+                            <div onClick={() => onClickImg()}>
+                                <img
+                                    alt={''}
+                                    width={sizeImg}
+                                    src={extraImg}
+                                    style={{
+                                        marginRight: 20,
+                                        cursor: 'pointer',
+                                    }}
+                                />
+                            </div>
+                        ) : (
+                            ''
+                        )}
+                    </span>
                 </div>
             </div>
         </>

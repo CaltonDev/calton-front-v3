@@ -13,7 +13,7 @@ function TierListCard({ tierList, label }: TierListCardProps) {
                 <Typography size={'h5'} weight={'bold'}>
                     {t('Top 3')}
                 </Typography>
-                <Typography size={'h5'} weight={'normal'}>
+                <Typography size={'h5'} weight={'light'}>
                     {label}
                 </Typography>
             </div>

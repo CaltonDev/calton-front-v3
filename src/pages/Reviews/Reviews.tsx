@@ -426,12 +426,14 @@ function Reviews() {
                             size={'small'}
                             customColor={'#E9E7EC'}
                             customTextColor={'black'}
+                            customHeight={40}
                         >
                             {t('Data')}
                         </Button>
                         <Button
                             size={'small'}
                             customColor={'#E9E7EC'}
+                            customHeight={40}
                             customTextColor={'black'}
                         >
                             {t('Rating')}

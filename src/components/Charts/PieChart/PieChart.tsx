@@ -38,6 +38,10 @@ const PieChart = ({ title, data, colors, height = '370px' }: PieChartProps) => {
                 type: 'element-active',
             },
         ],
+        statistic: {
+            title: false,
+            content: false,
+        },
     }
 
     return (

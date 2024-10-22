@@ -20,12 +20,12 @@ function InfoCardViewer({ data, customWidth }: InfoCardViewerProps) {
                 keySvg={'highlighter.svg'}
                 hasContainerProps={{
                     hasContainer: true,
-                    containerSize: 60,
+                    containerSize: 50,
                     outlined: false,
                     background: '#E1DDFF',
                 }}
-                customWidth={60}
-                customHeight={60}
+                customWidth={50}
+                customHeight={50}
             />
             <div className={styles.contentContainer}>
                 <div className={styles.header}>

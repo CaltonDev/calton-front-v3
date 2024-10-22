@@ -240,8 +240,8 @@ function HomeReviews() {
                                     color={'#F1F1F1'}
                                     iconSvg={'radioSentiment.svg'}
                                     iconColor={'#34E0A1'}
-                                    customIconHeight={24}
-                                    customIconWidth={24}
+                                    customIconHeight={20}
+                                    customIconWidth={20}
                                     rightSideIcon={true}
                                     textSize={'h5'}
                                 />
@@ -253,8 +253,8 @@ function HomeReviews() {
                                     color={'#F1F1F1'}
                                     iconSvg={'radioSentiment.svg'}
                                     iconColor={'#FF608B'}
-                                    customIconHeight={24}
-                                    customIconWidth={24}
+                                    customIconHeight={20}
+                                    customIconWidth={20}
                                     rightSideIcon={true}
                                     textSize={'h5'}
                                 />

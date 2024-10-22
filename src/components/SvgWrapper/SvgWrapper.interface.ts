@@ -87,6 +87,7 @@ export interface SvgWrapperProps {
         background?: string
         border?: string
         outlined?: boolean
+        borderRadius?: number
     }
     customWidth?: number
     customHeight?: number

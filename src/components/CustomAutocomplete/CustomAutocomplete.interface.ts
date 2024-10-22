@@ -20,4 +20,5 @@ export interface CustomAutocompleteProps {
     applySelection?: () => void
     hasIcons?: boolean
     fullwidth?: boolean
+    isFromReview?: boolean
 }

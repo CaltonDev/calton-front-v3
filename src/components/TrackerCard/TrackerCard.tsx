@@ -17,10 +17,14 @@ function TrackerCard({ data, maxHeight = false }: TrackerCardProps) {
                         }
                     >
                         <div className={styles.headerContainer}>
-                            <Typography size={'h5'} weight={'bold'}>
+                            <Typography size={'h5'} weight={'light'}>
                                 {obj.label}
                             </Typography>
-                            <Typography size={'h2'} weight={'light'}>
+                            <Typography
+                                size={'h5'}
+                                useSpan={true}
+                                weight={'bold'}
+                            >
                                 {obj.displayLabel}
                             </Typography>
                         </div>

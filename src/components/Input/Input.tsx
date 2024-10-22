@@ -9,7 +9,6 @@ import {
     iconSmallSize,
     iconXLargeSize,
 } from '../../constants/constants'
-// import { onFocus } from '@reduxjs/toolkit/dist/query/core/setupListeners'
 
 const Input = ({
     size,

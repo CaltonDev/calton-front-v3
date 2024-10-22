@@ -8,7 +8,6 @@ export interface SmallGraphHomeProps {
     extraImg?: string
     numberToShowComponent?: any
     decimals?: any
-    styleCounter?: any
     isSentiment?: boolean
     isRound?: boolean
     isTwoCols?: boolean

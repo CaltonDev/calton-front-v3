@@ -7,6 +7,21 @@
   padding-top: 4px;
   color: #464D69;
 }
+
+.styleCounterDefault {
+  border-radius: 10px;
+  background: var(--Neutral-50, #F1F1F1);
+  display: inline-flex;
+  padding: 5px 10px;
+  align-items: center;
+  gap: 30px;
+  color: var(--Neutral-900, #321D48);
+}
+
+.tooltTipContainer {
+  margin-top: 10px;
+}
+
 .counterPoint {
   font-size: 1.40rem;
   font-weight: 500;

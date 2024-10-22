@@ -69,6 +69,7 @@
 
    &.small {
     width: map-deep-get($input, select, size, small, width);
+     min-width: 172px;
   }
 
   &.medium {

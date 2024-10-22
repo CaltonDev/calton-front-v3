@@ -13,6 +13,7 @@ function PageNavigator({
     currentPage,
     changePage,
     changeElementsPerPage,
+    hideChangeElementsPerPage = false,
 }: PageNavigatorProps) {
     const { t } = useTranslation()
 
@@ -36,7 +37,9 @@ function PageNavigator({
     ]
 
     const handlePageElements = (e: any) => {
-        changeElementsPerPage(e)
+        if (changeElementsPerPage) {
+            changeElementsPerPage(e)
+        }
     }
 
     const calculatePageSelector = () => {
@@ -67,27 +70,31 @@ function PageNavigator({
     return (
         <div className={styles.container}>
             <div className={styles.elementsPerPageSelector}>
-                <Typography size={'bodySmall'} weight={'light'}>
-                    {t('Elementi per pagina')}
-                </Typography>
-                <CaltonSelect
-                    options={selectOptions}
-                    value={
-                        selectOptions[
-                            selectOptions?.findIndex(
-                                (x) => x.value === pageElements
-                            )
-                        ]
-                    }
-                    size={'small'}
-                    fontSize={'small'}
-                    customColor={'white'}
-                    customBorderColor={'#9D96A5'}
-                    customHeight={'auto'}
-                    customWidth={'auto'}
-                    placeholderColor={'black'}
-                    onChange={handlePageElements}
-                />
+                {!hideChangeElementsPerPage && (
+                    <Typography size={'bodyMedium'} weight={'light'}>
+                        {t('Elementi per pagina')}
+                    </Typography>
+                )}
+                {!hideChangeElementsPerPage && (
+                    <CaltonSelect
+                        options={selectOptions}
+                        value={
+                            selectOptions[
+                                selectOptions?.findIndex(
+                                    (x) => x.value === pageElements
+                                )
+                            ]
+                        }
+                        size={'small'}
+                        fontSize={'small'}
+                        customColor={'white'}
+                        customBorderColor={'#9D96A5'}
+                        customHeight={'auto'}
+                        customWidth={'auto'}
+                        placeholderColor={'black'}
+                        onChange={handlePageElements}
+                    />
+                )}
                 <Typography size={'bodySmall'} weight={'light'}>
                     {currentPage +
                         1 +
@@ -109,11 +116,13 @@ function PageNavigator({
                 />
 
                 {calculatePageSelector()?.map((index) => {
+                    //TODO Remove multiple button and put in place an input
                     return (
                         <Button
                             key={index}
-                            size={'small'}
+                            size={'medium'}
                             variant={'outline'}
+                            customColor={'#fff'}
                             customBorderColor={
                                 index === currentPage ? 'blue' : '#C0BBC5'
                             }

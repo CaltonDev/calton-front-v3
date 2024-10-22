@@ -121,7 +121,6 @@ const Table = ({
                     }
                     return <span>{column?.title}</span>
                 },
-
                 footer: (info) => info.column.id,
             })
         )

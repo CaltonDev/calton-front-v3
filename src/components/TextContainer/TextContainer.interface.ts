@@ -34,4 +34,5 @@ export interface TextContainerProps {
         | 'bodyXXSmall'
     iconCallback?: (arg0: any) => void
     isRatingEditable?: boolean
+    isChip?: boolean
 }

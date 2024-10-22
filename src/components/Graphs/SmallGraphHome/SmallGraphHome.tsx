@@ -18,7 +18,6 @@ function SmallGraphHome({
     extraImg,
     numberToShowComponent,
     decimals,
-    styleCounter,
     isSentiment,
     isRound,
     isTwoCols = false,
@@ -43,7 +42,6 @@ function SmallGraphHome({
                 <HeaderGraph
                     title={title}
                     numberToShow={numberToShow}
-                    styleCounter={styleCounter}
                     extraImg={extraImg}
                     dataReady={dataReady}
                     numberToShowComponent={numberToShowComponent}
@@ -53,7 +51,13 @@ function SmallGraphHome({
                     infoTooltip={infoTooltip}
                 />
                 {!dataReady ? (
-                    <div id={title} style={{ height: '165px', width: '100%' }}>
+                    <div
+                        id={title}
+                        style={{
+                            height: '165px',
+                            width: '100%',
+                        }}
+                    >
                         {/*<LoaderChart type={'area'} />*/}
                     </div>
                 ) : isSentiment ? (
