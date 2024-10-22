@@ -1,0 +1,35 @@
+.standardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 25px;
+}
+
+.openDayRow {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    gap: 20px;
+}
+
+.timePickerContainer {
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+}
+
+.typographyContainer {
+    min-width: 100px;
+}
+
+.timePickerRows {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.timePickerPlusButton {
+    display: flex;
+    align-items: center;
+}

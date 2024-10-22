@@ -1,0 +1,44 @@
+.standardHoursContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.standardHoursTitleContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.customRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.customCol {
+    flex: 0 0 32%;
+    max-width: 50%;
+}
+
+.labelContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.buttonContainer button {
+    width: 42px;
+}

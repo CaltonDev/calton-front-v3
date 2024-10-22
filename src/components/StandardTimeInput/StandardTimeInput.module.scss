@@ -1,0 +1,25 @@
+.standardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 25px;
+}
+
+.openDayRow {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.dayLabelContainer {
+    min-width: 100px;
+}
+
+.timePickerContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+}

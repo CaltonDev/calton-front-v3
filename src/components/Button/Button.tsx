@@ -77,8 +77,6 @@ const Button = ({
                                       : disabled
                                         ? 'disabled'
                                         : 'black'
-                                          ? 'black'
-                                          : 'secondary'
                             }
                             keySvg={
                                 icon

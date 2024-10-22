@@ -1,0 +1,28 @@
+.holidayContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.holidayContent {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+}
+
+.dayCheckbox {
+    display: flex;
+    gap: 20px;
+}
+
+.timePickerContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 23px;
+    gap: 5px;
+}
+
+.timePickerContainer button {
+    margin-top: 2px;
+}

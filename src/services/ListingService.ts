@@ -3,6 +3,12 @@ import { getHeaders } from './api/headers'
 import { getNoCodeFromPlatfrom } from '../helpers/helpers'
 import { useQuery } from 'react-query'
 import { prefetchNextPage } from '../helpers/reactQueryHelpers'
+import {
+    ListingMoreHoursProps,
+    ListingProps,
+    ListingSpecialHoursProps,
+} from '../pages/ListingEditHours/ListingEditHours.interface'
+import { QueryResponse } from './interfaces/interfaces'
 
 export interface ListingServiceBody {
     limit?: number
@@ -65,6 +71,7 @@ export interface ListingServiceBody {
     }
     totalNumberOfRecords?: number
     isPrefetchNextPage?: boolean
+    queryStr?: string
 }
 
 function getListings(
@@ -305,17 +312,17 @@ function getPhotos(
     return queryResult
 }
 
-function editHours(
-    hours: any,
-    listingsName: any[] = [],
+export function editHours({
+    hours,
+    listingsName = [],
     isRegular = true,
     isSpecial = false,
     isMore = false,
     isNotSpecified = false,
     isTemporarilyClosed = false,
     isPermanentlyClosed = false,
-    toOverwrite = true
-) {
+    toOverwrite = true,
+}: ListingServiceBody) {
     const body: ListingServiceBody = {
         hours,
         listingsName,
@@ -350,8 +357,7 @@ function getHours({
         isSingle,
         nextPageToken,
     }
-
-    const queryResult = useQuery<any, Error>(
+    const queryResult = useQuery<QueryResponse<ListingProps[]>, Error>(
         ['hours', body],
         () => apiService.apiListings.post('/getHours', body, getHeaders()),
         {
@@ -375,31 +381,69 @@ function getHours({
     return queryResult
 }
 
-function getSpecialHours(
-    listingsName: any[] = [],
-    code: any[] = [6],
-    isSingle = true
-) {
+function getSpecialHours({
+    code = [6],
+    listingsName = [],
+    isSingle = true,
+}: ListingServiceBody) {
     const body: ListingServiceBody = {
         listingsName,
         code,
         isSingle,
     }
-    return apiService.apiListings.post('/getSpecialHours', body, getHeaders())
+    const queryResult = useQuery<
+        QueryResponse<ListingSpecialHoursProps>,
+        Error
+    >(
+        ['specialHours', body],
+        () =>
+            apiService.apiListings.post('/getSpecialHours', body, getHeaders()),
+        {
+            staleTime: 5 * 60 * 1000,
+            keepPreviousData: true,
+        }
+    )
+    return queryResult
 }
 
-function getMoreHours(
-    listingsName: any[] = [],
-    code: any[] = [6],
-    isSingle = true
-) {
+function getMoreHours({
+    code = [6],
+    listingsName = [],
+    isSingle = true,
+}: ListingServiceBody) {
     const body: ListingServiceBody = {
         listingsName,
         code,
         isSingle,
     }
-    return apiService.apiListings.post('/getMoreHoursList', body, getHeaders())
+    const queryResult = useQuery<QueryResponse<ListingMoreHoursProps>, Error>(
+        ['moreHours', body],
+        () =>
+            apiService.apiListings.post(
+                '/getMoreHoursList',
+                body,
+                getHeaders()
+            ),
+        {
+            staleTime: 5 * 60 * 1000,
+            keepPreviousData: true,
+        }
+    )
+    return queryResult
 }
+
+// function getMoreHours(
+//     listingsName: any[] = [],
+//     code: any[] = [6],
+//     isSingle = true
+// ) {
+//     const body: ListingServiceBody = {
+//         listingsName,
+//         code,
+//         isSingle,
+//     }
+//     return apiService.apiListings.post('/getMoreHoursList', body, getHeaders())
+// }
 
 function getPerformance(
     allFilters: any,

@@ -89,6 +89,7 @@ import DuplicateDeleteSvg from './SvgIcons/DuplicateDeleteSvg'
 import GoogleMapsSvg from './SvgIcons/GoogleMapsSvg'
 import PcIconSvg from './SvgIcons/PcIconSvg'
 import MobileIconSvg from './SvgIcons/MobileIconSvg'
+import XIcon from './SvgIcons/XIcon'
 import DownloadSvg from './SvgIcons/DownloadSvg'
 
 const SvgWrapper = ({
@@ -492,6 +493,12 @@ const SvgWrapper = ({
                     />
                 ) : keySvg === 'duplicateDeleteIcon' ? (
                     <DuplicateDeleteSvg
+                        width={iconWidth}
+                        height={iconHeight}
+                        fillColor={iconColor}
+                    />
+                ) : keySvg === 'xIcon' ? (
+                    <XIcon
                         width={iconWidth}
                         height={iconHeight}
                         fillColor={iconColor}

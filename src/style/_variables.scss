@@ -1,456 +1,459 @@
 //@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 $backgrounds: (
-        button: (
-                900: #00006B,
-                800: #0C14A1,
-                700: #0C16C8,
-                600: #0F1AF4,
-                500: #3F49FC,
-                400: #797FFD,
-                300: #A1A6FE,
-                200: #BDC0FE,
-                100: #D1D3FE,
-                50: #DFE0FF,
-        ),
+    button: (
+        900: #00006b,
+        800: #0c14a1,
+        700: #0c16c8,
+        600: #0f1af4,
+        500: #3f49fc,
+        400: #797ffd,
+        300: #a1a6fe,
+        200: #bdc0fe,
+        100: #d1d3fe,
+        50: #dfe0ff,
+    ),
 );
 
 $default-colors: (
-        primary: #321D48,
-        secondary: #FFFFFF,
-        tertiary: #9D96A5,
-        settings: #2EC4B6,
-        green: #1DBD82,
-        reviews: #7161EF,
-        white: #FFFFFF,
-        black: #000000,
-        surveys: #B57DFA,
-        competitor: #FFAFF2,
-        listing: #63D2FF,
-        grey: #C0BBC5,
-        blue: #3F49FC,
-        red: #FF608B,
-        lightGrey: #81788A
+    primary: #321d48,
+    secondary: #ffffff,
+    tertiary: #9d96a5,
+    settings: #2ec4b6,
+    reviews: #7161ef,
+    white: #ffffff,
+    black: #000000,
+    surveys: #b57dfa,
+    competitor: #ffaff2,
+    listing: #63d2ff,
+    grey: #c0bbc5,
+    blue: #3f49fc,
+    red: #ff608b,
 );
 
 $typography: (
-        headline: (
-                h1: (
-                        fontSize: 40px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 50.25px
-                ),
-                h2: (
-                        fontSize: 36px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 40.88px
-                ),
-                h3: (
-                        fontSize: 28px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 32.5px
-                ),
-                h4: (
-                        fontSize: 24px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 32.81px
-                ),
-                h5: (
-                        fontSize: 20px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 24.13px
-                ),
-                h6: (
-                        fontSize: 16px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 18.44px
-                ),
-                bodyBig: (
-                        fontSize: 16px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 20px
-                ),
-                bodyMedium: (
-                        fontSize: 14px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 16px
-                ),
-                bodySmall: (
-                        fontSize: 12px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 14.5px
-                ),
-                bodyXSmall: (
-                        fontSize: 10px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 12.5px
-                ),
-                bodyXXSmall: (
-                        fontSize: 8px,
-                        fontWeight: (
-                                light: 300,
-                                normal: 400,
-                                bold: 700
-                        ),
-                        lineHeight: 10px
-                ),
+    headline: (
+        h1: (
+            fontSize: 44px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 56.25px,
         ),
+        h2: (
+            fontSize: 40px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 46.88px,
+        ),
+        h3: (
+            fontSize: 32px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 37.5px,
+        ),
+        h4: (
+            fontSize: 28px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 32.81px,
+        ),
+        h5: (
+            fontSize: 24px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 28.13px,
+        ),
+        h6: (
+            fontSize: 20px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 23.44px,
+        ),
+        bodyBig: (
+            fontSize: 20px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 25px,
+        ),
+        bodyMedium: (
+            fontSize: 16px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 20px,
+        ),
+        bodySmall: (
+            fontSize: 14px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 17.5px,
+        ),
+        bodyXSmall: (
+            fontSize: 12px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 17.5px,
+        ),
+        bodyXXSmall: (
+            fontSize: 10px,
+            fontWeight: (
+                light: 300,
+                normal: 400,
+                bold: 700,
+            ),
+            lineHeight: 12px,
+        ),
+    ),
 );
 
 $button: (
-        display: flex,
-        flex-direction: row,
-        justify-content: center,
-        align-items: center,
-        padding: 15px 33px,
-        gap: 10px,
-        background: #3F49FC,
-        border: none,
-        border-radius: 10px,
-        font-size: 20px,
-        font-family: 'Roboto',
-        font-style: normal,
-        font-weight: 400,
-        line-height: 125%,
-        flex: none,
-        order: 0,
-        flex-grow: 0,
-        size: (
-                small: (
-                        font-size: 12px,
-                        width: 42px,
-                        height: 32px,
-                ),
-                medium: (
-                        font-size: 16px,
-                        width: 84px,
-                        height: 44px,
-                ),
-                large: (
-                        font-size: 20px,
-                        width: 125px,
-                        height: 55px,
-                ),
+    display: flex,
+    flex-direction: row,
+    justify-content: center,
+    align-items: center,
+    padding: 15px 33px,
+    gap: 10px,
+    background: #3f49fc,
+    border: none,
+    border-radius: 10px,
+    font-size: 20px,
+    font-family: 'Roboto',
+    font-style: normal,
+    font-weight: 400,
+    line-height: 125%,
+    flex: none,
+    order: 0,
+    flex-grow: 0,
+    size: (
+        small: (
+            font-size: 12px,
+            width: 42px,
+            height: 32px,
         ),
+        medium: (
+            font-size: 16px,
+            width: 84px,
+            height: 44px,
+        ),
+        large: (
+            font-size: 20px,
+            width: 125px,
+            height: 55px,
+        ),
+    ),
+    variant: (
+        solid: (
+            color: #ffffff,
+        ),
+        outline: (
+            background: none,
+            border: 2px #3f49fc solid,
+            color: #3f49fc,
+        ),
+        ghost: (
+            border: none,
+            background: none,
+            color: #3f49fc,
+        ),
+    ),
+    disabled: (
+        color: #ffffff,
+        background: #c0bbc5,
         variant: (
-                solid: (
-                        color: #FFFFFF,
-                ),
-                outline: (
-                        background: none,
-                        border: 2px #3F49FC solid,
-                        color: #3F49FC,
-                ),
-                ghost: (
-                        border: none,
-                        background: none,
-                        color: #3F49FC,
-                ),
+            solid: (
+                color: #ffffff,
+                background: #c0bbc5,
+            ),
+            outline: (
+                background: none,
+                border: 2px #c0bbc5 solid,
+                color: #c0bbc5,
+            ),
+            ghost: (
+                border: none,
+                background: none,
+                color: #c0bbc5,
+            ),
         ),
-        disabled: (
-                color: #FFFFFF,
-                background: #C0BBC5,
-                variant: (
-                        solid: (
-                                color: #FFFFFF,
-                                background: #C0BBC5,
-                        ),
-                        outline: (
-                                background: none,
-                                border: 2px #C0BBC5 solid,
-                                color: #C0BBC5,
-                        ),
-                        ghost: (
-                                border: none,
-                                background: none,
-                                color: #C0BBC5,
-                        ),
-                ),
+    ),
+    iconOnly: (
+        small: (
+            width: 32px,
+            height: 32px,
         ),
-        iconOnly: (
-                small: (
-                        width: 32px,
-                        height: 32px,
-                ),
-                medium: (
-                        width: 44px,
-                        height: 44px,
-                ),
-                large: (
-                        width: 55px,
-                        height: 55px,
-                )
-        )
+        medium: (
+            width: 44px,
+            height: 44px,
+        ),
+        large: (
+            width: 55px,
+            height: 55px,
+        ),
+    ),
 );
 
-
 $input: (
-        box-sizing: border-box,
-        display: flex,
-        flex-direction: row,
-        align-items: center,
-        padding: 12px 16px,
-        gap: 9px,
-        width: 35vw,
-        height: 45px,
-        background: #FFFFFF,
-        border: 1px solid #9D96A5,
-        border-radius: 10px,
-        flex: none,
-        order: 1,
-        flex-grow: 0,
-        font-family: 'Roboto',
-        font-style: normal,
-        font-weight: 400,
-        font-size: 12px,
-        line-height: 125%,
-        color: #321D48,
-        select: (
-          line-height: 21px,
-          size: (
-                  small: (
-                    width: 170px
-                  ),
-                  medium: (
-                  ),
-                  large: (
-                  )
-          ),
-        ),
+    box-sizing: border-box,
+    display: flex,
+    flex-direction: row,
+    align-items: center,
+    padding: 12px 16px,
+    gap: 9px,
+    width: 35vw,
+    height: 45px,
+    background: #ffffff,
+    border: 1px solid #9d96a5,
+    border-radius: 10px,
+    flex: none,
+    order: 1,
+    flex-grow: 0,
+    font-family: 'Roboto',
+    font-style: normal,
+    font-weight: 400,
+    font-size: 12px,
+    line-height: 125%,
+    color: #321d48,
+    select: (
+        line-height: 21px,
         size: (
-          small: (
-            width: 145px
-          ),
-          medium: (
-          ),
-          large: (
-          )
+            small: (
+                width: 170px,
+            ),
+            medium: (),
+            large: (),
         ),
-        fontSize: (
-          xsmall: (
+    ),
+    size: (
+        small: (
+            width: 145px,
+        ),
+        medium: (),
+        large: (),
+    ),
+    fontSize: (
+        xsmall: (
             font-size: 12px,
-          ),
-          small: (
-                  font-size: 14px,
-          ),
-          medium: (
+        ),
+        small: (
+            font-size: 14px,
+        ),
+        medium: (
             font-size: 16px,
             height: 50px,
-            line-height: 21px
-          ),
-          large: (
-            font-size: 18px,
-          )
+            line-height: 21px,
         ),
-        colorKey: (
-          primary: (
-            border: 1px solid #9D96A5,
-          ),
-          secondary: (
-            border: 1px solid #3F49FC,
-          ),
-          error: (
-                  border: 1px solid #FF608B,
-                  box-shadow: 0px 0px 0px 3px #FFBCCE
-          ),
-          success: (
-                  border: 1px solid #34E0A1,
-                  box-shadow: 0px 0px 0px 3px #A9F2D7
-          )
+        large: (
+            font-size: 18px,
+        ),
+    ),
+    colorKey: (
+        primary: (
+            border: 1px solid #9d96a5,
+        ),
+        secondary: (
+            border: 1px solid #3f49fc,
+        ),
+        error: (
+            border: 1px solid #ff608b,
+            box-shadow: 0px 0px 0px 3px #ffbcce,
+        ),
+        success: (
+            border: 1px solid #34e0a1,
+            box-shadow: 0px 0px 0px 3px #a9f2d7,
         ),
         disabled: (
-          border: 1px solid #9D96A5,
-          background: #F1F1F1,
-          color: #9D96A5
+            border-radius: 10px,
+            border: 2px solid #3f49fc,
+            background: #f1f1f1,
         ),
-        icon : (
-          position: absolute,
-          box-sizing: border-box,
-          top: 25%,
-          left: 5px,
-          small: (
+        outlined: (
+            border: 1px solid #321d48,
+            box-shadow: 0px 0px 0px 4px #bdc0fe,
+        ),
+    ),
+    disabled: (
+        border: 1px solid #9d96a5,
+        background: #f1f1f1,
+        color: #9d96a5,
+    ),
+    icon: (
+        position: absolute,
+        box-sizing: border-box,
+        top: 25%,
+        left: 5px,
+        small: (
             padding-top: 3px,
-            right: 3%
-          ),
-          large: (
-            right: 3%
-          ),
-          prefixXlarge: (
-            top: 18%
-          )
+            right: 3%,
         ),
-        textarea: (
-          icon: (
+        large: (
+            right: 3%,
+        ),
+        prefixXlarge: (
+            top: 18%,
+        ),
+    ),
+    textarea: (
+        icon: (
             position: absolute,
             box-sizing: border-box,
             right: 10px,
             bottom: 10px,
-          ),
-          box-shadow: (0px 1px 2px 0px rgba(50, 29, 72, 0.15), 0px 0px 0px 4px #BDC0FE),
-          resize: none,
-          padding: 6px 12px
-        )
+        ),
+        box-shadow: (
+            0px 1px 2px 0px rgba(50, 29, 72, 0.15),
+            0px 0px 0px 4px #bdc0fe,
+        ),
+        resize: none,
+        padding: 6px 12px,
+    ),
 );
 
 $select: (
-        size: (
-                small: (
-                  width: auto
-                ),
-                medium: (
-                ),
-                large: (
-                )
+    size: (
+        small: (
+            width: auto,
         ),
-        outlined: (
-            border-color: #321D48 !important,
-            background: none
-        )
+        medium: (),
+        large: (),
+    ),
+    outlined: (
+        border-color: #321d48,
+        background: none,
+    ),
 );
 
 $checkbox: (
     container: (
-      display: block,
-      position: relative,
-      padding-left: 35px,
-      margin-bottom: 5px,
-      cursor: pointer,
-      font-size: 22px,
-      -webkit-user-select: none,
-      -moz-user-select: none,
-      -ms-user-select: none,
-      user-select: none,
-      input: (
-        position: absolute,
-        opacity: 0,
+        display: block,
+        position: relative,
+        padding-left: 35px,
+        margin-bottom: 5px,
         cursor: pointer,
-        height: 0,
-        width: 0,
-      ),
-      checkmarkAfter: (
-        left: 6px,
-        top: 1px,
-        width: 3px,
-        height: 10px,
-        //checkmark color
-        border: solid #3F49FC,
-        border-width: 0 2px 2px 0,
-        -webkit-transform: rotate(45deg),
-        -ms-transform: rotate(45deg),
-        transform: rotate(45deg),
-        secondary: (
-          border: solid #0C16C8
+        font-size: 22px,
+        -webkit-user-select: none,
+        -moz-user-select: none,
+        -ms-user-select: none,
+        user-select: none,
+        input: (
+            position: absolute,
+            opacity: 0,
+            cursor: pointer,
+            height: 0,
+            width: 0,
         ),
-        disabled: (
-          border: solid #9D96A5
-        )
-      ),
-      checkmarkAfterRadio: (
-              left: 5px,
-              top: 5px,
-              width: 4px,
-              height: 4px,
-        //checkmark color
-              border: solid #3F49FC,
-              background: #3F49FC,
-              -webkit-transform: rotate(45deg),
-              -ms-transform: rotate(45deg),
-              transform: rotate(45deg),
-              border-radius: 10px,
-              secondary: (
-                      background: #0C16C8,
-                      border: solid #0C16C8
-              ),
-              disabled: (
-                      background: #9D96A5,
-                      border: solid #9D96A5
-              )
-      )
+        checkmarkAfter: (
+            left: 6px,
+            top: 1px,
+            width: 3px,
+            height: 10px,
+            //checkmark color
+            border: solid #3f49fc,
+            border-width: 0 2px 2px 0,
+            -webkit-transform: rotate(45deg),
+            -ms-transform: rotate(45deg),
+            transform: rotate(45deg),
+            secondary: (
+                border: solid #0c16c8,
+            ),
+            disabled: (
+                border: solid #9d96a5,
+            ),
+        ),
+        checkmarkAfterRadio: (
+            left: 5px,
+            top: 5px,
+            width: 4px,
+            height: 4px,
+            //checkmark color
+            border: solid #3f49fc,
+            background: #3f49fc,
+            -webkit-transform: rotate(45deg),
+            -ms-transform: rotate(45deg),
+            transform: rotate(45deg),
+            border-radius: 10px,
+            secondary: (
+                background: #0c16c8,
+                border: solid #0c16c8,
+            ),
+            disabled: (
+                background: #9d96a5,
+                border: solid #9d96a5,
+            ),
+        ),
     ),
     checkmark: (
-      position: absolute,
-      top: 0,
-      left: 0,
-      height: 16px,
-      width: 16px,
-      background-color: #FFF,
-      //checkbox border color
-      border: 2px solid #321D48,
-      border-radius: 6px,
-      after: (
-        content: "",
         position: absolute,
-        display: none,
-      ),
-      primary: (
-        background-color: #FFF,
-        border: 2px solid #321D48,
-      ),
-      primaryClicked: (
-        background-color: #FFF,
-        border: 2px solid #3F49FC,
-      ),
-      secondary: (
-        background-color: #DFE0FF,
-        border: 2px solid #0C16C8,
-      ),
-      shadow: (
-        background-color: #FFF,
-        border: 2px solid #3F49FC,
-        box-shadow: 0px 0px 0px 3px #A1A6FE
-      ),
-      disabled: (
-        background-color: #F1F1F1,
-        border: 2px solid #9D96A5,
-      ),
-      radius: (
-        border-radius: 25px
-      )
+        top: 0,
+        left: 0,
+        height: 16px,
+        width: 16px,
+        background-color: #fff,
+        //checkbox border color
+        border: 2px solid #321d48,
+        border-radius: 6px,
+        after: (
+            content: '',
+            position: absolute,
+            display: none,
+        ),
+        primary: (
+            background-color: #fff,
+            border: 2px solid #321d48,
+        ),
+        primaryClicked: (
+            background-color: #fff,
+            border: 2px solid #3f49fc,
+        ),
+        secondary: (
+            background-color: #dfe0ff,
+            border: 2px solid #0c16c8,
+        ),
+        shadow: (
+            background-color: #fff,
+            border: 2px solid #3f49fc,
+            box-shadow: 0px 0px 0px 3px #a1a6fe,
+        ),
+        disabled: (
+            background-color: #f1f1f1,
+            border: 2px solid #9d96a5,
+        ),
+        radius: (
+            border-radius: 25px,
+        ),
     ),
     hasContainer: (
         height: 44px,
         border-radius: 50px,
-        border: 1px solid #9D96A5,
+        border: 1px solid #9d96a5,
         gap: 12px,
         flex-direction: row,
         display: flex,
@@ -458,12 +461,11 @@ $checkbox: (
         justify-content: center,
         align-items: center,
         disabled: (
-          background: #F1F1F1
+            background: #f1f1f1,
         ),
         secondary: (
-          border: 1px solid #3F49FC,
-          box-shadow: 0px 0px 0px 3px #A1A6FE
-        )
-    )
-
-)
+            border: 1px solid #3f49fc,
+            box-shadow: 0px 0px 0px 3px #a1a6fe,
+        ),
+    ),
+);

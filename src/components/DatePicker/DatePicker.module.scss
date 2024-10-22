@@ -1,0 +1,65 @@
+@import '@Style/app';
+
+@mixin common-styles {
+    box-sizing: border-box;
+    display: flex;
+    min-width: 200px;
+    max-width: 500px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px 15px;
+    font-family: map-deep-get($input, font-family);
+    font-style: map-deep-get($input, font-style);
+    font-weight: map-deep-get($input, font-weight);
+    font-size: map-deep-get($input, fontSize, medium, font-size);
+    line-height: map-deep-get($input, line-height);
+    color: map-deep-get($input, color);
+    height: 100%;
+}
+
+.picker {
+    &.primary {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, primary, border);
+    }
+
+    &.secondary {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, secondary, border);
+    }
+
+    &.error {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, error, border);
+        box-shadow: map-deep-get($input, colorKey, error, box-shadow);
+    }
+
+    &.success {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, success, border);
+        box-shadow: map-deep-get($input, colorKey, success, box-shadow);
+    }
+
+    &.disabled {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, disabled, border);
+        border-radius: map-deep-get($input, colorKey, disabled, border-radius);
+        background: map-deep-get($input, colorKey, disabled, background);
+        color: map-deep-get($default-colors, tertiary);
+    }
+
+    &.outlined {
+        @include common-styles();
+        border: map-deep-get($input, colorKey, outlined, border);
+        box-shadow: map-deep-get($input, colorKey, outlined, box-shadow);
+    }
+}
+
+.datePickerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

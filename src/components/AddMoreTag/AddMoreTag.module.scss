@@ -1,0 +1,17 @@
+.container {
+    width: 165px;
+}
+.container:hover {
+    border-color: #3f49fc;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container:active {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.displayName {
+    margin-left: 8px;
+    font-family: Montserrat;
+    color: #321d48;
+}
