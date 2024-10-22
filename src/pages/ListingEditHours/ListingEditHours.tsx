@@ -26,7 +26,7 @@ import {
     OptionsCardSelectionType,
 } from '../../components/CardSelection/CardSelection.interface'
 import SpecialHoursList from '../../components/SpecialHoursList/SpecialHoursList'
-import SubCardDeleteModal from '../../components/Modals/SubCardDeleteModal/SubCardDeleteModal'
+import { default as Modal } from '../../components/Modals/ConfirmModal/ConfirmModal'
 
 function ListingEditHours() {
     const { t } = useTranslation()
@@ -115,8 +115,10 @@ function ListingEditHours() {
     }
 
     const handleDeleteMoreHoursSubCard = async (index: number) => {
-        const confirmDelete = await SubCardDeleteModal.confirm({
-            textDelete: t('Are you sure you want to delete this time?'),
+        const confirmDelete = await Modal.confirm({
+            content: t('Are you sure you want to delete this time?'),
+            okText: t('Delete'),
+            cancelText: t('Cancel'),
         })
         if (!confirmDelete) return
         const nextListingMoreHours = {
@@ -136,8 +138,10 @@ function ListingEditHours() {
     }
 
     const handleDeleteSpecialHoursSubcard = async (index: number) => {
-        const confirmDelete = await SubCardDeleteModal.confirm({
-            textDelete: t('Are you sure you want to delete this time?'),
+        const confirmDelete = await Modal.confirm({
+            content: t('Are you sure you want to delete this time?'),
+            okText: t('Delete'),
+            cancelText: t('Cancel'),
         })
         if (!confirmDelete) return
         const nextListingSpecialHours: ListingSpecialHoursProps = {

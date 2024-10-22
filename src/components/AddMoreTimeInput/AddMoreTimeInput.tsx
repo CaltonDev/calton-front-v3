@@ -1,5 +1,5 @@
 import { ListingMoreHoursProps } from '../../pages/ListingEditHours/ListingEditHours.interface'
-import ConfirmClosedHoursModal from '../ConfirmClosedHoursModal/ConfirmClosedHoursModal'
+import { default as Modal } from '../Modals/ConfirmModal/ConfirmModal'
 import styles from './AddMoreTimeInput.module.scss'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -49,25 +49,20 @@ function AddMoreTimeInput({
             ? initCheckedStatusArray(distinctPeriod)
             : Array(7).fill(false)
     )
-    const [openModal, setOpenModal] = React.useState(false)
-    const [checkBoxIdx, setCheckBoxIdx] = React.useState<number | null>(null)
 
-    const handleCheckboxChange = (i: number | null) => {
-        setCheckBoxIdx(i)
-        setOpenModal(true)
-    }
-    const handleAddMore = (weekday: (typeof weekdaysConstant)[number]) => {
-        // handleAddingMoreTimeInterval(
-        //     weekday,
-        //     index,
-        //     distinctPeriod,
-        //     setDistinctPeriod
-        // )
-        console.log('add more')
-    }
-
-    const handleConfirm = () => {
-        if (checkBoxIdx === null) return
+    const handleConfirm = async (idx: number) => {
+        const confirm = await Modal.confirm({
+            content: checkedStatus[idx]
+                ? t('Are you sure you want to open your business?')
+                : t('Are you sure you want to close your business?'),
+            okText: t('Confirm'),
+            cancelText: t('Cancel'),
+            title: t('Attention'),
+        })
+        if (!confirm) {
+            return
+        }
+        if (idx === null) return
         setListing((prevState: ListingMoreHoursProps | null) => {
             if (!prevState || !prevState.moreHours) {
                 return prevState
@@ -79,12 +74,12 @@ function AddMoreTimeInput({
             tmpDistinctPeriod.moreHours[index].periods =
                 tmpDistinctPeriod.moreHours[index]?.periods?.filter(
                     (p: PeriodsMoreHoursProps) =>
-                        p.openDay !== weekdaysConstant[checkBoxIdx] &&
-                        p.closeDay !== weekdaysConstant[checkBoxIdx]
+                        p.openDay !== weekdaysConstant[idx] &&
+                        p.closeDay !== weekdaysConstant[idx]
                 ) || []
             tmpDistinctPeriod.moreHours[index].periods.push({
-                openDay: weekdaysConstant[checkBoxIdx],
-                closeDay: weekdaysConstant[checkBoxIdx],
+                openDay: weekdaysConstant[idx],
+                closeDay: weekdaysConstant[idx],
                 openTime: {
                     hours: null,
                     minutes: null,
@@ -99,10 +94,9 @@ function AddMoreTimeInput({
         setCheckedStatus((prevStatus) => {
             return {
                 ...prevStatus,
-                [checkBoxIdx]: !prevStatus[checkBoxIdx],
+                [idx]: !prevStatus[idx],
             }
         })
-        setOpenModal(false)
     }
 
     const addEmptyPeriod = (weekday: (typeof weekdaysConstant)[number]) => {
@@ -132,13 +126,6 @@ function AddMoreTimeInput({
 
     return (
         <div className={styles.standardContainer}>
-            <ConfirmClosedHoursModal
-                idx={checkBoxIdx}
-                openModal={openModal}
-                checkedStatus={checkBoxIdx ? checkedStatus[checkBoxIdx] : false}
-                setOpenModal={setOpenModal}
-                handleConfirm={handleConfirm}
-            />
             {distinctPeriod &&
                 weekdaysConstant.map((d, i) => {
                     const periods = distinctPeriod?.filter(
@@ -163,7 +150,7 @@ function AddMoreTimeInput({
                             </div>
                             <div key={distinctPeriod?.toString()}>
                                 <Checkbox
-                                    onClick={() => handleCheckboxChange(i)}
+                                    onClick={() => handleConfirm(i)}
                                     checked={checkedStatus[i]}
                                     value={i}
                                     title={t('Chiuso')}
