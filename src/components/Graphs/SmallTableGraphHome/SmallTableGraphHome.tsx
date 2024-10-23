@@ -3,8 +3,7 @@ import styles from './SmallTableGraphHome.module.scss'
 //import LoaderChart from 'Components/CardInsights/LoaderChart/LoaderChart'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, InputNumber, Tooltip } from 'antd'
-import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
+import Tooltip from '../../Tooltip/Tooltip'
 import { SmallTableGraphHomeProps } from './SmallTableGraphHome.interface'
 import PageNavigator from '../../PageNavigator/PageNavigator'
 import { PaginationState } from '@tanstack/react-table'
@@ -109,10 +108,7 @@ function SmallTableGraphHome({
                                             className={styles.dataContainer}
                                             key={idx}
                                         >
-                                            <Tooltip
-                                                title={obj?.searchKeyword}
-                                                style={{ cursor: 'pointer' }}
-                                            >
+                                            <Tooltip title={obj?.searchKeyword}>
                                                 <span
                                                     className={
                                                         styles.titleLabel

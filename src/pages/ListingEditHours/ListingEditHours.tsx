@@ -26,6 +26,7 @@ import {
     OptionsCardSelectionType,
 } from '../../components/CardSelection/CardSelection.interface'
 import SpecialHoursList from '../../components/SpecialHoursList/SpecialHoursList'
+import { default as Modal } from '../../components/Modals/ConfirmModal/ConfirmModal'
 
 function ListingEditHours() {
     const { t } = useTranslation()
@@ -113,7 +114,13 @@ function ListingEditHours() {
         setListingMoreHours(JSON.parse(JSON.stringify(tmp)))
     }
 
-    const handleDeleteMoreHoursSubCard = (index: number) => {
+    const handleDeleteMoreHoursSubCard = async (index: number) => {
+        const confirmDelete = await Modal.confirm({
+            content: t('Are you sure you want to delete this time?'),
+            okText: t('Delete'),
+            cancelText: t('Cancel'),
+        })
+        if (!confirmDelete) return
         const nextListingMoreHours = {
             moreHours:
                 listingMoreHours?.moreHours?.filter((item, i) => i !== index) ||
@@ -130,7 +137,13 @@ function ListingEditHours() {
         refetchMoreHours()
     }
 
-    const handleDeleteSpecialHoursSubcard = (index: number) => {
+    const handleDeleteSpecialHoursSubcard = async (index: number) => {
+        const confirmDelete = await Modal.confirm({
+            content: t('Are you sure you want to delete this time?'),
+            okText: t('Delete'),
+            cancelText: t('Cancel'),
+        })
+        if (!confirmDelete) return
         const nextListingSpecialHours: ListingSpecialHoursProps = {
             ...listingSpecialHours,
             specialHours:
@@ -153,6 +166,7 @@ function ListingEditHours() {
         })
         queryClient.removeQueries('specialHours')
         refetchSpecialHours()
+        setSubCardSpecialHours(undefined)
     }
 
     const handleSaveMoreHours = (

@@ -1,6 +1,5 @@
 import styles from './HeaderGraph.module.scss'
 import CountUp from 'react-countup'
-import DownloadIcon from '../DownloadIcon/DownloadIcon'
 import React, { useState } from 'react'
 import html2canvas from 'html2canvas'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +7,7 @@ import settings from '../../assets/icons/settings.svg'
 import RibbonStateReview from '../RibbonStateReview/RibbonStateReview'
 import AppConfig from '../../constants/AppConfig'
 import { InfoCircleOutlined } from '@ant-design/icons'
-import { Tooltip } from 'antd'
+import Tooltip from '../Tooltip/Tooltip'
 import { saveAs } from 'file-saver'
 import { HeaderGraphProps } from './HeaderGraph.interface'
 import Typography from '../Typography/Typography'
@@ -94,14 +93,8 @@ function HeaderGraph({
                         {dataReady && isInfoTooltip ? (
                             <div className={styles.tooltipDiv}>
                                 <Tooltip
-                                    overlayInnerStyle={{ padding: '.8em' }}
-                                    color={'white'}
-                                    title={
-                                        <div className={styles.tooltipText}>
-                                            {infoTooltip}
-                                        </div>
-                                    }
-                                    arrow={false}
+                                    title={infoTooltip ? infoTooltip : ''}
+                                    direction="top"
                                 >
                                     <InfoCircleOutlined
                                         className={styles.infoIcon}

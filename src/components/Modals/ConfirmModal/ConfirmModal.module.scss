@@ -1,0 +1,38 @@
+.container {
+    width: 550px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 6px 3px 20px 0px rgba(50, 29, 72, 0.15);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1000;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    gap: 25px;
+}
+
+.darkBG {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    height: 100vw;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.body {
+    display: flex;
+    gap: 5px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: end;
+}

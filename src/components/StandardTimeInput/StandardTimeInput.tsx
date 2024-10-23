@@ -8,9 +8,9 @@ import {
     ListingProps,
     PeriodProps,
 } from '../../pages/ListingEditHours/ListingEditHours.interface'
-import ConfirmClosedHoursModal from '../ConfirmClosedHoursModal/ConfirmClosedHoursModal'
 import Typography from '../Typography/Typography'
 import Button from '../Button/Button'
+import { default as Modal } from '../Modals/ConfirmModal/ConfirmModal'
 
 interface StandardTimeInputProps {
     listing: ListingProps | null
@@ -25,22 +25,26 @@ export const StandardTimeInput = ({
     const [checkedStatus, setCheckedStatus] = React.useState(
         Array(7).fill(false)
     )
-    const [openModal, setOpenModal] = React.useState(false)
-    const [checkBoxIdx, setCheckBoxIdx] = React.useState<number | undefined>()
 
-    const handleCheckboxChange = (i: number) => {
-        setCheckBoxIdx(i)
-        setOpenModal(true)
-    }
-
-    const handleConfirm = () => {
-        if (checkBoxIdx === undefined) return
+    const handleConfirm = async (idx: number) => {
+        const confirm = await Modal.confirm({
+            content: checkedStatus[idx]
+                ? t('Are you sure you want to open your business?')
+                : t('Are you sure you want to close your business?'),
+            okText: t('Confirm'),
+            cancelText: t('Cancel'),
+            title: t('Attention'),
+        })
+        if (!confirm) {
+            return
+        }
+        if (idx === undefined) return
         const tmpCheckedList = [...checkedStatus]
-        tmpCheckedList[checkBoxIdx] = !tmpCheckedList[checkBoxIdx]
+        tmpCheckedList[idx] = !tmpCheckedList[idx]
         setCheckedStatus(JSON.parse(JSON.stringify(tmpCheckedList)))
 
         const tmpListing = JSON.parse(JSON.stringify(listing))
-        tmpListing[weekdaysConstant[checkBoxIdx]] = [
+        tmpListing[weekdaysConstant[idx]] = [
             {
                 closeHours: null,
                 closeMinutes: null,
@@ -49,7 +53,6 @@ export const StandardTimeInput = ({
             },
         ]
         setListing(tmpListing)
-        setOpenModal(false)
     }
 
     const addEmptyPeriod = (weekday: string) => {
@@ -84,13 +87,6 @@ export const StandardTimeInput = ({
             className={styles.standardContainer}
             key={weekdaysConstant?.toString()}
         >
-            <ConfirmClosedHoursModal
-                idx={checkBoxIdx}
-                openModal={openModal}
-                checkedStatus={checkBoxIdx ? checkedStatus[checkBoxIdx] : false}
-                setOpenModal={setOpenModal}
-                handleConfirm={handleConfirm}
-            />
             {weekdaysConstant.map((d, i) => (
                 <div className={styles.openDayRow} key={i}>
                     <div className={styles.dayLabelContainer}>
@@ -99,7 +95,7 @@ export const StandardTimeInput = ({
                         </Typography>
                     </div>
                     <Checkbox
-                        onClick={() => handleCheckboxChange(i)}
+                        onClick={() => handleConfirm(i)}
                         title={t('Chiuso')}
                         checked={checkedStatus[i]}
                         value={i}
