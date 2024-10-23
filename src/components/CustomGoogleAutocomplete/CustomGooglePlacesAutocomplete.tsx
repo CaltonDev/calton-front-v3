@@ -161,40 +161,42 @@ const CustomGooglePlacesAutocomplete = ({
     }
 
     return (
-        <Tooltip
-            title={t('Seleziona un indirizzo dalla lista')}
-            direction="top"
-        >
-            {fromForm ? (
-                <Field
-                    fullWidth={true}
-                    component={FormInputWrapper}
-                    required={true}
-                    name="googleCustomAutocomplete"
-                    //style={fromForm && address ? {marginBottom: "3rem"} : {marginBottom: '0'}}
-                    customClassName={customClass}
-                    placeholder={placeHolder}
-                    value={address}
-                    onChange={(event: any) => {
-                        setAddress(event.target.value)
-                    }}
-                    customRef={ref}
-                    suffix
-                />
-            ) : (
-                <Input
-                    name="googleCustomAutocomplete"
-                    isFromForm={fromForm && address}
-                    customClassName={customClass}
-                    placeholder={placeHolder}
-                    value={address}
-                    onChange={(event) => {
-                        setAddress(event.target.value)
-                    }}
-                    customRef={ref}
-                />
-            )}
-        </Tooltip>
+        <div>
+            <Tooltip
+                title={t('Seleziona un indirizzo dalla lista')}
+                direction="top"
+            >
+                {fromForm ? (
+                    <Field
+                        fullWidth={true}
+                        component={FormInputWrapper}
+                        required={true}
+                        name="googleCustomAutocomplete"
+                        //style={fromForm && address ? {marginBottom: "3rem"} : {marginBottom: '0'}}
+                        customClassName={customClass}
+                        placeholder={placeHolder}
+                        value={address}
+                        onChange={(event: any) => {
+                            setAddress(event.target.value)
+                        }}
+                        customRef={ref}
+                        suffix
+                    />
+                ) : (
+                    <Input
+                        name="googleCustomAutocomplete"
+                        isFromForm={fromForm && address}
+                        customClassName={customClass}
+                        placeholder={placeHolder}
+                        value={address}
+                        onChange={(event) => {
+                            setAddress(event.target.value)
+                        }}
+                        customRef={ref}
+                    />
+                )}
+            </Tooltip>
+        </div>
     )
 }
 
