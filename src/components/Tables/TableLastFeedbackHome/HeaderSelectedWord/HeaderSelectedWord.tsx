@@ -71,10 +71,7 @@ function HeaderSelectedWord({
             </div>
             <div className={'col-md-1'}>
                 {word && (
-                    <Tooltip
-                        title="Rimuovi"
-                        style={{ marginRight: 8, cursor: 'pointer' }}
-                    >
+                    <Tooltip title="Rimuovi">
                         <IoMdClose
                             style={{ fontSize: 20, cursor: 'pointer' }}
                             onClick={() => closeWord()}
