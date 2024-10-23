@@ -14,6 +14,8 @@ import { PaginationState } from '@tanstack/react-table'
 import InfoCard from '../../../components/InfoCard/InfoCard'
 import ListingService from '../../../services/ListingService'
 import ListingCard from '../../../components/Cards/ListingCard/ListingCard'
+import Tooltip from '../../../components/Tooltip/Tooltip'
+import Typography from '../../../components/Typography/Typography'
 
 function HomeListing() {
     const dispatch = useDispatch()

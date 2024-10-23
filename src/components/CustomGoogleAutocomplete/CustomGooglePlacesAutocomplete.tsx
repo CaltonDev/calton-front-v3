@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tooltip } from 'antd'
+import Tooltip from '../Tooltip/Tooltip'
 import { useState } from 'react'
 import { usePlacesWidget } from 'react-google-autocomplete'
 import AppConfig from '../../constants/AppConfig'
@@ -161,7 +161,10 @@ const CustomGooglePlacesAutocomplete = ({
     }
 
     return (
-        <Tooltip title={t('Seleziona un indirizzo dalla lista')}>
+        <Tooltip
+            title={t('Seleziona un indirizzo dalla lista')}
+            direction="top"
+        >
             {fromForm ? (
                 <Field
                     fullWidth={true}

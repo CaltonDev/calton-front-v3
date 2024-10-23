@@ -1,7 +1,6 @@
 import React, { forwardRef, useEffect, useState } from 'react'
 import styles from './SelectableCards.module.scss'
 import Button from '../../components/Button/Button'
-import { Row } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'

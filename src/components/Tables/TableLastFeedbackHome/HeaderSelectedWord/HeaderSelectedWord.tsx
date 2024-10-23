@@ -1,12 +1,12 @@
 import React from 'react'
-import { Tooltip } from 'antd'
+import Tooltip from '../../../Tooltip/Tooltip'
 import { useDispatch } from 'react-redux'
 import { setSelectedWord } from '../../../../store/home/selectedWordsSlice'
 import { IoMdClose, IoMdEye } from 'react-icons/io'
 import { useTranslation } from 'react-i18next'
-import { setWordSearched } from '../../../../store/search/search'
 import { useNavigate } from 'react-router-dom'
 import { HeaderSelectedWordProps } from './HeaderSelectedWord.interface'
+import { setWordSearched } from '../../../../store/search/search'
 
 function HeaderSelectedWord({
     word,
@@ -56,10 +56,7 @@ function HeaderSelectedWord({
             </div>
             <div className={'col-md-1'}>
                 {word && (
-                    <Tooltip
-                        title="Mostra tutti"
-                        style={{ marginRight: 8, cursor: 'pointer' }}
-                    >
+                    <Tooltip title={t('Mostra tutti')}>
                         <IoMdEye
                             style={{ fontSize: 20, cursor: 'pointer' }}
                             onClick={async () => {
