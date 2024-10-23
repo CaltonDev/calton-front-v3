@@ -6,6 +6,7 @@ import Typography from '../Typography/Typography'
 import { useTranslation } from 'react-i18next'
 
 const CaltonDatePicker: React.FC<DatePickerProps> = ({
+    name = '',
     variant = 'primary',
     selected,
     onChange,
@@ -16,6 +17,10 @@ const CaltonDatePicker: React.FC<DatePickerProps> = ({
     allowSameDay = true,
     placeholderText = '00/00/0000',
     dateFormat = 'dd/MM/yyyy',
+    //todo: check this selects range if is necessary
+    selectsRange,
+    customInput,
+    wrapperClassName,
 }) => {
     const variantClass = variant ? styles[variant] : ''
     const { t } = useTranslation()
@@ -25,6 +30,7 @@ const CaltonDatePicker: React.FC<DatePickerProps> = ({
                 {t('Date')}
             </Typography>
             <DatePicker
+                name={name}
                 selected={selected}
                 onChange={onChange}
                 isClearable={isClearable}
@@ -35,6 +41,8 @@ const CaltonDatePicker: React.FC<DatePickerProps> = ({
                 placeholderText={placeholderText}
                 dateFormat={dateFormat}
                 className={`${styles.picker} ${variantClass}`}
+                customInput={customInput}
+                wrapperClassName={wrapperClassName}
             />
         </div>
     )

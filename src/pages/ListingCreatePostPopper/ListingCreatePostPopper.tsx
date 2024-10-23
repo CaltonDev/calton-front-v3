@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next'
 import styles from './ListingCreatePostPopper.module.scss'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Select } from 'antd'
+import { Select } from 'antd'
+import Button from '../../components/Button/Button'
 import { showToast } from '../../store/toast/errorToastSlice'
 import LoaderChart from '../../components/CardInsights/LoaderChart/LoaderChart'
 import {
@@ -27,6 +28,7 @@ import { Formik, FormikProps } from 'formik'
 import { Form } from 'formik-antd'
 import { ListingCreatePostPopperProps } from './ListingCreatePostPopper.interface'
 import { RootState } from '../../store/store'
+import CaltonSelect from '../../components/Select/Select'
 
 function ListingCreatePostPopper({
     postData,
@@ -80,16 +82,13 @@ function ListingCreatePostPopper({
 
     const [imagesNotUploaded, setImagesNotUploaded] = useState([])
 
-    const [postType, setPostType] = useState(
+    const [postType, setPostType] = useState<any>(
         post?.topicType
             ? postTypes?.find((obj: any) => obj?.value === post?.topicType)
             : postTypes[0]
     )
 
-    const handleSetPostType = (
-        value: string,
-        formikProps: FormikProps<any>
-    ) => {
+    const handleSetPostType = (value: any, formikProps: FormikProps<any>) => {
         formikProps.resetForm()
         setPostType(JSON.parse(value))
         setDataReady(false)
@@ -284,6 +283,14 @@ function ListingCreatePostPopper({
         return undefined
     }
 
+    const postTitle = postTypes?.find(
+        (obj) => obj?.value === postType?.value
+    )?.title
+
+    const postSubTitle = postTypes?.find(
+        (obj) => obj?.value === postType?.value
+    )?.subtitle
+
     return (
         <Formik
             initialValues={{
@@ -310,35 +317,21 @@ function ListingCreatePostPopper({
                                 <span className={styles.label}>
                                     {t('Tipologia post')}
                                 </span>
-                                <StyledSelect
-                                    filterOption={false}
-                                    style={
-                                        fullWidth
-                                            ? { width: '30%' }
-                                            : { width: '100%' }
+                                <CaltonSelect
+                                    value={
+                                        postTypes[
+                                            postTypes?.findIndex(
+                                                (x) =>
+                                                    x.displayName ===
+                                                    postType?.displayName
+                                            )
+                                        ]
                                     }
-                                    value={t(
-                                        postType?.displayName
-                                            ? postTypes.displayName
-                                            : ''
-                                    )}
-                                    onChange={(value: string) =>
-                                        handleSetPostType(value, formikProps)
+                                    onChange={(newValue) =>
+                                        handleSetPostType(newValue, formikProps)
                                     }
-                                    dropdownRender={(menu) => (
-                                        <StyledMenu>{menu}</StyledMenu>
-                                    )}
-                                >
-                                    {postTypes?.map((type) => (
-                                        <Select.Option
-                                            key={type.displayName}
-                                            value={JSON.stringify(type)}
-                                            className={styles.menuItem}
-                                        >
-                                            {t(type.displayName)}
-                                        </Select.Option>
-                                    ))}
-                                </StyledSelect>
+                                    options={postTypes}
+                                />
                             </div>
                             <div
                                 className={styles.containerInputPopper}
@@ -370,11 +363,8 @@ function ListingCreatePostPopper({
                                                 : customAutocompleteSelected?.length +
                                                   t('luoghi')
                                         }
-                                        placeholder={t(
+                                        placeholderInput={t(
                                             'Seleziona la location da cui prendere le informazioni'
-                                        )}
-                                        title={t(
-                                            'Seleziona la tua location di base'
                                         )}
                                         labels={allLocations}
                                         defaultValue={
@@ -397,20 +387,16 @@ function ListingCreatePostPopper({
                                             style={{ paddingRight: 50 }}
                                         >
                                             <RctBlockPost
-                                                title={t(
-                                                    postTypes?.find(
-                                                        (obj) =>
-                                                            obj?.value ===
-                                                            postType?.value
-                                                    )?.title
-                                                )}
-                                                subtitle={t(
-                                                    postTypes?.find(
-                                                        (obj) =>
-                                                            obj?.value ===
-                                                            postType?.value
-                                                    )?.subtitle
-                                                )}
+                                                title={
+                                                    postTitle
+                                                        ? t(postTitle)
+                                                        : ''
+                                                }
+                                                subtitle={
+                                                    postSubTitle
+                                                        ? t(postSubTitle)
+                                                        : ''
+                                                }
                                             >
                                                 {postType.value === 'OFFER' ? (
                                                     <PostOffer
@@ -576,10 +562,7 @@ function ListingCreatePostPopper({
                         </div>
                         <div className={styles.popperSave}>
                             <Button
-                                loading={formikProps?.isSubmitting}
-                                type="button"
-                                htmlType={'submit'}
-                                className={`text-white pt-8 pb-8 ${styles.btnSave}`}
+                            //loading={formikProps?.isSubmitting}
                             >
                                 {t('Pubblica')}
                             </Button>

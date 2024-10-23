@@ -9,6 +9,7 @@ export interface ViewOption {
 export interface PostType {
     displayName: string
     labelValue: string
+    label: string
     value: string
     title: string
     subtitle: string
@@ -87,6 +88,7 @@ export const VIEW_OPTIONS: ViewOption[] = [
 export const postTypes: PostType[] = [
     {
         displayName: 'Crea aggiornamento',
+        label: 'Crea aggiornamento',
         labelValue: 'Post',
         value: 'STANDARD',
         title: 'Aggiungi aggiornamento',
@@ -94,6 +96,7 @@ export const postTypes: PostType[] = [
     },
     {
         displayName: 'Crea offerta',
+        label: 'Crea offerta',
         labelValue: 'Offerta',
         value: 'OFFER',
         title: 'Aggiungi offerta',
@@ -102,6 +105,7 @@ export const postTypes: PostType[] = [
     },
     {
         displayName: 'Crea evento',
+        label: 'Crea evento',
         labelValue: 'Evento',
         value: 'EVENT',
         title: 'Aggiungi evento',
