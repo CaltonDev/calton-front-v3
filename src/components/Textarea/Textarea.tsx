@@ -2,13 +2,6 @@ import styles from './Textarea.module.scss'
 import { TextareaProps } from './Textarea.interface'
 import React from 'react'
 import SvgWrapper from '../SvgWrapper/SvgWrapper'
-import {
-    iconExtraSmallSize,
-    iconLargeSize,
-    iconMediumSize,
-    iconSmallSize,
-    iconXLargeSize,
-} from '../../constants/constants'
 
 const Textarea = ({
     rows,
@@ -23,6 +16,7 @@ const Textarea = ({
     fullWidth = false,
     size,
     customPadding,
+    name = '',
 }: TextareaProps) => {
     const colorClass = color ? styles[color] : ''
     const disabledClass = disabled ? styles[`disabled`] : ''
@@ -32,6 +26,7 @@ const Textarea = ({
     return (
         <div className={`${styles.container} ${containerSizeClass}`}>
             <textarea
+                name={name}
                 className={`${styles.textarea} ${colorClass} ${disabledClass} ${sizeClass}`}
                 disabled={disabled}
                 onChange={onChange}

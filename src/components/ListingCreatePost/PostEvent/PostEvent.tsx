@@ -1,6 +1,6 @@
 import styles from './PostEvent.module.scss'
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Input, TimePicker } from 'antd'
+import { TimePicker } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import UploadPhotoModal from '../../Modals/UploadPhotoModal/UploadPhotoModal'
@@ -12,11 +12,13 @@ import moment, { Moment } from 'moment/moment'
 import { formatTime } from '../../../helpers/helpers'
 import PostCarousel from '../PostCarousel/PostCarousel'
 import PostSelectBtnType from '../PostSelectBtnType/PostSelectBtnType'
-import { Field, FormItem } from 'formik-antd'
+import { Field } from 'formik'
 import '../DatePicker.css'
 import { PostEventProps } from './PostEvent.interface'
 import { CustomInputProps } from '../PostCommons.interface'
 import CaltonDatePicker from '../../DatePicker/DatePicker'
+import FormInputWrapper from '../../FormFieldsWrapper/FormInputWrapper/FormInputWrapper'
+import Textarea from '../../Textarea/Textarea'
 
 function PostEvent({
     validatePostFields,
@@ -452,32 +454,21 @@ function PostEvent({
                     style={isFromPopper ? { width: '100%' } : {}}
                 >
                     <span className={styles.label}>{t('Titolo evento')}</span>
-                    <FormItem
+                    <Field
                         name="postEventTitle"
                         required={true}
-                        validate={(value) =>
+                        validate={(value: any) =>
                             validatePostFields(value, 'postEventTitle')
                         }
                         style={!isFromPopper ? { marginBottom: '3rem' } : {}}
-                    >
-                        <Input
-                            type={'text'}
-                            style={
-                                isFromPopper
-                                    ? { width: '100%' }
-                                    : { width: '95%' }
-                            }
-                            className={
-                                isFromPopper ? styles.inputPopper : styles.input
-                            }
-                            value={post?.event?.title}
-                            placeholder={t(
-                                'Esempio: 20% di sconto in negozio o online'
-                            )}
-                            onChange={(e) => handleSetTitle(e.target.value)}
-                            name={'postEventTitle'}
-                        />
-                    </FormItem>
+                        component={FormInputWrapper}
+                        type={'text'}
+                        value={post?.event?.title}
+                        placeholder={t(
+                            'Esempio: 20% di sconto in negozio o online'
+                        )}
+                        onChange={(e: any) => handleSetTitle(e.target.value)}
+                    />
                     <div
                         style={
                             isFromPopper
@@ -494,10 +485,10 @@ function PostEvent({
                             <span className={styles.label}>
                                 {t('Data di inizio')}
                             </span>
-                            <FormItem
+                            <Field
                                 name="postEventStartDate"
                                 required={true}
-                                validate={(value) =>
+                                validate={(value: any) =>
                                     validatePostFields(
                                         value,
                                         'postEventStartDate'
@@ -508,34 +499,35 @@ function PostEvent({
                                         ? { marginBottom: '3rem' }
                                         : {}
                                 }
-                            >
-                                <CaltonDatePicker
-                                    name="postEventStartDate"
-                                    selected={startDate}
-                                    onChange={(date) =>
-                                        handleSetStartDate(date)
-                                    }
-                                    selectsRange={false}
-                                    isClearable={false}
-                                    shouldCloseOnSelect={true}
-                                    startOpen={false}
-                                    preventOpenOnFocus={true}
-                                    allowSameDay={true}
-                                    placeholderText="00/00/0000"
-                                    dateFormat="dd/MM/yyyy"
-                                    wrapperClassName="datePicker"
-                                    customInput={<CustomInput />}
-                                />
-                            </FormItem>
+                                component={
+                                    <CaltonDatePicker
+                                        name="postEventStartDate"
+                                        selected={startDate}
+                                        onChange={(date) =>
+                                            handleSetStartDate(date)
+                                        }
+                                        selectsRange={false}
+                                        isClearable={false}
+                                        shouldCloseOnSelect={true}
+                                        startOpen={false}
+                                        preventOpenOnFocus={true}
+                                        allowSameDay={true}
+                                        placeholderText="00/00/0000"
+                                        dateFormat="dd/MM/yyyy"
+                                        wrapperClassName="datePicker"
+                                        customInput={<CustomInput />}
+                                    />
+                                }
+                            />
                         </div>
                         <div className={styles.containerInput}>
                             <span className={styles.label}>
                                 {t('Data di fine')}
                             </span>
-                            <FormItem
+                            <Field
                                 name="postEventEndDate"
                                 required={true}
-                                validate={(value) =>
+                                validate={(value: any) =>
                                     validatePostFields(
                                         value,
                                         'postEventEndDate'
@@ -546,22 +538,25 @@ function PostEvent({
                                         ? { marginBottom: '3rem' }
                                         : {}
                                 }
-                            >
-                                <CaltonDatePicker
-                                    name="postEventEndDate"
-                                    selected={endDate}
-                                    onChange={(date) => handleSetEndDate(date)}
-                                    selectsRange={false}
-                                    isClearable={false}
-                                    shouldCloseOnSelect={true}
-                                    startOpen={false}
-                                    preventOpenOnFocus={true}
-                                    allowSameDay={true}
-                                    placeholderText="00/00/0000"
-                                    dateFormat="dd/MM/yyyy"
-                                    customInput={<CustomInput />}
-                                />
-                            </FormItem>
+                                component={
+                                    <CaltonDatePicker
+                                        name="postEventEndDate"
+                                        selected={endDate}
+                                        onChange={(date) =>
+                                            handleSetEndDate(date)
+                                        }
+                                        selectsRange={false}
+                                        isClearable={false}
+                                        shouldCloseOnSelect={true}
+                                        startOpen={false}
+                                        preventOpenOnFocus={true}
+                                        allowSameDay={true}
+                                        placeholderText="00/00/0000"
+                                        dateFormat="dd/MM/yyyy"
+                                        customInput={<CustomInput />}
+                                    />
+                                }
+                            />
                         </div>
                     </div>
                     <div
@@ -580,10 +575,10 @@ function PostEvent({
                             <span className={styles.label}>
                                 {t('Orario di inizio')}
                             </span>
-                            <FormItem
+                            <Field
                                 name="postEventStartTime"
                                 required={true}
-                                validate={(value) =>
+                                validate={(value: any) =>
                                     validatePostFields(
                                         value,
                                         'postEventStartTime'
@@ -594,40 +589,41 @@ function PostEvent({
                                         ? { marginBottom: '3rem' }
                                         : {}
                                 }
-                            >
-                                <TimePicker
-                                    className={
-                                        isFromPopper
-                                            ? styles.pickerPopper
-                                            : styles.picker
-                                    }
-                                    onOpenChange={(e) =>
-                                        setIsTimePickerStart(e)
-                                    }
-                                    placeholder={`Open at: ${startTime.format('HH:mm')}`}
-                                    onChange={onSelectStartTime}
-                                    suffixIcon={
-                                        isTimePickerStart ? (
-                                            <CaretDownOutlined />
-                                        ) : (
-                                            <CaretRightOutlined />
-                                        )
-                                    }
-                                    format="HH:mm"
-                                    minuteStep={5}
-                                    value={valueStartTime}
-                                    name={'postEventStartTiime'}
-                                />
-                            </FormItem>
+                                component={
+                                    <TimePicker
+                                        className={
+                                            isFromPopper
+                                                ? styles.pickerPopper
+                                                : styles.picker
+                                        }
+                                        onOpenChange={(e) =>
+                                            setIsTimePickerStart(e)
+                                        }
+                                        placeholder={`Open at: ${startTime.format('HH:mm')}`}
+                                        onChange={onSelectStartTime}
+                                        suffixIcon={
+                                            isTimePickerStart ? (
+                                                <CaretDownOutlined />
+                                            ) : (
+                                                <CaretRightOutlined />
+                                            )
+                                        }
+                                        format="HH:mm"
+                                        minuteStep={5}
+                                        value={valueStartTime}
+                                        name={'postEventStartTiime'}
+                                    />
+                                }
+                            />
                         </div>
                         <div className={styles.timePickers}>
                             <span className={styles.label}>
                                 {t('Orario di fine')}
                             </span>
-                            <FormItem
+                            <Field
                                 name="postEventEndTime"
                                 required={true}
-                                validate={(value) =>
+                                validate={(value: any) =>
                                     validatePostFields(
                                         value,
                                         'postEventEndTime'
@@ -638,29 +634,32 @@ function PostEvent({
                                         ? { marginBottom: '3rem' }
                                         : {}
                                 }
-                            >
-                                <TimePicker
-                                    className={
-                                        isFromPopper
-                                            ? styles.pickerPopper
-                                            : styles.picker
-                                    }
-                                    onOpenChange={(e) => setIsTimePickerEnd(e)}
-                                    placeholder={`Close at: ${endTime.format('HH:mm')}`}
-                                    onChange={onSelectEndTime}
-                                    suffixIcon={
-                                        isTimePickerEnd ? (
-                                            <CaretDownOutlined />
-                                        ) : (
-                                            <CaretRightOutlined />
-                                        )
-                                    }
-                                    format="HH:mm"
-                                    minuteStep={5}
-                                    value={valueEndTime}
-                                    name="postEventEndTime"
-                                />
-                            </FormItem>
+                                component={
+                                    <TimePicker
+                                        className={
+                                            isFromPopper
+                                                ? styles.pickerPopper
+                                                : styles.picker
+                                        }
+                                        onOpenChange={(e) =>
+                                            setIsTimePickerEnd(e)
+                                        }
+                                        placeholder={`Close at: ${endTime.format('HH:mm')}`}
+                                        onChange={onSelectEndTime}
+                                        suffixIcon={
+                                            isTimePickerEnd ? (
+                                                <CaretDownOutlined />
+                                            ) : (
+                                                <CaretRightOutlined />
+                                            )
+                                        }
+                                        format="HH:mm"
+                                        minuteStep={5}
+                                        value={valueEndTime}
+                                        name="postEventEndTime"
+                                    />
+                                }
+                            />
                         </div>
                     </div>
                     <div
@@ -672,34 +671,29 @@ function PostEvent({
                         <span className={styles.label}>
                             {t('Dettagli eventi')}
                         </span>
-                        <FormItem
+                        <Field
                             name="postDescription"
                             required={true}
-                            validate={(value) =>
+                            validate={(value: any) =>
                                 validatePostFields(value, 'postDescription')
                             }
                             key={'postDescription'}
-                        >
-                            <Field
-                                name="postDescription"
-                                /*value={
-                                    post?.media?.length > 0
-                                        ? post?.media[0]?.description
-                                        : ''
-                                }
-                                className={
-                                    isFromPopper
-                                        ? styles.inputTextAreaPopper
-                                        : styles.inputTextArea
-                                }*/
-                                /*onChange={(e: any) =>
-                                    handleSetDescription(e.target.value)
-                                }
-                                placeholder={t('Aggiungi dettagli...')}
-                                rows={isFromPopper ? 2 : 4}*/
-                                //as={'textarea'}
-                            />
-                        </FormItem>
+                            component={
+                                <Textarea
+                                    name="postDescription"
+                                    value={
+                                        post?.media?.length > 0
+                                            ? post?.media[0]?.description
+                                            : ''
+                                    }
+                                    onChange={(e: any) =>
+                                        handleSetDescription(e.target.value)
+                                    }
+                                    placeholder={t('Aggiungi dettagli...')}
+                                    rows={isFromPopper ? 2 : 4}
+                                />
+                            }
+                        />
                         <span className={styles.labelCharCounter}>
                             {post?.summary
                                 ? post?.summary?.length + ' / 1500'
@@ -737,10 +731,10 @@ function PostEvent({
                         <PostSelectBtnType post={post} setPost={setPost} />
                         {post?.callToAction?.actionType !==
                             'ACTION_TYPE_UNSPECIFIED' && (
-                            <FormItem
+                            <Field
                                 name="postBtnLink"
                                 required={true}
-                                validate={(value) =>
+                                validate={(value: any) =>
                                     validatePostFields(value, 'postBtnLink')
                                 }
                                 style={
@@ -752,22 +746,19 @@ function PostEvent({
                                         : {}
                                 }
                                 key={'postBtnLink'}
-                            >
-                                <Input
-                                    type={'text'}
-                                    name={'postBtnLink'}
-                                    className={
-                                        isFromPopper
-                                            ? styles.inputPopper
-                                            : styles.input
-                                    }
-                                    value={post?.callToAction?.url}
-                                    placeholder={t('Link per il pulsante')}
-                                    onChange={(e) =>
-                                        handleSetBtnLink(e.target.value)
-                                    }
-                                />
-                            </FormItem>
+                                component={FormInputWrapper}
+                                type={'text'}
+                                className={
+                                    isFromPopper
+                                        ? styles.inputPopper
+                                        : styles.input
+                                }
+                                value={post?.callToAction?.url}
+                                placeholder={t('Link per il pulsante')}
+                                onChange={(e: any) =>
+                                    handleSetBtnLink(e.target.value)
+                                }
+                            />
                         )}
                     </div>
                 </div>

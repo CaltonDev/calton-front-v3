@@ -1,15 +1,16 @@
 import styles from './PostUpdate.module.scss'
 import React, { useState } from 'react'
-import { Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import UploadPhotoModal from '../../Modals/UploadPhotoModal/UploadPhotoModal'
 import { setIsSingle } from '../../../store/photos/photosSlice'
 import PostCarousel from '../PostCarousel/PostCarousel'
 import PostSelectBtnType from '../PostSelectBtnType/PostSelectBtnType'
-import { Field, FormItem } from 'formik-antd'
+import { Field } from 'formik'
 import '../DatePicker.css'
 import { PostUpdateProps } from './PostUpdate.interface'
+import FormInputWrapper from '../../FormFieldsWrapper/FormInputWrapper/FormInputWrapper'
+import Textarea from '../../Textarea/Textarea'
 
 function PostUpdate({
     validatePostFields,
@@ -114,35 +115,31 @@ function PostUpdate({
                     <span className={styles.label}>
                         {t('Aggiungi descrizione')}
                     </span>
-                    <FormItem
+                    <Field
+                        fullWidth={true}
                         name="postDescription"
+                        component={
+                            <Textarea
+                                value={
+                                    post?.media?.length > 0
+                                        ? post?.media[0]?.description
+                                        : ''
+                                }
+                                onChange={(e: any) =>
+                                    handleSetDescription(e.target.value)
+                                }
+                                rows={isFromPopper ? 2 : 4}
+                            />
+                        }
+                        placeholder={t('Email Name')}
+                        formikProps={formikProps}
                         required={true}
-                        validate={(value) =>
+                        validate={(value: any) =>
                             validatePostFields(value, 'postDescription')
                         }
                         style={!isFromPopper ? { marginBottom: '3rem' } : {}}
                         key={'postDescription'}
-                    >
-                        <Field
-                            name="postDescription"
-                            /*value={
-                                post?.media?.length > 0
-                                    ? post?.media[0]?.description
-                                    : ''
-                            }
-                            className={
-                                isFromPopper
-                                    ? styles.inputTextAreaPopper
-                                    : styles.inputTextArea
-                            }
-                            onChange={(e: any) =>
-                                handleSetDescription(e.target.value)
-                            }
-                            placeholder={t('Aggiungi descrizione')}
-                            rows={isFromPopper ? 2 : 4}
-                            as={'textarea'}*/
-                        />
-                    </FormItem>
+                    />
                     <span className={styles.labelCharCounter}>
                         {post?.summary
                             ? post?.summary?.length + ' / 1500'
@@ -155,24 +152,25 @@ function PostUpdate({
                             {t('Aggiungi foto')}
                         </span>
                         <div style={{ display: 'flex' }}>
-                            <FormItem
+                            <Field
                                 name="postEventMedia"
                                 required={true}
-                                validate={(value) =>
+                                validate={(value: any) =>
                                     validatePostFields(value, 'postEventMedia')
                                 }
                                 key={'postEventMedia'}
-                            >
-                                <PostCarousel
-                                    handleFormikValidation={
-                                        handleValidateFormikImgData
-                                    }
-                                    imagesWithError={imagesWithError}
-                                    imgFromApi={imgFromApiObj}
-                                    isFromPopper={isFromPopper}
-                                    handleAddPhoto={handleAddPhoto}
-                                />
-                            </FormItem>
+                                component={
+                                    <PostCarousel
+                                        handleFormikValidation={
+                                            handleValidateFormikImgData
+                                        }
+                                        imagesWithError={imagesWithError}
+                                        imgFromApi={imgFromApiObj}
+                                        isFromPopper={isFromPopper}
+                                        handleAddPhoto={handleAddPhoto}
+                                    />
+                                }
+                            />
                         </div>
                     </div>
                 )}
@@ -188,10 +186,11 @@ function PostUpdate({
                         <PostSelectBtnType post={post} setPost={setPost} />
                         {post?.callToAction?.actionType !==
                             'ACTION_TYPE_UNSPECIFIED' && (
-                            <FormItem
+                            <Field
                                 name="postBtnLink"
                                 required={true}
-                                validate={(value) =>
+                                component={FormInputWrapper}
+                                validate={(value: any) =>
                                     validatePostFields(value, 'postBtnLink')
                                 }
                                 style={
@@ -203,23 +202,18 @@ function PostUpdate({
                                         : {}
                                 }
                                 key={'postBtnLink'}
-                            >
-                                <Input
-                                    type={'text'}
-                                    name="postBtnLink"
-                                    style={{ height: 39 }}
-                                    className={
-                                        isFromPopper
-                                            ? styles.inputPopper
-                                            : styles.input
-                                    }
-                                    value={post?.callToAction?.url}
-                                    placeholder={t('Link per il pulsante')}
-                                    onChange={(e) =>
-                                        handleSetBtnLink(e.target.value)
-                                    }
-                                />
-                            </FormItem>
+                                type={'text'}
+                                className={
+                                    isFromPopper
+                                        ? styles.inputPopper
+                                        : styles.input
+                                }
+                                value={post?.callToAction?.url}
+                                placeholder={t('Link per il pulsante')}
+                                onChange={(e: any) =>
+                                    handleSetBtnLink(e.target.value)
+                                }
+                            />
                         )}
                     </div>
                 </div>
@@ -235,24 +229,25 @@ function PostUpdate({
                 >
                     <span className={styles.label}>{t('Aggiungi foto')}</span>
                     <div style={{ display: 'flex' }}>
-                        <FormItem
+                        <Field
                             name="postEventMedia"
                             required={true}
-                            validate={(value) =>
+                            validate={(value: any) =>
                                 validatePostFields(value, 'postEventMedia')
                             }
                             key={'postEventMedia'}
-                        >
-                            <PostCarousel
-                                handleFormikValidation={
-                                    handleValidateFormikImgData
-                                }
-                                imagesWithError={imagesWithError}
-                                imgFromApi={imgFromApiObj}
-                                isFromPopper={isFromPopper}
-                                handleAddPhoto={handleAddPhoto}
-                            />
-                        </FormItem>
+                            component={
+                                <PostCarousel
+                                    handleFormikValidation={
+                                        handleValidateFormikImgData
+                                    }
+                                    imagesWithError={imagesWithError}
+                                    imgFromApi={imgFromApiObj}
+                                    isFromPopper={isFromPopper}
+                                    handleAddPhoto={handleAddPhoto}
+                                />
+                            }
+                        />
                     </div>
                 </div>
             )}

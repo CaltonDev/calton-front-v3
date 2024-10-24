@@ -2,18 +2,12 @@ import { useTranslation } from 'react-i18next'
 import styles from './ListingCreatePostPopper.module.scss'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Select } from 'antd'
 import Button from '../../components/Button/Button'
 import { showToast } from '../../store/toast/errorToastSlice'
-import LoaderChart from '../../components/CardInsights/LoaderChart/LoaderChart'
 import {
     isWhiteSpaceString,
     manageLocalToastWSAndReload,
 } from '../../helpers/helpers'
-import {
-    StyledMenu,
-    StyledSelect,
-} from '../../components/ListingEdit/AdditionalCategorySelect/AdditionalCategorySelectStyled'
 import PostEvent from '../../components/ListingCreatePost/PostEvent/PostEvent'
 import PostOffer from '../../components/ListingCreatePost/PostOffer/PostOffer'
 import PostUpdate from '../../components/ListingCreatePost/PostUpdate/PostUpdate'
@@ -24,8 +18,7 @@ import PostPreview from '../../components/ListingCreatePost/PostPreview/PostPrev
 import { postTypes } from '../../constants/CustomConstants'
 import RctBlockPost from '../../components/RctBlockPost/RctBlockPost'
 import RctBlockPostPreview from '../../components/RctBlockPost/RctBlockPostPreview'
-import { Formik, FormikProps } from 'formik'
-import { Form } from 'formik-antd'
+import { Formik, FormikProps, Form } from 'formik'
 import { ListingCreatePostPopperProps } from './ListingCreatePostPopper.interface'
 import { RootState } from '../../store/store'
 import CaltonSelect from '../../components/Select/Select'

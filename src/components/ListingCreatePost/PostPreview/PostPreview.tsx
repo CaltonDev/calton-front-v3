@@ -1,6 +1,5 @@
 import styles from './PostPreview.module.scss'
-import React, { useEffect, useState } from 'react'
-import { Button } from 'antd'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { btnTypesList, postTypes } from '../../../constants/CustomConstants'
 import PostCarousel from '../PostCarousel/PostCarousel'
@@ -215,7 +214,7 @@ function PostPreview({
                                     <span className={styles.description}>
                                         {post?.summary}
                                     </span>
-                                    <Button
+                                    <a
                                         type="link"
                                         href={validateUrlText(
                                             post?.offer?.redeemOnlineUrl
@@ -232,7 +231,7 @@ function PostPreview({
                                         >
                                             {t('UTILIZZA ONLINE')}
                                         </span>
-                                    </Button>
+                                    </a>
                                 </div>
                                 <div className={styles.flexColumn}>
                                     <div className={styles.coupon}>
@@ -301,17 +300,17 @@ function PostPreview({
                             {post?.callToAction &&
                                 post?.callToAction?.actionType !==
                                     'ACTION_TYPE_UNSPECIFIED' && (
-                                    <Button
+                                    <a
                                         href={validateUrlText(
                                             post?.callToAction?.url
                                         )}
                                         target={'_blank'}
                                         className={styles.infoBtn}
                                         type="primary"
-                                        shape="round"
+                                        rel="noreferrer"
                                     >
                                         {btnLabel ? t(btnLabel) : ''}
-                                    </Button>
+                                    </a>
                                 )}
                         </div>
                     </div>

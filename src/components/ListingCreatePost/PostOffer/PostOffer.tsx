@@ -1,19 +1,18 @@
 import styles from './PostOffer.module.scss'
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Input } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import UploadPhotoModal from '../../Modals/UploadPhotoModal/UploadPhotoModal'
 import { setIsSingle } from '../../../store/photos/photosSlice'
 import { DownOutlined, RightOutlined } from '@ant-design/icons'
 import PostCarousel from '../PostCarousel/PostCarousel'
-import { FormItem } from 'formik-antd'
+import { Field } from 'formik'
 import { PostOfferProps } from './PostOffer.interface'
 import { CustomInputProps } from '../PostCommons.interface'
-
 import CaltonDatePicker from '../../DatePicker/DatePicker'
-
-const { TextArea } = Input
+import FormInputWrapper from '../../FormFieldsWrapper/FormInputWrapper/FormInputWrapper'
+import Input from '../../Input/Input'
+import Textarea from '../../Textarea/Textarea'
 
 function PostOffer({
     validatePostFields,
@@ -308,32 +307,24 @@ function PostOffer({
                     style={isFromPopper ? { width: '100%' } : {}}
                 >
                     <span className={styles.label}>{t('Titolo offerta')}</span>
-                    <FormItem
+                    <Field
                         name="postEventTitle"
                         required={true}
-                        validate={(value) =>
+                        validate={(value: any) =>
                             validatePostFields(value, 'postEventTitle')
                         }
                         style={!isFromPopper ? { marginBottom: '3rem' } : {}}
-                    >
-                        <Input
-                            type={'text'}
-                            style={
-                                isFromPopper
-                                    ? { width: '100%' }
-                                    : { width: '95%' }
-                            }
-                            className={
-                                isFromPopper ? styles.inputPopper : styles.input
-                            }
-                            value={post?.event?.title}
-                            placeholder={t(
-                                'Esempio: 20% di sconto in negozio o online'
-                            )}
-                            onChange={(e) => handleSetTitle(e.target.value)}
-                            name={'postEventTitle'}
-                        />
-                    </FormItem>
+                        component={FormInputWrapper}
+                        type={'text'}
+                        className={
+                            isFromPopper ? styles.inputPopper : styles.input
+                        }
+                        value={post?.event?.title}
+                        placeholder={t(
+                            'Esempio: 20% di sconto in negozio o online'
+                        )}
+                        onChange={(e: any) => handleSetTitle(e.target.value)}
+                    />
                     <div
                         style={
                             isFromPopper
@@ -348,10 +339,10 @@ function PostOffer({
                             <span className={styles.label}>
                                 {t('Data di inizio')}
                             </span>
-                            <FormItem
+                            <Field
                                 name="postEventStartDate"
                                 required={true}
-                                validate={(value) =>
+                                validate={(value: any) =>
                                     validatePostFields(
                                         value,
                                         'postEventStartDate'
@@ -362,34 +353,35 @@ function PostOffer({
                                         ? { marginBottom: '3rem' }
                                         : {}
                                 }
-                            >
-                                <CaltonDatePicker
-                                    name="postEventStartDate"
-                                    selected={startDate}
-                                    onChange={(date) =>
-                                        handleSetStartDate(date)
-                                    }
-                                    selectsRange={false}
-                                    isClearable={false}
-                                    shouldCloseOnSelect={true}
-                                    startOpen={false}
-                                    preventOpenOnFocus={true}
-                                    allowSameDay={true}
-                                    //locale={i18n.language}
-                                    placeholderText="00/00/0000"
-                                    dateFormat="dd/MM/yyyy"
-                                    customInput={<CustomInput />}
-                                />
-                            </FormItem>
+                                component={
+                                    <CaltonDatePicker
+                                        name="postEventStartDate"
+                                        selected={startDate}
+                                        onChange={(date) =>
+                                            handleSetStartDate(date)
+                                        }
+                                        selectsRange={false}
+                                        isClearable={false}
+                                        shouldCloseOnSelect={true}
+                                        startOpen={false}
+                                        preventOpenOnFocus={true}
+                                        allowSameDay={true}
+                                        //locale={i18n.language}
+                                        placeholderText="00/00/0000"
+                                        dateFormat="dd/MM/yyyy"
+                                        customInput={<CustomInput />}
+                                    />
+                                }
+                            />
                         </div>
                         <div className={styles.containerInput}>
                             <span className={styles.label}>
                                 {t('Data di fine')}
                             </span>
-                            <FormItem
+                            <Field
                                 name="postEventEndDate"
                                 required={true}
-                                validate={(value) =>
+                                validate={(value: any) =>
                                     validatePostFields(
                                         value,
                                         'postEventEndDate'
@@ -400,23 +392,26 @@ function PostOffer({
                                         ? { marginBottom: '3rem' }
                                         : {}
                                 }
-                            >
-                                <CaltonDatePicker
-                                    name="postEventEndDate"
-                                    selected={endDate}
-                                    onChange={(date) => handleSetEndDate(date)}
-                                    selectsRange={false}
-                                    isClearable={false}
-                                    shouldCloseOnSelect={true}
-                                    startOpen={false}
-                                    preventOpenOnFocus={true}
-                                    allowSameDay={true}
-                                    //locale={i18n.language}
-                                    placeholderText="00/00/0000"
-                                    dateFormat="dd/MM/yyyy"
-                                    customInput={<CustomInput />}
-                                />
-                            </FormItem>
+                                component={
+                                    <CaltonDatePicker
+                                        name="postEventEndDate"
+                                        selected={endDate}
+                                        onChange={(date) =>
+                                            handleSetEndDate(date)
+                                        }
+                                        selectsRange={false}
+                                        isClearable={false}
+                                        shouldCloseOnSelect={true}
+                                        startOpen={false}
+                                        preventOpenOnFocus={true}
+                                        allowSameDay={true}
+                                        //locale={i18n.language}
+                                        placeholderText="00/00/0000"
+                                        dateFormat="dd/MM/yyyy"
+                                        customInput={<CustomInput />}
+                                    />
+                                }
+                            />
                         </div>
                     </div>
                 </div>
@@ -467,11 +462,9 @@ function PostOffer({
                                 </span>
                                 <Input
                                     type={'text'}
-                                    style={{ width: '95%' }}
-                                    className={styles.input}
                                     value={post?.offer?.couponCode}
                                     placeholder={t('Nome coupon')}
-                                    onChange={(e) =>
+                                    onChange={(e: any) =>
                                         handleSetCouponCode(e.target.value)
                                     }
                                 />
@@ -482,11 +475,9 @@ function PostOffer({
                                 </span>
                                 <Input
                                     type={'text'}
-                                    style={{ width: '95%' }}
-                                    className={styles.input}
                                     value={post?.offer?.redeemOnlineUrl}
                                     placeholder={t('Link offerta')}
-                                    onChange={(e) =>
+                                    onChange={(e: any) =>
                                         handleSetOfferLink(e.target.value)
                                     }
                                 />
@@ -497,10 +488,9 @@ function PostOffer({
                                 <span className={styles.label}>
                                     {t('Dettagli offerta')}
                                 </span>
-                                <TextArea
+                                <Textarea
                                     value={post?.summary}
-                                    className={styles.inputTextArea}
-                                    onChange={(e) =>
+                                    onChange={(e: any) =>
                                         handleSetOfferDetails(e.target.value)
                                     }
                                     placeholder={t('Aggiungi dettagli...')}
@@ -511,10 +501,9 @@ function PostOffer({
                                 <span className={styles.label}>
                                     {t('Termini e condizioni')}
                                 </span>
-                                <TextArea
+                                <Textarea
                                     value={post?.offer?.termsConditions}
-                                    className={styles.inputTextArea}
-                                    onChange={(e) =>
+                                    onChange={(e: any) =>
                                         handleSetOfferTerms(e.target.value)
                                     }
                                     placeholder={t('Aggiungi dettagli...')}

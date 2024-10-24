@@ -1,5 +1,6 @@
 import * as React from 'react'
 export interface TextareaProps {
+    name?: string
     rows?: number
     cols?: number
     disabled?: boolean
