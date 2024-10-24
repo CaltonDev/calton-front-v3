@@ -10,7 +10,6 @@ import { VIEW_OPTIONS } from '../../../constants/CustomConstants'
 import { useTranslation } from 'react-i18next'
 import moment from 'moment/moment'
 import { Views } from 'react-big-calendar'
-import { views } from 'react-big-calendar/lib/utils/constants'
 import { debounce } from 'lodash'
 import { CaltonCalendarHeaderProps } from './CaltonCalendarHeader.interface'
 
@@ -89,19 +88,19 @@ function CaltonCalendarHeader({
     }
 
     const onTodayClick = () => {
-        if (view === views.WEEK) {
+        if (view === Views.WEEK) {
             const startOfWeek = moment()
                 .startOf('week')
                 .utcOffset(0, true)
                 .toDate()
             setStartDate(startOfWeek)
-        } else if (view === views.MONTH) {
+        } else if (view === Views.MONTH) {
             const startOfMonth = moment()
                 .startOf('month')
                 .utcOffset(0, true)
                 .toDate()
             setStartDate(startOfMonth)
-        } else if (view === views.DAY) {
+        } else if (view === Views.DAY) {
             const initialStartDate = moment()
                 .startOf('day')
                 .utcOffset(0, true)
