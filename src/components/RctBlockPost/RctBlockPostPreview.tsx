@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './RctBlock.module.scss'
+import styles from './RctBlockPost.module.scss'
 import { RctBlockPostProps } from './RctBlockPost.interface'
 
 function RctBlockPostPreview({
