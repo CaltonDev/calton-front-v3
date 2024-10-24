@@ -11,7 +11,7 @@ import AppConfig from '../../../constants/AppConfig'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsSingle, setUploadPhotos } from '../../../store/photos/photosSlice'
 import { PHOTO_CATEGORIES } from '../../../constants/StringConstant'
-import AntModal from 'Components/AntModal/AntModal'
+import AntModal from '../../ConfirmClosedHoursModal/AntModal'
 import { UploadPhotoModalProps } from './UploadPhotoModal.interface'
 import { RootState } from '../../../store/store'
 
@@ -24,7 +24,7 @@ function UploadPhotoModal({
     primaryCategory,
 }: UploadPhotoModalProps) {
     const { t, i18n } = useTranslation()
-    const [images, setImages] = useState([])
+    const [images, setImages] = useState<any[]>([])
     const isSingle = useSelector(
         (state: RootState) => state?.UploadPhotos?.isSingle
     )
@@ -116,7 +116,7 @@ function UploadPhotoModal({
     }
 
     const handleUploadWithLink = (link: any, idx: number) => {
-        let currentLinksArray = [...selectedLinks]
+        const currentLinksArray: any = [...selectedLinks]
         currentLinksArray[idx] = {
             data_url: link,
             uuid: uuidv5(
@@ -128,7 +128,12 @@ function UploadPhotoModal({
     }
 
     const handleAddAdditionalLink = () => {
-        setSelectedLinks((links) => [...links, {}])
+        setSelectedLinks((links: any) => [...links, {}])
+    }
+
+    const handleSavePhotosFromFunction = () => {
+        if (saveUploadPhoto) saveUploadPhoto(images)
+        handleCloseDeleteInternal()
     }
     return (
         <AntModal
@@ -179,8 +184,9 @@ function UploadPhotoModal({
                             // write your building UI
                             <div
                                 className={
-                                    imageList.length === 0 &&
-                                    styles.uploadImageWrapper
+                                    imageList.length === 0
+                                        ? styles.uploadImageWrapper
+                                        : styles.uploadImageWrapper
                                 }
                             >
                                 {imageList.length > 0 ? (
@@ -336,16 +342,12 @@ function UploadPhotoModal({
                         </a>
                     </span>
                     <Button
-                        variant="contained"
                         color="primary"
                         loading={loaderUploadPhoto}
                         onClick={
                             !fromListingPhotos
                                 ? handleSaveNewPhotos
-                                : () => {
-                                      saveUploadPhoto(images)
-                                      handleCloseDeleteInternal()
-                                  }
+                                : handleSavePhotosFromFunction
                         }
                         className={`text-white pt-8 pb-8 ${styles.saveButton}`}
                     >

@@ -271,6 +271,8 @@ function CaltonCalendar() {
         }
     }
 
+    const fetchCalendarData = () => {}
+
     return (
         <PageContainer>
             <PageHeader
@@ -287,7 +289,8 @@ function CaltonCalendar() {
                     setOpenModal={setCannotSetInPastModal}
                     showFooter={false}
                 />*/}
-            <div
+
+            {/*<div
                 style={{
                     height: 680,
                     background: 'white',
@@ -295,52 +298,46 @@ function CaltonCalendar() {
                     paddingBottom: 70,
                     paddingTop: 25,
                 }}
-            >
-                <CaltonCalendarPopper
-                    selectedPost={selectedPost}
-                    isVisibile={isPopperVisible}
-                    closePopper={handleChangeView}
-                    attributes={attributes}
-                    element={elementPopover}
-                    setPopperElement={setPopperElement}
-                    popperReference={popperElement}
-                    styles={styles}
-                    reloadData={fetchCalendarData}
-                    setIsPopperVisibile={setPopperVisible}
-                />
-                <CaltonCalendarHeader
-                    setStartDate={setStartDate}
-                    startDate={startDate}
-                    view={view}
-                    setView={setView}
-                />
-                {dataReady ? (
-                    <CalendarStyled
-                        components={components}
-                        defaultDate={defaultDate}
-                        defaultView={Views.WEEK}
-                        onSelectSlot={handleSelectSlot}
-                        onSelectEvent={handleSelectEvent}
-                        views={VIEW_OPTIONS.map((el) => el.labelBig)}
-                        onView={handleChangeView}
-                        events={eventsInternal}
-                        selectable
-                        localizer={localizer}
-                        slotPropGetter={customSlotPropGetter}
-                        showMultiDayTimes={true}
-                        showAllEvents={true}
-                        step={30}
-                        timeslots={4}
-                        toolbar={false}
-                        view={view}
-                        date={startDate}
-                    />
-                ) : (
-                    {
-                        /*<LoaderChart type={'calendar'} />*/
-                    }
-                )}
-            </div>
+            >*/}
+            <CaltonCalendarPopper
+                selectedPost={selectedPost}
+                isVisibile={isPopperVisible}
+                closePopper={handleChangeView}
+                attributes={attributes}
+                element={elementPopover}
+                setPopperElement={setPopperElement}
+                popperReference={popperElement}
+                styles={styles}
+                reloadData={fetchCalendarData}
+                setIsPopperVisibile={setPopperVisible}
+            />
+            <CaltonCalendarHeader
+                setStartDate={setStartDate}
+                startDate={startDate}
+                view={view}
+                setView={setView}
+            />
+            <CalendarStyled
+                components={components}
+                defaultDate={defaultDate}
+                defaultView={Views.WEEK}
+                onSelectSlot={handleSelectSlot}
+                onSelectEvent={handleSelectEvent}
+                views={VIEW_OPTIONS.map((el) => el.labelBig)}
+                onView={handleChangeView}
+                events={eventsInternal}
+                selectable
+                localizer={localizer}
+                slotPropGetter={customSlotPropGetter}
+                showMultiDayTimes={true}
+                showAllEvents={true}
+                step={30}
+                timeslots={4}
+                toolbar={false}
+                view={view}
+                date={startDate}
+            />
+            {/*</div>*/}
         </PageContainer>
     )
 }

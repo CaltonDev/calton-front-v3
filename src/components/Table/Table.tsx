@@ -17,6 +17,8 @@ import Switch from '../Switch/Switch'
 import Hooks from '../../utils/hooks/Hooks'
 import { HiOutlinePencil } from 'react-icons/hi'
 import { pointer } from 'd3-selection'
+import Button from '../Button/Button'
+import { useNavigate } from 'react-router-dom'
 
 function IndeterminateCheckbox({
     indeterminate,
@@ -53,8 +55,10 @@ const Table = ({
     customToggleButton = undefined,
     totalItems = undefined,
     handleEditIconClick = undefined,
+    openCalendarButton = false,
 }: TableProps) => {
     const { t } = useTranslation()
+    const history = useNavigate()
     const [tableSize, setTableSize] = useState('small')
     const [showTableColumnsVisibilityMenu, setShowTableColumnsVisibilityMenu] =
         useState(false)
@@ -445,6 +449,14 @@ const Table = ({
                                     </Typography>
                                 </div>
                             </div>
+                        )}
+                        {openCalendarButton && (
+                            <Button
+                                size={'small'}
+                                onClick={() => history('/localPost/calendar')}
+                            >
+                                {t('Pianifica')}
+                            </Button>
                         )}
                     </div>
                 )}

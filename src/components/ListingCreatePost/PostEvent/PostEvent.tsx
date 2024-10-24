@@ -614,7 +614,6 @@ function PostEvent({
                                         )
                                     }
                                     format="HH:mm"
-                                    picker="time"
                                     minuteStep={5}
                                     value={valueStartTime}
                                     name={'postEventStartTiime'}
@@ -657,7 +656,6 @@ function PostEvent({
                                         )
                                     }
                                     format="HH:mm"
-                                    picker="time"
                                     minuteStep={5}
                                     value={valueEndTime}
                                     name="postEventEndTime"
@@ -684,7 +682,7 @@ function PostEvent({
                         >
                             <Field
                                 name="postDescription"
-                                value={
+                                /*value={
                                     post?.media?.length > 0
                                         ? post?.media[0]?.description
                                         : ''
@@ -693,13 +691,13 @@ function PostEvent({
                                     isFromPopper
                                         ? styles.inputTextAreaPopper
                                         : styles.inputTextArea
-                                }
-                                onChange={(e: any) =>
+                                }*/
+                                /*onChange={(e: any) =>
                                     handleSetDescription(e.target.value)
                                 }
                                 placeholder={t('Aggiungi dettagli...')}
-                                rows={isFromPopper ? 2 : 4}
-                                as={'textarea'}
+                                rows={isFromPopper ? 2 : 4}*/
+                                //as={'textarea'}
                             />
                         </FormItem>
                         <span className={styles.labelCharCounter}>

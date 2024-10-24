@@ -125,7 +125,7 @@ function PostUpdate({
                     >
                         <Field
                             name="postDescription"
-                            value={
+                            /*value={
                                 post?.media?.length > 0
                                     ? post?.media[0]?.description
                                     : ''
@@ -135,12 +135,12 @@ function PostUpdate({
                                     ? styles.inputTextAreaPopper
                                     : styles.inputTextArea
                             }
-                            onChange={(e) =>
+                            onChange={(e: any) =>
                                 handleSetDescription(e.target.value)
                             }
                             placeholder={t('Aggiungi descrizione')}
                             rows={isFromPopper ? 2 : 4}
-                            as={'textarea'}
+                            as={'textarea'}*/
                         />
                     </FormItem>
                     <span className={styles.labelCharCounter}>

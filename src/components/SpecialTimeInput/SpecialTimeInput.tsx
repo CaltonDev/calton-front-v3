@@ -110,6 +110,7 @@ function SpecialTimeInput({
         >
             <div className={styles.holidayContent}>
                 <DatePicker
+                    name={''}
                     variant={'primary'}
                     selected={startDate}
                     onChange={(date: any) => handleSetStartDate(date)}
