@@ -3,7 +3,7 @@ export interface PostOfferProps {
     formikProps: any
     post: any
     setPost: (arg0: any) => void
-    imagesWithError: any[]
+    imagesWithError?: any[]
     isFromPopper?: boolean
     showMore: boolean
     setShowMore: (arg0: boolean) => void

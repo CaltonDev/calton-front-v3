@@ -3,6 +3,6 @@ export interface PostUpdateProps {
     formikProps: any
     post: any
     setPost: (arg0: any) => void
-    imagesWithError: any[]
+    imagesWithError?: any[]
     isFromPopper?: boolean
 }

@@ -3,11 +3,6 @@ export interface PostEventProps {
     formikProps: any
     post: any
     setPost: (arg0: any) => void
-    imagesWithError: any[]
+    imagesWithError?: any[]
     isFromPopper?: boolean
-}
-
-export interface CustomInputProps {
-    value?: string
-    onClick?: () => void
 }
