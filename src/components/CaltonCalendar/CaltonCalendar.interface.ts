@@ -5,17 +5,17 @@ import React from 'react'
 interface CalendarEvent {
     id: number
     title: string
-    start: Date
-    end: Date
+    start: string
+    end: string
     allDay?: boolean
-    tipe?: string
+    type?: string
 }
 
 // Define the props matching the Calendar's props
 export interface CalendarProps {
     defaultDate: Date
     defaultView: View
-    events: any[]
+    events?: CalendarEvent[]
     localizer: DateLocalizer
     onSelectSlot: (data: any) => void
     onSelectEvent: (event: CalendarEvent) => void

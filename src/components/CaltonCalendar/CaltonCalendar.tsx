@@ -126,7 +126,7 @@ function CaltonCalendar() {
         }) || []
     )
 
-    const [eventsInternal, setEventsInternal] = useState<any>(
+    const [eventsInternal, setEventsInternal] = useState<any[]>(
         eventsAPI?.filter((obj: any) => !obj?.allDay)
     )
 
@@ -140,8 +140,8 @@ function CaltonCalendar() {
     }, [localPosts])
 
     useEffect(() => {
-        console.log('API : ', eventsAPI)
-    }, [eventsAPI])
+        console.log('eventsInternal : ', eventsInternal)
+    }, [eventsInternal])
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: 'left-start',
         modifiers: [
@@ -169,7 +169,6 @@ function CaltonCalendar() {
                 ...eventsAPI?.filter((obj: any) => !obj?.allDay),
             ]
             tmpElements.push(elementToAdd)
-            console.log('tmpElements: ', tmpElements)
 
             setEventsInternal(tmpElements)
             setPopperVisible(true)
