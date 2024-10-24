@@ -19,6 +19,7 @@ import SvgWrapper from '../SvgWrapper/SvgWrapper'
 import PageHeader from '../PageComponents/PageHeader/PageHeader'
 import { RootState } from '../../store/store'
 import PageContainer from '../PageComponents/PageContainer/PageContainer'
+import { CalendarProps } from './CaltonCalendar.interface'
 
 const localizer = momentLocalizer(moment)
 
@@ -35,7 +36,7 @@ const calculateEndDate = (startDate: any, view: string) => {
     }
 }
 
-const CalendarStyled = styled(Calendar)`
+const CalendarStyled: React.FC<CalendarProps> = styled(Calendar)`
     .rbc-time-view {
         border: none;
     }
@@ -278,6 +279,14 @@ function CaltonCalendar() {
                 showArrowBack={true}
                 arrowBackUrl={`/localPost`}
             ></PageHeader>
+            {/*<ModalBasicMessage
+                    title={t(
+                        'Non è possibile selezionare un evento nel passato'
+                    )}
+                    openModal={cannotSetInPastModal}
+                    setOpenModal={setCannotSetInPastModal}
+                    showFooter={false}
+                />*/}
             <div
                 style={{
                     height: 680,
@@ -287,14 +296,6 @@ function CaltonCalendar() {
                     paddingTop: 25,
                 }}
             >
-                {/*<ModalBasicMessage
-                    title={t(
-                        'Non è possibile selezionare un evento nel passato'
-                    )}
-                    openModal={cannotSetInPastModal}
-                    setOpenModal={setCannotSetInPastModal}
-                    showFooter={false}
-                />*/}
                 <CaltonCalendarPopper
                     selectedPost={selectedPost}
                     isVisibile={isPopperVisible}
@@ -315,9 +316,7 @@ function CaltonCalendar() {
                 />
                 {dataReady ? (
                     <CalendarStyled
-                        onSelecting={() => false}
                         components={components}
-                        //dayPropGetter={customDayPropGetter}
                         defaultDate={defaultDate}
                         defaultView={Views.WEEK}
                         onSelectSlot={handleSelectSlot}

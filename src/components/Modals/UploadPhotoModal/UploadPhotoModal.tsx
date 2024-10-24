@@ -5,13 +5,15 @@ import { Button, Input } from 'antd'
 import ImageUploading from 'react-images-uploading'
 import { CloseOutlined } from '@ant-design/icons'
 import './Modal.css'
-import closeIcon from 'Assets/img/closeWhite.svg'
+import closeIcon from '../../../assets/img/closeWhite.svg'
 import { v5 as uuidv5 } from 'uuid'
-import AppConfig from '../../../../constants/AppConfig'
+import AppConfig from '../../../constants/AppConfig'
 import { useDispatch, useSelector } from 'react-redux'
-import { setIsSingle, setUploadPhotos } from '../../../../redux/UploadPhotos'
-import { PHOTO_CATEGORIES } from '../../../../constants/StringConstant'
+import { setIsSingle, setUploadPhotos } from '../../../store/photos/photosSlice'
+import { PHOTO_CATEGORIES } from '../../../constants/StringConstant'
 import AntModal from 'Components/AntModal/AntModal'
+import { UploadPhotoModalProps } from './UploadPhotoModal.interface'
+import { RootState } from '../../../store/store'
 
 function UploadPhotoModal({
     openUploadPhoto,
@@ -20,13 +22,17 @@ function UploadPhotoModal({
     loaderUploadPhoto,
     saveUploadPhoto,
     primaryCategory,
-}) {
+}: UploadPhotoModalProps) {
     const { t, i18n } = useTranslation()
     const [images, setImages] = useState([])
-    const isSingle = useSelector((state) => state?.UploadPhotos?.isSingle)
-    const photos = useSelector((state) => state?.UploadPhotos?.photos)
+    const isSingle = useSelector(
+        (state: RootState) => state?.UploadPhotos?.isSingle
+    )
+    const photos = useSelector(
+        (state: RootState) => state?.UploadPhotos?.photos
+    )
     const [photoCategory, setPhotoCategory] = useState(
-        PHOTO_CATEGORIES.find((pc) => pc?.name === primaryCategory?.name)
+        PHOTO_CATEGORIES.find((pc: any) => pc?.name === primaryCategory?.name)
     )
     const maxNumber = isSingle ? 1 : 100
     const [uploadWithLink, setUploadWithLink] = useState(false)
@@ -57,9 +63,9 @@ function UploadPhotoModal({
         setUploadWithLink(false)
     }
 
-    const onChange = (imageList) => {
+    const onChange = (imageList: any[]) => {
         // data for submit
-        imageList.forEach((image) => {
+        imageList.forEach((image: any) => {
             image.isPhoto = true
             image.uuid = uuidv5(
                 image?.file?.name + new Date().toString(),
@@ -109,7 +115,7 @@ function UploadPhotoModal({
         setUploadWithLink(false)
     }
 
-    const handleUploadWithLink = (link, idx) => {
+    const handleUploadWithLink = (link: any, idx: number) => {
         let currentLinksArray = [...selectedLinks]
         currentLinksArray[idx] = {
             data_url: link,
@@ -179,39 +185,49 @@ function UploadPhotoModal({
                             >
                                 {imageList.length > 0 ? (
                                     <div className={styles.photoContainer}>
-                                        {imageList.map((image, index) => (
-                                            <div
-                                                key={index}
-                                                className="image-item"
-                                            >
-                                                <div className={styles.card}>
+                                        {imageList.map(
+                                            (image: any, index: number) => (
+                                                <div
+                                                    key={index}
+                                                    className="image-item"
+                                                >
                                                     <div
-                                                        className={
-                                                            styles.imageOverlay
-                                                        }
-                                                    ></div>
-                                                    <img
-                                                        src={image['data_url']}
-                                                        alt=""
-                                                        className={
-                                                            styles.imgCard
-                                                        }
-                                                        width={'50px'}
-                                                        height={'50px'}
-                                                    />
-                                                    <img
-                                                        alt={'Close'}
-                                                        src={closeIcon}
-                                                        className={
-                                                            styles.deleteImg
-                                                        }
-                                                        onClick={() =>
-                                                            onImageRemove(index)
-                                                        }
-                                                    />
+                                                        className={styles.card}
+                                                    >
+                                                        <div
+                                                            className={
+                                                                styles.imageOverlay
+                                                            }
+                                                        ></div>
+                                                        <img
+                                                            src={
+                                                                image[
+                                                                    'data_url'
+                                                                ]
+                                                            }
+                                                            alt=""
+                                                            className={
+                                                                styles.imgCard
+                                                            }
+                                                            width={'50px'}
+                                                            height={'50px'}
+                                                        />
+                                                        <img
+                                                            alt={'Close'}
+                                                            src={closeIcon}
+                                                            className={
+                                                                styles.deleteImg
+                                                            }
+                                                            onClick={() =>
+                                                                onImageRemove(
+                                                                    index
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            )
+                                        )}
                                     </div>
                                 ) : !uploadWithLink ? (
                                     <p
