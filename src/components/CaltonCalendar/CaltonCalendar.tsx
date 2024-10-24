@@ -274,7 +274,7 @@ function CaltonCalendar() {
     const fetchCalendarData = () => {}
 
     return (
-        <PageContainer>
+        <>
             <PageHeader
                 heading={t('Luoghi')}
                 subheading={true}
@@ -338,7 +338,7 @@ function CaltonCalendar() {
                 date={startDate}
             />
             {/*</div>*/}
-        </PageContainer>
+        </>
     )
 }
 
