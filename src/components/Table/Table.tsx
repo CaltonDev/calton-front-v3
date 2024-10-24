@@ -452,7 +452,8 @@ const Table = ({
                         )}
                         {openCalendarButton && (
                             <Button
-                                size={'small'}
+                                size={'medium'}
+                                customHeight={48}
                                 onClick={() => history('/localPost/calendar')}
                             >
                                 {t('Pianifica')}
