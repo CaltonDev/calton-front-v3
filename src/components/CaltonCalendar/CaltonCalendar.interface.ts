@@ -8,16 +8,16 @@ interface CalendarEvent {
     start: Date
     end: Date
     allDay?: boolean
-    resource?: any
+    tipe?: string
 }
 
 // Define the props matching the Calendar's props
 export interface CalendarProps {
     defaultDate: Date
     defaultView: View
-    events: CalendarEvent[]
+    events: any[]
     localizer: DateLocalizer
-    onSelectSlot: (start: Date, end: Date, action: string) => void
+    onSelectSlot: (data: any) => void
     onSelectEvent: (event: CalendarEvent) => void
     onView: (view: View) => void
     view: View

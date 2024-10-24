@@ -104,7 +104,7 @@ export const objRoutes = {
     },
     LocalPost: {
         path: 'localPost',
-        component: LocalPost,
+        component: ListingCalendarPost,
     },
     AddCompetitorsSource: {
         path: 'home/AddCompetitorsSource',

@@ -9,7 +9,7 @@ export function getConfig() {
         case 'localhost':
         case '0.0.0.0':
         case '127.0.0.1':
-        /*case 'beta.calton.io':
+        case 'beta.calton.io':
             return {
                 //apiUrl: 'http://localhost:5004',
                 apiUrl: 'https://api-voixhub-test.herokuapp.com',
@@ -114,7 +114,7 @@ export function getConfig() {
                     'https://6ejcfxvb1d.execute-api.eu-south-1.amazonaws.com/',
                 apiListings:
                     'https://2qka5n4k81.execute-api.eu-south-1.amazonaws.com/',
-            }*/
+            }
         default:
             return {
                 apiUrl: 'https://api-voixhub-prod.herokuapp.com',

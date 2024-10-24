@@ -119,15 +119,29 @@ function CaltonCalendar() {
         fromCalendar: true,
     })?.data?.posts
 
-    const eventsAPI = localPosts?.forEach((data: any) => {
-        data.start = new Date(data?.start)
-        data.end = new Date(data?.end)
-    })
+    const [eventsAPI, setEventsAPI] = useState<any[]>(
+        localPosts?.forEach((data: any) => {
+            data.start = new Date(data?.start)
+            data.end = new Date(data?.end)
+        }) || []
+    )
 
     const [eventsInternal, setEventsInternal] = useState<any>(
         eventsAPI?.filter((obj: any) => !obj?.allDay)
     )
 
+    useEffect(() => {
+        setEventsAPI(
+            localPosts?.forEach((data: any) => {
+                data.start = new Date(data?.start)
+                data.end = new Date(data?.end)
+            }) || []
+        )
+    }, [localPosts])
+
+    useEffect(() => {
+        console.log('API : ', eventsAPI)
+    }, [eventsAPI])
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
         placement: 'left-start',
         modifiers: [
@@ -155,6 +169,8 @@ function CaltonCalendar() {
                 ...eventsAPI?.filter((obj: any) => !obj?.allDay),
             ]
             tmpElements.push(elementToAdd)
+            console.log('tmpElements: ', tmpElements)
+
             setEventsInternal(tmpElements)
             setPopperVisible(true)
         }
@@ -246,7 +262,10 @@ function CaltonCalendar() {
         setPopperVisible(false)
     }
 
-    const handleSelectSlot = (start: Date, end: Date, action: string) => {
+    const handleSelectSlot = (data: any) => {
+        const start = data?.start
+        const end = data?.end
+        const action = data?.action
         const isPast = checkIsPast(end)
         if (action === 'doubleClick') {
             if (isPast) {

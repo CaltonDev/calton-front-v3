@@ -23,6 +23,9 @@ function CaltonCalendarPopper({
     const [fullWidth, setFullWidth] = useState(false)
     const [timeVisible, setTimeVisible] = useState<number>(0)
 
+    useEffect(() => {
+        console.log('o: ', isVisibile)
+    }, [isVisibile])
     const handleClosePopper = () => {
         setFullWidth(false)
         closePopper()
