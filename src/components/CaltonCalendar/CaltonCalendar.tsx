@@ -276,9 +276,10 @@ function CaltonCalendar() {
     return (
         <>
             <PageHeader
-                heading={t('Luoghi')}
+                heading={t('Calendario')}
                 subheading={true}
                 showArrowBack={true}
+                hideFilters={true}
                 arrowBackUrl={`/localPost`}
             ></PageHeader>
             {/*<ModalBasicMessage

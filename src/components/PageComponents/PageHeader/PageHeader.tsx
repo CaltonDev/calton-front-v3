@@ -168,28 +168,26 @@ function PageHeader({
                             className={styles.headingContainer}
                         >
                             {showArrowBack && (
-                                <div>
-                                    <span
-                                        style={{
-                                            paddingTop: '5px',
-                                            lineHeight: 0,
-                                            verticalAlign: 'middle',
-                                            marginRight: '8px',
-                                            cursor: 'pointer',
-                                        }}
-                                        onClick={() =>
-                                            history(
-                                                arrowBackUrl ? arrowBackUrl : ''
-                                            )
-                                        }
-                                    >
-                                        <SvgWrapper
-                                            size={'small'}
-                                            color={'black'}
-                                            keySvg={'arrowBack'}
-                                        />
-                                    </span>
-                                </div>
+                                <span
+                                    style={{
+                                        paddingTop: '5px',
+                                        lineHeight: 0,
+                                        verticalAlign: 'middle',
+                                        marginRight: '8px',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={() =>
+                                        history(
+                                            arrowBackUrl ? arrowBackUrl : ''
+                                        )
+                                    }
+                                >
+                                    <SvgWrapper
+                                        size={'small'}
+                                        color={'black'}
+                                        keySvg={'arrowBack'}
+                                    />
+                                </span>
                             )}
                             <Typography size={'h1'} weight={'bold'}>
                                 {t(heading)}
